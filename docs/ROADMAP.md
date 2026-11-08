@@ -7,8 +7,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | # | Milestone | Status | Branch / PR |
 |---|-----------|--------|-------------|
 | 0 | Project setup | ✅ Merged | [PR #1](https://github.com/yorairh/flurai/pull/1) |
-| 1 | Accounts and onboarding | 🔍 In review (waiting for phone test) | `feature/01-auth-onboarding`, [PR #2](https://github.com/yorairh/flurai/pull/2) |
-| 2 | Content pipeline | ⏳ Next | |
+| 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) |
+| 2 | Content pipeline | 🔍 In review (waiting for phone test) | `feature/02-content-pipeline` |
 | 3 | Vocabulary SRS (Anki-style) | ⏳ | |
 | 4 | Progress dashboard | ⏳ | |
 | 5 | Study time, streaks, and reminders | ⏳ | |
@@ -85,7 +85,7 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - Sign up/in with name + email + password, and password reset.
    - Onboarding: choose a level (Beginner→N1), a daily goal (minutes, new cards/day), and a kana check for beginners.
    - "Edit level & goals" on the Me tab changes those choices later.
-2. **Content pipeline:** a `tools/content` Python script builds `content.db` (N5–N1 vocab with readings and meanings, kanji, Tatoeba examples), with tests on row counts per level. Also an attribution/licences screen (EDRDG, Tanos, Tatoeba, jiten.moe).
+2. **Content pipeline:** a `tools/content` Python script builds `content.db` (N5–N1 vocab with readings and meanings, kanji, Tatoeba examples), with tests on row counts per level. Also an attribution/licences screen (EDRDG, Tanos, Tatoeba, jiten.moe), and a word library (browse/search words and kanji by level, word pages with examples).
 3. **Vocabulary SRS (Anki-style):**
    - Decks per JLPT level, plus custom decks.
    - Daily "learn new" and "review" sessions with FSRS and Again/Hard/Good/Easy.

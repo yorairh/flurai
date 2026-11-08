@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.room) apply false
 }
 
 // The project folder has a non-ASCII (Hebrew) path, which breaks the unit-test JVM's classpath on Windows.

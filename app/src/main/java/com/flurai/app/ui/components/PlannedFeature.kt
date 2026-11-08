@@ -37,6 +37,7 @@ fun TabScreen(
     subtitle: String,
     features: List<PlannedFeature>,
     header: (@Composable () -> Unit)? = null,
+    footer: (@Composable () -> Unit)? = null,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -60,6 +61,7 @@ fun TabScreen(
         }
         if (header != null) item { header() }
         items(features) { PlannedFeatureCard(it) }
+        if (footer != null) item { footer() }
     }
 }
 
