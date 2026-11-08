@@ -34,7 +34,6 @@ import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.theme.japanese
 
 private val profileFeatures = listOf(
-    PlannedFeature("設定", "Settings", "Practice reminders, streak rules, and theme.", 5),
     PlannedFeature("同期", "Sync", "Your progress backed up and shared across devices.", 11),
 )
 
@@ -45,6 +44,7 @@ fun ProfileScreen(
     onEditProfile: () -> Unit,
     onOpenProgress: () -> Unit,
     onOpenLicences: () -> Unit,
+    onOpenSettings: () -> Unit,
     onSignOut: () -> Unit,
 ) {
     TabScreen(
@@ -56,6 +56,7 @@ fun ProfileScreen(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 AccountCard(user, profile, onEditProfile, onSignOut)
                 ProgressEntryCard(onOpenProgress)
+                SettingsEntryCard(onOpenSettings)
             }
         },
         footer = {
@@ -64,6 +65,25 @@ fun ProfileScreen(
             }
         },
     )
+}
+
+@Composable
+private fun SettingsEntryCard(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+    ) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("設定", style = MaterialTheme.typography.headlineSmall.japanese(), color = MaterialTheme.colorScheme.primary)
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text("Settings", style = MaterialTheme.typography.titleMedium)
+                Text("Reminders, streak rules, goals and app version.", style = MaterialTheme.typography.bodyMedium)
+            }
+            Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+        }
+    }
 }
 
 @Composable

@@ -20,8 +20,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // Bump both in every milestone PR: milestone N ships as 0.(N+1).0 with versionCode N+1.
-        versionCode = 5
-        versionName = "0.5.0"
+        versionCode = 6
+        versionName = "0.6.0"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.kotlinx.coroutines.play.services)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.work.runtime)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

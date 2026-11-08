@@ -71,6 +71,18 @@ class StudyRepository @Inject constructor(
         return SessionData(cards, newItems, endOfDay)
     }
 
+    /** Extra new items past the daily allowance: the learner asked to keep going. */
+    suspend fun loadMore(uid: String, profile: StudyProfile, source: StudySource, count: Int): List<ItemRef> =
+        newCandidates(uid, profile, source).take(count)
+
+    /** JLPT lists that still have words not yet studied, for the "learn more" picker. */
+    suspend fun levelsWithNewWords(uid: String): Set<Int> {
+        val introduced = study.introducedItems(uid).toSet()
+        return (1..5).filter { jlpt ->
+            content.wordIdsInStudyOrder(jlpt).any { ItemRef(ItemType.Word, it) !in introduced }
+        }.toSet()
+    }
+
     /** Items not yet studied, in teaching order. */
     private suspend fun newCandidates(uid: String, profile: StudyProfile, source: StudySource): List<ItemRef> {
         val introduced = study.introducedItems(uid).toSet()

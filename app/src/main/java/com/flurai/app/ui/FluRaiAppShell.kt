@@ -35,6 +35,7 @@ import com.flurai.app.ui.profile.LicencesScreen
 import com.flurai.app.ui.profile.ProfileScreen
 import com.flurai.app.ui.progress.ProgressScreen
 import com.flurai.app.ui.progress.WordBrowserScreen
+import com.flurai.app.ui.settings.SettingsScreen
 import com.flurai.app.ui.study.ReviewScreen
 import com.flurai.app.ui.study.VocabHubScreen
 import kotlinx.serialization.Serializable
@@ -51,6 +52,7 @@ import kotlin.reflect.KClass
 @Serializable object VocabHubRoute
 @Serializable object ProgressRoute
 @Serializable object WordBrowserRoute
+@Serializable object SettingsRoute
 
 /** [source] is a StudySource.encode() value. */
 @Serializable data class StudyRoute(val source: String)
@@ -81,7 +83,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {
                         it.hasRoute(destination.routeClass) ||
-                            (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class))) ||
+                            (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
                             (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class)))
                     } == true
@@ -149,6 +151,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onEditProfile = { navController.navigate(EditProfileRoute) },
                     onOpenProgress = { navController.navigate(ProgressRoute) },
                     onOpenLicences = { navController.navigate(LicencesRoute) },
+                    onOpenSettings = { navController.navigate(SettingsRoute) },
                     onSignOut = onSignOut,
                 )
             }
@@ -159,6 +162,13 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                 )
             }
             composable<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }) }
+            composable<SettingsRoute> {
+                SettingsScreen(
+                    profile = profile,
+                    onBack = { navController.popBackStack() },
+                    onEditProfile = { navController.navigate(EditProfileRoute) },
+                )
+            }
             composable<LicencesRoute> { LicencesScreen(onBack = { navController.popBackStack() }) }
             composable<EditProfileRoute> {
                 EditProfileScreen(user = user, profile = profile, onDone = { navController.popBackStack() })

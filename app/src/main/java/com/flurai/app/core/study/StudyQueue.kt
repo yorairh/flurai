@@ -77,6 +77,11 @@ class StudyQueue(
         if (card.due < endOfDay.toEpochMilli() && card.inLearning()) cards[key(card)] = card else cards.remove(key(card))
     }
 
+    /** Adds extra new items (the learner chose to keep going past the daily allowance). */
+    fun addNew(items: List<ItemRef>) {
+        items.filter { it !in newItems }.forEach(newItems::addLast)
+    }
+
     /** Removes an item entirely (suspended or buried during the session). */
     fun remove(item: ItemRef) {
         newItems.remove(item)

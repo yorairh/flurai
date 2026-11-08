@@ -32,9 +32,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.TextButton
+import androidx.compose.foundation.layout.PaddingValues
+import com.flurai.app.core.study.StudySource
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -70,7 +74,9 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val speech by viewModel.speaker.status.collectAsStateWithLifecycle()
     var menuOpen by remember { mutableStateOf(false) }
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refresh() }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refresh(); viewModel.onResume() }
+    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) { viewModel.onPause() }
+    DisposableEffect(Unit) { onDispose { viewModel.onPause() } }
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
@@ -100,7 +106,10 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
         val current = state.current
         when {
             state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
-            state.finished -> Finished(state.answeredCount, state.comeBackAt, onBack)
+            state.finished -> Finished(
+                state.answeredCount, state.comeBackAt, state.levelsWithWords, state.noMoreWords,
+                onMore = viewModel::learnMore, onBack = onBack,
+            )
             current != null -> {
                 Box(Modifier.weight(1f)) {
                     CardBody(current, state.revealed, onSpeak = viewModel::speakCurrent)
@@ -264,7 +273,14 @@ private fun androidx.compose.foundation.layout.RowScope.RatingButton(
 }
 
 @Composable
-private fun Finished(answered: Int, comeBackAt: Instant?, onBack: () -> Unit) {
+private fun Finished(
+    answered: Int,
+    comeBackAt: Instant?,
+    levelsWithWords: Set<Int>,
+    noMoreWords: Boolean,
+    onMore: (StudySource) -> Unit,
+    onBack: () -> Unit,
+) {
     Column(
         Modifier.fillMaxSize().padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -292,7 +308,27 @@ private fun Finished(answered: Int, comeBackAt: Instant?, onBack: () -> Unit) {
             )
         }
         Spacer(Modifier.height(24.dp))
-        Button(onClick = onBack) { Text("Done") }
-        Spacer(Modifier.width(1.dp))
+        if (levelsWithWords.isNotEmpty()) {
+            Spacer(Modifier.height(24.dp))
+            Text("Want to learn more?", style = MaterialTheme.typography.titleMedium)
+            if (noMoreWords) {
+                Text("No new words left in that deck.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+            }
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = { onMore(StudySource.Auto) }, modifier = Modifier.fillMaxWidth()) { Text("10 more new words") }
+            Spacer(Modifier.height(8.dp))
+            Text("or pick a section", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                levelsWithWords.sortedDescending().forEach { n ->
+                    OutlinedButton(
+                        onClick = { onMore(StudySource.Level(n)) },
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 0.dp),
+                    ) { Text("N$n", maxLines = 1, softWrap = false) }
+                }
+            }
+        }
+        Spacer(Modifier.height(16.dp))
+        TextButton(onClick = onBack) { Text("Done") }
     }
 }
