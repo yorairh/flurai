@@ -43,6 +43,17 @@ class StudyQueueTest {
     }
 
     @Test
+    fun extraNewItemsCanBeAddedAfterTheQueueRunsOut() {
+        val now = Instant.parse("2025-01-01T10:00:00Z")
+        val queue = StudyQueue(emptyList(), emptyList(), now.plus(Duration.ofHours(8)))
+        assertNull(queue.next(now))
+        queue.addNew(listOf(ItemRef(ItemType.Word, 1), ItemRef(ItemType.Word, 2)))
+        queue.addNew(listOf(ItemRef(ItemType.Word, 2))) // no duplicates
+        assertEquals(2, queue.counts().new)
+        assertEquals(ItemRef(ItemType.Word, 1), queue.next(now)?.item)
+    }
+
+    @Test
     fun learningCardDueLaterStaysButIsNotShownEarly() {
         val queue = StudyQueue(listOf(card(1, SrsState.Learning, Duration.ofMinutes(45))), emptyList(), endOfDay)
         assertNull(queue.next(now))

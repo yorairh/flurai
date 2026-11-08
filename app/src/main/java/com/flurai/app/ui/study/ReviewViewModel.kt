@@ -60,6 +60,10 @@ data class ReviewUiState(
     val finished: Boolean = false,
     /** If cards are still in learning, when the next one is due. */
     val comeBackAt: Instant? = null,
+    /** JLPT lists with words not studied yet, offered after finishing. */
+    val levelsWithWords: Set<Int> = emptySet(),
+    /** The learner asked for more words but that deck is used up. */
+    val noMoreWords: Boolean = false,
 )
 
 @HiltViewModel
@@ -121,6 +125,19 @@ class ReviewViewModel @Inject constructor(
         _state.value.current?.let { speaker.speak(it.content.speech) }
     }
 
+    /** After finishing: keep going with [count] more new words from [from] (default: the same deck). */
+    fun learnMore(from: StudySource = source, count: Int = MORE_WORDS) {
+        val uid = uid ?: return
+        val queue = queue ?: return
+        _state.update { it.copy(loading = true) }
+        viewModelScope.launch {
+            val profile = profiles.profile(uid).first()
+            val items = if (profile == null) emptyList() else repository.loadMore(uid, profile, from, count)
+            queue.addNew(items)
+            if (items.isEmpty()) _state.update { it.copy(loading = false, finished = true, noMoreWords = true) } else showNext()
+        }
+    }
+
     /** Called when the screen comes back into view, so learning cards that became due show up. */
     fun refresh() {
         if (_state.value.finished && _state.value.comeBackAt != null) viewModelScope.launch { showNext() }
@@ -142,8 +159,12 @@ class ReviewViewModel @Inject constructor(
         val now = Instant.now()
         val next = queue.next(now)
         if (next == null) {
+            val levels = uid?.let { repository.levelsWithNewWords(it) }.orEmpty()
             _state.update {
-                it.copy(loading = false, current = null, finished = true, counts = queue.counts(), comeBackAt = queue.nextLearningDue())
+                it.copy(
+                    loading = false, current = null, finished = true, counts = queue.counts(),
+                    comeBackAt = queue.nextLearningDue(), levelsWithWords = levels, noMoreWords = false,
+                )
             }
             return
         }
@@ -173,6 +194,8 @@ class ReviewViewModel @Inject constructor(
         }
     }
 }
+
+private const val MORE_WORDS = 10
 
 // Locale.US: a comma decimal separator would read oddly on the buttons.
 private fun oneDecimal(x: Double) = String.format(Locale.US, "%.1f", x).removeSuffix(".0")

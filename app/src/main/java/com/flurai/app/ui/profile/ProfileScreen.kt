@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -83,7 +84,7 @@ private fun appVersionLabel(): String {
     return remember {
         runCatching {
             val info = context.packageManager.getPackageInfo(context.packageName, 0)
-            "Version ${info.versionName} (${info.longVersionCode})"
+            "Version ${info.versionName} (${PackageInfoCompat.getLongVersionCode(info)})"
         }.getOrDefault("Version unknown")
     }
 }
