@@ -1,0 +1,19 @@
+.gradle/
+build/
+/local.properties
+.idea/
+*.iml
+.DS_Store
+.kotlin/
+captures/
+*.jks
+*.keystore
+keystore.properties
+*.apk
+*.aab
+google-services.json
+
+# Content pipeline downloads and caches
+tools/content/.cache/
+tools/content/.venv/
+__pycache__/
