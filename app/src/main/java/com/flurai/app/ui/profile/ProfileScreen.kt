@@ -21,15 +21,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.core.content.pm.PackageInfoCompat
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.flurai.app.core.auth.AuthUser
 import com.flurai.app.core.profile.StudyProfile
@@ -38,7 +34,6 @@ import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.theme.japanese
 
 private val profileFeatures = listOf(
-    PlannedFeature("設定", "Settings", "Practice reminders, streak rules, and theme.", 5),
     PlannedFeature("同期", "Sync", "Your progress backed up and shared across devices.", 11),
 )
 
@@ -49,6 +44,7 @@ fun ProfileScreen(
     onEditProfile: () -> Unit,
     onOpenProgress: () -> Unit,
     onOpenLicences: () -> Unit,
+    onOpenSettings: () -> Unit,
     onSignOut: () -> Unit,
 ) {
     TabScreen(
@@ -60,32 +56,33 @@ fun ProfileScreen(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 AccountCard(user, profile, onEditProfile, onSignOut)
                 ProgressEntryCard(onOpenProgress)
+                SettingsEntryCard(onOpenSettings)
             }
         },
         footer = {
             TextButton(onClick = onOpenLicences, modifier = Modifier.fillMaxWidth()) {
                 Text("Data sources & licences")
             }
-            Text(
-                "FluRai ${appVersionLabel()}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-            )
         },
     )
 }
 
-/** "Version 0.6.0 (6)", read from the installed package so it always matches the APK. */
 @Composable
-private fun appVersionLabel(): String {
-    val context = LocalContext.current
-    return remember {
-        runCatching {
-            val info = context.packageManager.getPackageInfo(context.packageName, 0)
-            "Version ${info.versionName} (${PackageInfoCompat.getLongVersionCode(info)})"
-        }.getOrDefault("Version unknown")
+private fun SettingsEntryCard(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+    ) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("設定", style = MaterialTheme.typography.headlineSmall.japanese(), color = MaterialTheme.colorScheme.primary)
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text("Settings", style = MaterialTheme.typography.titleMedium)
+                Text("Reminders, streak rules, goals and app version.", style = MaterialTheme.typography.bodyMedium)
+            }
+            Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+        }
     }
 }
 

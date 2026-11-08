@@ -8,15 +8,31 @@ import androidx.room.Query
 import androidx.room.RoomDatabase
 import androidx.room.Transaction
 import androidx.room.Upsert
+import androidx.room.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
+import com.flurai.app.core.activity.StudyDayDao
+import com.flurai.app.core.activity.StudyDayEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class], version = 1, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class], version = 2, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
+    abstract fun studyDayDao(): StudyDayDao
+}
+
+/** 1 → 2: daily study time (streaks). */
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `study_day` (`uid` TEXT NOT NULL, `day` INTEGER NOT NULL, " +
+                "`seconds` INTEGER NOT NULL, `reviews` INTEGER NOT NULL, PRIMARY KEY(`uid`, `day`))",
+        )
+    }
 }
 
 data class ItemRef(

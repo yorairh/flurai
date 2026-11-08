@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import com.flurai.app.core.study.StudySource
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -73,7 +74,9 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val speech by viewModel.speaker.status.collectAsStateWithLifecycle()
     var menuOpen by remember { mutableStateOf(false) }
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refresh() }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refresh(); viewModel.onResume() }
+    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) { viewModel.onPause() }
+    DisposableEffect(Unit) { onDispose { viewModel.onPause() } }
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(

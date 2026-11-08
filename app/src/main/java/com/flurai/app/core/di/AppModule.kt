@@ -9,6 +9,8 @@ import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.FirebaseAuthRepository
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.ContentDatabase
+import com.flurai.app.core.activity.StudyDayDao
+import com.flurai.app.core.study.MIGRATION_1_2
 import com.flurai.app.core.study.StudyDao
 import com.flurai.app.core.study.UserDatabase
 import androidx.room.Room
@@ -52,10 +54,13 @@ object AppModule {
     @Provides
     @Singleton
     fun userDatabase(@ApplicationContext context: Context): UserDatabase =
-        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").build()
+        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2).build()
 
     @Provides
     fun studyDao(db: UserDatabase): StudyDao = db.studyDao()
+
+    @Provides
+    fun studyDayDao(db: UserDatabase): StudyDayDao = db.studyDayDao()
 }
 
 @Module

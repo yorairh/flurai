@@ -11,7 +11,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
 | 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
 | 4 | Progress dashboard | ✅ Merged | [PR #6](https://github.com/yorairh/flurai/pull/6) | [0.5.0](https://github.com/yorairh/flurai/releases/tag/v0.5.0) |
-| 5 | Study time, streaks, and reminders | 🚧 In progress | `feature/05-streaks-reminders` | 0.6.0 |
+| 5 | Study time, streaks, and reminders | 🔍 In review (waiting for phone test) | `feature/05-streaks-reminders` | 0.6.0 |
 | 6 | Tests | ⏳ | | |
 | 7 | Grammar module | ⏳ | | |
 | 8 | Reading and stories | ⏳ | | |
@@ -133,7 +133,7 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
 
 ## Standing rules
 
-- **App version is always visible:** Me tab → bottom of the screen shows `Version x.y.z (code)`, read from the installed package. From milestone 5 it moves into the Settings screen. Every milestone's PR bumps it (see CLAUDE.md), so the user can tell which build is on the phone.
+- **App version is always visible:** Me → Settings → About shows `Version x.y.z (code)`, read from the installed package. It lives in Me → Settings → About. Every milestone's PR bumps it (see CLAUDE.md), so the user can tell which build is on the phone.
 
 ## Backlog (not scheduled)
 

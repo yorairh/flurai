@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flurai.app.core.activity.ActivitySummary
 import com.flurai.app.core.auth.AuthUser
 import com.flurai.app.core.knowledge.ProgressSnapshot
 import com.flurai.app.core.model.JlptLevel
@@ -42,9 +43,7 @@ import com.flurai.app.ui.theme.FluRaiTheme
 import com.flurai.app.ui.theme.japanese
 import kotlin.math.roundToInt
 
-private val homeFeatures = listOf(
-    PlannedFeature("連続", "Streak & study time", "Minutes studied each day, your streak, and practice reminders.", 5),
-)
+private val homeFeatures = emptyList<PlannedFeature>()
 
 @Composable
 fun HomeScreen(
@@ -53,9 +52,11 @@ fun HomeScreen(
     onStudy: () -> Unit,
     onOpenProgress: () -> Unit,
     viewModel: ProgressViewModel = hiltViewModel(),
+    activityViewModel: ActivityViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    HomeContent(user, profile, state, onStudy, onOpenProgress)
+    val activity by activityViewModel.summary.collectAsStateWithLifecycle()
+    HomeContent(user, profile, state, activity, onStudy, onOpenProgress)
 }
 
 @Composable
@@ -63,6 +64,7 @@ private fun HomeContent(
     user: AuthUser,
     profile: StudyProfile,
     state: ProgressUiState,
+    activity: ActivitySummary?,
     onStudy: () -> Unit,
     onOpenProgress: () -> Unit,
 ) {
@@ -76,6 +78,7 @@ private fun HomeContent(
                 WelcomeCard(user, profile)
                 state.snapshot?.let { snapshot ->
                     TodayCard(state, snapshot, onStudy)
+                    activity?.let { StreakCard(it) }
                     LevelCard(snapshot, onOpenProgress)
                 }
             }
@@ -211,6 +214,7 @@ private fun HomeScreenPreview() {
             user = AuthUser("uid", "Aki", "aki@example.com"),
             profile = StudyProfile(JlptLevel.N5, 15, 10, knowsHiragana = true, knowsKatakana = true),
             state = ProgressUiState(),
+            activity = null,
             onStudy = {},
             onOpenProgress = {},
         )
