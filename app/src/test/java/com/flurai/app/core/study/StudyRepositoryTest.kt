@@ -3,6 +3,7 @@ package com.flurai.app.core.study
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.ContentInfoEntity
 import com.flurai.app.core.content.KanjiEntity
+import com.flurai.app.core.content.KanjiLevel
 import com.flurai.app.core.content.LevelCount
 import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.WordEntity
@@ -41,6 +42,7 @@ class StudyRepositoryTest {
             cards.map { m -> m.values.count { it.kind == CardKind.Recognition && it.createdAt >= since } }
         override fun cardsForItem(uid: String, itemType: ItemType, itemId: Int) =
             cards.map { m -> m.values.filter { it.itemType == itemType && it.itemId == itemId } }
+        override fun allCards(uid: String) = cards.map { it.values.toList() }
         override fun stateCounts(uid: String): Flow<List<StateCount>> = throw NotImplementedError()
         override fun reviewsSince(uid: String, since: Long): Flow<Int> = throw NotImplementedError()
         override suspend fun upsertCard(card: CardEntity) { cards.value = cards.value + (key(card) to card) }
@@ -71,6 +73,8 @@ class StudyRepositoryTest {
         override suspend fun word(id: Int): WordEntity? = throw NotImplementedError()
         override suspend fun sentencesForWord(wordId: Int): List<SentenceEntity> = throw NotImplementedError()
         override fun kanjiAtLevel(jlpt: Int): Flow<List<KanjiEntity>> = throw NotImplementedError()
+        override suspend fun allWords(): List<WordEntity> = throw NotImplementedError()
+        override suspend fun kanjiLevels(): List<KanjiLevel> = throw NotImplementedError()
         override suspend fun words(ids: List<Int>): List<WordEntity> = throw NotImplementedError()
         override fun info(): Flow<List<ContentInfoEntity>> = throw NotImplementedError()
     }

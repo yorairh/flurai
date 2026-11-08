@@ -60,6 +60,10 @@ interface StudyDao {
     @Query("SELECT * FROM card WHERE uid = :uid AND item_type = :itemType AND item_id = :itemId ORDER BY kind")
     fun cardsForItem(uid: String, itemType: ItemType, itemId: Int): Flow<List<CardEntity>>
 
+    /** Every card of the user, for progress statistics. */
+    @Query("SELECT * FROM card WHERE uid = :uid")
+    fun allCards(uid: String): Flow<List<CardEntity>>
+
     @Query("SELECT state, COUNT(*) AS count FROM card WHERE uid = :uid GROUP BY state")
     fun stateCounts(uid: String): Flow<List<StateCount>>
 

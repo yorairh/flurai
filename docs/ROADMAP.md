@@ -10,7 +10,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) | [v0.2.0](https://github.com/yorairh/flurai/releases/tag/v0.2.0) |
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
 | 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
-| 4 | Progress dashboard | ⏳ Next | | 0.5.0 |
+| 4 | Progress dashboard | 🔍 In review (waiting for phone test) | `feature/04-progress-dashboard` | 0.5.0 |
 | 5 | Study time, streaks, and reminders | ⏳ | | |
 | 6 | Tests | ⏳ | | |
 | 7 | Grammar module | ⏳ | | |
@@ -94,10 +94,9 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - Example sentence on the answer side; per-word card status with start/suspend/reset; bury/suspend during review.
    - Moved later: custom decks and the card browser (milestone 4), listening-only cards and furigana (milestone 8).
 4. **Progress dashboard:**
-   - Estimated level with per-level coverage bars (vocab/kanji/grammar).
-   - What the app thinks you know (browse known items).
+   - Estimated level with per-level coverage bars (vocabulary and kanji now; grammar once it exists).
+   - What the app thinks you know: a word browser filtered by learning / known / mature / suspended.
    - "Improve now" weak areas, review forecast, and today's plan.
-   - Card browser ("what you know" filters) and custom decks (moved from milestone 3).
 5. **Study time, streaks, and reminders:**
    - **Study time:** a `StudySessionTracker` counts active time on study screens. It pauses in the background or after about 2 minutes idle. Totals go per day into a `study_day` table (date, seconds, cards reviewed, new learned).
    - **Streaks:** a day counts once the daily minimum is met (default 5 min or one finished review session, configurable). Show the current and longest streak, a calendar heatmap, and weekly totals. Optional streak freezes (e.g. 1 per week).
@@ -131,6 +130,10 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
     - Then voice: SpeechRecognizer in, TTS out.
     - Mistakes it notices feed weak areas and cards.
 13. **AI-generated graded content:** stories and questions built from known vocab + target grammar ("i+1"), with reading exercises and TTS listening.
+
+## Backlog (not scheduled)
+
+- **Custom decks:** user-made word lists to study. Planned for milestone 3, then dropped from milestone 4 to keep it focused; not started. Add when wanted.
 
 ## User actions along the way
 

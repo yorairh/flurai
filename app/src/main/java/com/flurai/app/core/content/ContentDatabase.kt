@@ -29,6 +29,8 @@ data class LevelCount(val jlpt: Int, val count: Int)
 
 data class WordLevel(val id: Int, val jlpt: Int)
 
+data class KanjiLevel(val literal: String, val jlpt: Int)
+
 @Dao
 interface ContentDao {
     @Query("SELECT jlpt, COUNT(*) AS count FROM word GROUP BY jlpt ORDER BY jlpt DESC")
@@ -70,6 +72,12 @@ interface ContentDao {
 
     @Query("SELECT id, jlpt FROM word")
     suspend fun wordLevels(): List<WordLevel>
+
+    @Query("SELECT * FROM word")
+    suspend fun allWords(): List<WordEntity>
+
+    @Query("SELECT literal, jlpt FROM kanji")
+    suspend fun kanjiLevels(): List<KanjiLevel>
 
     @Query("SELECT * FROM word WHERE id IN (:ids)")
     suspend fun words(ids: List<Int>): List<WordEntity>
