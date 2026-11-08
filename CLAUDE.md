@@ -24,7 +24,7 @@ There is no emulator. The user tests on their phone: build `assembleDebug` and s
 
 ## Firebase
 
-Project `flurai-app` (console: https://console.firebase.google.com/project/flurai-app), Android app `com.flurai.app`. `app/google-services.json` is gitignored; recreate it with:
+Project `flurai-app` (console: https://console.firebase.google.com/project/flurai-app), Android app `com.flurai.app`. `app/google-services.json` is committed (its values ship inside every APK anyway, so it isn't a secret, and cloud sessions need it to build a working APK). If the Firebase app config changes, regenerate it with:
 
 ```bash
 firebase apps:sdkconfig ANDROID 1:451607396485:android:bf1319f7372c68d38829ec --project flurai-app --out app/google-services.json
