@@ -8,8 +8,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 |---|-----------|--------|-------------|
 | 0 | Project setup | ✅ Merged | [PR #1](https://github.com/yorairh/flurai/pull/1) |
 | 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) |
-| 2 | Content pipeline | 🔍 In review (waiting for phone test) | `feature/02-content-pipeline`, [PR #3](https://github.com/yorairh/flurai/pull/3) |
-| 3 | Vocabulary SRS (Anki-style) | ⏳ | |
+| 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) |
+| 3 | Vocabulary SRS (Anki-style) | 🔍 In review (waiting for phone test) | `feature/03-vocab-srs` |
 | 4 | Progress dashboard | ⏳ | |
 | 5 | Study time, streaks, and reminders | ⏳ | |
 | 6 | Tests | ⏳ | |
@@ -87,15 +87,16 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - "Edit level & goals" on the Me tab changes those choices later.
 2. **Content pipeline:** a `tools/content` Python script builds `content.db` (N5–N1 vocab with readings and meanings, kanji, Tatoeba examples), with tests on row counts per level. Also an attribution/licences screen (EDRDG, Tanos, Tatoeba, jiten.moe), and a word library (browse/search words and kanji by level, word pages with examples).
 3. **Vocabulary SRS (Anki-style):**
-   - Decks per JLPT level, plus custom decks.
-   - Daily "learn new" and "review" sessions with FSRS and Again/Hard/Good/Easy.
-   - Card types: recognition (JP→meaning), production (meaning→JP), and listening (TTS).
-   - Example sentence with furigana, card browser/search, suspend/bury.
-   - Optional kana deck for beginners.
+   - Decks per JLPT level, and hiragana/katakana decks (beginners who can't read kana start there).
+   - Daily "learn new" and "review" sessions with FSRS-6 and Again/Hard/Good/Easy.
+   - Card types: recognition (JP→meaning), then production (meaning→JP) once recognition is learned. Audio via TTS on every card.
+   - Example sentence on the answer side; per-word card status with start/suspend/reset; bury/suspend during review.
+   - Moved later: custom decks and the card browser (milestone 4), listening-only cards and furigana (milestone 8).
 4. **Progress dashboard:**
    - Estimated level with per-level coverage bars (vocab/kanji/grammar).
    - What the app thinks you know (browse known items).
    - "Improve now" weak areas, review forecast, and today's plan.
+   - Card browser ("what you know" filters) and custom decks (moved from milestone 3).
 5. **Study time, streaks, and reminders:**
    - **Study time:** a `StudySessionTracker` counts active time on study screens. It pauses in the background or after about 2 minutes idle. Totals go per day into a `study_day` table (date, seconds, cards reviewed, new learned).
    - **Streaks:** a day counts once the daily minimum is met (default 5 min or one finished review session, configurable). Show the current and longest streak, a calendar heatmap, and weekly totals. Optional streak freezes (e.g. 1 per week).
@@ -112,7 +113,8 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - Exercises: multiple choice, fill-in-the-blank, and sentence reordering.
    - Grammar points also enter the SRS.
 8. **Reading and stories:**
-   - An in-app reader for short graded texts, with tap-to-lookup (JMdict) and add-to-deck.
+   - An in-app reader for short graded texts, with tap-to-lookup (JMdict), furigana and add-to-deck.
+   - Listening-only flashcards (audio → meaning), moved from milestone 3.
    - Level-matched links to Tadoku, NHK Easy, and Watanoc.
    - Comprehension questions.
 9. **YouTube recommendations:** the curated catalog by level and grammar point, an embedded player, "watched" tracking, and recommendations driven by your level and weak grammar.
