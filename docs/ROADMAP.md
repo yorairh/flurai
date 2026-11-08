@@ -10,7 +10,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) | [v0.2.0](https://github.com/yorairh/flurai/releases/tag/v0.2.0) |
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
 | 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
-| 4 | Progress dashboard | 🔍 In review (waiting for phone test) | `feature/04-progress-dashboard` | 0.5.0 |
+| 4 | Progress dashboard | 🔍 In review (waiting for phone test) | `feature/04-progress-dashboard`, [PR #6](https://github.com/yorairh/flurai/pull/6) | 0.5.0 |
 | 5 | Study time, streaks, and reminders | ⏳ | | |
 | 6 | Tests | ⏳ | | |
 | 7 | Grammar module | ⏳ | | |
