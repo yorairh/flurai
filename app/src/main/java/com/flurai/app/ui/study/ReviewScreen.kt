@@ -315,9 +315,13 @@ private fun Finished(
             Button(onClick = { onMore(StudySource.Auto) }, modifier = Modifier.fillMaxWidth()) { Text("10 more new words") }
             Spacer(Modifier.height(8.dp))
             Text("or pick a section", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 levelsWithWords.sortedDescending().forEach { n ->
-                    OutlinedButton(onClick = { onMore(StudySource.Level(n)) }, contentPadding = PaddingValues(horizontal = 12.dp)) { Text("N$n") }
+                    OutlinedButton(
+                        onClick = { onMore(StudySource.Level(n)) },
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 0.dp),
+                    ) { Text("N$n", maxLines = 1, softWrap = false) }
                 }
             }
         }
