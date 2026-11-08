@@ -9,7 +9,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 0 | Project setup | ✅ Merged | [PR #1](https://github.com/yorairh/flurai/pull/1) |
 | 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) |
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) |
-| 3 | Vocabulary SRS (Anki-style) | 🔍 In review (waiting for phone test) | `feature/03-vocab-srs` |
+| 3 | Vocabulary SRS (Anki-style) | 🔍 In review (waiting for phone test) | `feature/03-vocab-srs`, [PR #4](https://github.com/yorairh/flurai/pull/4) |
 | 4 | Progress dashboard | ⏳ | |
 | 5 | Study time, streaks, and reminders | ⏳ | |
 | 6 | Tests | ⏳ | |
