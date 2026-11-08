@@ -22,9 +22,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.flurai.app.core.auth.AuthUser
+import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.explore.ExploreScreen
 import com.flurai.app.ui.home.HomeScreen
 import com.flurai.app.ui.learn.LearnScreen
+import com.flurai.app.ui.profile.EditProfileScreen
 import com.flurai.app.ui.profile.ProfileScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -33,6 +36,7 @@ import kotlin.reflect.KClass
 @Serializable object LearnRoute
 @Serializable object ExploreRoute
 @Serializable object ProfileRoute
+@Serializable object EditProfileRoute
 
 private enum class TopLevelDestination(
     val route: Any,
@@ -47,7 +51,7 @@ private enum class TopLevelDestination(
 }
 
 @Composable
-fun FluRaiAppShell() {
+fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -56,7 +60,10 @@ fun FluRaiAppShell() {
         bottomBar = {
             NavigationBar {
                 TopLevelDestination.entries.forEach { destination ->
-                    val selected = currentDestination?.hierarchy?.any { it.hasRoute(destination.routeClass) } == true
+                    val selected = currentDestination?.hierarchy?.any {
+                        it.hasRoute(destination.routeClass) ||
+                            (destination == TopLevelDestination.Profile && it.hasRoute(EditProfileRoute::class))
+                    } == true
                     NavigationBarItem(
                         selected = selected,
                         onClick = {
@@ -78,10 +85,20 @@ fun FluRaiAppShell() {
             startDestination = HomeRoute,
             modifier = Modifier.padding(innerPadding),
         ) {
-            composable<HomeRoute> { HomeScreen() }
+            composable<HomeRoute> { HomeScreen(user, profile) }
             composable<LearnRoute> { LearnScreen() }
             composable<ExploreRoute> { ExploreScreen() }
-            composable<ProfileRoute> { ProfileScreen() }
+            composable<ProfileRoute> {
+                ProfileScreen(
+                    user = user,
+                    profile = profile,
+                    onEditProfile = { navController.navigate(EditProfileRoute) },
+                    onSignOut = onSignOut,
+                )
+            }
+            composable<EditProfileRoute> {
+                EditProfileScreen(user = user, profile = profile, onDone = { navController.popBackStack() })
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.flurai.app.ui.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.flurai.app.core.auth.AuthUser
+import com.flurai.app.core.model.JlptLevel
+import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.components.PlannedFeature
 import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.theme.FluRaiTheme
@@ -28,18 +35,19 @@ private val homeFeatures = listOf(
 )
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(user: AuthUser, profile: StudyProfile) {
     TabScreen(
         titleJapanese = "ホーム",
         title = "Home",
         subtitle = "Your daily study hub",
         features = homeFeatures,
-        header = { WelcomeCard() },
+        header = { WelcomeCard(user, profile) },
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun WelcomeCard() {
+private fun WelcomeCard(user: AuthUser, profile: StudyProfile) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -54,20 +62,46 @@ private fun WelcomeCard() {
                 color = MaterialTheme.colorScheme.secondaryContainer,
             )
             Spacer(Modifier.width(20.dp))
-            Column {
-                Text("ようこそ", style = MaterialTheme.typography.titleMedium.japanese())
-                Text("Welcome to FluRai", style = MaterialTheme.typography.titleLarge)
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("おかえり", style = MaterialTheme.typography.titleMedium.japanese())
                 Text(
-                    "流 (ryū) means \"flow\", as in 流暢 (ryūchō), fluent. Features arrive one milestone at a time.",
-                    style = MaterialTheme.typography.bodyMedium,
+                    if (user.name.isBlank()) "Welcome back" else "Welcome back, ${user.name}",
+                    style = MaterialTheme.typography.titleLarge,
                 )
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Pill(profile.level.label)
+                    Pill("${profile.dailyMinutes} min/day")
+                    Pill("${profile.newCardsPerDay} new/day")
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun Pill(text: String) {
+    Surface(shape = MaterialTheme.shapes.small, color = MaterialTheme.colorScheme.primaryContainer) {
+        Text(
+            text,
+            style = MaterialTheme.typography.labelMedium,
+            maxLines = 1,
+            softWrap = false,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    FluRaiTheme { HomeScreen() }
+    FluRaiTheme {
+        HomeScreen(
+            user = AuthUser("uid", "Aki", "aki@example.com"),
+            profile = StudyProfile(JlptLevel.N5, 15, 10, knowsHiragana = true, knowsKatakana = true),
+        )
+    }
 }
