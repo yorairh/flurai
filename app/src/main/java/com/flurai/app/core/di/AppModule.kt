@@ -7,6 +7,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.FirebaseAuthRepository
+import com.flurai.app.core.content.ContentDao
+import com.flurai.app.core.content.ContentDatabase
+import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
 import dagger.Module
@@ -27,6 +30,21 @@ object AppModule {
     @Singleton
     fun preferences(@ApplicationContext context: Context): DataStore<Preferences> =
         PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("settings") }
+
+    /**
+     * Read-only study content copied from assets/content.db. When ContentDatabase.version goes up,
+     * the old copy is thrown away and the new asset copied in (it holds no user data).
+     */
+    @Provides
+    @Singleton
+    fun contentDatabase(@ApplicationContext context: Context): ContentDatabase =
+        Room.databaseBuilder(context, ContentDatabase::class.java, "content.db")
+            .createFromAsset(ContentDatabase.ASSET_PATH)
+            .fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
+
+    @Provides
+    fun contentDao(db: ContentDatabase): ContentDao = db.contentDao()
 }
 
 @Module

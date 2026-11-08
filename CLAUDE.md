@@ -20,6 +20,13 @@ export JAVA_HOME="/c/Program Files/Android/Android Studio/jbr"
 ./gradlew lintDebug
 ```
 
+Content pipeline (Python 3.12+, stdlib only; downloads are cached in `tools/content/.cache`):
+
+```bash
+python -X utf8 tools/content/build_content.py           # rebuilds app/src/main/assets/content.db
+python -X utf8 -m unittest discover tools/content       # pipeline tests, incl. checks on the built db
+```
+
 There is no emulator. The user tests on their phone: build `assembleDebug` and send them the APK. Builds are signed with the machine's `~/.android/debug.keystore`, so new APKs install over old ones without losing data.
 
 ## Firebase
@@ -45,6 +52,7 @@ The Email/Password sign-in provider must be enabled in the console (Authenticati
 - DI: Hilt (`@HiltAndroidApp FluRaiApp`, `@AndroidEntryPoint MainActivity`); bindings in `core/di/AppModule.kt`.
 - `FluRaiRoot` switches on `AppViewModel.state` (`AppState`: Loading → SignedOut → NeedsOnboarding → Ready). It shows `AuthFlow` (welcome/sign-up/sign-in/reset), `OnboardingScreen`, or the tab shell, which receives the `AuthUser` and `StudyProfile`.
 - Auth: `AuthRepository` (Firebase email/password; the display name is the user's name). Firebase error codes become user-facing text in `AuthErrors.kt`; ViewModels only ever see `AuthException` messages.
+- **Study content** (`core/content`): a read-only Room database (`ContentDatabase`) copied from `assets/content.db`. That file is built by `tools/content/build_content.py` from JLPT lists, JMdict/KANJIDIC2 and Tatoeba, using Room's exported schema in `app/schemas/` so it always matches the entities. **To change a content table:** edit the entity, bump `ContentDatabase.version`, run `./gradlew kspDebugKotlin` (exports the new schema), then re-run the pipeline. Word ids come from `tools/content/word_ids.tsv` (Anki guid → id) and must never be renumbered, because user progress will refer to them; commit that file after a rebuild. `jlpt` columns hold the JLPT number (5 = N5, easiest).
 - `StudyProfile` (level, daily goal, kana knowledge) lives in DataStore keyed by Firebase uid (`StudyProfileRepository`); no profile = onboarding not done. Cloud sync comes in a later milestone.
 - `JlptLevel` orders levels easiest-first (Beginner, N5 … N1). Compare by ordinal, never by the number in the name.
 - **Japanese text must use `TextStyle.japanese()`** (`ui/theme/Type.kt`). It sets the `ja-JP` locale so devices with a non-Japanese system language draw Japanese, not Chinese, kanji shapes.

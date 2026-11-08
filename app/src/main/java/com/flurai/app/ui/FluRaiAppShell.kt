@@ -27,7 +27,10 @@ import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.explore.ExploreScreen
 import com.flurai.app.ui.home.HomeScreen
 import com.flurai.app.ui.learn.LearnScreen
+import com.flurai.app.ui.library.LibraryScreen
+import com.flurai.app.ui.library.WordDetailScreen
 import com.flurai.app.ui.profile.EditProfileScreen
+import com.flurai.app.ui.profile.LicencesScreen
 import com.flurai.app.ui.profile.ProfileScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -37,6 +40,9 @@ import kotlin.reflect.KClass
 @Serializable object ExploreRoute
 @Serializable object ProfileRoute
 @Serializable object EditProfileRoute
+@Serializable object LibraryRoute
+@Serializable data class WordRoute(val id: Int)
+@Serializable object LicencesRoute
 
 private enum class TopLevelDestination(
     val route: Any,
@@ -62,7 +68,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {
                         it.hasRoute(destination.routeClass) ||
-                            (destination == TopLevelDestination.Profile && it.hasRoute(EditProfileRoute::class))
+                            (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class))) ||
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class)))
                     } == true
                     NavigationBarItem(
                         selected = selected,
@@ -86,16 +93,25 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             modifier = Modifier.padding(innerPadding),
         ) {
             composable<HomeRoute> { HomeScreen(user, profile) }
-            composable<LearnRoute> { LearnScreen() }
+            composable<LearnRoute> { LearnScreen(onOpenLibrary = { navController.navigate(LibraryRoute) }) }
             composable<ExploreRoute> { ExploreScreen() }
             composable<ProfileRoute> {
                 ProfileScreen(
                     user = user,
                     profile = profile,
                     onEditProfile = { navController.navigate(EditProfileRoute) },
+                    onOpenLicences = { navController.navigate(LicencesRoute) },
                     onSignOut = onSignOut,
                 )
             }
+            composable<LibraryRoute> {
+                LibraryScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenWord = { navController.navigate(WordRoute(it)) },
+                )
+            }
+            composable<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }) }
+            composable<LicencesRoute> { LicencesScreen(onBack = { navController.popBackStack() }) }
             composable<EditProfileRoute> {
                 EditProfileScreen(user = user, profile = profile, onDone = { navController.popBackStack() })
             }

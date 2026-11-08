@@ -37,6 +37,7 @@ fun ProfileScreen(
     user: AuthUser,
     profile: StudyProfile,
     onEditProfile: () -> Unit,
+    onOpenLicences: () -> Unit,
     onSignOut: () -> Unit,
 ) {
     TabScreen(
@@ -45,6 +46,11 @@ fun ProfileScreen(
         subtitle = "Account, progress and settings",
         features = profileFeatures,
         header = { AccountCard(user, profile, onEditProfile, onSignOut) },
+        footer = {
+            TextButton(onClick = onOpenLicences, modifier = Modifier.fillMaxWidth()) {
+                Text("Data sources & licences")
+            }
+        },
     )
 }
 
