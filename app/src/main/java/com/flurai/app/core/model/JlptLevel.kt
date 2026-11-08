@@ -13,8 +13,23 @@ enum class JlptLevel(val label: String, val description: String) {
     N1("N1", "Advanced: complex texts on any topic"),
     ;
 
+    /** The JLPT number (5 for N5 … 1 for N1); null for Beginner, which isn't a JLPT level. */
+    val jlpt: Int?
+        get() = when (this) {
+            Beginner -> null
+            N5 -> 5
+            N4 -> 4
+            N3 -> 3
+            N2 -> 2
+            N1 -> 1
+        }
+
     /** The next goal after this level, or null at N1. */
     fun next(): JlptLevel? = entries.getOrNull(ordinal + 1)
 
     fun isAtLeast(other: JlptLevel): Boolean = ordinal >= other.ordinal
+
+    companion object {
+        fun ofJlpt(number: Int): JlptLevel? = entries.firstOrNull { it.jlpt == number }
+    }
 }

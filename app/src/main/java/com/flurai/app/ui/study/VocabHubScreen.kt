@@ -34,6 +34,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.study.KanaScript
 import com.flurai.app.core.study.StudySource
+import com.flurai.app.ui.components.SectionHeader
 import com.flurai.app.ui.library.JlptNumbers
 import com.flurai.app.ui.theme.japanese
 
@@ -59,11 +60,11 @@ fun VocabHubScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item { TodayCard(state, onStudy = { onStudy(StudySource.Auto) }) }
-            item { SectionTitle("単語", "Word decks", "Pick a level to take today's new words from it.") }
+            item { SectionHeader("単語", "Word decks", "Pick a level to take today's new words from it.") }
             items(JlptNumbers) { n ->
                 state.levels[n]?.let { DeckRow("N$n", it) { onStudy(StudySource.Level(n)) } }
             }
-            item { SectionTitle("かな", "Kana decks", "Hiragana and katakana, sound by sound.") }
+            item { SectionHeader("かな", "Kana decks", "Hiragana and katakana, sound by sound.") }
             items(KanaScript.entries) { script ->
                 state.kana[script]?.let { DeckRow("${script.japanese}  ${script.label}", it) { onStudy(StudySource.KanaDeck(script)) } }
             }
@@ -103,18 +104,6 @@ private fun Stat(value: Int, label: String, modifier: Modifier) {
     Column(modifier) {
         Text("$value", style = MaterialTheme.typography.displaySmall)
         Text(label, style = MaterialTheme.typography.bodyMedium)
-    }
-}
-
-@Composable
-private fun SectionTitle(japanese: String, title: String, subtitle: String) {
-    Column(Modifier.padding(top = 12.dp)) {
-        Row(verticalAlignment = Alignment.Bottom) {
-            Text(japanese, style = MaterialTheme.typography.titleMedium.japanese(), color = MaterialTheme.colorScheme.secondary)
-            Spacer(Modifier.width(8.dp))
-            Text(title, style = MaterialTheme.typography.titleLarge)
-        }
-        Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

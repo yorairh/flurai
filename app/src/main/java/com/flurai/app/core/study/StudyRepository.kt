@@ -37,13 +37,7 @@ sealed interface StudySource {
 }
 
 /** First JLPT list to take new words from for a starting level (Beginner starts at N5). */
-fun JlptLevel.firstWordList(): Int = when (this) {
-    JlptLevel.Beginner, JlptLevel.N5 -> 5
-    JlptLevel.N4 -> 4
-    JlptLevel.N3 -> 3
-    JlptLevel.N2 -> 2
-    JlptLevel.N1 -> 1
-}
+fun JlptLevel.firstWordList(): Int = jlpt ?: 5
 
 data class SessionData(val cards: List<CardEntity>, val newItems: List<ItemRef>, val endOfDay: Instant)
 

@@ -21,4 +21,14 @@ class JlptLevelTest {
         assertTrue(JlptLevel.N3.isAtLeast(JlptLevel.N3))
         assertFalse(JlptLevel.N5.isAtLeast(JlptLevel.N4))
     }
+
+    @Test
+    fun jlptNumbersMapBothWays() {
+        assertNull(JlptLevel.Beginner.jlpt)
+        assertEquals(5, JlptLevel.N5.jlpt)
+        assertEquals(1, JlptLevel.N1.jlpt)
+        assertEquals(JlptLevel.N3, JlptLevel.ofJlpt(3))
+        assertNull(JlptLevel.ofJlpt(0))
+        assertEquals(JlptLevel.entries.drop(1), (5 downTo 1).map { JlptLevel.ofJlpt(it) })
+    }
 }
