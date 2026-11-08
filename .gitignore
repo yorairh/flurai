@@ -11,6 +11,7 @@ captures/
 keystore.properties
 *.apk
 *.aab
+google-services.json
 
 # Content pipeline downloads and caches
 tools/content/.cache/
