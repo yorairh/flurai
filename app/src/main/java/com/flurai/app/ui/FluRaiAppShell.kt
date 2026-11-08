@@ -32,6 +32,8 @@ import com.flurai.app.ui.library.WordDetailScreen
 import com.flurai.app.ui.profile.EditProfileScreen
 import com.flurai.app.ui.profile.LicencesScreen
 import com.flurai.app.ui.profile.ProfileScreen
+import com.flurai.app.ui.study.ReviewScreen
+import com.flurai.app.ui.study.VocabHubScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 
@@ -43,6 +45,10 @@ import kotlin.reflect.KClass
 @Serializable object LibraryRoute
 @Serializable data class WordRoute(val id: Int)
 @Serializable object LicencesRoute
+@Serializable object VocabHubRoute
+
+/** [source] is a StudySource.encode() value. */
+@Serializable data class StudyRoute(val source: String)
 
 private enum class TopLevelDestination(
     val route: Any,
@@ -63,13 +69,15 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
     val currentDestination = backStackEntry?.destination
 
     Scaffold(
-        bottomBar = {
+        bottomBar = bottomBar@{
+            // Reviews get the whole screen.
+            if (currentDestination?.hasRoute(StudyRoute::class) == true) return@bottomBar
             NavigationBar {
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class)))
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class)))
                     } == true
                     NavigationBarItem(
                         selected = selected,
@@ -93,7 +101,19 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             modifier = Modifier.padding(innerPadding),
         ) {
             composable<HomeRoute> { HomeScreen(user, profile) }
-            composable<LearnRoute> { LearnScreen(onOpenLibrary = { navController.navigate(LibraryRoute) }) }
+            composable<LearnRoute> {
+                LearnScreen(
+                    onOpenFlashcards = { navController.navigate(VocabHubRoute) },
+                    onOpenLibrary = { navController.navigate(LibraryRoute) },
+                )
+            }
+            composable<VocabHubRoute> {
+                VocabHubScreen(
+                    onBack = { navController.popBackStack() },
+                    onStudy = { navController.navigate(StudyRoute(it.encode())) },
+                )
+            }
+            composable<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
             composable<ExploreRoute> { ExploreScreen() }
             composable<ProfileRoute> {
                 ProfileScreen(

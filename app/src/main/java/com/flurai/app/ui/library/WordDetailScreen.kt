@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +16,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -36,39 +41,76 @@ import androidx.navigation.toRoute
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.WordEntity
+import com.flurai.app.core.auth.AuthRepository
+import com.flurai.app.core.speech.JapaneseSpeaker
+import com.flurai.app.core.study.CardEntity
+import com.flurai.app.core.study.ItemRef
+import com.flurai.app.core.study.ItemType
+import com.flurai.app.core.study.StudyRepository
 import com.flurai.app.ui.WordRoute
+import com.flurai.app.ui.study.YourCards
 import com.flurai.app.ui.theme.japanese
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.time.Instant
 import javax.inject.Inject
 
 data class WordDetail(val word: WordEntity, val sentences: List<SentenceEntity>)
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WordDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     content: ContentDao,
+    private val auth: AuthRepository,
+    private val study: StudyRepository,
+    private val speaker: JapaneseSpeaker,
 ) : ViewModel() {
+    private val item = ItemRef(ItemType.Word, savedStateHandle.toRoute<WordRoute>().id)
     private val _detail = MutableStateFlow<WordDetail?>(null)
     val detail: StateFlow<WordDetail?> = _detail.asStateFlow()
 
+    /** This user's cards for the word (empty when not studying it yet). */
+    val cards: StateFlow<List<CardEntity>> = auth.currentUser
+        .flatMapLatest { user -> if (user == null) flowOf(emptyList()) else study.cardsForItem(user.uid, item) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
     init {
-        val id = savedStateHandle.toRoute<WordRoute>().id
+        speaker.start()
         viewModelScope.launch {
-            val word = content.word(id) ?: return@launch
-            _detail.value = WordDetail(word, content.sentencesForWord(id))
+            val word = content.word(item.itemId) ?: return@launch
+            _detail.value = WordDetail(word, content.sentencesForWord(item.itemId))
         }
     }
+
+    fun speak() {
+        _detail.value?.let { speaker.speak(it.word.reading) }
+    }
+
+    private fun withUid(action: suspend (String) -> Unit) {
+        val uid = auth.currentUser.value?.uid ?: return
+        viewModelScope.launch { action(uid) }
+    }
+
+    fun startLearning() = withUid { study.addToStudy(it, item, Instant.now()) }
+    fun setSuspended(suspended: Boolean) = withUid { study.setSuspended(it, item, suspended) }
+    fun reset() = withUid { study.reset(it, item) }
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltViewModel()) {
     val detail by viewModel.detail.collectAsStateWithLifecycle()
+    val cards by viewModel.cards.collectAsStateWithLifecycle()
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
@@ -92,7 +134,11 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
             if (word.reading != word.expression) {
                 Text(word.reading, style = MaterialTheme.typography.titleMedium.japanese(), color = MaterialTheme.colorScheme.secondary)
             }
-            Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese())
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), modifier = Modifier.weight(1f, fill = false))
+                Spacer(Modifier.width(12.dp))
+                FilledTonalIconButton(onClick = viewModel::speak) { Icon(Icons.Filled.PlayArrow, contentDescription = "Play audio") }
+            }
             word.otherForms?.let {
                 Text(
                     "Also written $it",
@@ -106,6 +152,13 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
                 word.genkiLesson?.let { Tag("Genki lesson $it") }
                 partOfSpeechLabel(word.partsOfSpeech)?.let { Tag(it) }
             }
+
+            YourCards(
+                cards = cards,
+                onStart = viewModel::startLearning,
+                onSuspend = viewModel::setSuspended,
+                onReset = viewModel::reset,
+            )
 
             Text("Examples", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
             if (d.sentences.isEmpty()) {

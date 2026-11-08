@@ -27,6 +27,8 @@ abstract class ContentDatabase : RoomDatabase() {
 
 data class LevelCount(val jlpt: Int, val count: Int)
 
+data class WordLevel(val id: Int, val jlpt: Int)
+
 @Dao
 interface ContentDao {
     @Query("SELECT jlpt, COUNT(*) AS count FROM word GROUP BY jlpt ORDER BY jlpt DESC")
@@ -61,6 +63,16 @@ interface ContentDao {
 
     @Query("SELECT * FROM kanji WHERE jlpt = :jlpt ORDER BY frequency IS NULL, frequency, literal")
     fun kanjiAtLevel(jlpt: Int): Flow<List<KanjiEntity>>
+
+    /** Word ids at a level in teaching order: Genki lesson order first, then the rest of the list. */
+    @Query("SELECT id FROM word WHERE jlpt = :jlpt ORDER BY genki_lesson IS NULL, genki_lesson, id")
+    suspend fun wordIdsInStudyOrder(jlpt: Int): List<Int>
+
+    @Query("SELECT id, jlpt FROM word")
+    suspend fun wordLevels(): List<WordLevel>
+
+    @Query("SELECT * FROM word WHERE id IN (:ids)")
+    suspend fun words(ids: List<Int>): List<WordEntity>
 
     @Query("SELECT * FROM content_info")
     fun info(): Flow<List<ContentInfoEntity>>
