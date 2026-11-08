@@ -2,6 +2,8 @@ package com.flurai.app.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,6 +45,7 @@ fun HomeScreen(user: AuthUser, profile: StudyProfile) {
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun WelcomeCard(user: AuthUser, profile: StudyProfile) {
     Card(
@@ -65,7 +68,10 @@ private fun WelcomeCard(user: AuthUser, profile: StudyProfile) {
                     if (user.name.isBlank()) "Welcome back" else "Welcome back, ${user.name}",
                     style = MaterialTheme.typography.titleLarge,
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
                     Pill(profile.level.label)
                     Pill("${profile.dailyMinutes} min/day")
                     Pill("${profile.newCardsPerDay} new/day")
@@ -81,6 +87,8 @@ private fun Pill(text: String) {
         Text(
             text,
             style = MaterialTheme.typography.labelMedium,
+            maxLines = 1,
+            softWrap = false,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
         )

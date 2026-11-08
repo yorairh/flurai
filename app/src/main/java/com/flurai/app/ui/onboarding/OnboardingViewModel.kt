@@ -23,6 +23,8 @@ data class OnboardingUiState(
     val dailyMinutes: Int = StudyProfile.DEFAULT_DAILY_MINUTES,
     val newCardsPerDay: Int = StudyProfile.DEFAULT_NEW_CARDS,
     val saving: Boolean = false,
+    /** Set once an edit of an existing profile has been written. */
+    val saved: Boolean = false,
 ) {
     /** The kana question only makes sense for beginners; everyone above can read kana. */
     val steps: List<OnboardingStep>
@@ -68,6 +70,32 @@ class OnboardingViewModel @Inject constructor(
         } else {
             _state.update { it.copy(saving = true) }
             viewModelScope.launch { profiles.save(uid, s.toProfile()) }
+        }
+    }
+
+    private var editingLoaded = false
+
+    /** Prefills the form from an existing profile (the edit screen). Only the first call counts. */
+    fun startEditing(profile: StudyProfile) {
+        if (editingLoaded) return
+        editingLoaded = true
+        _state.value = OnboardingUiState(
+            level = profile.level,
+            knowsHiragana = profile.knowsHiragana,
+            knowsKatakana = profile.knowsKatakana,
+            dailyMinutes = profile.dailyMinutes,
+            newCardsPerDay = profile.newCardsPerDay,
+        )
+    }
+
+    /** Saves the edited profile in one go (no steps). */
+    fun saveEdits(uid: String) {
+        val s = _state.value
+        if (s.level == null || s.saving) return
+        _state.update { it.copy(saving = true) }
+        viewModelScope.launch {
+            profiles.save(uid, s.toProfile())
+            _state.update { it.copy(saving = false, saved = true) }
         }
     }
 

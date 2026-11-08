@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -27,23 +28,33 @@ import com.flurai.app.ui.components.TabScreen
 
 private val profileFeatures = listOf(
     PlannedFeature("進歩", "Progress", "What the app thinks you know, and where to improve.", 4),
-    PlannedFeature("設定", "Settings", "Change your daily goal, practice reminders, and theme.", 5),
+    PlannedFeature("設定", "Settings", "Practice reminders, streak rules, and theme.", 5),
     PlannedFeature("同期", "Sync", "Your progress backed up and shared across devices.", 11),
 )
 
 @Composable
-fun ProfileScreen(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit) {
+fun ProfileScreen(
+    user: AuthUser,
+    profile: StudyProfile,
+    onEditProfile: () -> Unit,
+    onSignOut: () -> Unit,
+) {
     TabScreen(
         titleJapanese = "マイページ",
         title = "Me",
         subtitle = "Account, progress and settings",
         features = profileFeatures,
-        header = { AccountCard(user, profile, onSignOut) },
+        header = { AccountCard(user, profile, onEditProfile, onSignOut) },
     )
 }
 
 @Composable
-private fun AccountCard(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit) {
+private fun AccountCard(
+    user: AuthUser,
+    profile: StudyProfile,
+    onEditProfile: () -> Unit,
+    onSignOut: () -> Unit,
+) {
     var confirmSignOut by rememberSaveable { mutableStateOf(false) }
 
     Card(
@@ -54,9 +65,12 @@ private fun AccountCard(user: AuthUser, profile: StudyProfile, onSignOut: () -> 
             Text(user.name.ifBlank { "Learner" }, style = MaterialTheme.typography.titleLarge)
             Text(user.email, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
-            InfoRow("Starting level", profile.level.label)
+            InfoRow("Level", profile.level.label)
             InfoRow("Daily goal", "${profile.dailyMinutes} minutes")
             InfoRow("New words per day", profile.newCardsPerDay.toString())
+            Button(onClick = onEditProfile, modifier = Modifier.fillMaxWidth()) {
+                Text("Edit level & goals")
+            }
             OutlinedButton(onClick = { confirmSignOut = true }, modifier = Modifier.fillMaxWidth()) {
                 Text("Sign out")
             }

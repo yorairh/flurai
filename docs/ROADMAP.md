@@ -84,6 +84,7 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - Firebase project `flurai-app`.
    - Sign up/in with name + email + password, and password reset.
    - Onboarding: choose a level (Beginner→N1), a daily goal (minutes, new cards/day), and a kana check for beginners.
+   - "Edit level & goals" on the Me tab changes those choices later.
 2. **Content pipeline:** a `tools/content` Python script builds `content.db` (N5–N1 vocab with readings and meanings, kanji, Tatoeba examples), with tests on row counts per level. Also an attribution/licences screen (EDRDG, Tanos, Tatoeba, jiten.moe).
 3. **Vocabulary SRS (Anki-style):**
    - Decks per JLPT level, plus custom decks.
@@ -100,7 +101,7 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
    - **Streaks:** a day counts once the daily minimum is met (default 5 min or one finished review session, configurable). Show the current and longest streak, a calendar heatmap, and weekly totals. Optional streak freezes (e.g. 1 per week).
    - **Motivation:** a progress ring toward the daily goal, celebrations at 7/30/100 days, and a "streak at risk" banner in the evening.
    - **Notifications (opt-in):** a daily reminder at a chosen time (WorkManager, plus `POST_NOTIFICATIONS` on Android 13+). It is skipped if you've already studied today and has adaptive text ("12 reviews due", "keep your 9-day streak"). Optional streak-at-risk reminder. Rescheduled after reboot.
-   - **Settings screen:** reminders on/off, time and days, streak-at-risk toggle, daily goal, streak minimum, and theme.
+   - **Settings screen:** reminders on/off, time and days, streak-at-risk toggle, streak minimum, and theme (level and daily goal are already editable from milestone 1).
 6. **Tests:**
    - Adaptive placement test.
    - JLPT-style checkpoint tests per level: vocab, kanji reading, grammar, and reading.

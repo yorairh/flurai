@@ -127,7 +127,7 @@ private fun LevelStep(name: String, selected: JlptLevel?, onSelect: (JlptLevel) 
 }
 
 @Composable
-private fun LevelCard(level: JlptLevel, selected: Boolean, onClick: () -> Unit) {
+internal fun LevelCard(level: JlptLevel, selected: Boolean, onClick: () -> Unit) {
     val colors = MaterialTheme.colorScheme
     Card(
         modifier = Modifier
@@ -162,7 +162,7 @@ private fun KanaStep(state: OnboardingUiState, viewModel: OnboardingViewModel) {
 }
 
 @Composable
-private fun KanaToggle(
+internal fun KanaToggle(
     japanese: String,
     name: String,
     sample: String,
@@ -184,14 +184,19 @@ private fun KanaToggle(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun GoalStep(state: OnboardingUiState, viewModel: OnboardingViewModel) {
     StepHeader(
         japanese = "目標",
         title = "Set a daily goal",
-        subtitle = "Small and steady beats big and rare. You can change this later in settings.",
+        subtitle = "Small and steady beats big and rare. You can change this any time on the Me tab.",
     )
+    GoalPickers(state, viewModel)
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+internal fun GoalPickers(state: OnboardingUiState, viewModel: OnboardingViewModel) {
     Text("Study time per day", style = MaterialTheme.typography.titleMedium)
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         StudyProfile.DailyMinuteOptions.forEach { minutes ->

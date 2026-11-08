@@ -27,6 +27,7 @@ import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.explore.ExploreScreen
 import com.flurai.app.ui.home.HomeScreen
 import com.flurai.app.ui.learn.LearnScreen
+import com.flurai.app.ui.profile.EditProfileScreen
 import com.flurai.app.ui.profile.ProfileScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -35,6 +36,7 @@ import kotlin.reflect.KClass
 @Serializable object LearnRoute
 @Serializable object ExploreRoute
 @Serializable object ProfileRoute
+@Serializable object EditProfileRoute
 
 private enum class TopLevelDestination(
     val route: Any,
@@ -58,7 +60,10 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
         bottomBar = {
             NavigationBar {
                 TopLevelDestination.entries.forEach { destination ->
-                    val selected = currentDestination?.hierarchy?.any { it.hasRoute(destination.routeClass) } == true
+                    val selected = currentDestination?.hierarchy?.any {
+                        it.hasRoute(destination.routeClass) ||
+                            (destination == TopLevelDestination.Profile && it.hasRoute(EditProfileRoute::class))
+                    } == true
                     NavigationBarItem(
                         selected = selected,
                         onClick = {
@@ -83,7 +88,17 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             composable<HomeRoute> { HomeScreen(user, profile) }
             composable<LearnRoute> { LearnScreen() }
             composable<ExploreRoute> { ExploreScreen() }
-            composable<ProfileRoute> { ProfileScreen(user, profile, onSignOut) }
+            composable<ProfileRoute> {
+                ProfileScreen(
+                    user = user,
+                    profile = profile,
+                    onEditProfile = { navController.navigate(EditProfileRoute) },
+                    onSignOut = onSignOut,
+                )
+            }
+            composable<EditProfileRoute> {
+                EditProfileScreen(user = user, profile = profile, onDone = { navController.popBackStack() })
+            }
         }
     }
 }
