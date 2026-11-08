@@ -27,7 +27,9 @@ python -X utf8 tools/content/build_content.py           # rebuilds app/src/main/
 python -X utf8 -m unittest discover tools/content       # pipeline tests, incl. checks on the built db
 ```
 
-There is no emulator. The user tests on their phone: build `assembleDebug` and send them the APK. Builds are signed with the machine's `~/.android/debug.keystore`, so new APKs install over old ones without losing data.
+There is no emulator. The user tests on their phone: build `assembleDebug` and send them the APK.
+
+**Signing:** both debug and release builds are signed with the FluRai release key in `~/.flurai-signing/` (`flurai-release.jks` + `keystore.properties`, outside the repo and OneDrive). Test APKs and releases therefore update each other in place. Never commit the key. If it is missing, builds fall back to the standard debug key, and those APKs can't update an installed release.
 
 ## Firebase
 
@@ -68,3 +70,5 @@ The Email/Password sign-in provider must be enabled in the console (Authenticati
 ## Workflow
 
 - Private repo `yorairh/flurai`. One branch per feature (`feature/NN-name`), push and open a PR with `gh` when it's done; merge only after the user has tested the APK and approved.
+- **Versions:** milestone N ships as `0.(N+1).0` with `versionCode` N+1. Bump `versionCode`/`versionName` in `app/build.gradle.kts` in the milestone's PR, and write its release notes in `docs/releases/<version>.md` (see the earlier ones for the format).
+- **After merging a milestone PR:** check out an up-to-date `main` and run `tools/release.sh <version> "<milestone title>"`. It builds the signed release APK, verifies the signature, and creates GitHub release `v<version>` with the notes. Then update the roadmap's status table.
