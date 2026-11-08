@@ -71,5 +71,5 @@ The Email/Password sign-in provider must be enabled in the console (Authenticati
 ## Workflow
 
 - Private repo `yorairh/flurai`. One branch per feature (`feature/NN-name`), push and open a PR with `gh` when it's done; merge only after the user has tested the APK and approved.
-- **Versions:** milestone N ships as `0.(N+1).0` with `versionCode` N+1. Bump `versionCode`/`versionName` in `app/build.gradle.kts` in the milestone's PR, and write its release notes in `docs/releases/<version>.md` (see the earlier ones for the format).
+- **Versions:** milestone N ships as `0.(N+1).0` with `versionCode` N+1. Bump `versionCode`/`versionName` in `app/build.gradle.kts` in the milestone's PR (the version is shown in the app on the Me tab, so the user can check which build they have; keep it visible in Settings), and write its release notes in `docs/releases/<version>.md` (see the earlier ones for the format).
 - **After merging a milestone PR:** check out an up-to-date `main` and run `tools/release.sh <version> "<milestone title>"`. It builds the signed release APK, verifies the signature, and creates GitHub release `v<version>` with the notes. Then update the roadmap's status table.

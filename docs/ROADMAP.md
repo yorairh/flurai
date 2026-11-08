@@ -10,8 +10,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) | [v0.2.0](https://github.com/yorairh/flurai/releases/tag/v0.2.0) |
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
 | 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
-| 4 | Progress dashboard | 🔍 In review (waiting for phone test) | `feature/04-progress-dashboard`, [PR #6](https://github.com/yorairh/flurai/pull/6) | 0.5.0 |
-| 5 | Study time, streaks, and reminders | ⏳ | | |
+| 4 | Progress dashboard | ✅ Merged | [PR #6](https://github.com/yorairh/flurai/pull/6) | [0.5.0](https://github.com/yorairh/flurai/releases/tag/v0.5.0) |
+| 5 | Study time, streaks, and reminders | 🚧 In progress | `feature/05-streaks-reminders` | 0.6.0 |
 | 6 | Tests | ⏳ | | |
 | 7 | Grammar module | ⏳ | | |
 | 8 | Reading and stories | ⏳ | | |
@@ -130,6 +130,10 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
     - Then voice: SpeechRecognizer in, TTS out.
     - Mistakes it notices feed weak areas and cards.
 13. **AI-generated graded content:** stories and questions built from known vocab + target grammar ("i+1"), with reading exercises and TTS listening.
+
+## Standing rules
+
+- **App version is always visible:** Me tab → bottom of the screen shows `Version x.y.z (code)`, read from the installed package. From milestone 5 it moves into the Settings screen. Every milestone's PR bumps it (see CLAUDE.md), so the user can tell which build is on the phone.
 
 ## Backlog (not scheduled)
 

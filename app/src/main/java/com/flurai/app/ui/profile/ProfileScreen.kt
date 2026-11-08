@@ -21,11 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.flurai.app.core.auth.AuthUser
 import com.flurai.app.core.profile.StudyProfile
@@ -62,8 +65,27 @@ fun ProfileScreen(
             TextButton(onClick = onOpenLicences, modifier = Modifier.fillMaxWidth()) {
                 Text("Data sources & licences")
             }
+            Text(
+                "FluRai ${appVersionLabel()}",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+            )
         },
     )
+}
+
+/** "Version 0.6.0 (6)", read from the installed package so it always matches the APK. */
+@Composable
+private fun appVersionLabel(): String {
+    val context = LocalContext.current
+    return remember {
+        runCatching {
+            val info = context.packageManager.getPackageInfo(context.packageName, 0)
+            "Version ${info.versionName} (${info.longVersionCode})"
+        }.getOrDefault("Version unknown")
+    }
 }
 
 @Composable
