@@ -1,0 +1,22 @@
+package com.flurai.app
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.flurai.app.ui.FluRaiAppShell
+import com.flurai.app.ui.theme.FluRaiTheme
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            FluRaiTheme {
+                FluRaiAppShell()
+            }
+        }
+    }
+}
