@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.flurai.app.ui.FluRaiAppShell
+import com.flurai.app.ui.FluRaiRoot
 import com.flurai.app.ui.theme.FluRaiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FluRaiTheme {
-                FluRaiAppShell()
+                FluRaiRoot()
             }
         }
     }

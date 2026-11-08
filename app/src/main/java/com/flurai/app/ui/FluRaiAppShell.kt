@@ -22,6 +22,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.flurai.app.core.auth.AuthUser
+import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.explore.ExploreScreen
 import com.flurai.app.ui.home.HomeScreen
 import com.flurai.app.ui.learn.LearnScreen
@@ -47,7 +49,7 @@ private enum class TopLevelDestination(
 }
 
 @Composable
-fun FluRaiAppShell() {
+fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -78,10 +80,10 @@ fun FluRaiAppShell() {
             startDestination = HomeRoute,
             modifier = Modifier.padding(innerPadding),
         ) {
-            composable<HomeRoute> { HomeScreen() }
+            composable<HomeRoute> { HomeScreen(user, profile) }
             composable<LearnRoute> { LearnScreen() }
             composable<ExploreRoute> { ExploreScreen() }
-            composable<ProfileRoute> { ProfileScreen() }
+            composable<ProfileRoute> { ProfileScreen(user, profile, onSignOut) }
         }
     }
 }
