@@ -4,22 +4,22 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 
 ## Status
 
-| # | Milestone | Status | Branch / PR |
-|---|-----------|--------|-------------|
-| 0 | Project setup | ✅ Merged | [PR #1](https://github.com/yorairh/flurai/pull/1) |
-| 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) |
-| 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) |
-| 3 | Vocabulary SRS (Anki-style) | 🔍 In review (waiting for phone test) | `feature/03-vocab-srs`, [PR #4](https://github.com/yorairh/flurai/pull/4) |
-| 4 | Progress dashboard | ⏳ | |
-| 5 | Study time, streaks, and reminders | ⏳ | |
-| 6 | Tests | ⏳ | |
-| 7 | Grammar module | ⏳ | |
-| 8 | Reading and stories | ⏳ | |
-| 9 | YouTube recommendations | ⏳ | |
-| 10 | Media recommendations (jiten.moe) | ⏳ | |
-| 11 | Cloud sync | ⏳ | |
-| 12 | AI conversation partner | ⏳ | |
-| 13 | AI-generated graded content | ⏳ | |
+| # | Milestone | Status | Branch / PR | Release |
+|---|-----------|--------|-------------|---------|
+| 0 | Project setup | ✅ Merged | [PR #1](https://github.com/yorairh/flurai/pull/1) | [v0.1.0](https://github.com/yorairh/flurai/releases/tag/v0.1.0) |
+| 1 | Accounts and onboarding | ✅ Merged | [PR #2](https://github.com/yorairh/flurai/pull/2) | [v0.2.0](https://github.com/yorairh/flurai/releases/tag/v0.2.0) |
+| 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
+| 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
+| 4 | Progress dashboard | ⏳ Next | | 0.5.0 |
+| 5 | Study time, streaks, and reminders | ⏳ | | |
+| 6 | Tests | ⏳ | | |
+| 7 | Grammar module | ⏳ | | |
+| 8 | Reading and stories | ⏳ | | |
+| 9 | YouTube recommendations | ⏳ | | |
+| 10 | Media recommendations (jiten.moe) | ⏳ | | |
+| 11 | Cloud sync | ⏳ | | |
+| 12 | AI conversation partner | ⏳ | | |
+| 13 | AI-generated graded content | ⏳ | | |
 
 ## Goal
 
@@ -37,6 +37,7 @@ Decisions made:
 - Private repo `yorairh/flurai`. Use the `gh` CLI (the GitHub MCP server had auth problems).
 - **One branch per milestone** from an up-to-date `main` (`feature/NN-name`); bug fixes on `fix/<topic>`.
 - When a milestone is done: push, open a PR with `gh pr create`, and send the user the debug APK. **Merge only after the user has tested on their phone and approved.** Fixes go on the same branch with a new APK.
+- Every merged milestone gets a GitHub release (`v0.(N+1).0`, signed APK + notes from `docs/releases/`) via `tools/release.sh`.
 - There is no emulator; the user sideloads APKs. Build and test commands are in CLAUDE.md.
 
 ## Research findings that shape the design

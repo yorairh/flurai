@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -17,13 +19,34 @@ android {
         applicationId = "com.flurai.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        // Bump both in every milestone PR: milestone N ships as 0.(N+1).0 with versionCode N+1.
+        versionCode = 4
+        versionName = "0.4.0"
+    }
+
+    // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
+    // APKs and releases update each other in place. Without it (another machine), builds fall back
+    // to the standard debug key and release builds are unsigned.
+    val signingFile = file("${System.getProperty("user.home")}/.flurai-signing/keystore.properties")
+    val releaseSigning = if (signingFile.exists()) {
+        val props = Properties().apply { signingFile.inputStream().use { load(it) } }
+        signingConfigs.create("release") {
+            storeFile = file(props.getProperty("storeFile"))
+            storePassword = props.getProperty("storePassword")
+            keyAlias = props.getProperty("keyAlias")
+            keyPassword = props.getProperty("keyPassword")
+        }
+    } else {
+        null
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = releaseSigning
+        }
+        debug {
+            if (releaseSigning != null) signingConfig = releaseSigning
         }
     }
     compileOptions {
