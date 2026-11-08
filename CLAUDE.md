@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 FluRai is an Android app (Kotlin + Jetpack Compose) for learning Japanese: SRS vocabulary cards, grammar, tests, reading, video and media recommendations, streaks, and later an AI conversation partner, measured against JLPT N5–N1. The feature roadmap is built one milestone at a time (milestone numbers appear in `PlannedFeature` cards on each tab).
 
+**Start every session by reading [docs/ROADMAP.md](docs/ROADMAP.md).** It holds the full plan, the research behind it, and a status table showing which milestone is merged, in review, or next. Update that table when you open or merge a milestone's PR.
+
 ## Commands
 
 Use Android Studio's bundled JDK (the `java` on PATH is an old JDK 13):
