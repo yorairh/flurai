@@ -25,7 +25,9 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 16 | Furigana in Reading | ⏳ | | |
 | 17 | Listening practice (flashcard type + quiz) | ⏳ | | |
 | 18 | Custom decks | ⏳ | | |
-| 19 | N3 grammar (full list, ~100+ points) | ⏳ | | |
+| 19 | Complete N5 grammar (25 → ~80 points) | ⏳ | | |
+| 20 | Complete N4 grammar (22 → ~130 points) | ⏳ | | |
+| 21 | N3 grammar (full list, ~200 points) | ⏳ | | |
 
 ## Goal
 
@@ -139,13 +141,15 @@ Each one ends with a PR and an APK for the user to test, then a feedback and bug
 
 ## Plan for milestones 15-19 (agreed 2026-11-09)
 
-Order: 15 → 16 → 17 → 18 → 19. Milestone 12 (chat) is parked on `feature/12-conversation` (PR #15); it will need a new version number when it comes back.
+Order: 15 → 16 → 17 → 18 → 19 → 20 → 21. Milestone 12 (chat) is parked on `feature/12-conversation` (PR #15); it will need a new version number when it comes back.
 
 15. **Polish pass (0.14.0):** onboarding says "Back"/"Leave guest mode" to guests; Home greets "Welcome" on the first visit; one shared in-memory word cache instead of four full-table loads; progress, Home and Vocab hub flows recompute only on real changes (`distinctUntilChanged`, conflate, lighter queries); sync fetches collections in parallel and skips unchanged meta writes.
 16. **Furigana in Reading (0.15.0):** ruby text over every word with kanji, from the word's reading, aligned to the kanji only (okurigana stripped). Toggle: always / off / tap to show.
 17. **Listening practice (0.16.0):** a third card kind, Listening (hear the word, reveal kana, kanji and meaning), unlocked when a word's recognition card graduates, like production. A Listening quick quiz in Tests (hear, pick the meaning of 4). Setting to turn listening cards off. UserDatabase migration.
 18. **Custom decks (0.17.0):** create, rename, delete decks; add words from the word page, Library and media "words to learn"; study one deck through the normal session (cards are shared, not copied). Synced like the rest; guests keep them locally. New tables, migration, sync.
-19. **N3 grammar (0.18.0):** the full N3 list (~100+ points) in grammar.json, same format as N5/N4: explanation, formation, 3-4 examples (Tatoeba where one fits, otherwise written), fill-in-the-blank practice.
+19. **Complete N5 grammar (0.18.0):** grow N5 from 25 to the full list (~80 points, JLPT Sensei-sized lists as the reference), same format: explanation, formation, 3-4 examples (Tatoeba where one fits, otherwise written), fill-in-the-blank practice. New ids only; existing ids never change.
+20. **Complete N4 grammar (0.19.0):** grow N4 from 22 to the full list (~130 points), same way.
+21. **N3 grammar (0.20.0):** the full N3 list (~200 points), same way.
 
 ## Standing rules
 
