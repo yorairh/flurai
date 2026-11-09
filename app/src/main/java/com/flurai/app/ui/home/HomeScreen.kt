@@ -75,7 +75,9 @@ private fun HomeContent(
         features = homeFeatures,
         header = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                WelcomeCard(user, profile)
+                // Someone who has never studied is greeted, not welcomed back.
+                val returning = (state.snapshot?.studiedWords ?: 0) > 0 || activity?.heat?.any { it > 0 } == true
+                WelcomeCard(user, profile, returning)
                 state.snapshot?.let { snapshot ->
                     TodayCard(state, snapshot, onStudy)
                     activity?.let { StreakCard(it) }
@@ -88,7 +90,7 @@ private fun HomeContent(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun WelcomeCard(user: AuthUser, profile: StudyProfile) {
+private fun WelcomeCard(user: AuthUser, profile: StudyProfile, returning: Boolean) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -104,9 +106,10 @@ private fun WelcomeCard(user: AuthUser, profile: StudyProfile) {
             )
             Spacer(Modifier.width(20.dp))
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("おかえり", style = MaterialTheme.typography.titleMedium.japanese())
+                Text(if (returning) "おかえり" else "ようこそ", style = MaterialTheme.typography.titleMedium.japanese())
+                val greeting = if (returning) "Welcome back" else "Welcome"
                 Text(
-                    if (user.name.isBlank()) "Welcome back" else "Welcome back, ${user.name}",
+                    if (user.name.isBlank()) greeting else "$greeting, ${user.name}",
                     style = MaterialTheme.typography.titleLarge,
                 )
                 FlowRow(

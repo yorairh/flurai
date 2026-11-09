@@ -1,5 +1,6 @@
 package com.flurai.app.core.media
 
+import com.flurai.app.core.content.WordCache
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.knowledge.Knowledge
 import com.flurai.app.core.knowledge.knowledge
@@ -31,6 +32,7 @@ class MediaRepository @Inject constructor(
     private val content: ContentDao,
     private val studyDao: StudyDao,
     private val study: StudyRepository,
+    private val wordCache: WordCache,
 ) {
     private data class Cached<T>(val at: Long, val value: T)
 
@@ -57,7 +59,7 @@ class MediaRepository @Inject constructor(
         return api.topVocabulary(deckId).also { vocab[deckId] = Cached(now(), it) }
     }
 
-    private suspend fun idMap(): Map<Int, Int> = jmdictToWord ?: content.allWords()
+    private suspend fun idMap(): Map<Int, Int> = jmdictToWord ?: wordCache.all()
         .mapNotNull { w -> w.jmdictId?.let { it to w.id } }.toMap().also { jmdictToWord = it }
 
     suspend fun analyse(uid: String, deckId: Int, learnLimit: Int = LEARN_BATCH): MediaAnalysis {

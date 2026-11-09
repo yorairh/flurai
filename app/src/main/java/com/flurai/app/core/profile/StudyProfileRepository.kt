@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flurai.app.core.model.JlptLevel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,7 +32,7 @@ class StudyProfileRepository @Inject constructor(
             knowsHiragana = prefs[keys.knowsHiragana] ?: true,
             knowsKatakana = prefs[keys.knowsKatakana] ?: true,
         )
-    }
+    }.distinctUntilChanged()
 
     suspend fun save(uid: String, profile: StudyProfile) {
         val keys = Keys(uid)

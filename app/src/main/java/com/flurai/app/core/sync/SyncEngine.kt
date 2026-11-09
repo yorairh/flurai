@@ -1,5 +1,9 @@
 package com.flurai.app.core.sync
 
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.async
 import com.flurai.app.core.auth.GUEST_UID
 import android.util.Log
 import androidx.datastore.core.DataStore
@@ -133,17 +137,22 @@ class SyncEngine @Inject constructor(
         val dayIds = HashSet<Long>()
         val grammarIds = HashSet<Int>()
 
-        suspend fun docs(name: String) = user(uid).collection(name).whereGreaterThan("updatedAt", since)
-            .orderBy("updatedAt", Query.Direction.ASCENDING).get().await().documents
+        fun query(name: String) = user(uid).collection(name).whereGreaterThan("updatedAt", since)
+            .orderBy("updatedAt", Query.Direction.ASCENDING).get()
 
-        for (doc in docs("cards")) {
+        // The four downloads are independent: start them together, then merge one by one.
+        val (cardDocs, dayDocs, testDocs, grammarDocs) = coroutineScope {
+            listOf("cards", "days", "tests", "grammar").map { name -> async { query(name).await().documents } }.awaitAll()
+        }
+
+        for (doc in cardDocs) {
             max = maxOf(max, doc.getLong("updatedAt") ?: 0)
             val card = cardFrom(uid, doc.data ?: continue) ?: continue
             val local = dao.card(uid, card.itemType, card.itemId, card.kind)
             if (local == null || touched(card) > touched(local)) dao.upsertCard(card)
             cardIds += doc.id
         }
-        for (doc in docs("days")) {
+        for (doc in dayDocs) {
             max = maxOf(max, doc.getLong("updatedAt") ?: 0)
             val day = doc.getLong("day") ?: continue
             val remote = StudyDayEntity(uid, day, (doc.getLong("seconds") ?: 0).toInt(), (doc.getLong("reviews") ?: 0).toInt())
@@ -152,7 +161,7 @@ class SyncEngine @Inject constructor(
             dao.upsertDay(local?.let { StudyDayEntity(uid, day, maxOf(it.seconds, remote.seconds), maxOf(it.reviews, remote.reviews)) } ?: remote)
             dayIds += day
         }
-        for (doc in docs("tests")) {
+        for (doc in testDocs) {
             max = maxOf(max, doc.getLong("updatedAt") ?: 0)
             val takenAt = doc.getLong("takenAt") ?: continue
             val type = doc.getString("type") ?: continue
@@ -166,7 +175,7 @@ class SyncEngine @Inject constructor(
                 )
             }
         }
-        for (doc in docs("grammar")) {
+        for (doc in grammarDocs) {
             max = maxOf(max, doc.getLong("updatedAt") ?: 0)
             val id = (doc.getLong("grammarId") ?: continue).toInt()
             val remote = GrammarProgressEntity(
@@ -235,15 +244,18 @@ class SyncEngine @Inject constructor(
             batch.commit().await()
         }
 
-        // Small whole-document items: written on every sync.
-        user(uid).collection("meta").document("channels").set(
-            mapOf(
-                "items" to dao.channels(uid).map { mapOf("name" to it.name, "url" to it.url, "level" to it.level, "addedAt" to it.addedAt) },
-                "updatedAt" to now,
-            ),
-        ).await()
+        // Small whole-document items: written only when they changed since the last upload (or on a full push).
+        val items = dao.channels(uid).map { mapOf("name" to it.name, "url" to it.url, "level" to it.level, "addedAt" to it.addedAt) }
         val prefs = readPrefs(uid)
-        if (prefs.isNotEmpty()) user(uid).collection("meta").document("profile").set(mapOf("prefs" to prefs, "updatedAt" to now)).await()
+        val metaKey = longPreferencesKey("$uid.sync.meta")
+        val metaHash = (items to prefs).hashCode().toLong()
+        if (since == 0L || dataStore.data.first()[metaKey] != metaHash) {
+            coroutineScope {
+                launch { user(uid).collection("meta").document("channels").set(mapOf("items" to items, "updatedAt" to now)).await() }
+                if (prefs.isNotEmpty()) launch { user(uid).collection("meta").document("profile").set(mapOf("prefs" to prefs, "updatedAt" to now)).await() }
+            }
+            dataStore.edit { it[metaKey] = metaHash }
+        }
     }
 
     // -- preferences -----------------------------------------------------------------------------

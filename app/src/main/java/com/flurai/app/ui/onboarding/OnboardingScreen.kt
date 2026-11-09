@@ -63,7 +63,7 @@ fun OnboardingScreen(
                 modifier = Modifier.weight(1f),
             )
             Spacer(Modifier.width(8.dp))
-            TextButton(onClick = onSignOut) { Text("Sign out") }
+            TextButton(onClick = onSignOut) { Text(if (user.isGuest) "Back" else "Sign out") }
         }
         if (state.stepIndex == 0) com.flurai.app.ui.account.MoveProgressCard(
             Modifier.padding(top = 8.dp),

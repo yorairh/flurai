@@ -1,5 +1,6 @@
 package com.flurai.app.core.reading
 
+import com.flurai.app.core.content.WordCache
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.WordEntity
@@ -107,10 +108,10 @@ fun sentenceQuestion(sentence: SentenceEntity, pool: List<SentenceEntity>, jlpt:
 }
 
 @Singleton
-class ReadingRepository @Inject constructor(private val content: ContentDao) {
+class ReadingRepository @Inject constructor(private val content: ContentDao, private val wordCache: WordCache) {
     private var lexicon: Lexicon? = null
 
-    suspend fun lexicon(): Lexicon = lexicon ?: withContext(Dispatchers.Default) { Lexicon(content.allWords()) }.also { lexicon = it }
+    suspend fun lexicon(): Lexicon = lexicon ?: wordCache.all().let { words -> withContext(Dispatchers.Default) { Lexicon(words) } }.also { lexicon = it }
 
     private var byLevel: Map<Int, List<SentenceEntity>>? = null
 
