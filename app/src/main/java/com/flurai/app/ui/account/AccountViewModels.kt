@@ -12,7 +12,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class VerifyEmailState(val busy: Boolean = false, val sent: Boolean = false, val message: String? = null)
+data class VerifyEmailState(
+    val busy: Boolean = false,
+    val sent: Boolean = false,
+    val message: String? = null,
+    /** Seconds until another email may be requested (Firebase rate-limits them). */
+    val cooldown: Int = 0,
+)
 
 @HiltViewModel
 class VerifyEmailViewModel @Inject constructor(private val auth: AuthRepository) : ViewModel() {
@@ -44,6 +50,11 @@ class VerifyEmailViewModel @Inject constructor(private val auth: AuthRepository)
         viewModelScope.launch {
             val result = auth.sendVerificationEmail()
             _state.update { it.copy(busy = false, sent = result.isSuccess, message = result.exceptionOrNull()?.message) }
+            // Either way, wait before the next try: a refusal also means Firebase wants a pause.
+            for (left in RESEND_COOLDOWN_SECONDS downTo 0) {
+                _state.update { it.copy(cooldown = left) }
+                if (left > 0) kotlinx.coroutines.delay(1_000)
+            }
         }
     }
 
@@ -56,6 +67,10 @@ class VerifyEmailViewModel @Inject constructor(private val auth: AuthRepository)
     }
 
     fun signOut() = auth.signOut()
+
+    private companion object {
+        const val RESEND_COOLDOWN_SECONDS = 60
+    }
 }
 
 data class MoveProgressState(val other: OtherProgress? = null, val busy: Boolean = false, val done: Boolean = false)

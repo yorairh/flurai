@@ -63,8 +63,14 @@ fun VerifyEmailScreen(user: AuthUser, viewModel: VerifyEmailViewModel = hiltView
         Button(onClick = { viewModel.check(quiet = false) }, enabled = !state.busy, modifier = Modifier.fillMaxWidth().height(52.dp)) {
             Text("I've confirmed it")
         }
-        OutlinedButton(onClick = { viewModel.resend() }, enabled = !state.busy, modifier = Modifier.fillMaxWidth()) {
-            Text(if (state.sent) "Email sent. Check your inbox" else "Send the email")
+        OutlinedButton(onClick = { viewModel.resend() }, enabled = !state.busy && state.cooldown == 0, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                when {
+                    state.cooldown > 0 && state.sent -> "Email sent. Send again in ${state.cooldown} s"
+                    state.cooldown > 0 -> "Send again in ${state.cooldown} s"
+                    else -> "Send the email"
+                },
+            )
         }
         OutlinedButton(onClick = { confirmDelete = true }, enabled = !state.busy, modifier = Modifier.fillMaxWidth()) {
             Text("Use a different email")

@@ -15,4 +15,7 @@ fun authErrorMessage(errorCode: String?): String = when (errorCode) {
     else -> "Something went wrong. Please try again."
 }
 
+/** Firebase limits how often it sends emails or accepts attempts. */
+const val TOO_MANY_REQUESTS_MESSAGE = "An email was sent a moment ago. Wait a few minutes, then check your inbox (and spam) before asking again."
+
 const val NETWORK_ERROR_MESSAGE = "No internet connection. Check your connection and try again."

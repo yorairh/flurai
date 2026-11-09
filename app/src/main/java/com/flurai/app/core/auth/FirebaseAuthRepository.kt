@@ -1,6 +1,7 @@
 package com.flurai.app.core.auth
 
 import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
@@ -85,6 +86,8 @@ class FirebaseAuthRepository @Inject constructor(
         throw e
     } catch (e: FirebaseAuthException) {
         Result.failure(AuthException(authErrorMessage(e.errorCode)))
+    } catch (e: FirebaseTooManyRequestsException) {
+        Result.failure(AuthException(TOO_MANY_REQUESTS_MESSAGE))
     } catch (e: FirebaseNetworkException) {
         Result.failure(AuthException(NETWORK_ERROR_MESSAGE))
     } catch (e: AuthException) {
