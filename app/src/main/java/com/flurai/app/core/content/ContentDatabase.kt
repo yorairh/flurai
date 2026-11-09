@@ -76,6 +76,9 @@ interface ContentDao {
     @Query("SELECT * FROM word")
     suspend fun allWords(): List<WordEntity>
 
+    @Query("SELECT * FROM kanji")
+    suspend fun allKanji(): List<KanjiEntity>
+
     @Query("SELECT literal, jlpt FROM kanji")
     suspend fun kanjiLevels(): List<KanjiLevel>
 

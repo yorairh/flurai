@@ -13,16 +13,30 @@ import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 import com.flurai.app.core.activity.StudyDayDao
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.quiz.TestResultDao
+import com.flurai.app.core.quiz.TestResultEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class], version = 2, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class], version = 3, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun studyDayDao(): StudyDayDao
+    abstract fun testResultDao(): TestResultDao
+}
+
+/** 2 → 3: test results (placement, checkpoints, quick quizzes). */
+val MIGRATION_2_3 = object : Migration(2, 3) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `test_result` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "`uid` TEXT NOT NULL, `type` TEXT NOT NULL, `level` INTEGER, `correct` INTEGER NOT NULL, " +
+                "`total` INTEGER NOT NULL, `taken_at` INTEGER NOT NULL)",
+        )
+    }
 }
 
 /** 1 → 2: daily study time (streaks). */
