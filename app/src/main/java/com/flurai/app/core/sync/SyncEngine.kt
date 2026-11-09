@@ -21,6 +21,7 @@ import com.flurai.app.core.study.ItemType
 import com.flurai.app.core.video.CustomChannelDao
 import com.flurai.app.core.video.CustomChannelEntity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,6 +49,7 @@ data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = nu
 @Singleton
 class SyncEngine @Inject constructor(
     private val firestore: FirebaseFirestore,
+    private val auth: com.google.firebase.auth.FirebaseAuth,
     private val dao: SyncDao,
     private val studyDays: StudyDayDao,
     private val tests: TestResultDao,
@@ -65,20 +67,44 @@ class SyncEngine @Inject constructor(
     suspend fun sync(uid: String): Boolean = mutex.withLock {
         _status.value = _status.value.copy(running = true, error = null)
         try {
-            val startedAt = System.currentTimeMillis()
-            val cursors = cursors(uid)
-            val pulled = pull(uid, cursors.pull)
-            push(uid, cursors.push, pulled)
-            saveCursors(uid, pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt)
+            try {
+                syncOnce(uid)
+            } catch (e: FirebaseFirestoreException) {
+                if (e.code != FirebaseFirestoreException.Code.PERMISSION_DENIED) throw e
+                // The sign-in token may still carry an old "email not verified" claim: refresh it and retry once.
+                auth.currentUser?.reload()?.await()
+                auth.currentUser?.getIdToken(true)?.await()
+                syncOnce(uid)
+            }
             _status.value = SyncStatus(lastSyncedAt = System.currentTimeMillis())
             true
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
             Log.w(TAG, "sync failed", e)
-            _status.value = _status.value.copy(running = false, error = "Could not sync. Your data is safe on this phone.")
+            _status.value = _status.value.copy(running = false, error = describe(e))
             false
         }
+    }
+
+    private suspend fun syncOnce(uid: String) {
+        val startedAt = System.currentTimeMillis()
+        val cursors = cursors(uid)
+        val pulled = pull(uid, cursors.pull)
+        push(uid, cursors.push, pulled)
+        saveCursors(uid, pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt)
+    }
+
+    /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
+    private fun describe(e: Exception): String {
+        val reason = when ((e as? FirebaseFirestoreException)?.code) {
+            FirebaseFirestoreException.Code.PERMISSION_DENIED -> "not allowed (confirm your email, then sign out and in)"
+            FirebaseFirestoreException.Code.UNAVAILABLE, FirebaseFirestoreException.Code.DEADLINE_EXCEEDED -> "no connection to the server"
+            FirebaseFirestoreException.Code.NOT_FOUND -> "the cloud database was not found"
+            null -> e.javaClass.simpleName
+            else -> (e as FirebaseFirestoreException).code.name
+        }
+        return "Could not sync: $reason. Your data is safe on this phone."
     }
 
     /** Makes the next sync push everything (after progress was moved between accounts). */
