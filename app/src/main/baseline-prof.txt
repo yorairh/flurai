@@ -1,0 +1,5 @@
+# Baseline profile: tells Android to compile the app's own code ahead of time when it is installed,
+# so the first launch and first screens do not run through the slow interpreter.
+HSPLcom/flurai/app/**->**(**)**
+HSPLcom/flurai/app/**-><init>(**)V
+Lcom/flurai/app/**;
