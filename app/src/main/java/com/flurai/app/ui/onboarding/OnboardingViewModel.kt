@@ -69,7 +69,10 @@ class OnboardingViewModel @Inject constructor(
             _state.update { it.copy(step = nextStep) }
         } else {
             _state.update { it.copy(saving = true) }
-            viewModelScope.launch { profiles.save(uid, s.toProfile()) }
+            viewModelScope.launch {
+                profiles.save(uid, s.toProfile())
+                _state.update { it.copy(saving = false) }
+            }
         }
     }
 

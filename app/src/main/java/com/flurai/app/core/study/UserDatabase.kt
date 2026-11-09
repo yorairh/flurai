@@ -32,6 +32,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun testResultDao(): TestResultDao
     abstract fun grammarProgressDao(): GrammarProgressDao
     abstract fun customChannelDao(): CustomChannelDao
+    abstract fun accountDao(): com.flurai.app.core.account.AccountDao
 }
 
 /** 4 → 5: channels the learner added. */

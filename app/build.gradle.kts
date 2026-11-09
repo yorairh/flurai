@@ -20,8 +20,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // Bump both in every milestone PR: milestone N ships as 0.(N+1).0 with versionCode N+1.
-        versionCode = 11
-        versionName = "0.11.0"
+        versionCode = 12
+        versionName = "0.11.1"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test

@@ -72,6 +72,9 @@ object AppModule {
     fun testResultDao(db: UserDatabase): TestResultDao = db.testResultDao()
 
     @Provides
+    fun accountDao(db: UserDatabase): com.flurai.app.core.account.AccountDao = db.accountDao()
+
+    @Provides
     fun customChannelDao(db: UserDatabase): CustomChannelDao = db.customChannelDao()
 
     @Provides

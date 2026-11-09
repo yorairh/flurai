@@ -20,12 +20,14 @@ import javax.inject.Inject
 sealed interface AppState {
     data object Loading : AppState
     data object SignedOut : AppState
+    data class NeedsVerification(val user: AuthUser) : AppState
     data class NeedsOnboarding(val user: AuthUser) : AppState
     data class Ready(val user: AuthUser, val profile: StudyProfile) : AppState
 }
 
 fun appStateOf(user: AuthUser?, profile: StudyProfile?): AppState = when {
     user == null -> AppState.SignedOut
+    !user.emailVerified -> AppState.NeedsVerification(user)
     profile == null -> AppState.NeedsOnboarding(user)
     else -> AppState.Ready(user, profile)
 }
@@ -40,6 +42,7 @@ class AppViewModel @Inject constructor(
     val state: StateFlow<AppState> = auth.currentUser
         .flatMapLatest { user ->
             if (user == null) flowOf(AppState.SignedOut)
+            else if (!user.emailVerified) flowOf(AppState.NeedsVerification(user))
             else profiles.profile(user.uid).map { appStateOf(user, it) }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AppState.Loading)

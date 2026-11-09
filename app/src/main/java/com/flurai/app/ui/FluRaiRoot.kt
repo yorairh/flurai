@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.ui.auth.AuthFlow
+import com.flurai.app.ui.account.VerifyEmailScreen
 import com.flurai.app.ui.onboarding.OnboardingScreen
 
 /** Routes between sign-in, onboarding and the main app based on [AppState]. */
@@ -27,8 +28,14 @@ fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel()) {
                     CircularProgressIndicator()
                 }
                 AppState.SignedOut::class -> AuthFlow()
+                AppState.NeedsVerification::class -> (state as? AppState.NeedsVerification)?.let { VerifyEmailScreen(user = it.user, viewModel = hiltViewModel(key = "verify-${it.user.uid}")) }
                 AppState.NeedsOnboarding::class -> (state as? AppState.NeedsOnboarding)?.let {
-                    OnboardingScreen(user = it.user, onSignOut = viewModel::signOut)
+                    OnboardingScreen(
+                        user = it.user,
+                        onSignOut = viewModel::signOut,
+                        // Keyed by account: without it the form (and a finished "saving" state) would carry over to the next account.
+                        viewModel = hiltViewModel(key = "onboarding-${it.user.uid}"),
+                    )
                 }
                 else -> (state as? AppState.Ready)?.let {
                     FluRaiAppShell(user = it.user, profile = it.profile, onSignOut = viewModel::signOut)

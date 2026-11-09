@@ -138,6 +138,10 @@ fun SettingsScreen(
                     Text(versionLabel(), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.primary)
                 }
             }
+
+            SettingsCard("Account") {
+                com.flurai.app.ui.account.DeleteAccountSection()
+            }
         }
     }
 
