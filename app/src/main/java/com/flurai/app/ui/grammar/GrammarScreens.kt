@@ -2,7 +2,9 @@ package com.flurai.app.ui.grammar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -11,7 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -25,6 +30,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -57,33 +63,49 @@ fun GrammarListScreen(
             },
             windowInsets = WindowInsets(0),
         )
-        Column(
-            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+        // Lazy, so only the rows on screen are built: the list grows a lot once N3 to N1 arrive.
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
         ) {
             state.levels.forEach { level ->
-                SectionHeader(
-                    "N${level.jlpt}",
-                    "N${level.jlpt} grammar",
-                    "${level.known} of ${level.points.size} known · ${level.learning} in progress",
-                )
-                OutlinedButton(onClick = { onPractice(level.jlpt) }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Practise N${level.jlpt} grammar")
+                item(key = "header-${level.jlpt}") {
+                    Box(Modifier.padding(vertical = 6.dp)) {
+                        SectionHeader(
+                            "N${level.jlpt}",
+                            "N${level.jlpt} grammar",
+                            "${level.known} of ${level.points.size} known · ${level.learning} in progress",
+                        )
+                    }
                 }
-                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
-                    Column {
-                        level.points.forEachIndexed { index, item ->
-                            if (index > 0) HorizontalDivider()
-                            PointRow(item.point, item.status) { onOpenPoint(item.point.id) }
+                item(key = "practise-${level.jlpt}") {
+                    OutlinedButton(onClick = { onPractice(level.jlpt) }, modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+                        Text("Practise N${level.jlpt} grammar")
+                    }
+                }
+                // The rows of one level look like a single card: round only the first and last.
+                itemsIndexed(level.points, key = { _, item -> item.point.id }) { index, item ->
+                    val top = if (index == 0) 12.dp else 0.dp
+                    val bottom = if (index == level.points.lastIndex) 12.dp else 0.dp
+                    Box(Modifier.padding(bottom = if (index == level.points.lastIndex) 12.dp else 0.dp)) {
+                        Surface(
+                            shape = RoundedCornerShape(top, top, bottom, bottom),
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        ) {
+                            Column {
+                                if (index > 0) HorizontalDivider()
+                                PointRow(item.point, item.status) { onOpenPoint(item.point.id) }
+                            }
                         }
                     }
                 }
             }
-            Text(
-                "N3 to N1 grammar arrives in later updates.",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            item(key = "footer") {
+                Text(
+                    "N3 to N1 grammar arrives in later updates.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
     }
 }
