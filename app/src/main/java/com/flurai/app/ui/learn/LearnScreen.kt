@@ -27,9 +27,7 @@ import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.study.VocabHubViewModel
 import com.flurai.app.ui.theme.japanese
 
-private val learnFeatures = listOf(
-    PlannedFeature("会話", "Conversation partner", "Practice speaking and chatting with an AI tutor at your level.", 12),
-)
+private val learnFeatures = emptyList<PlannedFeature>()
 
 @Composable
 fun LearnScreen(
@@ -38,6 +36,7 @@ fun LearnScreen(
     onOpenTests: () -> Unit,
     onOpenGrammar: () -> Unit,
     onOpenReading: () -> Unit,
+    onOpenChat: () -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val hub by viewModel.state.collectAsStateWithLifecycle()
@@ -94,6 +93,17 @@ fun LearnScreen(
                     ),
                     accent = MaterialTheme.colorScheme.tertiary,
                     onClick = onOpenReading,
+                )
+                EntryCard(
+                    japanese = "会話",
+                    title = "Conversation partner",
+                    body = "Chat in Japanese with an AI tutor that speaks at your level and corrects you.",
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                    ),
+                    accent = MaterialTheme.colorScheme.secondaryContainer,
+                    onClick = onOpenChat,
                 )
                 EntryCard(
                     japanese = "試験",
