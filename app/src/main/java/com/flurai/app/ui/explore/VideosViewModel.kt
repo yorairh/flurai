@@ -1,5 +1,6 @@
 package com.flurai.app.ui.explore
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.auth.AuthRepository
@@ -38,7 +39,7 @@ class VideosViewModel @Inject constructor(
     val state: StateFlow<VideosUiState> = _state
 
     init {
-        val uid = auth.currentUser.value?.uid
+        val uid = auth.uid
         viewModelScope.launch {
             val level = uid?.let { profiles.profile(it).first()?.level?.jlpt } ?: 5
             _state.update { it.copy(jlpt = level) }
@@ -54,7 +55,7 @@ class VideosViewModel @Inject constructor(
     }
 
     init {
-        val uid = auth.currentUser.value?.uid
+        val uid = auth.uid
         if (uid != null) {
             viewModelScope.launch {
                 customChannels.channels(uid).collect { list -> _state.update { it.copy(custom = list) } }
@@ -66,7 +67,7 @@ class VideosViewModel @Inject constructor(
 
     /** Saves a channel; returns false when the link is not usable or the name is empty. */
     fun addChannel(name: String, link: String, level: Int): Boolean {
-        val uid = auth.currentUser.value?.uid ?: return false
+        val uid = auth.uid ?: return false
         val url = normalizeUrl(link)
         if (name.isBlank() || url == null) return false
         viewModelScope.launch {
@@ -76,7 +77,7 @@ class VideosViewModel @Inject constructor(
     }
 
     fun removeChannel(id: Long) {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         viewModelScope.launch { customChannels.delete(uid, id) }
     }
 }

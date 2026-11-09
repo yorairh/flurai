@@ -1,5 +1,7 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.core.model.JlptNumbers
+import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,7 +28,6 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
@@ -136,7 +137,7 @@ fun LibraryScreen(
 
 @Composable
 private fun Loading() {
-    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+    LoadingBox()
 }
 
 @Composable

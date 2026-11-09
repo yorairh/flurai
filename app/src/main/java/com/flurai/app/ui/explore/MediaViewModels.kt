@@ -1,5 +1,6 @@
 package com.flurai.app.ui.explore
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,7 +41,7 @@ class MediaViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val level = auth.currentUser.value?.uid?.let { profiles.profile(it).first()?.level } ?: JlptLevel.N5
+            val level = auth.uid?.let { profiles.profile(it).first()?.level } ?: JlptLevel.N5
             _state.update { it.copy(level = level) }
             load(reset = true)
         }
@@ -107,7 +108,7 @@ class MediaDetailViewModel @Inject constructor(
     }
 
     fun load() {
-        val uid = auth.currentUser.value?.uid
+        val uid = auth.uid
         if (uid == null || _state.value.deck == null) {
             _state.update { it.copy(loading = false) }
             return
@@ -124,7 +125,7 @@ class MediaDetailViewModel @Inject constructor(
     }
 
     fun addWords() {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         val words = _state.value.analysis?.learnable ?: return
         viewModelScope.launch {
             media.addToFlashcards(uid, words)

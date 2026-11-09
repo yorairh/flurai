@@ -33,3 +33,6 @@ enum class JlptLevel(val label: String, val description: String) {
         fun ofJlpt(number: Int): JlptLevel? = entries.firstOrNull { it.jlpt == number }
     }
 }
+
+/** The JLPT numbers a learner studies, easiest (N5) first. */
+val JlptNumbers = listOf(5, 4, 3, 2, 1)

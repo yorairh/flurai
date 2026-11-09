@@ -1,5 +1,6 @@
 package com.flurai.app.ui.tests
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -111,7 +112,7 @@ class QuizViewModel @Inject constructor(
     private val placement = PlacementTest()
     private val timer = ActivityTimer()
     private var profile: StudyProfile? = null
-    private val uid: String? get() = auth.currentUser.value?.uid
+    private val uid: String? get() = auth.uid
 
     init {
         viewModelScope.launch {

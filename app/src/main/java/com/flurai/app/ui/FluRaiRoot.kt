@@ -1,13 +1,11 @@
 package com.flurai.app.ui
 
+import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -24,9 +22,7 @@ fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel()) {
         // Crossfade by screen kind, so the main app isn't rebuilt when the user or profile changes.
         Crossfade(targetState = state::class, label = "app-state") { kind ->
             when (kind) {
-                AppState.Loading::class -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
+                AppState.Loading::class -> LoadingBox()
                 AppState.SignedOut::class -> AuthFlow()
                 AppState.NeedsVerification::class -> (state as? AppState.NeedsVerification)?.let { VerifyEmailScreen(user = it.user, viewModel = hiltViewModel(key = "verify-${it.user.uid}")) }
                 AppState.NeedsOnboarding::class -> (state as? AppState.NeedsOnboarding)?.let {

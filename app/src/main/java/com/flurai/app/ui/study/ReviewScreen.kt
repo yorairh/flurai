@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -105,7 +105,7 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
 
         val current = state.current
         when {
-            state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+            state.loading -> LoadingBox()
             state.finished -> Finished(
                 state.answeredCount, state.comeBackAt, state.levelsWithWords, state.noMoreWords,
                 onMore = viewModel::learnMore, onBack = onBack,

@@ -1,5 +1,6 @@
 package com.flurai.app.ui.grammar
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -73,7 +74,7 @@ class GrammarDetailViewModel @Inject constructor(
             _state.update { it.copy(point = grammar.point(id), examples = grammar.examples(id)) }
         }
         viewModelScope.launch {
-            val uid = auth.currentUser.value?.uid ?: return@launch
+            val uid = auth.uid ?: return@launch
             grammar.progress(uid).collect { all ->
                 _state.update { it.copy(progressText = progressText(all.firstOrNull { p -> p.grammarId == id })) }
             }
