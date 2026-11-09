@@ -20,8 +20,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // Bump both in every milestone PR: milestone N ships as 0.(N+1).0 with versionCode N+1.
-        versionCode = 14
-        versionName = "0.12.1"
+        versionCode = 15
+        versionName = "0.12.2"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
@@ -42,7 +42,10 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // R8 shrinks and optimises the code, which makes the app start and run noticeably faster.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = releaseSigning
         }
         debug {
