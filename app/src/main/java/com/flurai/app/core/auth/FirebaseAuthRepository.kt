@@ -43,6 +43,9 @@ class FirebaseAuthRepository @Inject constructor(
     override suspend fun refresh() = attempt {
         val current = auth.currentUser ?: return@attempt
         current.reload().await()
+        // The rules check the "email verified" claim in the sign-in token, which stays stale for up
+        // to an hour after the link is opened unless it is refreshed.
+        if (current.isEmailVerified) current.getIdToken(true).await()
         user.value = auth.currentUser?.toAuthUser()
     }
 
