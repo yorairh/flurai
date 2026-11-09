@@ -21,8 +21,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 12 | AI conversation partner | ⏳ | | |
 | 13 | AI-generated graded content | ⏳ | | |
 | 14 | Guest mode (use the app without an account) | ✅ Merged | [PR #20](https://github.com/yorairh/flurai/pull/20) | [0.13.0](https://github.com/yorairh/flurai/releases/tag/v0.13.0) |
-| 15 | Polish pass (guest wording, welcome text, shared word cache, lighter progress, parallel sync) | 🔍 In review | | |
-| 16 | Furigana in Reading | ⏳ | | |
+| 15 | Polish pass (guest wording, welcome text, shared word cache, lighter progress, parallel sync) | ✅ Merged | [PR #21](https://github.com/yorairh/flurai/pull/21) | [0.14.0](https://github.com/yorairh/flurai/releases/tag/v0.14.0) |
+| 16 | Furigana in Reading | ⏳ Next | | |
 | 17 | Listening practice (flashcard type + quiz) | ⏳ | | |
 | 18 | Custom decks | ⏳ | | |
 | 19 | Complete N5 grammar (25 → ~80 points) | ⏳ | | |
