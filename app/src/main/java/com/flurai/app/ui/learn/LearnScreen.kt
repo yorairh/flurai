@@ -29,7 +29,6 @@ import com.flurai.app.ui.theme.japanese
 
 private val learnFeatures = listOf(
     PlannedFeature("文法", "Grammar", "Grammar points by JLPT level: explanations, examples and exercises.", 7),
-    PlannedFeature("試験", "Tests", "Placement test, JLPT-style level checks, and review quizzes.", 6),
     PlannedFeature("会話", "Conversation partner", "Practice speaking and chatting with an AI tutor at your level.", 12),
 )
 
@@ -37,6 +36,7 @@ private val learnFeatures = listOf(
 fun LearnScreen(
     onOpenFlashcards: () -> Unit,
     onOpenLibrary: () -> Unit,
+    onOpenTests: () -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val hub by viewModel.state.collectAsStateWithLifecycle()
@@ -71,6 +71,17 @@ fun LearnScreen(
                     ),
                     accent = MaterialTheme.colorScheme.primary,
                     onClick = onOpenLibrary,
+                )
+                EntryCard(
+                    japanese = "試験",
+                    title = "Tests",
+                    body = "Placement test, level checkpoints and quick quizzes.",
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        contentColor = MaterialTheme.colorScheme.onSurface,
+                    ),
+                    accent = MaterialTheme.colorScheme.primary,
+                    onClick = onOpenTests,
                 )
             }
         },

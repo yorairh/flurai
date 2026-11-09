@@ -11,8 +11,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 2 | Content pipeline | ✅ Merged | [PR #3](https://github.com/yorairh/flurai/pull/3) | [v0.3.0](https://github.com/yorairh/flurai/releases/tag/v0.3.0) |
 | 3 | Vocabulary SRS (Anki-style) | ✅ Merged | [PR #4](https://github.com/yorairh/flurai/pull/4) | [v0.4.0](https://github.com/yorairh/flurai/releases/tag/v0.4.0) |
 | 4 | Progress dashboard | ✅ Merged | [PR #6](https://github.com/yorairh/flurai/pull/6) | [0.5.0](https://github.com/yorairh/flurai/releases/tag/v0.5.0) |
-| 5 | Study time, streaks, and reminders | 🔍 In review (waiting for phone test) | `feature/05-streaks-reminders` | 0.6.0 |
-| 6 | Tests | ⏳ | | |
+| 5 | Study time, streaks, and reminders | ✅ Merged | [PR #7](https://github.com/yorairh/flurai/pull/7) | [0.6.0](https://github.com/yorairh/flurai/releases/tag/v0.6.0) |
+| 6 | Tests | 🔍 In review (waiting for phone test) | `feature/06-tests` | 0.7.0 |
 | 7 | Grammar module | ⏳ | | |
 | 8 | Reading and stories | ⏳ | | |
 | 9 | YouTube recommendations | ⏳ | | |

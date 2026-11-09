@@ -73,6 +73,7 @@ class StudyRepositoryTest {
         override suspend fun word(id: Int): WordEntity? = throw NotImplementedError()
         override suspend fun sentencesForWord(wordId: Int): List<SentenceEntity> = throw NotImplementedError()
         override fun kanjiAtLevel(jlpt: Int): Flow<List<KanjiEntity>> = throw NotImplementedError()
+        override suspend fun allKanji(): List<com.flurai.app.core.content.KanjiEntity> = throw NotImplementedError()
         override suspend fun allWords(): List<WordEntity> = throw NotImplementedError()
         override suspend fun kanjiLevels(): List<KanjiLevel> = throw NotImplementedError()
         override suspend fun words(ids: List<Int>): List<WordEntity> = throw NotImplementedError()
