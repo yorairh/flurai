@@ -1,5 +1,6 @@
 package com.flurai.app.ui.settings
 
+import com.flurai.app.core.auth.uid
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     val syncStatus: StateFlow<com.flurai.app.core.sync.SyncStatus> = sync.status
 
     fun syncNow() {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         viewModelScope.launch { sync.sync(uid) }
     }
 
@@ -45,7 +46,7 @@ class SettingsViewModel @Inject constructor(
     fun setStreakMinutes(minutes: Int) = change { it.copy(streakMinutes = minutes) }
 
     private fun change(transform: (AppSettings) -> AppSettings) {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         viewModelScope.launch {
             var saved = AppSettings()
             repository.update(uid) { current -> transform(current).also { saved = it } }

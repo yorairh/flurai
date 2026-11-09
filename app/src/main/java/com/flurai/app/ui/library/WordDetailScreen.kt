@@ -1,7 +1,8 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.core.auth.uid
+import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -20,7 +21,6 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -97,7 +97,7 @@ class WordDetailViewModel @Inject constructor(
     }
 
     private fun withUid(action: suspend (String) -> Unit) {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         viewModelScope.launch { action(uid) }
     }
 
@@ -121,9 +121,7 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
             // The app Scaffold already pads for the status bar.
             windowInsets = WindowInsets(0),
         )
-        val d = detail ?: return Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
-        }
+        val d = detail ?: return LoadingBox()
         val word = d.word
         Column(
             Modifier

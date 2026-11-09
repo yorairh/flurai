@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -87,7 +88,7 @@ class ReviewViewModel @Inject constructor(
     private val timer = ActivityTimer()
     private var wasTiming = false
     private var shownAt: Instant = Instant.now()
-    private val uid: String? get() = auth.currentUser.value?.uid
+    private val uid: String? get() = auth.uid
 
     init {
         speaker.start()

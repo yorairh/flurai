@@ -1,5 +1,6 @@
 package com.flurai.app.ui.account
 
+import com.flurai.app.core.auth.uid
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,7 +52,7 @@ class DeleteAccountViewModel @Inject constructor(
      * account's data from the phone, then the account itself. Once it is gone the app shows sign-in.
      */
     fun delete(password: String) {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         _state.update { DeleteAccountState(busy = true) }
         viewModelScope.launch {
             val checked = auth.reauthenticate(password)

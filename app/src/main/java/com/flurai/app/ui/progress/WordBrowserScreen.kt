@@ -1,13 +1,13 @@
 package com.flurai.app.ui.progress
 
+import com.flurai.app.ui.components.LoadingBox
+import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,17 +15,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -34,7 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.flurai.app.ui.library.JlptNumbers
+import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.study.cardStatus
 import com.flurai.app.ui.theme.japanese
 
@@ -49,13 +43,7 @@ fun WordBrowserScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("Your words") },
-            navigationIcon = {
-                IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
-            },
-            windowInsets = WindowInsets(0),
-        )
+        BackTopAppBar(title = { Text("Your words") }, onBack = onBack)
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -81,7 +69,7 @@ fun WordBrowserScreen(
         }
 
         when {
-            state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+            state.loading -> LoadingBox()
             state.rows.isEmpty() -> Text(
                 emptyMessage(state.filter, state.counts[BrowserFilter.All] ?: 0),
                 style = MaterialTheme.typography.bodyMedium,

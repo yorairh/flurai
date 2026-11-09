@@ -21,8 +21,6 @@ import javax.inject.Inject
 
 enum class LibraryTab { Words, Kanji }
 
-/** JLPT numbers in study order: N5 (5) first. */
-val JlptNumbers = listOf(5, 4, 3, 2, 1)
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @HiltViewModel

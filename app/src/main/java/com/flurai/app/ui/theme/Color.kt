@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.Color
 // Palette: deep indigo (藍 ai) as the brand color, vermilion (朱 shu, the torii red) as the accent,
 // on warm washi-paper neutrals.
 internal val Indigo10 = Color(0xFF0B1530)
-internal val Indigo30 = Color(0xFF1F2A44)
 internal val Indigo40 = Color(0xFF2E3F6E)
 internal val Indigo80 = Color(0xFFB7C4F0)
 internal val Indigo90 = Color(0xFFDCE2FA)

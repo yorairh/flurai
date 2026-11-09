@@ -1,10 +1,11 @@
 package com.flurai.app.ui.tests
 
+import com.flurai.app.core.model.JlptNumbers
+import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,17 +13,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.clickable
@@ -50,13 +48,7 @@ fun TestsHubScreen(
     val quick = results.firstOrNull { it.type == TestType.Quick }
 
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("Tests") },
-            navigationIcon = {
-                IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
-            },
-            windowInsets = WindowInsets(0),
-        )
+        BackTopAppBar(title = { Text("Tests") }, onBack = onBack)
         Column(
             Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -78,7 +70,7 @@ fun TestsHubScreen(
             SectionHeader("級", "Level checkpoints", "20 questions on one level's words and kanji. Score 80% to pass.")
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                 Column {
-                    listOf(5, 4, 3, 2, 1).forEachIndexed { index, jlpt ->
+                    JlptNumbers.forEachIndexed { index, jlpt ->
                         if (index > 0) HorizontalDivider()
                         val best = results.filter { it.type == TestType.Checkpoint && it.level == jlpt }.maxByOrNull { it.fraction }
                         CheckpointRow(jlpt, best) { onStart(QuizKind.Checkpoint(jlpt)) }

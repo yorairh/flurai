@@ -1,18 +1,18 @@
 package com.flurai.app.ui.explore
 
+import com.flurai.app.core.model.JlptNumbers
+import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AlertDialog
@@ -35,7 +35,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -59,19 +58,13 @@ fun VideosScreen(onBack: () -> Unit, viewModel: VideosViewModel = hiltViewModel(
     val context = LocalContext.current
     var adding by remember { mutableStateOf(false) }
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("Videos") },
-            navigationIcon = {
-                IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
-            },
-            windowInsets = WindowInsets(0),
-        )
+        BackTopAppBar(title = { Text("Videos") }, onBack = onBack)
         Column(
             Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(5, 4, 3, 2, 1).forEach { n ->
+                JlptNumbers.forEach { n ->
                     FilterChip(selected = state.jlpt == n, onClick = { viewModel.chooseLevel(n) }, label = { Text("N$n", maxLines = 1) })
                 }
             }
@@ -168,7 +161,7 @@ private fun AddChannelDialog(initialLevel: Int, onAdd: (String, String, Int) -> 
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    listOf(5, 4, 3, 2, 1).forEach { n ->
+                    JlptNumbers.forEach { n ->
                         FilterChip(selected = level == n, onClick = { level = n }, label = { Text("N$n", maxLines = 1) })
                     }
                 }

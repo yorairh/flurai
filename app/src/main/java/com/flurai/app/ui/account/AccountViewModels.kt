@@ -1,5 +1,6 @@
 package com.flurai.app.ui.account
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.account.AccountMover
@@ -86,13 +87,13 @@ class MoveProgressViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val uid = auth.currentUser.value?.uid ?: return@launch
+            val uid = auth.uid ?: return@launch
             _state.update { it.copy(other = mover.otherProgress(uid).firstOrNull()) }
         }
     }
 
     fun move() {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         val from = _state.value.other?.uid ?: return
         _state.update { it.copy(busy = true) }
         viewModelScope.launch {

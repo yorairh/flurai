@@ -39,7 +39,4 @@ interface SyncDao {
 
     @Query("SELECT * FROM custom_channel WHERE uid = :uid ORDER BY added_at")
     suspend fun channels(uid: String): List<com.flurai.app.core.video.CustomChannelEntity>
-
-    @Query("DELETE FROM custom_channel WHERE uid = :uid")
-    suspend fun clearChannels(uid: String)
 }

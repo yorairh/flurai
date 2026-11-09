@@ -35,3 +35,6 @@ interface AuthRepository {
 }
 
 class AuthException(message: String) : Exception(message)
+
+/** The signed-in user's id, or null when signed out. */
+val AuthRepository.uid: String? get() = currentUser.value?.uid

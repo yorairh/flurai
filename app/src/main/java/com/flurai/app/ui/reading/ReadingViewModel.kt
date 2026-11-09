@@ -1,5 +1,6 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.core.auth.uid
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.auth.AuthRepository
@@ -43,7 +44,7 @@ class ReadingViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val uid = auth.currentUser.value?.uid
+            val uid = auth.uid
             val start = uid?.let { profiles.profile(it).first()?.level?.jlpt } ?: 5
             load(start)
         }
@@ -72,7 +73,7 @@ class ReadingViewModel @Inject constructor(
     fun select(word: WordEntity?) = _state.update { it.copy(selected = word) }
 
     fun addToFlashcards(word: WordEntity) {
-        val uid = auth.currentUser.value?.uid ?: return
+        val uid = auth.uid ?: return
         viewModelScope.launch {
             study.addToStudy(uid, ItemRef(ItemType.Word, word.id), Instant.now())
             _state.update { it.copy(addedWordIds = it.addedWordIds + word.id) }

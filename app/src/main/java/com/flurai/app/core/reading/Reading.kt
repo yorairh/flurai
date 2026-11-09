@@ -110,7 +110,7 @@ fun sentenceQuestion(sentence: SentenceEntity, pool: List<SentenceEntity>, jlpt:
 class ReadingRepository @Inject constructor(private val content: ContentDao) {
     private var lexicon: Lexicon? = null
 
-    suspend fun lexicon(): Lexicon = lexicon ?: Lexicon(content.allWords()).also { lexicon = it }
+    suspend fun lexicon(): Lexicon = lexicon ?: withContext(Dispatchers.Default) { Lexicon(content.allWords()) }.also { lexicon = it }
 
     private var byLevel: Map<Int, List<SentenceEntity>>? = null
 
