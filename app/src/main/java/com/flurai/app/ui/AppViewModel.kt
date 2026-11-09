@@ -50,6 +50,8 @@ class AppViewModel @Inject constructor(
     val state: StateFlow<AppState> = auth.currentUser
         .flatMapLatest { user ->
             if (user == null) flowOf(AppState.SignedOut)
+            // Guests have no account to confirm and nothing to back up.
+            else if (user.isGuest) profiles.profile(user.uid).map { appStateOf(user, it) }
             else if (!user.emailVerified) flowOf(AppState.NeedsVerification(user))
             else flow {
                 emit(AppState.Loading)

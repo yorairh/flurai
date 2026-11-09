@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         val user = auth.currentUser.value
-        if (user != null && user.emailVerified) {
+        if (user != null && user.emailVerified && !user.isGuest) {
             (application as FluRaiApp).appScope.launch { sync.sync(user.uid) }
         }
     }

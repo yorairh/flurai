@@ -119,7 +119,11 @@ private fun AccountCard(
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(user.name.ifBlank { "Learner" }, style = MaterialTheme.typography.titleLarge)
-            Text(user.email, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                if (user.isGuest) "Guest profile: saved on this phone only, not backed up." else user.email,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             InfoRow("Level", profile.level.label)
             InfoRow("Daily goal", "${profile.dailyMinutes} minutes")
@@ -128,7 +132,7 @@ private fun AccountCard(
                 Text("Edit level & goals")
             }
             OutlinedButton(onClick = { confirmSignOut = true }, modifier = Modifier.fillMaxWidth()) {
-                Text("Sign out")
+                Text(if (user.isGuest) "Create an account or sign in" else "Sign out")
             }
         }
     }
@@ -136,10 +140,15 @@ private fun AccountCard(
     if (confirmSignOut) {
         AlertDialog(
             onDismissRequest = { confirmSignOut = false },
-            title = { Text("Sign out?") },
-            text = { Text("Your settings stay on this phone, and you can sign back in any time.") },
+            title = { Text(if (user.isGuest) "Leave guest mode?" else "Sign out?") },
+            text = {
+                Text(
+                    if (user.isGuest) "Your guest progress stays on this phone. Create an account or sign in, and you can move it over."
+                    else "Your settings stay on this phone, and you can sign back in any time.",
+                )
+            },
             confirmButton = {
-                TextButton(onClick = { confirmSignOut = false; onSignOut() }) { Text("Sign out") }
+                TextButton(onClick = { confirmSignOut = false; onSignOut() }) { Text(if (user.isGuest) "Continue" else "Sign out") }
             },
             dismissButton = { TextButton(onClick = { confirmSignOut = false }) { Text("Cancel") } },
         )

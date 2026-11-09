@@ -44,6 +44,8 @@ class AuthViewModel @Inject constructor(
         AuthUiState(screen = screen, email = it.email)
     }
 
+    fun continueAsGuest() = auth.continueAsGuest()
+
     fun onName(value: String) = _state.update { it.copy(name = value, nameError = null, formError = null) }
     fun onEmail(value: String) = _state.update { it.copy(email = value, emailError = null, formError = null) }
     fun onPassword(value: String) = _state.update { it.copy(password = value, passwordError = null, formError = null) }

@@ -72,6 +72,7 @@ fun AuthFlow(viewModel: AuthViewModel = hiltViewModel()) {
                     AuthScreen.Welcome -> WelcomeContent(
                         onSignUp = { viewModel.show(AuthScreen.SignUp) },
                         onSignIn = { viewModel.show(AuthScreen.SignIn) },
+                        onGuest = viewModel::continueAsGuest,
                     )
                     AuthScreen.SignUp -> SignUpContent(state, viewModel)
                     AuthScreen.SignIn -> SignInContent(state, viewModel)
@@ -83,7 +84,7 @@ fun AuthFlow(viewModel: AuthViewModel = hiltViewModel()) {
 }
 
 @Composable
-private fun ColumnScope.WelcomeContent(onSignUp: () -> Unit, onSignIn: () -> Unit) {
+private fun ColumnScope.WelcomeContent(onSignUp: () -> Unit, onSignIn: () -> Unit, onGuest: () -> Unit) {
     Spacer(Modifier.height(48.dp))
     Text(
         "流",
@@ -110,6 +111,14 @@ private fun ColumnScope.WelcomeContent(onSignUp: () -> Unit, onSignIn: () -> Uni
     OutlinedButton(onClick = onSignIn, modifier = Modifier.fillMaxWidth().height(52.dp)) {
         Text("I already have an account")
     }
+    TextButton(onClick = onGuest, modifier = Modifier.fillMaxWidth()) { Text("Continue without an account") }
+    Text(
+        "As a guest your progress stays on this phone only. You can create an account later and move it over.",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth(),
+    )
 }
 
 @Composable

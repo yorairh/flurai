@@ -29,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.account.AccountMover
 import com.flurai.app.core.auth.AuthRepository
+import com.flurai.app.core.auth.GUEST_UID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -136,6 +137,51 @@ fun DeleteAccountSection(viewModel: DeleteAccountViewModel = hiltViewModel()) {
             dismissButton = {
                 TextButton(onClick = { step = 0; password = ""; viewModel.clearError() }, enabled = !state.busy) { Text("Cancel") }
             },
+        )
+    }
+}
+
+
+@HiltViewModel
+class EraseGuestViewModel @Inject constructor(
+    private val auth: AuthRepository,
+    private val mover: AccountMover,
+) : ViewModel() {
+    /** Removes everything the guest has on this phone, then leaves guest mode. */
+    fun erase() {
+        viewModelScope.launch {
+            mover.wipe(GUEST_UID)
+            auth.signOut()
+        }
+    }
+}
+
+/** "Erase guest data" with a confirmation, for the settings screen in guest mode. */
+@Composable
+fun EraseGuestSection(viewModel: EraseGuestViewModel = hiltViewModel()) {
+    var confirm by remember { mutableStateOf(false) }
+    OutlinedButton(
+        onClick = { confirm = true },
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error),
+    ) { Text("Erase guest data") }
+    if (confirm) {
+        AlertDialog(
+            onDismissRequest = { confirm = false },
+            title = { Text("Erase all guest data?") },
+            text = {
+                Text(
+                    "This permanently deletes the flashcards, review history, streaks, test results, grammar progress, " +
+                        "level and settings of the guest profile on this phone. It cannot be undone.",
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = { confirm = false; viewModel.erase() },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                ) { Text("Erase forever") }
+            },
+            dismissButton = { TextButton(onClick = { confirm = false }) { Text("Keep it") } },
         )
     }
 }

@@ -28,6 +28,8 @@ class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
+    val isGuest: Boolean get() = auth.currentUser.value?.isGuest == true
+
     val syncStatus: StateFlow<com.flurai.app.core.sync.SyncStatus> = sync.status
 
     fun syncNow() {

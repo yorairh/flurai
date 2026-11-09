@@ -87,8 +87,10 @@ class MoveProgressViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val uid = auth.uid ?: return@launch
-            _state.update { it.copy(other = mover.otherProgress(uid).firstOrNull()) }
+            val user = auth.currentUser.value ?: return@launch
+            // A guest has nothing to move into; only real accounts are offered guest or other progress.
+            if (user.isGuest) return@launch
+            _state.update { it.copy(other = mover.otherProgress(user.uid).firstOrNull()) }
         }
     }
 

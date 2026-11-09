@@ -20,6 +20,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 11 | Cloud sync | ✅ Merged | [PR #14](https://github.com/yorairh/flurai/pull/14) | [0.12.0](https://github.com/yorairh/flurai/releases/tag/v0.12.0) |
 | 12 | AI conversation partner | ⏳ | | |
 | 13 | AI-generated graded content | ⏳ | | |
+| 14 | Guest mode (use the app without an account) | ⏳ In review | | |
 
 ## Goal
 
