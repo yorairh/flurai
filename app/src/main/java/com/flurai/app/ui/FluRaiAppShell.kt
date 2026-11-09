@@ -43,6 +43,8 @@ import com.flurai.app.ui.tests.QuizKind
 import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
 import com.flurai.app.ui.reading.ReadingScreen
+import com.flurai.app.ui.chat.ChatHubScreen
+import com.flurai.app.ui.chat.ChatScreen
 import com.flurai.app.ui.explore.VideosScreen
 import com.flurai.app.ui.explore.MediaScreen
 import com.flurai.app.ui.explore.MediaDetailScreen
@@ -65,6 +67,8 @@ import kotlin.reflect.KClass
 @Serializable object TestsRoute
 @Serializable object GrammarListRoute
 @Serializable object ReadingRoute
+@Serializable object ChatHubRoute
+@Serializable data class ChatRoute(val scenarioId: String)
 @Serializable object VideosRoute
 @Serializable object MediaRoute
 @Serializable data class MediaDetailRoute(val deckId: Int)
@@ -97,14 +101,14 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
     Scaffold(
         bottomBar = bottomBar@{
             // Reviews get the whole screen.
-            if (currentDestination?.hasRoute(StudyRoute::class) == true || currentDestination?.hasRoute(QuizRoute::class) == true) return@bottomBar
+            if (currentDestination?.hasRoute(StudyRoute::class) == true || currentDestination?.hasRoute(QuizRoute::class) == true || currentDestination?.hasRoute(ChatRoute::class) == true) return@bottomBar
             NavigationBar {
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class) || it.hasRoute(ChatHubRoute::class) || it.hasRoute(ChatRoute::class))) ||
                             (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
                     NavigationBarItem(
@@ -143,6 +147,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenTests = { navController.navigate(TestsRoute) },
                     onOpenGrammar = { navController.navigate(GrammarListRoute) },
                     onOpenReading = { navController.navigate(ReadingRoute) },
+                    onOpenChat = { navController.navigate(ChatHubRoute) },
                 )
             }
             composable<VocabHubRoute> {
@@ -165,6 +170,10 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
+            composable<ChatHubRoute> {
+                ChatHubScreen(onBack = { navController.popBackStack() }, onStart = { navController.navigate(ChatRoute(it)) })
+            }
+            composable<ChatRoute> { ChatScreen(onBack = { navController.popBackStack() }) }
             composable<ReadingRoute> {
                 ReadingScreen(
                     onBack = { navController.popBackStack() },
