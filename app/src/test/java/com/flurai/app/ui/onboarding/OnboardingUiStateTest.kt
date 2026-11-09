@@ -42,6 +42,7 @@ class OnboardingUiStateTest {
         val profile = StudyProfile(JlptLevel.N5, 15, 10, knowsHiragana = true, knowsKatakana = true)
         assertEquals(AppState.SignedOut, appStateOf(null, profile))
         assertEquals(AppState.NeedsOnboarding(user), appStateOf(user, null))
+        assertEquals(AppState.NeedsVerification(user.copy(emailVerified = false)), appStateOf(user.copy(emailVerified = false), profile))
         assertEquals(AppState.Ready(user, profile), appStateOf(user, profile))
     }
 }

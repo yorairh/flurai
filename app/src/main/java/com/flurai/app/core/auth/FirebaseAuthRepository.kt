@@ -31,6 +31,30 @@ class FirebaseAuthRepository @Inject constructor(
         created.updateProfile(userProfileChangeRequest { displayName = name.trim() }).await()
         // The auth-state listener fired before the name was set, so publish the user again.
         user.value = created.toAuthUser()
+        created.sendEmailVerification().await()
+    }
+
+    override suspend fun sendVerificationEmail() = attempt {
+        auth.currentUser?.sendEmailVerification()?.await() ?: throw AuthException(authErrorMessage(null))
+    }
+
+    override suspend fun refresh() = attempt {
+        val current = auth.currentUser ?: return@attempt
+        current.reload().await()
+        user.value = auth.currentUser?.toAuthUser()
+    }
+
+    override suspend fun deleteUnverifiedAccount() = attempt {
+        val current = auth.currentUser ?: return@attempt
+        current.reload().await()
+        if (current.isEmailVerified) throw AuthException("This email is already confirmed, so the account was kept.")
+        try {
+            current.delete().await()
+        } catch (e: FirebaseAuthException) {
+            // Firebase only deletes accounts that signed in recently; sign out so the user can start over.
+            auth.signOut()
+            throw AuthException("Signed out. Sign in again with this email, then choose 'Use a different email' to delete it.")
+        }
     }
 
     override suspend fun signIn(email: String, password: String) = attempt {
@@ -63,4 +87,5 @@ private fun FirebaseUser.toAuthUser() = AuthUser(
     uid = uid,
     name = displayName.orEmpty(),
     email = email.orEmpty(),
+    emailVerified = isEmailVerified,
 )

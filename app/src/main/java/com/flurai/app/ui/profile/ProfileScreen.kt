@@ -56,6 +56,7 @@ fun ProfileScreen(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 AccountCard(user, profile, onEditProfile, onSignOut)
                 ProgressEntryCard(onOpenProgress)
+                com.flurai.app.ui.account.MoveProgressCard()
                 SettingsEntryCard(onOpenSettings)
             }
         },

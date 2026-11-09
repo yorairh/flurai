@@ -65,6 +65,7 @@ fun OnboardingScreen(
             Spacer(Modifier.width(8.dp))
             TextButton(onClick = onSignOut) { Text("Sign out") }
         }
+        if (state.stepIndex == 0) com.flurai.app.ui.account.MoveProgressCard(Modifier.padding(top = 8.dp))
 
         AnimatedContent(
             targetState = state.step,
