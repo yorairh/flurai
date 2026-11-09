@@ -1,6 +1,8 @@
 package com.flurai.app.ui.onboarding
 
 import com.flurai.app.core.auth.AuthUser
+import com.flurai.app.core.auth.GUEST_UID
+import com.flurai.app.core.auth.GuestUser
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.ui.AppState
@@ -44,5 +46,12 @@ class OnboardingUiStateTest {
         assertEquals(AppState.NeedsOnboarding(user), appStateOf(user, null))
         assertEquals(AppState.NeedsVerification(user.copy(emailVerified = false)), appStateOf(user.copy(emailVerified = false), profile))
         assertEquals(AppState.Ready(user, profile), appStateOf(user, profile))
+    }
+
+    @Test
+    fun guestGoesStraightToOnboardingWithoutEmailCheck() {
+        assertEquals(AppState.NeedsOnboarding(GuestUser), appStateOf(GuestUser, null))
+        assertTrue(GuestUser.isGuest)
+        assertEquals(GUEST_UID, GuestUser.uid)
     }
 }

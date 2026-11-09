@@ -8,7 +8,14 @@ data class AuthUser(
     val email: String,
     /** The email link has been opened. Unverified accounts only see the "check your email" screen. */
     val emailVerified: Boolean = true,
+    /** Using the app without an account: everything is kept on this phone only. */
+    val isGuest: Boolean = false,
 )
+
+/** The id every guest's local data is stored under. */
+const val GUEST_UID = "guest"
+
+val GuestUser = AuthUser(GUEST_UID, "Guest", "", emailVerified = true, isGuest = true)
 
 /** Sign-in with name + email + password. Failures carry a message that is safe to show the user. */
 interface AuthRepository {
@@ -31,6 +38,11 @@ interface AuthRepository {
 
     /** Permanently deletes the signed-in account. Call [reauthenticate] first. */
     suspend fun deleteAccount(): Result<Unit>
+
+    /** Starts guest mode: no account, no cloud backup, data stays on this phone. */
+    fun continueAsGuest()
+
+    /** Signs out of the account, or leaves guest mode (the guest's data stays on the phone). */
     fun signOut()
 }
 

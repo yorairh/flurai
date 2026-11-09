@@ -1,5 +1,6 @@
 package com.flurai.app.ui.account
 
+import com.flurai.app.core.auth.GUEST_UID
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -105,9 +106,10 @@ fun MoveProgressCard(modifier: Modifier = Modifier, viewModel: MoveProgressViewM
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("Progress from another account", style = MaterialTheme.typography.titleMedium)
+            val guest = other.uid == GUEST_UID
+            Text(if (guest) "Your guest progress" else "Progress from another account", style = MaterialTheme.typography.titleMedium)
             Text(
-                "This phone has study data from a different account (" +
+                (if (guest) "This phone has progress from guest mode (" else "This phone has study data from a different account (") +
                     listOfNotNull(other.level?.let { "level $it" }, "${other.cards} flashcards").joinToString(", ") + "). " +
                     "You can move it to the account you're signed in with now.",
                 style = MaterialTheme.typography.bodyMedium,

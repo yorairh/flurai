@@ -1,5 +1,6 @@
 package com.flurai.app.core.sync
 
+import com.flurai.app.core.auth.GUEST_UID
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -64,7 +65,7 @@ class SyncEngine @Inject constructor(
     private fun user(uid: String) = firestore.collection("users").document(uid)
 
     /** Pulls then pushes. Never throws: a failure is recorded in [status] and the next sync retries. */
-    suspend fun sync(uid: String): Boolean = mutex.withLock {
+    suspend fun sync(uid: String): Boolean = if (uid == GUEST_UID) false else mutex.withLock {
         _status.value = _status.value.copy(running = true, error = null)
         try {
             try {

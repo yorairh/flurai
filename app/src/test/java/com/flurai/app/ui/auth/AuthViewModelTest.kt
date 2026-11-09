@@ -28,6 +28,7 @@ class AuthViewModelTest {
         override suspend fun signUp(name: String, email: String, password: String) = result.also { calls += "signUp:$name" }
         override suspend fun signIn(email: String, password: String) = result.also { calls += "signIn:$email" }
         override suspend fun sendPasswordReset(email: String) = result.also { calls += "reset:$email" }
+        override fun continueAsGuest() {}
         override fun signOut() {}
         override suspend fun sendVerificationEmail() = Result.success(Unit)
         override suspend fun refresh() = Result.success(Unit)

@@ -1,5 +1,7 @@
 package com.flurai.app.core.auth
 
+import dagger.hilt.android.qualifiers.ApplicationContext
+import android.content.Context
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.EmailAuthProvider
@@ -18,13 +20,29 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseAuthRepository @Inject constructor(
     private val auth: FirebaseAuth,
+    @ApplicationContext context: Context,
 ) : AuthRepository {
 
-    private val user = MutableStateFlow(auth.currentUser?.toAuthUser())
+    /** Guest mode is a flag on the phone (read synchronously, so the first screen is right). */
+    private val prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE)
+    private var guest = prefs.getBoolean(GUEST_KEY, false)
+
+    private val user = MutableStateFlow(if (guest) GuestUser else auth.currentUser?.toAuthUser())
     override val currentUser: StateFlow<AuthUser?> = user.asStateFlow()
 
     init {
-        auth.addAuthStateListener { user.value = it.currentUser?.toAuthUser() }
+        auth.addAuthStateListener { if (!guest) user.value = it.currentUser?.toAuthUser() }
+    }
+
+    private fun setGuest(value: Boolean) {
+        guest = value
+        prefs.edit().putBoolean(GUEST_KEY, value).apply()
+        user.value = if (value) GuestUser else auth.currentUser?.toAuthUser()
+    }
+
+    override fun continueAsGuest() {
+        setGuest(true)
+        auth.signOut()
     }
 
     override suspend fun signUp(name: String, email: String, password: String) = attempt {
@@ -80,7 +98,7 @@ class FirebaseAuthRepository @Inject constructor(
         auth.currentUser?.delete()?.await() ?: throw AuthException(authErrorMessage(null))
     }
 
-    override fun signOut() = auth.signOut()
+    override fun signOut() = if (guest) setGuest(false) else auth.signOut()
 
     private suspend fun attempt(block: suspend () -> Unit): Result<Unit> = try {
         block()
@@ -99,6 +117,8 @@ class FirebaseAuthRepository @Inject constructor(
         Result.failure(AuthException(authErrorMessage(null)))
     }
 }
+
+private const val GUEST_KEY = "guest"
 
 private fun FirebaseUser.toAuthUser() = AuthUser(
     uid = uid,

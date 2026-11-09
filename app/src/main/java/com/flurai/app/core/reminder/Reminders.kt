@@ -1,5 +1,7 @@
 package com.flurai.app.core.reminder
 
+import com.flurai.app.core.auth.uid
+import com.flurai.app.core.auth.AuthRepository
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -24,7 +26,6 @@ import com.flurai.app.core.activity.computeStreaks
 import com.flurai.app.core.activity.studyEpochDay
 import com.flurai.app.core.study.StudyDao
 import com.flurai.app.core.study.StudyDay
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -76,6 +77,7 @@ object ReminderScheduler {
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 interface ReminderDependencies {
+    fun auth(): AuthRepository
     fun settings(): SettingsRepository
     fun activity(): StudyActivityRepository
     fun study(): StudyDao
@@ -85,8 +87,8 @@ interface ReminderDependencies {
 class ReminderWorker(private val context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return Result.success()
         val deps = EntryPointAccessors.fromApplication(context, ReminderDependencies::class.java)
+        val uid = deps.auth().uid ?: return Result.success()
         val settings = deps.settings().settings(uid).first()
         if (!settings.reminderEnabled || !ReminderScheduler.canPost(context)) return Result.success()
 
