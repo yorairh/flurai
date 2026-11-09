@@ -17,6 +17,7 @@ data class VideoChannel(
 /** The bundled, hand-picked list. No YouTube API key or network call is involved. */
 val videoChannels = listOf(
     VideoChannel("Japanese Ammo with Misa", "Friendly grammar and everyday phrases, mostly in English.", setOf(5, 4, 3), "Japanese Ammo with Misa"),
+    VideoChannel("Organic Japanese with Cure Dolly", "Lesson series that teaches grammar in a natural order, from the first sentence.", setOf(5, 4), "Organic Japanese with Cure Dolly"),
     VideoChannel("Tokini Andy", "Genki textbook walkthroughs and practical beginner Japanese.", setOf(5, 4), "Tokini Andy Genki"),
     VideoChannel("Comprehensible Japanese", "Slow, picture-supported Japanese you can follow without translation.", setOf(5, 4, 3), "Comprehensible Japanese"),
     VideoChannel("Nihongo con Teppei", "Talk-style videos for beginners, spoken slowly and clearly.", setOf(5, 4, 3), "Nihongo con Teppei beginners"),
@@ -25,6 +26,21 @@ val videoChannels = listOf(
     VideoChannel("Nihongo no Mori", "JLPT lessons taught entirely in Japanese, N5 to N1.", setOf(3, 2, 1), "日本語の森 JLPT"),
     VideoChannel("Japanese with Shun", "Podcast-style Japanese for upper-intermediate learners.", setOf(3, 2, 1), "Japanese with Shun"),
 )
+
+/** A specific video or playlist we recommend by link (given by the project owner, so the link is known good). */
+data class FeaturedVideo(val title: String, val by: String, val note: String, val levels: Set<Int>, val url: String)
+
+val featuredVideos = listOf(
+    FeaturedVideo(
+        title = "Lesson 1: Japanese made easy! The core Japanese sentence",
+        by = "Organic Japanese with Cure Dolly",
+        note = "A calm, step-by-step course that builds Japanese from the simplest sentence. Great for simple lessons.",
+        levels = setOf(5, 4),
+        url = "https://youtu.be/pSvH9vH60Ig",
+    ),
+)
+
+fun featuredFor(jlpt: Int): List<FeaturedVideo> = featuredVideos.filter { jlpt in it.levels }
 
 fun channelsFor(jlpt: Int): List<VideoChannel> = videoChannels.filter { jlpt in it.levels }
 

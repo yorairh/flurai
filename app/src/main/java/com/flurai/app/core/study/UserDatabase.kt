@@ -16,6 +16,8 @@ import com.flurai.app.core.activity.StudyDayEntity
 import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultDao
+import com.flurai.app.core.video.CustomChannelDao
+import com.flurai.app.core.video.CustomChannelEntity
 import com.flurai.app.core.quiz.TestResultEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -23,12 +25,24 @@ import kotlinx.coroutines.flow.Flow
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class], version = 4, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class], version = 5, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun studyDayDao(): StudyDayDao
     abstract fun testResultDao(): TestResultDao
     abstract fun grammarProgressDao(): GrammarProgressDao
+    abstract fun customChannelDao(): CustomChannelDao
+}
+
+/** 4 → 5: channels the learner added. */
+val MIGRATION_4_5 = object : Migration(4, 5) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `custom_channel` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "`uid` TEXT NOT NULL, `name` TEXT NOT NULL, `url` TEXT NOT NULL, `level` INTEGER NOT NULL, " +
+                "`added_at` INTEGER NOT NULL)",
+        )
+    }
 }
 
 /** 3 → 4: how well each grammar point is known. */

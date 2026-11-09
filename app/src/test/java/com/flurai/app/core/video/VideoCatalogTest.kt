@@ -22,4 +22,20 @@ class VideoCatalogTest {
         assertEquals("そうだ Japanese grammar", grammarQuery("〜そうだ (appearance)"))
         assertEquals("から Japanese grammar", grammarQuery("から"))
     }
+
+    @Test
+    fun normalizeUrlAddsSchemeAndRejectsJunk() {
+        assertEquals("https://youtu.be/pSvH9vH60Ig", normalizeUrl(" youtu.be/pSvH9vH60Ig "))
+        assertEquals("http://example.com/a?b=1", normalizeUrl("http://example.com/a?b=1"))
+        assertEquals(null, normalizeUrl(""))
+        assertEquals(null, normalizeUrl("not a link"))
+        assertEquals(null, normalizeUrl("localhost"))
+        assertEquals(null, normalizeUrl("https://.com"))
+    }
+
+    @Test
+    fun featuredLessonIsOfferedAtBeginnerLevels() {
+        assertTrue(featuredFor(5).isNotEmpty())
+        assertTrue(featuredFor(1).isEmpty())
+    }
 }
