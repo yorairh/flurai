@@ -1,6 +1,7 @@
 package com.flurai.app.core.auth
 
 import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
@@ -63,6 +64,16 @@ class FirebaseAuthRepository @Inject constructor(
 
     override suspend fun sendPasswordReset(email: String) = attempt {
         auth.sendPasswordResetEmail(email.trim()).await()
+    }
+
+    override suspend fun reauthenticate(password: String) = attempt {
+        val current = auth.currentUser ?: throw AuthException(authErrorMessage(null))
+        val email = current.email ?: throw AuthException(authErrorMessage(null))
+        current.reauthenticate(EmailAuthProvider.getCredential(email, password)).await()
+    }
+
+    override suspend fun deleteAccount() = attempt {
+        auth.currentUser?.delete()?.await() ?: throw AuthException(authErrorMessage(null))
     }
 
     override fun signOut() = auth.signOut()

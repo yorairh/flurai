@@ -68,6 +68,21 @@ interface AccountDao {
      * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
      * own copy is kept.
      */
+    @Query("DELETE FROM review_log WHERE uid = :uid")
+    suspend fun dropLogs(uid: String)
+
+    @Query("DELETE FROM test_result WHERE uid = :uid")
+    suspend fun dropTests(uid: String)
+
+    @Query("DELETE FROM custom_channel WHERE uid = :uid")
+    suspend fun dropChannels(uid: String)
+
+    /** Removes every row of [uid] (account deletion). */
+    @Transaction
+    suspend fun wipe(uid: String) {
+        dropCards(uid); dropLogs(uid); dropDays(uid); dropTests(uid); dropGrammar(uid); dropChannels(uid)
+    }
+
     @Transaction
     suspend fun move(from: String, to: String) {
         moveCards(from, to); dropCards(from)
@@ -102,6 +117,14 @@ class AccountMover @Inject constructor(
             .map { OtherProgress(it, cards[it] ?: 0, levels[it]) }
             .filter { it.cards > 0 || it.level != null }
             .sortedByDescending { it.cards }
+    }
+
+    /** Deletes everything this phone holds for [uid]: database rows and "<uid>." settings. */
+    suspend fun wipe(uid: String) {
+        dao.wipe(uid)
+        dataStore.edit { prefs ->
+            prefs.asMap().keys.filter { it.name.startsWith("$uid.") }.forEach { prefs.remove(it) }
+        }
     }
 
     /** Moves [from]'s data to [to]; [to]'s profile and settings are replaced by [from]'s. */

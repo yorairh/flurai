@@ -32,6 +32,8 @@ class AuthViewModelTest {
         override suspend fun sendVerificationEmail() = Result.success(Unit)
         override suspend fun refresh() = Result.success(Unit)
         override suspend fun deleteUnverifiedAccount() = Result.success(Unit)
+        override suspend fun reauthenticate(password: String) = Result.success(Unit)
+        override suspend fun deleteAccount() = Result.success(Unit)
     }
 
     private val auth = FakeAuth()

@@ -25,6 +25,12 @@ interface AuthRepository {
 
     /** Deletes the signed-in account if its email was never verified (a mistyped address). */
     suspend fun deleteUnverifiedAccount(): Result<Unit>
+
+    /** Confirms the signed-in user's password (Firebase needs a recent sign-in before deleting). */
+    suspend fun reauthenticate(password: String): Result<Unit>
+
+    /** Permanently deletes the signed-in account. Call [reauthenticate] first. */
+    suspend fun deleteAccount(): Result<Unit>
     fun signOut()
 }
 
