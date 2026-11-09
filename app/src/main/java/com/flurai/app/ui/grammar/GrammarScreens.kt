@@ -164,6 +164,14 @@ fun GrammarDetailScreen(
                 onClick = { onPractice(point.jlpt, point.id) },
                 modifier = Modifier.fillMaxWidth().height(52.dp),
             ) { Text("Practise this point") }
+            val context = androidx.compose.ui.platform.LocalContext.current
+            OutlinedButton(
+                onClick = {
+                    val url = com.flurai.app.core.video.searchUrl(com.flurai.app.core.video.grammarQuery(point.pattern))
+                    context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)))
+                },
+                modifier = Modifier.fillMaxWidth(),
+            ) { Text("Find videos about this") }
             Spacer(Modifier.height(16.dp))
         }
     }

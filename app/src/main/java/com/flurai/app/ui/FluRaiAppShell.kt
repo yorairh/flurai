@@ -43,6 +43,7 @@ import com.flurai.app.ui.tests.QuizKind
 import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
 import com.flurai.app.ui.reading.ReadingScreen
+import com.flurai.app.ui.explore.VideosScreen
 import com.flurai.app.ui.study.VocabHubScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -62,6 +63,7 @@ import kotlin.reflect.KClass
 @Serializable object TestsRoute
 @Serializable object GrammarListRoute
 @Serializable object ReadingRoute
+@Serializable object VideosRoute
 @Serializable data class GrammarRoute(val id: Int)
 
 /** [kind] is a QuizKind.encode() value. */
@@ -98,7 +100,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class)))
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
+                            (destination == TopLevelDestination.Explore && it.hasRoute(VideosRoute::class))
                     } == true
                     NavigationBarItem(
                         selected = selected,
@@ -186,7 +189,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             }
             composable<QuizRoute> { QuizScreen(onBack = { navController.popBackStack() }) }
             composable<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
-            composable<ExploreRoute> { ExploreScreen() }
+            composable<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }) }
+            composable<VideosRoute> { VideosScreen(onBack = { navController.popBackStack() }) }
             composable<ProfileRoute> {
                 ProfileScreen(
                     user = user,
