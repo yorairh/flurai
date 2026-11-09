@@ -5,7 +5,7 @@ import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import kotlin.random.Random
 
-enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank }
+enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank, SentenceMeaning }
 
 /**
  * A multiple-choice question. [wordId] is set for vocabulary questions so a missed word can be

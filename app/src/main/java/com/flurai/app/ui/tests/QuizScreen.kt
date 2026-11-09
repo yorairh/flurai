@@ -91,7 +91,7 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
         Spacer(Modifier.height(24.dp))
         Text(
             question.prompt,
-            style = (if (question.kind == QuestionKind.GrammarBlank) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displayMedium).japanese(),
+            style = (if (question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displayMedium).japanese(),
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -104,9 +104,12 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
             )
         }
-        if (question.kind == QuestionKind.WordMeaning || question.kind == QuestionKind.GrammarBlank) {
+        if (question.kind != QuestionKind.KanjiReading) {
             Text(
-                if (question.kind == QuestionKind.WordMeaning) "What does it mean?" else "Which part fits the gap?",
+                when (question.kind) {
+                    QuestionKind.GrammarBlank -> "Which part fits the gap?"
+                    else -> "What does it mean?"
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,

@@ -8,6 +8,7 @@ import com.flurai.app.core.activity.ActivityTimer
 import com.flurai.app.core.activity.StudyActivityRepository
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.grammar.GrammarRepository
+import com.flurai.app.core.reading.ReadingRepository
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.profile.StudyProfileRepository
@@ -40,11 +41,15 @@ sealed interface QuizKind {
     /** Fill-in-the-blank grammar practice for one level, or one point when [pointId] is not 0. */
     data class Grammar(val jlpt: Int, val pointId: Int = 0) : QuizKind
 
+    /** "What does this sentence mean?" over Tatoeba sentences of one level. */
+    data class Reading(val jlpt: Int) : QuizKind
+
     fun encode(): String = when (this) {
         Placement -> "placement"
         is Checkpoint -> "checkpoint-$jlpt"
         Quick -> "quick"
         is Grammar -> "grammar-$jlpt-$pointId"
+        is Reading -> "reading-$jlpt"
     }
 
     companion object {
@@ -52,6 +57,7 @@ sealed interface QuizKind {
             value == "placement" -> Placement
             value.startsWith("checkpoint-") -> Checkpoint(value.removePrefix("checkpoint-").toInt())
             value.startsWith("grammar-") -> value.removePrefix("grammar-").split("-").let { Grammar(it[0].toInt(), it[1].toInt()) }
+            value.startsWith("reading-") -> Reading(value.removePrefix("reading-").toInt())
             else -> Quick
         }
     }
@@ -91,6 +97,7 @@ class QuizViewModel @Inject constructor(
     private val profiles: StudyProfileRepository,
     private val quizzes: QuizRepository,
     private val grammar: GrammarRepository,
+    private val reading: ReadingRepository,
     private val study: StudyRepository,
     private val activity: StudyActivityRepository,
 ) : ViewModel() {
@@ -114,6 +121,7 @@ class QuizViewModel @Inject constructor(
                 QuizKind.Placement -> quizzes.placementStage(placement.level, STAGE_SIZE)
                 is QuizKind.Checkpoint -> quizzes.checkpoint(kind.jlpt)
                 QuizKind.Quick -> quizzes.quick(uid, profile?.level ?: JlptLevel.N5)
+                is QuizKind.Reading -> reading.questions(kind.jlpt)
                 is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 })
             }
             if (questions.isEmpty()) {
@@ -177,12 +185,14 @@ class QuizViewModel @Inject constructor(
                     is QuizKind.Checkpoint -> TestType.Checkpoint
                     QuizKind.Quick -> TestType.Quick
                     is QuizKind.Grammar -> TestType.Grammar
+                    is QuizKind.Reading -> TestType.Reading
                 },
                 level = when (kind) {
                     QuizKind.Placement -> placementLevel?.jlpt ?: 0
                     is QuizKind.Checkpoint -> kind.jlpt
                     QuizKind.Quick -> null
                     is QuizKind.Grammar -> kind.jlpt
+                    is QuizKind.Reading -> kind.jlpt
                 },
                 correct = correct,
                 total = total,
@@ -246,6 +256,7 @@ class QuizViewModel @Inject constructor(
             is QuizKind.Checkpoint -> "N${kind.jlpt} checkpoint"
             QuizKind.Quick -> "Quick quiz"
             is QuizKind.Grammar -> "N${kind.jlpt} grammar"
+            is QuizKind.Reading -> "N${kind.jlpt} reading"
         }
     }
 }
