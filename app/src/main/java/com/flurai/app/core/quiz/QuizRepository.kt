@@ -1,5 +1,6 @@
 package com.flurai.app.core.quiz
 
+import com.flurai.app.core.content.WordCache
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Entity
@@ -61,6 +62,7 @@ fun testedLevel(results: List<TestResultEntity>): JlptLevel? = results.mapNotNul
 @Singleton
 class QuizRepository @Inject constructor(
     private val content: ContentDao,
+    private val wordCache: WordCache,
     private val study: StudyDao,
     private val results: TestResultDao,
 ) {
@@ -68,7 +70,7 @@ class QuizRepository @Inject constructor(
     private var kanjiByLevel: Map<Int, List<KanjiEntity>>? = null
 
     private suspend fun words(): Map<Int, List<WordEntity>> =
-        wordsByLevel ?: content.allWords().groupBy { it.jlpt }.also { wordsByLevel = it }
+        wordsByLevel ?: wordCache.all().groupBy { it.jlpt }.also { wordsByLevel = it }
 
     private suspend fun kanji(): Map<Int, List<KanjiEntity>> =
         kanjiByLevel ?: content.allKanji().groupBy { it.jlpt }.also { kanjiByLevel = it }

@@ -1,5 +1,6 @@
 package com.flurai.app.core.activity
 
+import kotlinx.coroutines.flow.distinctUntilChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -23,6 +24,8 @@ data class AppSettings(
 @Singleton
 class SettingsRepository @Inject constructor(private val dataStore: DataStore<Preferences>) {
     fun settings(uid: String): Flow<AppSettings> = dataStore.data.map { read(it, Keys(uid)) }
+        // Every DataStore write (sync cursors, other settings) re-emits; pass on only real changes.
+        .distinctUntilChanged()
 
     suspend fun update(uid: String, change: (AppSettings) -> AppSettings) {
         dataStore.edit { prefs ->
