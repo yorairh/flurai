@@ -11,6 +11,7 @@ import com.flurai.app.core.chat.AiTurn
 import com.flurai.app.core.chat.ChatRepository
 import com.flurai.app.core.chat.ChatSession
 import com.flurai.app.core.chat.Scenario
+import com.flurai.app.core.chat.isOverloaded
 import com.flurai.app.core.chat.scenario
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfileRepository
@@ -125,6 +126,7 @@ class ChatViewModel @Inject constructor(
     private fun explain(e: Exception): String {
         val text = (e.message ?: "") + " " + e.javaClass.simpleName
         return when {
+            isOverloaded(e) -> "The AI is very busy right now. Try again in a minute."
             text.contains("quota", true) || text.contains("429") || text.contains("exhausted", true) ->
                 "The free AI limit was reached for now. Try again in a few minutes."
             text.contains("403") || text.contains("permission", true) || text.contains("not enabled", true) ||
