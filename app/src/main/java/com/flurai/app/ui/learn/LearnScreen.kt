@@ -37,6 +37,7 @@ fun LearnScreen(
     onOpenLibrary: () -> Unit,
     onOpenTests: () -> Unit,
     onOpenGrammar: () -> Unit,
+    onOpenReading: () -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val hub by viewModel.state.collectAsStateWithLifecycle()
@@ -82,6 +83,17 @@ fun LearnScreen(
                     ),
                     accent = MaterialTheme.colorScheme.secondary,
                     onClick = onOpenGrammar,
+                )
+                EntryCard(
+                    japanese = "読解",
+                    title = "Reading",
+                    body = "Read real sentences at your level, tap any word to look it up, then check your understanding.",
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    ),
+                    accent = MaterialTheme.colorScheme.tertiary,
+                    onClick = onOpenReading,
                 )
                 EntryCard(
                     japanese = "試験",

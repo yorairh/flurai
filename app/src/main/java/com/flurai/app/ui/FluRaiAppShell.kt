@@ -42,6 +42,7 @@ import com.flurai.app.ui.tests.QuizScreen
 import com.flurai.app.ui.tests.QuizKind
 import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
+import com.flurai.app.ui.reading.ReadingScreen
 import com.flurai.app.ui.study.VocabHubScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -60,6 +61,7 @@ import kotlin.reflect.KClass
 @Serializable object SettingsRoute
 @Serializable object TestsRoute
 @Serializable object GrammarListRoute
+@Serializable object ReadingRoute
 @Serializable data class GrammarRoute(val id: Int)
 
 /** [kind] is a QuizKind.encode() value. */
@@ -96,7 +98,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class)))
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class)))
                     } == true
                     NavigationBarItem(
                         selected = selected,
@@ -133,6 +135,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenLibrary = { navController.navigate(LibraryRoute) },
                     onOpenTests = { navController.navigate(TestsRoute) },
                     onOpenGrammar = { navController.navigate(GrammarListRoute) },
+                    onOpenReading = { navController.navigate(ReadingRoute) },
                 )
             }
             composable<VocabHubRoute> {
@@ -152,6 +155,13 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             composable<WordBrowserRoute> {
                 WordBrowserScreen(
                     onBack = { navController.popBackStack() },
+                    onOpenWord = { navController.navigate(WordRoute(it)) },
+                )
+            }
+            composable<ReadingRoute> {
+                ReadingScreen(
+                    onBack = { navController.popBackStack() },
+                    onCheck = { navController.navigate(QuizRoute(QuizKind.Reading(it).encode())) },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
