@@ -84,9 +84,10 @@ fun GrammarListScreen(
                 }
                 // The rows of one level look like a single card: round only the first and last.
                 itemsIndexed(level.points, key = { _, item -> item.point.id }) { index, item ->
+                    val last = index == level.points.lastIndex
                     val top = if (index == 0) 12.dp else 0.dp
-                    val bottom = if (index == level.points.lastIndex) 12.dp else 0.dp
-                    Box(Modifier.padding(bottom = if (index == level.points.lastIndex) 12.dp else 0.dp)) {
+                    val bottom = if (last) 12.dp else 0.dp
+                    Box(Modifier.padding(bottom = bottom)) {
                         Surface(
                             shape = RoundedCornerShape(top, top, bottom, bottom),
                             color = MaterialTheme.colorScheme.surfaceContainerHigh,
