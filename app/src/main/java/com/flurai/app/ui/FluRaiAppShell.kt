@@ -140,7 +140,10 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             enterTransition = { fadeIn(tween(220)) + slideInHorizontally(tween(260)) { it / 10 } },
             exitTransition = { fadeOut(tween(120)) },
             popEnterTransition = { fadeIn(tween(220)) },
-            popExitTransition = { fadeOut(tween(160)) + slideOutHorizontally(tween(240)) { it / 10 } },
+            popExitTransition = { fadeOut(tween(160)) },
+            // The back gesture would otherwise shrink the screen like a minimising window.
+            predictivePopEnterTransition = { fadeIn(tween(220)) },
+            predictivePopExitTransition = { fadeOut(tween(160)) },
         ) {
             screen<HomeRoute> {
                 HomeScreen(
