@@ -17,7 +17,7 @@ import kotlin.random.Random
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class TestType { Placement, Checkpoint, Quick }
+enum class TestType { Placement, Checkpoint, Quick, Grammar }
 
 /**
  * One finished test. [level] is the JLPT number tested (checkpoint) or the number passed

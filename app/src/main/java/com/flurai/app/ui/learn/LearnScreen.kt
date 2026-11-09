@@ -28,7 +28,6 @@ import com.flurai.app.ui.study.VocabHubViewModel
 import com.flurai.app.ui.theme.japanese
 
 private val learnFeatures = listOf(
-    PlannedFeature("文法", "Grammar", "Grammar points by JLPT level: explanations, examples and exercises.", 7),
     PlannedFeature("会話", "Conversation partner", "Practice speaking and chatting with an AI tutor at your level.", 12),
 )
 
@@ -37,6 +36,7 @@ fun LearnScreen(
     onOpenFlashcards: () -> Unit,
     onOpenLibrary: () -> Unit,
     onOpenTests: () -> Unit,
+    onOpenGrammar: () -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val hub by viewModel.state.collectAsStateWithLifecycle()
@@ -71,6 +71,17 @@ fun LearnScreen(
                     ),
                     accent = MaterialTheme.colorScheme.primary,
                     onClick = onOpenLibrary,
+                )
+                EntryCard(
+                    japanese = "文法",
+                    title = "Grammar",
+                    body = "N5 and N4 grammar points with explanations, examples and practice.",
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    ),
+                    accent = MaterialTheme.colorScheme.secondary,
+                    onClick = onOpenGrammar,
                 )
                 EntryCard(
                     japanese = "試験",

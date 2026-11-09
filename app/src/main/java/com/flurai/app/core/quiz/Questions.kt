@@ -5,7 +5,7 @@ import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import kotlin.random.Random
 
-enum class QuestionKind { WordMeaning, KanjiReading }
+enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank }
 
 /**
  * A multiple-choice question. [wordId] is set for vocabulary questions so a missed word can be
@@ -20,6 +20,10 @@ data class Question(
     val answer: Int,
     val level: Int,
     val wordId: Int? = null,
+    /** Set for grammar questions so the answer can be saved against the point. */
+    val grammarId: Int? = null,
+    /** Shown once the question is answered, e.g. which grammar point it tested. */
+    val note: String? = null,
 ) {
     val correctOption: String get() = options[answer]
 }

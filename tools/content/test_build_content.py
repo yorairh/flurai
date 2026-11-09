@@ -144,6 +144,17 @@ class BuiltDatabaseTest(unittest.TestCase):
         self.assertEqual(ids, set(registry.values()))
         self.assertEqual(len(ids), max(ids), "ids should be 1..n with no gaps")
 
+    def test_grammar_examples_hide_one_clear_answer(self):
+        points = dict(self.db.execute("SELECT id, jlpt FROM grammar_point"))
+        self.assertGreaterEqual(sum(1 for j in points.values() if j == 5), 20)
+        self.assertGreaterEqual(sum(1 for j in points.values() if j == 4), 20)
+        for grammar_id, japanese, answer in self.db.execute("SELECT grammar_id, japanese, answer FROM grammar_example"):
+            self.assertIn(grammar_id, points)
+            self.assertEqual(1, japanese.count(answer), f"{grammar_id}: {japanese} / {answer}")
+        for grammar_id in points:
+            n = self.db.execute("SELECT COUNT(*) FROM grammar_example WHERE grammar_id = ?", (grammar_id,)).fetchone()[0]
+            self.assertGreaterEqual(n, 2, f"grammar point {grammar_id}")
+
 
 if __name__ == "__main__":
     unittest.main()
