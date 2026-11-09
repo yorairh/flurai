@@ -27,7 +27,7 @@ python -X utf8 tools/content/build_content.py           # rebuilds app/src/main/
 python -X utf8 -m unittest discover tools/content       # pipeline tests, incl. checks on the built db
 ```
 
-There is no emulator. The user tests on their phone: build `assembleDebug` and send them the APK.
+There is no emulator. The user tests on their phone: build `assembleRelease` (R8-optimised, signed with the same key, so it updates over any earlier build) and send `~/.flurai-build/app/outputs/apk/release/app-release.apk`. Debug builds are several times slower in Compose, so don't judge speed from them. After changing code that R8 could strip (reflection, serialization, Firestore mapping), check `app/proguard-rules.pro`.
 
 **Signing:** both debug and release builds are signed with the FluRai release key in `~/.flurai-signing/` (`flurai-release.jks` + `keystore.properties`, outside the repo and OneDrive). Test APKs and releases therefore update each other in place. Never commit the key. If it is missing, builds fall back to the standard debug key, and those APKs can't update an installed release.
 
