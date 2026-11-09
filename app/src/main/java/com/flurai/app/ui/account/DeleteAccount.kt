@@ -41,6 +41,7 @@ data class DeleteAccountState(val busy: Boolean = false, val error: String? = nu
 class DeleteAccountViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val mover: AccountMover,
+    private val sync: com.flurai.app.core.sync.SyncEngine,
 ) : ViewModel() {
     private val _state = MutableStateFlow(DeleteAccountState())
     val state: StateFlow<DeleteAccountState> = _state
@@ -56,6 +57,12 @@ class DeleteAccountViewModel @Inject constructor(
             val checked = auth.reauthenticate(password)
             if (checked.isFailure) {
                 _state.update { DeleteAccountState(error = checked.exceptionOrNull()?.message) }
+                return@launch
+            }
+            try {
+                sync.deleteRemote(uid)
+            } catch (e: Exception) {
+                _state.update { DeleteAccountState(error = "Could not delete your cloud backup. Check your connection and try again.") }
                 return@launch
             }
             mover.wipe(uid)

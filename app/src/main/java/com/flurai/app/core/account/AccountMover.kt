@@ -130,7 +130,12 @@ class AccountMover @Inject constructor(
     /** Moves [from]'s data to [to]; [to]'s profile and settings are replaced by [from]'s. */
     suspend fun move(from: String, to: String) {
         dao.move(from, to)
-        dataStore.edit { prefs -> movePrefixedKeys(prefs, from, to) }
+        dataStore.edit { prefs ->
+            movePrefixedKeys(prefs, from, to)
+            // The moved rows must all be uploaded under the new account, so its sync cursors start over.
+            prefs.remove(androidx.datastore.preferences.core.longPreferencesKey("$to.sync.pull"))
+            prefs.remove(androidx.datastore.preferences.core.longPreferencesKey("$to.sync.push"))
+        }
     }
 }
 

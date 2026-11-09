@@ -139,6 +139,22 @@ fun SettingsScreen(
                 }
             }
 
+            val syncStatus by viewModel.syncStatus.collectAsStateWithLifecycle()
+            SettingsCard("Cloud backup") {
+                Text(
+                    when {
+                        syncStatus.running -> "Syncing…"
+                        syncStatus.error != null -> syncStatus.error.orEmpty()
+                        syncStatus.lastSyncedAt != null -> "Last synced " + java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(syncStatus.lastSyncedAt)
+                        else -> "Your progress is backed up to your account when you leave the app."
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                OutlinedButton(onClick = { viewModel.syncNow() }, enabled = !syncStatus.running, modifier = Modifier.fillMaxWidth()) {
+                    Text("Sync now")
+                }
+            }
+
             SettingsCard("Account") {
                 com.flurai.app.ui.account.DeleteAccountSection()
             }

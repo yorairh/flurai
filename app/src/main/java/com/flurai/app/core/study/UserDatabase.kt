@@ -33,6 +33,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun grammarProgressDao(): GrammarProgressDao
     abstract fun customChannelDao(): CustomChannelDao
     abstract fun accountDao(): com.flurai.app.core.account.AccountDao
+    abstract fun syncDao(): com.flurai.app.core.sync.SyncDao
 }
 
 /** 4 → 5: channels the learner added. */

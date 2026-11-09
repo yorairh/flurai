@@ -79,6 +79,7 @@ data class MoveProgressState(val other: OtherProgress? = null, val busy: Boolean
 class MoveProgressViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val mover: AccountMover,
+    private val sync: com.flurai.app.core.sync.SyncEngine,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MoveProgressState())
     val state: StateFlow<MoveProgressState> = _state
@@ -96,6 +97,8 @@ class MoveProgressViewModel @Inject constructor(
         _state.update { it.copy(busy = true) }
         viewModelScope.launch {
             mover.move(from, uid)
+            sync.markAllDirty(uid)
+            sync.sync(uid)
             _state.update { it.copy(busy = false, done = true) }
         }
     }
