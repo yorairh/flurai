@@ -72,6 +72,13 @@ object AppModule {
     fun testResultDao(db: UserDatabase): TestResultDao = db.testResultDao()
 
     @Provides
+    @Singleton
+    fun firestore(): com.google.firebase.firestore.FirebaseFirestore = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+    @Provides
+    fun syncDao(db: UserDatabase): com.flurai.app.core.sync.SyncDao = db.syncDao()
+
+    @Provides
     fun accountDao(db: UserDatabase): com.flurai.app.core.account.AccountDao = db.accountDao()
 
     @Provides

@@ -33,9 +33,7 @@ import com.flurai.app.ui.components.PlannedFeature
 import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.theme.japanese
 
-private val profileFeatures = listOf(
-    PlannedFeature("同期", "Sync", "Your progress backed up and shared across devices.", 11),
-)
+private val profileFeatures = emptyList<PlannedFeature>()
 
 @Composable
 fun ProfileScreen(

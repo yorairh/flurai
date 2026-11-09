@@ -23,8 +23,16 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val repository: SettingsRepository,
+    private val sync: com.flurai.app.core.sync.SyncEngine,
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
+
+    val syncStatus: StateFlow<com.flurai.app.core.sync.SyncStatus> = sync.status
+
+    fun syncNow() {
+        val uid = auth.currentUser.value?.uid ?: return
+        viewModelScope.launch { sync.sync(uid) }
+    }
 
     val settings: StateFlow<AppSettings> = auth.currentUser.flatMapLatest { user ->
         if (user == null) emptyFlow() else repository.settings(user.uid)
