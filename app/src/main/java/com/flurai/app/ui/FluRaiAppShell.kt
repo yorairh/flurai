@@ -10,6 +10,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavBackStackEntry
+import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.fadeIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -127,8 +137,15 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             navController = navController,
             startDestination = HomeRoute,
             modifier = Modifier.padding(innerPadding),
+            enterTransition = { fadeIn(tween(220)) + slideInHorizontally(tween(260)) { it / 10 } },
+            exitTransition = { fadeOut(tween(120)) },
+            popEnterTransition = { fadeIn(tween(220)) },
+            popExitTransition = { fadeOut(tween(160)) },
+            // The back gesture would otherwise shrink the screen like a minimising window.
+            predictivePopEnterTransition = { fadeIn(tween(220)) },
+            predictivePopExitTransition = { fadeOut(tween(160)) },
         ) {
-            composable<HomeRoute> {
+            screen<HomeRoute> {
                 HomeScreen(
                     user = user,
                     profile = profile,
@@ -136,7 +153,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenProgress = { navController.navigate(ProgressRoute) },
                 )
             }
-            composable<LearnRoute> {
+            screen<LearnRoute> {
                 LearnScreen(
                     onOpenFlashcards = { navController.navigate(VocabHubRoute) },
                     onOpenLibrary = { navController.navigate(LibraryRoute) },
@@ -145,13 +162,13 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenReading = { navController.navigate(ReadingRoute) },
                 )
             }
-            composable<VocabHubRoute> {
+            screen<VocabHubRoute> {
                 VocabHubScreen(
                     onBack = { navController.popBackStack() },
                     onStudy = { navController.navigate(StudyRoute(it.encode())) },
                 )
             }
-            composable<ProgressRoute> {
+            screen<ProgressRoute> {
                 ProgressScreen(
                     onBack = { navController.popBackStack() },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
@@ -159,47 +176,47 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onStudy = { navController.navigate(StudyRoute(StudySource.Auto.encode())) },
                 )
             }
-            composable<WordBrowserRoute> {
+            screen<WordBrowserRoute> {
                 WordBrowserScreen(
                     onBack = { navController.popBackStack() },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
-            composable<ReadingRoute> {
+            screen<ReadingRoute> {
                 ReadingScreen(
                     onBack = { navController.popBackStack() },
                     onCheck = { navController.navigate(QuizRoute(QuizKind.Reading(it).encode())) },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
-            composable<GrammarListRoute> {
+            screen<GrammarListRoute> {
                 GrammarListScreen(
                     onBack = { navController.popBackStack() },
                     onOpenPoint = { navController.navigate(GrammarRoute(it)) },
                     onPractice = { navController.navigate(QuizRoute(QuizKind.Grammar(it).encode())) },
                 )
             }
-            composable<GrammarRoute> {
+            screen<GrammarRoute> {
                 GrammarDetailScreen(
                     onBack = { navController.popBackStack() },
                     onPractice = { jlpt, id -> navController.navigate(QuizRoute(QuizKind.Grammar(jlpt, id).encode())) },
                 )
             }
-            composable<TestsRoute> {
+            screen<TestsRoute> {
                 TestsHubScreen(
                     onBack = { navController.popBackStack() },
                     onStart = { navController.navigate(QuizRoute(it.encode())) },
                 )
             }
-            composable<QuizRoute> { QuizScreen(onBack = { navController.popBackStack() }) }
-            composable<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
-            composable<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }, onOpenMedia = { navController.navigate(MediaRoute) }) }
-            composable<MediaRoute> {
+            screen<QuizRoute> { QuizScreen(onBack = { navController.popBackStack() }) }
+            screen<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
+            screen<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }, onOpenMedia = { navController.navigate(MediaRoute) }) }
+            screen<MediaRoute> {
                 MediaScreen(onBack = { navController.popBackStack() }, onOpen = { navController.navigate(MediaDetailRoute(it)) })
             }
-            composable<MediaDetailRoute> { MediaDetailScreen(onBack = { navController.popBackStack() }) }
-            composable<VideosRoute> { VideosScreen(onBack = { navController.popBackStack() }) }
-            composable<ProfileRoute> {
+            screen<MediaDetailRoute> { MediaDetailScreen(onBack = { navController.popBackStack() }) }
+            screen<VideosRoute> { VideosScreen(onBack = { navController.popBackStack() }) }
+            screen<ProfileRoute> {
                 ProfileScreen(
                     user = user,
                     profile = profile,
@@ -210,24 +227,35 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onSignOut = onSignOut,
                 )
             }
-            composable<LibraryRoute> {
+            screen<LibraryRoute> {
                 LibraryScreen(
                     onBack = { navController.popBackStack() },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
-            composable<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }) }
-            composable<SettingsRoute> {
+            screen<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }) }
+            screen<SettingsRoute> {
                 SettingsScreen(
                     profile = profile,
                     onBack = { navController.popBackStack() },
                     onEditProfile = { navController.navigate(EditProfileRoute) },
                 )
             }
-            composable<LicencesRoute> { LicencesScreen(onBack = { navController.popBackStack() }) }
-            composable<EditProfileRoute> {
+            screen<LicencesRoute> { LicencesScreen(onBack = { navController.popBackStack() }) }
+            screen<EditProfileRoute> {
                 EditProfileScreen(user = user, profile = profile, onDone = { navController.popBackStack() })
             }
         }
+    }
+}
+
+
+/**
+ * A destination with an opaque background. Without it the screen underneath shows through while a
+ * screen slides or shrinks away (the "window minimising on top of the page" look when going back).
+ */
+private inline fun <reified T : Any> NavGraphBuilder.screen(noinline content: @Composable (NavBackStackEntry) -> Unit) {
+    composable<T> { entry ->
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { content(entry) }
     }
 }
