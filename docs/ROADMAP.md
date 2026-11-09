@@ -17,7 +17,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 8 | Reading and stories | ✅ Merged | [PR #10](https://github.com/yorairh/flurai/pull/10) | [0.9.0](https://github.com/yorairh/flurai/releases/tag/v0.9.0) |
 | 9 | YouTube recommendations | ✅ Merged | [PR #11](https://github.com/yorairh/flurai/pull/11) | [0.10.0](https://github.com/yorairh/flurai/releases/tag/v0.10.0) |
 | 10 | Media recommendations (jiten.moe) | ✅ Merged | [PR #12](https://github.com/yorairh/flurai/pull/12) | [0.11.0](https://github.com/yorairh/flurai/releases/tag/v0.11.0) |
-| 11 | Cloud sync | 🔍 In review (waiting for phone test) | `feature/11-cloud-sync` | 0.12.0 |
+| 11 | Cloud sync | 🔍 In review (waiting for phone test) | [PR #14](https://github.com/yorairh/flurai/pull/14) | 0.12.0 |
 | 12 | AI conversation partner | ⏳ | | |
 | 13 | AI-generated graded content | ⏳ | | |
 
