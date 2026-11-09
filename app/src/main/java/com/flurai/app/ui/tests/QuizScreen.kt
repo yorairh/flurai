@@ -91,7 +91,7 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
         Spacer(Modifier.height(24.dp))
         Text(
             question.prompt,
-            style = MaterialTheme.typography.displayMedium.japanese(),
+            style = (if (question.kind == QuestionKind.GrammarBlank) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displayMedium).japanese(),
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -104,9 +104,9 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
             )
         }
-        if (question.kind == QuestionKind.WordMeaning) {
+        if (question.kind == QuestionKind.WordMeaning || question.kind == QuestionKind.GrammarBlank) {
             Text(
-                "What does it mean?",
+                if (question.kind == QuestionKind.WordMeaning) "What does it mean?" else "Which part fits the gap?",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
@@ -120,6 +120,14 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
             }
         }
         if (state.selected != null) {
+            question.note?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodyMedium.japanese(),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                )
+            }
             Spacer(Modifier.height(16.dp))
             Button(onClick = onNext, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Next") }
         }

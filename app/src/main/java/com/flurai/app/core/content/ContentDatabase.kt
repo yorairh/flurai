@@ -12,9 +12,11 @@ import kotlinx.coroutines.flow.Flow
         KanjiEntity::class,
         SentenceEntity::class,
         WordSentenceEntity::class,
+        GrammarPointEntity::class,
+        GrammarExampleEntity::class,
         ContentInfoEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 abstract class ContentDatabase : RoomDatabase() {
@@ -84,6 +86,21 @@ interface ContentDao {
 
     @Query("SELECT * FROM word WHERE id IN (:ids)")
     suspend fun words(ids: List<Int>): List<WordEntity>
+
+    @Query("SELECT * FROM grammar_point ORDER BY jlpt DESC, id")
+    fun grammarPoints(): Flow<List<GrammarPointEntity>>
+
+    @Query("SELECT * FROM grammar_point ORDER BY jlpt DESC, id")
+    suspend fun allGrammarPoints(): List<GrammarPointEntity>
+
+    @Query("SELECT * FROM grammar_point WHERE id = :id")
+    suspend fun grammarPoint(id: Int): GrammarPointEntity?
+
+    @Query("SELECT * FROM grammar_example WHERE grammar_id = :id ORDER BY rank")
+    suspend fun grammarExamples(id: Int): List<GrammarExampleEntity>
+
+    @Query("SELECT * FROM grammar_example")
+    suspend fun allGrammarExamples(): List<GrammarExampleEntity>
 
     @Query("SELECT * FROM content_info")
     fun info(): Flow<List<ContentInfoEntity>>

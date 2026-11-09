@@ -13,6 +13,8 @@ import com.flurai.app.core.activity.StudyDayDao
 import com.flurai.app.core.quiz.TestResultDao
 import com.flurai.app.core.study.MIGRATION_1_2
 import com.flurai.app.core.study.MIGRATION_2_3
+import com.flurai.app.core.study.MIGRATION_3_4
+import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.study.StudyDao
 import com.flurai.app.core.study.UserDatabase
 import androidx.room.Room
@@ -56,7 +58,7 @@ object AppModule {
     @Provides
     @Singleton
     fun userDatabase(@ApplicationContext context: Context): UserDatabase =
-        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
+        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4).build()
 
     @Provides
     fun studyDao(db: UserDatabase): StudyDao = db.studyDao()
@@ -66,6 +68,9 @@ object AppModule {
 
     @Provides
     fun testResultDao(db: UserDatabase): TestResultDao = db.testResultDao()
+
+    @Provides
+    fun grammarProgressDao(db: UserDatabase): GrammarProgressDao = db.grammarProgressDao()
 }
 
 @Module

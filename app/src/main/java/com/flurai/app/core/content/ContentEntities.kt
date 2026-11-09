@@ -70,6 +70,35 @@ data class WordSentenceEntity(
     val rank: Int,
 )
 
+/** A grammar point written for FluRai (tools/content/grammar.json). [jlpt] as for words: 5 = N5. */
+@Entity(tableName = "grammar_point", indices = [Index("jlpt")])
+data class GrammarPointEntity(
+    @PrimaryKey val id: Int,
+    val jlpt: Int,
+    /** How it is written, e.g. "〜たことがある". */
+    val pattern: String,
+    val title: String,
+    val meaning: String,
+    val formation: String,
+    val explanation: String,
+)
+
+/**
+ * An example for a grammar point. [answer] is the part of [japanese] that shows the pattern; it
+ * appears exactly once and is blanked out in fill-in-the-blank exercises.
+ */
+@Entity(
+    tableName = "grammar_example",
+    primaryKeys = ["grammar_id", "rank"],
+)
+data class GrammarExampleEntity(
+    @ColumnInfo(name = "grammar_id") val grammarId: Int,
+    val rank: Int,
+    val japanese: String,
+    val english: String,
+    val answer: String,
+)
+
 /** Build metadata: data versions, build date, row counts. */
 @Entity(tableName = "content_info")
 data class ContentInfoEntity(

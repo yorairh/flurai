@@ -34,6 +34,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 CACHE = HERE / ".cache"
 WORD_IDS = HERE / "word_ids.tsv"
+GRAMMAR = HERE / "grammar.json"
 WORD_IDS_HEADER = "guid\tword_id"
 SCHEMA_DIR = ROOT / "app" / "schemas" / "com.flurai.app.core.content.ContentDatabase"
 OUTPUT = ROOT / "app" / "src" / "main" / "assets" / "content.db"
@@ -439,6 +440,7 @@ def write_database(
     words: list[Word],
     kanji: list[Kanji],
     sentences: dict[int, tuple[str, str, bool]],
+    grammar: list[dict],
     info: dict[str, str],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -469,6 +471,14 @@ def write_database(
     db.executemany(
         "INSERT INTO word_sentence (word_id, sentence_id, rank) VALUES (?, ?, ?)",
         [(w.id, sid, rank) for w in words for rank, sid in enumerate(w.sentence_ids)],
+    )
+    db.executemany(
+        "INSERT INTO grammar_point (id, jlpt, pattern, title, meaning, formation, explanation) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [(g["id"], g["jlpt"], g["pattern"], g["title"], g["meaning"], g["formation"], g["explanation"]) for g in grammar],
+    )
+    db.executemany(
+        "INSERT INTO grammar_example (grammar_id, rank, japanese, english, answer) VALUES (?, ?, ?, ?, ?)",
+        [(g["id"], rank, e["jp"], e["en"], e["answer"]) for g in grammar for rank, e in enumerate(g["examples"])],
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
     db.commit()
@@ -502,6 +512,8 @@ def main() -> None:
         read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2")),
     )
 
+    grammar = json.loads(GRAMMAR.read_text(encoding="utf-8"))
+
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
         "jlpt_decks_commit": JLPT_DECKS_COMMIT,
@@ -510,8 +522,9 @@ def main() -> None:
         "word_count": str(len(words)),
         "kanji_count": str(len(kanji)),
         "sentence_count": str(len(sentences)),
+        "grammar_count": str(len(grammar)),
     }
-    write_database(OUTPUT, latest_schema(), words, kanji, sentences, info)
+    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)

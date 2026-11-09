@@ -7,6 +7,7 @@ import androidx.navigation.toRoute
 import com.flurai.app.core.activity.ActivityTimer
 import com.flurai.app.core.activity.StudyActivityRepository
 import com.flurai.app.core.auth.AuthRepository
+import com.flurai.app.core.grammar.GrammarRepository
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.profile.StudyProfileRepository
@@ -36,16 +37,21 @@ sealed interface QuizKind {
     data class Checkpoint(val jlpt: Int) : QuizKind
     data object Quick : QuizKind
 
+    /** Fill-in-the-blank grammar practice for one level, or one point when [pointId] is not 0. */
+    data class Grammar(val jlpt: Int, val pointId: Int = 0) : QuizKind
+
     fun encode(): String = when (this) {
         Placement -> "placement"
         is Checkpoint -> "checkpoint-$jlpt"
         Quick -> "quick"
+        is Grammar -> "grammar-$jlpt-$pointId"
     }
 
     companion object {
         fun decode(value: String): QuizKind = when {
             value == "placement" -> Placement
             value.startsWith("checkpoint-") -> Checkpoint(value.removePrefix("checkpoint-").toInt())
+            value.startsWith("grammar-") -> value.removePrefix("grammar-").split("-").let { Grammar(it[0].toInt(), it[1].toInt()) }
             else -> Quick
         }
     }
@@ -84,6 +90,7 @@ class QuizViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val profiles: StudyProfileRepository,
     private val quizzes: QuizRepository,
+    private val grammar: GrammarRepository,
     private val study: StudyRepository,
     private val activity: StudyActivityRepository,
 ) : ViewModel() {
@@ -107,9 +114,10 @@ class QuizViewModel @Inject constructor(
                 QuizKind.Placement -> quizzes.placementStage(placement.level, STAGE_SIZE)
                 is QuizKind.Checkpoint -> quizzes.checkpoint(kind.jlpt)
                 QuizKind.Quick -> quizzes.quick(uid, profile?.level ?: JlptLevel.N5)
+                is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 })
             }
             if (questions.isEmpty()) {
-                _state.update { it.copy(loading = false, error = "Not enough words to build this test yet.") }
+                _state.update { it.copy(loading = false, error = "Not enough material to build this test yet.") }
                 return@launch
             }
             queue.addAll(questions)
@@ -125,6 +133,11 @@ class QuizViewModel @Inject constructor(
         answered += current to correct
         if (kind == QuizKind.Placement) placement.answer(correct)
         credit(reviews = 1)
+        val uid = uid
+        val grammarId = current.grammarId
+        if (uid != null && grammarId != null) {
+            viewModelScope.launch { grammar.record(uid, grammarId, correct, Instant.now().toEpochMilli()) }
+        }
         _state.update { it.copy(selected = index) }
     }
 
@@ -163,11 +176,13 @@ class QuizViewModel @Inject constructor(
                     QuizKind.Placement -> TestType.Placement
                     is QuizKind.Checkpoint -> TestType.Checkpoint
                     QuizKind.Quick -> TestType.Quick
+                    is QuizKind.Grammar -> TestType.Grammar
                 },
                 level = when (kind) {
                     QuizKind.Placement -> placementLevel?.jlpt ?: 0
                     is QuizKind.Checkpoint -> kind.jlpt
                     QuizKind.Quick -> null
+                    is QuizKind.Grammar -> kind.jlpt
                 },
                 correct = correct,
                 total = total,
@@ -230,6 +245,7 @@ class QuizViewModel @Inject constructor(
             QuizKind.Placement -> "Placement test"
             is QuizKind.Checkpoint -> "N${kind.jlpt} checkpoint"
             QuizKind.Quick -> "Quick quiz"
+            is QuizKind.Grammar -> "N${kind.jlpt} grammar"
         }
     }
 }

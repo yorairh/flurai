@@ -13,6 +13,8 @@ import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 import com.flurai.app.core.activity.StudyDayDao
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.grammar.GrammarProgressDao
+import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultDao
 import com.flurai.app.core.quiz.TestResultEntity
 import kotlinx.coroutines.flow.Flow
@@ -21,11 +23,23 @@ import kotlinx.coroutines.flow.Flow
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class], version = 3, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class], version = 4, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun studyDayDao(): StudyDayDao
     abstract fun testResultDao(): TestResultDao
+    abstract fun grammarProgressDao(): GrammarProgressDao
+}
+
+/** 3 → 4: how well each grammar point is known. */
+val MIGRATION_3_4 = object : Migration(3, 4) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `grammar_progress` (`uid` TEXT NOT NULL, `grammar_id` INTEGER NOT NULL, " +
+                "`correct` INTEGER NOT NULL, `wrong` INTEGER NOT NULL, `last_correct` INTEGER NOT NULL, " +
+                "`last_at` INTEGER NOT NULL, PRIMARY KEY(`uid`, `grammar_id`))",
+        )
+    }
 }
 
 /** 2 → 3: test results (placement, checkpoints, quick quizzes). */
