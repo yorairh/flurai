@@ -107,8 +107,8 @@ fun MoveProgressCard(modifier: Modifier = Modifier, viewModel: MoveProgressViewM
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Progress from another account", style = MaterialTheme.typography.titleMedium)
             Text(
-                "This phone has study data from a different account" +
-                    (other.level?.let { " (level $it" } ?: " (") + "${other.cards} flashcards). " +
+                "This phone has study data from a different account (" +
+                    listOfNotNull(other.level?.let { "level $it" }, "${other.cards} flashcards").joinToString(", ") + "). " +
                     "You can move it to the account you're signed in with now.",
                 style = MaterialTheme.typography.bodyMedium,
             )

@@ -28,9 +28,14 @@ fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel()) {
                     CircularProgressIndicator()
                 }
                 AppState.SignedOut::class -> AuthFlow()
-                AppState.NeedsVerification::class -> (state as? AppState.NeedsVerification)?.let { VerifyEmailScreen(user = it.user) }
+                AppState.NeedsVerification::class -> (state as? AppState.NeedsVerification)?.let { VerifyEmailScreen(user = it.user, viewModel = hiltViewModel(key = "verify-${it.user.uid}")) }
                 AppState.NeedsOnboarding::class -> (state as? AppState.NeedsOnboarding)?.let {
-                    OnboardingScreen(user = it.user, onSignOut = viewModel::signOut)
+                    OnboardingScreen(
+                        user = it.user,
+                        onSignOut = viewModel::signOut,
+                        // Keyed by account: without it the form (and a finished "saving" state) would carry over to the next account.
+                        viewModel = hiltViewModel(key = "onboarding-${it.user.uid}"),
+                    )
                 }
                 else -> (state as? AppState.Ready)?.let {
                     FluRaiAppShell(user = it.user, profile = it.profile, onSignOut = viewModel::signOut)
