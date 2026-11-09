@@ -20,8 +20,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // Bump both in every milestone PR: milestone N ships as 0.(N+1).0 with versionCode N+1.
-        versionCode = 10
-        versionName = "0.10.0"
+        versionCode = 11
+        versionName = "0.11.0"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
@@ -76,6 +76,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

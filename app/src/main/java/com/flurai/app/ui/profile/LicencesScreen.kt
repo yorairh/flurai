@@ -47,10 +47,11 @@ private val sources = listOf(
         "Sentences from tatoeba.org, including the Tanaka Corpus, by the Tatoeba community.",
     ),
     Source(
-        "jiten.moe (coming later)",
+        "jiten.moe",
         "Difficulty and vocabulary of anime, dramas, books and games",
         "Creative Commons Attribution-ShareAlike 4.0",
-        "Media data from jiten.moe will be credited here when that feature arrives.",
+        "Difficulty, word lists and titles of anime, dramas, manga, novels and games come from the public jiten.moe API. " +
+            "The data is requested from the device when you open Explore and is not stored or shared by FluRai.",
     ),
 )
 

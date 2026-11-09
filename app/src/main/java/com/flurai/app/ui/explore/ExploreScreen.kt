@@ -22,12 +22,10 @@ import com.flurai.app.ui.components.PlannedFeature
 import com.flurai.app.ui.components.TabScreen
 import com.flurai.app.ui.theme.japanese
 
-private val exploreFeatures = listOf(
-    PlannedFeature("作品", "Anime, shows & manga", "Media matched to your level, with how many of its words you already know.", 10),
-)
+private val exploreFeatures = emptyList<PlannedFeature>()
 
 @Composable
-fun ExploreScreen(onOpenVideos: () -> Unit) {
+fun ExploreScreen(onOpenVideos: () -> Unit, onOpenMedia: () -> Unit) {
     TabScreen(
         titleJapanese = "探す",
         title = "Explore",
@@ -35,6 +33,24 @@ fun ExploreScreen(onOpenVideos: () -> Unit) {
         features = exploreFeatures,
         header = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Card(
+                    onClick = onOpenMedia,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+                ) {
+                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text("作品", style = MaterialTheme.typography.headlineSmall.japanese(), color = MaterialTheme.colorScheme.tertiary)
+                        Spacer(Modifier.width(16.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("Anime, shows & manga", style = MaterialTheme.typography.titleMedium)
+                            Text(
+                                "Titles matched to your level, with how much of what is said you already know.",
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                        }
+                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+                    }
+                }
                 Card(
                     onClick = onOpenVideos,
                     modifier = Modifier.fillMaxWidth(),

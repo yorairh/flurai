@@ -44,6 +44,8 @@ import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
 import com.flurai.app.ui.reading.ReadingScreen
 import com.flurai.app.ui.explore.VideosScreen
+import com.flurai.app.ui.explore.MediaScreen
+import com.flurai.app.ui.explore.MediaDetailScreen
 import com.flurai.app.ui.study.VocabHubScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
@@ -64,6 +66,8 @@ import kotlin.reflect.KClass
 @Serializable object GrammarListRoute
 @Serializable object ReadingRoute
 @Serializable object VideosRoute
+@Serializable object MediaRoute
+@Serializable data class MediaDetailRoute(val deckId: Int)
 @Serializable data class GrammarRoute(val id: Int)
 
 /** [kind] is a QuizKind.encode() value. */
@@ -101,7 +105,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
                             (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
-                            (destination == TopLevelDestination.Explore && it.hasRoute(VideosRoute::class))
+                            (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
                     NavigationBarItem(
                         selected = selected,
@@ -189,7 +193,11 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             }
             composable<QuizRoute> { QuizScreen(onBack = { navController.popBackStack() }) }
             composable<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
-            composable<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }) }
+            composable<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }, onOpenMedia = { navController.navigate(MediaRoute) }) }
+            composable<MediaRoute> {
+                MediaScreen(onBack = { navController.popBackStack() }, onOpen = { navController.navigate(MediaDetailRoute(it)) })
+            }
+            composable<MediaDetailRoute> { MediaDetailScreen(onBack = { navController.popBackStack() }) }
             composable<VideosRoute> { VideosScreen(onBack = { navController.popBackStack() }) }
             composable<ProfileRoute> {
                 ProfileScreen(
