@@ -5,7 +5,7 @@ import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import kotlin.random.Random
 
-enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank, SentenceMeaning }
+enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank, SentenceMeaning, WordListening }
 
 /**
  * A multiple-choice question. [wordId] is set for vocabulary questions so a missed word can be
@@ -63,6 +63,18 @@ fun wordQuestion(word: WordEntity, pool: List<WordEntity>, random: Random): Ques
         wordId = word.id,
     )
 }
+
+/**
+ * "What did you hear?": the word is spoken (the prompt holds its reading, which is what gets read
+ * aloud) and the options are meanings. The written word is only shown after answering.
+ */
+fun listeningQuestion(word: WordEntity, pool: List<WordEntity>, random: Random): Question? =
+    wordQuestion(word, pool, random)?.copy(
+        kind = QuestionKind.WordListening,
+        prompt = word.reading,
+        hint = null,
+        note = if (word.reading != word.expression) "${word.expression}（${word.reading}）" else word.expression,
+    )
 
 /** One reading to ask about: the first kun'yomi if the kanji has one (without okurigana dots), else the first on'yomi. */
 fun mainReading(kanji: KanjiEntity): String? {

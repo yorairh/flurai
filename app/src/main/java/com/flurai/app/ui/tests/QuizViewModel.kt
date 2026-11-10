@@ -1,5 +1,7 @@
 package com.flurai.app.ui.tests
 
+import com.flurai.app.core.quiz.QuestionKind
+import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -39,6 +41,9 @@ sealed interface QuizKind {
     data class Checkpoint(val jlpt: Int) : QuizKind
     data object Quick : QuizKind
 
+    /** Hear a word and pick its meaning. */
+    data object Listening : QuizKind
+
     /** Fill-in-the-blank grammar practice for one level, or one point when [pointId] is not 0. */
     data class Grammar(val jlpt: Int, val pointId: Int = 0) : QuizKind
 
@@ -49,6 +54,7 @@ sealed interface QuizKind {
         Placement -> "placement"
         is Checkpoint -> "checkpoint-$jlpt"
         Quick -> "quick"
+        Listening -> "listening"
         is Grammar -> "grammar-$jlpt-$pointId"
         is Reading -> "reading-$jlpt"
     }
@@ -56,6 +62,7 @@ sealed interface QuizKind {
     companion object {
         fun decode(value: String): QuizKind = when {
             value == "placement" -> Placement
+            value == "listening" -> Listening
             value.startsWith("checkpoint-") -> Checkpoint(value.removePrefix("checkpoint-").toInt())
             value.startsWith("grammar-") -> value.removePrefix("grammar-").split("-").let { Grammar(it[0].toInt(), it[1].toInt()) }
             value.startsWith("reading-") -> Reading(value.removePrefix("reading-").toInt())
@@ -101,6 +108,7 @@ class QuizViewModel @Inject constructor(
     private val reading: ReadingRepository,
     private val study: StudyRepository,
     private val activity: StudyActivityRepository,
+    val speaker: JapaneseSpeaker,
 ) : ViewModel() {
 
     private val kind = QuizKind.decode(savedStateHandle.toRoute<QuizRoute>().kind)
@@ -115,6 +123,7 @@ class QuizViewModel @Inject constructor(
     private val uid: String? get() = auth.uid
 
     init {
+        if (kind == QuizKind.Listening) speaker.start()
         viewModelScope.launch {
             val uid = uid ?: return@launch
             profile = profiles.profile(uid).first()
@@ -122,6 +131,7 @@ class QuizViewModel @Inject constructor(
                 QuizKind.Placement -> quizzes.placementStage(placement.level, STAGE_SIZE)
                 is QuizKind.Checkpoint -> quizzes.checkpoint(kind.jlpt)
                 QuizKind.Quick -> quizzes.quick(uid, profile?.level ?: JlptLevel.N5)
+                QuizKind.Listening -> quizzes.listening(uid, profile?.level ?: JlptLevel.N5)
                 is QuizKind.Reading -> reading.questions(kind.jlpt)
                 is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 })
             }
@@ -169,6 +179,11 @@ class QuizViewModel @Inject constructor(
         _state.update {
             it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null)
         }
+        if (question.kind == QuestionKind.WordListening) speaker.speak(question.prompt)
+    }
+
+    fun replay() {
+        _state.value.question?.let { speaker.speak(it.prompt) }
     }
 
     private suspend fun finish() {
@@ -185,6 +200,7 @@ class QuizViewModel @Inject constructor(
                     QuizKind.Placement -> TestType.Placement
                     is QuizKind.Checkpoint -> TestType.Checkpoint
                     QuizKind.Quick -> TestType.Quick
+                    QuizKind.Listening -> TestType.Listening
                     is QuizKind.Grammar -> TestType.Grammar
                     is QuizKind.Reading -> TestType.Reading
                 },
@@ -192,6 +208,7 @@ class QuizViewModel @Inject constructor(
                     QuizKind.Placement -> placementLevel?.jlpt ?: 0
                     is QuizKind.Checkpoint -> kind.jlpt
                     QuizKind.Quick -> null
+                    QuizKind.Listening -> null
                     is QuizKind.Grammar -> kind.jlpt
                     is QuizKind.Reading -> kind.jlpt
                 },
@@ -256,6 +273,7 @@ class QuizViewModel @Inject constructor(
             QuizKind.Placement -> "Placement test"
             is QuizKind.Checkpoint -> "N${kind.jlpt} checkpoint"
             QuizKind.Quick -> "Quick quiz"
+            QuizKind.Listening -> "Listening quiz"
             is QuizKind.Grammar -> "N${kind.jlpt} grammar"
             is QuizKind.Reading -> "N${kind.jlpt} reading"
         }

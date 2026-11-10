@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import androidx.compose.foundation.layout.size
 import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -172,7 +173,16 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) 
                     SpeakButton(onSpeak)
                 }
             }
-            is CardContent.Word -> if (card.item.kind == CardKind.Recognition) {
+            is CardContent.Word -> if (card.item.kind == CardKind.Listening) {
+                Text("What do you hear?", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                FilledTonalIconButton(onClick = onSpeak, modifier = Modifier.size(96.dp)) {
+                    Icon(Icons.Filled.PlayArrow, contentDescription = "Play audio", modifier = Modifier.size(56.dp))
+                }
+                if (revealed) {
+                    HorizontalDivider()
+                    WordAnswer(content, showExpression = true, onSpeak = onSpeak, showMeaning = true)
+                }
+            } else if (card.item.kind == CardKind.Recognition) {
                 Text(
                     content.word.expression,
                     style = MaterialTheme.typography.displayLarge.japanese().copy(fontSize = 56.sp),
@@ -195,7 +205,7 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) 
 }
 
 @Composable
-private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpeak: () -> Unit) {
+private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpeak: () -> Unit, showMeaning: Boolean = false) {
     val word = content.word
     if (showExpression) {
         Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), textAlign = TextAlign.Center)
@@ -203,7 +213,7 @@ private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpe
     if (word.reading != word.expression) {
         Text(word.reading, style = MaterialTheme.typography.headlineSmall.japanese(), color = MaterialTheme.colorScheme.secondary)
     }
-    if (!showExpression) {
+    if (!showExpression || showMeaning) {
         Text(word.meanings, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
     }
     SpeakButton(onSpeak)

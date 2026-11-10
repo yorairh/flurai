@@ -1,5 +1,12 @@
 package com.flurai.app.core.study
 
+import org.junit.rules.TemporaryFolder
+import org.junit.Rule
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineScope
+import com.flurai.app.core.activity.SettingsRepository
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.ContentInfoEntity
 import com.flurai.app.core.content.KanjiEntity
@@ -33,9 +40,9 @@ class StudyRepositoryTest {
         private fun key(c: CardEntity) = Triple(c.itemType, c.itemId, c.kind)
         private fun all() = cards.value.values
 
-        override suspend fun dueCards(uid: String, until: Long, now: Long) =
-            all().filter { it.due <= until && !it.suspended && (it.buriedUntil ?: 0) <= now }.sortedBy { it.due }
-        override fun dueCount(uid: String, until: Long, now: Long): Flow<Int> = cards.map { it.size }
+        override suspend fun dueCards(uid: String, until: Long, now: Long, listening: Boolean) =
+            all().filter { it.due <= until && !it.suspended && (it.buriedUntil ?: 0) <= now && (listening || it.kind != CardKind.Listening) }.sortedBy { it.due }
+        override fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int> = cards.map { it.size }
         override suspend fun introducedItems(uid: String) = all().map { ItemRef(it.itemType, it.itemId) }.distinct()
         override fun introducedItemsFlow(uid: String) = cards.map { m -> m.values.map { ItemRef(it.itemType, it.itemId) }.distinct() }
         override fun introducedSince(uid: String, since: Long) =
@@ -87,7 +94,11 @@ class StudyRepositoryTest {
     }
 
     private val dao = FakeStudyDao()
-    private val repo = StudyRepository(dao, FakeContentDao())
+    @get:Rule val tmp = TemporaryFolder()
+    private val settings by lazy {
+        SettingsRepository(PreferenceDataStoreFactory.create(scope = CoroutineScope(Dispatchers.Unconfined + SupervisorJob())) { tmp.newFile("s.preferences_pb").also { it.delete() } })
+    }
+    private val repo by lazy { StudyRepository(dao, FakeContentDao(), settings) }
 
     private fun profile(level: JlptLevel, newPerDay: Int = 10, hiragana: Boolean = true, katakana: Boolean = true) =
         StudyProfile(level, 15, newPerDay, hiragana, katakana)
@@ -127,6 +138,20 @@ class StudyRepositoryTest {
         assertNotNull(production)
         assertEquals(StudyDay.end(now).toEpochMilli(), production!!.due)
         assertNull(production.lastReview)
+    }
+
+    @Test
+    fun learningAWordAlsoUnlocksAListeningCard() = runTest {
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Easy, now, Duration.ZERO)
+        assertNotNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Listening)])
+    }
+
+    @Test
+    fun noListeningCardWhileTheSettingIsOff() = runTest {
+        settings.update("u") { it.copy(listeningCards = false) }
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Easy, now, Duration.ZERO)
+        assertNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Listening)])
+        assertNotNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Production)])
     }
 
     @Test

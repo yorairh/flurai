@@ -8,8 +8,11 @@ import androidx.room.PrimaryKey
 /** What a card teaches: a JLPT word (content.db `word.id`) or a kana (`Kana.id`). */
 enum class ItemType { Word, Kana }
 
-/** Recognition: Japanese → meaning. Production: meaning → Japanese (unlocked once recognition is learned). */
-enum class CardKind { Recognition, Production }
+/**
+ * Recognition: Japanese → meaning. Production: meaning → Japanese. Listening: hear the word, say what it is.
+ * Production and Listening unlock once recognition is learned.
+ */
+enum class CardKind { Recognition, Production, Listening }
 
 /**
  * One flashcard's scheduling state, per signed-in user (several people can share a phone).

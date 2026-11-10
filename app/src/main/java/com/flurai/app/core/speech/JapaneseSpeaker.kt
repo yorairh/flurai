@@ -26,6 +26,10 @@ class JapaneseSpeaker @Inject constructor(
 
     private var tts: TextToSpeech? = null
 
+    /** Asked for before the engine was ready (a listening card plays as it appears). */
+    @Volatile
+    private var pending: String? = null
+
     fun start() {
         if (_status.value != Status.NotStarted) return
         _status.value = Status.Starting
@@ -38,6 +42,8 @@ class JapaneseSpeaker @Inject constructor(
                     else -> Status.Ready
                 }
             }
+            if (_status.value == Status.Ready) pending?.let { tts?.speak(it, TextToSpeech.QUEUE_FLUSH, null, it) }
+            pending = null
         }
     }
 
@@ -45,6 +51,8 @@ class JapaneseSpeaker @Inject constructor(
         start()
         if (_status.value == Status.Ready) {
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, text)
+        } else if (_status.value == Status.Starting) {
+            pending = text
         }
     }
 

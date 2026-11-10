@@ -54,7 +54,11 @@ fun YourCards(
             cards.forEach { card ->
                 Row(Modifier.fillMaxWidth()) {
                     Text(
-                        if (card.kind == CardKind.Recognition) "Japanese → meaning" else "Meaning → Japanese",
+                        when (card.kind) {
+                            CardKind.Recognition -> "Japanese → meaning"
+                            CardKind.Production -> "Meaning → Japanese"
+                            CardKind.Listening -> "Listening"
+                        },
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f),
                     )
@@ -63,7 +67,7 @@ fun YourCards(
             }
             if (cards.none { it.kind == CardKind.Production }) {
                 Text(
-                    "The meaning → Japanese card unlocks once you've learned this one.",
+                    "The meaning → Japanese and listening cards unlock once you've learned this one.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

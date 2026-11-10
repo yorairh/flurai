@@ -1,5 +1,11 @@
 package com.flurai.app.ui.tests
 
+import androidx.compose.material3.Icon
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Box
 import com.flurai.app.ui.components.LoadingBox
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.layout.Arrangement
@@ -52,7 +58,7 @@ fun QuizScreen(onBack: () -> Unit, viewModel: QuizViewModel = hiltViewModel()) {
             state.error != null -> Message(state.error.orEmpty(), onBack)
             state.loading -> LoadingBox()
             result != null -> ResultView(result, viewModel, onBack)
-            question != null -> QuestionView(state, question, viewModel::choose, viewModel::next)
+            question != null -> QuestionView(state, question, viewModel::choose, viewModel::next, viewModel::replay)
         }
     }
 }
@@ -67,7 +73,7 @@ private fun Message(text: String, onBack: () -> Unit) {
 }
 
 @Composable
-private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int) -> Unit, onNext: () -> Unit) {
+private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int) -> Unit, onNext: () -> Unit, onReplay: () -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp)) {
         val total = state.total
         if (total != null) {
@@ -77,7 +83,13 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
             Text("Question ${state.number}", style = MaterialTheme.typography.labelLarge)
         }
         Spacer(Modifier.height(24.dp))
-        Text(
+        if (question.kind == QuestionKind.WordListening) {
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                FilledTonalIconButton(onClick = onReplay, modifier = Modifier.size(96.dp)) {
+                    Icon(Icons.Filled.PlayArrow, contentDescription = "Play the word again", modifier = Modifier.size(56.dp))
+                }
+            }
+        } else Text(
             question.prompt,
             style = (if (question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displayMedium).japanese(),
             textAlign = TextAlign.Center,
@@ -96,6 +108,7 @@ private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int)
             Text(
                 when (question.kind) {
                     QuestionKind.GrammarBlank -> "Which part fits the gap?"
+                    QuestionKind.WordListening -> "What does the word you heard mean?"
                     else -> "What does it mean?"
                 },
                 style = MaterialTheme.typography.bodyMedium,

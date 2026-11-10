@@ -47,6 +47,8 @@ class SettingsViewModel @Inject constructor(
 
     fun setStreakMinutes(minutes: Int) = change { it.copy(streakMinutes = minutes) }
 
+    fun setListeningCards(enabled: Boolean) = change { it.copy(listeningCards = enabled) }
+
     private fun change(transform: (AppSettings) -> AppSettings) {
         val uid = auth.uid ?: return
         viewModelScope.launch {

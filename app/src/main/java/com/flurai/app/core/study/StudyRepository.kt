@@ -1,5 +1,10 @@
 package com.flurai.app.core.study
 
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.flurai.app.core.activity.SettingsRepository
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
@@ -45,11 +50,17 @@ data class SessionData(val cards: List<CardEntity>, val newItems: List<ItemRef>,
 class StudyRepository @Inject constructor(
     private val study: StudyDao,
     private val content: ContentDao,
+    private val settings: SettingsRepository,
 ) {
     private val scheduler = FsrsScheduler()
 
+    private suspend fun listeningOn(uid: String) = settings.settings(uid).first().listeningCards
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun dueCount(uid: String, now: Instant): Flow<Int> =
-        study.dueCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli())
+        settings.settings(uid).map { it.listeningCards }.distinctUntilChanged().flatMapLatest { listening ->
+            study.dueCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening)
+        }
 
     fun introducedToday(uid: String, now: Instant): Flow<Int> =
         study.introducedSince(uid, StudyDay.start(now).toEpochMilli())
@@ -64,7 +75,7 @@ class StudyRepository @Inject constructor(
     /** Due cards plus today's remaining allowance of new items from [source]. */
     suspend fun loadSession(uid: String, profile: StudyProfile, source: StudySource, now: Instant): SessionData {
         val endOfDay = StudyDay.end(now)
-        val cards = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli())
+        val cards = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli(), listeningOn(uid))
         val introducedToday = study.introducedSince(uid, StudyDay.start(now).toEpochMilli())
         val allowance = (profile.newCardsPerDay - introducedToday.first()).coerceAtLeast(0)
         val newItems = if (allowance == 0) emptyList() else newCandidates(uid, profile, source).take(allowance)
@@ -112,7 +123,7 @@ class StudyRepository @Inject constructor(
 
     /**
      * Schedules an answer and saves it. Learning a word's recognition card for the first time
-     * unlocks its production card (meaning → Japanese), due from tomorrow.
+     * unlocks its production card (meaning → Japanese) and listening card, due from tomorrow.
      */
     suspend fun answer(
         uid: String,
@@ -146,9 +157,14 @@ class StudyRepository @Inject constructor(
             item.item.itemType == ItemType.Word && item.kind == CardKind.Recognition &&
             before.state != SrsState.Review && after.state == SrsState.Review
         ) {
-            newCard(uid, item.item, CardKind.Production, due = StudyDay.end(now), now = now)
+            val due = StudyDay.end(now)
+            listOfNotNull(
+                newCard(uid, item.item, CardKind.Production, due = due, now = now),
+                // Listening cards are only added while the setting is on (turning it on later adds them as you learn more).
+                if (listeningOn(uid)) newCard(uid, item.item, CardKind.Listening, due = due, now = now) else null,
+            )
         } else {
-            null
+            emptyList()
         }
         val log = ReviewLogEntity(
             uid = uid,

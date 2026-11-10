@@ -18,7 +18,7 @@ import kotlin.random.Random
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class TestType { Placement, Checkpoint, Quick, Grammar, Reading }
+enum class TestType { Placement, Checkpoint, Quick, Grammar, Reading, Listening }
 
 /**
  * One finished test. [level] is the JLPT number tested (checkpoint) or the number passed
@@ -98,7 +98,13 @@ class QuizRepository @Inject constructor(
      * Ten words: up to seven the learner has already started (review), the rest new ones from
      * their level so the quiz also shows what is still to learn.
      */
-    suspend fun quick(uid: String, level: JlptLevel, count: Int = 10, random: Random = Random): List<Question> {
+    suspend fun quick(
+        uid: String,
+        level: JlptLevel,
+        count: Int = 10,
+        random: Random = Random,
+        build: (WordEntity, List<WordEntity>, Random) -> Question? = ::wordQuestion,
+    ): List<Question> {
         val all = words()
         val started = study.introducedItems(uid).filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
         val byId = all.values.flatten().associateBy { it.id }
@@ -109,10 +115,14 @@ class QuizRepository @Inject constructor(
         }.orEmpty()
 
         fun ask(candidates: List<WordEntity>, n: Int): List<Question> = candidates.shuffled(random).asSequence()
-            .mapNotNull { w -> wordQuestion(w, all[w.jlpt].orEmpty(), random) }.take(n).toList()
+            .mapNotNull { w -> build(w, all[w.jlpt].orEmpty(), random) }.take(n).toList()
 
         val review = ask(reviewPool, minOf(7, count))
         val fresh = ask(newPool, count - review.size)
         return (review + fresh).shuffled(random)
     }
+
+    /** Ten spoken words (same mix as the quick quiz): pick the meaning of what you hear. */
+    suspend fun listening(uid: String, level: JlptLevel, count: Int = 10, random: Random = Random): List<Question> =
+        quick(uid, level, count, random, build = ::listeningQuestion)
 }

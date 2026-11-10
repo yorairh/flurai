@@ -67,6 +67,14 @@ fun TestsHubScreen(
                 onClick = { onStart(QuizKind.Quick) },
             )
 
+            val listening = results.firstOrNull { it.type == TestType.Listening }
+            TestCard(
+                japanese = "聴解",
+                title = "Listening quiz",
+                body = listening?.let { "Last score: ${it.correct}/${it.total}" } ?: "Ten spoken words: pick what each one means. Turn the sound on.",
+                onClick = { onStart(QuizKind.Listening) },
+            )
+
             SectionHeader("級", "Level checkpoints", "20 questions on one level's words and kanji. Score 80% to pass.")
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                 Column {

@@ -99,7 +99,7 @@ class ReminderWorker(private val context: Context, params: WorkerParameters) : C
         if ((days[today] ?: 0) >= minSeconds) return Result.success() // already practised today
 
         val streak = computeStreaks(days, today, minSeconds).current
-        val due = deps.study().dueCards(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli()).size
+        val due = deps.study().dueCards(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening = true).size
         post(reminderText(due, streak))
         return Result.success()
     }
