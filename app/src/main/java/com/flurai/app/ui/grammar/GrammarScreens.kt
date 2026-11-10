@@ -1,5 +1,7 @@
 package com.flurai.app.ui.grammar
 
+import com.flurai.app.core.model.JlptNumbers
+import androidx.compose.material3.FilterChip
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -52,13 +54,22 @@ fun GrammarListScreen(
     viewModel: GrammarListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val selected by viewModel.selected.collectAsStateWithLifecycle()
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
-        // Lazy, so only the rows on screen are built: the list grows a lot once N3 to N1 arrive.
+        // One level at a time, like the Reading screen: with hundreds of points a single list is too long.
+        Row(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            JlptNumbers.forEach { n ->
+                FilterChip(selected = selected == n, onClick = { viewModel.select(n) }, label = { Text("N$n", maxLines = 1) })
+            }
+        }
+        // Lazy, so only the rows on screen are built.
+        // A new list state per level, so each level starts at its top.
+        androidx.compose.runtime.key(selected) {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
         ) {
-            state.levels.forEach { level ->
+            state.levels.filter { it.jlpt == selected }.forEach { level ->
                 item(key = "header-${level.jlpt}") {
                     Box(Modifier.padding(vertical = 6.dp)) {
                         SectionHeader(
@@ -93,11 +104,12 @@ fun GrammarListScreen(
             }
             item(key = "footer") {
                 Text(
-                    "N2 and N1 grammar arrive in later updates.",
+                    "Grammar for every level from N5 to N1. Examples are written for this app.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+        }
         }
     }
 }

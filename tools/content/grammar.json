@@ -1810,5 +1810,835 @@
    "explanation": "A casual invitation or request with falling intonation: 行かないか = shall we go?",
    "examples": [
      {"jp": "一緒に映画を見に行かないか。", "en": "Shall we go and see a movie together?", "answer": "ないか"},
-     {"jp": "明日、会わないか。", "en": "Shall we meet tomorrow?", "answer": "ないか"}]}
+     {"jp": "明日、会わないか。", "en": "Shall we meet tomorrow?", "answer": "ないか"}]},
+  {"id": 201, "jlpt": 2, "pattern": "〜に際して", "title": "On the occasion of", "meaning": "on the occasion of, when", "formation": "Verb dictionary form / Noun + に際して",
+   "explanation": "A formal phrase for an important moment such as starting or ending something. More formal than にあたって.",
+   "examples": [
+     {"jp": "入社に際して、書類を提出してください。", "en": "Please submit documents when you join the company.", "answer": "に際して"},
+     {"jp": "開会に際して、一言ご挨拶申し上げます。", "en": "I would like to say a few words at the opening.", "answer": "に際して"}]},
+  {"id": 202, "jlpt": 2, "pattern": "〜に先立って", "title": "Prior to", "meaning": "before, prior to", "formation": "Verb dictionary form / Noun + に先立って",
+   "explanation": "Says something is done as preparation before a bigger event.",
+   "examples": [
+     {"jp": "試合に先立って、選手が紹介されました。", "en": "The players were introduced before the match.", "answer": "に先立って"},
+     {"jp": "工事に先立ち、住民に説明が行われた。", "en": "An explanation was given to residents before the construction.", "answer": "に先立ち"}]},
+  {"id": 203, "jlpt": 2, "pattern": "〜をきっかけに", "title": "Triggered by", "meaning": "taking the opportunity of, triggered by", "formation": "Noun + をきっかけに(して)",
+   "explanation": "Something small becomes the starting point of a change.",
+   "examples": [
+     {"jp": "留学をきっかけに、日本語に興味を持ちました。", "en": "Studying abroad was what made me interested in Japanese.", "answer": "をきっかけに"},
+     {"jp": "病気をきっかけにして、生活を見直した。", "en": "Illness prompted me to review my life.", "answer": "をきっかけにして"}]},
+  {"id": 204, "jlpt": 2, "pattern": "〜を契機に", "title": "As a turning point", "meaning": "triggered by, as a turning point", "formation": "Noun + を契機に",
+   "explanation": "A formal version of をきっかけに, often for big changes.",
+   "examples": [
+     {"jp": "結婚を契機に、仕事をやめました。", "en": "I quit my job when I got married.", "answer": "を契機に"},
+     {"jp": "この事件を契機に、法律が改正された。", "en": "The law was revised as a result of this incident.", "answer": "を契機に"}]},
+  {"id": 205, "jlpt": 2, "pattern": "〜をめぐって", "title": "Concerning (dispute)", "meaning": "over, concerning", "formation": "Noun + をめぐって",
+   "explanation": "Says something is the subject of debate or conflict.",
+   "examples": [
+     {"jp": "遺産をめぐって、兄弟がけんかしています。", "en": "The brothers are fighting over the inheritance.", "answer": "をめぐって"},
+     {"jp": "新しい計画をめぐって、議論が続いている。", "en": "The debate over the new plan continues.", "answer": "をめぐって"}]},
+  {"id": 206, "jlpt": 2, "pattern": "〜に伴って", "title": "Along with", "meaning": "along with, accompanying", "formation": "Noun / Verb dictionary form + に伴って",
+   "explanation": "One change happens together with another, often as a result.",
+   "examples": [
+     {"jp": "人口の増加に伴って、住宅が不足しています。", "en": "Housing is in short supply along with the population increase.", "answer": "に伴って"},
+     {"jp": "経済の発展に伴い、環境問題が起きた。", "en": "Environmental problems arose along with economic development.", "answer": "に伴い"}]},
+  {"id": 207, "jlpt": 2, "pattern": "〜に応えて", "title": "In response to", "meaning": "in response to, meeting", "formation": "Noun + に応えて",
+   "explanation": "Says you act in answer to a request or expectation.",
+   "examples": [
+     {"jp": "ファンの期待に応えて、新しい曲を発表しました。", "en": "In response to the fans' expectations, they released a new song.", "answer": "に応えて"},
+     {"jp": "要望に応えて、営業時間を延長します。", "en": "In response to requests, we will extend opening hours.", "answer": "に応えて"}]},
+  {"id": 208, "jlpt": 2, "pattern": "〜にかかわらず", "title": "Regardless of", "meaning": "regardless of", "formation": "Noun / Plain form + にかかわらず",
+   "explanation": "Says something holds whatever the condition, often with opposite pairs.",
+   "examples": [
+     {"jp": "天気にかかわらず、試合は行われます。", "en": "The match will be held regardless of the weather.", "answer": "にかかわらず"},
+     {"jp": "経験の有無にかかわらず、応募できます。", "en": "You can apply whether or not you have experience.", "answer": "にかかわらず"}]},
+  {"id": 209, "jlpt": 2, "pattern": "〜にかかわる", "title": "Concerning / affecting", "meaning": "affect, concern", "formation": "Noun + にかかわる",
+   "explanation": "Something touches an important matter: 命にかかわる = a matter of life and death.",
+   "examples": [
+     {"jp": "これは命にかかわる問題です。", "en": "This is a matter of life and death.", "answer": "にかかわる"},
+     {"jp": "会社の信用にかかわる事件が起きた。", "en": "An incident that affects the company's credibility occurred.", "answer": "にかかわる"}]},
+  {"id": 210, "jlpt": 2, "pattern": "〜にわたって", "title": "Over a span of", "meaning": "throughout, over", "formation": "Noun + にわたって / にわたり",
+   "explanation": "Covers a wide range of time, place or number.",
+   "examples": [
+     {"jp": "三日間にわたって、会議が行われました。", "en": "The meeting was held over three days.", "answer": "にわたって"},
+     {"jp": "全国にわたり、大雨が降りました。", "en": "Heavy rain fell across the country.", "answer": "にわたり"}]},
+  {"id": 211, "jlpt": 2, "pattern": "〜にかけて", "title": "From … to / in the field of", "meaning": "over (a period), regarding", "formation": "Noun + から + Noun + にかけて · Noun + にかけては",
+   "explanation": "Describes a period or area, or says someone is outstanding in a field.",
+   "examples": [
+     {"jp": "六月から七月にかけて、雨が多いです。", "en": "There is a lot of rain from June to July.", "answer": "にかけて"},
+     {"jp": "料理にかけては、彼女にかなう人はいない。", "en": "When it comes to cooking, nobody can match her.", "answer": "にかけては"}]},
+  {"id": 212, "jlpt": 2, "pattern": "〜に至るまで", "title": "Even down to", "meaning": "all the way to, down to", "formation": "Noun + に至るまで",
+   "explanation": "Stresses how far something extends, including small details.",
+   "examples": [
+     {"jp": "彼は細かいところに至るまで、気を配ります。", "en": "He pays attention even down to the smallest details.", "answer": "に至るまで"},
+     {"jp": "子供から老人に至るまで、みんな楽しめる。", "en": "Everyone from children to the elderly can enjoy it.", "answer": "に至るまで"}]},
+  {"id": 213, "jlpt": 2, "pattern": "〜を問わず", "title": "Regardless of", "meaning": "regardless of, no matter", "formation": "Noun + を問わず",
+   "explanation": "Says something applies to everyone, whatever the category.",
+   "examples": [
+     {"jp": "年齢を問わず、誰でも参加できます。", "en": "Anyone can take part regardless of age.", "answer": "を問わず"},
+     {"jp": "昼夜を問わず、工事が続いています。", "en": "Construction continues day and night.", "answer": "を問わず"}]},
+  {"id": 214, "jlpt": 2, "pattern": "〜はもとより", "title": "Not to mention", "meaning": "not to mention, as well as", "formation": "Noun + はもとより",
+   "explanation": "A formal form of はもちろん: the first is obvious, the second is added.",
+   "examples": [
+     {"jp": "彼は国内はもとより、海外でも有名です。", "en": "He is famous overseas, not to mention in Japan.", "answer": "はもとより"},
+     {"jp": "英語はもとより、中国語も話せる。", "en": "He speaks Chinese, not to mention English.", "answer": "はもとより"}]},
+  {"id": 215, "jlpt": 2, "pattern": "〜のみならず", "title": "Not only", "meaning": "not only … but also", "formation": "Noun / Plain form + のみならず",
+   "explanation": "A formal way to say not only A but also B.",
+   "examples": [
+     {"jp": "この薬は子供のみならず、大人にも効きます。", "en": "This medicine works not only for children but also for adults.", "answer": "のみならず"},
+     {"jp": "経済のみならず、文化にも影響を与えた。", "en": "It influenced not only the economy but also culture.", "answer": "のみならず"}]},
+  {"id": 216, "jlpt": 2, "pattern": "〜ともなると", "title": "When it comes to", "meaning": "once it comes to, when", "formation": "Noun / Verb dictionary form + ともなると",
+   "explanation": "Says that in a more serious situation, things are different.",
+   "examples": [
+     {"jp": "社長ともなると、毎日が忙しいです。", "en": "When you become a company president, every day is busy.", "answer": "ともなると"},
+     {"jp": "年末ともなると、街がにぎやかになる。", "en": "Come the end of the year, the town becomes lively.", "answer": "ともなると"}]},
+  {"id": 217, "jlpt": 2, "pattern": "〜とはいえ", "title": "Even so", "meaning": "although, that said", "formation": "Plain form + とはいえ",
+   "explanation": "Admits a point and then qualifies it:春とはいえ、まだ寒い.",
+   "examples": [
+     {"jp": "春とはいえ、朝晩はまだ寒いです。", "en": "Although it is spring, mornings and evenings are still cold.", "answer": "とはいえ"},
+     {"jp": "安いとはいえ、品質は悪くない。", "en": "Cheap as it is, the quality is not bad.", "answer": "とはいえ"}]},
+  {"id": 218, "jlpt": 2, "pattern": "〜からといって", "title": "Just because", "meaning": "just because", "formation": "Plain form + からといって",
+   "explanation": "Just because something is true does not mean something else follows.",
+   "examples": [
+     {"jp": "高いからといって、いい物とは限りません。", "en": "Just because it is expensive does not mean it is good.", "answer": "からといって"},
+     {"jp": "日本人だからといって、漢字が全部書けるわけではない。", "en": "Just because someone is Japanese does not mean they can write all kanji.", "answer": "からといって"}]},
+  {"id": 219, "jlpt": 2, "pattern": "〜からこそ", "title": "Precisely because", "meaning": "precisely because", "formation": "Plain form + からこそ",
+   "explanation": "Stresses that a reason is exactly what makes something possible.",
+   "examples": [
+     {"jp": "あなたを信じているからこそ、本当のことを言います。", "en": "It is precisely because I trust you that I tell the truth.", "answer": "からこそ"},
+     {"jp": "苦労したからこそ、成功の喜びが大きい。", "en": "It is because of the hardship that the joy of success is great.", "answer": "からこそ"}]},
+  {"id": 220, "jlpt": 2, "pattern": "〜ことなく", "title": "Without", "meaning": "without doing", "formation": "Verb dictionary form + ことなく",
+   "explanation": "A formal way to say without: he continued without resting.",
+   "examples": [
+     {"jp": "彼は休むことなく、働き続けました。", "en": "He kept working without resting.", "answer": "ことなく"},
+     {"jp": "一度も遅れることなく、卒業した。", "en": "He graduated without being late even once.", "answer": "ことなく"}]},
+  {"id": 221, "jlpt": 2, "pattern": "〜ことだし", "title": "Since (a mild reason)", "meaning": "since, seeing that", "formation": "Plain form + ことだし",
+   "explanation": "Gives a soft reason for a suggestion or decision.",
+   "examples": [
+     {"jp": "天気もいいことだし、散歩に行きましょう。", "en": "The weather is good, so let's go for a walk.", "answer": "ことだし"},
+     {"jp": "明日は休みのことだし、今夜はゆっくりしよう。", "en": "Tomorrow is a day off, so let's relax tonight.", "answer": "のことだし"}]},
+  {"id": 222, "jlpt": 2, "pattern": "〜ところを", "title": "Even though (at a time)", "meaning": "at a time when", "formation": "Plain form + ところを",
+   "explanation": "Used to apologise for troubling someone at a moment: お忙しいところを.",
+   "examples": [
+     {"jp": "お忙しいところを、申し訳ありません。", "en": "I am sorry to trouble you when you are busy.", "answer": "ところを"},
+     {"jp": "お休みのところを失礼します。", "en": "Excuse me for disturbing you on your day off.", "answer": "ところを"}]},
+  {"id": 223, "jlpt": 2, "pattern": "〜ながらに", "title": "Just as", "meaning": "while, in the state of", "formation": "Noun / Verb stem + ながらに",
+   "explanation": "Fixed expressions: 生まれながらに (from birth), 涙ながらに (in tears).",
+   "examples": [
+     {"jp": "彼女は生まれながらに音楽の才能がありました。", "en": "She had a talent for music from birth.", "answer": "ながらに"},
+     {"jp": "彼は涙ながらに、事情を話した。", "en": "He explained the situation in tears.", "answer": "ながらに"}]},
+  {"id": 224, "jlpt": 2, "pattern": "〜なりに", "title": "In one's own way", "meaning": "in one's own way, for", "formation": "Noun / Plain form + なりに",
+   "explanation": "Says someone does something within their ability: 子供なりに考えている.",
+   "examples": [
+     {"jp": "私は私なりに、一生懸命やりました。", "en": "I tried hard in my own way.", "answer": "なりに"},
+     {"jp": "子供なりに、親のことを心配している。", "en": "The child worries about his parents in his own way.", "answer": "なりに"}]},
+  {"id": 225, "jlpt": 2, "pattern": "〜なり〜なり", "title": "Either … or …", "meaning": "either … or", "formation": "Verb dictionary form / Noun + なり + same + なり",
+   "explanation": "Offers alternatives: do this or that, whichever.",
+   "examples": [
+     {"jp": "電話するなりメールするなり、連絡してください。", "en": "Please contact me by phone or email.", "answer": "メールするなり"},
+     {"jp": "わからなければ、先生なり友達なりに聞きなさい。", "en": "If you do not understand, ask the teacher or a friend.", "answer": "先生なり"}]},
+  {"id": 226, "jlpt": 2, "pattern": "〜なしに", "title": "Without", "meaning": "without", "formation": "Noun + なしに / Verb dictionary form + ことなしに",
+   "explanation": "A formal form of なくて or ずに.",
+   "examples": [
+     {"jp": "許可なしに、中に入ってはいけません。", "en": "You must not enter without permission.", "answer": "なしに"},
+     {"jp": "努力なしに、成功はありえない。", "en": "There can be no success without effort.", "answer": "なしに"}]},
+  {"id": 227, "jlpt": 2, "pattern": "〜ないことには", "title": "Unless", "meaning": "unless, if not", "formation": "Verb ない-form + ことには",
+   "explanation": "Says that unless something is done, the result cannot follow.",
+   "examples": [
+     {"jp": "やってみないことには、わかりません。", "en": "You cannot know unless you try.", "answer": "ないことには"},
+     {"jp": "実際に見ないことには、判断できない。", "en": "I cannot judge unless I actually see it.", "answer": "ないことには"}]},
+  {"id": 228, "jlpt": 2, "pattern": "〜ないではおかない", "title": "Cannot help but", "meaning": "will surely, cannot but", "formation": "Verb ない-form + ではおかない / ずにはおかない",
+   "explanation": "Says something is bound to cause a reaction in others.",
+   "examples": [
+     {"jp": "この映画は、見る人を感動させずにはおかない。", "en": "This film cannot fail to move the audience.", "answer": "ずにはおかない"},
+     {"jp": "彼の言葉は、人を怒らせないではおかない。", "en": "His words are bound to anger people.", "answer": "ないではおかない"}]},
+  {"id": 229, "jlpt": 2, "pattern": "〜ないまでも", "title": "If not … at least", "meaning": "even if not, though not", "formation": "Plain form + ないまでも",
+   "explanation": "Gives a lower, more modest alternative: if not every day, at least once a week.",
+   "examples": [
+     {"jp": "毎日ないまでも、週に一度は運動したい。", "en": "If not every day, I want to exercise once a week.", "answer": "ないまでも"},
+     {"jp": "完璧とは言えないまでも、よくできている。", "en": "Though not perfect, it is well done.", "answer": "言えないまでも"}]},
+  {"id": 230, "jlpt": 2, "pattern": "〜にあって", "title": "In (a situation)", "meaning": "in, at a time of", "formation": "Noun + にあって",
+   "explanation": "Says what circumstance something takes place in.",
+   "examples": [
+     {"jp": "非常時にあって、冷静に行動することが大切です。", "en": "In an emergency, it is important to act calmly.", "answer": "にあって"},
+     {"jp": "厳しい状況にあっても、彼は笑顔を忘れない。", "en": "Even in harsh circumstances he does not forget to smile.", "answer": "にあっても"}]},
+  {"id": 231, "jlpt": 2, "pattern": "〜にしたら・〜にすれば", "title": "From the standpoint of", "meaning": "from the viewpoint of", "formation": "Noun + にしたら / にすれば",
+   "explanation": "Says how something looks from someone's perspective.",
+   "examples": [
+     {"jp": "子供にしたら、親の転勤はつらいでしょう。", "en": "For a child, a parent's transfer must be hard.", "answer": "にしたら"},
+     {"jp": "彼にすれば、これは大きなチャンスだ。", "en": "From his point of view, this is a big chance.", "answer": "にすれば"}]},
+  {"id": 232, "jlpt": 2, "pattern": "〜にたえない・〜にたえる", "title": "Cannot bear / worth", "meaning": "cannot stand, worth", "formation": "Verb dictionary form / Noun + にたえない / にたえる",
+   "explanation": "Fixed phrases: 見るにたえない = unbearable to watch, 鑑賞にたえる = worth appreciating.",
+   "examples": [
+     {"jp": "あの映画は暴力が多すぎて、見るにたえません。", "en": "That film has so much violence it is unbearable to watch.", "answer": "見るにたえません"},
+     {"jp": "この絵は鑑賞にたえる作品です。", "en": "This painting is a work worth appreciating.", "answer": "にたえる"}]},
+  {"id": 233, "jlpt": 2, "pattern": "〜にほかならない", "title": "Nothing but", "meaning": "is nothing other than", "formation": "Noun / Plain form + にほかならない",
+   "explanation": "Declares that something is exactly that and nothing else.",
+   "examples": [
+     {"jp": "成功は努力の結果にほかなりません。", "en": "Success is nothing but the result of effort.", "answer": "にほかなりません"},
+     {"jp": "彼が怒るのは、君を心配しているからにほかならない。", "en": "He is angry only because he is worried about you.", "answer": "からにほかならない"}]},
+  {"id": 234, "jlpt": 2, "pattern": "〜によっては", "title": "Depending on", "meaning": "depending on, in some cases", "formation": "Noun + によっては",
+   "explanation": "Says that in some cases the result differs: 場合によっては = in some cases.",
+   "examples": [
+     {"jp": "人によっては、この味が苦手かもしれません。", "en": "Depending on the person, they may not like this taste.", "answer": "によっては"},
+     {"jp": "場合によっては、中止することもある。", "en": "In some cases it may be cancelled.", "answer": "場合によっては"}]},
+  {"id": 235, "jlpt": 2, "pattern": "〜によらず", "title": "Regardless of", "meaning": "regardless of, irrespective of", "formation": "Noun + によらず",
+   "explanation": "Says something holds whatever the thing is: 見かけによらず = contrary to appearance.",
+   "examples": [
+     {"jp": "彼は見かけによらず、優しい人です。", "en": "Contrary to how he looks, he is a kind person.", "answer": "見かけによらず"},
+     {"jp": "理由のいかんによらず、遅刻は認められません。", "en": "Regardless of the reason, lateness is not accepted.", "answer": "によらず"}]},
+  {"id": 236, "jlpt": 2, "pattern": "〜抜きで", "title": "Without", "meaning": "without, leaving out", "formation": "Noun + 抜きで / 抜きに",
+   "explanation": "Leaves something out: 朝食抜きで.",
+   "examples": [
+     {"jp": "冗談抜きで、これは本当に難しい問題です。", "en": "Joking aside, this is a really difficult problem.", "answer": "抜きで"},
+     {"jp": "彼抜きに、会議を始めましょう。", "en": "Let's begin the meeting without him.", "answer": "抜きに"}]},
+  {"id": 237, "jlpt": 2, "pattern": "〜はおろか", "title": "Let alone", "meaning": "let alone, not to mention", "formation": "Noun + はおろか + negative",
+   "explanation": "Says even the easier thing is not true, so the harder one is out of question.",
+   "examples": [
+     {"jp": "彼は漢字はおろか、ひらがなも読めません。", "en": "He cannot even read hiragana, let alone kanji.", "answer": "はおろか"},
+     {"jp": "海外はおろか、国内旅行もしたことがない。", "en": "I have never even travelled in Japan, let alone abroad.", "answer": "はおろか"}]},
+  {"id": 238, "jlpt": 2, "pattern": "〜べく", "title": "In order to", "meaning": "in order to, so as to", "formation": "Verb dictionary form + べく",
+   "explanation": "A written, formal way to say a goal: 〜するために.",
+   "examples": [
+     {"jp": "彼は夢を実現すべく、毎日努力しています。", "en": "He works hard every day to realise his dream.", "answer": "べく"},
+     {"jp": "合格すべく、猛勉強を始めた。", "en": "I started studying intensively in order to pass.", "answer": "べく"}]},
+  {"id": 239, "jlpt": 2, "pattern": "〜まい", "title": "Will not / probably not", "meaning": "will not, probably not", "formation": "Verb dictionary form + まい",
+   "explanation": "Expresses a negative intention or a negative guess, in formal writing.",
+   "examples": [
+     {"jp": "もう二度と嘘はつくまい。", "en": "I will never tell a lie again.", "answer": "つくまい"},
+     {"jp": "彼は来るまいと思っていた。", "en": "I thought he probably would not come.", "answer": "来るまい"}]},
+  {"id": 240, "jlpt": 2, "pattern": "〜もかまわず", "title": "Without caring", "meaning": "regardless of, not caring", "formation": "Noun / Plain form + もかまわず",
+   "explanation": "Says someone does something without worrying about something.",
+   "examples": [
+     {"jp": "彼は人目もかまわず、大声で泣いた。", "en": "He cried loudly without caring who saw.", "answer": "もかまわず"},
+     {"jp": "雨にぬれるのもかまわず、走り続けた。", "en": "I kept running, not caring that I was getting wet.", "answer": "もかまわず"}]},
+  {"id": 241, "jlpt": 2, "pattern": "〜もさることながら", "title": "Not to mention", "meaning": "not to mention, as well as", "formation": "Noun + もさることながら",
+   "explanation": "Grants the first as obvious and says the second is equally important.",
+   "examples": [
+     {"jp": "この店は味もさることながら、雰囲気も素晴らしい。", "en": "This shop is wonderful not only in taste but also in atmosphere.", "answer": "もさることながら"},
+     {"jp": "才能もさることながら、努力も大切です。", "en": "Talent is important, but effort is too.", "answer": "もさることながら"}]},
+  {"id": 242, "jlpt": 2, "pattern": "〜も〜ば〜も", "title": "Both … and …", "meaning": "both … and, as well as", "formation": "Noun も + ば形 + Noun も",
+   "explanation": "Lists two things of the same kind: both good and bad.",
+   "examples": [
+     {"jp": "彼は頭もよければ、性格もいい。", "en": "He is both smart and good-natured.", "answer": "もよければ"},
+     {"jp": "この町には、山もあれば海もあります。", "en": "This town has both mountains and sea.", "answer": "もあれば"}]},
+  {"id": 243, "jlpt": 2, "pattern": "〜やら〜やら", "title": "… and … (and more)", "meaning": "and, among other things", "formation": "Noun / Plain form + やら + same + やら",
+   "explanation": "Lists examples, often of things that all happen at once and overwhelm.",
+   "examples": [
+     {"jp": "引っ越しで、荷造りやら掃除やらで大変でした。", "en": "With the move, it was hard with the packing, cleaning and so on.", "answer": "やら掃除やら"},
+     {"jp": "うれしいやら悲しいやら、複雑な気持ちです。", "en": "I feel both happy and sad, a mix of feelings.", "answer": "うれしいやら"}]},
+  {"id": 244, "jlpt": 2, "pattern": "〜ようによっては", "title": "Depending on how", "meaning": "depending on how one …", "formation": "Verb stem + ようによっては",
+   "explanation": "Says that the result changes with the way you do or look at something.",
+   "examples": [
+     {"jp": "考えようによっては、これはいい機会です。", "en": "Depending on how you think of it, this is a good opportunity.", "answer": "ようによっては"},
+     {"jp": "言いようによっては、相手を傷つけてしまう。", "en": "Depending on how you say it, you can hurt the other person.", "answer": "ようによっては"}]},
+  {"id": 245, "jlpt": 2, "pattern": "〜ずくめ", "title": "Entirely / full of", "meaning": "all, nothing but", "formation": "Noun + ずくめ",
+   "explanation": "Says something is made up of only one thing: 黒ずくめ = dressed all in black.",
+   "examples": [
+     {"jp": "彼は黒ずくめの服を着ていました。", "en": "He was dressed all in black.", "answer": "ずくめ"},
+     {"jp": "今日は朝からいいことずくめだった。", "en": "Today has been all good things since morning.", "answer": "ずくめ"}]},
+  {"id": 246, "jlpt": 2, "pattern": "〜がてら", "title": "While at it", "meaning": "while, on the way to", "formation": "Verb stem / Noun + がてら",
+   "explanation": "Do a second thing as you do the main one: 散歩がてら.",
+   "examples": [
+     {"jp": "散歩がてら、本屋に寄りました。", "en": "I stopped by the bookshop on my walk.", "answer": "がてら"},
+     {"jp": "買い物がてら、友達に会ってきた。", "en": "I met a friend while shopping.", "answer": "がてら"}]},
+  {"id": 247, "jlpt": 2, "pattern": "〜かたわら", "title": "While also", "meaning": "while, besides", "formation": "Verb dictionary form / Noun の + かたわら",
+   "explanation": "Says someone does one main activity and at the same time another one.",
+   "examples": [
+     {"jp": "彼は会社で働くかたわら、小説を書いています。", "en": "While working at a company, he also writes novels.", "answer": "かたわら"},
+     {"jp": "看護師のかたわら、ボランティアもしている。", "en": "Besides being a nurse, she also volunteers.", "answer": "かたわら"}]},
+  {"id": 248, "jlpt": 2, "pattern": "〜か〜まいか", "title": "Whether or not", "meaning": "whether to or not", "formation": "Verb dictionary form + か + Verb + まいか",
+   "explanation": "Shows hesitation: should I do it or not?",
+   "examples": [
+     {"jp": "行こうか行くまいか、迷っています。", "en": "I am torn about whether to go or not.", "answer": "か行くまいか"},
+     {"jp": "言おうか言うまいか、悩んだ。", "en": "I agonised over whether to say it or not.", "answer": "か言うまいか"}]},
+  {"id": 249, "jlpt": 2, "pattern": "〜からして", "title": "Judging from", "meaning": "judging from, even from", "formation": "Noun + からして",
+   "explanation": "Takes one small clue as evidence for a general view: 名前からして変だ.",
+   "examples": [
+     {"jp": "あの人は話し方からして、頭がよさそうです。", "en": "From the way he speaks, he seems clever.", "answer": "からして"},
+     {"jp": "彼の態度からして、怒っているに違いない。", "en": "Judging by his attitude, he must be angry.", "answer": "からして"}]},
+  {"id": 250, "jlpt": 2, "pattern": "〜からみて", "title": "Judging from", "meaning": "from the viewpoint of, judging from", "formation": "Noun + からみて / からみると",
+   "explanation": "Says from what point of view or evidence a judgement is made.",
+   "examples": [
+     {"jp": "経験からみて、その計画は成功すると思います。", "en": "Judging from experience, I think the plan will succeed.", "answer": "からみて"},
+     {"jp": "私の立場からみると、それは無理です。", "en": "From my position, that is impossible.", "answer": "からみると"}]},
+  {"id": 251, "jlpt": 2, "pattern": "〜くらいなら", "title": "Rather than", "meaning": "rather than, if it comes to", "formation": "Plain form + くらいなら / ぐらいなら",
+   "explanation": "Says you prefer a hard alternative to the thing named.",
+   "examples": [
+     {"jp": "あんな人と結婚するくらいなら、一人でいたい。", "en": "Rather than marry a person like that, I want to stay single.", "answer": "くらいなら"},
+     {"jp": "途中でやめるぐらいなら、最初からやらないほうがいい。", "en": "If you are going to quit halfway, it is better not to start.", "answer": "ぐらいなら"}]},
+  {"id": 252, "jlpt": 2, "pattern": "〜げ", "title": "Looking (feeling)", "meaning": "looking, seeming", "formation": "Adjective stem + げ",
+   "explanation": "Describes how someone appears to feel: 悲しげな顔 = a sad-looking face.",
+   "examples": [
+     {"jp": "彼女は悲しげな顔をしていました。", "en": "She had a sad-looking face.", "answer": "げ"},
+     {"jp": "子供が楽しげに遊んでいる。", "en": "The children are playing happily.", "answer": "げに"}]},
+  {"id": 253, "jlpt": 2, "pattern": "〜しかない", "title": "No choice but", "meaning": "have no choice but", "formation": "Verb dictionary form + しかない",
+   "explanation": "Says there is only one option left.",
+   "examples": [
+     {"jp": "ここまで来たら、やるしかありません。", "en": "Now that we have come this far, we have no choice but to do it.", "answer": "しかありません"},
+     {"jp": "バスがないので、歩くしかない。", "en": "There is no bus, so I have no choice but to walk.", "answer": "しかない"}]},
+  {"id": 254, "jlpt": 2, "pattern": "〜しだいで", "title": "Depending on", "meaning": "depending on, up to", "formation": "Noun + しだいで / しだいだ",
+   "explanation": "Says the result depends on the thing named.",
+   "examples": [
+     {"jp": "成功するかどうかは、あなたの努力しだいです。", "en": "Whether you succeed depends on your effort.", "answer": "しだいです"},
+     {"jp": "考え方しだいで、人生は変わる。", "en": "Life changes depending on how you think.", "answer": "しだいで"}]},
+  {"id": 255, "jlpt": 2, "pattern": "〜すら", "title": "Even", "meaning": "even, not even", "formation": "Noun + すら",
+   "explanation": "A literary form of さえ, giving an extreme example.",
+   "examples": [
+     {"jp": "そんな簡単なことすら、彼にはできません。", "en": "He cannot do even such a simple thing.", "answer": "すら"},
+     {"jp": "自分の名前すら、書けない子供もいる。", "en": "There are children who cannot even write their own names.", "answer": "すら"}]},
+  {"id": 256, "jlpt": 2, "pattern": "〜だけに", "title": "Precisely because", "meaning": "just because, as might be expected", "formation": "Plain form + だけに",
+   "explanation": "Says a result is natural or heightened by a reason.",
+   "examples": [
+     {"jp": "期待していただけに、がっかりしました。", "en": "Since I was looking forward to it, I was all the more disappointed.", "answer": "だけに"},
+     {"jp": "プロだけに、技術が違う。", "en": "Being a professional, the skill is different.", "answer": "だけに"}]},
+  {"id": 257, "jlpt": 2, "pattern": "〜たとえ〜ても", "title": "Even if", "meaning": "even if, no matter", "formation": "たとえ + Plain form + ても",
+   "explanation": "Emphasises that something stays true however the condition is.",
+   "examples": [
+     {"jp": "たとえ失敗しても、あきらめません。", "en": "Even if I fail, I will not give up.", "answer": "たとえ"},
+     {"jp": "たとえ雨が降っても、予定は変えません。", "en": "Even if it rains, I will not change the plan.", "answer": "たとえ"}]},
+  {"id": 258, "jlpt": 2, "pattern": "〜たりとも", "title": "Not even", "meaning": "not even (a single)", "formation": "一 + counter + たりとも + negative",
+   "explanation": "Stresses not even the smallest amount: 一円たりとも.",
+   "examples": [
+     {"jp": "一円たりとも無駄にできません。", "en": "We cannot waste even a single yen.", "answer": "たりとも"},
+     {"jp": "一瞬たりとも、気を抜いてはいけない。", "en": "You must not let your guard down for even a moment.", "answer": "たりとも"}]},
+  {"id": 259, "jlpt": 2, "pattern": "〜つつある", "title": "Is in the process of", "meaning": "is becoming, gradually", "formation": "Verb stem + つつある",
+   "explanation": "Says a change is happening gradually right now.",
+   "examples": [
+     {"jp": "世界は急速に変わりつつあります。", "en": "The world is changing rapidly.", "answer": "つつあります"},
+     {"jp": "景気は回復しつつある。", "en": "The economy is gradually recovering.", "answer": "つつある"}]},
+  {"id": 260, "jlpt": 2, "pattern": "〜っこない", "title": "Not possible", "meaning": "no way, impossible", "formation": "Verb stem + っこない",
+   "explanation": "A casual, strong denial: できっこない = there's no way it can be done.",
+   "examples": [
+     {"jp": "そんなこと、できっこありません。", "en": "There is no way I can do that.", "answer": "っこありません"},
+     {"jp": "今から行っても、間に合いっこない。", "en": "Even if we go now, there is no way we will be in time.", "answer": "っこない"}]},
+  {"id": 261, "jlpt": 2, "pattern": "〜ていては", "title": "If you keep …ing", "meaning": "if you continue to", "formation": "Verb て-form + いては",
+   "explanation": "Warns that a continuing action will lead to a bad result.",
+   "examples": [
+     {"jp": "そんなに遊んでいては、試験に落ちますよ。", "en": "If you play around that much, you will fail the exam.", "answer": "いては"},
+     {"jp": "毎日夜更かししていては、体を壊す。", "en": "If you stay up late every day, you will ruin your health.", "answer": "いては"}]},
+  {"id": 262, "jlpt": 2, "pattern": "〜てからでないと", "title": "Not until", "meaning": "not until, only after", "formation": "Verb て-form + からでないと + negative",
+   "explanation": "Says something cannot be done before something else is done.",
+   "examples": [
+     {"jp": "先に支払いを済ませてからでないと、入れません。", "en": "You cannot enter until you have paid.", "answer": "てからでないと"},
+     {"jp": "よく読んでからでないと、サインできません。", "en": "I cannot sign before reading carefully.", "answer": "んでからでないと"}]},
+  {"id": 263, "jlpt": 2, "pattern": "〜てこそ", "title": "Only by", "meaning": "only when, it is by", "formation": "Verb て-form + こそ",
+   "explanation": "Says that something has real value only when done.",
+   "examples": [
+     {"jp": "実際に経験してこそ、わかることがあります。", "en": "There are things you only understand by actually experiencing them.", "answer": "てこそ"},
+     {"jp": "努力してこそ、成功がある。", "en": "Success comes only through effort.", "answer": "てこそ"}]},
+  {"id": 264, "jlpt": 2, "pattern": "〜てはいられない", "title": "Cannot afford to", "meaning": "cannot keep on", "formation": "Verb て-form + はいられない",
+   "explanation": "Says you cannot go on in a state any longer.",
+   "examples": [
+     {"jp": "試験が近いので、遊んではいられません。", "en": "The exam is near, so I cannot afford to play.", "answer": "んではいられません"},
+     {"jp": "のんびりしてはいられない。", "en": "I cannot relax like this.", "answer": "てはいられない"}]},
+  {"id": 265, "jlpt": 2, "pattern": "〜てばかりいる", "title": "Does nothing but", "meaning": "always doing, keep doing", "formation": "Verb て-form + ばかりいる",
+   "explanation": "Says someone does only one thing, with criticism.",
+   "examples": [
+     {"jp": "弟はゲームをしてばかりいます。", "en": "My younger brother does nothing but play games.", "answer": "てばかりいます"},
+     {"jp": "彼は文句を言ってばかりいる。", "en": "He does nothing but complain.", "answer": "てばかりいる"}]},
+  {"id": 266, "jlpt": 2, "pattern": "〜ても差し支えない", "title": "No problem if", "meaning": "may, no objection to", "formation": "Verb て-form + も差し支えない",
+   "explanation": "A formal way of saying it is all right to do something.",
+   "examples": [
+     {"jp": "ご都合が悪ければ、キャンセルしても差し支えありません。", "en": "If it is inconvenient, you may cancel.", "answer": "ても差し支えありません"},
+     {"jp": "ここで写真を撮っても差し支えない。", "en": "There is no problem with taking photos here.", "answer": "ても差し支えない"}]},
+  {"id": 267, "jlpt": 2, "pattern": "〜と同時に", "title": "At the same time as", "meaning": "at the same time, as soon as", "formation": "Verb dictionary form / Noun + と同時に",
+   "explanation": "Two things happen at once, or one thing has two sides.",
+   "examples": [
+     {"jp": "電車が止まると同時に、ドアが開きました。", "en": "The doors opened at the same moment the train stopped.", "answer": "と同時に"},
+     {"jp": "彼は優しいと同時に、厳しい人でもある。", "en": "He is kind and at the same time strict.", "answer": "と同時に"}]},
+  {"id": 268, "jlpt": 2, "pattern": "〜というか", "title": "Or rather", "meaning": "or rather, I would say", "formation": "Sentence + というか",
+   "explanation": "Rephrases a statement more accurately or casually.",
+   "examples": [
+     {"jp": "彼は変わっているというか、個性的ですね。", "en": "He is odd, or rather, he has a strong personality.", "answer": "というか"},
+     {"jp": "楽しいというか、ほっとするというか。", "en": "It is fun, or rather, it is relaxing.", "answer": "楽しいというか"}]},
+  {"id": 269, "jlpt": 2, "pattern": "〜というものではない", "title": "It is not that", "meaning": "it is not necessarily", "formation": "Plain form + というものではない",
+   "explanation": "Denies a widely held idea: 高ければいいというものではない = expensive is not always better.",
+   "examples": [
+     {"jp": "高ければいいというものではありません。", "en": "It is not the case that expensive is always better.", "answer": "というものではありません"},
+     {"jp": "たくさん練習すればいいというものではない。", "en": "It is not simply a matter of practising a lot.", "answer": "というものではない"}]},
+  {"id": 270, "jlpt": 2, "pattern": "〜どころではない", "title": "Not the time for", "meaning": "far from, no time for", "formation": "Noun / Verb dictionary form + どころではない",
+   "explanation": "Says the situation is far too serious or busy for something.",
+   "examples": [
+     {"jp": "忙しくて、遊びどころではありません。", "en": "I am so busy that it is no time to play.", "answer": "どころではありません"},
+     {"jp": "風邪で、旅行どころではない。", "en": "With a cold, a trip is out of the question.", "answer": "どころではない"}]},
+  {"id": 271, "jlpt": 2, "pattern": "〜どうせ", "title": "Anyway", "meaning": "anyway, after all", "formation": "どうせ + sentence",
+   "explanation": "Says that something is inevitable or hopeless, so why bother: どうせ無理だ.",
+   "examples": [
+     {"jp": "どうせ行くなら、早いほうがいいです。", "en": "If you are going anyway, the sooner the better.", "answer": "どうせ"},
+     {"jp": "どうせ、私には無理でしょう。", "en": "It is probably impossible for me anyway.", "answer": "どうせ"}]},
+  {"id": 272, "jlpt": 2, "pattern": "〜とみえる", "title": "It seems", "meaning": "it seems, apparently", "formation": "Plain form + とみえる",
+   "explanation": "A written way to say something looks like it: 疲れているとみえる.",
+   "examples": [
+     {"jp": "彼はよほど疲れているとみえて、すぐ眠ってしまった。", "en": "He must have been very tired, as he fell asleep at once.", "answer": "とみえて"},
+     {"jp": "この道は人が少ないとみえる。", "en": "It seems few people use this road.", "answer": "とみえる"}]},
+  {"id": 273, "jlpt": 2, "pattern": "〜なくもない", "title": "Not entirely not", "meaning": "not that I can't, there is some", "formation": "Verb ない-form minus い + くもない",
+   "explanation": "A double negative that means there is a little: 分からなくもない.",
+   "examples": [
+     {"jp": "彼の気持ちは、分からなくもありません。", "en": "I can understand his feelings somewhat.", "answer": "なくもありません"},
+     {"jp": "行きたくなくもないが、時間がない。", "en": "It is not that I do not want to go, but I have no time.", "answer": "なくもない"}]},
+  {"id": 274, "jlpt": 2, "pattern": "〜にしろ・〜にせよ", "title": "Whether … or / even if", "meaning": "whether, even if", "formation": "Plain form / Noun + にしろ / にせよ",
+   "explanation": "Concedes a point: whichever it is, the main clause holds.",
+   "examples": [
+     {"jp": "理由はどうあるにせよ、遅刻はよくない。", "en": "Whatever the reason, being late is bad.", "answer": "にせよ"},
+     {"jp": "賛成にしろ反対にしろ、意見を言ってください。", "en": "Whether you are for or against, please say your opinion.", "answer": "賛成にしろ"}]},
+  {"id": 275, "jlpt": 2, "pattern": "〜ぶり", "title": "After a gap / way of", "meaning": "after (a period), manner of", "formation": "Time + ぶり · Verb stem + ぶり",
+   "explanation": "Time + ぶり means for the first time in that long: 三年ぶり. After a verb stem or noun it means the manner of doing: 働きぶり.",
+   "examples": [
+     {"jp": "三年ぶりに、友達に会いました。", "en": "I met my friend for the first time in three years.", "answer": "ぶりに"},
+     {"jp": "彼の仕事ぶりは、とても真面目です。", "en": "His way of working is very serious.", "answer": "ぶり"}]},
+  {"id": 276, "jlpt": 2, "pattern": "〜上は", "title": "Now that", "meaning": "now that, since", "formation": "Verb dictionary / た-form + 上は",
+   "explanation": "Because a situation has been decided, you must follow through.",
+   "examples": [
+     {"jp": "引き受けた上は、最後までやります。", "en": "Now that I have accepted it, I will see it through.", "answer": "上は"},
+     {"jp": "留学すると決めた上は、しっかり勉強しなさい。", "en": "Now that you have decided to study abroad, study hard.", "answer": "上は"}]},
+  {"id": 277, "jlpt": 2, "pattern": "〜おそれがある", "title": "There is a risk of", "meaning": "there is a fear that", "formation": "Plain form / Noun の + おそれがある",
+   "explanation": "Warns of a possible bad outcome. Common in news and weather reports.",
+   "examples": [
+     {"jp": "台風で、川の水があふれるおそれがあります。", "en": "There is a risk that the river will overflow because of the typhoon.", "answer": "おそれがあります"},
+     {"jp": "このままでは、赤字になるおそれがある。", "en": "At this rate there is a risk of going into deficit.", "answer": "おそれがある"}]},
+  {"id": 278, "jlpt": 2, "pattern": "〜かのようだ", "title": "As if", "meaning": "as if, as though", "formation": "Plain form + かのようだ",
+   "explanation": "Compares to something that is not actually true.",
+   "examples": [
+     {"jp": "彼は何も知らないかのように、笑っていました。", "en": "He was smiling as if he knew nothing.", "answer": "かのように"},
+     {"jp": "まるで夢を見ているかのようだ。", "en": "It is just as if I were dreaming.", "answer": "かのようだ"}]},
+  {"id": 279, "jlpt": 2, "pattern": "〜かねる", "title": "Cannot (reluctantly)", "meaning": "cannot bring oneself to, unable to", "formation": "Verb stem + かねる",
+   "explanation": "A polite way to say you cannot do something: お答えしかねます.",
+   "examples": [
+     {"jp": "その件については、お答えしかねます。", "en": "I am unable to answer about that matter.", "answer": "かねます"},
+     {"jp": "彼の意見には、賛成しかねる。", "en": "I cannot agree with his opinion.", "answer": "かねる"}]},
+  {"id": 280, "jlpt": 2, "pattern": "〜といえども", "title": "Even though", "meaning": "even if, although", "formation": "Plain form + といえども",
+   "explanation": "A formal way to say even if, usually after a name or title.",
+   "examples": [
+     {"jp": "専門家といえども、間違えることがあります。", "en": "Even experts make mistakes.", "answer": "といえども"},
+     {"jp": "子供といえども、責任はあります。", "en": "Even a child has responsibility.", "answer": "といえども"}]},
+  {"id": 281, "jlpt": 2, "pattern": "〜てやまない", "title": "Never stop", "meaning": "continue to, deeply", "formation": "Verb て-form + やまない",
+   "explanation": "Strong, lasting feelings: 願ってやまない = I earnestly hope.",
+   "examples": [
+     {"jp": "皆様のご多幸を願ってやみません。", "en": "I sincerely hope for everyone's happiness.", "answer": "てやみません"},
+     {"jp": "彼は故郷を愛してやまなかった。", "en": "He never stopped loving his hometown.", "answer": "てやまなかった"}]},
+  {"id": 282, "jlpt": 2, "pattern": "〜ようが〜まいが", "title": "Whether or not", "meaning": "whether … or not", "formation": "Verb volitional + が + Verb + まいが",
+   "explanation": "Says it does not matter if someone does or does not do something.",
+   "examples": [
+     {"jp": "あなたが行こうが行くまいが、私は行きます。", "en": "Whether you go or not, I will go.", "answer": "が行くまいが"},
+     {"jp": "雨が降ろうが降るまいが、試合は行われる。", "en": "The match will be held whether it rains or not.", "answer": "が降るまいが"}]},
+  {"id": 283, "jlpt": 2, "pattern": "〜を余儀なくされる", "title": "Forced to", "meaning": "be forced to, have no choice but", "formation": "Noun + を余儀なくされる",
+   "explanation": "Says someone had to do something because of circumstances.",
+   "examples": [
+     {"jp": "台風のため、旅行の中止を余儀なくされました。", "en": "Because of the typhoon, we were forced to cancel the trip.", "answer": "を余儀なくされました"},
+     {"jp": "会社は事業の縮小を余儀なくされた。", "en": "The company was forced to scale back its business.", "answer": "を余儀なくされた"}]},
+  {"id": 284, "jlpt": 2, "pattern": "〜を込めて", "title": "With (feeling)", "meaning": "with, putting … into it", "formation": "Noun + を込めて",
+   "explanation": "Says something is done with a feeling: 心を込めて.",
+   "examples": [
+     {"jp": "感謝の気持ちを込めて、手紙を書きました。", "en": "I wrote a letter with feelings of gratitude.", "answer": "を込めて"},
+     {"jp": "心を込めて、料理を作ります。", "en": "I cook with all my heart.", "answer": "心を込めて"}]},
+  {"id": 285, "jlpt": 2, "pattern": "〜を前提に", "title": "On the premise of", "meaning": "on the premise that", "formation": "Noun + を前提に(して)",
+   "explanation": "Says a plan is built on an assumption.",
+   "examples": [
+     {"jp": "結婚を前提に、お付き合いしています。", "en": "We are seeing each other with the view of marriage.", "answer": "を前提に"},
+     {"jp": "雨が降ることを前提にして、計画を立てた。", "en": "I made a plan assuming it would rain.", "answer": "を前提にして"}]},
+  {"id": 286, "jlpt": 2, "pattern": "〜を踏まえて", "title": "Based on", "meaning": "based on, taking into account", "formation": "Noun + を踏まえて",
+   "explanation": "Uses something as a foundation for thinking or acting.",
+   "examples": [
+     {"jp": "前回の反省を踏まえて、改善を行います。", "en": "We will make improvements based on the lessons of last time.", "answer": "を踏まえて"},
+     {"jp": "事実を踏まえて、判断する。", "en": "We judge based on the facts.", "answer": "を踏まえて"}]},
+  {"id": 287, "jlpt": 2, "pattern": "〜を機に", "title": "Taking the opportunity", "meaning": "taking the opportunity of", "formation": "Noun + を機に",
+   "explanation": "A formal way to say a change begins at a certain event.",
+   "examples": [
+     {"jp": "定年を機に、田舎に引っ越しました。", "en": "I moved to the countryside upon retirement.", "answer": "を機に"},
+     {"jp": "卒業を機に、一人暮らしを始めた。", "en": "I started living alone upon graduating.", "answer": "を機に"}]},
+  {"id": 288, "jlpt": 2, "pattern": "〜をよそに", "title": "Ignoring", "meaning": "regardless of, in disregard of", "formation": "Noun + をよそに",
+   "explanation": "Says someone acts without caring about the worries of others.",
+   "examples": [
+     {"jp": "彼は親の心配をよそに、毎晩遊び歩いています。", "en": "He goes out every night, ignoring his parents' worries.", "answer": "をよそに"},
+     {"jp": "周りの反対をよそに、会社を辞めた。", "en": "Ignoring the objections around him, he quit the company.", "answer": "をよそに"}]},
+  {"id": 289, "jlpt": 2, "pattern": "〜とばかりに", "title": "As if to say", "meaning": "as if to say", "formation": "Sentence + とばかりに",
+   "explanation": "Describes an action that looks like it means a certain thing.",
+   "examples": [
+     {"jp": "彼は「どうだ」とばかりに、胸を張った。", "en": "He puffed out his chest as if to say, \"How about that?\"", "answer": "とばかりに"},
+     {"jp": "犬は遊んでくれとばかりに、しっぽを振った。", "en": "The dog wagged its tail as if asking to play.", "answer": "とばかりに"}]},
+  {"id": 290, "jlpt": 2, "pattern": "〜んばかり", "title": "As if about to", "meaning": "as if, almost", "formation": "Verb ない-form minus ない + んばかり",
+   "explanation": "Describes someone nearly doing something extreme.",
+   "examples": [
+     {"jp": "彼女は泣かんばかりに喜びました。", "en": "She was so happy she was almost crying.", "answer": "んばかり"},
+     {"jp": "観客は割れんばかりの拍手を送った。", "en": "The audience gave thunderous applause, as if it would crack the hall.", "answer": "んばかり"}]},
+  {"id": 291, "jlpt": 2, "pattern": "〜ようでは", "title": "If it is like that", "meaning": "if you are like that", "formation": "Plain form + ようでは",
+   "explanation": "Says that if a negative situation continues, it will lead to a bad result.",
+   "examples": [
+     {"jp": "これくらいで疲れるようでは、先が思いやられます。", "en": "If you get tired this easily, I worry about the future.", "answer": "ようでは"},
+     {"jp": "朝起きられないようでは、仕事にならない。", "en": "If you cannot get up in the morning, you cannot work.", "answer": "ようでは"}]},
+  {"id": 292, "jlpt": 2, "pattern": "〜ところを見ると", "title": "Judging from", "meaning": "judging from the fact that", "formation": "Plain form + ところを見ると",
+   "explanation": "Draws a conclusion from something observed.",
+   "examples": [
+     {"jp": "電気がついているところを見ると、彼はまだ会社にいるようだ。", "en": "Judging by the light being on, he is still at the company.", "answer": "ところを見ると"},
+     {"jp": "みんなが笑っているところを見ると、うまくいったようだ。", "en": "Since everyone is laughing, it seems to have gone well.", "answer": "ところを見ると"}]},
+  {"id": 293, "jlpt": 2, "pattern": "〜かと思うと", "title": "Just when", "meaning": "no sooner had … than, just as", "formation": "Verb た-form + かと思うと / かと思えば",
+   "explanation": "Describes a sudden change: first this, then immediately that.",
+   "examples": [
+     {"jp": "泣いたかと思うと、もう笑っています。", "en": "She cried just a moment ago and is already laughing.", "answer": "かと思うと"},
+     {"jp": "晴れたかと思えば、急に雨が降り出した。", "en": "No sooner did it clear up than it suddenly began to rain.", "answer": "かと思えば"}]},
+  {"id": 294, "jlpt": 2, "pattern": "〜がはやいか", "title": "As soon as", "meaning": "no sooner than", "formation": "Verb dictionary form + が早いか",
+   "explanation": "Describes something that happens immediately after another action.",
+   "examples": [
+     {"jp": "彼はベルが鳴るが早いか、教室を飛び出した。", "en": "He dashed out of the classroom the instant the bell rang.", "answer": "が早いか"},
+     {"jp": "席に着くが早いか、彼は食べ始めた。", "en": "No sooner had he sat down than he started eating.", "answer": "が早いか"}]},
+  {"id": 295, "jlpt": 2, "pattern": "〜にとどまらず", "title": "Not limited to", "meaning": "not only, beyond", "formation": "Noun + にとどまらず",
+   "explanation": "Says something goes beyond the range named.",
+   "examples": [
+     {"jp": "この問題は日本にとどまらず、世界に広がっています。", "en": "This problem is not limited to Japan but spreads worldwide.", "answer": "にとどまらず"},
+     {"jp": "彼の人気は国内にとどまらず、海外にも及んでいる。", "en": "His popularity goes beyond Japan and reaches overseas.", "answer": "にとどまらず"}]},
+  {"id": 101, "jlpt": 1, "pattern": "〜あっての", "title": "Only thanks to", "meaning": "owing to, exists because of", "formation": "Noun + あっての + Noun",
+   "explanation": "Says the second thing exists only because of the first: お客様あっての商売.",
+   "examples": [
+     {"jp": "お客様あっての商売ですから、大切にしなければなりません。", "en": "Business exists only because of customers, so we must value them.", "answer": "あっての"},
+     {"jp": "健康あっての人生です。", "en": "Life depends on health.", "answer": "あっての"}]},
+  {"id": 102, "jlpt": 1, "pattern": "〜いかんで", "title": "Depending on", "meaning": "depending on, according to", "formation": "Noun + いかんで / いかんによって",
+   "explanation": "Says the result depends on the thing named. 〜いかんにかかわらず means regardless.",
+   "examples": [
+     {"jp": "結果のいかんで、今後の計画を変えます。", "en": "Depending on the result, we will change future plans.", "answer": "いかんで"},
+     {"jp": "理由のいかんにかかわらず、遅刻は認められない。", "en": "Regardless of the reason, lateness is not accepted.", "answer": "いかんにかかわらず"}]},
+  {"id": 103, "jlpt": 1, "pattern": "〜が最後", "title": "Once … it is over", "meaning": "once, if you ever", "formation": "Verb た-form + が最後",
+   "explanation": "Warns that once something happens, the result is unavoidable and bad.",
+   "examples": [
+     {"jp": "彼に秘密を話したが最後、すぐに広まるでしょう。", "en": "Once you tell him a secret, it will spread at once.", "answer": "が最後"},
+     {"jp": "この機会を逃したが最後、二度とチャンスはない。", "en": "If you miss this chance, there will never be another.", "answer": "が最後"}]},
+  {"id": 104, "jlpt": 1, "pattern": "〜極まりない", "title": "Extremely", "meaning": "extremely, utterly", "formation": "な-adj stem / い-adj dictionary form + こと + 極まりない",
+   "explanation": "A strong, formal word for extremely, almost always for negative things.",
+   "examples": [
+     {"jp": "その態度は失礼極まりない。", "en": "That attitude is utterly rude.", "answer": "極まりない"},
+     {"jp": "彼の行動は危険極まる。", "en": "His behaviour is extremely dangerous.", "answer": "極まる"}]},
+  {"id": 105, "jlpt": 1, "pattern": "〜ごとき・〜ごとく", "title": "Like / such as", "meaning": "like, as if", "formation": "Noun + ごとき / ごとく",
+   "explanation": "A literary form of ように/ような; ごとき can also be dismissive: 私ごとき.",
+   "examples": [
+     {"jp": "矢のごとく、時間は過ぎていく。", "en": "Time passes like an arrow.", "answer": "のごとく"},
+     {"jp": "私ごときが、意見を言うのは失礼です。", "en": "It would be rude for someone like me to give an opinion.", "answer": "ごとき"}]},
+  {"id": 106, "jlpt": 1, "pattern": "〜ずにはおかない", "title": "Is bound to", "meaning": "cannot fail to, is certain to", "formation": "Verb ない-form minus ない + ずにはおかない",
+   "explanation": "Something is bound to produce a strong effect.",
+   "examples": [
+     {"jp": "彼の演説は聞く人を感動させずにはおかなかった。", "en": "His speech could not fail to move the audience.", "answer": "ずにはおかなかった"},
+     {"jp": "この問題は議論を呼ばずにはおかないだろう。", "en": "This issue is certain to provoke debate.", "answer": "ずにはおかない"}]},
+  {"id": 107, "jlpt": 1, "pattern": "〜そばから", "title": "No sooner … than", "meaning": "as soon as, immediately", "formation": "Verb dictionary / た-form + そばから",
+   "explanation": "Something is undone or repeats immediately after it is done.",
+   "examples": [
+     {"jp": "覚えるそばから、忘れてしまいます。", "en": "I forget it the moment I learn it.", "answer": "そばから"},
+     {"jp": "掃除したそばから、子供が散らかす。", "en": "As soon as I clean, the children make a mess.", "answer": "そばから"}]},
+  {"id": 108, "jlpt": 1, "pattern": "〜てしかるべき", "title": "It is right that", "meaning": "should be, ought to", "formation": "Verb て-form / Noun + しかるべき",
+   "explanation": "Says that something is proper and expected.",
+   "examples": [
+     {"jp": "この問題は、もっと注目されてしかるべきです。", "en": "This issue should be getting more attention.", "answer": "てしかるべき"},
+     {"jp": "しかるべき処置が取られた。", "en": "Appropriate measures were taken.", "answer": "しかるべき"}]},
+  {"id": 109, "jlpt": 1, "pattern": "〜とあって", "title": "Because it is", "meaning": "since it is, given that", "formation": "Noun / Plain form + とあって",
+   "explanation": "Explains why something is the case by a special situation.",
+   "examples": [
+     {"jp": "連休とあって、観光地はどこも混んでいます。", "en": "Since it is a long weekend, every tourist spot is crowded.", "answer": "とあって"},
+     {"jp": "人気歌手が来るとあって、会場は満員だった。", "en": "Given that a popular singer was coming, the hall was full.", "answer": "とあって"}]},
+  {"id": 110, "jlpt": 1, "pattern": "〜とあれば", "title": "If it is for", "meaning": "if it is a matter of", "formation": "Noun / Plain form + とあれば",
+   "explanation": "Says someone will do anything if the situation calls for it.",
+   "examples": [
+     {"jp": "あなたの頼みとあれば、喜んで協力します。", "en": "If it is your request, I will gladly cooperate.", "answer": "とあれば"},
+     {"jp": "家族のためとあれば、どんな苦労も惜しまない。", "en": "If it is for my family, I will spare no hardship.", "answer": "とあれば"}]},
+  {"id": 111, "jlpt": 1, "pattern": "〜といったらない", "title": "Extremely", "meaning": "so …, beyond description", "formation": "Adjective dictionary form + といったらない",
+   "explanation": "Says something is so extreme it cannot be described: うれしいといったらない.",
+   "examples": [
+     {"jp": "合格したときのうれしさといったらなかった。", "en": "The joy of passing was indescribable.", "answer": "といったらなかった"},
+     {"jp": "この暑さといったらない。", "en": "This heat is unbelievable.", "answer": "といったらない"}]},
+  {"id": 112, "jlpt": 1, "pattern": "〜ときたら", "title": "As for (complaint)", "meaning": "as for, when it comes to", "formation": "Noun + ときたら",
+   "explanation": "Brings up a person or thing in order to complain or marvel about them.",
+   "examples": [
+     {"jp": "うちの息子ときたら、毎日ゲームばかりしている。", "en": "My son does nothing but play games every day.", "answer": "ときたら"},
+     {"jp": "彼ときたら、いつも遅刻ばかりだ。", "en": "As for him, he is always late.", "answer": "ときたら"}]},
+  {"id": 113, "jlpt": 1, "pattern": "〜ともなれば", "title": "Once it becomes", "meaning": "when it comes to, if it comes to", "formation": "Noun / Verb + ともなれば",
+   "explanation": "Says that once a person reaches a certain status, certain things are expected.",
+   "examples": [
+     {"jp": "プロともなれば、技術も違います。", "en": "When it comes to professionals, the skill is different.", "answer": "ともなれば"},
+     {"jp": "大人ともなれば、自分で責任を取るべきだ。", "en": "Once you are an adult, you should take responsibility yourself.", "answer": "ともなれば"}]},
+  {"id": 114, "jlpt": 1, "pattern": "〜なくして", "title": "Without", "meaning": "without, were it not for", "formation": "Noun + なくして(は)",
+   "explanation": "Says that something is impossible without the first thing.",
+   "examples": [
+     {"jp": "努力なくして、成功はありえません。", "en": "Success is impossible without effort.", "answer": "なくして"},
+     {"jp": "皆様のご協力なくしては、完成しなかった。", "en": "It could not have been completed without everyone's cooperation.", "answer": "なくしては"}]},
+  {"id": 115, "jlpt": 1, "pattern": "〜ならでは", "title": "Unique to", "meaning": "only possible for, unique to", "formation": "Noun + ならではの + Noun",
+   "explanation": "Praises something as possible only because of the thing named.",
+   "examples": [
+     {"jp": "これは京都ならではの味です。", "en": "This is a taste unique to Kyoto.", "answer": "ならでは"},
+     {"jp": "手作りならではの温かさがあります。", "en": "It has a warmth only found in handmade things.", "answer": "ならでは"}]},
+  {"id": 116, "jlpt": 1, "pattern": "〜にあるまじき", "title": "Unbecoming of", "meaning": "unworthy of, not befitting", "formation": "Noun + にあるまじき + Noun",
+   "explanation": "Criticises behaviour that does not suit someone's position.",
+   "examples": [
+     {"jp": "それは教師にあるまじき行為です。", "en": "That is conduct unbecoming of a teacher.", "answer": "にあるまじき"},
+     {"jp": "政治家にあるまじき発言だ。", "en": "That is a remark unbecoming of a politician.", "answer": "にあるまじき"}]},
+  {"id": 117, "jlpt": 1, "pattern": "〜に足る", "title": "Worthy of", "meaning": "worth, enough to", "formation": "Verb dictionary form / Noun + に足る",
+   "explanation": "Says something is good enough or worthy: 信頼するに足る人.",
+   "examples": [
+     {"jp": "彼は信頼するに足る人物です。", "en": "He is a person worthy of trust.", "answer": "に足る"},
+     {"jp": "この本は読むに足る内容だ。", "en": "This book has content worth reading.", "answer": "に足る"}]},
+  {"id": 118, "jlpt": 1, "pattern": "〜にして", "title": "At / being", "meaning": "being, only at", "formation": "Noun + にして",
+   "explanation": "A formal way to say that someone is something, or only at some point does something happen: 三十にして成功した.",
+   "examples": [
+     {"jp": "彼は二十歳にして、会社を作りました。", "en": "He founded a company at just twenty.", "answer": "にして"},
+     {"jp": "彼は医者にして、作家でもある。", "en": "He is a doctor and also a writer.", "answer": "にして"}]},
+  {"id": 119, "jlpt": 1, "pattern": "〜に即して", "title": "In line with", "meaning": "in accordance with, based on", "formation": "Noun + に即して",
+   "explanation": "Fits something to facts or rules: 実情に即して.",
+   "examples": [
+     {"jp": "実情に即して、規則を見直します。", "en": "We will review the rules to fit the actual situation.", "answer": "に即して"},
+     {"jp": "事実に即して、報告してください。", "en": "Please report in accordance with the facts.", "answer": "に即して"}]},
+  {"id": 120, "jlpt": 1, "pattern": "〜に至っては", "title": "As for (extreme)", "meaning": "as for, when it comes to", "formation": "Noun + に至っては",
+   "explanation": "Picks up the most extreme example in a list.",
+   "examples": [
+     {"jp": "彼の部屋は散らかっていて、机に至っては足の踏み場もない。", "en": "His room is messy, and as for the desk, there is no space to step.", "answer": "に至っては"},
+     {"jp": "みんな疲れていて、山田に至っては寝てしまった。", "en": "Everyone was tired, and Yamada even fell asleep.", "answer": "に至っては"}]},
+  {"id": 121, "jlpt": 1, "pattern": "〜にひきかえ", "title": "In contrast to", "meaning": "in contrast to, whereas", "formation": "Noun / Plain form + にひきかえ",
+   "explanation": "Compares two things that are very different.",
+   "examples": [
+     {"jp": "兄の社交的なのにひきかえ、弟はおとなしい。", "en": "In contrast to his sociable older brother, the younger is quiet.", "answer": "にひきかえ"},
+     {"jp": "去年にひきかえ、今年は雪が少ない。", "en": "Compared to last year, there is little snow this year.", "answer": "にひきかえ"}]},
+  {"id": 122, "jlpt": 1, "pattern": "〜に値する", "title": "Worth", "meaning": "is worth, deserving of", "formation": "Noun / Verb dictionary form + に値する",
+   "explanation": "Says something deserves praise, attention or criticism.",
+   "examples": [
+     {"jp": "この研究は高く評価されるに値する。", "en": "This research deserves high praise.", "answer": "に値する"},
+     {"jp": "尊敬に値する人物だ。", "en": "He is a person worthy of respect.", "answer": "に値する"}]},
+  {"id": 123, "jlpt": 1, "pattern": "〜にかたくない", "title": "Not hard to", "meaning": "it is easy to, not difficult to", "formation": "Verb dictionary form / Noun + にかたくない",
+   "explanation": "A formal phrase: it is not hard to imagine.",
+   "examples": [
+     {"jp": "彼の苦労は想像にかたくありません。", "en": "It is not hard to imagine his hardship.", "answer": "にかたくありません"},
+     {"jp": "彼女が怒ったことは、察するにかたくない。", "en": "It is easy to guess that she was angry.", "answer": "にかたくない"}]},
+  {"id": 124, "jlpt": 1, "pattern": "〜にもまして", "title": "Even more than", "meaning": "more than, above all", "formation": "Noun + にもまして",
+   "explanation": "Says that something is even greater than what was already great.",
+   "examples": [
+     {"jp": "去年にもまして、今年は忙しかったです。", "en": "This year was even busier than last year.", "answer": "にもまして"},
+     {"jp": "何にもまして、健康が一番大切だ。", "en": "Above all, health is the most important.", "answer": "にもまして"}]},
+  {"id": 125, "jlpt": 1, "pattern": "〜の至り", "title": "The height of", "meaning": "extreme, utmost", "formation": "Noun + の至り",
+   "explanation": "A formal phrase for extreme feelings: 光栄の至り = a great honour.",
+   "examples": [
+     {"jp": "このような賞をいただき、光栄の至りです。", "en": "It is a great honour to receive such an award.", "answer": "の至り"},
+     {"jp": "若気の至りで、失礼なことを言ってしまいました。", "en": "In the folly of youth, I said something rude.", "answer": "の至り"}]},
+  {"id": 126, "jlpt": 1, "pattern": "〜の極み", "title": "The extreme of", "meaning": "the height of, utmost", "formation": "Noun + の極み",
+   "explanation": "Says that something has reached an extreme: 感激の極み.",
+   "examples": [
+     {"jp": "こんな賞をもらえるとは、感激の極みです。", "en": "To receive such a prize fills me with the utmost emotion.", "answer": "の極み"},
+     {"jp": "贅沢の極みを尽くした暮らしだった。", "en": "It was a life of the utmost luxury.", "answer": "の極み"}]},
+  {"id": 127, "jlpt": 1, "pattern": "〜ばこそ", "title": "Precisely because", "meaning": "only because", "formation": "Verb ば-form + こそ",
+   "explanation": "Emphasises a reason: because of this, and only this.",
+   "examples": [
+     {"jp": "家族がいればこそ、がんばれるのです。", "en": "It is precisely because I have my family that I can do my best.", "answer": "ばこそ"},
+     {"jp": "あなたのためを思えばこそ、厳しいことを言う。", "en": "It is precisely because I care about you that I am strict.", "answer": "ばこそ"}]},
+  {"id": 128, "jlpt": 1, "pattern": "〜べからず", "title": "Must not", "meaning": "must not", "formation": "Verb dictionary form + べからず / べからざる",
+   "explanation": "A strong, old-fashioned ban seen on signs: 立入るべからず.",
+   "examples": [
+     {"jp": "芝生に入るべからず。", "en": "Keep off the grass.", "answer": "べからず"},
+     {"jp": "これは許すべからざる行為だ。", "en": "This is an act that must not be forgiven.", "answer": "べからざる"}]},
+  {"id": 129, "jlpt": 1, "pattern": "〜まみれ", "title": "Covered in", "meaning": "covered in, smeared with", "formation": "Noun + まみれ",
+   "explanation": "Says something is covered in something dirty: 泥まみれ.",
+   "examples": [
+     {"jp": "子供たちは泥まみれになって遊んでいました。", "en": "The children played covered in mud.", "answer": "まみれ"},
+     {"jp": "彼は汗まみれで走っていた。", "en": "He was running, drenched in sweat.", "answer": "まみれ"}]},
+  {"id": 130, "jlpt": 1, "pattern": "〜も同然", "title": "Just the same as", "meaning": "as good as, equivalent to", "formation": "Noun / Plain form + も同然",
+   "explanation": "Says something is practically the same as something else.",
+   "examples": [
+     {"jp": "この車は新品も同然です。", "en": "This car is as good as new.", "answer": "も同然"},
+     {"jp": "契約したも同然だ。", "en": "It is as good as signed.", "answer": "も同然"}]},
+  {"id": 131, "jlpt": 1, "pattern": "〜ものを", "title": "If only", "meaning": "but, although", "formation": "Plain form + ものを",
+   "explanation": "Expresses regret or reproach: something could have been avoided.",
+   "examples": [
+     {"jp": "言ってくれれば、手伝ったものを。", "en": "If you had told me, I would have helped.", "answer": "ものを"},
+     {"jp": "素直に謝れば許してもらえたものを。", "en": "If you had apologised honestly, you would have been forgiven.", "answer": "ものを"}]},
+  {"id": 132, "jlpt": 1, "pattern": "〜やいなや", "title": "The moment", "meaning": "as soon as, the instant", "formation": "Verb dictionary form + やいなや",
+   "explanation": "A written way to say something happens right after something else.",
+   "examples": [
+     {"jp": "彼は電車を降りるやいなや、走り出しました。", "en": "The moment he got off the train, he started running.", "answer": "やいなや"},
+     {"jp": "先生が入ってくるやいなや、教室は静かになった。", "en": "The moment the teacher came in, the classroom fell silent.", "answer": "やいなや"}]},
+  {"id": 133, "jlpt": 1, "pattern": "〜ゆえに", "title": "Because of", "meaning": "because of, therefore", "formation": "Noun / Plain form + ゆえに",
+   "explanation": "A literary word for because or therefore.",
+   "examples": [
+     {"jp": "貧しさゆえに、彼は学校へ行けなかった。", "en": "Because of poverty, he could not go to school.", "answer": "ゆえに"},
+     {"jp": "彼は若いがゆえに、経験が足りない。", "en": "Because he is young, he lacks experience.", "answer": "がゆえに"}]},
+  {"id": 134, "jlpt": 1, "pattern": "〜ようものなら", "title": "If you dare to", "meaning": "if one should …", "formation": "Verb volitional + ものなら",
+   "explanation": "Warns that if something happens, a terrible result follows.",
+   "examples": [
+     {"jp": "そんなことを言おうものなら、大変なことになる。", "en": "If you say such a thing, it will be serious.", "answer": "おうものなら"},
+     {"jp": "遅刻しようものなら、先生に怒られる。", "en": "If I am late, the teacher will be angry.", "answer": "ようものなら"}]},
+  {"id": 135, "jlpt": 1, "pattern": "〜を皮切りに", "title": "Starting with", "meaning": "starting with, beginning with", "formation": "Noun + を皮切りに(して)",
+   "explanation": "Says that something begins with a first event and continues.",
+   "examples": [
+     {"jp": "東京公演を皮切りに、全国ツアーが始まります。", "en": "A national tour begins, starting with the Tokyo show.", "answer": "を皮切りに"},
+     {"jp": "この商品を皮切りにして、新しい事業を展開する。", "en": "We will develop new businesses, starting with this product.", "answer": "を皮切りにして"}]},
+  {"id": 136, "jlpt": 1, "pattern": "〜をおいて", "title": "Other than", "meaning": "other than, besides", "formation": "Noun + をおいて + negative",
+   "explanation": "Says that only one person or thing fits: 彼をおいて他にいない.",
+   "examples": [
+     {"jp": "この仕事は、彼をおいて他にできる人はいません。", "en": "There is nobody but him who can do this job.", "answer": "をおいて"},
+     {"jp": "社長にふさわしいのは、彼女をおいて他にいない。", "en": "No one but her is suited to be president.", "answer": "をおいて"}]},
+  {"id": 137, "jlpt": 1, "pattern": "〜を禁じえない", "title": "Cannot help feeling", "meaning": "cannot suppress", "formation": "Noun + を禁じえない",
+   "explanation": "Says you cannot hold back a feeling: 驚きを禁じえない.",
+   "examples": [
+     {"jp": "この事件には、驚きを禁じえません。", "en": "I cannot help being astonished by this incident.", "answer": "を禁じえません"},
+     {"jp": "彼の話を聞いて、涙を禁じえなかった。", "en": "Hearing his story, I could not hold back tears.", "answer": "を禁じえなかった"}]},
+  {"id": 138, "jlpt": 1, "pattern": "〜をもって", "title": "With / by means of", "meaning": "with, by, as of", "formation": "Noun + をもって",
+   "explanation": "A formal word for by means of or as of a date: 本日をもって.",
+   "examples": [
+     {"jp": "本日をもって、営業を終了いたします。", "en": "We will close for business as of today.", "answer": "をもって"},
+     {"jp": "書面をもって、通知いたします。", "en": "We will notify you in writing.", "answer": "をもって"}]},
+  {"id": 139, "jlpt": 1, "pattern": "〜をものともせず", "title": "Undaunted by", "meaning": "in spite of, undeterred by", "formation": "Noun + をものともせず",
+   "explanation": "Says someone does something without being stopped by difficulty.",
+   "examples": [
+     {"jp": "彼は困難をものともせず、前に進みました。", "en": "He moved forward, undaunted by difficulties.", "answer": "をものともせず"},
+     {"jp": "雨をものともせず、試合は続けられた。", "en": "The match continued, unaffected by the rain.", "answer": "をものともせず"}]},
+  {"id": 140, "jlpt": 1, "pattern": "〜を押して", "title": "Despite", "meaning": "in spite of, pushing through", "formation": "Noun + を押して",
+   "explanation": "Does something forcing yourself despite difficulty.",
+   "examples": [
+     {"jp": "彼は病気を押して、会議に出席しました。", "en": "He attended the meeting in spite of his illness.", "answer": "を押して"},
+     {"jp": "反対を押して、計画を進めた。", "en": "We pushed ahead with the plan despite opposition.", "answer": "を押して"}]},
+  {"id": 141, "jlpt": 1, "pattern": "〜んがため", "title": "In order to", "meaning": "in order to, for the sake of", "formation": "Verb ない-form minus ない + んがため",
+   "explanation": "A literary form meaning for the purpose of.",
+   "examples": [
+     {"jp": "生きんがために、彼は何でもした。", "en": "He did anything in order to survive.", "answer": "んがため"},
+     {"jp": "勝たんがため、全力を尽くした。", "en": "I did my utmost in order to win.", "answer": "んがため"}]},
+  {"id": 142, "jlpt": 1, "pattern": "〜たる", "title": "Being (a)", "meaning": "as, being", "formation": "Noun + たる + Noun",
+   "explanation": "A literary form meaning \"being\", used for standing or dignity: 教師たる者.",
+   "examples": [
+     {"jp": "教師たる者、生徒の模範であるべきだ。", "en": "One who is a teacher should be a model for the students.", "answer": "たる"},
+     {"jp": "男たる者、約束は守らなければならない。", "en": "A man should keep his promises.", "answer": "たる"}]},
+  {"id": 143, "jlpt": 1, "pattern": "〜だに", "title": "Even (just)", "meaning": "even, just by", "formation": "Noun / Verb dictionary form + だに",
+   "explanation": "A literary \"even\": 想像だにしない = I never even imagined.",
+   "examples": [
+     {"jp": "そんなことは、想像だにしなかった。", "en": "I never even imagined such a thing.", "answer": "だに"},
+     {"jp": "考えるだに恐ろしい。", "en": "It is frightening even to think about it.", "answer": "だに"}]},
+  {"id": 144, "jlpt": 1, "pattern": "〜と相まって", "title": "Combined with", "meaning": "together with, coupled with", "formation": "Noun + と相まって",
+   "explanation": "Says that two factors work together to produce an effect.",
+   "examples": [
+     {"jp": "彼の才能と努力が相まって、成功を収めました。", "en": "His talent and effort combined to bring success.", "answer": "が相まって"},
+     {"jp": "景気の回復と相まって、消費が増えている。", "en": "Together with the recovery, consumption is increasing.", "answer": "と相まって"}]},
+  {"id": 145, "jlpt": 1, "pattern": "〜ともあろう", "title": "Someone as (important) as", "meaning": "someone like, one who is", "formation": "Noun + ともあろう + Noun",
+   "explanation": "Expresses surprise that someone of that position acts badly.",
+   "examples": [
+     {"jp": "教師ともあろう人が、そんなことをするとは。", "en": "To think a person who is a teacher would do such a thing.", "answer": "ともあろう"},
+     {"jp": "大臣ともあろう人が、嘘をついた。", "en": "A person of ministerial rank told a lie.", "answer": "ともあろう"}]},
+  {"id": 146, "jlpt": 1, "pattern": "〜かと思いきや", "title": "Just when I thought", "meaning": "I thought … but", "formation": "Plain form + かと思いきや",
+   "explanation": "You thought one thing, but the opposite turned out true.",
+   "examples": [
+     {"jp": "簡単かと思いきや、意外に難しかった。", "en": "I thought it would be easy, but it was surprisingly difficult.", "answer": "かと思いきや"},
+     {"jp": "晴れかと思いきや、急に雨が降り出した。", "en": "I thought it was clear, but it suddenly began to rain.", "answer": "かと思いきや"}]},
+  {"id": 147, "jlpt": 1, "pattern": "〜か否か", "title": "Whether or not", "meaning": "whether or not", "formation": "Plain form + か否か",
+   "explanation": "A formal form of かどうか.",
+   "examples": [
+     {"jp": "計画が成功するか否かは、彼にかかっています。", "en": "Whether the plan succeeds or not depends on him.", "answer": "か否か"},
+     {"jp": "参加するか否か、早めにお知らせください。", "en": "Please let us know soon whether you will attend.", "answer": "か否か"}]},
+  {"id": 148, "jlpt": 1, "pattern": "〜きらいがある", "title": "Has a tendency to", "meaning": "tend to, have a habit of", "formation": "Verb dictionary form / Noun の + きらいがある",
+   "explanation": "Says someone tends toward an undesirable thing.",
+   "examples": [
+     {"jp": "彼は物事を大げさに言うきらいがあります。", "en": "He tends to exaggerate things.", "answer": "きらいがあります"},
+     {"jp": "日本人は人の意見に流されるきらいがある。", "en": "Japanese people tend to be swayed by others' opinions.", "answer": "きらいがある"}]},
+  {"id": 149, "jlpt": 1, "pattern": "〜しまつだ", "title": "End up (badly)", "meaning": "end up, wind up", "formation": "Plain form + しまつだ",
+   "explanation": "Describes a bad final result: in the end it came to this.",
+   "examples": [
+     {"jp": "彼は仕事もせず、ついには借金までするしまつです。", "en": "He does not work, and has ended up even borrowing money.", "answer": "しまつ"},
+     {"jp": "言うことを聞かないので、とうとう怒られるしまつだった。", "en": "He would not listen and ended up being scolded.", "answer": "しまつ"}]},
+  {"id": 150, "jlpt": 1, "pattern": "〜だけまし", "title": "Better than", "meaning": "at least, it could have been worse", "formation": "Plain form + だけまし",
+   "explanation": "Says the situation is bad but could have been worse.",
+   "examples": [
+     {"jp": "けがをしなかっただけましです。", "en": "At least I was not injured.", "answer": "だけまし"},
+     {"jp": "雨が降らなかっただけましだと思う。", "en": "I think it is good enough that it did not rain.", "answer": "だけまし"}]},
+  {"id": 151, "jlpt": 1, "pattern": "〜てでも", "title": "Even if it means", "meaning": "even if it means, at any cost", "formation": "Verb て-form + でも",
+   "explanation": "Says someone will do whatever it takes, even something drastic.",
+   "examples": [
+     {"jp": "何としてでも、約束は守ります。", "en": "I will keep my promise at any cost.", "answer": "としてでも"},
+     {"jp": "借金してでも、留学したい。", "en": "I want to study abroad even if I have to borrow money.", "answer": "してでも"}]},
+  {"id": 152, "jlpt": 1, "pattern": "〜てまで", "title": "To the extent of", "meaning": "going as far as, even", "formation": "Verb て-form + まで",
+   "explanation": "Says someone goes to an extreme length.",
+   "examples": [
+     {"jp": "睡眠時間を削ってまで、勉強する必要はありません。", "en": "There is no need to study at the expense of your sleep.", "answer": "てまで"},
+     {"jp": "人を傷つけてまで、成功したくない。", "en": "I do not want to succeed at the cost of hurting others.", "answer": "てまで"}]},
+  {"id": 153, "jlpt": 1, "pattern": "〜というところだ", "title": "At most about", "meaning": "about, roughly", "formation": "Number + というところだ",
+   "explanation": "Gives a rough estimate of how much or how little.",
+   "examples": [
+     {"jp": "今月の収入は、十万円というところです。", "en": "My income this month is roughly 100,000 yen.", "answer": "というところ"},
+     {"jp": "できて半分というところだろう。", "en": "At best, we can do about half.", "answer": "というところ"}]},
+  {"id": 154, "jlpt": 1, "pattern": "〜にしてみれば", "title": "From the viewpoint of", "meaning": "from the standpoint of", "formation": "Noun + にしてみれば",
+   "explanation": "How someone sees something from their own position.",
+   "examples": [
+     {"jp": "親にしてみれば、子供はいつまでも子供です。", "en": "From a parent's point of view, a child is always a child.", "answer": "にしてみれば"},
+     {"jp": "彼にしてみれば、それは当然のことだった。", "en": "From his viewpoint, that was only natural.", "answer": "にしてみれば"}]},
+  {"id": 155, "jlpt": 1, "pattern": "〜はさておき", "title": "Setting aside", "meaning": "aside from, setting aside", "formation": "Noun + はさておき",
+   "explanation": "Puts something aside to talk about a more important point.",
+   "examples": [
+     {"jp": "冗談はさておき、真面目に話しましょう。", "en": "Joking aside, let's talk seriously.", "answer": "はさておき"},
+     {"jp": "値段はさておき、まず品質を確かめたい。", "en": "Setting price aside, I first want to check the quality.", "answer": "はさておき"}]},
+  {"id": 156, "jlpt": 1, "pattern": "〜を経て", "title": "Through / after", "meaning": "after, through", "formation": "Noun + を経て",
+   "explanation": "Passes through a process or a place to arrive.",
+   "examples": [
+     {"jp": "長い交渉を経て、ようやく合意に達しました。", "en": "After long negotiations, they finally reached agreement.", "answer": "を経て"},
+     {"jp": "大阪を経て、東京に着いた。", "en": "I arrived in Tokyo via Osaka.", "answer": "を経て"}]},
+  {"id": 157, "jlpt": 1, "pattern": "〜ようが", "title": "No matter how", "meaning": "no matter, whether", "formation": "Verb volitional + が",
+   "explanation": "Says that whatever happens, the result is the same.",
+   "examples": [
+     {"jp": "誰が何と言おうが、私は自分の道を行く。", "en": "Whatever anyone says, I will follow my own path.", "answer": "言おうが"},
+     {"jp": "どんなに頑張ろうが、結果は変わらない。", "en": "No matter how hard we try, the result will not change.", "answer": "頑張ろうが"}]},
+  {"id": 158, "jlpt": 1, "pattern": "〜ものと思われる", "title": "Is thought to be", "meaning": "it is thought that, is believed", "formation": "Plain form + ものと思われる",
+   "explanation": "A formal way to say something is generally believed or expected.",
+   "examples": [
+     {"jp": "事故の原因は、不注意によるものと思われます。", "en": "The cause of the accident is thought to be carelessness.", "answer": "ものと思われます"},
+     {"jp": "この計画は、予定通り進むものと思われる。", "en": "This plan is expected to go ahead as scheduled.", "answer": "ものと思われる"}]},
+  {"id": 159, "jlpt": 1, "pattern": "〜となると", "title": "When it comes to", "meaning": "if it comes to, once it is", "formation": "Plain form + となると",
+   "explanation": "Says that in the situation described, things change or become harder.",
+   "examples": [
+     {"jp": "海外旅行となると、準備が大変です。", "en": "When it comes to overseas travel, preparation is hard.", "answer": "となると"},
+     {"jp": "彼が行くとなると、私も行かなければならない。", "en": "If he is going, I have to go too.", "answer": "となると"}]},
+  {"id": 160, "jlpt": 1, "pattern": "〜べくもない", "title": "Cannot hope to", "meaning": "no way to, cannot expect", "formation": "Verb dictionary form + べくもない",
+   "explanation": "Says something is impossible, beyond hope.",
+   "examples": [
+     {"jp": "彼の実力には、私など及ぶべくもありません。", "en": "Someone like me cannot hope to match his ability.", "answer": "べくもありません"},
+     {"jp": "今から行っても、間に合うべくもない。", "en": "Going now, there is no way to be in time.", "answer": "べくもない"}]},
+  {"id": 161, "jlpt": 1, "pattern": "〜までもない", "title": "No need to", "meaning": "there is no need to", "formation": "Verb dictionary form + までもない",
+   "explanation": "Says something is too obvious to need doing.",
+   "examples": [
+     {"jp": "言うまでもなく、健康が一番大切です。", "en": "Needless to say, health is the most important.", "answer": "までもなく"},
+     {"jp": "調べるまでもない。", "en": "There is no need to look it up.", "answer": "までもない"}]},
+  {"id": 162, "jlpt": 1, "pattern": "〜ていいものか", "title": "Is it right to", "meaning": "is it all right to", "formation": "Verb て-form + いいものか",
+   "explanation": "A rhetorical question meaning it is definitely not right.",
+   "examples": [
+     {"jp": "こんなことを許していいものか。", "en": "Is it all right to allow a thing like this?", "answer": "いいものか"},
+     {"jp": "子供を一人にしていいものか、不安です。", "en": "I am worried whether it is right to leave the child alone.", "answer": "いいものか"}]},
+  {"id": 163, "jlpt": 1, "pattern": "〜とはいうものの", "title": "Even so", "meaning": "although, that said", "formation": "Plain form + とはいうものの",
+   "explanation": "Grants something and then qualifies it.",
+   "examples": [
+     {"jp": "春とはいうものの、まだ寒い日が続いています。", "en": "It is spring, but cold days continue.", "answer": "とはいうものの"},
+     {"jp": "安いとはいうものの、品質には問題がある。", "en": "It is cheap, but there are problems with the quality.", "answer": "とはいうものの"}]},
+  {"id": 164, "jlpt": 1, "pattern": "〜ても〜ても", "title": "No matter how", "meaning": "no matter how many times", "formation": "Verb て-form + も + same + も",
+   "explanation": "Repeats a verb to stress an action done again and again.",
+   "examples": [
+     {"jp": "洗っても洗っても、汚れが落ちません。", "en": "No matter how much I wash, the stain does not come out.", "answer": "洗っても洗っても"},
+     {"jp": "待っても待っても、彼は来なかった。", "en": "I waited and waited, but he did not come.", "answer": "待っても待っても"}]},
+  {"id": 165, "jlpt": 1, "pattern": "〜たら〜たで", "title": "If … then …", "meaning": "if, in that case", "formation": "Verb た-form + ら + same + たで",
+   "explanation": "Says that in either case there will be trouble or a different problem.",
+   "examples": [
+     {"jp": "買ったら買ったで、置く場所に困る。", "en": "If I buy it, I will have trouble finding somewhere to put it.", "answer": "たら買ったで"},
+     {"jp": "忙しかったら忙しかったで、文句を言う。", "en": "If I am busy, he complains about that too.", "answer": "たら忙しかったで"}]},
+  {"id": 166, "jlpt": 1, "pattern": "〜かたがた", "title": "While at it", "meaning": "on the occasion of, combining", "formation": "Noun + かたがた",
+   "explanation": "A formal, polite phrase for doing two things at once: お礼かたがた.",
+   "examples": [
+     {"jp": "お礼かたがた、ご挨拶にうかがいました。", "en": "I called on you to say hello and to thank you.", "answer": "かたがた"},
+     {"jp": "散歩かたがた、郵便局へ行ってきます。", "en": "I will go to the post office on a walk.", "answer": "かたがた"}]},
+  {"id": 167, "jlpt": 1, "pattern": "〜とて", "title": "Even though", "meaning": "even if, even though", "formation": "Plain form + とて",
+   "explanation": "A literary form meaning even if or even though.",
+   "examples": [
+     {"jp": "子供とて、悪いことは悪いと分かるはずだ。", "en": "Even a child should understand that wrong is wrong.", "answer": "とて"},
+     {"jp": "いくら頑張ったとて、結果は変わらない。", "en": "No matter how hard you try, the result will not change.", "answer": "たとて"}]},
+  {"id": 168, "jlpt": 1, "pattern": "〜ならいざ知らず", "title": "Unlike (with)", "meaning": "I could understand if, but", "formation": "Noun / Plain form + ならいざ知らず",
+   "explanation": "Says one case is different, but the case at hand is not acceptable: for a child it would be fine, but...",
+   "examples": [
+     {"jp": "子供ならいざ知らず、大人がそんなことをするなんて。", "en": "It would be one thing for a child, but for an adult to do that.", "answer": "ならいざ知らず"},
+     {"jp": "昔ならいざ知らず、今は通用しない。", "en": "That might have worked in the old days, but not now.", "answer": "ならいざ知らず"}]},
+  {"id": 169, "jlpt": 1, "pattern": "〜であれ", "title": "Whether … or", "meaning": "whether, be it", "formation": "Noun + であれ",
+   "explanation": "A formal concession: whatever it is, whoever it is.",
+   "examples": [
+     {"jp": "誰であれ、規則は守らなければなりません。", "en": "Whoever it is, they must follow the rules.", "answer": "であれ"},
+     {"jp": "理由が何であれ、暴力は許されない。", "en": "Whatever the reason, violence is not allowed.", "answer": "であれ"}]},
+  {"id": 170, "jlpt": 1, "pattern": "〜といわず〜といわず", "title": "Not only … but also", "meaning": "both … and, without exception", "formation": "Noun + といわず + Noun + といわず",
+   "explanation": "Says it applies to all of them: 昼といわず夜といわず.",
+   "examples": [
+     {"jp": "彼は昼といわず夜といわず、働いている。", "en": "He works day and night.", "answer": "昼といわず夜といわず"},
+     {"jp": "顔といわず手といわず、泥だらけだった。", "en": "He was covered in mud, face and hands alike.", "answer": "顔といわず手といわず"}]},
+  {"id": 171, "jlpt": 1, "pattern": "〜てからというもの", "title": "Ever since", "meaning": "ever since", "formation": "Verb て-form + からというもの",
+   "explanation": "Says that something has been different since a certain moment.",
+   "examples": [
+     {"jp": "日本に来てからというもの、毎日が新しい発見です。", "en": "Ever since I came to Japan, every day has been a new discovery.", "answer": "てからというもの"},
+     {"jp": "子供が生まれてからというもの、夜眠れない。", "en": "Ever since the child was born, I cannot sleep at night.", "answer": "てからというもの"}]}
 ]
