@@ -103,4 +103,10 @@ object AppModule {
 abstract class BindingsModule {
     @Binds
     abstract fun authRepository(impl: FirebaseAuthRepository): AuthRepository
+
+    @Binds
+    abstract fun syncCloud(impl: com.flurai.app.core.sync.FirestoreCloud): com.flurai.app.core.sync.SyncCloud
+
+    @Binds
+    abstract fun syncLocal(impl: com.flurai.app.core.sync.RoomSyncLocal): com.flurai.app.core.sync.SyncLocal
 }
