@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flurai.app.core.activity.StudyDayEntity
 import com.flurai.app.core.auth.GUEST_UID
 import com.flurai.app.core.grammar.GrammarProgressEntity
+import com.flurai.app.core.prefs.UserPreferences
 import com.flurai.app.core.quiz.TestResultEntity
 import com.flurai.app.core.quiz.TestType
 import com.flurai.app.core.study.CardEntity
@@ -34,7 +35,7 @@ class SyncEngineTest {
         val local = InMemoryLocal()
         val dataStore = InMemoryPrefs()
         var now = 10_000L
-        val engine = SyncEngine(cloud, local, dataStore, { now }, { errors += it })
+        val engine = SyncEngine(cloud, local, UserPreferences(dataStore), { now }, { errors += it })
 
         fun sync(uid: String = UID) = runBlocking { engine.sync(uid) }.also { ok ->
             if (!ok && uid != GUEST_UID) errors.lastOrNull()?.printStackTrace()

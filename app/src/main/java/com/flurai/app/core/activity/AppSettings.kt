@@ -3,9 +3,8 @@ package com.flurai.app.core.activity
 import kotlinx.coroutines.flow.distinctUntilChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
+import com.flurai.app.core.prefs.UserKeys
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -57,11 +56,11 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
     }
 
     private class Keys(uid: String) {
-        val enabled = booleanPreferencesKey("$uid.reminderEnabled")
-        val hour = intPreferencesKey("$uid.reminderHour")
-        val minute = intPreferencesKey("$uid.reminderMinute")
-        val streak = intPreferencesKey("$uid.streakMinutes")
-        val furigana = booleanPreferencesKey("$uid.showFurigana")
-        val listening = booleanPreferencesKey("$uid.listeningCards")
+        val enabled = UserKeys.boolean(uid, "reminderEnabled")
+        val hour = UserKeys.int(uid, "reminderHour")
+        val minute = UserKeys.int(uid, "reminderMinute")
+        val streak = UserKeys.int(uid, "streakMinutes")
+        val furigana = UserKeys.boolean(uid, "showFurigana")
+        val listening = UserKeys.boolean(uid, "listeningCards")
     }
 }

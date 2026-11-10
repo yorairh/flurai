@@ -1,11 +1,9 @@
 package com.flurai.app.core.profile
 
+import com.flurai.app.core.prefs.UserKeys
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flurai.app.core.model.JlptLevel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -46,10 +44,10 @@ class StudyProfileRepository @Inject constructor(
     }
 
     private class Keys(uid: String) {
-        val level = stringPreferencesKey("$uid.level")
-        val dailyMinutes = intPreferencesKey("$uid.dailyMinutes")
-        val newCards = intPreferencesKey("$uid.newCardsPerDay")
-        val knowsHiragana = booleanPreferencesKey("$uid.knowsHiragana")
-        val knowsKatakana = booleanPreferencesKey("$uid.knowsKatakana")
+        val level = UserKeys.string(uid, UserKeys.LEVEL)
+        val dailyMinutes = UserKeys.int(uid, "dailyMinutes")
+        val newCards = UserKeys.int(uid, "newCardsPerDay")
+        val knowsHiragana = UserKeys.boolean(uid, "knowsHiragana")
+        val knowsKatakana = UserKeys.boolean(uid, "knowsKatakana")
     }
 }

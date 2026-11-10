@@ -105,6 +105,12 @@ abstract class BindingsModule {
     abstract fun authRepository(impl: FirebaseAuthRepository): AuthRepository
 
     @Binds
+    abstract fun quizBackend(impl: com.flurai.app.core.quiz.RepositoryQuizBackend): com.flurai.app.core.quiz.QuizBackend
+
+    @Binds
+    abstract fun cardContent(impl: com.flurai.app.core.study.DatabaseCardContent): com.flurai.app.core.study.CardContentSource
+
+    @Binds
     abstract fun syncCloud(impl: com.flurai.app.core.sync.FirestoreCloud): com.flurai.app.core.sync.SyncCloud
 
     @Binds

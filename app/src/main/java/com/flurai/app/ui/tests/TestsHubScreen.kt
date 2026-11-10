@@ -1,5 +1,6 @@
 package com.flurai.app.ui.tests
 
+import com.flurai.app.core.quiz.QuizKind
 import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.layout.Arrangement
@@ -86,7 +87,7 @@ fun TestsHubScreen(
                 }
             }
             Text(
-                "Grammar and reading checks arrive with those features.",
+                "Grammar practice is in Learn → Grammar, and reading checks are in Learn → Reading.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

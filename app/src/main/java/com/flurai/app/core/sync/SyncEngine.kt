@@ -1,12 +1,7 @@
 package com.flurai.app.core.sync
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import com.flurai.app.core.prefs.SyncCursors
+import com.flurai.app.core.prefs.UserPreferences
 import com.flurai.app.core.activity.studyEpochDay
 import com.flurai.app.core.auth.GUEST_UID
 import kotlinx.coroutines.CancellationException
@@ -16,7 +11,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.time.Instant
@@ -43,13 +37,13 @@ data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = nu
 class SyncEngine internal constructor(
     private val cloud: SyncCloud,
     private val local: SyncLocal,
-    private val dataStore: DataStore<Preferences>,
+    private val prefs: UserPreferences,
     private val clock: () -> Long,
     private val onError: (Throwable) -> Unit,
 ) {
     @Inject
-    constructor(cloud: SyncCloud, local: SyncLocal, dataStore: DataStore<Preferences>) :
-        this(cloud, local, dataStore, System::currentTimeMillis, { android.util.Log.w("SyncEngine", "sync failed", it) })
+    constructor(cloud: SyncCloud, local: SyncLocal, prefs: UserPreferences) :
+        this(cloud, local, prefs, System::currentTimeMillis, { android.util.Log.w("SyncEngine", "sync failed", it) })
 
     private val mutex = Mutex()
     private val _status = MutableStateFlow(SyncStatus())
@@ -80,10 +74,10 @@ class SyncEngine internal constructor(
 
     private suspend fun syncOnce(uid: String) {
         val startedAt = clock()
-        val cursors = cursors(uid)
+        val cursors = prefs.cursors(uid)
         val pulled = pull(uid, cursors.pull)
         push(uid, cursors.push, pulled)
-        saveCursors(uid, pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt)
+        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt))
     }
 
     /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
@@ -98,9 +92,7 @@ class SyncEngine internal constructor(
     }
 
     /** Makes the next sync push everything (after progress was moved between accounts). */
-    suspend fun markAllDirty(uid: String) {
-        dataStore.edit { it[longPreferencesKey("$uid.sync.push")] = 0L }
-    }
+    suspend fun markAllDirty(uid: String) = prefs.markAllDirty(uid)
 
     /** Deletes this user's cloud copy. Needs the user to still be signed in. */
     suspend fun deleteRemote(uid: String) = cloud.deleteAll(uid, COLLECTIONS + META)
@@ -152,10 +144,9 @@ class SyncEngine internal constructor(
         }
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
-        val hasProfile = dataStore.data.first().asMap().keys.any { it.name == "$uid.level" }
-        if (!hasProfile) {
-            val prefs = cloud.document(uid, META, "profile")?.get("prefs") as? Map<*, *>
-            if (prefs != null) writePrefs(uid, prefs)
+        if (!prefs.hasProfile(uid)) {
+            val saved = cloud.document(uid, META, "profile")?.get("prefs") as? Map<*, *>
+            if (saved != null) prefs.import(uid, saved)
         }
         // Channels and decks: likewise, restored only when this phone has none.
         if (local.channels(uid).isEmpty()) {
@@ -187,55 +178,17 @@ class SyncEngine internal constructor(
         // Small whole-document items: written only when they changed since the last upload (or on a full push).
         val channels = local.channels(uid).map(::channelDoc)
         val decks = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
-        val prefs = readPrefs(uid)
-        val metaKey = longPreferencesKey("$uid.sync.meta")
-        val metaHash = Triple(channels, prefs, decks).hashCode().toLong()
-        val metaChanged = since == 0L || dataStore.data.first()[metaKey] != metaHash
+        val settings = prefs.export(uid)
+        val metaHash = Triple(channels, settings, decks).hashCode().toLong()
+        val metaChanged = since == 0L || prefs.uploadedHash(uid) != metaHash
         if (metaChanged) {
             writes += CloudWrite(META, "channels", mapOf("items" to channels))
             writes += CloudWrite(META, "decks", mapOf("items" to decks))
-            if (prefs.isNotEmpty()) writes += CloudWrite(META, "profile", mapOf("prefs" to prefs))
+            if (settings.isNotEmpty()) writes += CloudWrite(META, "profile", mapOf("prefs" to settings))
         }
 
         if (writes.isNotEmpty()) cloud.write(uid, writes)
-        if (metaChanged) dataStore.edit { it[metaKey] = metaHash }
-    }
-
-    // -- preferences -----------------------------------------------------------------------------
-
-    /** Profile and settings keys of [uid] without the uid prefix, skipping the sync cursors. */
-    private suspend fun readPrefs(uid: String): Map<String, Any> =
-        dataStore.data.first().asMap().entries
-            .filter { it.key.name.startsWith("$uid.") && !it.key.name.startsWith("$uid.sync.") }
-            .associate { it.key.name.removePrefix("$uid.") to it.value }
-
-    private suspend fun writePrefs(uid: String, values: Map<*, *>) {
-        dataStore.edit { prefs ->
-            values.forEach { (k, v) ->
-                val name = "$uid.$k"
-                when (v) {
-                    is Boolean -> prefs[booleanPreferencesKey(name)] = v
-                    is Long -> prefs[intPreferencesKey(name)] = v.toInt()
-                    is String -> prefs[stringPreferencesKey(name)] = v
-                }
-            }
-        }
-    }
-
-    // -- cursors ---------------------------------------------------------------------------------
-
-    private class Cursors(val pull: Long, val push: Long)
-
-    private suspend fun cursors(uid: String): Cursors {
-        val prefs = dataStore.data.first()
-        return Cursors(prefs[longPreferencesKey("$uid.sync.pull")] ?: 0L, prefs[longPreferencesKey("$uid.sync.push")] ?: 0L)
-    }
-
-    private suspend fun saveCursors(uid: String, pull: Long, push: Long) {
-        dataStore.edit {
-            it[longPreferencesKey("$uid.sync.pull")] = pull
-            it[longPreferencesKey("$uid.sync.push")] = push
-        }
+        if (metaChanged) prefs.saveUploadedHash(uid, metaHash)
     }
 
     private companion object {

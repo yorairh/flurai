@@ -37,6 +37,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.quiz.Question
+import com.flurai.app.core.quiz.QuizResult
+import com.flurai.app.core.quiz.QuizRunState
 import com.flurai.app.core.quiz.QuestionKind
 import com.flurai.app.ui.theme.japanese
 
@@ -73,7 +75,7 @@ private fun Message(text: String, onBack: () -> Unit) {
 }
 
 @Composable
-private fun QuestionView(state: QuizUiState, question: Question, onChoose: (Int) -> Unit, onNext: () -> Unit, onReplay: () -> Unit) {
+private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int) -> Unit, onNext: () -> Unit, onReplay: () -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp)) {
         val total = state.total
         if (total != null) {
