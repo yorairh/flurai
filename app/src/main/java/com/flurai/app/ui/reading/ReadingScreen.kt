@@ -1,5 +1,6 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.core.reading.rubyParts
 import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
@@ -8,7 +9,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -79,11 +78,7 @@ fun ReadingScreen(
             Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                JlptNumbers.forEach { n ->
-                    FilterChip(selected = state.jlpt == n, onClick = { viewModel.chooseLevel(n) }, label = { Text("N$n", maxLines = 1) })
-                }
-            }
+            LevelChips(state.jlpt, viewModel::chooseLevel)
             Text(
                 "Tap an underlined word to see its meaning or add it to your flashcards.",
                 style = MaterialTheme.typography.bodyMedium,

@@ -74,10 +74,6 @@ interface AccountDao {
     @Query("DELETE FROM deck WHERE uid = :uid")
     suspend fun dropDeckRows(uid: String)
 
-    /**
-     * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
-     * own copy is kept.
-     */
     @Query("DELETE FROM review_log WHERE uid = :uid")
     suspend fun dropLogs(uid: String)
 
@@ -94,6 +90,10 @@ interface AccountDao {
         dropDeckWords(uid); dropDeckRows(uid)
     }
 
+    /**
+     * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
+     * own copy is kept.
+     */
     @Transaction
     suspend fun move(from: String, to: String) {
         moveCards(from, to); dropCards(from)

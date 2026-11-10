@@ -99,8 +99,6 @@ data class ItemRef(
     val itemId: Int,
 )
 
-data class StateCount(val state: Int, val count: Int)
-
 @Dao
 interface StudyDao {
     /**
@@ -143,12 +141,6 @@ interface StudyDao {
     /** Every card of the user, for progress statistics. */
     @Query("SELECT * FROM card WHERE uid = :uid")
     fun allCards(uid: String): Flow<List<CardEntity>>
-
-    @Query("SELECT state, COUNT(*) AS count FROM card WHERE uid = :uid GROUP BY state")
-    fun stateCounts(uid: String): Flow<List<StateCount>>
-
-    @Query("SELECT COUNT(*) FROM review_log WHERE uid = :uid AND reviewed_at >= :since")
-    fun reviewsSince(uid: String, since: Long): Flow<Int>
 
     @Upsert
     suspend fun upsertCard(card: CardEntity)

@@ -50,8 +50,6 @@ class StudyRepositoryTest {
         override fun cardsForItem(uid: String, itemType: ItemType, itemId: Int) =
             cards.map { m -> m.values.filter { it.itemType == itemType && it.itemId == itemId } }
         override fun allCards(uid: String) = cards.map { it.values.toList() }
-        override fun stateCounts(uid: String): Flow<List<StateCount>> = throw NotImplementedError()
-        override fun reviewsSince(uid: String, since: Long): Flow<Int> = throw NotImplementedError()
         override suspend fun upsertCard(card: CardEntity) { cards.value = cards.value + (key(card) to card) }
         override suspend fun insertCardIfAbsent(card: CardEntity) {
             if (key(card) !in cards.value) upsertCard(card)

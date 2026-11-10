@@ -1,5 +1,6 @@
 package com.flurai.app.ui.explore
 
+import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Context
@@ -63,11 +64,7 @@ fun VideosScreen(onBack: () -> Unit, viewModel: VideosViewModel = hiltViewModel(
             Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                JlptNumbers.forEach { n ->
-                    FilterChip(selected = state.jlpt == n, onClick = { viewModel.chooseLevel(n) }, label = { Text("N$n", maxLines = 1) })
-                }
-            }
+            LevelChips(state.jlpt, viewModel::chooseLevel)
 
             val featured = featuredFor(state.jlpt)
             if (featured.isNotEmpty()) {

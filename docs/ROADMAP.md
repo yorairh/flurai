@@ -30,6 +30,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 21 | N3 grammar (158 points) | ✅ Merged | [#25](https://github.com/yorairh/flurai/pull/25) | [v0.22.0](https://github.com/yorairh/flurai/releases/tag/v0.22.0) |
 | 22 | N2 grammar (95 points) | ✅ Merged | [#25](https://github.com/yorairh/flurai/pull/25) | [v0.22.0](https://github.com/yorairh/flurai/releases/tag/v0.22.0) |
 | 23 | N1 grammar (71 points) | ✅ Merged | [#25](https://github.com/yorairh/flurai/pull/25) | [v0.22.0](https://github.com/yorairh/flurai/releases/tag/v0.22.0) |
+| 24 | Release prep: code and architecture review, simplify, optimize | 🔍 In review (0.23.0) | | |
 
 ## Goal
 

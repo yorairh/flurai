@@ -1,7 +1,6 @@
 package com.flurai.app.ui.grammar
 
-import com.flurai.app.core.model.JlptNumbers
-import androidx.compose.material3.FilterChip
+import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -58,11 +57,7 @@ fun GrammarListScreen(
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
         // One level at a time, like the Reading screen: with hundreds of points a single list is too long.
-        Row(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            JlptNumbers.forEach { n ->
-                FilterChip(selected = selected == n, onClick = { viewModel.select(n) }, label = { Text("N$n", maxLines = 1) })
-            }
-        }
+        LevelChips(selected, viewModel::select, Modifier.padding(horizontal = 20.dp, vertical = 8.dp))
         // Lazy, so only the rows on screen are built.
         // A new list state per level, so each level starts at its top.
         androidx.compose.runtime.key(selected) {

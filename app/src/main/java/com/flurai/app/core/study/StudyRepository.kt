@@ -125,10 +125,8 @@ class StudyRepository @Inject constructor(
 
     /** JLPT lists that still have words not yet studied, for the "learn more" picker. */
     suspend fun levelsWithNewWords(uid: String): Set<Int> {
-        val introduced = study.introducedItems(uid).toSet()
-        return (1..5).filter { jlpt ->
-            content.wordIdsInStudyOrder(jlpt).any { ItemRef(ItemType.Word, it) !in introduced }
-        }.toSet()
+        val introduced = study.introducedItems(uid).filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
+        return wordLevels().filterKeys { it !in introduced }.values.toSet()
     }
 
     /** Items not yet studied, in teaching order. */

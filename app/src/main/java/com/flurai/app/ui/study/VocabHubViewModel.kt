@@ -52,29 +52,28 @@ class VocabHubViewModel @Inject constructor(
         val newLeft = combine(profiles.profile(user.uid), repository.introducedToday(user.uid)) { profile, introduced ->
             ((profile?.newCardsPerDay ?: 0) - introduced).coerceAtLeast(0)
         }
-        val myDecks = combine(decks.decks(user.uid), decks.members(user.uid), repository.introducedItems(user.uid)) { list, members, introduced ->
-            val started = introduced.filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
-            val byDeck = members.groupBy({ it.deckId }, { it.wordId })
-            list.map { d ->
-                val words = byDeck[d.id].orEmpty()
-                UserDeckRow(d.id, d.name, DeckProgress(words.count { it in started }, words.size))
-            }
-        }
+        val myDecks = combine(decks.decks(user.uid), decks.members(user.uid)) { list, members -> list to members }
+        // One query for the studied items feeds every bar on the screen.
         combine(
             repository.dueCount(user.uid),
             newLeft,
             repository.introducedItems(user.uid),
             wordLevels,
             myDecks,
-        ) { due, left, introduced, levels, mine ->
-            val studiedWords = introduced.filter { it.itemType == ItemType.Word }.mapNotNull { levels[it.itemId] }
+        ) { due, left, introduced, levels, (deckList, members) ->
+            val startedWords = introduced.filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
+            val studiedPerLevel = startedWords.mapNotNull { levels[it] }.groupingBy { it }.eachCount()
             val studiedKana = introduced.filter { it.itemType == ItemType.Kana }.mapNotNull { KanaData.byId(it.itemId)?.script }
+            val byDeck = members.groupBy({ it.deckId }, { it.wordId })
             VocabHubState(
-                myDecks = mine,
+                myDecks = deckList.map { d ->
+                    val words = byDeck[d.id].orEmpty()
+                    UserDeckRow(d.id, d.name, DeckProgress(words.count { it in startedWords }, words.size))
+                },
                 due = due,
                 newLeftToday = left,
                 levels = levels.values.groupingBy { it }.eachCount().mapValues { (jlpt, total) ->
-                    DeckProgress(studiedWords.count { it == jlpt }, total)
+                    DeckProgress(studiedPerLevel[jlpt] ?: 0, total)
                 },
                 kana = KanaScript.entries.associateWith { script ->
                     DeckProgress(studiedKana.count { it == script }, KanaData.of(script).size)
