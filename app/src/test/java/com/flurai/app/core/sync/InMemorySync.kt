@@ -1,8 +1,5 @@
 package com.flurai.app.core.sync
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.emptyPreferences
 import com.flurai.app.core.activity.StudyDayEntity
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultEntity
@@ -11,8 +8,6 @@ import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.DeckEntity
 import com.flurai.app.core.study.ItemType
 import com.flurai.app.core.video.CustomChannelEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * A cloud kept in memory, shared by every [Phone] of a test. Like Firestore it stamps each write
@@ -29,12 +24,12 @@ class InMemoryCloud : SyncCloud {
     var refreshCount = 0
         private set
 
-    /** The next [times] calls fail with [reason]; a negative count fails every call until [heal]. */
-    var failingFor: CloudException? = null
-    fun failNext(reason: CloudException.Reason, times: Int = 1) {
-        repeat(times) { failures += CloudException(reason) }
-    }
+    private var failingFor: CloudException? = null
 
+    /** The next call fails with [reason]. */
+    fun failNext(reason: CloudException.Reason) { failures += CloudException(reason) }
+
+    /** Every call fails with [reason] until [heal]. */
     fun failAlways(reason: CloudException.Reason) { failingFor = CloudException(reason) }
     fun heal() { failingFor = null; failures.clear() }
 
@@ -93,7 +88,7 @@ class InMemoryLocal : SyncLocal {
     val deckWords = mutableMapOf<Long, List<Int>>()
     private var nextDeckId = 1L
 
-    override suspend fun cards(uid: String) = cardRows.filter { it.uid == uid }
+    override suspend fun cardsSince(uid: String, since: Long) = cardRows.filter { it.uid == uid }
     override suspend fun card(uid: String, type: ItemType, id: Int, kind: CardKind) =
         cardRows.firstOrNull { it.uid == uid && it.itemType == type && it.itemId == id && it.kind == kind }
 
@@ -109,13 +104,13 @@ class InMemoryLocal : SyncLocal {
         dayRows += day
     }
 
-    override suspend fun tests(uid: String) = testRows.filter { it.uid == uid }
+    override suspend fun testsSince(uid: String, since: Long) = testRows.filter { it.uid == uid }
     override suspend fun hasTest(uid: String, type: String, takenAt: Long) =
         testRows.any { it.uid == uid && it.type.name == type && it.takenAt == takenAt }
 
     override suspend fun insertTest(result: TestResultEntity) { testRows += result }
 
-    override suspend fun grammar(uid: String) = grammarRows.filter { it.uid == uid }
+    override suspend fun grammarSince(uid: String, since: Long) = grammarRows.filter { it.uid == uid }
     override suspend fun grammar(uid: String, id: Int) = grammarRows.firstOrNull { it.uid == uid && it.grammarId == id }
     override suspend fun upsertGrammar(progress: GrammarProgressEntity) {
         grammarRows.removeAll { it.uid == progress.uid && it.grammarId == progress.grammarId }
@@ -132,13 +127,4 @@ class InMemoryLocal : SyncLocal {
         deckRows += deck.copy(id = id)
         deckWords[id] = wordIds
     }
-}
-
-/** Settings kept in memory (the real file-backed store cannot rename its file on Windows while it is read). */
-class InMemoryPrefs : DataStore<Preferences> {
-    private val state = MutableStateFlow(emptyPreferences())
-    override val data: Flow<Preferences> = state
-
-    override suspend fun updateData(transform: suspend (t: Preferences) -> Preferences): Preferences =
-        transform(state.value).also { state.value = it }
 }

@@ -7,7 +7,7 @@ import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.activity.StudyClock
 import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.srs.SrsState
-import com.flurai.app.core.sync.InMemoryPrefs
+import com.flurai.app.core.prefs.InMemoryPrefs
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

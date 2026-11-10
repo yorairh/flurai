@@ -28,11 +28,10 @@ object UserKeys {
 
     fun boolean(uid: String, name: String) = booleanPreferencesKey(name(uid, name))
     fun int(uid: String, name: String) = intPreferencesKey(name(uid, name))
-    fun long(uid: String, name: String) = longPreferencesKey(name(uid, name))
     fun string(uid: String, name: String) = stringPreferencesKey(name(uid, name))
 
     /** The sync bookkeeping keys of [uid]. */
-    internal fun sync(uid: String, name: String) = long(uid, "$SYNC$name")
+    internal fun sync(uid: String, name: String) = longPreferencesKey(name(uid, "$SYNC$name"))
 
     internal fun belongsTo(key: Preferences.Key<*>, uid: String) = key.name.startsWith("$uid.")
     internal fun isSync(key: Preferences.Key<*>, uid: String) = key.name.startsWith("$uid.$SYNC")
@@ -54,8 +53,7 @@ data class SyncCursors(val pull: Long, val push: Long)
 class UserPreferences @Inject constructor(private val dataStore: DataStore<Preferences>) {
 
     /** Whether [uid] has a profile on this phone (onboarding was done). */
-    suspend fun hasProfile(uid: String): Boolean =
-        dataStore.data.first().asMap().keys.any { it.name == "$uid.${UserKeys.LEVEL}" }
+    suspend fun hasProfile(uid: String): Boolean = dataStore.data.first()[UserKeys.string(uid, UserKeys.LEVEL)] != null
 
     /** Every account with a profile on this phone: its uid and the level it chose. */
     suspend fun levelsByUid(): Map<String, String> =
@@ -95,8 +93,8 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
     suspend fun move(from: String, to: String) {
         dataStore.edit { prefs ->
             movePrefixedKeys(prefs, from, to)
-            prefs.remove(UserKeys.sync(to, "pull"))
-            prefs.remove(UserKeys.sync(to, "push"))
+            prefs.remove(pullKey(to))
+            prefs.remove(pushKey(to))
         }
     }
 
@@ -107,28 +105,32 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
 
     // -- sync bookkeeping ------------------------------------------------------------------------
 
+    private fun pullKey(uid: String) = UserKeys.sync(uid, "pull")
+    private fun pushKey(uid: String) = UserKeys.sync(uid, "push")
+    private fun metaKey(uid: String) = UserKeys.sync(uid, "meta")
+
     suspend fun cursors(uid: String): SyncCursors {
         val prefs = dataStore.data.first()
-        return SyncCursors(prefs[UserKeys.sync(uid, "pull")] ?: 0L, prefs[UserKeys.sync(uid, "push")] ?: 0L)
+        return SyncCursors(prefs[pullKey(uid)] ?: 0L, prefs[pushKey(uid)] ?: 0L)
     }
 
     suspend fun saveCursors(uid: String, cursors: SyncCursors) {
         dataStore.edit {
-            it[UserKeys.sync(uid, "pull")] = cursors.pull
-            it[UserKeys.sync(uid, "push")] = cursors.push
+            it[pullKey(uid)] = cursors.pull
+            it[pushKey(uid)] = cursors.push
         }
     }
 
     /** Makes the next sync upload everything. */
     suspend fun markAllDirty(uid: String) {
-        dataStore.edit { it[UserKeys.sync(uid, "push")] = 0L }
+        dataStore.edit { it[pushKey(uid)] = 0L }
     }
 
     /** A fingerprint of the small whole-document items (settings, channels, decks) as last uploaded. */
-    suspend fun uploadedHash(uid: String): Long? = dataStore.data.first()[UserKeys.sync(uid, "meta")]
+    suspend fun uploadedHash(uid: String): Long? = dataStore.data.first()[metaKey(uid)]
 
     suspend fun saveUploadedHash(uid: String, hash: Long) {
-        dataStore.edit { it[UserKeys.sync(uid, "meta")] = hash }
+        dataStore.edit { it[metaKey(uid)] = hash }
     }
 }
 

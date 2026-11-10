@@ -1,26 +1,11 @@
 package com.flurai.app.core.study
 
-import org.junit.rules.TemporaryFolder
-import org.junit.Rule
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.CoroutineScope
+import com.flurai.app.core.prefs.InMemoryPrefs
 import com.flurai.app.core.activity.SettingsRepository
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import com.flurai.app.core.content.ContentDao
-import com.flurai.app.core.content.ContentInfoEntity
-import com.flurai.app.core.content.KanjiEntity
-import com.flurai.app.core.content.KanjiLevel
-import com.flurai.app.core.content.LevelCount
-import com.flurai.app.core.content.SentenceEntity
-import com.flurai.app.core.content.WordEntity
-import com.flurai.app.core.content.WordLevel
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.srs.SrsState
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -34,7 +19,7 @@ class StudyRepositoryTest {
     private val now = Instant.parse("2026-03-10T03:00:00Z")
 
     private val dao = FakeStudyDao()
-    private val settings = SettingsRepository(com.flurai.app.core.sync.InMemoryPrefs())
+    private val settings = SettingsRepository(InMemoryPrefs())
     private val deckWords = mutableMapOf<Long, List<Int>>()
     private val repo by lazy {
         StudyRepository(dao, FakeContentDao(), settings, object : DeckWords {
@@ -193,5 +178,20 @@ class StudyRepositoryTest {
         listOf(StudySource.Auto, StudySource.Level(3), StudySource.KanaDeck(KanaScript.Katakana)).forEach {
             assertEquals(it, StudySource.decode(it.encode()))
         }
+    }
+
+    @Test
+    fun aWordAddedByHandDoesNotUseUpTheDailyAllowanceEvenAfterItsFirstReview() = runTest {
+        val word = ItemRef(ItemType.Word, 10)
+        repo.addToStudy("u", word, now)
+        val added = dao.cards.value.values.single()
+        assertEquals(now.toEpochMilli(), added.createdAt) // its real creation time, so sync sees it as new
+
+        val before = repo.loadSession("u", profile(JlptLevel.N5, newPerDay = 2), StudySource.Auto, now)
+        assertEquals(2, before.newItems.size)
+
+        repo.answer("u", QueueItem.Existing(added), Rating.Good, now, Duration.ZERO)
+        val after = repo.loadSession("u", profile(JlptLevel.N5, newPerDay = 2), StudySource.Auto, now)
+        assertEquals(2, after.newItems.size)
     }
 }

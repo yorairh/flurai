@@ -18,10 +18,11 @@ import javax.inject.Inject
 /**
  * What the sync engine reads and writes on this phone: plain lookups and writes with no rules.
  * Which rows count as changed, and which copy wins, are decided by the engine, so they are tested
- * once. [RoomSyncLocal] in the app, an in-memory copy in tests.
+ * once. The "since" reads only narrow what is loaded: they return at least the rows changed after
+ * that time and may return more (the in-memory copy returns everything). [RoomSyncLocal] in the app, an in-memory copy in tests.
  */
 interface SyncLocal {
-    suspend fun cards(uid: String): List<CardEntity>
+    suspend fun cardsSince(uid: String, since: Long): List<CardEntity>
     suspend fun card(uid: String, type: ItemType, id: Int, kind: CardKind): CardEntity?
     suspend fun upsertCard(card: CardEntity)
 
@@ -29,11 +30,11 @@ interface SyncLocal {
     suspend fun day(uid: String, day: Long): StudyDayEntity?
     suspend fun upsertDay(day: StudyDayEntity)
 
-    suspend fun tests(uid: String): List<TestResultEntity>
+    suspend fun testsSince(uid: String, since: Long): List<TestResultEntity>
     suspend fun hasTest(uid: String, type: String, takenAt: Long): Boolean
     suspend fun insertTest(result: TestResultEntity)
 
-    suspend fun grammar(uid: String): List<GrammarProgressEntity>
+    suspend fun grammarSince(uid: String, since: Long): List<GrammarProgressEntity>
     suspend fun grammar(uid: String, id: Int): GrammarProgressEntity?
     suspend fun upsertGrammar(progress: GrammarProgressEntity)
 
@@ -54,7 +55,7 @@ class RoomSyncLocal @Inject constructor(
     private val customChannels: CustomChannelDao,
     private val deckDao: DeckDao,
 ) : SyncLocal {
-    override suspend fun cards(uid: String) = sync.cards(uid)
+    override suspend fun cardsSince(uid: String, since: Long) = sync.cardsSince(uid, since)
     override suspend fun card(uid: String, type: ItemType, id: Int, kind: CardKind) = sync.card(uid, type, id, kind)
     override suspend fun upsertCard(card: CardEntity) = sync.upsertCard(card)
 
@@ -62,11 +63,11 @@ class RoomSyncLocal @Inject constructor(
     override suspend fun day(uid: String, day: Long) = sync.day(uid, day)
     override suspend fun upsertDay(day: StudyDayEntity) = sync.upsertDay(day)
 
-    override suspend fun tests(uid: String) = sync.tests(uid)
+    override suspend fun testsSince(uid: String, since: Long) = sync.testsSince(uid, since)
     override suspend fun hasTest(uid: String, type: String, takenAt: Long) = sync.testCount(uid, type, takenAt) > 0
     override suspend fun insertTest(result: TestResultEntity) = testResults.insert(result)
 
-    override suspend fun grammar(uid: String) = sync.grammar(uid)
+    override suspend fun grammarSince(uid: String, since: Long) = sync.grammarSince(uid, since)
     override suspend fun grammar(uid: String, id: Int) = grammarProgress.get(uid, id)
     override suspend fun upsertGrammar(progress: GrammarProgressEntity) = grammarProgress.upsert(progress)
 

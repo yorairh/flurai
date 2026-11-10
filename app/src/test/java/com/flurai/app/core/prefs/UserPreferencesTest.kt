@@ -1,7 +1,6 @@
 package com.flurai.app.core.prefs
 
 import androidx.datastore.preferences.core.edit
-import com.flurai.app.core.sync.InMemoryPrefs
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals

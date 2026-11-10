@@ -131,8 +131,12 @@ interface StudyDao {
     @Query("SELECT DISTINCT item_type AS itemType, item_id AS itemId FROM card WHERE uid = :uid")
     fun introducedItemsFlow(uid: String): Flow<List<ItemRef>>
 
-    /** New items introduced since [since] (counts against the daily new-card limit). */
-    @Query("SELECT COUNT(*) FROM card WHERE uid = :uid AND kind = 'Recognition' AND created_at >= :since")
+    /**
+     * New items first studied in a session since [since] (counts against the daily new-card limit).
+     * A first answer is logged with state_before 0. A word the learner added by hand already has
+     * a card by then, so it never counts: picking a word yourself doesn't use up the allowance.
+     */
+    @Query("SELECT COUNT(*) FROM review_log WHERE uid = :uid AND kind = 'Recognition' AND state_before = 0 AND reviewed_at >= :since")
     fun introducedSince(uid: String, since: Long): Flow<Int>
 
     @Query("SELECT * FROM card WHERE uid = :uid AND item_type = :itemType AND item_id = :itemId ORDER BY kind")

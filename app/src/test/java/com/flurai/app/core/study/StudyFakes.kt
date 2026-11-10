@@ -1,7 +1,5 @@
 package com.flurai.app.core.study
 
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import com.flurai.app.core.activity.SettingsRepository
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.ContentInfoEntity
 import com.flurai.app.core.content.KanjiEntity
@@ -10,25 +8,9 @@ import com.flurai.app.core.content.LevelCount
 import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.content.WordLevel
-import com.flurai.app.core.model.JlptLevel
-import com.flurai.app.core.profile.StudyProfile
-import com.flurai.app.core.srs.Rating
-import com.flurai.app.core.srs.SrsState
-import java.time.Duration
-import java.time.Instant
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
 
 /** In-memory StudyDao: just enough behaviour for the repository. */
 class FakeStudyDao : StudyDao {
@@ -43,7 +25,7 @@ class FakeStudyDao : StudyDao {
     override suspend fun introducedItems(uid: String) = all().map { ItemRef(it.itemType, it.itemId) }.distinct()
     override fun introducedItemsFlow(uid: String) = cards.map { m -> m.values.map { ItemRef(it.itemType, it.itemId) }.distinct() }
     override fun introducedSince(uid: String, since: Long) =
-        cards.map { m -> m.values.count { it.kind == CardKind.Recognition && it.createdAt >= since } }
+        cards.map { logs.count { it.kind == CardKind.Recognition && it.stateBefore == 0 && it.reviewedAt >= since } }
     override fun cardsForItem(uid: String, itemType: ItemType, itemId: Int) =
         cards.map { m -> m.values.filter { it.itemType == itemType && it.itemId == itemId } }
     override fun allCards(uid: String) = cards.map { it.values.toList() }
@@ -75,8 +57,8 @@ class FakeContentDao : ContentDao {
     override suspend fun word(id: Int): WordEntity? = throw NotImplementedError()
     override suspend fun sentencesForWord(wordId: Int): List<SentenceEntity> = throw NotImplementedError()
     override fun kanjiAtLevel(jlpt: Int): Flow<List<KanjiEntity>> = throw NotImplementedError()
-    override suspend fun readingCandidates() = emptyList<com.flurai.app.core.content.SentenceEntity>()
-    override suspend fun allKanji(): List<com.flurai.app.core.content.KanjiEntity> = throw NotImplementedError()
+    override suspend fun readingCandidates() = emptyList<SentenceEntity>()
+    override suspend fun allKanji(): List<KanjiEntity> = throw NotImplementedError()
     override fun grammarPoints() = kotlinx.coroutines.flow.flowOf(emptyList<com.flurai.app.core.content.GrammarPointEntity>())
     override suspend fun allGrammarPoints() = emptyList<com.flurai.app.core.content.GrammarPointEntity>()
     override suspend fun grammarPoint(id: Int): com.flurai.app.core.content.GrammarPointEntity? = null

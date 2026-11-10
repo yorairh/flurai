@@ -17,23 +17,30 @@ import java.time.Instant
 import javax.inject.Inject
 
 /**
- * Which test a run is. Everything that differs between kinds is answered here, so adding a kind
- * means adding one case: how it is written in a navigation route, its title, the [TestType] it is
- * saved as, the level it is saved against, and whether it is passed.
+ * Which test a run is. Everything that differs between kinds is answered here: the [TestType] it
+ * is saved as and the level it is about (given when the kind is declared), how it is written in a
+ * navigation route, its title, and whether it is passed. A new kind is one declaration plus its
+ * route text and title.
  */
-sealed interface QuizKind {
-    data object Placement : QuizKind
-    data class Checkpoint(val jlpt: Int) : QuizKind
-    data object Quick : QuizKind
+sealed class QuizKind(
+    /** How the result is stored (and synced). */
+    val testType: TestType,
+) {
+    /** The JLPT number the test is about, for the kinds that are about one level. */
+    open val jlpt: Int? get() = null
+
+    data object Placement : QuizKind(TestType.Placement)
+    data class Checkpoint(override val jlpt: Int) : QuizKind(TestType.Checkpoint)
+    data object Quick : QuizKind(TestType.Quick)
 
     /** Hear a word and pick its meaning. */
-    data object Listening : QuizKind
+    data object Listening : QuizKind(TestType.Listening)
 
     /** Fill-in-the-blank grammar practice for one level, or one point when [pointId] is not 0. */
-    data class Grammar(val jlpt: Int, val pointId: Int = 0) : QuizKind
+    data class Grammar(override val jlpt: Int, val pointId: Int = 0) : QuizKind(TestType.Grammar)
 
     /** "What does this sentence mean?" over Tatoeba sentences of one level. */
-    data class Reading(val jlpt: Int) : QuizKind
+    data class Reading(override val jlpt: Int) : QuizKind(TestType.Reading)
 
     /** Round-trips through navigation arguments. */
     fun encode(): String = when (this) {
@@ -55,25 +62,11 @@ sealed interface QuizKind {
             is Reading -> "N$jlpt reading"
         }
 
-    /** How the result is stored (and synced). */
-    val testType: TestType
-        get() = when (this) {
-            Placement -> TestType.Placement
-            is Checkpoint -> TestType.Checkpoint
-            Quick -> TestType.Quick
-            Listening -> TestType.Listening
-            is Grammar -> TestType.Grammar
-            is Reading -> TestType.Reading
-        }
-
-    /** The JLPT number the result is stored against; [placementLevel] is the level a placement test ended at. */
-    fun savedLevel(placementLevel: JlptLevel?): Int? = when (this) {
-        Placement -> placementLevel?.jlpt ?: 0
-        is Checkpoint -> jlpt
-        Quick, Listening -> null
-        is Grammar -> jlpt
-        is Reading -> jlpt
-    }
+    /**
+     * The JLPT number the result is stored against: the level the test is about, or for a
+     * placement test the level it ended at ([placementLevel]; 0 = Beginner).
+     */
+    fun savedLevel(placementLevel: JlptLevel?): Int? = if (this == Placement) placementLevel?.jlpt ?: 0 else jlpt
 
     /** Only a checkpoint is passed or failed. */
     fun passed(correct: Int, total: Int): Boolean? =
@@ -162,6 +155,8 @@ data class QuizRunState(
     val selected: Int? = null,
     val result: QuizResult? = null,
     val error: String? = null,
+    /** Goes up by one each time a question is put on screen (so a listening question's audio plays once). */
+    val shown: Int = 0,
 )
 
 /**
@@ -184,10 +179,11 @@ class QuizRun(
     private val queue = ArrayDeque<Question>()
     private val answered = mutableListOf<Pair<Question, Boolean>>()
     private val placement = PlacementTest()
+    private val profileLevel = profile?.level ?: JlptLevel.N5
     private var advancing = false
 
     suspend fun start() {
-        val questions = backend.questions(uid, kind, profile?.level ?: JlptLevel.N5, placement.level)
+        val questions = backend.questions(uid, kind, profileLevel, placement.level)
         if (questions.isEmpty()) {
             _state.update { it.copy(loading = false, error = "Not enough material to build this test yet.") }
             return
@@ -215,7 +211,7 @@ class QuizRun(
         if (queue.isNotEmpty()) return showNext(_state.value.total)
         if (kind.adaptive && !placement.finished) {
             _state.update { it.copy(loading = true) }
-            queue.addAll(backend.questions(uid, kind, profile?.level ?: JlptLevel.N5, placement.level))
+            queue.addAll(backend.questions(uid, kind, profileLevel, placement.level))
             if (queue.isNotEmpty()) return showNext(null)
         }
         finish()
@@ -245,7 +241,7 @@ class QuizRun(
         advancing = false
         val question = queue.removeFirst()
         _state.update {
-            it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null)
+            it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null, shown = it.shown + 1)
         }
     }
 

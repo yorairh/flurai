@@ -1,7 +1,6 @@
 package com.flurai.app.ui.explore
 
 import com.flurai.app.ui.components.LevelChips
-import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Context
 import android.content.Intent
@@ -31,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -153,15 +151,7 @@ private fun AddChannelDialog(initialLevel: Int, onAdd: (String, String, Int) -> 
                     isError = error, supportingText = if (error) ({ Text("Enter a name and a valid link") }) else null,
                 )
                 Text("Level", style = MaterialTheme.typography.labelLarge)
-                @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
-                androidx.compose.foundation.layout.FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    JlptNumbers.forEach { n ->
-                        FilterChip(selected = level == n, onClick = { level = n }, label = { Text("N$n", maxLines = 1) })
-                    }
-                }
+                LevelChips(level, { level = it })
             }
         },
         confirmButton = {

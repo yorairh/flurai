@@ -24,8 +24,9 @@ internal const val META_COLLECTION = "meta"
 internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION
 
 /** Firestore returns every whole number as Long and every fraction as Double. */
-private fun Map<String, Any?>.int(key: String) = (this[key] as? Number)?.toInt()
-private fun Map<String, Any?>.long(key: String) = (this[key] as? Number)?.toLong()
+private fun Map<*, *>.int(key: String) = (this[key] as? Number)?.toInt()
+private fun Map<*, *>.long(key: String) = (this[key] as? Number)?.toLong()
+private fun Map<*, *>.double(key: String) = (this[key] as? Number)?.toDouble()
 
 // -- cards -----------------------------------------------------------------------------------------
 
@@ -34,13 +35,8 @@ internal fun cardId(c: CardEntity) = "${c.itemType.name}-${c.itemId}-${c.kind.na
 /** When a card last changed: its latest review, or its creation. */
 internal fun touched(c: CardEntity) = maxOf(c.lastReview ?: 0L, c.createdAt)
 
-/**
- * Whether a card has to go to the cloud: it changed after the last upload ([since], 0 = everything),
- * or it was added by hand (creation time 0, see StudyRepository.addToStudy) and never reviewed, which
- * leaves nothing to compare with [since]. Such a card is re-sent until its first review.
- */
-internal fun needsUpload(c: CardEntity, since: Long): Boolean =
-    since == 0L || touched(c) > since || (c.lastReview == null && c.createdAt == 0L)
+/** Whether a card has to go to the cloud: it changed after the last upload ([since], 0 = everything). */
+internal fun needsUpload(c: CardEntity, since: Long): Boolean = since == 0L || touched(c) > since
 
 internal fun cardDoc(c: CardEntity): Map<String, Any?> = mapOf(
     "itemType" to c.itemType.name, "itemId" to c.itemId, "kind" to c.kind.name, "state" to c.state, "step" to c.step,
@@ -55,7 +51,7 @@ internal fun cardFrom(uid: String, d: Map<String, Any?>): CardEntity? {
     return CardEntity(
         uid = uid, itemType = type, itemId = d.int("itemId") ?: return null, kind = kind,
         state = d.int("state") ?: return null, step = d.int("step"),
-        stability = (d["stability"] as? Number)?.toDouble(), difficulty = (d["difficulty"] as? Number)?.toDouble(),
+        stability = d.double("stability"), difficulty = d.double("difficulty"),
         due = d.long("due") ?: return null, lastReview = d.long("lastReview"), reps = d.int("reps") ?: 0,
         lapses = d.int("lapses") ?: 0, suspended = d["suspended"] as? Boolean ?: false,
         buriedUntil = d.long("buriedUntil"), createdAt = d.long("createdAt") ?: 0L,
@@ -110,7 +106,7 @@ internal fun channelDoc(c: CustomChannelEntity): Map<String, Any?> =
 
 internal fun channelFrom(uid: String, m: Map<*, *>): CustomChannelEntity? = CustomChannelEntity(
     uid = uid, name = m["name"] as? String ?: return null, url = m["url"] as? String ?: return null,
-    level = (m["level"] as? Number)?.toInt() ?: 5, addedAt = (m["addedAt"] as? Number)?.toLong() ?: 0,
+    level = m.int("level") ?: 5, addedAt = m.long("addedAt") ?: 0,
 )
 
 internal class DeckDoc(val deck: DeckEntity, val words: List<Int>)
@@ -120,7 +116,7 @@ internal fun deckDoc(d: DeckEntity, words: List<Int>): Map<String, Any?> =
 
 internal fun deckFrom(uid: String, m: Map<*, *>): DeckDoc? {
     val name = m["name"] as? String ?: return null
-    val createdAt = (m["createdAt"] as? Number)?.toLong() ?: 0
+    val createdAt = m.long("createdAt") ?: 0
     val words = (m["words"] as? List<*>)?.mapNotNull { (it as? Number)?.toInt() }.orEmpty()
     return DeckDoc(DeckEntity(uid = uid, name = name, createdAt = createdAt), words)
 }

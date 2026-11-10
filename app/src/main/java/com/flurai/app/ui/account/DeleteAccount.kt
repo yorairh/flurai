@@ -65,9 +65,6 @@ class DeleteAccountViewModel @Inject constructor(
                 return@launch
             }
             try {
-                // If anything below fails the account lives on with a (partly) erased backup: make
-                // its next sync upload everything again.
-                sync.markAllDirty(uid)
                 sync.deleteRemote(uid)
             } catch (e: Exception) {
                 _state.update { DeleteAccountState(error = "Could not delete your cloud backup. Check your connection and try again.") }

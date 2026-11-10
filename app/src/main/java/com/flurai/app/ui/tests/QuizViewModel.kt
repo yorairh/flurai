@@ -57,30 +57,27 @@ class QuizViewModel @Inject constructor(
 
     /** Mirrors the run's state and says a listening question's word as the question appears. */
     private suspend fun follow(run: QuizRun) {
-        var spoken: Any? = null
+        var shown = 0
         run.state.collect { s ->
             _state.value = s
-            val question = s.question
-            if (question == null) {
-                spoken = null
-            } else if (question !== spoken) {
-                spoken = question
-                if (question.kind == QuestionKind.WordListening) speaker.speak(question.prompt)
+            if (s.shown != shown) {
+                shown = s.shown
+                s.question?.takeIf { it.kind == QuestionKind.WordListening }?.let { speaker.speak(it.prompt) }
             }
         }
     }
 
-    fun choose(index: Int) = launch { choose(index) }
+    fun choose(index: Int) = withRun { choose(index) }
 
-    fun next() = launch { next() }
+    fun next() = withRun { next() }
 
     fun replay() {
         _state.value.question?.let { speaker.speak(it.prompt) }
     }
 
-    fun addMissedToFlashcards() = launch { addMissedToFlashcards() }
+    fun addMissedToFlashcards() = withRun { addMissedToFlashcards() }
 
-    fun applyPlacementLevel() = launch { applyPlacementLevel() }
+    fun applyPlacementLevel() = withRun { applyPlacementLevel() }
 
     fun onPause() {
         run?.pause()
@@ -90,7 +87,7 @@ class QuizViewModel @Inject constructor(
         run?.resume()
     }
 
-    private fun launch(action: suspend QuizRun.() -> Unit) {
+    private fun withRun(action: suspend QuizRun.() -> Unit) {
         val run = run ?: return
         viewModelScope.launch { run.action() }
     }

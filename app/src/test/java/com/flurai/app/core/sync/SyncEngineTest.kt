@@ -1,5 +1,6 @@
 package com.flurai.app.core.sync
 
+import com.flurai.app.core.prefs.InMemoryPrefs
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flurai.app.core.activity.StudyDayEntity
@@ -134,9 +135,9 @@ class SyncEngineTest {
         a.local.cardRows += card(1)
         a.sync()
 
-        // "Add to flashcards" from a word page: creation time 0, never reviewed.
+        // "Add to flashcards" from a word page: a card that was never reviewed.
         a.now = 20_000
-        a.local.cardRows += card(2, lastReview = null, createdAt = 0, reps = 0)
+        a.local.cardRows += card(2, lastReview = null, createdAt = 20_000, reps = 0)
         a.now = 30_000
         a.sync()
 
@@ -265,7 +266,7 @@ class SyncEngineTest {
     // -- cloud copy deleted -----------------------------------------------------------------------
 
     @Test
-    fun deletingTheCloudCopyAndMarkingEverythingDirtyUploadsItAllAgain() {
+    fun afterTheCloudCopyIsDeletedTheNextSyncUploadsItAllAgain() {
         val a = Phone()
         a.local.cardRows += card(1)
         a.local.channelRows += CustomChannelEntity(uid = UID, name = "Ch", url = "u", level = 5, addedAt = 1)
@@ -275,12 +276,8 @@ class SyncEngineTest {
         assertTrue(cloud.ids(UID, "cards").isEmpty())
         assertTrue(cloud.ids(UID, "meta").isEmpty())
 
+        // The account lives on (say its deletion failed): nothing changed locally, but the backup must come back.
         a.now = 20_000
-        a.sync() // nothing changed since the last upload, so nothing is sent
-        assertTrue(cloud.ids(UID, "cards").isEmpty())
-
-        runBlocking { a.engine.markAllDirty(UID) }
-        a.now = 30_000
         a.sync()
         assertNotNull(cloudCard(1))
         assertTrue("channels" in cloud.ids(UID, "meta"))

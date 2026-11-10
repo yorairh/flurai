@@ -22,6 +22,14 @@ import com.flurai.app.core.study.StudyDao
 import com.flurai.app.core.study.UserDatabase
 import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
+import com.flurai.app.core.quiz.RepositoryQuizBackend
+import com.flurai.app.core.quiz.QuizBackend
+import com.flurai.app.core.study.DatabaseCardContent
+import com.flurai.app.core.study.CardContentSource
+import com.flurai.app.core.sync.FirestoreCloud
+import com.flurai.app.core.sync.SyncCloud
+import com.flurai.app.core.sync.RoomSyncLocal
+import com.flurai.app.core.sync.SyncLocal
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -105,14 +113,14 @@ abstract class BindingsModule {
     abstract fun authRepository(impl: FirebaseAuthRepository): AuthRepository
 
     @Binds
-    abstract fun quizBackend(impl: com.flurai.app.core.quiz.RepositoryQuizBackend): com.flurai.app.core.quiz.QuizBackend
+    abstract fun quizBackend(impl: RepositoryQuizBackend): QuizBackend
 
     @Binds
-    abstract fun cardContent(impl: com.flurai.app.core.study.DatabaseCardContent): com.flurai.app.core.study.CardContentSource
+    abstract fun cardContent(impl: DatabaseCardContent): CardContentSource
 
     @Binds
-    abstract fun syncCloud(impl: com.flurai.app.core.sync.FirestoreCloud): com.flurai.app.core.sync.SyncCloud
+    abstract fun syncCloud(impl: FirestoreCloud): SyncCloud
 
     @Binds
-    abstract fun syncLocal(impl: com.flurai.app.core.sync.RoomSyncLocal): com.flurai.app.core.sync.SyncLocal
+    abstract fun syncLocal(impl: RoomSyncLocal): SyncLocal
 }

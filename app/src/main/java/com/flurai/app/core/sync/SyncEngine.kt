@@ -77,7 +77,7 @@ class SyncEngine internal constructor(
         val cursors = prefs.cursors(uid)
         val pulled = pull(uid, cursors.pull)
         push(uid, cursors.push, pulled)
-        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt))
+        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt, push = startedAt))
     }
 
     /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
@@ -94,8 +94,14 @@ class SyncEngine internal constructor(
     /** Makes the next sync push everything (after progress was moved between accounts). */
     suspend fun markAllDirty(uid: String) = prefs.markAllDirty(uid)
 
-    /** Deletes this user's cloud copy. Needs the user to still be signed in. */
-    suspend fun deleteRemote(uid: String) = cloud.deleteAll(uid, CLOUD_COLLECTIONS)
+    /**
+     * Deletes this user's cloud copy. Needs the user to still be signed in. The next sync uploads
+     * everything again, so an account that lives on (its deletion failed) gets its backup back.
+     */
+    suspend fun deleteRemote(uid: String) = mutex.withLock {
+        prefs.markAllDirty(uid)
+        cloud.deleteAll(uid, CLOUD_COLLECTIONS)
+    }
 
     // -- pull ------------------------------------------------------------------------------------
 
@@ -165,14 +171,14 @@ class SyncEngine internal constructor(
     private suspend fun push(uid: String, since: Long, pulled: Pulled) {
         val writes = mutableListOf<CloudWrite>()
 
-        local.cards(uid).filter { needsUpload(it, since) && cardId(it) !in pulled.cardIds }
+        local.cardsSince(uid, since).filter { needsUpload(it, since) && cardId(it) !in pulled.cardIds }
             .forEach { writes += CloudWrite("cards", cardId(it), cardDoc(it)) }
         val sinceDay = if (since == 0L) 0L else studyEpochDay(Instant.ofEpochMilli(since)) - 1
         local.days(uid).filter { it.day >= sinceDay && it.day !in pulled.dayIds }
             .forEach { writes += CloudWrite("days", it.day.toString(), dayDoc(it)) }
-        local.tests(uid).filter { it.takenAt > since }
+        local.testsSince(uid, since).filter { it.takenAt > since }
             .forEach { writes += CloudWrite("tests", testId(it), testDoc(it)) }
-        local.grammar(uid).filter { it.lastAt > since && it.grammarId !in pulled.grammarIds }
+        local.grammarSince(uid, since).filter { it.lastAt > since && it.grammarId !in pulled.grammarIds }
             .forEach { writes += CloudWrite("grammar", it.grammarId.toString(), grammarDoc(it)) }
 
         // Small whole-document items: written only when they changed since the last upload (or on a full push).

@@ -66,6 +66,8 @@ data class SessionState(
     val deckSession: Boolean = false,
     /** That chosen deck still has words never studied. */
     val deckHasMore: Boolean = false,
+    /** Goes up by one each time a card is put on screen (so the screen can play a Listening card's audio once). */
+    val shown: Int = 0,
 )
 
 /**
@@ -84,7 +86,6 @@ class StudySession(
     private val content: CardContentSource,
     private val clock: StudyClock,
     private val now: () -> Instant = Instant::now,
-    private val moreWords: Int = MORE_WORDS,
 ) {
     private val _state = MutableStateFlow(SessionState())
     val state: StateFlow<SessionState> = _state.asStateFlow()
@@ -121,11 +122,11 @@ class StudySession(
     /** Stop showing this word until it's resumed from its word page. */
     suspend fun suspendCurrent() = removeCurrent { repository.setSuspended(uid, it, true) }
 
-    /** After finishing: keep going with [count] more new words from [from] (default: the same deck). */
-    suspend fun learnMore(from: StudySource = source, count: Int = moreWords) {
+    /** After finishing: keep going with more new words from [from] (default: the same deck). */
+    suspend fun learnMore(from: StudySource = source) {
         val queue = queue ?: return
         _state.update { it.copy(loading = true) }
-        val items = repository.loadMore(uid, profile, from, count)
+        val items = repository.loadMore(uid, profile, from, MORE_WORDS)
         queue.addNew(items)
         if (items.isEmpty()) _state.update { it.copy(loading = false, finished = true, noMoreWords = true) } else showNext()
     }
@@ -183,6 +184,7 @@ class StudySession(
                 intervals = repository.preview(existing, at).mapValues { (_, d) -> formatInterval(d) },
                 finished = false,
                 comeBackAt = null,
+                shown = it.shown + 1,
             )
         }
     }

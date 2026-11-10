@@ -61,15 +61,12 @@ class ReviewViewModel @Inject constructor(
 
     /** Mirrors the session's state and plays a Listening card's audio as it appears: hearing the word is the question. */
     private suspend fun follow(session: StudySession) {
-        var spoken: Any? = null
+        var shown = 0
         session.state.collect { s ->
             _state.value = s
-            val card = s.current
-            if (card == null) {
-                spoken = null
-            } else if (card !== spoken) {
-                spoken = card
-                if (card.item.kind == CardKind.Listening) speaker.speak(card.content.speech)
+            if (s.shown != shown) {
+                shown = s.shown
+                s.current?.takeIf { it.item.kind == CardKind.Listening }?.let { speaker.speak(it.content.speech) }
             }
         }
     }
@@ -80,23 +77,23 @@ class ReviewViewModel @Inject constructor(
         speakCurrent()
     }
 
-    fun answer(rating: Rating) = run { answer(rating) }
+    fun answer(rating: Rating) = withSession { answer(rating) }
 
     /** Hide this word until tomorrow. */
-    fun buryCurrent() = run { buryCurrent() }
+    fun buryCurrent() = withSession { buryCurrent() }
 
     /** Stop showing this word until it's resumed from its word page. */
-    fun suspendCurrent() = run { suspendCurrent() }
+    fun suspendCurrent() = withSession { suspendCurrent() }
 
     fun speakCurrent() {
         _state.value.current?.let { speaker.speak(it.content.speech) }
     }
 
     /** After finishing: keep going with more new words from [from] (default: the same deck). */
-    fun learnMore(from: StudySource = source) = run { learnMore(from) }
+    fun learnMore(from: StudySource = source) = withSession { learnMore(from) }
 
     /** Called when the screen comes back into view, so learning cards that became due show up. */
-    fun refresh() = run { refresh() }
+    fun refresh() = withSession { refresh() }
 
     fun onPause() {
         session?.pause()
@@ -106,7 +103,7 @@ class ReviewViewModel @Inject constructor(
         session?.resume()
     }
 
-    private fun run(action: suspend StudySession.() -> Unit) {
+    private fun withSession(action: suspend StudySession.() -> Unit) {
         val session = session ?: return
         viewModelScope.launch { session.action() }
     }

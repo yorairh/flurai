@@ -226,11 +226,11 @@ class StudyRepository @Inject constructor(
     suspend fun reset(uid: String, item: ItemRef) = study.resetItem(uid, item.itemType, item.itemId)
 
     /**
-     * Starts studying an item now (from its word page). createdAt 0 keeps it out of today's
-     * new-card count: picking a word yourself shouldn't use up the daily allowance.
+     * Starts studying an item now (from its word page, Reading, a quiz or Media). It does not use
+     * up the daily allowance: only words first met in a session count (see StudyDao.introducedSince).
      */
     suspend fun addToStudy(uid: String, item: ItemRef, now: Instant) =
-        study.insertCardIfAbsent(newCard(uid, item, CardKind.Recognition, due = now, now = now).copy(createdAt = 0))
+        study.insertCardIfAbsent(newCard(uid, item, CardKind.Recognition, due = now, now = now))
 
     private fun newCard(uid: String, item: ItemRef, kind: CardKind, due: Instant, now: Instant) = CardEntity(
         uid = uid, itemType = item.itemType, itemId = item.itemId, kind = kind,
