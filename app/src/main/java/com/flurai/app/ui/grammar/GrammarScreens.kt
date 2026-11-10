@@ -93,7 +93,7 @@ fun GrammarListScreen(
             }
             item(key = "footer") {
                 Text(
-                    "N3 to N1 grammar arrives in later updates.",
+                    "N2 and N1 grammar arrive in later updates.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

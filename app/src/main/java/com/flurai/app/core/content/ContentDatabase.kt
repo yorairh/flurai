@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
         GrammarExampleEntity::class,
         ContentInfoEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class ContentDatabase : RoomDatabase() {
