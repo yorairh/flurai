@@ -24,8 +24,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 15 | Polish pass (guest wording, welcome text, shared word cache, lighter progress, parallel sync) | ✅ Merged | [PR #21](https://github.com/yorairh/flurai/pull/21) | [0.14.0](https://github.com/yorairh/flurai/releases/tag/v0.14.0) |
 | 16 | Furigana in Reading | ✅ Merged | [#22](https://github.com/yorairh/flurai/pull/22) | [v0.15.0](https://github.com/yorairh/flurai/releases/tag/v0.15.0) |
 | 17 | Listening practice (flashcard type + quiz) | ✅ Merged | [#23](https://github.com/yorairh/flurai/pull/23) | [v0.16.0](https://github.com/yorairh/flurai/releases/tag/v0.16.0) |
-| 18 | Custom decks | 🔍 In review | | |
-| 19 | Complete N5 grammar (25 → ~80 points) | ⏳ | | |
+| 18 | Custom decks | ✅ Merged | [#24](https://github.com/yorairh/flurai/pull/24) | [v0.17.0](https://github.com/yorairh/flurai/releases/tag/v0.17.0) |
+| 19 | Complete N5 grammar (25 → 89 points) | 🔍 In review | | |
 | 20 | Complete N4 grammar (22 → ~130 points) | ⏳ | | |
 | 21 | N3 grammar (full list, ~200 points) | ⏳ | | |
 
