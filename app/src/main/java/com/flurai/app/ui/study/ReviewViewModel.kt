@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.flurai.app.core.activity.ActivityTimer
+import com.flurai.app.core.activity.StudyClock
 import com.flurai.app.core.activity.StudyActivityRepository
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.content.ContentDao
@@ -92,8 +92,7 @@ class ReviewViewModel @Inject constructor(
 
     private var queue: StudyQueue? = null
     private var profile: StudyProfile? = null
-    private val timer = ActivityTimer()
-    private var wasTiming = false
+    private val clock = StudyClock(activity, { auth.uid })
     private var shownAt: Instant = Instant.now()
     private val uid: String? get() = auth.uid
 
@@ -105,14 +104,13 @@ class ReviewViewModel @Inject constructor(
             this@ReviewViewModel.profile = profile
             val session = repository.loadSession(uid, profile, source, Instant.now())
             queue = StudyQueue(session.cards, session.newItems, session.endOfDay)
-            timer.start()
             showNext()
         }
     }
 
     /** Audio plays with the answer, never before: hearing a word gives its reading away. */
     fun reveal() {
-        credit(reviews = 0)
+        clock.tap()
         _state.update { it.copy(revealed = true) }
         _state.value.current?.let { speaker.speak(it.content.speech) }
     }
@@ -124,7 +122,7 @@ class ReviewViewModel @Inject constructor(
         _state.update { it.copy(current = null) } // ignore double taps while saving
         viewModelScope.launch {
             val now = Instant.now()
-            credit(reviews = 1)
+            clock.tap(reviews = 1)
             val updated = repository.answer(uid, current.item, rating, now, Duration.between(shownAt, now))
             queue?.update(current.item, updated)
             _state.update { it.copy(answeredCount = it.answeredCount + 1) }
@@ -147,7 +145,6 @@ class ReviewViewModel @Inject constructor(
         val uid = uid ?: return
         val queue = queue ?: return
         _state.update { it.copy(loading = true) }
-        timer.start()
         viewModelScope.launch {
             val profile = profiles.profile(uid).first()
             val items = if (profile == null) emptyList() else repository.loadMore(uid, profile, from, count)
@@ -156,23 +153,11 @@ class ReviewViewModel @Inject constructor(
         }
     }
 
-    /** Adds the time since the last tap (capped at two minutes) to today's study time. */
-    private fun credit(reviews: Int) {
-        val uid = uid ?: return
-        activity.record(uid, Instant.now(), timer.tick(), reviews)
-    }
-
     /** The app left the foreground or the screen closed: stop the clock. */
-    fun onPause() {
-        val uid = uid ?: return
-        wasTiming = true
-        activity.record(uid, Instant.now(), timer.stop(), 0)
-    }
+    fun onPause() = clock.pause()
 
     /** Back in the foreground: the clock restarts (time away is not counted). */
-    fun onResume() {
-        if (wasTiming && !_state.value.finished) timer.start()
-    }
+    fun onResume() = clock.resume()
 
     /** Called when the screen comes back into view, so learning cards that became due show up. */
     fun refresh() {
@@ -195,10 +180,11 @@ class ReviewViewModel @Inject constructor(
         val now = Instant.now()
         val next = queue.next(now)
         if (next == null) {
-            uid?.let { activity.record(it, now, timer.stop(), 0) }
+            clock.finish()
+            val uid = uid
             val chosen = source != StudySource.Auto
-            val levels = if (chosen) emptySet() else uid?.let { repository.levelsWithNewWords(it) }.orEmpty()
-            val more = chosen && uid != null && profile?.let { repository.hasMoreNew(uid!!, it, source) } == true
+            val levels = if (chosen || uid == null) emptySet() else repository.levelsWithNewWords(uid)
+            val more = chosen && uid != null && profile?.let { repository.hasMoreNew(uid, it, source) } == true
             _state.update {
                 it.copy(
                     loading = false, current = null, finished = true, counts = queue.counts(),
@@ -213,6 +199,7 @@ class ReviewViewModel @Inject constructor(
             return showNext()
         }
         shownAt = now
+        clock.start() // also after "learn more" or a learning card coming back on the finished screen
         val existing = (next as? QueueItem.Existing)?.card
         _state.update {
             it.copy(

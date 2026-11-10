@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.flurai.app.core.activity.ActivityTimer
+import com.flurai.app.core.activity.StudyClock
 import com.flurai.app.core.activity.StudyActivityRepository
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.grammar.GrammarRepository
@@ -118,8 +118,9 @@ class QuizViewModel @Inject constructor(
     private val queue = ArrayDeque<Question>()
     private val answered = mutableListOf<Pair<Question, Boolean>>()
     private val placement = PlacementTest()
-    private val timer = ActivityTimer()
+    private val clock = StudyClock(activity, { auth.uid })
     private var profile: StudyProfile? = null
+    private var advancing = false
     private val uid: String? get() = auth.uid
 
     init {
@@ -140,7 +141,7 @@ class QuizViewModel @Inject constructor(
                 return@launch
             }
             queue.addAll(questions)
-            timer.start()
+            clock.start()
             showNext(total = if (kind == QuizKind.Placement) null else questions.size)
         }
     }
@@ -151,7 +152,7 @@ class QuizViewModel @Inject constructor(
         val correct = index == current.answer
         answered += current to correct
         if (kind == QuizKind.Placement) placement.answer(correct)
-        credit(reviews = 1)
+        clock.tap(reviews = 1)
         val uid = uid
         val grammarId = current.grammarId
         if (uid != null && grammarId != null) {
@@ -161,9 +162,10 @@ class QuizViewModel @Inject constructor(
     }
 
     fun next() {
-        if (_state.value.selected == null) return
+        if (_state.value.selected == null || advancing) return
+        advancing = true // a second tap while the result saves must not finish the test twice
         viewModelScope.launch {
-            credit(reviews = 0)
+            clock.tap()
             if (queue.isNotEmpty()) return@launch showNext(_state.value.total)
             if (kind == QuizKind.Placement && !placement.finished) {
                 _state.update { it.copy(loading = true) }
@@ -175,6 +177,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun showNext(total: Int?) {
+        advancing = false
         val question = queue.removeFirst()
         _state.update {
             it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null)
@@ -217,9 +220,10 @@ class QuizViewModel @Inject constructor(
                 takenAt = Instant.now().toEpochMilli(),
             ),
         )
-        activity.record(uid, Instant.now(), timer.stop(), 0)
+        clock.finish()
         _state.update {
             it.copy(
+                loading = false,
                 question = null,
                 result = QuizResult(
                     title = titleOf(kind), correct = correct, total = total, passed = passed,
@@ -252,19 +256,9 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    private fun credit(reviews: Int) {
-        val uid = uid ?: return
-        activity.record(uid, Instant.now(), timer.tick(), reviews)
-    }
+    fun onPause() = clock.pause()
 
-    fun onPause() {
-        val uid = uid ?: return
-        activity.record(uid, Instant.now(), timer.stop(), 0)
-    }
-
-    fun onResume() {
-        if (_state.value.result == null && !_state.value.loading) timer.start()
-    }
+    fun onResume() = clock.resume()
 
     private companion object {
         const val STAGE_SIZE = 5

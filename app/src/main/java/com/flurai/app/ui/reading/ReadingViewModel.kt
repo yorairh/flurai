@@ -1,6 +1,8 @@
 package com.flurai.app.ui.reading
 
 import com.flurai.app.core.activity.SettingsRepository
+import com.flurai.app.core.activity.StudyActivityRepository
+import com.flurai.app.core.activity.StudyClock
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -41,11 +43,16 @@ class ReadingViewModel @Inject constructor(
     private val reading: ReadingRepository,
     private val settings: SettingsRepository,
     private val study: StudyRepository,
+    activity: StudyActivityRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(ReadingUiState())
     val state: StateFlow<ReadingUiState> = _state
 
+    /** Reading counts as study time; every tap on the page keeps the clock going. */
+    private val clock = StudyClock(activity, { auth.uid })
+
     init {
+        clock.start()
         viewModelScope.launch {
             val uid = auth.uid
             val start = uid?.let { profiles.profile(it).first()?.level?.jlpt } ?: 5
@@ -66,7 +73,12 @@ class ReadingViewModel @Inject constructor(
 
     fun newSet() = load(_state.value.jlpt)
 
+    fun onPause() = clock.pause()
+
+    fun onResume() = clock.resume()
+
     private fun load(jlpt: Int) {
+        clock.tap()
         _state.update { it.copy(jlpt = jlpt, loading = true, selected = null) }
         viewModelScope.launch {
             val lexicon: Lexicon = reading.lexicon()
@@ -80,9 +92,15 @@ class ReadingViewModel @Inject constructor(
         }
     }
 
-    fun toggleTranslations() = _state.update { it.copy(showTranslations = !it.showTranslations) }
+    fun toggleTranslations() {
+        clock.tap()
+        _state.update { it.copy(showTranslations = !it.showTranslations) }
+    }
 
-    fun select(word: WordEntity?) = _state.update { it.copy(selected = word) }
+    fun select(word: WordEntity?) {
+        clock.tap()
+        _state.update { it.copy(selected = word) }
+    }
 
     fun addToFlashcards(word: WordEntity) {
         val uid = auth.uid ?: return

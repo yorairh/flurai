@@ -13,6 +13,7 @@ import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.srs.SrsCard
 import com.flurai.app.core.srs.SrsState
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import java.time.Duration
 import java.time.Instant
@@ -62,21 +63,30 @@ class StudyRepository @Inject constructor(
 
     private suspend fun listeningOn(uid: String) = settings.settings(uid).first().listeningCards
 
+    /** Cards due today; moves on by itself when the study day rolls over while a screen is open. */
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun dueCount(uid: String, now: Instant): Flow<Int> =
-        settings.settings(uid).map { it.listeningCards }.distinctUntilChanged().flatMapLatest { listening ->
-            study.dueCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening)
-        }
+    fun dueCount(uid: String): Flow<Int> =
+        combine(settings.settings(uid).map { it.listeningCards }.distinctUntilChanged(), StudyDay.ticks()) { l, now -> l to now }
+            .flatMapLatest { (listening, now) ->
+                study.dueCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening)
+            }
 
-    fun introducedToday(uid: String, now: Instant): Flow<Int> =
-        study.introducedSince(uid, StudyDay.start(now).toEpochMilli())
+    /** New items started today (counts against the daily allowance); follows the rollover too. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun introducedToday(uid: String): Flow<Int> =
+        StudyDay.ticks().flatMapLatest { now -> study.introducedSince(uid, StudyDay.start(now).toEpochMilli()) }
 
     fun introducedItems(uid: String): Flow<List<ItemRef>> = study.introducedItemsFlow(uid)
 
     fun cardsForItem(uid: String, item: ItemRef): Flow<List<CardEntity>> =
         study.cardsForItem(uid, item.itemType, item.itemId)
 
-    suspend fun wordLevels(): Map<Int, Int> = content.wordLevels().associate { it.id to it.jlpt }
+    @Volatile
+    private var levels: Map<Int, Int>? = null
+
+    /** Word id → JLPT number, read once (the content never changes while the app runs). */
+    suspend fun wordLevels(): Map<Int, Int> =
+        levels ?: content.wordLevels().associate { it.id to it.jlpt }.also { levels = it }
 
     /** Due cards plus today's remaining allowance of new items from [source]. */
     suspend fun loadSession(uid: String, profile: StudyProfile, source: StudySource, now: Instant): SessionData {

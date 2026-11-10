@@ -47,6 +47,8 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.ui.theme.japanese
@@ -68,6 +70,8 @@ fun ReadingScreen(
     viewModel: ReadingViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.onResume() }
+    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) { viewModel.onPause() }
     val context = LocalContext.current
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Reading") }, onBack = onBack)

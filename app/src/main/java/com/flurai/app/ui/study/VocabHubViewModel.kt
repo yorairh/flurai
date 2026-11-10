@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
-import java.time.Instant
 import javax.inject.Inject
 
 data class DeckProgress(val studying: Int, val total: Int)
@@ -50,8 +49,7 @@ class VocabHubViewModel @Inject constructor(
 
     val state: StateFlow<VocabHubState> = auth.currentUser.flatMapLatest { user ->
         if (user == null) return@flatMapLatest emptyFlow()
-        val now = Instant.now()
-        val newLeft = combine(profiles.profile(user.uid), repository.introducedToday(user.uid, now)) { profile, introduced ->
+        val newLeft = combine(profiles.profile(user.uid), repository.introducedToday(user.uid)) { profile, introduced ->
             ((profile?.newCardsPerDay ?: 0) - introduced).coerceAtLeast(0)
         }
         val myDecks = combine(decks.decks(user.uid), decks.members(user.uid), repository.introducedItems(user.uid)) { list, members, introduced ->
@@ -63,7 +61,7 @@ class VocabHubViewModel @Inject constructor(
             }
         }
         combine(
-            repository.dueCount(user.uid, now),
+            repository.dueCount(user.uid),
             newLeft,
             repository.introducedItems(user.uid),
             wordLevels,

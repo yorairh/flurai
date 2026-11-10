@@ -29,7 +29,11 @@ import com.flurai.app.core.video.CustomChannelDao
 import com.flurai.app.core.video.CustomChannelEntity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.Query
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Source
+import java.util.Date
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -132,6 +136,10 @@ class SyncEngine @Inject constructor(
 
     // -- pull ------------------------------------------------------------------------------------
 
+    /**
+     * What the pull took from the cloud. Ids listed here already match the cloud copy, so the push
+     * skips them; rows where the local copy won the merge are not listed and get uploaded.
+     */
     private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>)
 
     private suspend fun pull(uid: String, since: Long): Pulled {
@@ -140,8 +148,12 @@ class SyncEngine @Inject constructor(
         val dayIds = HashSet<Long>()
         val grammarIds = HashSet<Int>()
 
-        fun query(name: String) = user(uid).collection(name).whereGreaterThan("updatedAt", since)
-            .orderBy("updatedAt", Query.Direction.ASCENDING).get()
+        // updatedAt is the server's commit time, so phones with different clocks still agree on order.
+        // A first sync reads everything (older backups stored updatedAt as a plain number). Always
+        // from the server: a cached result could move the cursor past changes this phone hasn't seen.
+        fun query(name: String) = user(uid).collection(name).let { c ->
+            if (since == 0L) c.get(Source.SERVER) else c.whereGreaterThan("updatedAt", Timestamp(Date(since))).get(Source.SERVER)
+        }
 
         // The four downloads are independent: start them together, then merge one by one.
         val (cardDocs, dayDocs, testDocs, grammarDocs) = coroutineScope {
@@ -149,23 +161,26 @@ class SyncEngine @Inject constructor(
         }
 
         for (doc in cardDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
+            max = maxOf(max, updatedAt(doc))
             val card = cardFrom(uid, doc.data ?: continue) ?: continue
             val local = dao.card(uid, card.itemType, card.itemId, card.kind)
-            if (local == null || touched(card) > touched(local)) dao.upsertCard(card)
-            cardIds += doc.id
+            if (local == null || touched(card) > touched(local)) {
+                dao.upsertCard(card)
+                cardIds += doc.id
+            } else if (touched(card) == touched(local)) {
+                cardIds += doc.id
+            }
         }
         for (doc in dayDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
+            max = maxOf(max, updatedAt(doc))
             val day = doc.getLong("day") ?: continue
             val remote = StudyDayEntity(uid, day, (doc.getLong("seconds") ?: 0).toInt(), (doc.getLong("reviews") ?: 0).toInt())
-            val local = dao.day(uid, day)
-            // Time studied on two phones on the same day: keep the larger total, never lose time.
-            dao.upsertDay(local?.let { StudyDayEntity(uid, day, maxOf(it.seconds, remote.seconds), maxOf(it.reviews, remote.reviews)) } ?: remote)
-            dayIds += day
+            val merged = mergeDay(dao.day(uid, day), remote)
+            dao.upsertDay(merged)
+            if (merged == remote) dayIds += day
         }
         for (doc in testDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
+            max = maxOf(max, updatedAt(doc))
             val takenAt = doc.getLong("takenAt") ?: continue
             val type = doc.getString("type") ?: continue
             if (dao.testCount(uid, type, takenAt) == 0) {
@@ -179,15 +194,19 @@ class SyncEngine @Inject constructor(
             }
         }
         for (doc in grammarDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
+            max = maxOf(max, updatedAt(doc))
             val id = (doc.getLong("grammarId") ?: continue).toInt()
             val remote = GrammarProgressEntity(
                 uid, id, (doc.getLong("correct") ?: 0).toInt(), (doc.getLong("wrong") ?: 0).toInt(),
                 doc.getBoolean("lastCorrect") ?: false, doc.getLong("lastAt") ?: 0,
             )
             val local = grammar.get(uid, id)
-            if (local == null || remote.lastAt > local.lastAt) grammar.upsert(remote)
-            grammarIds += id
+            if (local == null || remote.lastAt > local.lastAt) {
+                grammar.upsert(remote)
+                grammarIds += id
+            } else if (remote.lastAt == local.lastAt) {
+                grammarIds += id
+            }
         }
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
@@ -224,7 +243,7 @@ class SyncEngine @Inject constructor(
     // -- push ------------------------------------------------------------------------------------
 
     private suspend fun push(uid: String, since: Long, pulled: Pulled) {
-        val now = System.currentTimeMillis()
+        val now = FieldValue.serverTimestamp()
         val writes = mutableListOf<Pair<com.google.firebase.firestore.DocumentReference, Map<String, Any?>>>()
 
         dao.cardsChangedSince(uid, since).filter { cardId(it) !in pulled.cardIds }.forEach { c ->
@@ -316,6 +335,14 @@ class SyncEngine @Inject constructor(
         const val TAG = "SyncEngine"
     }
 }
+
+/** A document's server write time in ms (backups from before 0.23.0 stored a plain number). */
+private fun updatedAt(doc: DocumentSnapshot): Long =
+    doc.getTimestamp("updatedAt")?.toDate()?.time ?: doc.getLong("updatedAt") ?: 0L
+
+/** Time studied on two phones on the same day: keep the larger totals, never lose time. */
+internal fun mergeDay(local: StudyDayEntity?, remote: StudyDayEntity): StudyDayEntity =
+    if (local == null) remote else remote.copy(seconds = maxOf(local.seconds, remote.seconds), reviews = maxOf(local.reviews, remote.reviews))
 
 internal fun cardId(c: CardEntity) = "${c.itemType.name}-${c.itemId}-${c.kind.name}"
 

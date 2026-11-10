@@ -1,5 +1,6 @@
 package com.flurai.app.core.sync
 
+import com.flurai.app.core.activity.StudyDayEntity
 import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.ItemType
@@ -36,6 +37,15 @@ class SyncTest {
             "lapses" to 1L, "suspended" to false, "buriedUntil" to null, "createdAt" to 100L,
         )
         assertEquals(card, cardFrom("u", data))
+    }
+
+    @Test
+    fun daysMergeToTheLargerTotals() {
+        val remote = StudyDayEntity("u", 10, seconds = 300, reviews = 5)
+        assertEquals(remote, mergeDay(null, remote))
+        assertEquals(StudyDayEntity("u", 10, 600, 5), mergeDay(StudyDayEntity("u", 10, 600, 2), remote))
+        // Only when the cloud copy already holds everything can the upload be skipped.
+        assertEquals(remote, mergeDay(StudyDayEntity("u", 10, 100, 1), remote))
     }
 
     @Test
