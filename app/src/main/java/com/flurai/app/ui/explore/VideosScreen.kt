@@ -80,7 +80,7 @@ fun VideosScreen(onBack: () -> Unit, viewModel: VideosViewModel = hiltViewModel(
             Text("For the grammar you struggle with", style = MaterialTheme.typography.titleMedium)
             if (state.weakGrammar.isEmpty()) {
                 Text(
-                    "Practise some grammar and the points you miss most will show up here, each with a video search.",
+                    "Practice some grammar and the points you miss most will show up here, each with a video search.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

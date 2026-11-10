@@ -108,7 +108,7 @@ class GrammarDetailViewModel @Inject constructor(
     }
 
     private fun progressText(progress: GrammarProgressEntity?): String? = when (grammarStatus(progress)) {
-        GrammarStatus.New -> "Not practised yet."
+        GrammarStatus.New -> "Not practiced yet."
         GrammarStatus.Learning ->
             "${progress?.correct ?: 0} right, ${progress?.wrong ?: 0} wrong so far. Answer $KNOWN_AFTER_CORRECT right (the latest one included) to mark it known."
         GrammarStatus.Known -> "Known: ${progress?.correct ?: 0} right answers."

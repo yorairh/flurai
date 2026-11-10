@@ -79,9 +79,9 @@ fun GrammarListScreen(
                         )
                     }
                 }
-                item(key = "practise-${level.jlpt}") {
+                item(key = "practice-${level.jlpt}") {
                     OutlinedButton(onClick = { onPractice(level.jlpt) }, modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
-                        Text("Practise N${level.jlpt} grammar")
+                        Text("Practice N${level.jlpt} grammar")
                     }
                 }
                 // The rows of one level look like a single card: round only the first and last.
@@ -183,7 +183,7 @@ fun GrammarDetailScreen(
             Button(
                 onClick = { onPractice(point.jlpt, point.id) },
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Practise this point") }
+            ) { Text("Practice this point") }
             val context = androidx.compose.ui.platform.LocalContext.current
             OutlinedButton(
                 onClick = {

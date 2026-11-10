@@ -26,7 +26,7 @@ private val sources = listOf(
         "Creative Commons Attribution-ShareAlike 4.0",
         "This app uses the JMdict/EDICT and KANJIDIC dictionary files. These files are the property of the " +
             "Electronic Dictionary Research and Development Group, and are used in conformance with the " +
-            "Group's licence (edrdg.org/edrdg/licence.html). Converted to JSON by jmdict-simplified (scriptin).",
+            "Group's license (edrdg.org/edrdg/licence.html). Converted to JSON by jmdict-simplified (scriptin).",
     ),
     Source(
         "JLPT word and kanji lists",
@@ -54,7 +54,7 @@ private val sources = listOf(
 @Composable
 fun LicencesScreen(onBack: () -> Unit) {
     Column(Modifier.fillMaxSize()) {
-        BackTopAppBar(title = { Text("Data sources & licences") }, onBack = onBack)
+        BackTopAppBar(title = { Text("Data sources & licenses") }, onBack = onBack)
         Column(
             Modifier.verticalScroll(rememberScrollState()).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
