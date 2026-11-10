@@ -14,6 +14,15 @@ import com.flurai.app.core.video.CustomChannelEntity
 // cloud's. All pure. The documents' layout is a stored format: backups written by earlier versions
 // must stay readable, so field names here never change.
 
+/** The collections that hold one document per row, in the order the pull reads them. */
+internal val ROW_COLLECTIONS = listOf("cards", "days", "tests", "grammar")
+
+/** Small whole-document items (profile, channels, decks). */
+internal const val META_COLLECTION = "meta"
+
+/** Every collection of a user's backup (what deleting the cloud copy removes). */
+internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION
+
 /** Firestore returns every whole number as Long and every fraction as Double. */
 private fun Map<String, Any?>.int(key: String) = (this[key] as? Number)?.toInt()
 private fun Map<String, Any?>.long(key: String) = (this[key] as? Number)?.toLong()

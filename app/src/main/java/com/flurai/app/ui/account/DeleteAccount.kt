@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.account.AccountMover
+import com.flurai.app.core.account.UserTables
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.GUEST_UID
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -103,9 +104,8 @@ fun DeleteAccountSection(viewModel: DeleteAccountViewModel = hiltViewModel()) {
             title = { Text("Delete your account?") },
             text = {
                 Text(
-                    "This permanently deletes your FluRai account and everything it holds on this phone: flashcards, " +
-                        "review history, streaks, test results, grammar progress, your channels, level and settings. " +
-                        "It cannot be undone.",
+                    "This permanently deletes your FluRai account and everything it holds on this phone and in the cloud: " +
+                        "${UserTables.erasedSummary()}. It cannot be undone.",
                 )
             },
             confirmButton = {
@@ -179,8 +179,8 @@ fun EraseGuestSection(viewModel: EraseGuestViewModel = hiltViewModel()) {
             title = { Text("Erase all guest data?") },
             text = {
                 Text(
-                    "This permanently deletes the flashcards, review history, streaks, test results, grammar progress, " +
-                        "level and settings of the guest profile on this phone. It cannot be undone.",
+                    "This permanently deletes everything the guest profile holds on this phone: ${UserTables.erasedSummary()}. " +
+                        "It cannot be undone.",
                 )
             },
             confirmButton = {

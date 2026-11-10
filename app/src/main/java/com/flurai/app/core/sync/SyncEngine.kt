@@ -95,7 +95,7 @@ class SyncEngine internal constructor(
     suspend fun markAllDirty(uid: String) = prefs.markAllDirty(uid)
 
     /** Deletes this user's cloud copy. Needs the user to still be signed in. */
-    suspend fun deleteRemote(uid: String) = cloud.deleteAll(uid, COLLECTIONS + META)
+    suspend fun deleteRemote(uid: String) = cloud.deleteAll(uid, CLOUD_COLLECTIONS)
 
     // -- pull ------------------------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ class SyncEngine internal constructor(
 
         // The downloads are independent: start them together, then merge one by one.
         val (cardDocs, dayDocs, testDocs, grammarDocs) = coroutineScope {
-            COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
+            ROW_COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
         }
 
         for (doc in cardDocs) {
@@ -145,16 +145,16 @@ class SyncEngine internal constructor(
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
         if (!prefs.hasProfile(uid)) {
-            val saved = cloud.document(uid, META, "profile")?.get("prefs") as? Map<*, *>
+            val saved = cloud.document(uid, META_COLLECTION, "profile")?.get("prefs") as? Map<*, *>
             if (saved != null) prefs.import(uid, saved)
         }
         // Channels and decks: likewise, restored only when this phone has none.
         if (local.channels(uid).isEmpty()) {
-            val items = cloud.document(uid, META, "channels")?.get("items") as? List<*>
+            val items = cloud.document(uid, META_COLLECTION, "channels")?.get("items") as? List<*>
             items?.filterIsInstance<Map<*, *>>()?.mapNotNull { channelFrom(uid, it) }?.forEach { local.insertChannel(it) }
         }
         if (local.decks(uid).isEmpty()) {
-            val items = cloud.document(uid, META, "decks")?.get("items") as? List<*>
+            val items = cloud.document(uid, META_COLLECTION, "decks")?.get("items") as? List<*>
             items?.filterIsInstance<Map<*, *>>()?.mapNotNull { deckFrom(uid, it) }?.forEach { local.createDeck(it.deck, it.words, it.deck.createdAt) }
         }
         return Pulled(max, cardIds, dayIds, grammarIds)
@@ -182,20 +182,12 @@ class SyncEngine internal constructor(
         val metaHash = Triple(channels, settings, decks).hashCode().toLong()
         val metaChanged = since == 0L || prefs.uploadedHash(uid) != metaHash
         if (metaChanged) {
-            writes += CloudWrite(META, "channels", mapOf("items" to channels))
-            writes += CloudWrite(META, "decks", mapOf("items" to decks))
-            if (settings.isNotEmpty()) writes += CloudWrite(META, "profile", mapOf("prefs" to settings))
+            writes += CloudWrite(META_COLLECTION, "channels", mapOf("items" to channels))
+            writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to decks))
+            if (settings.isNotEmpty()) writes += CloudWrite(META_COLLECTION, "profile", mapOf("prefs" to settings))
         }
 
         if (writes.isNotEmpty()) cloud.write(uid, writes)
         if (metaChanged) prefs.saveUploadedHash(uid, metaHash)
-    }
-
-    private companion object {
-        /** The collections that hold one document per row, in the order [pull] reads them. */
-        val COLLECTIONS = listOf("cards", "days", "tests", "grammar")
-
-        /** Small whole-document items (profile, channels, decks). */
-        const val META = "meta"
     }
 }
