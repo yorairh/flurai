@@ -1,6 +1,7 @@
 package com.flurai.app.ui.reading
 
 import com.flurai.app.core.reading.rubyParts
+import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
@@ -199,15 +200,26 @@ private fun RubySentence(tokens: List<Token>, onWord: (WordEntity) -> Unit) {
     val main = MaterialTheme.typography.titleLarge.japanese()
     val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 12.sp, textAlign = TextAlign.Center)
     val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
+    // Units that may wrap as a whole: a tappable word, or one plain character. Closing punctuation
+    // is stuck to the unit before it, so a lone 。 never lands on a line of its own.
+    class Unit(val word: WordEntity?, val parts: List<RubyPart>, val tail: String = "")
+    val units = mutableListOf<Unit>()
+    tokens.forEach { token ->
+        val word = token.word
+        if (word != null) {
+            units += Unit(word, rubyParts(token.text, word.reading))
+        } else {
+            token.text.forEach { c ->
+                if (c in "。、．，！？!?」』）)…" && units.isNotEmpty()) units[units.lastIndex] = units.last().let { Unit(it.word, it.parts, it.tail + c) }
+                else units += Unit(null, listOf(RubyPart(c.toString(), null)))
+            }
+        }
+    }
     FlowRow(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        tokens.forEach { token ->
-            val word = token.word
-            if (word == null) {
-                token.text.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
-            } else {
-                Row(Modifier.clickable { onWord(word) }) {
-                    rubyParts(token.text, word.reading).forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = true) }
-                }
+        units.forEach { u ->
+            Row(if (u.word != null) Modifier.clickable { onWord(u.word) } else Modifier) {
+                u.parts.forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = u.word != null) }
+                u.tail.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
             }
         }
     }
