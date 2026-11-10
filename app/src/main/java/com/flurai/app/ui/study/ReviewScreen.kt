@@ -109,6 +109,8 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
             state.loading -> LoadingBox()
             state.finished -> Finished(
                 state.answeredCount, state.comeBackAt, state.levelsWithWords, state.noMoreWords,
+                deckSession = state.deckSession, deckHasMore = state.deckHasMore,
+                onMoreDeck = { viewModel.learnMore() },
                 onMore = viewModel::learnMore, onBack = onBack,
             )
             current != null -> {
@@ -288,6 +290,9 @@ private fun Finished(
     comeBackAt: Instant?,
     levelsWithWords: Set<Int>,
     noMoreWords: Boolean,
+    deckSession: Boolean,
+    deckHasMore: Boolean,
+    onMoreDeck: () -> Unit,
     onMore: (StudySource) -> Unit,
     onBack: () -> Unit,
 ) {
@@ -318,7 +323,14 @@ private fun Finished(
             )
         }
         Spacer(Modifier.height(24.dp))
-        if (levelsWithWords.isNotEmpty()) {
+        if (deckSession) {
+            // A deck you chose only ever continues with itself.
+            if (deckHasMore) {
+                Button(onClick = onMoreDeck, modifier = Modifier.fillMaxWidth()) { Text("10 more words from this deck") }
+            } else {
+                Text("No new words left in this deck.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        } else if (levelsWithWords.isNotEmpty()) {
             Spacer(Modifier.height(24.dp))
             Text("Want to learn more?", style = MaterialTheme.typography.titleMedium)
             if (noMoreWords) {

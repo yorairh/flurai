@@ -25,15 +25,30 @@ import kotlinx.coroutines.flow.Flow
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class], version = 5, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class], version = 6, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun studyDayDao(): StudyDayDao
     abstract fun testResultDao(): TestResultDao
     abstract fun grammarProgressDao(): GrammarProgressDao
     abstract fun customChannelDao(): CustomChannelDao
+    abstract fun deckDao(): DeckDao
     abstract fun accountDao(): com.flurai.app.core.account.AccountDao
     abstract fun syncDao(): com.flurai.app.core.sync.SyncDao
+}
+
+/** 5 → 6: the learner's own word decks. */
+val MIGRATION_5_6 = object : Migration(5, 6) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `deck` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "`uid` TEXT NOT NULL, `name` TEXT NOT NULL, `created_at` INTEGER NOT NULL)",
+        )
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `deck_word` (`deck_id` INTEGER NOT NULL, `word_id` INTEGER NOT NULL, " +
+                "`added_at` INTEGER NOT NULL, PRIMARY KEY(`deck_id`, `word_id`))",
+        )
+    }
 }
 
 /** 4 → 5: channels the learner added. */
@@ -88,11 +103,14 @@ data class StateCount(val state: Int, val count: Int)
 
 @Dao
 interface StudyDao {
-    /** Cards to study before [until]: not suspended, not buried. */
+    /**
+     * Cards to study before [until] (the end of the study day, exclusive: a card unlocked "for tomorrow"
+     * is due exactly then and must not count today): not suspended, not buried.
+     */
     @Query(
         """
         SELECT * FROM card
-        WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+        WHERE uid = :uid AND due < :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
             AND (:listening OR kind != 'Listening')
         ORDER BY due
         """,
@@ -102,7 +120,7 @@ interface StudyDao {
     @Query(
         """
         SELECT COUNT(*) FROM card
-        WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+        WHERE uid = :uid AND due < :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
             AND (:listening OR kind != 'Listening')
         """,
     )

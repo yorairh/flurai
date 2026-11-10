@@ -1,5 +1,7 @@
 package com.flurai.app.core.sync
 
+import com.flurai.app.core.study.DeckEntity
+import com.flurai.app.core.study.DeckDao
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.awaitAll
@@ -60,6 +62,7 @@ class SyncEngine @Inject constructor(
     private val tests: TestResultDao,
     private val grammar: GrammarProgressDao,
     private val channels: CustomChannelDao,
+    private val decks: DeckDao,
     private val dataStore: DataStore<Preferences>,
 ) {
     private val mutex = Mutex()
@@ -205,6 +208,16 @@ class SyncEngine @Inject constructor(
                 )
             }
         }
+        // Decks: likewise, restored only when this phone has none.
+        if (decks.decksNow(uid).isEmpty()) {
+            val items = user(uid).collection("meta").document("decks").get().await().get("items") as? List<*>
+            items?.filterIsInstance<Map<*, *>>()?.forEach { m ->
+                val name = m["name"] as? String ?: return@forEach
+                val words = (m["words"] as? List<*>)?.mapNotNull { (it as? Long)?.toInt() }.orEmpty()
+                val createdAt = m["createdAt"] as? Long ?: 0
+                decks.create(DeckEntity(uid = uid, name = name, createdAt = createdAt), words, createdAt)
+            }
+        }
         return Pulled(max, cardIds, dayIds, grammarIds)
     }
 
@@ -248,10 +261,14 @@ class SyncEngine @Inject constructor(
         val items = dao.channels(uid).map { mapOf("name" to it.name, "url" to it.url, "level" to it.level, "addedAt" to it.addedAt) }
         val prefs = readPrefs(uid)
         val metaKey = longPreferencesKey("$uid.sync.meta")
-        val metaHash = (items to prefs).hashCode().toLong()
+        val deckItems = decks.decksNow(uid).map { d ->
+            mapOf("name" to d.name, "createdAt" to d.createdAt, "words" to decks.wordIds(d.id))
+        }
+        val metaHash = Triple(items, prefs, deckItems).hashCode().toLong()
         if (since == 0L || dataStore.data.first()[metaKey] != metaHash) {
             coroutineScope {
                 launch { user(uid).collection("meta").document("channels").set(mapOf("items" to items, "updatedAt" to now)).await() }
+                launch { user(uid).collection("meta").document("decks").set(mapOf("items" to deckItems, "updatedAt" to now)).await() }
                 if (prefs.isNotEmpty()) launch { user(uid).collection("meta").document("profile").set(mapOf("prefs" to prefs, "updatedAt" to now)).await() }
             }
             dataStore.edit { it[metaKey] = metaHash }

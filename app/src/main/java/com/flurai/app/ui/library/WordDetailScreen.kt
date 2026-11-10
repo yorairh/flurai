@@ -1,5 +1,13 @@
 package com.flurai.app.ui.library
 
+import kotlinx.coroutines.flow.map
+import com.flurai.app.ui.study.DeckPickerDialog
+import com.flurai.app.core.study.DeckRepository
+import com.flurai.app.core.study.DeckEntity
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material3.OutlinedButton
 import com.flurai.app.core.auth.uid
 import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.layout.Arrangement
@@ -74,6 +82,7 @@ class WordDetailViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val study: StudyRepository,
     private val speaker: JapaneseSpeaker,
+    private val decks: DeckRepository,
 ) : ViewModel() {
     private val item = ItemRef(ItemType.Word, savedStateHandle.toRoute<WordRoute>().id)
     private val _detail = MutableStateFlow<WordDetail?>(null)
@@ -83,6 +92,15 @@ class WordDetailViewModel @Inject constructor(
     val cards: StateFlow<List<CardEntity>> = auth.currentUser
         .flatMapLatest { user -> if (user == null) flowOf(emptyList()) else study.cardsForItem(user.uid, item) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    /** The learner's decks, and which of them contain this word. */
+    val deckList: StateFlow<List<DeckEntity>> = auth.currentUser
+        .flatMapLatest { user -> if (user == null) flowOf(emptyList()) else decks.decks(user.uid) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    val inDecks: StateFlow<Set<Long>> = auth.currentUser
+        .flatMapLatest { user -> if (user == null) flowOf(emptySet()) else decks.decksWithWord(user.uid, item.itemId).map { it.toSet() } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptySet())
 
     init {
         speaker.start()
@@ -101,6 +119,12 @@ class WordDetailViewModel @Inject constructor(
         viewModelScope.launch { action(uid) }
     }
 
+    fun setInDeck(deckId: Long, inDeck: Boolean) {
+        viewModelScope.launch { if (inDeck) decks.addWord(deckId, item.itemId) else decks.removeWord(deckId, item.itemId) }
+    }
+
+    fun createDeckWithWord(name: String) = withUid { decks.create(it, name, listOf(item.itemId)) }
+
     fun startLearning() = withUid { study.addToStudy(it, item, Instant.now()) }
     fun setSuspended(suspended: Boolean) = withUid { study.setSuspended(it, item, suspended) }
     fun reset() = withUid { study.reset(it, item) }
@@ -111,6 +135,9 @@ class WordDetailViewModel @Inject constructor(
 fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltViewModel()) {
     val detail by viewModel.detail.collectAsStateWithLifecycle()
     val cards by viewModel.cards.collectAsStateWithLifecycle()
+    val deckList by viewModel.deckList.collectAsStateWithLifecycle()
+    val inDecks by viewModel.inDecks.collectAsStateWithLifecycle()
+    var pickingDeck by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
@@ -157,6 +184,9 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
                 onSuspend = viewModel::setSuspended,
                 onReset = viewModel::reset,
             )
+            OutlinedButton(onClick = { pickingDeck = true }, modifier = Modifier.fillMaxWidth()) {
+                Text(if (inDecks.isEmpty()) "Add to a deck" else "In ${inDecks.size} of your decks · change")
+            }
 
             Text("Examples", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
             if (d.sentences.isEmpty()) {
@@ -170,6 +200,15 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
                 modifier = Modifier.padding(bottom = 24.dp),
             )
         }
+    }
+    if (pickingDeck) {
+        DeckPickerDialog(
+            decks = deckList,
+            selected = inDecks,
+            onToggle = viewModel::setInDeck,
+            onCreate = viewModel::createDeckWithWord,
+            onDismiss = { pickingDeck = false },
+        )
     }
 }
 

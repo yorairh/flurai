@@ -41,7 +41,7 @@ class StudyRepositoryTest {
         private fun all() = cards.value.values
 
         override suspend fun dueCards(uid: String, until: Long, now: Long, listening: Boolean) =
-            all().filter { it.due <= until && !it.suspended && (it.buriedUntil ?: 0) <= now && (listening || it.kind != CardKind.Listening) }.sortedBy { it.due }
+            all().filter { it.due < until && !it.suspended && (it.buriedUntil ?: 0) <= now && (listening || it.kind != CardKind.Listening) }.sortedBy { it.due }
         override fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int> = cards.map { it.size }
         override suspend fun introducedItems(uid: String) = all().map { ItemRef(it.itemType, it.itemId) }.distinct()
         override fun introducedItemsFlow(uid: String) = cards.map { m -> m.values.map { ItemRef(it.itemType, it.itemId) }.distinct() }
@@ -98,7 +98,12 @@ class StudyRepositoryTest {
     private val settings by lazy {
         SettingsRepository(PreferenceDataStoreFactory.create(scope = CoroutineScope(Dispatchers.Unconfined + SupervisorJob())) { tmp.newFile("s.preferences_pb").also { it.delete() } })
     }
-    private val repo by lazy { StudyRepository(dao, FakeContentDao(), settings) }
+    private val deckWords = mutableMapOf<Long, List<Int>>()
+    private val repo by lazy {
+        StudyRepository(dao, FakeContentDao(), settings, object : DeckWords {
+            override suspend fun wordIds(deckId: Long) = deckWords[deckId].orEmpty()
+        })
+    }
 
     private fun profile(level: JlptLevel, newPerDay: Int = 10, hiragana: Boolean = true, katakana: Boolean = true) =
         StudyProfile(level, 15, newPerDay, hiragana, katakana)
@@ -152,6 +157,69 @@ class StudyRepositoryTest {
         repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Easy, now, Duration.ZERO)
         assertNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Listening)])
         assertNotNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Production)])
+    }
+
+    @Test
+    fun aDeckSessionOnlyOffersThatDecksWords() = runTest {
+        deckWords[7] = listOf(2, 10) // one N5 and one N4 word
+        val session = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Deck(7), now)
+        assertEquals(listOf(ItemRef(ItemType.Word, 2), ItemRef(ItemType.Word, 10)), session.newItems)
+    }
+
+    @Test
+    fun aDeckSessionSkipsDueCardsOfOtherWords() = runTest {
+        deckWords[7] = listOf(2)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Again, now, Duration.ZERO)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 2)), Rating.Again, now, Duration.ZERO)
+        val session = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Deck(7), now.plusSeconds(3600))
+        assertEquals(listOf(2), session.cards.map { it.itemId })
+    }
+
+    @Test
+    fun aLevelSessionOnlyReviewsThatLevelsWords() = runTest {
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Again, now, Duration.ZERO) // N5
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 10)), Rating.Again, now, Duration.ZERO) // N4
+        val later = now.plusSeconds(3600)
+        assertEquals(listOf(1), repo.loadSession("u", profile(JlptLevel.N5), StudySource.Level(5), later).cards.map { it.itemId })
+        assertEquals(listOf(10), repo.loadSession("u", profile(JlptLevel.N5), StudySource.Level(4), later).cards.map { it.itemId })
+        assertEquals(2, repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, later).cards.size)
+    }
+
+    @Test
+    fun aKanaSessionOnlyReviewsThatScript() = runTest {
+        val hira = KanaData.of(KanaScript.Hiragana).first().id
+        val kata = KanaData.of(KanaScript.Katakana).first().id
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Kana, hira)), Rating.Again, now, Duration.ZERO)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Kana, kata)), Rating.Again, now, Duration.ZERO)
+        val session = repo.loadSession("u", profile(JlptLevel.N5), StudySource.KanaDeck(KanaScript.Katakana), now.plusSeconds(3600))
+        assertEquals(listOf(kata), session.cards.map { it.itemId })
+    }
+
+    @Test
+    fun aDeckYouChoseIgnoresTodaysNewWordAllowance() = runTest {
+        val p = profile(JlptLevel.N5, newPerDay = 2)
+        repo.loadSession("u", p, StudySource.Auto, now).newItems.forEach { repo.answer("u", QueueItem.New(it), Rating.Good, now, Duration.ZERO) }
+        assertEquals(0, repo.loadSession("u", p, StudySource.Auto, now).newItems.size)
+        assertEquals(1, repo.loadSession("u", p, StudySource.Level(5), now).newItems.size)
+    }
+
+    @Test
+    fun cardsUnlockedForTomorrowAreNotDueToday() = runTest {
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Easy, now, Duration.ZERO)
+        assertEquals(3, dao.cards.value.size) // recognition, production and listening
+        // Today: the learned recognition card is scheduled days ahead and the two unlocked cards wait for 4 a.m.
+        val today = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, now.plusSeconds(60))
+        assertEquals(emptyList<CardKind>(), today.cards.map { it.kind })
+        // After the rollover the unlocked ones are due.
+        val tomorrow = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, StudyDay.end(now).plusSeconds(60))
+        assertEquals(setOf(CardKind.Production, CardKind.Listening), tomorrow.cards.map { it.kind }.toSet())
+    }
+
+    @Test
+    fun sourceRoundTripsThroughNavigationArguments() {
+        listOf(StudySource.Auto, StudySource.Level(4), StudySource.KanaDeck(KanaScript.Katakana), StudySource.Deck(12)).forEach {
+            assertEquals(it, StudySource.decode(it.encode()))
+        }
     }
 
     @Test

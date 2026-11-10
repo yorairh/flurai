@@ -218,9 +218,13 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                                 Button(onClick = { viewModel.addWords() }, modifier = Modifier.fillMaxWidth()) {
                                     Text("Learn the top ${analysis.learnable.size} words first")
                                 }
+                                OutlinedButton(onClick = { viewModel.saveAsDeck() }, modifier = Modifier.fillMaxWidth(), enabled = state.savedDeck == null) {
+                                    Text("Save them as a deck")
+                                }
                             }
                         }
                     }
+                    state.savedDeck?.let { Text("Saved as the deck \"$it\" (Learn → Flashcards → My decks).", style = MaterialTheme.typography.bodyMedium) }
                     state.added?.let { Text("Added $it words to your flashcards.", style = MaterialTheme.typography.bodyMedium) }
                 }
             }

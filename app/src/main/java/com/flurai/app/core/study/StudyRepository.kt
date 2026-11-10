@@ -25,16 +25,21 @@ sealed interface StudySource {
     data class Level(val jlpt: Int) : StudySource
     data class KanaDeck(val script: KanaScript) : StudySource
 
+    /** One of the learner's own decks. */
+    data class Deck(val id: Long) : StudySource
+
     /** Round-trips through navigation arguments. */
     fun encode(): String = when (this) {
         Auto -> "auto"
         is Level -> "n$jlpt"
         is KanaDeck -> script.name
+        is Deck -> "deck-$id"
     }
 
     companion object {
         fun decode(value: String): StudySource = when {
             value == "auto" -> Auto
+            value.startsWith("deck-") -> Deck(value.removePrefix("deck-").toLong())
             value.startsWith("n") -> Level(value.drop(1).toInt())
             else -> KanaDeck(KanaScript.valueOf(value))
         }
@@ -51,6 +56,7 @@ class StudyRepository @Inject constructor(
     private val study: StudyDao,
     private val content: ContentDao,
     private val settings: SettingsRepository,
+    private val deckWords: DeckWords,
 ) {
     private val scheduler = FsrsScheduler()
 
@@ -75,9 +81,26 @@ class StudyRepository @Inject constructor(
     /** Due cards plus today's remaining allowance of new items from [source]. */
     suspend fun loadSession(uid: String, profile: StudyProfile, source: StudySource, now: Instant): SessionData {
         val endOfDay = StudyDay.end(now)
-        val cards = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli(), listeningOn(uid))
-        val introducedToday = study.introducedSince(uid, StudyDay.start(now).toEpochMilli())
-        val allowance = (profile.newCardsPerDay - introducedToday.first()).coerceAtLeast(0)
+        val due = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli(), listeningOn(uid))
+        // Studying one chosen deck: only that deck's cards come up, due or new.
+        val cards = when (source) {
+            StudySource.Auto -> due
+            is StudySource.Level -> {
+                val levels = wordLevels()
+                due.filter { it.itemType == ItemType.Word && levels[it.itemId] == source.jlpt }
+            }
+            is StudySource.KanaDeck -> due.filter { it.itemType == ItemType.Kana && KanaData.byId(it.itemId)?.script == source.script }
+            is StudySource.Deck -> {
+                val inDeck = deckWords.wordIds(source.id).toSet()
+                due.filter { it.itemType == ItemType.Word && it.itemId in inDeck }
+            }
+        }
+        // The daily allowance paces the automatic session. A deck you chose yourself always gets a batch.
+        val allowance = if (source == StudySource.Auto) {
+            (profile.newCardsPerDay - study.introducedSince(uid, StudyDay.start(now).toEpochMilli()).first()).coerceAtLeast(0)
+        } else {
+            profile.newCardsPerDay
+        }
         val newItems = if (allowance == 0) emptyList() else newCandidates(uid, profile, source).take(allowance)
         return SessionData(cards, newItems, endOfDay)
     }
@@ -85,6 +108,10 @@ class StudyRepository @Inject constructor(
     /** Extra new items past the daily allowance: the learner asked to keep going. */
     suspend fun loadMore(uid: String, profile: StudyProfile, source: StudySource, count: Int): List<ItemRef> =
         newCandidates(uid, profile, source).take(count)
+
+    /** Whether [source] still has items that were never studied. */
+    suspend fun hasMoreNew(uid: String, profile: StudyProfile, source: StudySource): Boolean =
+        newCandidates(uid, profile, source).isNotEmpty()
 
     /** JLPT lists that still have words not yet studied, for the "learn more" picker. */
     suspend fun levelsWithNewWords(uid: String): Set<Int> {
@@ -104,6 +131,7 @@ class StudyRepository @Inject constructor(
         return when (source) {
             is StudySource.KanaDeck -> kana(source.script)
             is StudySource.Level -> words(source.jlpt)
+            is StudySource.Deck -> fresh(deckWords.wordIds(source.id).map { ItemRef(ItemType.Word, it) })
             StudySource.Auto -> {
                 if (profile.level == JlptLevel.Beginner) {
                     if (!profile.knowsHiragana) kana(KanaScript.Hiragana).ifEmpty { null }?.let { return it }
