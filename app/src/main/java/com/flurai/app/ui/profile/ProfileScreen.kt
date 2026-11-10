@@ -60,7 +60,7 @@ fun ProfileScreen(
         },
         footer = {
             TextButton(onClick = onOpenLicences, modifier = Modifier.fillMaxWidth()) {
-                Text("Data sources & licences")
+                Text("Data sources & licenses")
             }
         },
     )

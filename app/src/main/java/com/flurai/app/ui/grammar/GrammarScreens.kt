@@ -1,5 +1,7 @@
 package com.flurai.app.ui.grammar
 
+import com.flurai.app.core.model.JlptNumbers
+import androidx.compose.material3.FilterChip
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -52,13 +54,22 @@ fun GrammarListScreen(
     viewModel: GrammarListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val selected by viewModel.selected.collectAsStateWithLifecycle()
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
-        // Lazy, so only the rows on screen are built: the list grows a lot once N3 to N1 arrive.
+        // One level at a time, like the Reading screen: with hundreds of points a single list is too long.
+        Row(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            JlptNumbers.forEach { n ->
+                FilterChip(selected = selected == n, onClick = { viewModel.select(n) }, label = { Text("N$n", maxLines = 1) })
+            }
+        }
+        // Lazy, so only the rows on screen are built.
+        // A new list state per level, so each level starts at its top.
+        androidx.compose.runtime.key(selected) {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
         ) {
-            state.levels.forEach { level ->
+            state.levels.filter { it.jlpt == selected }.forEach { level ->
                 item(key = "header-${level.jlpt}") {
                     Box(Modifier.padding(vertical = 6.dp)) {
                         SectionHeader(
@@ -68,9 +79,9 @@ fun GrammarListScreen(
                         )
                     }
                 }
-                item(key = "practise-${level.jlpt}") {
+                item(key = "practice-${level.jlpt}") {
                     OutlinedButton(onClick = { onPractice(level.jlpt) }, modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
-                        Text("Practise N${level.jlpt} grammar")
+                        Text("Practice N${level.jlpt} grammar")
                     }
                 }
                 // The rows of one level look like a single card: round only the first and last.
@@ -93,11 +104,12 @@ fun GrammarListScreen(
             }
             item(key = "footer") {
                 Text(
-                    "N3 to N1 grammar arrives in later updates.",
+                    "Grammar for every level from N5 to N1. Examples are written for this app.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+        }
         }
     }
 }
@@ -171,7 +183,7 @@ fun GrammarDetailScreen(
             Button(
                 onClick = { onPractice(point.jlpt, point.id) },
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Practise this point") }
+            ) { Text("Practice this point") }
             val context = androidx.compose.ui.platform.LocalContext.current
             OutlinedButton(
                 onClick = {

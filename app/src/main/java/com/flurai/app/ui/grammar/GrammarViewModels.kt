@@ -1,5 +1,7 @@
 package com.flurai.app.ui.grammar
 
+import kotlinx.coroutines.flow.first
+import com.flurai.app.core.profile.StudyProfileRepository
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -38,7 +40,31 @@ data class GrammarListState(val levels: List<GrammarLevel> = emptyList())
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class GrammarListViewModel @Inject constructor(auth: AuthRepository, grammar: GrammarRepository) : ViewModel() {
+class GrammarListViewModel @Inject constructor(
+    auth: AuthRepository,
+    grammar: GrammarRepository,
+    profiles: StudyProfileRepository,
+) : ViewModel() {
+    private val _selected = MutableStateFlow(5)
+
+    /** The JLPT level shown in the list. Starts at the learner's own level. */
+    val selected: StateFlow<Int> = _selected
+
+    private var chosen = false
+
+    init {
+        viewModelScope.launch {
+            val uid = auth.uid ?: return@launch
+            val level = profiles.profile(uid).first()?.level?.jlpt ?: return@launch
+            if (!chosen) _selected.value = level
+        }
+    }
+
+    fun select(jlpt: Int) {
+        chosen = true
+        _selected.value = jlpt
+    }
+
     val state: StateFlow<GrammarListState> = auth.currentUser.flatMapLatest { user ->
         val progress = if (user == null) flowOf(emptyList()) else grammar.progress(user.uid)
         combine(grammar.points(), progress) { points, progress ->
@@ -82,7 +108,7 @@ class GrammarDetailViewModel @Inject constructor(
     }
 
     private fun progressText(progress: GrammarProgressEntity?): String? = when (grammarStatus(progress)) {
-        GrammarStatus.New -> "Not practised yet."
+        GrammarStatus.New -> "Not practiced yet."
         GrammarStatus.Learning ->
             "${progress?.correct ?: 0} right, ${progress?.wrong ?: 0} wrong so far. Answer $KNOWN_AFTER_CORRECT right (the latest one included) to mark it known."
         GrammarStatus.Known -> "Known: ${progress?.correct ?: 0} right answers."

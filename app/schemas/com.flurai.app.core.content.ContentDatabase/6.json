@@ -1,0 +1,383 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "6badf94748510f7a30b3d22ab0391d3d",
+    "entities": [
+      {
+        "tableName": "word",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `expression` TEXT NOT NULL, `reading` TEXT NOT NULL, `other_forms` TEXT, `meanings` TEXT NOT NULL, `jlpt` INTEGER NOT NULL, `genki_lesson` INTEGER, `jmdict_id` INTEGER, `parts_of_speech` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expression",
+            "columnName": "expression",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reading",
+            "columnName": "reading",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "otherForms",
+            "columnName": "other_forms",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "meanings",
+            "columnName": "meanings",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jlpt",
+            "columnName": "jlpt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genkiLesson",
+            "columnName": "genki_lesson",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "jmdictId",
+            "columnName": "jmdict_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "partsOfSpeech",
+            "columnName": "parts_of_speech",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_word_jlpt",
+            "unique": false,
+            "columnNames": [
+              "jlpt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_word_jlpt` ON `${TABLE_NAME}` (`jlpt`)"
+          },
+          {
+            "name": "index_word_reading",
+            "unique": false,
+            "columnNames": [
+              "reading"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_word_reading` ON `${TABLE_NAME}` (`reading`)"
+          },
+          {
+            "name": "index_word_expression",
+            "unique": false,
+            "columnNames": [
+              "expression"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_word_expression` ON `${TABLE_NAME}` (`expression`)"
+          }
+        ]
+      },
+      {
+        "tableName": "kanji",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`literal` TEXT NOT NULL, `jlpt` INTEGER NOT NULL, `meanings` TEXT NOT NULL, `onyomi` TEXT NOT NULL, `kunyomi` TEXT NOT NULL, `stroke_count` INTEGER NOT NULL, `grade` INTEGER, `frequency` INTEGER, PRIMARY KEY(`literal`))",
+        "fields": [
+          {
+            "fieldPath": "literal",
+            "columnName": "literal",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jlpt",
+            "columnName": "jlpt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "meanings",
+            "columnName": "meanings",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "onyomi",
+            "columnName": "onyomi",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kunyomi",
+            "columnName": "kunyomi",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "strokeCount",
+            "columnName": "stroke_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "frequency",
+            "columnName": "frequency",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "literal"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_kanji_jlpt",
+            "unique": false,
+            "columnNames": [
+              "jlpt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_kanji_jlpt` ON `${TABLE_NAME}` (`jlpt`)"
+          }
+        ]
+      },
+      {
+        "tableName": "sentence",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `japanese` TEXT NOT NULL, `english` TEXT NOT NULL, `verified` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "japanese",
+            "columnName": "japanese",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "english",
+            "columnName": "english",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "verified",
+            "columnName": "verified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "word_sentence",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`word_id` INTEGER NOT NULL, `sentence_id` INTEGER NOT NULL, `rank` INTEGER NOT NULL, PRIMARY KEY(`word_id`, `sentence_id`))",
+        "fields": [
+          {
+            "fieldPath": "wordId",
+            "columnName": "word_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sentenceId",
+            "columnName": "sentence_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "word_id",
+            "sentence_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_word_sentence_sentence_id",
+            "unique": false,
+            "columnNames": [
+              "sentence_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_word_sentence_sentence_id` ON `${TABLE_NAME}` (`sentence_id`)"
+          }
+        ]
+      },
+      {
+        "tableName": "grammar_point",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `jlpt` INTEGER NOT NULL, `pattern` TEXT NOT NULL, `title` TEXT NOT NULL, `meaning` TEXT NOT NULL, `formation` TEXT NOT NULL, `explanation` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jlpt",
+            "columnName": "jlpt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pattern",
+            "columnName": "pattern",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "meaning",
+            "columnName": "meaning",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formation",
+            "columnName": "formation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "explanation",
+            "columnName": "explanation",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_grammar_point_jlpt",
+            "unique": false,
+            "columnNames": [
+              "jlpt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_grammar_point_jlpt` ON `${TABLE_NAME}` (`jlpt`)"
+          }
+        ]
+      },
+      {
+        "tableName": "grammar_example",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`grammar_id` INTEGER NOT NULL, `rank` INTEGER NOT NULL, `japanese` TEXT NOT NULL, `english` TEXT NOT NULL, `answer` TEXT NOT NULL, PRIMARY KEY(`grammar_id`, `rank`))",
+        "fields": [
+          {
+            "fieldPath": "grammarId",
+            "columnName": "grammar_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "japanese",
+            "columnName": "japanese",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "english",
+            "columnName": "english",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "answer",
+            "columnName": "answer",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "grammar_id",
+            "rank"
+          ]
+        }
+      },
+      {
+        "tableName": "content_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6badf94748510f7a30b3d22ab0391d3d')"
+    ]
+  }
+}

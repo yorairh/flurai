@@ -113,8 +113,8 @@ class GrammarRepository @Inject constructor(
     suspend fun examples(id: Int): List<GrammarExampleEntity> = content.grammarExamples(id)
 
     /**
-     * Fill-in-the-blank questions. [pointId] practises one point (every example); otherwise
-     * [jlpt] draws [count] examples from that level, favouring points not yet known.
+     * Fill-in-the-blank questions. [pointId] practices one point (every example); otherwise
+     * [jlpt] draws [count] examples from that level, favoring points not yet known.
      */
     suspend fun practice(
         uid: String,

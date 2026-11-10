@@ -71,7 +71,7 @@ fun SettingsScreen(
                     Column(Modifier.weight(1f)) {
                         Text("Daily reminder", style = MaterialTheme.typography.bodyLarge)
                         Text(
-                            "A nudge when you have not practised yet today.",
+                            "A nudge when you have not practiced yet today.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
