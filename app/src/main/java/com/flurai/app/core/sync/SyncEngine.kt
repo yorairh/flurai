@@ -164,12 +164,8 @@ class SyncEngine @Inject constructor(
             max = maxOf(max, updatedAt(doc))
             val card = cardFrom(uid, doc.data ?: continue) ?: continue
             val local = dao.card(uid, card.itemType, card.itemId, card.kind)
-            if (local == null || touched(card) > touched(local)) {
-                dao.upsertCard(card)
-                cardIds += doc.id
-            } else if (touched(card) == touched(local)) {
-                cardIds += doc.id
-            }
+            if (local == null || touched(card) > touched(local)) dao.upsertCard(card)
+            if (cloudCovers(touched(card), local?.let(::touched))) cardIds += doc.id
         }
         for (doc in dayDocs) {
             max = maxOf(max, updatedAt(doc))
@@ -201,12 +197,8 @@ class SyncEngine @Inject constructor(
                 doc.getBoolean("lastCorrect") ?: false, doc.getLong("lastAt") ?: 0,
             )
             val local = grammar.get(uid, id)
-            if (local == null || remote.lastAt > local.lastAt) {
-                grammar.upsert(remote)
-                grammarIds += id
-            } else if (remote.lastAt == local.lastAt) {
-                grammarIds += id
-            }
+            if (local == null || remote.lastAt > local.lastAt) grammar.upsert(remote)
+            if (cloudCovers(remote.lastAt, local?.lastAt)) grammarIds += id
         }
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
@@ -337,8 +329,21 @@ class SyncEngine @Inject constructor(
 }
 
 /** A document's server write time in ms (backups from before 0.23.0 stored a plain number). */
-private fun updatedAt(doc: DocumentSnapshot): Long =
-    doc.getTimestamp("updatedAt")?.toDate()?.time ?: doc.getLong("updatedAt") ?: 0L
+private fun updatedAt(doc: DocumentSnapshot): Long = updatedAtMillis(doc.get("updatedAt"))
+
+/** Firestore's typed getters throw on the other type, so the raw value is read and checked here. */
+internal fun updatedAtMillis(value: Any?): Long = when (value) {
+    is Timestamp -> value.toDate().time
+    is Number -> value.toLong()
+    else -> 0L
+}
+
+/**
+ * After merging one cloud row: true when the cloud already holds what this phone has (the cloud
+ * copy won or is the same), so uploading it again would be pointless. False when the local copy is
+ * newer and must be pushed. [remote] and [local] are "last changed" times; [local] null = no local row.
+ */
+internal fun cloudCovers(remote: Long, local: Long?): Boolean = local == null || remote >= local
 
 /** Time studied on two phones on the same day: keep the larger totals, never lose time. */
 internal fun mergeDay(local: StudyDayEntity?, remote: StudyDayEntity): StudyDayEntity =

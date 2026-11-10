@@ -75,10 +75,13 @@ class ActivityTimer(private val clock: () -> Instant = Instant::now) {
  * never counts). Every study screen uses one so its time counts toward the streak.
  */
 class StudyClock(
-    private val activity: StudyActivityRepository,
     private val uid: () -> String?,
     private val clock: () -> Instant = Instant::now,
+    /** Saves (uid, when, seconds, reviews); [StudyActivityRepository.record] in the app. */
+    private val save: (String, Instant, Int, Int) -> Unit,
 ) {
+    constructor(activity: StudyActivityRepository, uid: () -> String?) : this(uid, Instant::now, activity::record)
+
     private val timer = ActivityTimer(clock)
     private var running = false
 
@@ -103,7 +106,8 @@ class StudyClock(
     }
 
     private fun record(seconds: Int, reviews: Int) {
+        if (seconds <= 0 && reviews <= 0) return
         val uid = uid() ?: return
-        activity.record(uid, clock(), seconds, reviews)
+        save(uid, clock(), seconds, reviews)
     }
 }

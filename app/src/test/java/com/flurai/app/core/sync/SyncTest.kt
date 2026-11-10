@@ -5,6 +5,8 @@ import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.ItemType
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -46,6 +48,21 @@ class SyncTest {
         assertEquals(StudyDayEntity("u", 10, 600, 5), mergeDay(StudyDayEntity("u", 10, 600, 2), remote))
         // Only when the cloud copy already holds everything can the upload be skipped.
         assertEquals(remote, mergeDay(StudyDayEntity("u", 10, 100, 1), remote))
+    }
+
+    @Test
+    fun updatedAtReadsServerTimestampsAndOldPlainNumbers() {
+        assertEquals(5_000L, updatedAtMillis(com.google.firebase.Timestamp(java.util.Date(5_000))))
+        assertEquals(1_700_000_000_000L, updatedAtMillis(1_700_000_000_000L)) // backups from before 0.23.0
+        assertEquals(0L, updatedAtMillis(null)) // a write still waiting for the server
+    }
+
+    @Test
+    fun onlyRowsTheCloudAlreadyHoldsAreLeftOutOfTheUpload() {
+        assertTrue(cloudCovers(remote = 500, local = null))
+        assertTrue(cloudCovers(remote = 500, local = 500)) // this phone's own last upload coming back
+        assertTrue(cloudCovers(remote = 900, local = 500))
+        assertFalse(cloudCovers(remote = 500, local = 900)) // reviewed here since: must be uploaded
     }
 
     @Test

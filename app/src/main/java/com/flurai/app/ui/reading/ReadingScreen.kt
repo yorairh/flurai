@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -46,8 +45,7 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
+import com.flurai.app.ui.components.rememberStudyScroll
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.ui.theme.japanese
@@ -69,13 +67,12 @@ fun ReadingScreen(
     viewModel: ReadingViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.onResume() }
-    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) { viewModel.onPause() }
+    val scroll = rememberStudyScroll(viewModel.clock)
     val context = LocalContext.current
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Reading") }, onBack = onBack)
         Column(
-            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
+            Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             LevelChips(state.jlpt, viewModel::chooseLevel)

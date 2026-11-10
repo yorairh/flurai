@@ -118,4 +118,33 @@ class StreakCalculatorTest {
         assertEquals(Duration.ofHours(23).plusMinutes(30), delayUntil(now, 18, 0))
         assertEquals(Duration.ofDays(1), delayUntil(now, 18, 30)) // exactly now means tomorrow
     }
+
+    @Test
+    fun studyClockCountsOnlyWhileRunningAndInFront() {
+        var now = Instant.parse("2026-01-01T10:00:00Z")
+        val saved = mutableListOf<Pair<Int, Int>>()
+        val clock = StudyClock({ "u" }, { now }) { _, _, seconds, reviews -> saved += seconds to reviews }
+
+        clock.resume() // not started yet: coming to the front must not start it
+        now = now.plusSeconds(30)
+        clock.tap()
+        assertTrue(saved.isEmpty())
+
+        clock.start()
+        now = now.plusSeconds(20)
+        clock.tap(reviews = 1)
+        now = now.plusSeconds(10)
+        clock.pause()
+        now = now.plusSeconds(600) // in the background
+        clock.resume()
+        now = now.plusSeconds(5)
+        clock.start() // already running: must not restart the count
+        now = now.plusSeconds(5)
+        clock.finish()
+        now = now.plusSeconds(50)
+        clock.resume() // finished: stays stopped
+        clock.tap()
+
+        assertEquals(listOf(20 to 1, 10 to 0, 10 to 0), saved)
+    }
 }

@@ -49,7 +49,7 @@ class ReadingViewModel @Inject constructor(
     val state: StateFlow<ReadingUiState> = _state
 
     /** Reading counts as study time; every tap on the page keeps the clock going. */
-    private val clock = StudyClock(activity, { auth.uid })
+    val clock = StudyClock(activity, { auth.uid })
 
     init {
         clock.start()
@@ -65,6 +65,7 @@ class ReadingViewModel @Inject constructor(
     }
 
     fun toggleFurigana() {
+        clock.tap()
         val uid = auth.uid ?: return
         viewModelScope.launch { settings.update(uid) { it.copy(showFurigana = !it.showFurigana) } }
     }
@@ -72,10 +73,6 @@ class ReadingViewModel @Inject constructor(
     fun chooseLevel(jlpt: Int) = load(jlpt)
 
     fun newSet() = load(_state.value.jlpt)
-
-    fun onPause() = clock.pause()
-
-    fun onResume() = clock.resume()
 
     private fun load(jlpt: Int) {
         clock.tap()
@@ -103,6 +100,7 @@ class ReadingViewModel @Inject constructor(
     }
 
     fun addToFlashcards(word: WordEntity) {
+        clock.tap()
         val uid = auth.uid ?: return
         viewModelScope.launch {
             study.addToStudy(uid, ItemRef(ItemType.Word, word.id), Instant.now())
