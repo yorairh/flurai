@@ -81,6 +81,20 @@ interface DeckDao {
         deleteRow(uid, id)
     }
 
+    @Query("DELETE FROM deck_word WHERE deck_id IN (SELECT id FROM deck WHERE uid = :uid)")
+    suspend fun clearAllWords(uid: String)
+
+    @Query("DELETE FROM deck WHERE uid = :uid")
+    suspend fun deleteAll(uid: String)
+
+    /** Makes [decks] (each with its word ids) the whole list of [uid] (the cloud's copy replacing this phone's). */
+    @Transaction
+    suspend fun replaceAll(uid: String, decks: List<Pair<DeckEntity, List<Int>>>) {
+        clearAllWords(uid)
+        deleteAll(uid)
+        decks.forEach { (deck, words) -> create(deck, words, deck.createdAt) }
+    }
+
     @Transaction
     suspend fun create(deck: DeckEntity, wordIds: List<Int>, now: Long): Long {
         val id = insert(deck)

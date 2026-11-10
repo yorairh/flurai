@@ -118,13 +118,20 @@ class InMemoryLocal : SyncLocal {
     }
 
     override suspend fun channels(uid: String) = channelRows.filter { it.uid == uid }
-    override suspend fun insertChannel(channel: CustomChannelEntity) { channelRows += channel }
+    override suspend fun replaceChannels(uid: String, channels: List<CustomChannelEntity>) {
+        channelRows.removeAll { it.uid == uid }
+        channelRows += channels
+    }
 
     override suspend fun decks(uid: String) = deckRows.filter { it.uid == uid }
     override suspend fun deckWordIds(deckId: Long) = deckWords[deckId].orEmpty()
-    override suspend fun createDeck(deck: DeckEntity, wordIds: List<Int>, now: Long) {
-        val id = nextDeckId++
-        deckRows += deck.copy(id = id)
-        deckWords[id] = wordIds
+    override suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>) {
+        deckRows.filter { it.uid == uid }.forEach { deckWords.remove(it.id) }
+        deckRows.removeAll { it.uid == uid }
+        decks.forEach { (deck, words) ->
+            val id = nextDeckId++
+            deckRows += deck.copy(id = id)
+            deckWords[id] = words
+        }
     }
 }

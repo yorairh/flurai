@@ -107,7 +107,7 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
 
     private fun pullKey(uid: String) = UserKeys.sync(uid, "pull")
     private fun pushKey(uid: String) = UserKeys.sync(uid, "push")
-    private fun metaKey(uid: String) = UserKeys.sync(uid, "meta")
+    private fun metaKey(uid: String, part: String) = UserKeys.sync(uid, "meta.$part")
 
     suspend fun cursors(uid: String): SyncCursors {
         val prefs = dataStore.data.first()
@@ -126,11 +126,15 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
         dataStore.edit { it[pushKey(uid)] = 0L }
     }
 
-    /** A fingerprint of the small whole-document items (settings, channels, decks) as last uploaded. */
-    suspend fun uploadedHash(uid: String): Long? = dataStore.data.first()[metaKey(uid)]
+    /**
+     * A fingerprint of one whole-document item ("channels", "decks" or "settings") as this phone last
+     * uploaded or took it from the cloud; null when it never did. If the item still has this
+     * fingerprint, this phone has not changed it since, so the cloud's version may replace it.
+     */
+    suspend fun uploadedHash(uid: String, part: String): Long? = dataStore.data.first()[metaKey(uid, part)]
 
-    suspend fun saveUploadedHash(uid: String, hash: Long) {
-        dataStore.edit { it[metaKey(uid)] = hash }
+    suspend fun saveUploadedHash(uid: String, part: String, hash: Long) {
+        dataStore.edit { it[metaKey(uid, part)] = hash }
     }
 }
 

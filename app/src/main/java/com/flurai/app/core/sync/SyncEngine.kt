@@ -118,8 +118,8 @@ class SyncEngine internal constructor(
         val grammarIds = HashSet<Int>()
 
         // The downloads are independent: start them together, then merge one by one.
-        val (cardDocs, dayDocs, testDocs, grammarDocs) = coroutineScope {
-            ROW_COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
+        val (cardDocs, dayDocs, testDocs, grammarDocs, metaDocs) = coroutineScope {
+            CLOUD_COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
         }
 
         for (doc in cardDocs) {
@@ -154,17 +154,43 @@ class SyncEngine internal constructor(
             val saved = cloud.document(uid, META_COLLECTION, "profile")?.get("prefs") as? Map<*, *>
             if (saved != null) prefs.import(uid, saved)
         }
-        // Channels and decks: likewise, restored only when this phone has none.
-        if (local.channels(uid).isEmpty()) {
-            val items = cloud.document(uid, META_COLLECTION, "channels")?.get("items") as? List<*>
-            items?.filterIsInstance<Map<*, *>>()?.mapNotNull { channelFrom(uid, it) }?.forEach { local.insertChannel(it) }
+        // Channels and decks are whole documents: another phone's version replaces this phone's, unless
+        // this phone changed its own since the last sync (then it wins and is uploaded).
+        metaDocs.forEach { max = maxOf(max, it.updatedAt) }
+        fun items(id: String) = (metaDocs.firstOrNull { it.id == id }?.data?.get("items") as? List<*>)?.filterIsInstance<Map<*, *>>()
+        items("channels")?.let { cloudItems ->
+            val theirs = cloudItems.mapNotNull { channelFrom(uid, it) }
+            val mine = local.channels(uid)
+            if (theirs.map(::channelDoc) != mine.map(::channelDoc) && mayTakeCloudVersion(uid, "channels", mine.map(::channelDoc))) {
+                local.replaceChannels(uid, theirs)
+                prefs.saveUploadedHash(uid, "channels", fingerprint(local.channels(uid).map(::channelDoc)))
+            }
         }
-        if (local.decks(uid).isEmpty()) {
-            val items = cloud.document(uid, META_COLLECTION, "decks")?.get("items") as? List<*>
-            items?.filterIsInstance<Map<*, *>>()?.mapNotNull { deckFrom(uid, it) }?.forEach { local.createDeck(it.deck, it.words, it.deck.createdAt) }
+        items("decks")?.let { cloudItems ->
+            val theirs = cloudItems.mapNotNull { deckFrom(uid, it) }
+            val mine = localDeckDocs(uid)
+            if (theirs.map { deckDoc(it.deck, it.words) } != mine && mayTakeCloudVersion(uid, "decks", mine)) {
+                local.replaceDecks(uid, theirs.map { it.deck to it.words })
+                prefs.saveUploadedHash(uid, "decks", fingerprint(localDeckDocs(uid)))
+            }
         }
         return Pulled(max, cardIds, dayIds, grammarIds)
     }
+
+    private suspend fun localDeckDocs(uid: String) = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
+
+    /**
+     * Whether the cloud's version of a whole-document item [part] may replace this phone's [mine]:
+     * this phone has not changed it since it last uploaded or took it (its fingerprint still
+     * matches), or it never synced it and has nothing of its own. An item deleted here differs from
+     * what was uploaded, so it is not brought back.
+     */
+    private suspend fun mayTakeCloudVersion(uid: String, part: String, mine: List<Map<String, Any?>>): Boolean {
+        val uploaded = prefs.uploadedHash(uid, part)
+        return if (uploaded == null) mine.isEmpty() else uploaded == fingerprint(mine)
+    }
+
+    private fun fingerprint(items: Any): Long = items.hashCode().toLong()
 
     // -- push ------------------------------------------------------------------------------------
 
@@ -182,18 +208,17 @@ class SyncEngine internal constructor(
             .forEach { writes += CloudWrite("grammar", it.grammarId.toString(), grammarDoc(it)) }
 
         // Small whole-document items: written only when they changed since the last upload (or on a full push).
+        // Each is written only when it changed here since it was last uploaded or taken (or on a full push).
         val channels = local.channels(uid).map(::channelDoc)
-        val decks = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
+        val decks = localDeckDocs(uid)
         val settings = prefs.export(uid)
-        val metaHash = Triple(channels, settings, decks).hashCode().toLong()
-        val metaChanged = since == 0L || prefs.uploadedHash(uid) != metaHash
-        if (metaChanged) {
-            writes += CloudWrite(META_COLLECTION, "channels", mapOf("items" to channels))
-            writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to decks))
-            if (settings.isNotEmpty()) writes += CloudWrite(META_COLLECTION, "profile", mapOf("prefs" to settings))
-        }
+        val parts = mapOf("channels" to channels, "decks" to decks, "settings" to settings)
+        val changed = parts.filter { (part, value) -> since == 0L || prefs.uploadedHash(uid, part) != fingerprint(value) }.keys
+        if ("channels" in changed) writes += CloudWrite(META_COLLECTION, "channels", mapOf("items" to channels))
+        if ("decks" in changed) writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to decks))
+        if ("settings" in changed && settings.isNotEmpty()) writes += CloudWrite(META_COLLECTION, "profile", mapOf("prefs" to settings))
 
         if (writes.isNotEmpty()) cloud.write(uid, writes)
-        if (metaChanged) prefs.saveUploadedHash(uid, metaHash)
+        changed.forEach { prefs.saveUploadedHash(uid, it, fingerprint(parts.getValue(it))) }
     }
 }

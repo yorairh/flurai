@@ -26,7 +26,7 @@ class UserPreferencesTest {
     fun exportListsOneAccountsSettingsWithoutTheUidAndWithoutSyncBookkeeping() = runTest {
         seed("a"); seed("b", "N2")
         prefs.saveCursors("a", SyncCursors(5, 6))
-        prefs.saveUploadedHash("a", 99)
+        prefs.saveUploadedHash("a", "decks", 99)
 
         assertEquals(mapOf("level" to "N5", "newCardsPerDay" to 12, "showFurigana" to false), prefs.export("a"))
     }
@@ -106,10 +106,11 @@ class UserPreferencesTest {
     }
 
     @Test
-    fun theUploadedHashIsRememberedPerAccount() = runTest {
-        assertNull(prefs.uploadedHash("a"))
-        prefs.saveUploadedHash("a", 1234)
-        assertEquals(1234L, prefs.uploadedHash("a"))
-        assertNull(prefs.uploadedHash("b"))
+    fun theUploadedHashIsRememberedPerAccountAndPart() = runTest {
+        assertNull(prefs.uploadedHash("a", "decks"))
+        prefs.saveUploadedHash("a", "decks", 1234)
+        assertEquals(1234L, prefs.uploadedHash("a", "decks"))
+        assertNull(prefs.uploadedHash("a", "channels"))
+        assertNull(prefs.uploadedHash("b", "decks"))
     }
 }

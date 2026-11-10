@@ -43,6 +43,30 @@ class SyncEngineTest {
         }
         fun setting(name: String, value: String) = runBlocking { dataStore.edit { it[stringPreferencesKey("$UID.$name")] = value } }
         fun setting(name: String) = runBlocking { dataStore.data.first()[stringPreferencesKey("$UID.$name")] }
+
+        fun addDeck(name: String, vararg words: Int) {
+            val id = (local.deckRows.maxOfOrNull { it.id } ?: 0) + 1
+            local.deckRows += DeckEntity(id = id, uid = UID, name = name, createdAt = id.toLong())
+            local.deckWords[id] = words.toList()
+        }
+
+        fun renameDeck(from: String, to: String) {
+            val i = local.deckRows.indexOfFirst { it.name == from }
+            local.deckRows[i] = local.deckRows[i].copy(name = to)
+        }
+
+        fun deleteDeck(name: String) {
+            local.deckRows.removeAll { it.name == name }
+        }
+
+        fun deckNames() = local.deckRows.map { it.name }
+
+        /** A later sync: this phone's clock and the cloud's both moved on. */
+        fun syncLater(): Boolean {
+            now += 10_000
+            cloud.serverTime += 4_000
+            return sync()
+        }
     }
 
     private fun card(id: Int, lastReview: Long? = 500, createdAt: Long = 100, reps: Int = 1, kind: CardKind = CardKind.Recognition) = CardEntity(
@@ -281,6 +305,102 @@ class SyncEngineTest {
         a.sync()
         assertNotNull(cloudCard(1))
         assertTrue("channels" in cloud.ids(UID, "meta"))
+    }
+
+    // -- decks and channels follow changes, including deletes ---------------------------------------------
+
+    @Test
+    fun aDeckDeletedOnOnePhoneDisappearsFromTheOther() {
+        val a = Phone()
+        a.addDeck("Trip", 1); a.addDeck("Food", 2)
+        a.sync()
+        val b = Phone()
+        b.sync()
+        assertEquals(listOf("Trip", "Food"), b.deckNames())
+
+        a.deleteDeck("Trip")
+        a.syncLater()
+        b.syncLater()
+
+        assertEquals(listOf("Food"), b.deckNames())
+        assertEquals(listOf(2), b.local.deckWords[b.local.deckRows.single().id])
+    }
+
+    @Test
+    fun decksDeletedEverywhereOnThisPhoneStayDeletedAndAreNotBroughtBackFromTheCloud() {
+        val a = Phone()
+        a.addDeck("Trip", 1); a.addDeck("Food", 2)
+        a.sync()
+
+        a.deleteDeck("Trip"); a.deleteDeck("Food")
+        a.syncLater()
+
+        assertTrue(a.deckNames().isEmpty())
+        assertEquals(emptyList<Any?>(), cloud.doc(UID, "meta", "decks")!!["items"])
+        val b = Phone()
+        b.sync()
+        assertTrue(b.deckNames().isEmpty())
+    }
+
+    @Test
+    fun aDeckAddedOrRenamedOnOnePhoneReachesTheOther() {
+        val a = Phone()
+        a.addDeck("Trip", 1)
+        a.sync()
+        val b = Phone()
+        b.sync()
+
+        a.renameDeck("Trip", "Trip 2026"); a.addDeck("Food", 2)
+        a.syncLater()
+        b.syncLater()
+
+        assertEquals(listOf("Trip 2026", "Food"), b.deckNames())
+    }
+
+    @Test
+    fun aChangeMadeOnThisPhoneIsNotOverwrittenByTheCloud() {
+        val a = Phone()
+        a.addDeck("Trip", 1)
+        a.sync()
+        val b = Phone()
+        b.sync()
+
+        b.deleteDeck("Trip") // not synced yet
+        a.addDeck("Food", 2)
+        a.syncLater()
+        b.syncLater()
+
+        assertTrue(b.deckNames().isEmpty()) // this phone's change won and was uploaded
+        assertEquals(emptyList<Any?>(), cloud.doc(UID, "meta", "decks")!!["items"])
+    }
+
+    @Test
+    fun aChannelDeletedOnOnePhoneDisappearsFromTheOther() {
+        val a = Phone()
+        a.local.channelRows += CustomChannelEntity(uid = UID, name = "Ch", url = "https://x", level = 5, addedAt = 1)
+        a.sync()
+        val b = Phone()
+        b.sync()
+        assertEquals(listOf("Ch"), b.local.channelRows.map { it.name })
+
+        a.local.channelRows.clear()
+        a.syncLater()
+        b.syncLater()
+
+        assertTrue(b.local.channelRows.isEmpty())
+    }
+
+    @Test
+    fun aPhoneThatNeverSyncedKeepsItsOwnDecksInsteadOfTakingTheClouds() {
+        val a = Phone()
+        a.addDeck("Cloud deck", 1)
+        a.sync()
+        val b = Phone()
+        b.addDeck("Own deck", 2)
+
+        b.syncLater()
+
+        assertEquals(listOf("Own deck"), b.deckNames())
     }
 
     // -- the documents ---------------------------------------------------------------------------

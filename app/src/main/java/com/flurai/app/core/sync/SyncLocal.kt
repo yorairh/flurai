@@ -39,11 +39,15 @@ interface SyncLocal {
     suspend fun upsertGrammar(progress: GrammarProgressEntity)
 
     suspend fun channels(uid: String): List<CustomChannelEntity>
-    suspend fun insertChannel(channel: CustomChannelEntity)
+
+    /** Makes [channels] the whole list of [uid]. */
+    suspend fun replaceChannels(uid: String, channels: List<CustomChannelEntity>)
 
     suspend fun decks(uid: String): List<DeckEntity>
     suspend fun deckWordIds(deckId: Long): List<Int>
-    suspend fun createDeck(deck: DeckEntity, wordIds: List<Int>, now: Long)
+
+    /** Makes [decks] (each with its word ids) the whole list of [uid]. */
+    suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>)
 }
 
 /** [SyncLocal] on the user database. */
@@ -72,11 +76,9 @@ class RoomSyncLocal @Inject constructor(
     override suspend fun upsertGrammar(progress: GrammarProgressEntity) = grammarProgress.upsert(progress)
 
     override suspend fun channels(uid: String) = sync.channels(uid)
-    override suspend fun insertChannel(channel: CustomChannelEntity) = customChannels.insert(channel)
+    override suspend fun replaceChannels(uid: String, channels: List<CustomChannelEntity>) = customChannels.replaceAll(uid, channels)
 
     override suspend fun decks(uid: String) = deckDao.decksNow(uid)
     override suspend fun deckWordIds(deckId: Long) = deckDao.wordIds(deckId)
-    override suspend fun createDeck(deck: DeckEntity, wordIds: List<Int>, now: Long) {
-        deckDao.create(deck, wordIds, now)
-    }
+    override suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>) = deckDao.replaceAll(uid, decks)
 }
