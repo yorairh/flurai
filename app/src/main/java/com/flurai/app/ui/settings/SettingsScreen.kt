@@ -115,6 +115,20 @@ fun SettingsScreen(
                 }
             }
 
+            SettingsCard("Flashcards") {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f)) {
+                        Text("Listening cards", style = MaterialTheme.typography.bodyLarge)
+                        Text(
+                            "Hear a word and say what it is. Added for words you have learned.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Switch(checked = settings.listeningCards, onCheckedChange = viewModel::setListeningCards)
+                }
+            }
+
             SettingsCard("Study goals") {
                 Text("Daily goal: ${profile.dailyMinutes} minutes", style = MaterialTheme.typography.bodyLarge)
                 Text("New words per day: ${profile.newCardsPerDay}", style = MaterialTheme.typography.bodyLarge)

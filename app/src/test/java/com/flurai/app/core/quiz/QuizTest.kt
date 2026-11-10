@@ -59,6 +59,18 @@ class QuizTest {
     }
 
     @Test
+    fun listeningQuestionSpeaksTheReadingAndHidesTheWrittenWordUntilAnswered() {
+        val kanjiWord = word(9, "日曜日", "Sunday").copy(reading = "にちようび")
+        val q = listeningQuestion(kanjiWord, pool + kanjiWord, Random(3))!!
+        assertEquals(QuestionKind.WordListening, q.kind)
+        assertEquals("にちようび", q.prompt)
+        assertNull(q.hint)
+        assertEquals("日曜日（にちようび）", q.note)
+        assertEquals("Sunday", q.correctOption)
+        assertEquals(9, q.wordId)
+    }
+
+    @Test
     fun mainReadingPrefersKunyomiWithoutOkuriganaDots() {
         assertEquals("たべ", mainReading(kanji("食", "ショク", "た.べる")) ?.take(2))
         assertEquals("うじ", mainReading(kanji("氏", "シ", "うじ、-うじ")))

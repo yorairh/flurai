@@ -19,6 +19,8 @@ data class AppSettings(
     val streakMinutes: Int = 5,
     /** Small kana readings above kanji in the Reading screen. */
     val showFurigana: Boolean = true,
+    /** Hear-the-word cards for words you have learned. */
+    val listeningCards: Boolean = true,
 ) {
     companion object { val StreakChoices = listOf(1, 5, 10, 15, 20, 30) }
 }
@@ -38,6 +40,7 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
             prefs[k.minute] = new.reminderMinute
             prefs[k.streak] = new.streakMinutes
             prefs[k.furigana] = new.showFurigana
+            prefs[k.listening] = new.listeningCards
         }
     }
 
@@ -49,6 +52,7 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
             reminderMinute = prefs[k.minute] ?: d.reminderMinute,
             streakMinutes = prefs[k.streak] ?: d.streakMinutes,
             showFurigana = prefs[k.furigana] ?: d.showFurigana,
+            listeningCards = prefs[k.listening] ?: d.listeningCards,
         )
     }
 
@@ -58,5 +62,6 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
         val minute = intPreferencesKey("$uid.reminderMinute")
         val streak = intPreferencesKey("$uid.streakMinutes")
         val furigana = booleanPreferencesKey("$uid.showFurigana")
+        val listening = booleanPreferencesKey("$uid.listeningCards")
     }
 }

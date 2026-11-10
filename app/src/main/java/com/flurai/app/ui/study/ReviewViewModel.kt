@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -214,6 +215,8 @@ class ReviewViewModel @Inject constructor(
                 comeBackAt = null,
             )
         }
+        // A listening card plays its audio straight away: hearing the word is the question.
+        if (next.kind == CardKind.Listening) speaker.speak(cardContent.speech)
     }
 
     private suspend fun load(item: QueueItem): CardContent? = when (item.item.itemType) {

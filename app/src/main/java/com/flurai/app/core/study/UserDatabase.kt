@@ -93,18 +93,20 @@ interface StudyDao {
         """
         SELECT * FROM card
         WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+            AND (:listening OR kind != 'Listening')
         ORDER BY due
         """,
     )
-    suspend fun dueCards(uid: String, until: Long, now: Long): List<CardEntity>
+    suspend fun dueCards(uid: String, until: Long, now: Long, listening: Boolean): List<CardEntity>
 
     @Query(
         """
         SELECT COUNT(*) FROM card
         WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+            AND (:listening OR kind != 'Listening')
         """,
     )
-    fun dueCount(uid: String, until: Long, now: Long): Flow<Int>
+    fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int>
 
     /** Items that already have a card of any kind (so they aren't introduced again). */
     @Query("SELECT DISTINCT item_type AS itemType, item_id AS itemId FROM card WHERE uid = :uid")
@@ -140,10 +142,10 @@ interface StudyDao {
     suspend fun insertLog(log: ReviewLogEntity)
 
     @Transaction
-    suspend fun recordReview(updated: CardEntity, log: ReviewLogEntity, unlocked: CardEntity?) {
+    suspend fun recordReview(updated: CardEntity, log: ReviewLogEntity, unlocked: List<CardEntity>) {
         upsertCard(updated)
         insertLog(log)
-        if (unlocked != null) insertCardIfAbsent(unlocked)
+        unlocked.forEach { insertCardIfAbsent(it) }
     }
 
     @Query("UPDATE card SET suspended = :suspended WHERE uid = :uid AND item_type = :itemType AND item_id = :itemId")
