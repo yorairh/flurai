@@ -1,5 +1,6 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.core.activity.SettingsRepository
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,6 +29,7 @@ data class ReadingUiState(
     val loading: Boolean = true,
     val lines: List<ReadLine> = emptyList(),
     val showTranslations: Boolean = false,
+    val showFurigana: Boolean = true,
     val selected: WordEntity? = null,
     val addedWordIds: Set<Int> = emptySet(),
 )
@@ -37,6 +39,7 @@ class ReadingViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val profiles: StudyProfileRepository,
     private val reading: ReadingRepository,
+    private val settings: SettingsRepository,
     private val study: StudyRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(ReadingUiState())
@@ -48,6 +51,15 @@ class ReadingViewModel @Inject constructor(
             val start = uid?.let { profiles.profile(it).first()?.level?.jlpt } ?: 5
             load(start)
         }
+        viewModelScope.launch {
+            val uid = auth.uid ?: return@launch
+            settings.settings(uid).collect { s -> _state.update { it.copy(showFurigana = s.showFurigana) } }
+        }
+    }
+
+    fun toggleFurigana() {
+        val uid = auth.uid ?: return
+        viewModelScope.launch { settings.update(uid) { it.copy(showFurigana = !it.showFurigana) } }
     }
 
     fun chooseLevel(jlpt: Int) = load(jlpt)
