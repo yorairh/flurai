@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
@@ -68,6 +69,10 @@ data class ReviewUiState(
     val levelsWithWords: Set<Int> = emptySet(),
     /** The learner asked for more words but that deck is used up. */
     val noMoreWords: Boolean = false,
+    /** The session was for one chosen deck (not the automatic one). */
+    val deckSession: Boolean = false,
+    /** That chosen deck still has words never studied. */
+    val deckHasMore: Boolean = false,
 )
 
 @HiltViewModel
@@ -86,6 +91,7 @@ class ReviewViewModel @Inject constructor(
     val state: StateFlow<ReviewUiState> = _state.asStateFlow()
 
     private var queue: StudyQueue? = null
+    private var profile: StudyProfile? = null
     private val timer = ActivityTimer()
     private var wasTiming = false
     private var shownAt: Instant = Instant.now()
@@ -96,6 +102,7 @@ class ReviewViewModel @Inject constructor(
         viewModelScope.launch {
             val uid = uid ?: return@launch
             val profile = profiles.profile(uid).first() ?: return@launch
+            this@ReviewViewModel.profile = profile
             val session = repository.loadSession(uid, profile, source, Instant.now())
             queue = StudyQueue(session.cards, session.newItems, session.endOfDay)
             timer.start()
@@ -189,11 +196,14 @@ class ReviewViewModel @Inject constructor(
         val next = queue.next(now)
         if (next == null) {
             uid?.let { activity.record(it, now, timer.stop(), 0) }
-            val levels = uid?.let { repository.levelsWithNewWords(it) }.orEmpty()
+            val chosen = source != StudySource.Auto
+            val levels = if (chosen) emptySet() else uid?.let { repository.levelsWithNewWords(it) }.orEmpty()
+            val more = chosen && uid != null && profile?.let { repository.hasMoreNew(uid!!, it, source) } == true
             _state.update {
                 it.copy(
                     loading = false, current = null, finished = true, counts = queue.counts(),
                     comeBackAt = queue.nextLearningDue(), levelsWithWords = levels, noMoreWords = false,
+                    deckSession = chosen, deckHasMore = more,
                 )
             }
             return

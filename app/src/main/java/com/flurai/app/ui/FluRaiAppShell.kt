@@ -1,5 +1,6 @@
 package com.flurai.app.ui
 
+import com.flurai.app.ui.study.SourceDeckScreen
 import com.flurai.app.ui.study.DeckScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -71,6 +72,9 @@ import kotlin.reflect.KClass
 @Serializable object LicencesRoute
 @Serializable object VocabHubRoute
 @Serializable data class DeckRoute(val id: Long)
+
+/** A built-in deck (an N level or a kana script); [source] is StudySource.encode(). */
+@Serializable data class SourceDeckRoute(val source: String)
 @Serializable object ProgressRoute
 @Serializable object WordBrowserRoute
 @Serializable object SettingsRoute
@@ -116,7 +120,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
                             (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
                             (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
                     NavigationBarItem(
@@ -169,6 +173,14 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onBack = { navController.popBackStack() },
                     onStudy = { navController.navigate(StudyRoute(it.encode())) },
                     onOpenDeck = { navController.navigate(DeckRoute(it)) },
+                    onOpenSource = { navController.navigate(SourceDeckRoute(it.encode())) },
+                )
+            }
+            screen<SourceDeckRoute> {
+                SourceDeckScreen(
+                    onBack = { navController.popBackStack() },
+                    onStudy = { navController.navigate(StudyRoute(it.encode())) },
+                    onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
             screen<DeckRoute> {

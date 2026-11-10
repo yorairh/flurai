@@ -103,11 +103,14 @@ data class StateCount(val state: Int, val count: Int)
 
 @Dao
 interface StudyDao {
-    /** Cards to study before [until]: not suspended, not buried. */
+    /**
+     * Cards to study before [until] (the end of the study day, exclusive: a card unlocked "for tomorrow"
+     * is due exactly then and must not count today): not suspended, not buried.
+     */
     @Query(
         """
         SELECT * FROM card
-        WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+        WHERE uid = :uid AND due < :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
             AND (:listening OR kind != 'Listening')
         ORDER BY due
         """,
@@ -117,7 +120,7 @@ interface StudyDao {
     @Query(
         """
         SELECT COUNT(*) FROM card
-        WHERE uid = :uid AND due <= :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+        WHERE uid = :uid AND due < :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
             AND (:listening OR kind != 'Listening')
         """,
     )

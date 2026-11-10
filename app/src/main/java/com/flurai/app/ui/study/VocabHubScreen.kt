@@ -43,6 +43,7 @@ fun VocabHubScreen(
     onBack: () -> Unit,
     onStudy: (StudySource) -> Unit,
     onOpenDeck: (Long) -> Unit,
+    onOpenSource: (StudySource) -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -62,13 +63,13 @@ fun VocabHubScreen(
             item {
                 OutlinedButton(onClick = { creating = true }, modifier = Modifier.fillMaxWidth()) { Text("New deck") }
             }
-            item { SectionHeader("単語", "Word decks", "Pick a level to take today's new words from it.") }
-            items(JlptNumbers) { n ->
-                state.levels[n]?.let { DeckRow("N$n", it) { onStudy(StudySource.Level(n)) } }
-            }
-            item { SectionHeader("かな", "Kana decks", "Hiragana and katakana, sound by sound.") }
+            item { SectionHeader("かな", "Kana decks", "Hiragana and katakana, sound by sound. Open one to study just it.") }
             items(KanaScript.entries) { script ->
-                state.kana[script]?.let { DeckRow("${script.japanese}  ${script.label}", it) { onStudy(StudySource.KanaDeck(script)) } }
+                state.kana[script]?.let { DeckRow("${script.japanese}  ${script.label}", it) { onOpenSource(StudySource.KanaDeck(script)) } }
+            }
+            item { SectionHeader("単語", "Word decks", "Open a level to see its words and study just it.") }
+            items(JlptNumbers) { n ->
+                state.levels[n]?.let { DeckRow("N$n", it) { onOpenSource(StudySource.Level(n)) } }
             }
         }
     }
