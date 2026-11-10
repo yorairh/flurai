@@ -17,6 +17,8 @@ data class AppSettings(
     val reminderMinute: Int = 0,
     /** Minutes of study that make a day count toward the streak. */
     val streakMinutes: Int = 5,
+    /** Small kana readings above kanji in the Reading screen. */
+    val showFurigana: Boolean = true,
 ) {
     companion object { val StreakChoices = listOf(1, 5, 10, 15, 20, 30) }
 }
@@ -35,6 +37,7 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
             prefs[k.hour] = new.reminderHour
             prefs[k.minute] = new.reminderMinute
             prefs[k.streak] = new.streakMinutes
+            prefs[k.furigana] = new.showFurigana
         }
     }
 
@@ -45,6 +48,7 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
             reminderHour = prefs[k.hour] ?: d.reminderHour,
             reminderMinute = prefs[k.minute] ?: d.reminderMinute,
             streakMinutes = prefs[k.streak] ?: d.streakMinutes,
+            showFurigana = prefs[k.furigana] ?: d.showFurigana,
         )
     }
 
@@ -53,5 +57,6 @@ class SettingsRepository @Inject constructor(private val dataStore: DataStore<Pr
         val hour = intPreferencesKey("$uid.reminderHour")
         val minute = intPreferencesKey("$uid.reminderMinute")
         val streak = intPreferencesKey("$uid.streakMinutes")
+        val furigana = booleanPreferencesKey("$uid.showFurigana")
     }
 }

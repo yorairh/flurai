@@ -1,5 +1,12 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.core.reading.rubyParts
+import com.flurai.app.core.reading.Token
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Intent
@@ -78,6 +85,10 @@ fun ReadingScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Show furigana", modifier = Modifier.weight(1f))
+                Switch(checked = state.showFurigana, onCheckedChange = { viewModel.toggleFurigana() })
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("Show translations", modifier = Modifier.weight(1f))
                 Switch(checked = state.showTranslations, onCheckedChange = { viewModel.toggleTranslations() })
             }
@@ -90,20 +101,24 @@ fun ReadingScreen(
                 state.lines.forEach { line ->
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                         Column(Modifier.fillMaxWidth().padding(16.dp)) {
-                            val linkStyle = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline))
-                            Text(
-                                buildAnnotatedString {
-                                    line.tokens.forEach { token ->
-                                        val word = token.word
-                                        if (word == null) append(token.text) else {
-                                            withLink(LinkAnnotation.Clickable("w${word.id}", linkStyle) { viewModel.select(word) }) {
-                                                append(token.text)
+                            if (state.showFurigana) {
+                                RubySentence(line.tokens, onWord = { viewModel.select(it) })
+                            } else {
+                                val linkStyle = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline))
+                                Text(
+                                    buildAnnotatedString {
+                                        line.tokens.forEach { token ->
+                                            val word = token.word
+                                            if (word == null) append(token.text) else {
+                                                withLink(LinkAnnotation.Clickable("w${word.id}", linkStyle) { viewModel.select(word) }) {
+                                                    append(token.text)
+                                                }
                                             }
                                         }
-                                    }
-                                },
-                                style = MaterialTheme.typography.titleLarge.japanese(),
-                            )
+                                    },
+                                    style = MaterialTheme.typography.titleLarge.japanese(),
+                                )
+                            }
                             if (state.showTranslations) {
                                 Text(
                                     line.english,
@@ -169,5 +184,40 @@ private fun WordSheet(word: WordEntity, added: Boolean, onAdd: () -> Unit, onDet
             }
             TextButton(onClick = onDetails, modifier = Modifier.fillMaxWidth()) { Text("Full details and examples") }
         }
+    }
+}
+
+
+/**
+ * A sentence with the reading above each kanji word. Text cannot draw ruby by itself, so each piece
+ * is a small two-line cell (reading over text) in a flow layout; kana and symbols are one cell per
+ * character, so the sentence wraps like normal text. Words you can tap are underlined.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun RubySentence(tokens: List<Token>, onWord: (WordEntity) -> Unit) {
+    val main = MaterialTheme.typography.titleLarge.japanese()
+    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 12.sp, textAlign = TextAlign.Center)
+    val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
+    FlowRow(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        tokens.forEach { token ->
+            val word = token.word
+            if (word == null) {
+                token.text.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
+            } else {
+                Row(Modifier.clickable { onWord(word) }) {
+                    rubyParts(token.text, word.reading).forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = true) }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun RubyCell(text: String, reading: String?, main: androidx.compose.ui.text.TextStyle, ruby: androidx.compose.ui.text.TextStyle, rubyColor: androidx.compose.ui.graphics.Color, underline: Boolean) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // A space keeps the line, so cells without a reading line up with the ones that have it.
+        Text(reading ?: " ", style = ruby, color = rubyColor, maxLines = 1)
+        Text(text, style = main, textDecoration = if (underline) TextDecoration.Underline else null)
     }
 }
