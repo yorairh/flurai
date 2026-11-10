@@ -25,16 +25,21 @@ sealed interface StudySource {
     data class Level(val jlpt: Int) : StudySource
     data class KanaDeck(val script: KanaScript) : StudySource
 
+    /** One of the learner's own decks. */
+    data class Deck(val id: Long) : StudySource
+
     /** Round-trips through navigation arguments. */
     fun encode(): String = when (this) {
         Auto -> "auto"
         is Level -> "n$jlpt"
         is KanaDeck -> script.name
+        is Deck -> "deck-$id"
     }
 
     companion object {
         fun decode(value: String): StudySource = when {
             value == "auto" -> Auto
+            value.startsWith("deck-") -> Deck(value.removePrefix("deck-").toLong())
             value.startsWith("n") -> Level(value.drop(1).toInt())
             else -> KanaDeck(KanaScript.valueOf(value))
         }
@@ -51,6 +56,7 @@ class StudyRepository @Inject constructor(
     private val study: StudyDao,
     private val content: ContentDao,
     private val settings: SettingsRepository,
+    private val deckWords: DeckWords,
 ) {
     private val scheduler = FsrsScheduler()
 
@@ -75,7 +81,12 @@ class StudyRepository @Inject constructor(
     /** Due cards plus today's remaining allowance of new items from [source]. */
     suspend fun loadSession(uid: String, profile: StudyProfile, source: StudySource, now: Instant): SessionData {
         val endOfDay = StudyDay.end(now)
-        val cards = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli(), listeningOn(uid))
+        var cards = study.dueCards(uid, endOfDay.toEpochMilli(), now.toEpochMilli(), listeningOn(uid))
+        // Studying one deck: only that deck's words come up, due or new.
+        if (source is StudySource.Deck) {
+            val inDeck = deckWords.wordIds(source.id).toSet()
+            cards = cards.filter { it.itemType == ItemType.Word && it.itemId in inDeck }
+        }
         val introducedToday = study.introducedSince(uid, StudyDay.start(now).toEpochMilli())
         val allowance = (profile.newCardsPerDay - introducedToday.first()).coerceAtLeast(0)
         val newItems = if (allowance == 0) emptyList() else newCandidates(uid, profile, source).take(allowance)
@@ -104,6 +115,7 @@ class StudyRepository @Inject constructor(
         return when (source) {
             is StudySource.KanaDeck -> kana(source.script)
             is StudySource.Level -> words(source.jlpt)
+            is StudySource.Deck -> fresh(deckWords.wordIds(source.id).map { ItemRef(ItemType.Word, it) })
             StudySource.Auto -> {
                 if (profile.level == JlptLevel.Beginner) {
                     if (!profile.knowsHiragana) kana(KanaScript.Hiragana).ifEmpty { null }?.let { return it }

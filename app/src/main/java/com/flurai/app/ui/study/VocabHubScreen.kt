@@ -1,5 +1,9 @@
 package com.flurai.app.ui.study
 
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material3.OutlinedButton
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,9 +42,11 @@ import com.flurai.app.ui.theme.japanese
 fun VocabHubScreen(
     onBack: () -> Unit,
     onStudy: (StudySource) -> Unit,
+    onOpenDeck: (Long) -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var creating by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Flashcards") }, onBack = onBack)
@@ -49,6 +55,13 @@ fun VocabHubScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item { TodayCard(state, onStudy = { onStudy(StudySource.Auto) }) }
+            item { SectionHeader("自作", "My decks", "Your own word lists. Add words from a word's page.") }
+            items(state.myDecks, key = { it.id }) { deck ->
+                DeckRow(deck.name, deck.progress) { onOpenDeck(deck.id) }
+            }
+            item {
+                OutlinedButton(onClick = { creating = true }, modifier = Modifier.fillMaxWidth()) { Text("New deck") }
+            }
             item { SectionHeader("単語", "Word decks", "Pick a level to take today's new words from it.") }
             items(JlptNumbers) { n ->
                 state.levels[n]?.let { DeckRow("N$n", it) { onStudy(StudySource.Level(n)) } }
@@ -57,6 +70,12 @@ fun VocabHubScreen(
             items(KanaScript.entries) { script ->
                 state.kana[script]?.let { DeckRow("${script.japanese}  ${script.label}", it) { onStudy(StudySource.KanaDeck(script)) } }
             }
+        }
+    }
+    if (creating) {
+        NameDialog("New deck", "", "Create", onDismiss = { creating = false }) {
+            creating = false
+            viewModel.createDeck(it)
         }
     }
 }

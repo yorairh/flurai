@@ -64,6 +64,16 @@ interface AccountDao {
     @Query("UPDATE custom_channel SET uid = :to WHERE uid = :from")
     suspend fun moveChannels(from: String, to: String)
 
+    /** Decks keep their ids, so their words follow without being touched. */
+    @Query("UPDATE deck SET uid = :to WHERE uid = :from")
+    suspend fun moveDecks(from: String, to: String)
+
+    @Query("DELETE FROM deck_word WHERE deck_id IN (SELECT id FROM deck WHERE uid = :uid)")
+    suspend fun dropDeckWords(uid: String)
+
+    @Query("DELETE FROM deck WHERE uid = :uid")
+    suspend fun dropDeckRows(uid: String)
+
     /**
      * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
      * own copy is kept.
@@ -81,6 +91,7 @@ interface AccountDao {
     @Transaction
     suspend fun wipe(uid: String) {
         dropCards(uid); dropLogs(uid); dropDays(uid); dropTests(uid); dropGrammar(uid); dropChannels(uid)
+        dropDeckWords(uid); dropDeckRows(uid)
     }
 
     @Transaction
@@ -91,6 +102,7 @@ interface AccountDao {
         moveTests(from, to)
         moveGrammar(from, to); dropGrammar(from)
         moveChannels(from, to)
+        moveDecks(from, to)
     }
 }
 

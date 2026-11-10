@@ -98,7 +98,12 @@ class StudyRepositoryTest {
     private val settings by lazy {
         SettingsRepository(PreferenceDataStoreFactory.create(scope = CoroutineScope(Dispatchers.Unconfined + SupervisorJob())) { tmp.newFile("s.preferences_pb").also { it.delete() } })
     }
-    private val repo by lazy { StudyRepository(dao, FakeContentDao(), settings) }
+    private val deckWords = mutableMapOf<Long, List<Int>>()
+    private val repo by lazy {
+        StudyRepository(dao, FakeContentDao(), settings, object : DeckWords {
+            override suspend fun wordIds(deckId: Long) = deckWords[deckId].orEmpty()
+        })
+    }
 
     private fun profile(level: JlptLevel, newPerDay: Int = 10, hiragana: Boolean = true, katakana: Boolean = true) =
         StudyProfile(level, 15, newPerDay, hiragana, katakana)
@@ -152,6 +157,29 @@ class StudyRepositoryTest {
         repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Easy, now, Duration.ZERO)
         assertNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Listening)])
         assertNotNull(dao.cards.value[Triple(ItemType.Word, 1, CardKind.Production)])
+    }
+
+    @Test
+    fun aDeckSessionOnlyOffersThatDecksWords() = runTest {
+        deckWords[7] = listOf(2, 10) // one N5 and one N4 word
+        val session = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Deck(7), now)
+        assertEquals(listOf(ItemRef(ItemType.Word, 2), ItemRef(ItemType.Word, 10)), session.newItems)
+    }
+
+    @Test
+    fun aDeckSessionSkipsDueCardsOfOtherWords() = runTest {
+        deckWords[7] = listOf(2)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 1)), Rating.Again, now, Duration.ZERO)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 2)), Rating.Again, now, Duration.ZERO)
+        val session = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Deck(7), now.plusSeconds(3600))
+        assertEquals(listOf(2), session.cards.map { it.itemId })
+    }
+
+    @Test
+    fun sourceRoundTripsThroughNavigationArguments() {
+        listOf(StudySource.Auto, StudySource.Level(4), StudySource.KanaDeck(KanaScript.Katakana), StudySource.Deck(12)).forEach {
+            assertEquals(it, StudySource.decode(it.encode()))
+        }
     }
 
     @Test
