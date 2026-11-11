@@ -58,6 +58,10 @@ SOURCES = {
 }
 
 MAX_SENTENCES_PER_WORD = 3
+#: Extra sentences added only for Reading practice, per JLPT level (on top of the word examples).
+READING_SENTENCES_PER_LEVEL = {5: 400, 4: 400, 3: 300, 2: 200, 1: 200}
+READING_LENGTH = (8, 30)
+IDEAL_READING_LENGTH = 16
 MAX_SENTENCE_LENGTH = 40  # characters; long sentences make poor flashcard examples
 IDEAL_SENTENCE_LENGTH = 14
 
@@ -395,6 +399,177 @@ def pick_sentences(
     return used
 
 
+# --------------------------------------------------------------------------------------------
+# Sentence levels
+#
+# A sentence is as hard as its hardest part: its hardest word (from the JLPT lists) or the hardest
+# grammar it uses. Tatoeba's index gives the dictionary form of every word in a sentence, so the
+# words are known exactly; grammar is found with a short list of patterns.
+
+#: Particles and endings that the JLPT word lists do not carry as words. They never make a sentence harder.
+FUNCTION_WORDS = frozenset(
+    "は が を に で と も の へ や か ね よ ぞ わ さ な から まで より ので のに けど けれど でも だ です ます ない "
+    "た て だろう でしょう たい らしい ばかり だけ しか ほど くらい ぐらい など って という ところ こと もの ため "
+    "ほう よう そう まま みたい ず ぬ ん".split()
+)
+
+#: (pattern, level) pairs: the sentence is at most this level (a smaller JLPT number is harder) when it matches.
+GRAMMAR_GATES: list[tuple[re.Pattern, int]] = [
+    (re.compile(p), level)
+    for p, level in [
+        # N4 grammar
+        (r"たことが|たことは", 4), (r"ながら", 4), (r"たり.*たり", 4), (r"ことができ|ことが出来", 4),
+        (r"ように|ような|ようだ|ようです", 4), (r"と思|と思い", 4), (r"かもしれ", 4),
+        (r"なければ|なくては|なくても|なきゃ", 4), (r"たほうが|た方が", 4), (r"すぎ|過ぎ", 4),
+        (r"ので", 4), (r"ために|為に", 4), (r"てくれ|てあげ|てもら|ていただ|てやっ", 4),
+        (r"(?<!と)ても", 4), (r"たら", 4), (r"[えけげせてねべめれ]ば", 4), (r"つもり|予定", 4),
+        (r"ところだ|ところです|たばかり", 4), (r"はず", 4), (r"みたい|らしい", 4), (r"のに", 4), (r"ないで", 4),
+        (r"という", 4), (r"なさい", 4), (r"始め|終わ|続け", 4), (r"やすい|にくい", 4), (r"んだ|んです|のだ|のです", 4),
+        (r"させ", 3), (r"られ", 3),
+        # N3 and harder: passive/causative, obligation, keigo, colloquial and written styles
+        (r"べき|べく", 3), (r"おいで|いらっしゃ|ございま|申し|致し|いたし|くださる|くださっ|なさる|おっしゃ|召し上が", 3),
+        (r"ちゃ|ちゃう|じゃん|っす|やがる|てんだ|なにやっ|てる|でる", 3),
+        (r"ざるを得|にもかかわらず|わけだ|わけです|ことになっ|ことにな", 3),
+    ]
+]
+
+#: Characters that mean the text is a fragment or contains a placeholder, not a sentence to read.
+_UNREADABLE = re.compile(r"[～〜…⋯＊*()（）]")
+
+
+def is_hiragana_only(text: str) -> bool:
+    return bool(text) and all("぀" <= c <= "ゟ" or c == "ー" for c in text)
+
+
+def is_katakana_only(text: str) -> bool:
+    return bool(text) and all("゠" <= c <= "ヿ" for c in text)
+
+
+#: Everyday names and compounds the JLPT lists leave out (or rank oddly, 日本 is N3 there). Treated as N5.
+COMMON_WORDS = frozenset(
+    "日本 日本人 日本語 東京 京都 大阪 中国 韓国 アメリカ イギリス フランス ドイツ 英語 外国 外国人 今日 今朝 今晩 今夜 毎日 毎朝 毎晩 "
+    "お母さん お父さん お兄さん お姉さん 子供 子供たち 人々 みんな 皆 皆さん 誰も 何も 何の 今まで 一人 二人 三人 一時間 時間 週間 ヶ月 ヵ月 か月".split()
+)
+
+_SUFFIXES = ("たち", "達", "人", "語", "さん", "ちゃん")
+_PARTICLE_ENDINGS = ("まで", "に", "で", "も", "の")
+_NUMERALS = "一二三四五六七八九十百千万0123456789０１２３４５６７８９"
+
+
+def derived_keys(key: str, depth: int = 2):
+    """The key itself, then simpler forms of it: 子供たち -> 子供, 一人で -> 一人 -> 人, 早く -> 早い."""
+    yield key
+    if depth == 0:
+        return
+    simpler = []
+    for suffix in _SUFFIXES + _PARTICLE_ENDINGS:
+        if key.endswith(suffix) and len(key) > len(suffix):
+            simpler.append(key[: -len(suffix)])
+    if key.endswith("く") and len(key) > 1:
+        simpler.append(key[:-1] + "い")
+    stripped = key.lstrip(_NUMERALS)
+    if stripped and stripped != key:
+        simpler.append(stripped)
+    for form in simpler:
+        yield from derived_keys(form, depth - 1)
+
+
+def word_levels(words: list["Word"]) -> dict[str, int]:
+    """Spelling (or kana reading of a kana word) -> JLPT number of the easiest word written that way."""
+    levels: dict[str, int] = {}
+    for w in words:
+        if w.is_affix:
+            continue
+        keys = set(w.spellings)
+        if w.expression == w.reading:
+            keys.add(w.reading)
+        for key in keys:
+            levels[key] = max(levels.get(key, 0), w.jlpt)
+    for key in COMMON_WORDS:
+        levels[key] = 5
+    return levels
+
+
+def token_level(token: "IndexToken", levels: dict[str, int]) -> int | None:
+    """The JLPT number a token asks of the reader, or None when it asks nothing (particles, endings)."""
+    # The form written in the sentence comes first: 未だ is read まだ here, not いまだ.
+    for key in (token.form, token.reading, token.headword):
+        for candidate in derived_keys(key) if key else ():
+            if candidate in levels:
+                return levels[candidate]
+    # What the reader sees is the form written in the sentence: 可き is read as べき, so it is judged as kana.
+    shown = token.form or token.headword
+    if token.headword in FUNCTION_WORDS or shown in FUNCTION_WORDS or len(shown) <= 1:
+        return None
+    if any(is_kanji(c) for c in shown):
+        return 1  # a kanji word outside the JLPT lists: rare, names and specialist words
+    if is_katakana_only(shown):
+        return 3  # loanwords and names outside the lists
+    return 4 if len(shown) >= 3 else None  # a hiragana word outside the lists
+
+
+_A_ROW = {"く": "か", "ぐ": "が", "す": "さ", "つ": "た", "ぬ": "な", "ぶ": "ば", "む": "ま", "る": "ら", "う": "わ"}
+
+
+def is_passive_or_causative(token: "IndexToken") -> bool:
+    """A godan verb in a passive or causative form: 書く -> 書かれた, 書かせた (the られ/させ gate covers ichidan verbs)."""
+    head, form = token.headword, token.form
+    if not form or len(head) < 2 or head[-1] not in _A_ROW:
+        return False
+    stem = head[:-1] + _A_ROW[head[-1]]
+    return form.startswith(stem + "れ") or form.startswith(stem + "せ")
+
+
+def grade_sentence(text: str, tokens: list["IndexToken"], levels: dict[str, int]) -> int | None:
+    """JLPT number of a sentence (5 = N5 ... 1 = N1), or None when it is not fit for reading practice."""
+    if not tokens or _UNREADABLE.search(text):
+        return None
+    grade = 5
+    for token in tokens:
+        level = token_level(token, levels)
+        if level is not None:
+            grade = min(grade, level)
+    for pattern, level in GRAMMAR_GATES:
+        if pattern.search(text):
+            grade = min(grade, level)
+    if any(is_passive_or_causative(t) for t in tokens):
+        grade = min(grade, 3)
+    return grade
+
+
+def pick_reading_sentences(
+    indexed: list["IndexedSentence"],
+    japanese: dict[int, str],
+    english: dict[int, str],
+    levels: dict[str, int],
+    taken: set[int],
+    per_level: dict[int, int] = READING_SENTENCES_PER_LEVEL,
+) -> tuple[dict[int, tuple[str, str, bool]], dict[int, int]]:
+    """Sentences for Reading practice beyond the word examples: graded, readable length, a spread of
+    lengths, verified ones first. Returns the sentences and their levels."""
+    candidates: dict[int, list[tuple]] = {n: [] for n in per_level}
+    for sentence in indexed:
+        text = japanese.get(sentence.japanese_id)
+        if text is None or sentence.english_id not in english or sentence.japanese_id in taken:
+            continue
+        if not READING_LENGTH[0] <= len(text) <= READING_LENGTH[1]:
+            continue
+        grade = grade_sentence(text, sentence.tokens, levels)
+        if grade not in candidates:
+            continue
+        verified = any(t.good_example for t in sentence.tokens)
+        # A fixed scramble of the id spreads the picks over the data instead of favoring early ids.
+        scatter = (sentence.japanese_id * 2654435761) % 1000003
+        candidates[grade].append(((not verified, abs(len(text) - IDEAL_READING_LENGTH) // 4, scatter), sentence, text, verified, grade))
+    picked: dict[int, tuple[str, str, bool]] = {}
+    graded: dict[int, int] = {}
+    for grade, items in candidates.items():
+        for _, sentence, text, verified, level in sorted(items, key=lambda i: i[0])[: per_level[grade]]:
+            picked[sentence.japanese_id] = (text, english[sentence.english_id], verified)
+            graded[sentence.japanese_id] = level
+    return picked, graded
+
+
 def read_tatoeba_sentences(path: Path) -> dict[int, str]:
     sentences = {}
     with bz2.open(path, "rt", encoding="utf-8") as f:
@@ -442,6 +617,7 @@ def write_database(
     sentences: dict[int, tuple[str, str, bool]],
     grammar: list[dict],
     info: dict[str, str],
+    sentence_levels: dict[int, int | None] | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
@@ -465,8 +641,8 @@ def write_database(
         [(k.literal, k.jlpt, k.meanings, k.onyomi, k.kunyomi, k.stroke_count, k.grade, k.frequency) for k in kanji],
     )
     db.executemany(
-        "INSERT INTO sentence (id, japanese, english, verified) VALUES (?, ?, ?, ?)",
-        [(sid, jp, en, int(good)) for sid, (jp, en, good) in sorted(sentences.items())],
+        "INSERT INTO sentence (id, japanese, english, verified, jlpt) VALUES (?, ?, ?, ?, ?)",
+        [(sid, jp, en, int(good), (sentence_levels or {}).get(sid)) for sid, (jp, en, good) in sorted(sentences.items())],
     )
     db.executemany(
         "INSERT INTO word_sentence (word_id, sentence_id, rank) VALUES (?, ?, ?)",
@@ -505,12 +681,22 @@ def main() -> None:
     )
 
     print("Example sentences")
+    indexed = parse_indices(read_indices(fetch("jpn_indices.tar.bz2")))
     sentences = pick_sentences(
         words,
-        parse_indices(read_indices(fetch("jpn_indices.tar.bz2"))),
+        indexed,
         read_tatoeba_sentences(fetch("jpn_sentences.tsv.bz2")),
         read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2")),
     )
+    levels = word_levels(words)
+    tokens_by_id = {s.japanese_id: s.tokens for s in indexed}
+    sentence_levels = {sid: grade_sentence(jp, tokens_by_id.get(sid, []), levels) for sid, (jp, _, _) in sentences.items()}
+    extra, extra_levels = pick_reading_sentences(
+        indexed, read_tatoeba_sentences(fetch("jpn_sentences.tsv.bz2")), read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2")),
+        levels, set(sentences),
+    )
+    sentences.update(extra)
+    sentence_levels.update(extra_levels)
 
     grammar = json.loads(GRAMMAR.read_text(encoding="utf-8"))
 
@@ -524,13 +710,15 @@ def main() -> None:
         "sentence_count": str(len(sentences)),
         "grammar_count": str(len(grammar)),
     }
-    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info)
+    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info, sentence_levels)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)
     print(f"Wrote {OUTPUT.relative_to(ROOT)} ({OUTPUT.stat().st_size / 1e6:.1f} MB)")
     for n in range(5, 0, -1):
         print(f"  N{n}: {sum(w.jlpt == n for w in words)} words, {sum(k.jlpt == n for k in kanji)} kanji")
+    graded = {n: sum(1 for g in sentence_levels.values() if g == n) for n in range(5, 0, -1)}
+    print(f"  sentence levels: {graded}, ungraded {sum(1 for g in sentence_levels.values() if g is None)}")
     print(f"  {len(sentences)} sentences; {with_examples}/{len(words)} words have examples;"
           f" {sum(w.jmdict_id is not None for w in words)} matched in JMdict")
 

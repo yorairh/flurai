@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
         GrammarExampleEntity::class,
         ContentInfoEntity::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = true,
 )
 abstract class ContentDatabase : RoomDatabase() {
@@ -87,9 +87,9 @@ interface ContentDao {
     @Query("SELECT * FROM word WHERE id IN (:ids)")
     suspend fun words(ids: List<Int>): List<WordEntity>
 
-    /** Verified Tatoeba sentences of reading length; the level is worked out from their words in the app. */
-    @Query("SELECT * FROM sentence WHERE verified = 1 AND length(japanese) BETWEEN 8 AND 30")
-    suspend fun readingCandidates(): List<SentenceEntity>
+    /** Sentences for Reading practice: graded by the content pipeline (hardest word or grammar) and of reading length. */
+    @Query("SELECT * FROM sentence WHERE jlpt IS NOT NULL AND length(japanese) BETWEEN 8 AND 30")
+    suspend fun readingSentences(): List<SentenceEntity>
 
     @Query("SELECT * FROM grammar_point ORDER BY jlpt DESC, id")
     fun grammarPoints(): Flow<List<GrammarPointEntity>>
