@@ -49,8 +49,8 @@ class VocabHubViewModel @Inject constructor(
 
     val state: StateFlow<VocabHubState> = auth.currentUser.flatMapLatest { user ->
         if (user == null) return@flatMapLatest emptyFlow()
-        val newLeft = combine(profiles.profile(user.uid), repository.introducedToday(user.uid)) { profile, introduced ->
-            ((profile?.newCardsPerDay ?: 0) - introduced).coerceAtLeast(0)
+        val newLeft = combine(profiles.profile(user.uid), repository.introducedToday(user.uid), repository.unstartedCount(user.uid)) { profile, introduced, unstarted ->
+            ((profile?.newCardsPerDay ?: 0) - introduced).coerceAtLeast(0) + unstarted
         }
         val myDecks = combine(decks.decks(user.uid), decks.members(user.uid)) { list, members -> list to members }
         // One query for the studied items feeds every bar on the screen.

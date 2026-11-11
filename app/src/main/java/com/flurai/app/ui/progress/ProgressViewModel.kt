@@ -42,11 +42,12 @@ class ProgressViewModel @Inject constructor(
                 progress.snapshot(user.uid, profile.level),
                 study.dueCount(user.uid),
                 study.introducedToday(user.uid),
-            ) { snapshot, due, introduced ->
+                study.unstartedCount(user.uid),
+            ) { snapshot, due, introduced, unstarted ->
                 ProgressUiState(
                     snapshot = snapshot,
                     dueNow = due,
-                    newLeftToday = (profile.newCardsPerDay - introduced).coerceAtLeast(0),
+                    newLeftToday = (profile.newCardsPerDay - introduced).coerceAtLeast(0) + unstarted,
                 )
             }
         }

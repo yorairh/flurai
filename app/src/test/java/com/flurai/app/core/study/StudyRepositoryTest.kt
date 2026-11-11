@@ -132,9 +132,11 @@ class StudyRepositoryTest {
         // Today: the learned recognition card is scheduled days ahead and the two unlocked cards wait for 4 a.m.
         val today = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, now.plusSeconds(60))
         assertEquals(emptyList<CardKind>(), today.cards.map { it.kind })
-        // After the rollover the unlocked ones are due.
+        // After the rollover the production card is due; the listening card follows a day later.
         val tomorrow = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, StudyDay.end(now).plusSeconds(60))
-        assertEquals(setOf(CardKind.Production, CardKind.Listening), tomorrow.cards.map { it.kind }.toSet())
+        assertEquals(listOf(CardKind.Production), tomorrow.cards.map { it.kind })
+        val dayAfter = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, StudyDay.end(StudyDay.end(now)).plusSeconds(60))
+        assertEquals(setOf(CardKind.Production, CardKind.Listening), dayAfter.cards.map { it.kind }.toSet())
     }
 
     @Test

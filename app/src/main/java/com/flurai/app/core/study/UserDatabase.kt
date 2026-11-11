@@ -115,14 +115,25 @@ interface StudyDao {
     )
     suspend fun dueCards(uid: String, until: Long, now: Long, listening: Boolean): List<CardEntity>
 
+    /** Cards to review: due and answered before (a card added by hand and never answered is "new", see [unstartedCount]). */
     @Query(
         """
         SELECT COUNT(*) FROM card
-        WHERE uid = :uid AND due < :until AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+        WHERE uid = :uid AND due < :until AND reps > 0 AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
             AND (:listening OR kind != 'Listening')
         """,
     )
     fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int>
+
+    /** Cards that exist but were never answered (a word added from its page, Reading or Media). They count as new, not as reviews. */
+    @Query(
+        """
+        SELECT COUNT(*) FROM card
+        WHERE uid = :uid AND due < :until AND reps = 0 AND NOT suspended AND (buried_until IS NULL OR buried_until <= :now)
+            AND (:listening OR kind != 'Listening')
+        """,
+    )
+    fun unstartedCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int>
 
     /** Items that already have a card of any kind (so they aren't introduced again). */
     @Query("SELECT DISTINCT item_type AS itemType, item_id AS itemId FROM card WHERE uid = :uid")

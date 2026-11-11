@@ -71,6 +71,14 @@ class StudyRepository @Inject constructor(
                 study.dueCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening)
             }
 
+    /** Cards added by hand and not answered yet: new words to learn today that do not use the daily allowance. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun unstartedCount(uid: String): Flow<Int> =
+        combine(settings.settings(uid).map { it.listeningCards }.distinctUntilChanged(), StudyDay.ticks()) { l, now -> l to now }
+            .flatMapLatest { (listening, now) ->
+                study.unstartedCount(uid, StudyDay.end(now).toEpochMilli(), now.toEpochMilli(), listening)
+            }
+
     /** New items started today (counts against the daily allowance); follows the rollover too. */
     @OptIn(ExperimentalCoroutinesApi::class)
     fun introducedToday(uid: String): Flow<Int> =
@@ -159,7 +167,7 @@ class StudyRepository @Inject constructor(
 
     /**
      * Schedules an answer and saves it. Learning a word's recognition card for the first time
-     * unlocks its production card (meaning → Japanese) and listening card, due from tomorrow.
+     * unlocks its production card (meaning → Japanese), due from tomorrow, and its listening card, due a day later.
      */
     suspend fun answer(
         uid: String,
@@ -197,7 +205,8 @@ class StudyRepository @Inject constructor(
             listOfNotNull(
                 newCard(uid, item.item, CardKind.Production, due = due, now = now),
                 // Listening cards are only added while the setting is on (turning it on later adds them as you learn more).
-                if (listeningOn(uid)) newCard(uid, item.item, CardKind.Listening, due = due, now = now) else null,
+                // One day after the production card, so the two never arrive together (one would give the other away).
+                if (listeningOn(uid)) newCard(uid, item.item, CardKind.Listening, due = StudyDay.end(due), now = now) else null,
             )
         } else {
             emptyList()
