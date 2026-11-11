@@ -32,6 +32,14 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 23 | N1 grammar (71 points) | ✅ Merged | [#25](https://github.com/yorairh/flurai/pull/25) | [v0.22.0](https://github.com/yorairh/flurai/releases/tag/v0.22.0) |
 | 24 | Release prep: code and architecture review, simplify, optimize | ✅ Merged | [#26](https://github.com/yorairh/flurai/pull/26) | [v0.23.0](https://github.com/yorairh/flurai/releases/tag/v0.23.0) |
 | 25 | First release for friends (1.0.0) | ✅ Merged | [#27](https://github.com/yorairh/flurai/pull/27) | [v1.0.0](https://github.com/yorairh/flurai/releases/tag/v1.0.0) |
+| 26 | Flashcard order: no repeating sequence, sibling cards spaced apart | ⏳ | | 1.1.0 |
+| 27 | A level you can trust: evidence per level (words, grammar, checkpoint) | ⏳ | | 1.1.0 |
+| 28 | Sentence audio: listen to example sentences | ⏳ | | 1.1.0 |
+| 29 | Reading that matches the level (content db) | ⏳ | | 1.2.0 |
+| 30 | Example sentences and word data quality (content db) | ⏳ | | 1.2.0 |
+| 31 | Search and library | ⏳ | | 1.2.0 |
+| 32 | Quizzes and grammar practice | ⏳ | | 1.3.0 |
+| 33 | Kana and polish | ⏳ | | 1.3.0 |
 
 ## Goal
 
@@ -154,6 +162,59 @@ Order: 15 → 16 → 17 → 18 → 19 → 20 → 21. Milestone 12 (chat) is park
 19. **Complete N5 grammar (0.18.0):** grow N5 from 25 to the full list (~80 points, JLPT Sensei-sized lists as the reference), same format: explanation, formation, 3-4 examples (Tatoeba where one fits, otherwise written), fill-in-the-blank practice. New ids only; existing ids never change.
 20. **Complete N4 grammar (0.19.0):** grow N4 from 22 to the full list (~130 points), same way.
 21. **N3 grammar (0.20.0):** the full N3 list (~200 points), same way.
+
+## Play-test of 1.0.0 (2026-11-11): milestones 26-33
+
+A guest-profile play-test of 1.0.0 on the emulator (every feature except audio, sign-in and sync) found no crashes but the issues below. Order: 26 → 27 → 28 (release 1.1.0), 29 → 30 → 31 (1.2.0, one content-db bump), 32 → 33 (1.3.0). Each milestone is its own branch, PR and APK. Decisions: the level is **evidence per level** (a level is reached when its checkpoint of words, kanji and grammar is passed, or 80% of its words and 80% of its grammar are known; placement only suggests a start); flashcard order is fixed both inside a session and across days.
+
+**26. Flashcard order**
+- Learning cards cycle in the same sequence (every Good adds the same 10 min); a card answered Again returns immediately.
+- Reviews come in the same order every day (`StudyQueue.next` takes the earliest `due`).
+- A word's Production and Listening cards are created with the same `due`, so they arrive back-to-back (the listening card gives away the answer).
+- The three counters at the top of a session have no labels.
+- Words added by hand or from Media count as "to review", not new.
+
+**27. A level you can trust**
+- The placement test (20 word-meaning questions, reading shown) can award N1; it never asks N5 and has no grammar, kanji or reading questions. Wrong options are often a different part of speech.
+- Home shows an "N5" chip and "Your level N1" at once; Progress says "reached the top level" with 4 words known; every level is labeled "assumed".
+- The level estimate ignores grammar entirely.
+- The level checkpoint covers words and kanji only; there is no grammar in it.
+- Stale texts: "Grammar progress will show up here once grammar lessons arrive", "Tests will refine it later" (Progress, Edit level & goals).
+- Progress opened from Me highlights Home in the bottom bar.
+- Media coverage says "0%" without saying it counts only words learned in the app.
+
+**28. Sentence audio (new feature)**
+- Listen to example sentences: flashcard answer side, word page, grammar examples, Reading. Long-press for slow speech. Device TTS; verify on a phone.
+
+**29. Reading that matches the level**
+- "N5" Reading sentences contain slang (もう～、なにやってんだよ), keigo (いつ旅行においでになりますか), passive (ワックスがかけられて), べき, and a Bible line (あなたをケパと呼ぶことにします). Levels come only from recognized words, never grammar.
+- 私 is shown with the reading わたくし instead of わたし.
+- Comprehension-check wrong options are unrelated sentences, so one known word answers it.
+- Wrapped furigana lines have very large gaps; every kana is its own accessibility node.
+
+**30. Example sentences and word data**
+- Examples are far above the word's level (お姉さん → 審美感, 医者 → 折れた足をついだ) and sometimes the wrong word (ええ "yes" shows Kansai ええ "good").
+- Examples on cards, word pages and grammar have no furigana.
+- Duplicate kana-only words with a wrong dictionary match (つうか "currency", id 4657); Media "learn the top 20" can add them.
+- Glosses: "(formal)" for お母さん/お父さん-type words should read polite; ええ and そう are both "yes".
+- Media: "Learn the top 20 words first" never shows which words; it adds N1 words (歪む) for an "N5" title; "suits N5" overpromises for titles with 2,500-7,000 distinct words.
+
+**31. Search and library**
+- Word search ranks substrings of glosses first ("eat" → weather, theater, great before 食べる; "cat" → vacation before 猫) and finds nothing for romaji ("taberu").
+- Kanji tab: no search; the sheet shows raw dictionary notation (おお.きい、-おお.いに) and no example words; the word page does not link to its kanji.
+- A custom deck has no "add words" button.
+
+**32. Quizzes and grammar practice**
+- Wrong options in word questions are easy to eliminate (different word family); glosses are cut mid-word ("cold (things", "…of a buildi").
+- Checkpoint kanji questions show readings with okurigana on a bare kanji (生 → いきる, 長 → ながい) and rare readings (後 → のち).
+- Result screens show only a score; they do not list what was missed. "Add 10 missed words" is shown even when the words are already cards.
+- Grammar practice: only two questions per point, reusing the lesson's own examples; wrong options are random fragments (何, 中 for a particle gap); feedback after a wrong answer is one line; closing mid-quiz does not confirm.
+- Grammar content: the answer ending is a fragment (かもしれ); "agonising" (American English); あげく, だけあって and ざるを得ない are filed under N3 but belong in N2.
+
+**33. Kana and polish**
+- Kana decks lack the combination sounds (きゃ, しゅ ...); the deck is a one-per-row list, not a chart; cards have no example word.
+- Streak card: the ring shows minutes next to "1-day streak"; the 5-minute streak rule and the 15-minute daily goal are easy to confuse; the heat map has no weekday labels or legend.
+- Videos copy: "Great for simple lessons."
 
 ## Standing rules
 
