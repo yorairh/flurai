@@ -11,7 +11,7 @@ An Android app (Kotlin + Jetpack Compose, package `com.flurai.app`) for learning
 - **Home:** study-now card (cards due, new words left today), streak card with a heat map of study minutes, progress summary.
 - **Learn:**
   - **Flashcards:** about 8,000 JLPT words (N5–N1) plus hiragana/katakana, FSRS scheduling, Recognition, Production and Listening cards, your own decks, a deck screen for every built-in deck.
-  - **Word library:** search and browse words and kanji with example sentences; add a word to the flashcards or to a deck.
+  - **Word library:** search (by Japanese, romaji or English; best match first) and browse words and kanji, with example sentences and the words written with each kanji; add a word to the flashcards or to a deck; a deck's "Add words" opens the library to pick words.
   - **Grammar:** 521 points (N5 89, N4 108, N3 158, N2 95, N1 71) with explanation, formation, examples and fill-in-the-blank practice; one level at a time.
   - **Reading:** graded Tatoeba sentences with furigana, tap-to-look-up, add-to-flashcards, and a comprehension check.
   - **Tests:** adaptive placement test (a suggestion), 30-question level checkpoints with words, kanji and grammar (80% to pass, confirms a level), quick quiz, listening quiz.
@@ -79,6 +79,7 @@ Single `app` module. Packages are split by feature (`ui/home`, `ui/learn`, `ui/e
 - `StudyProfile` (level, daily goal, new words per day, kana knowledge) lives in DataStore (`StudyProfileRepository`); no profile = onboarding not done. Its `level` only chooses the word list new words come from (shown as "Studying from"); it is **not** the learner's level, which is the estimate below.
 
 ### Study content
+`core/content/Search.kt` ranks search results (`rankWords`/`rankKanjiList`: the word itself, a meaning that is exactly the query, the start of the word, a meaning containing it as a whole word, then substrings; easier levels first on ties) over the SQL candidates in `ContentDao.searchCandidates`/`searchKanji`; `Romaji.toHiragana` turns typed romaji into kana (null when it is not romaji, so "eat" is searched as English only). The kanji sheet (`KanjiSheetHost`) shows readings with okurigana in brackets and the words written with the kanji, and opens from the Kanji tab and from the kanji chips on a word page.
 `core/content`: a read-only Room database (`ContentDatabase`) copied from `assets/content.db`, built by `tools/content/build_content.py` from JLPT lists, JMdict/KANJIDIC2, Tatoeba and `tools/content/grammar.json`, using Room's exported schema in `app/schemas/` so it always matches the entities.
 - **Installed apps only re-copy `content.db` when `ContentDatabase.version` goes up.** Bump it whenever the db changes (entities or content), run `./gradlew kspDebugKotlin` to export the schema, then re-run the pipeline.
 - Word ids come from `tools/content/word_ids.tsv` (Anki guid → id) and must never be renumbered, because user progress refers to them; commit that file after a rebuild. `jlpt` columns hold the JLPT number (5 = N5, easiest).

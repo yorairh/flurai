@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,6 +35,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
@@ -63,6 +65,8 @@ fun LibraryScreen(
     onOpenWord: (Int) -> Unit,
     viewModel: LibraryViewModel = hiltViewModel(),
 ) {
+    val picking = viewModel.pickDeckId != 0L
+    val inDeck by viewModel.inDeck.collectAsStateWithLifecycle()
     val tab by viewModel.tab.collectAsStateWithLifecycle()
     val jlpt by viewModel.jlpt.collectAsStateWithLifecycle()
     val query by viewModel.query.collectAsStateWithLifecycle()
@@ -74,7 +78,7 @@ fun LibraryScreen(
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
-            title = { Text("Word library") },
+            title = { Text(if (picking) "Add words to your deck" else "Word library") },
             navigationIcon = {
                 IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
             },
@@ -87,12 +91,14 @@ fun LibraryScreen(
             }
         }
 
-        val searching = tab == LibraryTab.Words && query.isNotBlank()
-        if (tab == LibraryTab.Words) {
+        val searching = query.isNotBlank()
+        run {
             OutlinedTextField(
                 value = query,
                 onValueChange = viewModel::search,
-                placeholder = { Text("Search: 食べる, たべる or eat") },
+                placeholder = {
+                    Text(if (tab == LibraryTab.Words) "Search: 食べる, たべる, taberu or eat" else "Search: 食, eat or しょく")
+                },
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                 trailingIcon = {
                     if (query.isNotEmpty()) {
@@ -125,14 +131,13 @@ fun LibraryScreen(
 
         Box(Modifier.weight(1f)) {
             when (tab) {
-                LibraryTab.Words -> WordList(words, searching, onOpenWord)
-                LibraryTab.Kanji -> KanjiGrid(kanji) { selectedKanji = it.literal }
+                LibraryTab.Words -> WordList(words, searching, picking, inDeck, onToggle = viewModel::toggleInDeck, onOpenWord = onOpenWord)
+                LibraryTab.Kanji -> KanjiGrid(kanji, searching) { selectedKanji = it.literal }
             }
         }
     }
 
-    val shown = kanji?.find { it.literal == selectedKanji }
-    if (shown != null) KanjiSheet(shown) { selectedKanji = null }
+    selectedKanji?.let { KanjiSheetHost(it, onOpenWord = { id -> selectedKanji = null; onOpenWord(id) }, onDismiss = { selectedKanji = null }) }
 }
 
 @Composable
@@ -141,7 +146,14 @@ private fun Loading() {
 }
 
 @Composable
-private fun WordList(words: List<WordEntity>?, searching: Boolean, onOpenWord: (Int) -> Unit) {
+private fun WordList(
+    words: List<WordEntity>?,
+    searching: Boolean,
+    picking: Boolean,
+    inDeck: Set<Int>,
+    onToggle: (Int) -> Unit,
+    onOpenWord: (Int) -> Unit,
+) {
     if (words == null) return Loading()
     if (words.isEmpty()) {
         Text(
@@ -153,14 +165,19 @@ private fun WordList(words: List<WordEntity>?, searching: Boolean, onOpenWord: (
     }
     LazyColumn(contentPadding = PaddingValues(bottom = 16.dp)) {
         items(words, key = { it.id }) { word ->
-            WordRow(word, showLevel = searching) { onOpenWord(word.id) }
+            WordRow(
+                word,
+                showLevel = searching,
+                deckState = if (picking) word.id in inDeck else null,
+                onToggle = { onToggle(word.id) },
+            ) { onOpenWord(word.id) }
             HorizontalDivider(Modifier.padding(start = 16.dp))
         }
     }
 }
 
 @Composable
-private fun WordRow(word: WordEntity, showLevel: Boolean, onClick: () -> Unit) {
+private fun WordRow(word: WordEntity, showLevel: Boolean, deckState: Boolean?, onToggle: () -> Unit, onClick: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
@@ -191,12 +208,28 @@ private fun WordRow(word: WordEntity, showLevel: Boolean, onClick: () -> Unit) {
             Spacer(Modifier.width(8.dp))
             Text("N${word.jlpt}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
+        if (deckState != null) {
+            Spacer(Modifier.width(8.dp))
+            if (deckState) {
+                OutlinedButton(onClick = onToggle) { Text("Added") }
+            } else {
+                Button(onClick = onToggle) { Text("Add") }
+            }
+        }
     }
 }
 
 @Composable
-private fun KanjiGrid(kanji: List<KanjiEntity>?, onClick: (KanjiEntity) -> Unit) {
+private fun KanjiGrid(kanji: List<KanjiEntity>?, searching: Boolean, onClick: (KanjiEntity) -> Unit) {
     if (kanji == null) return Loading()
+    if (kanji.isEmpty()) {
+        Text(
+            if (searching) "No kanji found." else "No kanji at this level.",
+            modifier = Modifier.padding(24.dp),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        return
+    }
     LazyVerticalGrid(
         columns = GridCells.Adaptive(64.dp),
         contentPadding = PaddingValues(16.dp),

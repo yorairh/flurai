@@ -67,7 +67,7 @@ import kotlin.reflect.KClass
 @Serializable object ExploreRoute
 @Serializable object ProfileRoute
 @Serializable object EditProfileRoute
-@Serializable object LibraryRoute
+@Serializable data class LibraryRoute(val deckId: Long = 0)
 @Serializable data class WordRoute(val id: Int)
 @Serializable object LicencesRoute
 @Serializable object VocabHubRoute
@@ -164,7 +164,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
             screen<LearnRoute> {
                 LearnScreen(
                     onOpenFlashcards = { navController.navigate(VocabHubRoute) },
-                    onOpenLibrary = { navController.navigate(LibraryRoute) },
+                    onOpenLibrary = { navController.navigate(LibraryRoute()) },
                     onOpenTests = { navController.navigate(TestsRoute) },
                     onOpenGrammar = { navController.navigate(GrammarListRoute) },
                     onOpenReading = { navController.navigate(ReadingRoute) },
@@ -190,6 +190,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onBack = { navController.popBackStack() },
                     onStudy = { navController.navigate(StudyRoute(it.encode())) },
                     onOpenWord = { navController.navigate(WordRoute(it)) },
+                    onAddWords = { navController.navigate(LibraryRoute(it)) },
                 )
             }
             screen<ProgressRoute> {
@@ -264,7 +265,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onOpenWord = { navController.navigate(WordRoute(it)) },
                 )
             }
-            screen<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }) }
+            screen<WordRoute> { WordDetailScreen(onBack = { navController.popBackStack() }, onOpenWord = { navController.navigate(WordRoute(it)) }) }
             screen<SettingsRoute> {
                 SettingsScreen(
                     profile = profile,

@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -108,6 +109,7 @@ fun DeckScreen(
     onBack: () -> Unit,
     onStudy: (StudySource) -> Unit,
     onOpenWord: (Int) -> Unit,
+    onAddWords: (Long) -> Unit,
     viewModel: DeckViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -136,10 +138,13 @@ fun DeckScreen(
                     modifier = Modifier.fillMaxWidth().height(52.dp),
                 ) { Text("Study this deck") }
             }
+            item {
+                OutlinedButton(onClick = { onAddWords(viewModel.deckId) }, modifier = Modifier.fillMaxWidth()) { Text("Add words") }
+            }
             if (state.words.isEmpty()) {
                 item {
                     Text(
-                        "This deck is empty. Open a word (from the Word library, Reading or a test) and choose Add to a deck.",
+                        "This deck is empty. Choose Add words, or open a word (from Reading or a test) and choose Add to a deck.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
