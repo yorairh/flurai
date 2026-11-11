@@ -75,13 +75,13 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import javax.inject.Inject
 
-data class WordDetail(val word: WordEntity, val sentences: List<SentenceEntity>)
+data class WordDetail(val word: WordEntity, val sentences: List<SentenceEntity>, val kanji: List<String> = emptyList())
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WordDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    content: ContentDao,
+    private val content: ContentDao,
     private val auth: AuthRepository,
     private val study: StudyRepository,
     val speaker: JapaneseSpeaker,
@@ -109,7 +109,9 @@ class WordDetailViewModel @Inject constructor(
         speaker.start()
         viewModelScope.launch {
             val word = content.word(item.itemId) ?: return@launch
-            _detail.value = WordDetail(word, content.sentencesForWord(item.itemId))
+            // The kanji of the word that are in the kanji list, each once, in reading order.
+            val kanji = word.expression.map { it.toString() }.distinct().filter { content.kanji(it) != null }
+            _detail.value = WordDetail(word, content.sentencesForWord(item.itemId), kanji)
         }
     }
 
@@ -137,12 +139,13 @@ class WordDetailViewModel @Inject constructor(
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltViewModel()) {
+fun WordDetailScreen(onBack: () -> Unit, onOpenWord: (Int) -> Unit = {}, viewModel: WordDetailViewModel = hiltViewModel()) {
     val detail by viewModel.detail.collectAsStateWithLifecycle()
     val cards by viewModel.cards.collectAsStateWithLifecycle()
     val deckList by viewModel.deckList.collectAsStateWithLifecycle()
     val inDecks by viewModel.inDecks.collectAsStateWithLifecycle()
     var pickingDeck by remember { mutableStateOf(false) }
+    var openKanji by remember { mutableStateOf<String?>(null) }
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
@@ -169,6 +172,20 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
                 Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), modifier = Modifier.weight(1f, fill = false))
                 Spacer(Modifier.width(12.dp))
                 FilledTonalIconButton(onClick = viewModel::speak) { Icon(Icons.Filled.PlayArrow, contentDescription = "Play audio") }
+            }
+            if (d.kanji.isNotEmpty()) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Kanji", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    d.kanji.forEach { k ->
+                        Surface(
+                            onClick = { openKanji = k },
+                            shape = MaterialTheme.shapes.small,
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                        ) {
+                            Text(k, style = MaterialTheme.typography.titleLarge.japanese(), modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp))
+                        }
+                    }
+                }
             }
             word.otherForms?.let {
                 Text(
@@ -207,6 +224,7 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
             )
         }
     }
+    openKanji?.let { KanjiSheetHost(it, onOpenWord = { id -> openKanji = null; onOpenWord(id) }, onDismiss = { openKanji = null }) }
     if (pickingDeck) {
         DeckPickerDialog(
             decks = deckList,

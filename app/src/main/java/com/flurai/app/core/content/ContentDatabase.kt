@@ -44,15 +44,37 @@ interface ContentDao {
     @Query("SELECT * FROM word WHERE jlpt = :jlpt ORDER BY id")
     fun wordsAtLevel(jlpt: Int): Flow<List<WordEntity>>
 
-    /** Matches the start of the written form or reading, or any part of the English meaning. */
+    /**
+     * Words that contain the query (or its kana reading, [kana] empty when the query is not romaji) in the
+     * written form, reading or meaning. Easier words first; the ranking happens in [rankWords].
+     */
     @Query(
         """
         SELECT * FROM word
-        WHERE expression LIKE :query || '%' OR reading LIKE :query || '%' OR meanings LIKE '%' || :query || '%'
-        ORDER BY jlpt DESC, id LIMIT 100
+        WHERE expression LIKE '%' || :query || '%' OR reading LIKE '%' || :query || '%' OR meanings LIKE '%' || :query || '%'
+            OR (:kana != '' AND (expression LIKE '%' || :kana || '%' OR reading LIKE '%' || :kana || '%'))
+        ORDER BY jlpt DESC, id LIMIT 800
         """,
     )
-    fun searchWords(query: String): Flow<List<WordEntity>>
+    fun searchCandidates(query: String, kana: String): Flow<List<WordEntity>>
+
+    /** Kanji whose character, meaning or reading (without the okurigana dot) contains the query; ranked by [rankKanjiList]. */
+    @Query(
+        """
+        SELECT * FROM kanji
+        WHERE literal = :query OR meanings LIKE '%' || :query || '%'
+            OR (:kana != '' AND (REPLACE(REPLACE(kunyomi, '.', ''), '-', '') LIKE '%' || :kana || '%' OR onyomi LIKE '%' || :kata || '%'))
+        ORDER BY jlpt DESC, frequency LIMIT 300
+        """,
+    )
+    fun searchKanji(query: String, kana: String, kata: String): Flow<List<KanjiEntity>>
+
+    @Query("SELECT * FROM kanji WHERE literal = :literal")
+    suspend fun kanji(literal: String): KanjiEntity?
+
+    /** Words written with the kanji, easier first, for the kanji sheet. */
+    @Query("SELECT * FROM word WHERE expression LIKE '%' || :literal || '%' ORDER BY jlpt DESC, id LIMIT 12")
+    suspend fun wordsWithKanji(literal: String): List<WordEntity>
 
     @Query("SELECT * FROM word WHERE id = :id")
     suspend fun word(id: Int): WordEntity?
