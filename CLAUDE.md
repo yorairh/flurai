@@ -14,7 +14,7 @@ An Android app (Kotlin + Jetpack Compose, package `com.flurai.app`) for learning
   - **Word library:** search and browse words and kanji with example sentences; add a word to the flashcards or to a deck.
   - **Grammar:** 521 points (N5 89, N4 108, N3 158, N2 95, N1 71) with explanation, formation, examples and fill-in-the-blank practice; one level at a time.
   - **Reading:** graded Tatoeba sentences with furigana, tap-to-look-up, add-to-flashcards, and a comprehension check.
-  - **Tests:** adaptive placement test, 20-question level checkpoints (80% to pass), quick quiz, listening quiz.
+  - **Tests:** adaptive placement test (a suggestion), 30-question level checkpoints with words, kanji and grammar (80% to pass, confirms a level), quick quiz, listening quiz.
   - A "Conversation partner" card marked Soon is a placeholder (see Not built).
 - **Explore:** Videos (YouTube channels per level, links only) and Media (anime, drama, books from jiten.moe with how much of each you would understand, and "learn the top words first").
 - **Me:** level and goals, settings (reminder, streak minutes, listening cards), progress, data sources and licenses, sign out, delete account.
