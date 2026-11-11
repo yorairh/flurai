@@ -2,6 +2,7 @@ package com.flurai.app.ui.grammar
 
 import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.BackTopAppBar
+import com.flurai.app.ui.components.ExampleSentence
 import com.flurai.app.ui.components.MissingVoiceBanner
 import com.flurai.app.ui.components.SentenceSpeakButton
 import androidx.compose.foundation.clickable
@@ -173,7 +174,7 @@ fun GrammarDetailScreen(
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
-                            Text(example.japanese, style = MaterialTheme.typography.titleLarge.japanese())
+                            ExampleSentence(example.japanese, MaterialTheme.typography.titleLarge.japanese())
                             Spacer(Modifier.width(4.dp))
                             Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }

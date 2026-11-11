@@ -36,6 +36,22 @@ class MediaTest {
     }
 
     @Test
+    fun wordsWellAboveTheLearnersLevelAreLeftOut() {
+        val map = mapOf(1 to 101, 2 to 102) // 101 is an N5 word, 102 an N1 word
+        val levelOf = { id: Int -> if (id == 101) 5 else 1 }
+        assertEquals(listOf(101), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = hardestWordToOffer(JlptLevel.N5)))
+        assertEquals(listOf(101, 102), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = 1))
+    }
+
+    @Test
+    fun oneLevelAboveTheLearnerIsStillOffered() {
+        assertEquals(4, hardestWordToOffer(JlptLevel.N5))
+        assertEquals(4, hardestWordToOffer(JlptLevel.Beginner))
+        assertEquals(2, hardestWordToOffer(JlptLevel.N3))
+        assertEquals(1, hardestWordToOffer(JlptLevel.N1))
+    }
+
+    @Test
     fun difficultyRangesRiseWithTheLevel() {
         val levels = listOf(JlptLevel.N5, JlptLevel.N4, JlptLevel.N3, JlptLevel.N2, JlptLevel.N1)
         levels.zipWithNext().forEach { (easy, hard) ->

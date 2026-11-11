@@ -57,6 +57,7 @@ import com.flurai.app.core.study.CardContent
 import com.flurai.app.core.study.CurrentCard
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.speech.JapaneseSpeaker
+import com.flurai.app.ui.components.ExampleSentence
 import com.flurai.app.ui.components.SentenceSpeakButton
 import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.study.CardKind
@@ -233,7 +234,7 @@ private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpe
         ) {
             Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(example.japanese, style = MaterialTheme.typography.titleMedium.japanese())
+                    ExampleSentence(example.japanese, MaterialTheme.typography.titleMedium.japanese())
                     Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.width(8.dp))

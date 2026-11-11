@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.material3.OutlinedButton
 import com.flurai.app.core.auth.uid
+import com.flurai.app.ui.components.ExampleSentence
 import com.flurai.app.ui.components.LoadingBox
 import com.flurai.app.ui.components.MissingVoiceBanner
 import com.flurai.app.ui.components.SentenceSpeakButton
@@ -237,7 +238,7 @@ private fun ExampleCard(sentence: SentenceEntity, onSpeak: (slow: Boolean) -> Un
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(sentence.japanese, style = MaterialTheme.typography.titleMedium.japanese())
+                ExampleSentence(sentence.japanese, MaterialTheme.typography.titleMedium.japanese())
                 Text(sentence.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Spacer(Modifier.width(8.dp))

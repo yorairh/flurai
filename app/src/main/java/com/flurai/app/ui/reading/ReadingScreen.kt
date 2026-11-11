@@ -2,6 +2,7 @@ package com.flurai.app.ui.reading
 
 import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.MissingVoiceBanner
+import com.flurai.app.ui.components.RubySentence
 import com.flurai.app.ui.components.SentenceSpeakButton
 import com.flurai.app.core.reading.rubyParts
 import com.flurai.app.core.reading.RubyPart
@@ -106,7 +107,7 @@ fun ReadingScreen(
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                         Column(Modifier.fillMaxWidth().padding(16.dp)) {
                             if (state.showFurigana) {
-                                RubySentence(line.tokens, onWord = { viewModel.select(it) })
+                                RubySentence(line.tokens, MaterialTheme.typography.titleLarge.japanese(), onWord = { viewModel.select(it) })
                             } else {
                                 val linkStyle = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline))
                                 Text(
@@ -192,66 +193,5 @@ private fun WordSheet(word: WordEntity, added: Boolean, onAdd: () -> Unit, onDet
             }
             TextButton(onClick = onDetails, modifier = Modifier.fillMaxWidth()) { Text("Full details and examples") }
         }
-    }
-}
-
-
-/**
- * A sentence with the reading above each kanji word. Text cannot draw ruby by itself, so each piece
- * is a small two-line cell (reading over text) in a flow layout; kana and symbols are one cell per
- * character, so the sentence wraps like normal text. Words you can tap are underlined.
- */
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun RubySentence(tokens: List<Token>, onWord: (WordEntity) -> Unit) {
-    val main = MaterialTheme.typography.titleLarge.japanese()
-    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, textAlign = TextAlign.Center)
-    val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
-    // Units that may wrap as a whole: a tappable word, or one plain character. Closing punctuation
-    // is stuck to the unit before it, so a lone 。 never lands on a line of its own.
-    class Unit(val word: WordEntity?, val parts: List<RubyPart>, val tail: String = "")
-    val units = mutableListOf<Unit>()
-    tokens.forEach { token ->
-        val word = token.word
-        if (word != null) {
-            units += Unit(word, rubyParts(token.text, word.reading))
-        } else {
-            token.text.forEach { c ->
-                if (c in "。、．，！？!?」』）)…" && units.isNotEmpty()) units[units.lastIndex] = units.last().let { Unit(it.word, it.parts, it.tail + c) }
-                else units += Unit(null, listOf(RubyPart(c.toString(), null)))
-            }
-        }
-    }
-    val sentence = tokens.joinToString("") { it.text }
-    // The cells are drawn one by one, so a screen reader would read them one kana at a time: describe the sentence once instead.
-    FlowRow(
-        verticalArrangement = Arrangement.spacedBy(0.dp),
-        modifier = Modifier.clearAndSetSemantics {
-            contentDescription = sentence
-            // The tappable words stay reachable for a screen reader as actions.
-            customActions = units.mapNotNull { u ->
-                u.word?.let { w -> CustomAccessibilityAction("Look up ${u.parts.joinToString("") { it.text }}") { onWord(w); true } }
-            }
-        },
-    ) {
-        units.forEach { u ->
-            Row(if (u.word != null) Modifier.clickable { onWord(u.word) } else Modifier) {
-                u.parts.forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = u.word != null) }
-                u.tail.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
-            }
-        }
-    }
-}
-
-@Composable
-private fun RubyCell(text: String, reading: String?, main: androidx.compose.ui.text.TextStyle, ruby: androidx.compose.ui.text.TextStyle, rubyColor: androidx.compose.ui.graphics.Color, underline: Boolean) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        // A space keeps the line, so cells without a reading line up with the ones that have it.
-        Text(reading ?: " ", style = ruby, color = rubyColor, maxLines = 1)
-        Text(
-            text,
-            style = main.copy(lineHeight = 26.sp),
-            textDecoration = if (underline) TextDecoration.Underline else null,
-        )
     }
 }
