@@ -26,9 +26,11 @@ class JapaneseSpeaker @Inject constructor(
 
     private var tts: TextToSpeech? = null
 
+    private class Request(val text: String, val slow: Boolean)
+
     /** Asked for before the engine was ready (a listening card plays as it appears). */
     @Volatile
-    private var pending: String? = null
+    private var pending: Request? = null
 
     fun start() {
         if (_status.value != Status.NotStarted) return
@@ -42,21 +44,32 @@ class JapaneseSpeaker @Inject constructor(
                     else -> Status.Ready
                 }
             }
-            if (_status.value == Status.Ready) pending?.let { tts?.speak(it, TextToSpeech.QUEUE_FLUSH, null, it) }
+            if (_status.value == Status.Ready) pending?.let { say(it.text, it.slow) }
             pending = null
         }
     }
 
-    fun speak(text: String) {
+    /** Speaks [text]; [slow] is for sentences the learner wants to follow word by word. */
+    fun speak(text: String, slow: Boolean = false) {
         start()
         if (_status.value == Status.Ready) {
-            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, text)
+            say(text, slow)
         } else if (_status.value == Status.Starting) {
-            pending = text
+            pending = Request(text, slow)
         }
+    }
+
+    private fun say(text: String, slow: Boolean) {
+        tts?.setSpeechRate(if (slow) SLOW_RATE else NORMAL_RATE)
+        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, text)
     }
 
     /** Opens the system screen for downloading voice data (when Japanese is missing). */
     fun installVoiceIntent(): Intent =
         Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+    private companion object {
+        const val NORMAL_RATE = 1.0f
+        const val SLOW_RATE = 0.7f
+    }
 }

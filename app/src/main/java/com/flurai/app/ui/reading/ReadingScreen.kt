@@ -1,6 +1,8 @@
 package com.flurai.app.ui.reading
 
 import com.flurai.app.ui.components.LevelChips
+import com.flurai.app.ui.components.MissingVoiceBanner
+import com.flurai.app.ui.components.SentenceSpeakButton
 import com.flurai.app.core.reading.rubyParts
 import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
@@ -71,6 +73,7 @@ fun ReadingScreen(
     val context = LocalContext.current
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Reading") }, onBack = onBack)
+        MissingVoiceBanner(viewModel.speaker)
         Column(
             Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -115,6 +118,10 @@ fun ReadingScreen(
                                     },
                                     style = MaterialTheme.typography.titleLarge.japanese(),
                                 )
+                            }
+                            Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Spacer(Modifier.weight(1f))
+                                SentenceSpeakButton(onSpeak = { slow -> viewModel.speak(line.tokens.joinToString("") { it.text }, slow) })
                             }
                             if (state.showTranslations) {
                                 Text(

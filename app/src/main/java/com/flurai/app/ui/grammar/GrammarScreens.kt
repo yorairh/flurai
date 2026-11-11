@@ -2,6 +2,8 @@ package com.flurai.app.ui.grammar
 
 import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.BackTopAppBar
+import com.flurai.app.ui.components.MissingVoiceBanner
+import com.flurai.app.ui.components.SentenceSpeakButton
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -147,6 +149,7 @@ fun GrammarDetailScreen(
     val point = state.point
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text(point?.let { "N${it.jlpt} grammar" } ?: "Grammar") }, onBack = onBack)
+        MissingVoiceBanner(viewModel.speaker)
         if (point == null) return@Column
         Column(
             Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
@@ -168,10 +171,14 @@ fun GrammarDetailScreen(
             Text("Examples", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
             state.examples.forEach { example ->
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp)) {
-                        Text(example.japanese, style = MaterialTheme.typography.titleLarge.japanese())
-                        Spacer(Modifier.width(4.dp))
-                        Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text(example.japanese, style = MaterialTheme.typography.titleLarge.japanese())
+                            Spacer(Modifier.width(4.dp))
+                            Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Spacer(Modifier.width(8.dp))
+                        SentenceSpeakButton(onSpeak = { slow -> viewModel.speak(example.japanese, slow) })
                     }
                 }
             }

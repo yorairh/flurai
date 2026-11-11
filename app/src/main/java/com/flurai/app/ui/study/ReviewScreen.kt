@@ -57,6 +57,7 @@ import com.flurai.app.core.study.CardContent
 import com.flurai.app.core.study.CurrentCard
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.speech.JapaneseSpeaker
+import com.flurai.app.ui.components.SentenceSpeakButton
 import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.QueueCounts
@@ -113,7 +114,7 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
             )
             current != null -> {
                 Box(Modifier.weight(1f)) {
-                    CardBody(current, state.revealed, onSpeak = viewModel::speakCurrent)
+                    CardBody(current, state.revealed, onSpeak = viewModel::speakCurrent, onSpeakExample = viewModel::speakExample)
                 }
                 AnswerBar(state.revealed, state.intervals, onReveal = viewModel::reveal, onAnswer = viewModel::answer)
             }
@@ -157,7 +158,7 @@ private fun MissingVoiceBanner(viewModel: ReviewViewModel) {
 }
 
 @Composable
-private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) {
+private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit, onSpeakExample: (Boolean) -> Unit) {
     Column(
         Modifier
             .fillMaxSize()
@@ -188,7 +189,7 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) 
                 }
                 if (revealed) {
                     HorizontalDivider()
-                    WordAnswer(content, showExpression = true, onSpeak = onSpeak, showMeaning = true)
+                    WordAnswer(content, showExpression = true, onSpeak = onSpeak, onSpeakExample = onSpeakExample, showMeaning = true)
                 }
             } else if (card.item.kind == CardKind.Recognition) {
                 Text(
@@ -198,14 +199,14 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) 
                 )
                 if (revealed) {
                     HorizontalDivider()
-                    WordAnswer(content, showExpression = false, onSpeak = onSpeak)
+                    WordAnswer(content, showExpression = false, onSpeak = onSpeak, onSpeakExample = onSpeakExample)
                 }
             } else {
                 Text("How do you say…", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(content.word.meanings, style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
                 if (revealed) {
                     HorizontalDivider()
-                    WordAnswer(content, showExpression = true, onSpeak = onSpeak)
+                    WordAnswer(content, showExpression = true, onSpeak = onSpeak, onSpeakExample = onSpeakExample)
                 }
             }
         }
@@ -213,7 +214,7 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit) 
 }
 
 @Composable
-private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpeak: () -> Unit, showMeaning: Boolean = false) {
+private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpeak: () -> Unit, onSpeakExample: (Boolean) -> Unit, showMeaning: Boolean = false) {
     val word = content.word
     if (showExpression) {
         Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), textAlign = TextAlign.Center)
@@ -230,9 +231,13 @@ private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpe
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
         ) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(example.japanese, style = MaterialTheme.typography.titleMedium.japanese())
-                Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(example.japanese, style = MaterialTheme.typography.titleMedium.japanese())
+                    Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Spacer(Modifier.width(8.dp))
+                SentenceSpeakButton(onSpeak = onSpeakExample)
             }
         }
     }
