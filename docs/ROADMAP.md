@@ -38,8 +38,8 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 29 | Reading that matches the level (content db) | ✅ Merged | [#35](https://github.com/yorairh/flurai/pull/35) | [v1.2.0](https://github.com/yorairh/flurai/releases/tag/v1.2.0) |
 | 30 | Example sentences and word data quality (content db) | ✅ Merged | [#36](https://github.com/yorairh/flurai/pull/36) | [v1.2.0](https://github.com/yorairh/flurai/releases/tag/v1.2.0) |
 | 31 | Search and library | ✅ Merged | [#37](https://github.com/yorairh/flurai/pull/37) | [v1.2.0](https://github.com/yorairh/flurai/releases/tag/v1.2.0) |
-| 32 | Quizzes and grammar practice | ⏳ | | 1.3.0 |
-| 33 | Kana and polish | ⏳ | | 1.3.0 |
+| 32 | Quizzes and grammar practice | ✅ Merged | [#39](https://github.com/yorairh/flurai/pull/39) | [v1.3.0](https://github.com/yorairh/flurai/releases/tag/v1.3.0) |
+| 33 | Kana and polish | ✅ Merged | [#40](https://github.com/yorairh/flurai/pull/40) | [v1.3.0](https://github.com/yorairh/flurai/releases/tag/v1.3.0) |
 
 ## Goal
 
