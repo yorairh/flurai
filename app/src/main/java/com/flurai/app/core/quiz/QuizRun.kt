@@ -98,6 +98,9 @@ interface QuizBackend {
     suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long)
     suspend fun saveResult(result: TestResultEntity)
     suspend fun addWordsToFlashcards(uid: String, wordIds: List<Int>, now: Instant)
+
+    /** The ids in [wordIds] that do not have a flashcard yet. */
+    suspend fun withoutFlashcards(uid: String, wordIds: List<Int>): List<Int>
     suspend fun saveProfile(uid: String, profile: StudyProfile)
 }
 
@@ -128,6 +131,11 @@ class RepositoryQuizBackend @Inject constructor(
     override suspend fun addWordsToFlashcards(uid: String, wordIds: List<Int>, now: Instant) =
         wordIds.forEach { study.addToStudy(uid, ItemRef(ItemType.Word, it), now) }
 
+    override suspend fun withoutFlashcards(uid: String, wordIds: List<Int>): List<Int> {
+        val started = study.startedWordIds(uid)
+        return wordIds.filter { it !in started }
+    }
+
     override suspend fun saveProfile(uid: String, profile: StudyProfile) = profiles.save(uid, profile)
 
     private companion object {
@@ -140,6 +148,9 @@ class RepositoryQuizBackend @Inject constructor(
     }
 }
 
+/** A question that was answered wrong: what was asked, what was right and what the learner picked. */
+data class MissedQuestion(val prompt: String, val hint: String?, val correct: String, val chosen: String, val note: String?)
+
 data class QuizResult(
     val title: String,
     val correct: Int,
@@ -149,6 +160,10 @@ data class QuizResult(
     /** Placement only: the hardest level passed. */
     val placementLevel: JlptLevel?,
     val missedWordIds: List<Int>,
+    /** The questions answered wrong, in order. */
+    val missed: List<MissedQuestion> = emptyList(),
+    /** The missed words that are not in the flashcards yet: what "add missed words" would add. */
+    val missedNewWordIds: List<Int> = missedWordIds,
     val currentLevel: JlptLevel?,
     val missedAdded: Boolean = false,
     val levelApplied: Boolean = false,
@@ -187,7 +202,7 @@ class QuizRun(
     val state: StateFlow<QuizRunState> = _state.asStateFlow()
 
     private val queue = ArrayDeque<Question>()
-    private val answered = mutableListOf<Pair<Question, Boolean>>()
+    private val answered = mutableListOf<Triple<Question, Boolean, Int>>()
     private val placement = PlacementTest()
     private val profileLevel = profile?.level ?: JlptLevel.N5
     private var advancing = false
@@ -207,7 +222,7 @@ class QuizRun(
         val current = _state.value.question ?: return
         if (_state.value.selected != null) return
         val correct = index == current.answer
-        answered += current to correct
+        answered += Triple(current, correct, index)
         if (kind.adaptive) placement.answer(correct)
         clock.tap(reviews = 1)
         _state.update { it.copy(selected = index) }
@@ -230,7 +245,7 @@ class QuizRun(
     /** Puts the words that were missed into the flashcards, as new cards for today. */
     suspend fun addMissedToFlashcards() {
         val result = _state.value.result ?: return
-        backend.addWordsToFlashcards(uid, result.missedWordIds, now())
+        backend.addWordsToFlashcards(uid, result.missedNewWordIds, now())
         _state.update { it.copy(result = result.copy(missedAdded = true)) }
     }
 
@@ -258,7 +273,12 @@ class QuizRun(
     private suspend fun finish() {
         val correct = answered.count { it.second }
         val total = answered.size
-        val missed = answered.filter { !it.second }.mapNotNull { it.first.wordId }.distinct()
+        val missedAnswers = answered.filter { !it.second }
+        val missed = missedAnswers.mapNotNull { it.first.wordId }.distinct()
+        val missedNew = if (missed.isEmpty()) emptyList() else backend.withoutFlashcards(uid, missed)
+        val missedList = missedAnswers.map { (q, _, chosen) ->
+            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: q.prompt, q.hint, q.correctOption, q.options[chosen], q.note?.takeIf { q.kind != QuestionKind.WordListening })
+        }
         val placementLevel = if (kind.adaptive) placement.result else null
         backend.saveResult(
             TestResultEntity(
@@ -273,7 +293,8 @@ class QuizRun(
                 question = null,
                 result = QuizResult(
                     title = kind.title, correct = correct, total = total, passed = kind.passed(correct, total),
-                    placementLevel = placementLevel, missedWordIds = missed, currentLevel = profile?.level,
+                    placementLevel = placementLevel, missedWordIds = missed, missed = missedList, missedNewWordIds = missedNew,
+                    currentLevel = profile?.level,
                 ),
             )
         }

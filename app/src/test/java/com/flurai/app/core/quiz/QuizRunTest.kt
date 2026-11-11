@@ -35,6 +35,9 @@ class QuizRunTest {
         override suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long) { grammar += Triple(grammarId, correct, at) }
         override suspend fun saveResult(result: TestResultEntity) { saved += result }
         override suspend fun addWordsToFlashcards(uid: String, wordIds: List<Int>, now: Instant) { flashcards += wordIds }
+        /** Word ids that already have a flashcard in this fake. */
+        val alreadyStudied = mutableSetOf<Int>()
+        override suspend fun withoutFlashcards(uid: String, wordIds: List<Int>): List<Int> = wordIds.filter { it !in alreadyStudied }
         override suspend fun saveProfile(uid: String, profile: StudyProfile) { savedProfile = profile }
     }
 
@@ -180,6 +183,37 @@ class QuizRunTest {
         run.addMissedToFlashcards()
         assertEquals(listOf(11), backend.flashcards)
         assertTrue(run.state.value.result!!.missedAdded)
+    }
+
+    @Test
+    fun theResultListsWhatWasMissedWithTheRightAnswerAndTheChoice() = runTest {
+        backend.questions = listOf(question(1, wordId = 11), question(2, wordId = 12), question(3, wordId = 13))
+        val run = run(QuizKind.Quick)
+        run.start()
+        run.answer(true)
+        run.answer(false)  // option 1 ("wrong") is picked by the helper
+        run.answer(false)
+
+        val missed = run.state.value.result!!.missed
+        assertEquals(listOf("q2", "q3"), missed.map { it.prompt })
+        assertEquals(listOf("right", "right"), missed.map { it.correct })
+        assertEquals(listOf("wrong", "wrong"), missed.map { it.chosen })
+    }
+
+    @Test
+    fun onlyMissedWordsWithoutAFlashcardAreOfferedToAdd() = runTest {
+        backend.alreadyStudied += 11
+        backend.questions = listOf(question(1, wordId = 11), question(2, wordId = 12))
+        val run = run(QuizKind.Quick)
+        run.start()
+        run.answer(false)
+        run.answer(false)
+
+        val result = run.state.value.result!!
+        assertEquals(listOf(11, 12), result.missedWordIds)
+        assertEquals(listOf(12), result.missedNewWordIds) // 11 already has a card
+        run.addMissedToFlashcards()
+        assertEquals(listOf(12), backend.flashcards)
     }
 
     @Test

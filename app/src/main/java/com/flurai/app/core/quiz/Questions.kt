@@ -1,6 +1,5 @@
 package com.flurai.app.core.quiz
 
-import com.flurai.app.core.content.KanjiEntity
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import kotlin.random.Random
@@ -28,14 +27,51 @@ data class Question(
     val correctOption: String get() = options[answer]
 }
 
-/** The first gloss of a JMdict meaning list, e.g. "heaven, the sky" gives "heaven". */
-fun firstGloss(meanings: String): String =
-    meanings.split(',', ';').first().trim().take(MAX_OPTION_LENGTH)
+/**
+ * The first gloss of a JMdict meaning list, e.g. "heaven, the sky" gives "heaven". Commas inside
+ * brackets do not split ("cold (things, drinks), chilly" gives "cold (things, drinks)"), and a gloss
+ * that is too long is cut at a word boundary, never in the middle of a word or a bracket.
+ */
+fun firstGloss(meanings: String): String {
+    val first = splitGlosses(meanings).firstOrNull().orEmpty()
+    if (first.length <= MAX_OPTION_LENGTH) return first
+    val cut = first.take(MAX_OPTION_LENGTH)
+    val atWord = if (first[MAX_OPTION_LENGTH] == ' ') cut else cut.substringBeforeLast(' ', cut)
+    // A bracket that the cut left open is dropped with what is in it.
+    return atWord.replace(Regex("\\s*\\([^)]*$"), "").trim().trimEnd(',', ';')
+}
+
+/** The glosses of [meanings], split at commas and semicolons that are not inside brackets. */
+fun splitGlosses(meanings: String): List<String> {
+    val parts = mutableListOf<String>()
+    val current = StringBuilder()
+    var depth = 0
+    for (c in meanings) {
+        when {
+            c == '(' -> { depth++; current.append(c) }
+            c == ')' -> { depth = (depth - 1).coerceAtLeast(0); current.append(c) }
+            (c == ',' || c == ';') && depth == 0 -> { parts += current.toString().trim(); current.clear() }
+            else -> current.append(c)
+        }
+    }
+    parts += current.toString().trim()
+    return parts.filter { it.isNotEmpty() }
+}
 
 private const val MAX_OPTION_LENGTH = 40
 
-/** Part-of-speech family used to keep distractors plausible (a noun among nouns, a verb among verbs). */
-private fun family(word: WordEntity): String = word.partsOfSpeech?.split(',')?.firstOrNull()?.take(1).orEmpty()
+/** What kind of word it is, from the first JMdict part-of-speech code: a noun among nouns, a verb among verbs, an い-adjective among い-adjectives. */
+internal fun family(word: WordEntity): String {
+    val code = word.partsOfSpeech?.split(',')?.firstOrNull()?.trim().orEmpty()
+    return when {
+        code.startsWith("v") -> "verb"
+        code == "adj-i" || code == "adj-ix" -> "i-adjective"
+        code == "adj-na" -> "na-adjective"
+        code.startsWith("adv") -> "adverb"
+        code.startsWith("n") -> "noun"
+        else -> code
+    }
+}
 
 /** "What does this word mean?" with three wrong glosses from [pool]. Null when the pool has too few distinct glosses. */
 fun wordQuestion(word: WordEntity, pool: List<WordEntity>, random: Random): Question? {
@@ -43,8 +79,10 @@ fun wordQuestion(word: WordEntity, pool: List<WordEntity>, random: Random): Ques
     if (correct.isBlank()) return null
     val taken = mutableSetOf(correct.lowercase())
     val candidates = pool.asSequence().filter { it.id != word.id }.toList().shuffled(random)
-    // Prefer the same word family, then anything.
-    val ordered = candidates.filter { family(it) == family(word) } + candidates.filter { family(it) != family(word) }
+    // Wrong options that look like the answer: the same kind of word at the same level first, then the
+    // same kind of word, and only then anything. A noun among verbs would give the answer away.
+    val sameFamily = candidates.filter { family(it) == family(word) }
+    val ordered = sameFamily.filter { it.jlpt == word.jlpt } + sameFamily.filter { it.jlpt != word.jlpt } + candidates.filter { family(it) != family(word) }
     val wrong = mutableListOf<String>()
     for (candidate in ordered) {
         val gloss = firstGloss(candidate.meanings)
@@ -76,34 +114,37 @@ fun listeningQuestion(word: WordEntity, pool: List<WordEntity>, random: Random):
         note = if (word.reading != word.expression) "${word.expression}（${word.reading}）" else word.expression,
     )
 
-/** One reading to ask about: the first kun'yomi if the kanji has one (without okurigana dots), else the first on'yomi. */
-fun mainReading(kanji: KanjiEntity): String? {
-    fun clean(s: String) = s.split('、').firstOrNull { it.isNotBlank() }?.replace(".", "")?.replace("-", "")?.trim()
-    return clean(kanji.kunyomi) ?: clean(kanji.onyomi)
-}
+/** Katakana-only text (a loanword) is read from its spelling, so it makes no reading question. */
+private fun hasKanji(text: String) = text.any { it in '一'..'鿿' || it == '々' }
 
-private fun isKatakana(s: String) = s.isNotEmpty() && s.all { it in '゠'..'ヿ' }
-
-/** "How is this kanji read?" with three readings borrowed from other kanji (same script, so the answer isn't obvious). */
-fun kanjiQuestion(kanji: KanjiEntity, pool: List<KanjiEntity>, random: Random): Question? {
-    val correct = mainReading(kanji) ?: return null
+/**
+ * "How is this word read?" for a word written with kanji. The wrong options are the readings of other
+ * kanji words of about the same length, so the answer cannot be guessed by its shape. Asking about a
+ * whole word rather than one kanji keeps okurigana and the common reading in the question.
+ */
+fun wordReadingQuestion(word: WordEntity, pool: List<WordEntity>, random: Random): Question? {
+    if (!hasKanji(word.expression) || word.reading == word.expression) return null
+    val correct = word.reading
     val taken = mutableSetOf(correct)
+    val similar = pool.asSequence().filter { it.id != word.id && hasKanji(it.expression) && it.reading != it.expression }
+        .toList().shuffled(random)
+        .sortedBy { kotlin.math.abs(it.reading.length - correct.length) }
     val wrong = mutableListOf<String>()
-    for (other in pool.shuffled(random)) {
-        if (other.literal == kanji.literal) continue
-        val reading = mainReading(other) ?: continue
-        if (isKatakana(reading) == isKatakana(correct) && taken.add(reading)) wrong += reading
+    for (other in similar) {
+        if (taken.add(other.reading)) wrong += other.reading
         if (wrong.size == 3) break
     }
     if (wrong.size < 3) return null
     val options = (wrong + correct).shuffled(random)
     return Question(
         kind = QuestionKind.KanjiReading,
-        prompt = kanji.literal,
-        hint = "Pick a reading",
+        prompt = word.expression,
+        hint = "How is this read?",
         options = options,
         answer = options.indexOf(correct),
-        level = kanji.jlpt,
+        level = word.jlpt,
+        wordId = word.id,
+        note = firstGloss(word.meanings),
     )
 }
 

@@ -8,7 +8,6 @@ import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import com.flurai.app.core.content.ContentDao
-import com.flurai.app.core.content.KanjiEntity
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.study.ItemType
@@ -66,13 +65,9 @@ class QuizRepository @Inject constructor(
     private val results: TestResultDao,
 ) {
     private var wordsByLevel: Map<Int, List<WordEntity>>? = null
-    private var kanjiByLevel: Map<Int, List<KanjiEntity>>? = null
 
     private suspend fun words(): Map<Int, List<WordEntity>> =
         wordsByLevel ?: wordCache.all().groupBy { it.jlpt }.also { wordsByLevel = it }
-
-    private suspend fun kanji(): Map<Int, List<KanjiEntity>> =
-        kanjiByLevel ?: content.allKanji().groupBy { it.jlpt }.also { kanjiByLevel = it }
 
     fun results(uid: String): Flow<List<TestResultEntity>> = results.results(uid)
 
@@ -87,12 +82,12 @@ class QuizRepository @Inject constructor(
         return pool.shuffled(random).asSequence().mapNotNull { wordQuestion(it, pool, random)?.copy(hint = null) }.take(count).toList()
     }
 
-    /** The word and kanji part of a level checkpoint (the backend adds grammar questions). */
+    /** The word and reading part of a level checkpoint (the backend adds grammar questions). */
     suspend fun checkpoint(jlpt: Int, wordCount: Int = 12, kanjiCount: Int = 6, random: Random = Random): List<Question> {
         val wordPool = words()[jlpt].orEmpty()
-        val kanjiPool = kanji()[jlpt].orEmpty()
         val wordQs = wordPool.shuffled(random).asSequence().mapNotNull { wordQuestion(it, wordPool, random) }.take(wordCount).toList()
-        val kanjiQs = kanjiPool.shuffled(random).asSequence().mapNotNull { kanjiQuestion(it, kanjiPool, random) }.take(kanjiCount).toList()
+        val readingPool = wordPool.filter { it.reading != it.expression }
+        val kanjiQs = readingPool.shuffled(random).asSequence().mapNotNull { wordReadingQuestion(it, readingPool, random) }.take(kanjiCount).toList()
         return (wordQs + kanjiQs).shuffled(random)
     }
 
