@@ -71,33 +71,66 @@ class QuizTest {
     }
 
     @Test
-    fun mainReadingPrefersKunyomiWithoutOkuriganaDots() {
-        assertEquals("たべ", mainReading(kanji("食", "ショク", "た.べる")) ?.take(2))
-        assertEquals("うじ", mainReading(kanji("氏", "シ", "うじ、-うじ")))
-        assertEquals("ダイ", mainReading(kanji("第", "ダイ、テイ", "")))
-        assertNull(mainReading(kanji("?", "", "")))
+    fun commasInsideBracketsDoNotSplitAGloss() {
+        assertEquals("cold (things, drinks)", firstGloss("cold (things, drinks), chilly"))
+        assertEquals(listOf("to run", "to flow"), splitGlosses("to run; to flow"))
+        assertEquals(listOf("a (b; c)", "d"), splitGlosses("a (b; c), d"))
     }
 
     @Test
-    fun kanjiQuestionKeepsDistractorsInTheSameScript() {
-        val kanjiPool = listOf(
-            kanji("氏", "シ", "うじ"), kanji("統", "トウ", "す.べる"), kanji("保", "ホ", "たも.つ"),
-            kanji("第", "ダイ", ""), kanji("結", "ケツ", "むす.ぶ"), kanji("派", "ハ", ""),
-            kanji("山", "サン", "やま"), kanji("川", "セン", "かわ"),
+    fun aLongGlossIsCutAtAWordNeverInsideAWordOrABracket() {
+        val long = firstGloss("counter for stories (floors) of a building, extra")
+        assertEquals("counter for stories (floors) of a", long)
+        val open = firstGloss("a very long explanation of something (with a bracket that is far too long to fit)")
+        assertTrue(open.length <= 40)
+        assertTrue("(" !in open || ")" in open)
+        assertTrue(!open.endsWith("(wit"))
+    }
+
+    @Test
+    fun wrongOptionsAreTheSameKindOfWordAtTheSameLevelFirst() {
+        val verbs = (1..6).map { word(it, "動$it", "move $it", pos = "v5r", jlpt = 5) }
+        val nouns = (10..16).map { word(it, "名$it", "thing $it", pos = "n", jlpt = 5) }
+        val harderVerbs = (20..24).map { word(it, "難$it", "hard $it", pos = "v1", jlpt = 2) }
+        val all = verbs + nouns + harderVerbs
+        repeat(20) { seed ->
+            val q = wordQuestion(verbs[0], all, Random(seed))!!
+            val wrong = q.options.filter { it != q.correctOption }
+            // five other N5 verbs are available, so no noun and no harder verb is needed
+            assertTrue("seed $seed: $wrong", wrong.all { it.startsWith("move") })
+        }
+    }
+
+    @Test
+    fun adjectivesAndAdverbsAreNotMixedUp() {
+        val adj = word(1, "高い", "tall", pos = "adj-i")
+        val adv = word(2, "とても", "very", pos = "adv")
+        assertEquals("i-adjective", family(adj))
+        assertEquals("adverb", family(adv))
+        assertEquals("verb", family(word(3, "行く", "go", pos = "v5k")))
+        assertEquals("noun", family(word(4, "水", "water", pos = "n")))
+    }
+
+    @Test
+    fun readingQuestionAsksForTheWholeWordsReading() {
+        val words = listOf(
+            word(1, "学校", "school").copy(reading = "がっこう"),
+            word(2, "先生", "teacher").copy(reading = "せんせい"),
+            word(3, "会社", "company").copy(reading = "かいしゃ"),
+            word(4, "電話", "telephone").copy(reading = "でんわ"),
+            word(5, "水", "water").copy(reading = "みず"),
+            word(6, "ありがとう", "thanks"),
         )
         repeat(20) { seed ->
-            val q = kanjiQuestion(kanjiPool[0], kanjiPool, Random(seed))!!
-            assertEquals("うじ", q.correctOption)
+            val q = wordReadingQuestion(words[0], words, Random(seed))!!
+            assertEquals(QuestionKind.KanjiReading, q.kind)
+            assertEquals("学校", q.prompt)
+            assertEquals("がっこう", q.correctOption)
             assertEquals(4, q.options.toSet().size)
-            assertTrue(q.options.all { o -> o.all { it in '぀'..'ゟ' } }) // all hiragana, like the answer
+            assertEquals(1, q.wordId) // a missed reading can be added to the flashcards
+            assertTrue("ありがとう" !in q.options) // a kana word has no kanji reading to mix up
         }
-        // A katakana-only answer gets katakana distractors.
-        val onlyOn = listOf(
-            kanji("第", "ダイ", ""), kanji("派", "ハ", ""), kanji("貿", "ボウ", ""),
-            kanji("易", "エキ", ""), kanji("曜", "ヨウ", ""), kanji("山", "サン", "やま"),
-        )
-        val q = kanjiQuestion(onlyOn[0], onlyOn, Random(1))!!
-        assertTrue(q.options.all { o -> o.all { it in '゠'..'ヿ' } })
+        assertNull(wordReadingQuestion(words[5], words, Random(1))) // no kanji: nothing to ask
     }
 
     // Placement ------------------------------------------------------------------------------

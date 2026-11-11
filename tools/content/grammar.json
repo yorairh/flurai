@@ -163,8 +163,8 @@
   {"id": 408, "jlpt": 4, "pattern": "〜かもしれない", "title": "Might", "meaning": "might …; may …", "formation": "Plain form + かもしれない",
    "explanation": "A possibility that is not certain. The polite form is かもしれません. After a noun or な-adjective the だ is dropped.",
    "examples": [
-     {"jp": "彼は来ないかもしれません。", "en": "He might not come.", "answer": "かもしれ"},
-     {"jp": "明日は雪かもしれません。", "en": "It might snow tomorrow.", "answer": "かもしれ"}]},
+     {"jp": "彼は来ないかもしれません。", "en": "He might not come.", "answer": "かもしれません"},
+     {"jp": "明日は雪かもしれません。", "en": "It might snow tomorrow.", "answer": "かもしれません"}]},
   {"id": 409, "jlpt": 4, "pattern": "〜なければならない", "title": "Must do", "meaning": "must …; have to …", "formation": "Verb ない-form − い + ければならない",
    "explanation": "An obligation. In speech people use なきゃ, and なくてはいけない is a close alternative.",
    "examples": [
@@ -1136,7 +1136,7 @@
    "examples": [
      {"jp": "嘘をついたばかりに、信用をなくしました。", "en": "I lost trust just because I told a lie.", "answer": "ばかりに"},
      {"jp": "一言多かったばかりに、けんかになった。", "en": "One extra word was all it took to start a fight.", "answer": "ばかりに"}]},
-  {"id": 324, "jlpt": 3, "pattern": "〜だけあって", "title": "As expected of", "meaning": "as one would expect", "formation": "Plain form / Noun + だけあって",
+  {"id": 324, "jlpt": 2, "pattern": "〜だけあって", "title": "As expected of", "meaning": "as one would expect", "formation": "Plain form / Noun + だけあって",
    "explanation": "Praises someone because the result suits their ability or position.",
    "examples": [
      {"jp": "さすがプロだけあって、上手ですね。", "en": "As expected of a professional, you are good.", "answer": "だけあって"},
@@ -1176,7 +1176,7 @@
    "examples": [
      {"jp": "もう行かないと。", "en": "I have to go now.", "answer": "ないと"},
      {"jp": "早く寝ないと、明日起きられないよ。", "en": "If you do not go to bed early, you will not be able to get up tomorrow.", "answer": "ないと"}]},
-  {"id": 332, "jlpt": 3, "pattern": "〜ざるを得ない", "title": "Cannot help but", "meaning": "have no choice but to", "formation": "Verb ない-form minus ない + ざるを得ない",
+  {"id": 332, "jlpt": 2, "pattern": "〜ざるを得ない", "title": "Cannot help but", "meaning": "have no choice but to", "formation": "Verb ない-form minus ない + ざるを得ない",
    "explanation": "A formal way to say you have no choice but to do something.",
    "examples": [
      {"jp": "雨なので、中止せざるを得ません。", "en": "Because of rain, we have no choice but to cancel.", "answer": "ざるを得ません"},
@@ -1726,10 +1726,10 @@
    "examples": [
      {"jp": "行けないことはありませんが、あまり行きたくありません。", "en": "It is not that I cannot go, but I do not really want to.", "answer": "ないことはありません"},
      {"jp": "食べられないことはないが、おいしくない。", "en": "I can eat it, but it is not tasty.", "answer": "ないことはない"}]},
-  {"id": 743, "jlpt": 3, "pattern": "〜あげく", "title": "After all that", "meaning": "in the end, after", "formation": "Verb た-form / Noun の + あげく(に)",
+  {"id": 743, "jlpt": 2, "pattern": "〜あげく", "title": "After all that", "meaning": "in the end, after", "formation": "Verb た-form / Noun の + あげく(に)",
    "explanation": "After a long, tiring process, a (usually bad) result.",
    "examples": [
-     {"jp": "悩んだあげく、会社をやめました。", "en": "After agonising a lot, I quit the company.", "answer": "あげく"},
+     {"jp": "悩んだあげく、会社をやめました。", "en": "After agonizing a lot, I quit the company.", "answer": "あげく"},
      {"jp": "長い議論のあげくに、結論は出なかった。", "en": "After a long discussion, no conclusion was reached.", "answer": "あげくに"}]},
   {"id": 744, "jlpt": 3, "pattern": "〜末に", "title": "In the end", "meaning": "after, at the end of", "formation": "Verb た-form / Noun の + 末に",
    "explanation": "A result reached after a long process, often a positive or final decision.",

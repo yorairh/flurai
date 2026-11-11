@@ -114,6 +114,39 @@ class SentenceMatchingTest(unittest.TestCase):
         self.assertEqual([], counter.sentence_ids)
 
 
+class GrammarExtrasTest(unittest.TestCase):
+    point = {"id": 1, "jlpt": 4, "pattern": "〜たほうがいい", "examples": [{"jp": "行ったほうがいい。", "en": "x", "answer": "たほうが"}]}
+
+    def sentence(self, id, text, *tokens):
+        return bc.IndexedSentence(id, id + 1000, [bc.parse_index_token(t) for t in tokens]), text
+
+    def pick(self, *sentences, grades=None):
+        indexed = [s for s, _ in sentences]
+        japanese = {s.japanese_id: text for s, text in sentences}
+        english = {s.english_id: "translation" for s in indexed}
+        grades = grades or {s.japanese_id: 4 for s in indexed}
+        return bc.pick_grammar_extras([self.point], indexed, japanese, english, grades)
+
+    def test_finds_extra_sentences_that_contain_the_answer_once(self):
+        a = self.sentence(1, "早く寝たほうがいいですよ。", "早く", "寝る{寝た}", "ほう", "が", "良い{いい}", "です", "よ")
+        extras = self.pick(a)
+        self.assertEqual(["早く寝たほうがいいですよ。"], [e["jp"] for e in extras[1]])
+        self.assertEqual("たほうが", extras[1][0]["answer"])
+
+    def test_skips_the_lessons_own_sentence_harder_sentences_and_matches_inside_a_longer_word(self):
+        own = self.sentence(1, "行ったほうがいい。", "行く{行った}", "ほう", "が", "良い{いい}")
+        hard = self.sentence(2, "寝たほうがいいと言われる。", "寝る{寝た}", "ほう", "が", "良い{いい}")
+        inside = self.sentence(3, "寝たほうがいいかげん。", "寝る{寝た}", "ほうがいい加減{ほうがいいかげん}")  # answer ends mid-word
+        extras = self.pick(own, hard, inside, grades={1: 4, 2: 3, 3: 4})
+        self.assertEqual({}, extras)
+
+    def test_short_answers_are_not_matched(self):
+        particle = {"id": 2, "jlpt": 5, "pattern": "が", "examples": [{"jp": "誰が来ましたか。", "en": "x", "answer": "が"}]}
+        s = self.sentence(5, "私は猫が好きです。", "私", "は", "猫", "が", "好き", "です")
+        extras = bc.pick_grammar_extras([particle], [s[0]], {5: s[1]}, {1005: "t"}, {5: 5})
+        self.assertEqual({}, extras)
+
+
 class JmdictMatchTest(unittest.TestCase):
     def entry(self, id, kanji, kana, *glosses):
         return {"id": str(id), "kanji": [{"text": k} for k in kanji], "kana": [{"text": k} for k in kana],
@@ -250,6 +283,13 @@ class BuiltDatabaseTest(unittest.TestCase):
         for (japanese,) in self.db.execute("SELECT japanese FROM sentence WHERE jlpt = 5"):
             for pattern, level in bc.GRAMMAR_GATES:
                 self.assertFalse(pattern.search(japanese), f"N5 sentence matches a level {level} gate: {japanese}")
+
+    def test_extra_grammar_examples_hide_one_answer_and_stay_off_the_lesson_rank(self):
+        extras = self.db.execute("SELECT grammar_id, rank, japanese, answer FROM grammar_example WHERE rank >= ?", (bc.EXTRA_EXAMPLE_RANK,)).fetchall()
+        self.assertGreater(len({e[0] for e in extras}), 150)
+        for grammar_id, rank, japanese, answer in extras:
+            self.assertEqual(1, japanese.count(answer), f"{grammar_id}: {japanese}")
+            self.assertLess(rank, bc.EXTRA_EXAMPLE_RANK + bc.EXTRA_GRAMMAR_EXAMPLES)
 
     def test_ids_match_registry(self):
         registry = bc.load_registry(bc.WORD_IDS)

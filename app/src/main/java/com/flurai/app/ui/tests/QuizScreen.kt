@@ -35,7 +35,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.activity.compose.BackHandler
+import androidx.compose.material3.AlertDialog
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import com.flurai.app.core.model.JlptLevel
+import com.flurai.app.core.quiz.MissedQuestion
 import com.flurai.app.core.quiz.Question
 import com.flurai.app.core.quiz.QuizResult
 import com.flurai.app.core.quiz.QuizRunState
@@ -51,8 +59,22 @@ fun QuizScreen(onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit, viewModel: Q
     val state by viewModel.state.collectAsStateWithLifecycle()
     StudyClockEffects(onResume = viewModel::onResume, onPause = viewModel::onPause)
 
+    // Leaving in the middle of a test loses its answers, so it asks first.
+    var confirmLeave by remember { mutableStateOf(false) }
+    val inProgress = state.result == null && state.error == null && (state.number > 1 || state.selected != null)
+    BackHandler(enabled = inProgress) { confirmLeave = true }
+    if (confirmLeave) {
+        AlertDialog(
+            onDismissRequest = { confirmLeave = false },
+            title = { Text("Leave this test?") },
+            text = { Text("Your answers so far will not be saved.") },
+            confirmButton = { TextButton(onClick = { confirmLeave = false; onBack() }) { Text("Leave") } },
+            dismissButton = { TextButton(onClick = { confirmLeave = false }) { Text("Keep going") } },
+        )
+    }
+
     Column(Modifier.fillMaxSize()) {
-        BackTopAppBar(title = { Text(state.title) }, onBack = onBack, backDescription = "Close")
+        BackTopAppBar(title = { Text(state.title) }, onBack = { if (inProgress) confirmLeave = true else onBack() }, backDescription = "Close")
         val question = state.question
         val result = state.result
         when {
@@ -162,6 +184,26 @@ private fun OptionButton(option: String, index: Int, question: Question, selecte
 }
 
 @Composable
+private fun MissedList(missed: List<MissedQuestion>) {
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("What you missed", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
+        missed.forEach { m ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+            ) {
+                Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Text(m.prompt, style = MaterialTheme.typography.titleMedium.japanese())
+                    m.hint?.let { Text(it, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                    Text("Right: ${m.correct}", style = MaterialTheme.typography.bodyMedium.japanese(), color = CorrectGreen)
+                    Text("You chose: ${m.chosen}", style = MaterialTheme.typography.bodyMedium.japanese(), color = WrongRed)
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit) {
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
@@ -205,15 +247,18 @@ private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () 
                 }
             }
         }
-        if (result.missedWordIds.isNotEmpty()) {
+        if (result.missedNewWordIds.isNotEmpty() || result.missedAdded) {
             if (result.missedAdded) {
-                Text("Added ${result.missedWordIds.size} words to your flashcards.", color = MaterialTheme.colorScheme.primary)
+                Text("Added ${result.missedNewWordIds.size} words to your flashcards.", color = MaterialTheme.colorScheme.primary)
             } else {
                 OutlinedButton(onClick = viewModel::addMissedToFlashcards, modifier = Modifier.fillMaxWidth()) {
-                    Text("Add ${result.missedWordIds.size} missed words to flashcards")
+                    Text("Add ${result.missedNewWordIds.size} missed ${if (result.missedNewWordIds.size == 1) "word" else "words"} to flashcards")
                 }
             }
+        } else if (result.missedWordIds.isNotEmpty()) {
+            Text("The words you missed are already in your flashcards.", color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
         }
+        if (result.missed.isNotEmpty()) MissedList(result.missed)
         TextButton(onClick = onBack) { Text("Done") }
     }
 }

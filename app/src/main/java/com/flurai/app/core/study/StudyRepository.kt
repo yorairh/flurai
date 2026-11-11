@@ -86,6 +86,10 @@ class StudyRepository @Inject constructor(
 
     fun introducedItems(uid: String): Flow<List<ItemRef>> = study.introducedItemsFlow(uid)
 
+    /** Ids of the words that already have a card (started, added by hand, or in a deck being studied). */
+    suspend fun startedWordIds(uid: String): Set<Int> =
+        study.introducedItems(uid).filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
+
     fun cardsForItem(uid: String, item: ItemRef): Flow<List<CardEntity>> =
         study.cardsForItem(uid, item.itemType, item.itemId)
 

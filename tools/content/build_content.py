@@ -61,6 +61,10 @@ MAX_SENTENCES_PER_WORD = 3
 #: Extra sentences added only for Reading practice, per JLPT level (on top of the word examples).
 READING_SENTENCES_PER_LEVEL = {5: 400, 4: 400, 3: 300, 2: 200, 1: 200}
 READING_LENGTH = (8, 30)
+#: Extra practice sentences per grammar point, found in Tatoeba; ranks from here up are not listed on the lesson page.
+EXTRA_GRAMMAR_EXAMPLES = 2
+EXTRA_EXAMPLE_RANK = 10
+MIN_EXTRA_ANSWER = 3  # shorter answers (particles) match too many unrelated sentences
 IDEAL_READING_LENGTH = 16
 MAX_SENTENCE_LENGTH = 40  # characters; long sentences make poor flashcard examples
 IDEAL_SENTENCE_LENGTH = 14
@@ -600,6 +604,74 @@ def pick_reading_sentences(
     return picked, graded
 
 
+def token_ends(text: str, tokens: list["IndexToken"]) -> set[int]:
+    """Where each word of the sentence ends (character offsets), found by laying the index's tokens over the text.
+    A word that cannot be found is skipped, so a missing boundary means "do not trust this match"."""
+    ends: set[int] = set()
+    position = 0
+    for token in tokens:
+        surface = token.form or token.headword
+        found = text.find(surface, position)
+        if found < 0:
+            continue
+        position = found + len(surface)
+        ends.add(position)
+    return ends
+
+
+def pick_grammar_extras(
+    grammar: list[dict],
+    indexed: list["IndexedSentence"],
+    japanese: dict[int, str],
+    english: dict[int, str],
+    grades: dict[int, int | None],
+    per_point: int = EXTRA_GRAMMAR_EXAMPLES,
+) -> dict[int, list[dict]]:
+    """More practice sentences for grammar points from Tatoeba, so a practice question is not the lesson's own
+    example. A sentence qualifies for a point when it contains one of the point's answers exactly once and is
+    not harder than the point's level. Returns {grammar id: [{"jp", "en", "answer"}]}."""
+    owners: dict[str, list[dict]] = {}
+    for point in grammar:
+        for answer in {e["answer"] for e in point["examples"]}:
+            if len(answer) >= MIN_EXTRA_ANSWER:
+                owners.setdefault(answer, []).append(point)
+    own_text = {e["jp"] for point in grammar for e in point["examples"]}
+    candidates: dict[int, list[tuple]] = {}
+    for sentence in indexed:
+        text = japanese.get(sentence.japanese_id)
+        grade = grades.get(sentence.japanese_id)
+        if text is None or grade is None or sentence.english_id not in english or text in own_text:
+            continue
+        if not READING_LENGTH[0] <= len(text) <= READING_LENGTH[1]:
+            continue
+        verified = any(t.good_example for t in sentence.tokens)
+        scatter = (sentence.japanese_id * 2654435761) % 1000003
+        ends = None
+        for answer, points in owners.items():
+            if text.count(answer) != 1:
+                continue
+            # The pattern must end where a word ends: がたい is not the start of たいへん, みたい is not 見たいと.
+            if ends is None:
+                ends = token_ends(text, sentence.tokens)
+            if text.index(answer) + len(answer) not in ends:
+                continue
+            for point in points:
+                if grade >= point["jlpt"]:  # a smaller number is harder
+                    candidates.setdefault(point["id"], []).append(
+                        ((not verified, abs(len(text) - IDEAL_READING_LENGTH) // 4, scatter), text, english[sentence.english_id], answer)
+                    )
+    extras: dict[int, list[dict]] = {}
+    for point_id, items in candidates.items():
+        chosen: list[dict] = []
+        for _, text, translation, answer in sorted(items, key=lambda i: i[0]):
+            if len(chosen) == per_point:
+                break
+            if all(c["jp"] != text for c in chosen):
+                chosen.append({"jp": text, "en": translation, "answer": answer})
+        extras[point_id] = chosen
+    return extras
+
+
 def read_tatoeba_sentences(path: Path) -> dict[int, str]:
     sentences = {}
     with bz2.open(path, "rt", encoding="utf-8") as f:
@@ -684,7 +756,8 @@ def write_database(
     )
     db.executemany(
         "INSERT INTO grammar_example (grammar_id, rank, japanese, english, answer) VALUES (?, ?, ?, ?, ?)",
-        [(g["id"], rank, e["jp"], e["en"], e["answer"]) for g in grammar for rank, e in enumerate(g["examples"])],
+        [(g["id"], rank, e["jp"], e["en"], e["answer"]) for g in grammar for rank, e in enumerate(g["examples"])]
+        + [(g["id"], EXTRA_EXAMPLE_RANK + i, e["jp"], e["en"], e["answer"]) for g in grammar for i, e in enumerate(g.get("extras", []))],
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
     db.commit()
@@ -728,6 +801,9 @@ def main() -> None:
     sentence_levels.update(extra_levels)
 
     grammar = json.loads(GRAMMAR.read_text(encoding="utf-8"))
+    extras = pick_grammar_extras(grammar, indexed, japanese, english, grades)
+    for point in grammar:
+        point["extras"] = extras.get(point["id"], [])
 
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -748,6 +824,7 @@ def main() -> None:
         print(f"  N{n}: {sum(w.jlpt == n for w in words)} words, {sum(k.jlpt == n for k in kanji)} kanji")
     graded = {n: sum(1 for g in sentence_levels.values() if g == n) for n in range(5, 0, -1)}
     print(f"  sentence levels: {graded}, ungraded {sum(1 for g in sentence_levels.values() if g is None)}")
+    print(f"  grammar: {sum(1 for g in grammar if g['extras'])}/{len(grammar)} points have extra practice sentences")
     print(f"  {len(sentences)} sentences; {with_examples}/{len(words)} words have examples;"
           f" {sum(w.jmdict_id is not None for w in words)} matched in JMdict")
 

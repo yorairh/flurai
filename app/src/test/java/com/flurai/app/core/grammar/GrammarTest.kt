@@ -62,6 +62,34 @@ class GrammarTest {
     }
 
     @Test
+    fun aParticleGetsParticlesAsWrongOptions() {
+        val pool = pool + listOf(
+            example(6, "駅まで歩く。", "まで"), example(7, "友達と行く。", "と"),
+            example(8, "行ったことがある。", "たことが"), example(9, "食べてください。", "てください"),
+        )
+        repeat(20) { seed ->
+            val q = grammarQuestion(point(1), pool[0], pool, Random(seed))!!
+            assertTrue("seed $seed: ${q.options}", q.options.all { it.length <= 2 }) // は among がをにでまでと, never たことが
+        }
+    }
+
+    @Test
+    fun answerShapeGroupsLikeWithLike() {
+        assertEquals("short", answerShape("は"))
+        assertEquals("medium", answerShape("てください"))
+        assertEquals("kanji-medium", answerShape("予定だ"))
+        assertEquals("long", answerShape("なければならない"))
+    }
+
+    @Test
+    fun theNoteGivesTheFirstSentenceOfTheExplanation() {
+        assertEquals("が marks the subject.", firstSentence("が marks the subject. It is also used with 好き."))
+        assertEquals("ここでは句点がない", firstSentence("ここでは句点がない"))
+        val q = grammarQuestion(GrammarPointEntity(1, 5, "が", "t", "subject", "f", "が marks the subject. More."), pool[1], pool, Random(1))!!
+        assertEquals("が: subject" + "\n" + "が marks the subject.", q.note)
+    }
+
+    @Test
     fun needsEnoughOtherPoints() {
         assertNull(grammarQuestion(point(1), pool[0], pool.take(3), Random(1)))
         assertNotNull(grammarQuestion(point(1), pool[0], pool, Random(1)))

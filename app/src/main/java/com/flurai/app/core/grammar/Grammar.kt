@@ -59,6 +59,29 @@ fun GrammarProgressEntity?.afterAnswer(uid: String, id: Int, correct: Boolean, a
     lastAt = at,
 )
 
+/**
+ * The shape of an answer, so wrong options look like it: a particle (one or two kana) among particles,
+ * a short ending among short endings, a phrase with kanji among phrases with kanji.
+ */
+internal fun answerShape(answer: String): String {
+    val kanji = if (answer.any { it in '一'..'鿿' }) "kanji-" else ""
+    val size = when {
+        answer.length <= 2 -> "short"
+        answer.length <= 5 -> "medium"
+        else -> "long"
+    }
+    return kanji + size
+}
+
+/** The first sentence of an explanation, for the note under a practice question. */
+internal fun firstSentence(text: String, max: Int = 160): String {
+    val end = text.indexOfFirst { it == '。' || it == '.' }.let { if (it < 0) text.length else it + 1 }
+    return text.substring(0, end).take(max).trim()
+}
+
+/** Examples with a rank from here up were added by the content pipeline for practice only: the lesson page does not list them. */
+const val EXTRA_EXAMPLE_RANK = 10
+
 /** The sentence with the pattern's key part hidden. */
 const val BLANK = "＿＿"
 
@@ -75,6 +98,7 @@ fun grammarQuestion(
 ): Question? {
     val answer = example.answer
     if (example.japanese.indexOf(answer) < 0) return null
+    val shape = answerShape(answer)
     val wrong = pool.asSequence()
         .filter { it.grammarId != example.grammarId }
         .map { it.answer }
@@ -82,8 +106,8 @@ fun grammarQuestion(
         .distinct()
         .toList()
         .shuffled(random)
-        // Similar length looks alike, so it is harder to guess by shape.
-        .sortedBy { kotlin.math.abs(it.length - answer.length) }
+        // The same kind of part first (a particle among particles), then a similar length: both make it hard to guess by shape.
+        .sortedWith(compareBy<String> { answerShape(it) != shape }.thenBy { kotlin.math.abs(it.length - answer.length) })
         .take(3)
     if (wrong.size < 3) return null
     val options = (wrong + answer).shuffled(random)
@@ -95,7 +119,7 @@ fun grammarQuestion(
         answer = options.indexOf(answer),
         level = point.jlpt,
         grammarId = point.id,
-        note = "${point.pattern}: ${point.meaning}",
+        note = "${point.pattern}: ${point.meaning}\n${firstSentence(point.explanation)}",
     )
 }
 
@@ -110,7 +134,8 @@ class GrammarRepository @Inject constructor(
 
     suspend fun point(id: Int): GrammarPointEntity? = content.grammarPoint(id)
 
-    suspend fun examples(id: Int): List<GrammarExampleEntity> = content.grammarExamples(id)
+    /** The examples of the lesson page: the written ones, without the extra sentences used only for practice. */
+    suspend fun examples(id: Int): List<GrammarExampleEntity> = content.grammarExamples(id).filter { it.rank < EXTRA_EXAMPLE_RANK }
 
     /**
      * Fill-in-the-blank questions. [pointId] practices one point (every example); otherwise
