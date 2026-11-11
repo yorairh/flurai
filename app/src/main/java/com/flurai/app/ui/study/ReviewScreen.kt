@@ -125,9 +125,17 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
 @Composable
 private fun Counts(counts: QueueCounts) {
     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("${counts.new}", color = NewBlue, fontWeight = FontWeight.Bold)
-        Text("${counts.learning}", color = LearnRed, fontWeight = FontWeight.Bold)
-        Text("${counts.review}", color = ReviewGreen, fontWeight = FontWeight.Bold)
+        CountColumn(counts.new, "New", NewBlue)
+        CountColumn(counts.learning, "Learning", LearnRed)
+        CountColumn(counts.review, "Review", ReviewGreen)
+    }
+}
+
+@Composable
+private fun CountColumn(count: Int, label: String, color: Color) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("$count", color = color, fontWeight = FontWeight.Bold)
+        Text(label, color = color, style = MaterialTheme.typography.labelSmall)
     }
 }
 

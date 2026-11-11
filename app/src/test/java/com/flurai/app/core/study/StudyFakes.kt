@@ -21,7 +21,8 @@ class FakeStudyDao : StudyDao {
 
     override suspend fun dueCards(uid: String, until: Long, now: Long, listening: Boolean) =
         all().filter { it.due < until && !it.suspended && (it.buriedUntil ?: 0) <= now && (listening || it.kind != CardKind.Listening) }.sortedBy { it.due }
-    override fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int> = cards.map { it.size }
+    override fun dueCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int> = cards.map { m -> m.values.count { it.reps > 0 } }
+    override fun unstartedCount(uid: String, until: Long, now: Long, listening: Boolean): Flow<Int> = cards.map { m -> m.values.count { it.reps == 0 } }
     override suspend fun introducedItems(uid: String) = all().map { ItemRef(it.itemType, it.itemId) }.distinct()
     override fun introducedItemsFlow(uid: String) = cards.map { m -> m.values.map { ItemRef(it.itemType, it.itemId) }.distinct() }
     override fun introducedSince(uid: String, since: Long) =

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.update
 import java.time.Duration
 import java.time.Instant
 import java.util.Locale
+import kotlin.random.Random
 import javax.inject.Inject
 
 /** What a card shows. */
@@ -86,6 +87,7 @@ class StudySession(
     private val content: CardContentSource,
     private val clock: StudyClock,
     private val now: () -> Instant = Instant::now,
+    private val random: Random = Random.Default,
 ) {
     private val _state = MutableStateFlow(SessionState())
     val state: StateFlow<SessionState> = _state.asStateFlow()
@@ -95,7 +97,7 @@ class StudySession(
 
     suspend fun start() {
         val data = repository.loadSession(uid, profile, source, now())
-        queue = StudyQueue(data.cards, data.newItems, data.endOfDay)
+        queue = StudyQueue(data.cards, data.newItems, data.endOfDay, random = random)
         showNext()
     }
 
@@ -178,7 +180,7 @@ class StudySession(
         _state.update {
             it.copy(
                 loading = false,
-                current = CurrentCard(next, cardContent, isNew = existing == null),
+                current = CurrentCard(next, cardContent, isNew = existing == null || existing.reps == 0),
                 revealed = false,
                 counts = queue.counts(),
                 intervals = repository.preview(existing, at).mapValues { (_, d) -> formatInterval(d) },
