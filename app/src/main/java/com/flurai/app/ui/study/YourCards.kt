@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.core.study.formatInterval
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

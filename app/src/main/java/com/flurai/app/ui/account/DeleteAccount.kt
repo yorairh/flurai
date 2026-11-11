@@ -28,13 +28,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.account.AccountMover
+import com.flurai.app.core.account.UserTables
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.GUEST_UID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class DeleteAccountState(val busy: Boolean = false, val error: String? = null)
@@ -49,8 +52,8 @@ class DeleteAccountViewModel @Inject constructor(
     val state: StateFlow<DeleteAccountState> = _state
 
     /**
-     * Checks the password first (Firebase needs a recent sign-in to delete), then removes this
-     * account's data from the phone, then the account itself. Once it is gone the app shows sign-in.
+     * Checks the password first (Firebase needs a recent sign-in to delete), then removes the cloud
+     * backup, the account, and finally this phone's copy. Once it is gone the app shows sign-in.
      */
     fun delete(password: String) {
         val uid = auth.uid ?: return
@@ -67,8 +70,11 @@ class DeleteAccountViewModel @Inject constructor(
                 _state.update { DeleteAccountState(error = "Could not delete your cloud backup. Check your connection and try again.") }
                 return@launch
             }
-            mover.wipe(uid)
-            val deleted = auth.deleteAccount()
+            // The phone's copy goes only once the account is really gone, and the screen closing as the
+            // user signs out must not stop that halfway.
+            val deleted = withContext(NonCancellable) {
+                auth.deleteAccount().also { if (it.isSuccess) mover.wipe(uid) }
+            }
             _state.update { DeleteAccountState(error = deleted.exceptionOrNull()?.message) }
         }
     }
@@ -95,9 +101,8 @@ fun DeleteAccountSection(viewModel: DeleteAccountViewModel = hiltViewModel()) {
             title = { Text("Delete your account?") },
             text = {
                 Text(
-                    "This permanently deletes your FluRai account and everything it holds on this phone: flashcards, " +
-                        "review history, streaks, test results, grammar progress, your channels, level and settings. " +
-                        "It cannot be undone.",
+                    "This permanently deletes your FluRai account and everything it holds on this phone and in the cloud: " +
+                        "${UserTables.erasedSummary()}. It cannot be undone.",
                 )
             },
             confirmButton = {
@@ -171,8 +176,8 @@ fun EraseGuestSection(viewModel: EraseGuestViewModel = hiltViewModel()) {
             title = { Text("Erase all guest data?") },
             text = {
                 Text(
-                    "This permanently deletes the flashcards, review history, streaks, test results, grammar progress, " +
-                        "level and settings of the guest profile on this phone. It cannot be undone.",
+                    "This permanently deletes everything the guest profile holds on this phone: ${UserTables.erasedSummary()}. " +
+                        "It cannot be undone.",
                 )
             },
             confirmButton = {

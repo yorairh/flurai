@@ -1,20 +1,9 @@
 package com.flurai.app.core.account
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.MutablePreferences
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.doublePreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.floatPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import kotlinx.coroutines.flow.first
+import com.flurai.app.core.prefs.UserPreferences
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -74,10 +63,6 @@ interface AccountDao {
     @Query("DELETE FROM deck WHERE uid = :uid")
     suspend fun dropDeckRows(uid: String)
 
-    /**
-     * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
-     * own copy is kept.
-     */
     @Query("DELETE FROM review_log WHERE uid = :uid")
     suspend fun dropLogs(uid: String)
 
@@ -94,6 +79,10 @@ interface AccountDao {
         dropDeckWords(uid); dropDeckRows(uid)
     }
 
+    /**
+     * Everything of [from] becomes [to]'s. Where both have the same card or grammar point, [to]'s
+     * own copy is kept.
+     */
     @Transaction
     suspend fun move(from: String, to: String) {
         moveCards(from, to); dropCards(from)
@@ -111,19 +100,15 @@ data class OtherProgress(val uid: String, val cards: Int, val level: String?)
 
 /**
  * Finds and moves study data left on this phone by another account (for example one created with
- * a mistyped email). Settings and the study profile are stored as "<uid>.<name>" keys in DataStore.
+ * a mistyped email): database rows through [AccountDao], settings through [UserPreferences].
  */
 @Singleton
 class AccountMover @Inject constructor(
     private val dao: AccountDao,
-    private val dataStore: DataStore<Preferences>,
+    private val prefs: UserPreferences,
 ) {
     suspend fun otherProgress(currentUid: String): List<OtherProgress> {
-        val prefs = dataStore.data.first().asMap()
-        val levels = prefs.entries.mapNotNull { (key, value) ->
-            val name = key.name
-            if (name.endsWith(".level")) name.removeSuffix(".level") to value.toString() else null
-        }.toMap()
+        val levels = prefs.levelsByUid()
         val cards = dao.cardCounts().associate { it.uid to it.count }
         return (levels.keys + cards.keys).filter { it != currentUid }.distinct()
             .map { OtherProgress(it, cards[it] ?: 0, levels[it]) }
@@ -131,41 +116,15 @@ class AccountMover @Inject constructor(
             .sortedByDescending { it.cards }
     }
 
-    /** Deletes everything this phone holds for [uid]: database rows and "<uid>." settings. */
+    /** Deletes everything this phone holds for [uid]: database rows and settings. */
     suspend fun wipe(uid: String) {
         dao.wipe(uid)
-        dataStore.edit { prefs ->
-            prefs.asMap().keys.filter { it.name.startsWith("$uid.") }.forEach { prefs.remove(it) }
-        }
+        prefs.wipe(uid)
     }
 
     /** Moves [from]'s data to [to]; [to]'s profile and settings are replaced by [from]'s. */
     suspend fun move(from: String, to: String) {
         dao.move(from, to)
-        dataStore.edit { prefs ->
-            movePrefixedKeys(prefs, from, to)
-            // The moved rows must all be uploaded under the new account, so its sync cursors start over.
-            prefs.remove(androidx.datastore.preferences.core.longPreferencesKey("$to.sync.pull"))
-            prefs.remove(androidx.datastore.preferences.core.longPreferencesKey("$to.sync.push"))
-        }
-    }
-}
-
-/** Copies every "<from>.x" key to "<to>.x" (overwriting) and removes the originals. */
-internal fun movePrefixedKeys(prefs: MutablePreferences, from: String, to: String) {
-    val prefix = "$from."
-    prefs.asMap().entries.filter { it.key.name.startsWith(prefix) }.forEach { (key, value) ->
-        val name = to + "." + key.name.removePrefix(prefix)
-        @Suppress("UNCHECKED_CAST")
-        when (value) {
-            is Boolean -> prefs[booleanPreferencesKey(name)] = value
-            is Int -> prefs[intPreferencesKey(name)] = value
-            is Long -> prefs[longPreferencesKey(name)] = value
-            is Float -> prefs[floatPreferencesKey(name)] = value
-            is Double -> prefs[doublePreferencesKey(name)] = value
-            is String -> prefs[stringPreferencesKey(name)] = value
-            is Set<*> -> prefs[stringSetPreferencesKey(name)] = value as Set<String>
-        }
-        prefs.remove(key)
+        prefs.move(from, to)
     }
 }

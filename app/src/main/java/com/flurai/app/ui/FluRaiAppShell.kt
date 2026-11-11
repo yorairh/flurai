@@ -51,7 +51,7 @@ import com.flurai.app.ui.settings.SettingsScreen
 import com.flurai.app.ui.study.ReviewScreen
 import com.flurai.app.ui.tests.TestsHubScreen
 import com.flurai.app.ui.tests.QuizScreen
-import com.flurai.app.ui.tests.QuizKind
+import com.flurai.app.core.quiz.QuizKind
 import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
 import com.flurai.app.ui.reading.ReadingScreen

@@ -4,6 +4,7 @@ import com.flurai.app.core.srs.SrsState
 import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.ItemType
+import com.flurai.app.core.study.formatInterval
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.Duration

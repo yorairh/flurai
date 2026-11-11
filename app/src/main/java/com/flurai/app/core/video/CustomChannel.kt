@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 /** A channel, playlist or video the learner added themselves (UserDatabase v5). [level] is a JLPT number. */
@@ -29,6 +30,16 @@ interface CustomChannelDao {
 
     @Query("DELETE FROM custom_channel WHERE uid = :uid AND id = :id")
     suspend fun delete(uid: String, id: Long)
+
+    @Query("DELETE FROM custom_channel WHERE uid = :uid")
+    suspend fun deleteAll(uid: String)
+
+    /** Makes [channels] the whole list of [uid] (the cloud's copy replacing this phone's). */
+    @Transaction
+    suspend fun replaceAll(uid: String, channels: List<CustomChannelEntity>) {
+        deleteAll(uid)
+        channels.forEach { insert(it) }
+    }
 }
 
 /**

@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
-import java.time.Instant
 import javax.inject.Inject
 
 data class ProgressUiState(
@@ -39,11 +38,10 @@ class ProgressViewModel @Inject constructor(
     val state: StateFlow<ProgressUiState> = auth.currentUser.flatMapLatest { user ->
         if (user == null) return@flatMapLatest emptyFlow()
         profiles.profile(user.uid).filterNotNull().flatMapLatest { profile ->
-            val now = Instant.now()
             combine(
                 progress.snapshot(user.uid, profile.level),
-                study.dueCount(user.uid, now),
-                study.introducedToday(user.uid, now),
+                study.dueCount(user.uid),
+                study.introducedToday(user.uid),
             ) { snapshot, due, introduced ->
                 ProgressUiState(
                     snapshot = snapshot,

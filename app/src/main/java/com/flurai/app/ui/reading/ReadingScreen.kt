@@ -1,5 +1,6 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.core.reading.rubyParts
 import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
@@ -8,7 +9,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import com.flurai.app.core.model.JlptNumbers
 import com.flurai.app.ui.components.BackTopAppBar
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -19,14 +19,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -47,6 +45,7 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.flurai.app.ui.components.rememberStudyScroll
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.ui.theme.japanese
@@ -68,18 +67,15 @@ fun ReadingScreen(
     viewModel: ReadingViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val scroll = rememberStudyScroll(viewModel.clock)
     val context = LocalContext.current
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Reading") }, onBack = onBack)
         Column(
-            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
+            Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                JlptNumbers.forEach { n ->
-                    FilterChip(selected = state.jlpt == n, onClick = { viewModel.chooseLevel(n) }, label = { Text("N$n", maxLines = 1) })
-                }
-            }
+            LevelChips(state.jlpt, viewModel::chooseLevel)
             Text(
                 "Tap an underlined word to see its meaning or add it to your flashcards.",
                 style = MaterialTheme.typography.bodyMedium,

@@ -68,3 +68,46 @@ class ActivityTimer(private val clock: () -> Instant = Instant::now) {
 
     companion object { const val IDLE_CAP_SECONDS = 120L }
 }
+
+/**
+ * The study-time clock of one screen: [start] when studying begins, [tap] on every answer or tap,
+ * [finish] when it ends, and [pause]/[resume] from the screen's lifecycle (time in the background
+ * never counts). Every study screen uses one so its time counts toward the streak.
+ */
+class StudyClock(
+    private val uid: () -> String?,
+    private val clock: () -> Instant = Instant::now,
+    /** Saves (uid, when, seconds, reviews); [StudyActivityRepository.record] in the app. */
+    private val save: (String, Instant, Int, Int) -> Unit,
+) {
+    constructor(activity: StudyActivityRepository, uid: () -> String?) : this(uid, Instant::now, activity::record)
+
+    private val timer = ActivityTimer(clock)
+    private var running = false
+
+    /** Starts counting; does nothing if already counting. */
+    fun start() {
+        if (running) return
+        running = true
+        timer.start()
+    }
+
+    fun tap(reviews: Int = 0) = record(timer.tick(), reviews)
+
+    fun finish() {
+        running = false
+        record(timer.stop(), 0)
+    }
+
+    fun pause() = record(timer.stop(), 0)
+
+    fun resume() {
+        if (running) timer.start()
+    }
+
+    private fun record(seconds: Int, reviews: Int) {
+        if (seconds <= 0 && reviews <= 0) return
+        val uid = uid() ?: return
+        save(uid, clock(), seconds, reviews)
+    }
+}

@@ -1,7 +1,6 @@
 package com.flurai.app.ui.grammar
 
-import com.flurai.app.core.model.JlptNumbers
-import androidx.compose.material3.FilterChip
+import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
+import com.flurai.app.ui.components.rememberStudyScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -58,11 +57,10 @@ fun GrammarListScreen(
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
         // One level at a time, like the Reading screen: with hundreds of points a single list is too long.
-        Row(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            JlptNumbers.forEach { n ->
-                FilterChip(selected = selected == n, onClick = { viewModel.select(n) }, label = { Text("N$n", maxLines = 1) })
-            }
-        }
+        LevelChips(selected, viewModel::select, Modifier.padding(horizontal = 20.dp, vertical = 8.dp))
+        // Nothing until the points are loaded: a list that starts with only its footer stays anchored
+        // to it when the rows arrive, and would open scrolled to the bottom.
+        if (state.levels.isEmpty()) return@Column
         // Lazy, so only the rows on screen are built.
         // A new list state per level, so each level starts at its top.
         androidx.compose.runtime.key(selected) {
@@ -145,12 +143,13 @@ fun GrammarDetailScreen(
     viewModel: GrammarDetailViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val scroll = rememberStudyScroll(viewModel.clock)
     val point = state.point
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text(point?.let { "N${it.jlpt} grammar" } ?: "Grammar") }, onBack = onBack)
         if (point == null) return@Column
         Column(
-            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
+            Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(point.pattern, style = MaterialTheme.typography.displaySmall.japanese())

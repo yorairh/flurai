@@ -1,43 +1,19 @@
 package com.flurai.app.core.sync
 
-import com.flurai.app.core.study.DeckEntity
-import com.flurai.app.core.study.DeckDao
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.async
+import com.flurai.app.core.prefs.SyncCursors
+import com.flurai.app.core.prefs.UserPreferences
+import com.flurai.app.core.activity.studyEpochDay
 import com.flurai.app.core.auth.GUEST_UID
-import android.util.Log
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import com.flurai.app.core.activity.StudyDayDao
-import com.flurai.app.core.activity.StudyDayEntity
-import com.flurai.app.core.grammar.GrammarProgressDao
-import com.flurai.app.core.grammar.GrammarProgressEntity
-import com.flurai.app.core.quiz.TestResultDao
-import com.flurai.app.core.quiz.TestResultEntity
-import com.flurai.app.core.quiz.TestType
-import com.flurai.app.core.study.CardEntity
-import com.flurai.app.core.study.CardKind
-import com.flurai.app.core.study.ItemType
-import com.flurai.app.core.video.CustomChannelDao
-import com.flurai.app.core.video.CustomChannelEntity
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.tasks.await
+import java.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,31 +21,33 @@ import javax.inject.Singleton
 data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = null, val error: String? = null)
 
 /**
- * Keeps a copy of the learner's progress in Firestore (users/{uid}/...) so it survives a new
+ * Keeps a copy of the learner's progress in the cloud (users/{uid}/...) so it survives a new
  * phone or a reinstall. Local data stays the source of truth: each sync first pulls what changed
  * remotely and merges it (the newer row wins), then pushes what changed locally.
  *
- * Synced: flashcards, study days, test results, grammar progress, custom channels, and the
- * profile/settings. Not synced: the review log (nothing reads it) and suspended/buried flags
+ * Synced: flashcards, study days, test results, grammar progress, custom channels and decks, and
+ * the profile/settings. Not synced: the review log (nothing reads it) and suspended/buried flags
  * set without a review.
+ *
+ * The cloud is reached through [SyncCloud] and this phone's database through [SyncLocal], so the
+ * whole pull-merge-push runs against in-memory copies in tests. The rules for which copy wins and
+ * what the documents look like are in SyncCodec.kt.
  */
 @Singleton
-class SyncEngine @Inject constructor(
-    private val firestore: FirebaseFirestore,
-    private val auth: com.google.firebase.auth.FirebaseAuth,
-    private val dao: SyncDao,
-    private val studyDays: StudyDayDao,
-    private val tests: TestResultDao,
-    private val grammar: GrammarProgressDao,
-    private val channels: CustomChannelDao,
-    private val decks: DeckDao,
-    private val dataStore: DataStore<Preferences>,
+class SyncEngine internal constructor(
+    private val cloud: SyncCloud,
+    private val local: SyncLocal,
+    private val prefs: UserPreferences,
+    private val clock: () -> Long,
+    private val onError: (Throwable) -> Unit,
 ) {
+    @Inject
+    constructor(cloud: SyncCloud, local: SyncLocal, prefs: UserPreferences) :
+        this(cloud, local, prefs, System::currentTimeMillis, { android.util.Log.w("SyncEngine", "sync failed", it) })
+
     private val mutex = Mutex()
     private val _status = MutableStateFlow(SyncStatus())
     val status: StateFlow<SyncStatus> = _status.asStateFlow()
-
-    private fun user(uid: String) = firestore.collection("users").document(uid)
 
     /** Pulls then pushes. Never throws: a failure is recorded in [status] and the next sync retries. */
     suspend fun sync(uid: String): Boolean = if (uid == GUEST_UID) false else mutex.withLock {
@@ -77,61 +55,60 @@ class SyncEngine @Inject constructor(
         try {
             try {
                 syncOnce(uid)
-            } catch (e: FirebaseFirestoreException) {
-                if (e.code != FirebaseFirestoreException.Code.PERMISSION_DENIED) throw e
+            } catch (e: CloudException) {
+                if (e.reason != CloudException.Reason.NotAllowed) throw e
                 // The sign-in token may still carry an old "email not verified" claim: refresh it and retry once.
-                auth.currentUser?.reload()?.await()
-                auth.currentUser?.getIdToken(true)?.await()
+                cloud.refreshSignIn()
                 syncOnce(uid)
             }
-            _status.value = SyncStatus(lastSyncedAt = System.currentTimeMillis())
+            _status.value = SyncStatus(lastSyncedAt = clock())
             true
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w(TAG, "sync failed", e)
+            onError(e)
             _status.value = _status.value.copy(running = false, error = describe(e))
             false
         }
     }
 
     private suspend fun syncOnce(uid: String) {
-        val startedAt = System.currentTimeMillis()
-        val cursors = cursors(uid)
+        val startedAt = clock()
+        val cursors = prefs.cursors(uid)
         val pulled = pull(uid, cursors.pull)
         push(uid, cursors.push, pulled)
-        saveCursors(uid, pull = pulled.maxUpdatedAt.takeIf { it > cursors.pull } ?: cursors.pull, push = startedAt)
+        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt, push = startedAt))
     }
 
     /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
     private fun describe(e: Exception): String {
-        val reason = when ((e as? FirebaseFirestoreException)?.code) {
-            FirebaseFirestoreException.Code.PERMISSION_DENIED -> "not allowed (confirm your email, then sign out and in)"
-            FirebaseFirestoreException.Code.UNAVAILABLE, FirebaseFirestoreException.Code.DEADLINE_EXCEEDED -> "no connection to the server"
-            FirebaseFirestoreException.Code.NOT_FOUND -> "the cloud database was not found"
-            null -> e.javaClass.simpleName
-            else -> (e as FirebaseFirestoreException).code.name
+        val reason = when ((e as? CloudException)?.reason) {
+            CloudException.Reason.NotAllowed -> "not allowed (confirm your email, then sign out and in)"
+            CloudException.Reason.Offline -> "no connection to the server"
+            CloudException.Reason.NotFound -> "the cloud database was not found"
+            CloudException.Reason.Other, null -> e.cause?.javaClass?.simpleName ?: e.javaClass.simpleName
         }
         return "Could not sync: $reason. Your data is safe on this phone."
     }
 
     /** Makes the next sync push everything (after progress was moved between accounts). */
-    suspend fun markAllDirty(uid: String) {
-        dataStore.edit { it[longPreferencesKey("$uid.sync.push")] = 0L }
-    }
+    suspend fun markAllDirty(uid: String) = prefs.markAllDirty(uid)
 
-    /** Deletes this user's cloud copy. Needs the user to still be signed in. */
-    suspend fun deleteRemote(uid: String) {
-        for (name in listOf("cards", "days", "tests", "grammar", "meta")) {
-            val docs = user(uid).collection(name).get().await().documents
-            docs.chunked(400).forEach { chunk ->
-                firestore.batch().also { b -> chunk.forEach { b.delete(it.reference) } }.commit().await()
-            }
-        }
+    /**
+     * Deletes this user's cloud copy. Needs the user to still be signed in. The next sync uploads
+     * everything again, so an account that lives on (its deletion failed) gets its backup back.
+     */
+    suspend fun deleteRemote(uid: String) = mutex.withLock {
+        prefs.markAllDirty(uid)
+        cloud.deleteAll(uid, CLOUD_COLLECTIONS)
     }
 
     // -- pull ------------------------------------------------------------------------------------
 
+    /**
+     * What the pull took from the cloud. Ids listed here already match the cloud copy, so the push
+     * skips them; rows where the local copy won the merge are not listed and get uploaded.
+     */
     private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>)
 
     private suspend fun pull(uid: String, since: Long): Pulled {
@@ -140,198 +117,108 @@ class SyncEngine @Inject constructor(
         val dayIds = HashSet<Long>()
         val grammarIds = HashSet<Int>()
 
-        fun query(name: String) = user(uid).collection(name).whereGreaterThan("updatedAt", since)
-            .orderBy("updatedAt", Query.Direction.ASCENDING).get()
-
-        // The four downloads are independent: start them together, then merge one by one.
-        val (cardDocs, dayDocs, testDocs, grammarDocs) = coroutineScope {
-            listOf("cards", "days", "tests", "grammar").map { name -> async { query(name).await().documents } }.awaitAll()
+        // The downloads are independent: start them together, then merge one by one.
+        val (cardDocs, dayDocs, testDocs, grammarDocs, metaDocs) = coroutineScope {
+            CLOUD_COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
         }
 
         for (doc in cardDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
-            val card = cardFrom(uid, doc.data ?: continue) ?: continue
-            val local = dao.card(uid, card.itemType, card.itemId, card.kind)
-            if (local == null || touched(card) > touched(local)) dao.upsertCard(card)
-            cardIds += doc.id
+            max = maxOf(max, doc.updatedAt)
+            val card = cardFrom(uid, doc.data) ?: continue
+            val mine = local.card(uid, card.itemType, card.itemId, card.kind)
+            if (mine == null || touched(card) > touched(mine)) local.upsertCard(card)
+            if (cloudCovers(touched(card), mine?.let(::touched))) cardIds += doc.id
         }
         for (doc in dayDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
-            val day = doc.getLong("day") ?: continue
-            val remote = StudyDayEntity(uid, day, (doc.getLong("seconds") ?: 0).toInt(), (doc.getLong("reviews") ?: 0).toInt())
-            val local = dao.day(uid, day)
-            // Time studied on two phones on the same day: keep the larger total, never lose time.
-            dao.upsertDay(local?.let { StudyDayEntity(uid, day, maxOf(it.seconds, remote.seconds), maxOf(it.reviews, remote.reviews)) } ?: remote)
-            dayIds += day
+            max = maxOf(max, doc.updatedAt)
+            val remote = dayFrom(uid, doc.data) ?: continue
+            val merged = mergeDay(local.day(uid, remote.day), remote)
+            local.upsertDay(merged)
+            if (merged == remote) dayIds += remote.day
         }
         for (doc in testDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
-            val takenAt = doc.getLong("takenAt") ?: continue
-            val type = doc.getString("type") ?: continue
-            if (dao.testCount(uid, type, takenAt) == 0) {
-                val kind = TestType.entries.firstOrNull { it.name == type } ?: continue
-                tests.insert(
-                    TestResultEntity(
-                        uid = uid, type = kind, level = doc.getLong("level")?.toInt(),
-                        correct = (doc.getLong("correct") ?: 0).toInt(), total = (doc.getLong("total") ?: 0).toInt(), takenAt = takenAt,
-                    ),
-                )
-            }
+            max = maxOf(max, doc.updatedAt)
+            val test = testFrom(uid, doc.data) ?: continue
+            if (!local.hasTest(uid, test.type.name, test.takenAt)) local.insertTest(test)
         }
         for (doc in grammarDocs) {
-            max = maxOf(max, doc.getLong("updatedAt") ?: 0)
-            val id = (doc.getLong("grammarId") ?: continue).toInt()
-            val remote = GrammarProgressEntity(
-                uid, id, (doc.getLong("correct") ?: 0).toInt(), (doc.getLong("wrong") ?: 0).toInt(),
-                doc.getBoolean("lastCorrect") ?: false, doc.getLong("lastAt") ?: 0,
-            )
-            val local = grammar.get(uid, id)
-            if (local == null || remote.lastAt > local.lastAt) grammar.upsert(remote)
-            grammarIds += id
+            max = maxOf(max, doc.updatedAt)
+            val remote = grammarFrom(uid, doc.data) ?: continue
+            val mine = local.grammar(uid, remote.grammarId)
+            if (mine == null || remote.lastAt > mine.lastAt) local.upsertGrammar(remote)
+            if (cloudCovers(remote.lastAt, mine?.lastAt)) grammarIds += remote.grammarId
         }
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
-        val hasProfile = dataStore.data.first().asMap().keys.any { it.name == "$uid.level" }
-        if (!hasProfile) {
-            val prefs = user(uid).collection("meta").document("profile").get().await().get("prefs") as? Map<*, *>
-            if (prefs != null) writePrefs(uid, prefs)
+        if (!prefs.hasProfile(uid)) {
+            val saved = cloud.document(uid, META_COLLECTION, "profile")?.get("prefs") as? Map<*, *>
+            if (saved != null) prefs.import(uid, saved)
         }
-        // Channels: likewise, restored only when this phone has none.
-        if (dao.channels(uid).isEmpty()) {
-            val items = user(uid).collection("meta").document("channels").get().await().get("items") as? List<*>
-            items?.filterIsInstance<Map<*, *>>()?.forEach { m ->
-                channels.insert(
-                    CustomChannelEntity(
-                        uid = uid, name = m["name"] as? String ?: return@forEach, url = m["url"] as? String ?: return@forEach,
-                        level = (m["level"] as? Long)?.toInt() ?: 5, addedAt = m["addedAt"] as? Long ?: 0,
-                    ),
-                )
+        // Channels and decks are whole documents: another phone's version replaces this phone's, unless
+        // this phone changed its own since the last sync (then it wins and is uploaded).
+        metaDocs.forEach { max = maxOf(max, it.updatedAt) }
+        fun items(id: String) = (metaDocs.firstOrNull { it.id == id }?.data?.get("items") as? List<*>)?.filterIsInstance<Map<*, *>>()
+        items("channels")?.let { cloudItems ->
+            val theirs = cloudItems.mapNotNull { channelFrom(uid, it) }
+            val mine = local.channels(uid)
+            if (theirs.map(::channelDoc) != mine.map(::channelDoc) && mayTakeCloudVersion(uid, "channels", mine.map(::channelDoc))) {
+                local.replaceChannels(uid, theirs)
+                prefs.saveUploadedHash(uid, "channels", fingerprint(local.channels(uid).map(::channelDoc)))
             }
         }
-        // Decks: likewise, restored only when this phone has none.
-        if (decks.decksNow(uid).isEmpty()) {
-            val items = user(uid).collection("meta").document("decks").get().await().get("items") as? List<*>
-            items?.filterIsInstance<Map<*, *>>()?.forEach { m ->
-                val name = m["name"] as? String ?: return@forEach
-                val words = (m["words"] as? List<*>)?.mapNotNull { (it as? Long)?.toInt() }.orEmpty()
-                val createdAt = m["createdAt"] as? Long ?: 0
-                decks.create(DeckEntity(uid = uid, name = name, createdAt = createdAt), words, createdAt)
+        items("decks")?.let { cloudItems ->
+            val theirs = cloudItems.mapNotNull { deckFrom(uid, it) }
+            val mine = localDeckDocs(uid)
+            if (theirs.map { deckDoc(it.deck, it.words) } != mine && mayTakeCloudVersion(uid, "decks", mine)) {
+                local.replaceDecks(uid, theirs.map { it.deck to it.words })
+                prefs.saveUploadedHash(uid, "decks", fingerprint(localDeckDocs(uid)))
             }
         }
         return Pulled(max, cardIds, dayIds, grammarIds)
     }
 
+    private suspend fun localDeckDocs(uid: String) = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
+
+    /**
+     * Whether the cloud's version of a whole-document item [part] may replace this phone's [mine]:
+     * this phone has not changed it since it last uploaded or took it (its fingerprint still
+     * matches), or it never synced it and has nothing of its own. An item deleted here differs from
+     * what was uploaded, so it is not brought back.
+     */
+    private suspend fun mayTakeCloudVersion(uid: String, part: String, mine: List<Map<String, Any?>>): Boolean {
+        val uploaded = prefs.uploadedHash(uid, part)
+        return if (uploaded == null) mine.isEmpty() else uploaded == fingerprint(mine)
+    }
+
+    private fun fingerprint(items: Any): Long = items.hashCode().toLong()
+
     // -- push ------------------------------------------------------------------------------------
 
     private suspend fun push(uid: String, since: Long, pulled: Pulled) {
-        val now = System.currentTimeMillis()
-        val writes = mutableListOf<Pair<com.google.firebase.firestore.DocumentReference, Map<String, Any?>>>()
+        val writes = mutableListOf<CloudWrite>()
 
-        dao.cardsChangedSince(uid, since).filter { cardId(it) !in pulled.cardIds }.forEach { c ->
-            writes += user(uid).collection("cards").document(cardId(c)) to mapOf(
-                "itemType" to c.itemType.name, "itemId" to c.itemId, "kind" to c.kind.name, "state" to c.state, "step" to c.step,
-                "stability" to c.stability, "difficulty" to c.difficulty, "due" to c.due, "lastReview" to c.lastReview,
-                "reps" to c.reps, "lapses" to c.lapses, "suspended" to c.suspended, "buriedUntil" to c.buriedUntil,
-                "createdAt" to c.createdAt, "updatedAt" to now,
-            )
-        }
-        val sinceDay = if (since == 0L) 0L else com.flurai.app.core.activity.studyEpochDay(java.time.Instant.ofEpochMilli(since)) - 1
-        studyDays.all(uid).filter { it.day >= sinceDay && it.day !in pulled.dayIds }.forEach { d ->
-            writes += user(uid).collection("days").document(d.day.toString()) to
-                mapOf("day" to d.day, "seconds" to d.seconds, "reviews" to d.reviews, "updatedAt" to now)
-        }
-        dao.testsSince(uid, since).forEach { t ->
-            writes += user(uid).collection("tests").document("${t.takenAt}-${t.type.name}") to mapOf(
-                "type" to t.type.name, "level" to t.level, "correct" to t.correct, "total" to t.total, "takenAt" to t.takenAt, "updatedAt" to now,
-            )
-        }
-        dao.grammarSince(uid, since).filter { it.grammarId !in pulled.grammarIds }.forEach { g ->
-            writes += user(uid).collection("grammar").document(g.grammarId.toString()) to mapOf(
-                "grammarId" to g.grammarId, "correct" to g.correct, "wrong" to g.wrong, "lastCorrect" to g.lastCorrect,
-                "lastAt" to g.lastAt, "updatedAt" to now,
-            )
-        }
-        writes.chunked(400).forEach { chunk ->
-            val batch = firestore.batch()
-            chunk.forEach { (ref, data) -> batch.set(ref, data) }
-            batch.commit().await()
-        }
+        local.cardsSince(uid, since).filter { needsUpload(it, since) && cardId(it) !in pulled.cardIds }
+            .forEach { writes += CloudWrite("cards", cardId(it), cardDoc(it)) }
+        val sinceDay = if (since == 0L) 0L else studyEpochDay(Instant.ofEpochMilli(since)) - 1
+        local.days(uid).filter { it.day >= sinceDay && it.day !in pulled.dayIds }
+            .forEach { writes += CloudWrite("days", it.day.toString(), dayDoc(it)) }
+        local.testsSince(uid, since).filter { it.takenAt > since }
+            .forEach { writes += CloudWrite("tests", testId(it), testDoc(it)) }
+        local.grammarSince(uid, since).filter { it.lastAt > since && it.grammarId !in pulled.grammarIds }
+            .forEach { writes += CloudWrite("grammar", it.grammarId.toString(), grammarDoc(it)) }
 
         // Small whole-document items: written only when they changed since the last upload (or on a full push).
-        val items = dao.channels(uid).map { mapOf("name" to it.name, "url" to it.url, "level" to it.level, "addedAt" to it.addedAt) }
-        val prefs = readPrefs(uid)
-        val metaKey = longPreferencesKey("$uid.sync.meta")
-        val deckItems = decks.decksNow(uid).map { d ->
-            mapOf("name" to d.name, "createdAt" to d.createdAt, "words" to decks.wordIds(d.id))
-        }
-        val metaHash = Triple(items, prefs, deckItems).hashCode().toLong()
-        if (since == 0L || dataStore.data.first()[metaKey] != metaHash) {
-            coroutineScope {
-                launch { user(uid).collection("meta").document("channels").set(mapOf("items" to items, "updatedAt" to now)).await() }
-                launch { user(uid).collection("meta").document("decks").set(mapOf("items" to deckItems, "updatedAt" to now)).await() }
-                if (prefs.isNotEmpty()) launch { user(uid).collection("meta").document("profile").set(mapOf("prefs" to prefs, "updatedAt" to now)).await() }
-            }
-            dataStore.edit { it[metaKey] = metaHash }
-        }
+        // Each is written only when it changed here since it was last uploaded or taken (or on a full push).
+        val channels = local.channels(uid).map(::channelDoc)
+        val decks = localDeckDocs(uid)
+        val settings = prefs.export(uid)
+        val parts = mapOf("channels" to channels, "decks" to decks, "settings" to settings)
+        val changed = parts.filter { (part, value) -> since == 0L || prefs.uploadedHash(uid, part) != fingerprint(value) }.keys
+        if ("channels" in changed) writes += CloudWrite(META_COLLECTION, "channels", mapOf("items" to channels))
+        if ("decks" in changed) writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to decks))
+        if ("settings" in changed && settings.isNotEmpty()) writes += CloudWrite(META_COLLECTION, "profile", mapOf("prefs" to settings))
+
+        if (writes.isNotEmpty()) cloud.write(uid, writes)
+        changed.forEach { prefs.saveUploadedHash(uid, it, fingerprint(parts.getValue(it))) }
     }
-
-    // -- preferences -----------------------------------------------------------------------------
-
-    /** Profile and settings keys of [uid] without the uid prefix, skipping the sync cursors. */
-    private suspend fun readPrefs(uid: String): Map<String, Any> =
-        dataStore.data.first().asMap().entries
-            .filter { it.key.name.startsWith("$uid.") && !it.key.name.startsWith("$uid.sync.") }
-            .associate { it.key.name.removePrefix("$uid.") to it.value }
-
-    private suspend fun writePrefs(uid: String, values: Map<*, *>) {
-        dataStore.edit { prefs ->
-            values.forEach { (k, v) ->
-                val name = "$uid.$k"
-                when (v) {
-                    is Boolean -> prefs[booleanPreferencesKey(name)] = v
-                    is Long -> prefs[intPreferencesKey(name)] = v.toInt()
-                    is String -> prefs[stringPreferencesKey(name)] = v
-                }
-            }
-        }
-    }
-
-    // -- cursors ---------------------------------------------------------------------------------
-
-    private class Cursors(val pull: Long, val push: Long)
-
-    private suspend fun cursors(uid: String): Cursors {
-        val prefs = dataStore.data.first()
-        return Cursors(prefs[longPreferencesKey("$uid.sync.pull")] ?: 0L, prefs[longPreferencesKey("$uid.sync.push")] ?: 0L)
-    }
-
-    private suspend fun saveCursors(uid: String, pull: Long, push: Long) {
-        dataStore.edit {
-            it[longPreferencesKey("$uid.sync.pull")] = pull
-            it[longPreferencesKey("$uid.sync.push")] = push
-        }
-    }
-
-    private companion object {
-        const val TAG = "SyncEngine"
-    }
-}
-
-internal fun cardId(c: CardEntity) = "${c.itemType.name}-${c.itemId}-${c.kind.name}"
-
-/** When a card last changed: its latest review, or its creation. */
-internal fun touched(c: CardEntity) = maxOf(c.lastReview ?: 0L, c.createdAt)
-
-internal fun cardFrom(uid: String, d: Map<String, Any?>): CardEntity? {
-    val type = ItemType.entries.firstOrNull { it.name == d["itemType"] } ?: return null
-    val kind = CardKind.entries.firstOrNull { it.name == d["kind"] } ?: return null
-    fun long(key: String) = (d[key] as? Number)?.toLong()
-    return CardEntity(
-        uid = uid, itemType = type, itemId = (d["itemId"] as? Number)?.toInt() ?: return null, kind = kind,
-        state = (d["state"] as? Number)?.toInt() ?: return null, step = (d["step"] as? Number)?.toInt(),
-        stability = (d["stability"] as? Number)?.toDouble(), difficulty = (d["difficulty"] as? Number)?.toDouble(),
-        due = long("due") ?: return null, lastReview = long("lastReview"), reps = (d["reps"] as? Number)?.toInt() ?: 0,
-        lapses = (d["lapses"] as? Number)?.toInt() ?: 0, suspended = d["suspended"] as? Boolean ?: false,
-        buriedUntil = long("buriedUntil"), createdAt = long("createdAt") ?: 0L,
-    )
 }

@@ -7,6 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.flurai.app.core.activity.StudyActivityRepository
+import com.flurai.app.core.activity.StudyClock
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.content.GrammarExampleEntity
 import com.flurai.app.core.content.GrammarPointEntity
@@ -90,12 +92,17 @@ class GrammarDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val auth: AuthRepository,
     private val grammar: GrammarRepository,
+    activity: StudyActivityRepository,
 ) : ViewModel() {
+    /** Reading a grammar point counts as study time. */
+    val clock = StudyClock(activity, { auth.uid })
+
     private val id = savedStateHandle.toRoute<GrammarRoute>().id
     private val _state = MutableStateFlow(GrammarDetailState())
     val state: StateFlow<GrammarDetailState> = _state
 
     init {
+        clock.start()
         viewModelScope.launch {
             _state.update { it.copy(point = grammar.point(id), examples = grammar.examples(id)) }
         }

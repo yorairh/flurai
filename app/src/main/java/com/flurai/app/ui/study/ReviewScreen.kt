@@ -1,5 +1,6 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.ui.components.StudyClockEffects
 import androidx.compose.foundation.layout.size
 import com.flurai.app.ui.components.LoadingBox
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +40,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import com.flurai.app.core.study.StudySource
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,8 +53,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
+import com.flurai.app.core.study.CardContent
+import com.flurai.app.core.study.CurrentCard
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.srs.Rating
@@ -75,9 +75,7 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val speech by viewModel.speaker.status.collectAsStateWithLifecycle()
     var menuOpen by remember { mutableStateOf(false) }
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refresh(); viewModel.onResume() }
-    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) { viewModel.onPause() }
-    DisposableEffect(Unit) { onDispose { viewModel.onPause() } }
+    StudyClockEffects(onResume = { viewModel.refresh(); viewModel.onResume() }, onPause = viewModel::onPause)
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(

@@ -1,6 +1,9 @@
 package com.flurai.app.core.study
 
 import com.flurai.app.core.srs.SrsState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalTime
@@ -20,6 +23,15 @@ object StudyDay {
 
     fun end(now: Instant, zone: ZoneId = ZoneId.systemDefault()): Instant =
         ZonedDateTime.ofInstant(start(now, zone), zone).plusDays(1).toInstant()
+
+    /** The current time now, and again each time a new study day begins (for counts shown on screen). */
+    fun ticks(clock: () -> Instant = Instant::now): Flow<Instant> = flow {
+        while (true) {
+            val now = clock()
+            emit(now)
+            delay(Duration.between(now, end(now)).toMillis().coerceAtLeast(1_000))
+        }
+    }
 }
 
 /** Something to study next: an existing card, or a new item shown for the first time. */
