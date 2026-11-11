@@ -79,6 +79,27 @@ interface ContentDao {
     @Query("SELECT * FROM word WHERE id = :id")
     suspend fun word(id: Int): WordEntity?
 
+    /**
+     * A simple word to show with a kana: one whose reading starts with it, a word written with kanji
+     * first, easier levels first, then the shortest. Null for kana nothing starts with (ん, を).
+     */
+    @Query(
+        """
+        SELECT * FROM word WHERE reading LIKE :prefix || '%' AND expression NOT LIKE '%～%'
+        ORDER BY (expression = reading), jlpt DESC, LENGTH(reading), id LIMIT 1
+        """,
+    )
+    suspend fun wordStartingWith(prefix: String): WordEntity?
+
+    /** The same for katakana: a loanword (written in kana only) that starts with it. */
+    @Query(
+        """
+        SELECT * FROM word WHERE expression = reading AND expression LIKE :prefix || '%'
+        ORDER BY jlpt DESC, LENGTH(reading), id LIMIT 1
+        """,
+    )
+    suspend fun loanwordStartingWith(prefix: String): WordEntity?
+
     @Query(
         """
         SELECT s.* FROM sentence s JOIN word_sentence ws ON ws.sentence_id = s.id

@@ -113,6 +113,11 @@ fun SettingsScreen(
                         )
                     }
                 }
+                Text(
+                    "Your daily goal (${profile.dailyMinutes} min, in Study goals below) is separate: it fills the ring on Home.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
 
             SettingsCard("Flashcards") {

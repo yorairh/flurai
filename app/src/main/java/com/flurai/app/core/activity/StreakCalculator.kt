@@ -42,6 +42,8 @@ data class ActivitySummary(
     val heat: List<Int>,
     val weekSeconds: Int,
     val minSeconds: Int,
+    /** The study day number of today (days since 1970), to label the days of the heat map. */
+    val today: Long = 0,
 ) {
     val todayProgress: Float get() = if (goalSeconds <= 0) 1f else (todaySeconds.toFloat() / goalSeconds).coerceIn(0f, 1f)
 }
@@ -56,6 +58,7 @@ fun summarize(days: List<StudyDayEntity>, today: Long, goalMinutes: Int, streakM
         heat = (today - 34..today).map { byDay[it] ?: 0 },
         weekSeconds = (today - 6..today).sumOf { byDay[it] ?: 0 },
         minSeconds = minSeconds,
+        today = today,
     )
 }
 

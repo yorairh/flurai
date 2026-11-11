@@ -149,7 +149,36 @@ class StudyQueueTest {
         assertEquals("あ", KanaData.byId(1)!!.kana)
         assertEquals("ア", KanaData.byId(101)!!.kana)
         assertEquals("ン", KanaData.katakana.first { it.romaji == "n" }.kana)
-        assertEquals(71, KanaData.hiragana.size)
+        assertEquals(71 + 33, KanaData.hiragana.size)
         assertEquals(KanaData.hiragana.map { it.romaji }, KanaData.katakana.map { it.romaji })
+    }
+
+    @Test
+    fun combinationSoundsAreAppendedWithNewIdsAndTheBasicKanaKeepTheirs() {
+        assertEquals("きゃ", KanaData.byId(201)!!.kana)
+        assertEquals("キャ", KanaData.byId(301)!!.kana)
+        assertEquals("りょ", KanaData.byId(233)!!.kana)
+        assertEquals("リョ", KanaData.byId(333)!!.kana)
+        assertEquals("ryo", KanaData.byId(333)!!.romaji)
+        assertEquals(71 + 33, KanaData.katakana.size)
+        // the basic kana come first, so a beginner learns them before the combinations
+        assertEquals(KanaData.hiragana.take(71).map { it.id }, (1..71).toList())
+        assertEquals((201..233).toList(), KanaData.hiragana.drop(71).map { it.id })
+        assertEquals(208, (KanaData.hiragana + KanaData.katakana).map { it.id }.toSet().size) // every id is different
+    }
+
+    @Test
+    fun theChartListsEveryKanaOnceInTextbookRows() {
+        val chart = KanaData.chart(KanaScript.Hiragana)
+        assertEquals(listOf("Basic", "Voiced", "Combinations"), chart.map { it.title })
+        val shown = chart.flatMap { it.rows }.flatMap { it }.filterNotNull()
+        assertEquals(KanaData.hiragana.map { it.id }.sorted(), shown.map { it.id }.sorted())
+        val basic = chart[0].rows
+        assertEquals(listOf("あ", "い", "う", "え", "お"), basic[0].map { it?.kana })
+        assertEquals(listOf("や", null, "ゆ", null, "よ"), basic[7].map { it?.kana })
+        assertEquals(listOf("わ", null, null, null, "を"), basic[9].map { it?.kana })
+        assertEquals(listOf("ん"), basic[10].map { it?.kana })
+        assertEquals(listOf("きゃ", "きゅ", "きょ"), chart[2].rows[0].map { it?.kana })
+        assertEquals(11, chart[2].rows.size)
     }
 }
