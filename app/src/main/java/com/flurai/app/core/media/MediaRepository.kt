@@ -2,6 +2,7 @@ package com.flurai.app.core.media
 
 import com.flurai.app.core.content.WordCache
 import com.flurai.app.core.content.ContentDao
+import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.knowledge.Knowledge
 import com.flurai.app.core.knowledge.knowledge
 import com.flurai.app.core.model.JlptLevel
@@ -18,8 +19,10 @@ import javax.inject.Singleton
 /** What the detail screen shows about a title next to the learner's own progress. */
 data class MediaAnalysis(
     val coverage: MediaCoverage,
-    /** How many of the title's common words can be added to the flashcards. */
-    val learnable: List<Int>,
+    /** The title's common words that can be added to the flashcards, most common first. */
+    val learnable: List<WordEntity>,
+    /** Common words left out because they are well above the learner's level; "include harder words" brings them back. */
+    val skippedHarder: Int = 0,
 )
 
 /**
@@ -62,7 +65,13 @@ class MediaRepository @Inject constructor(
     private suspend fun idMap(): Map<Int, Int> = jmdictToWord ?: wordCache.all()
         .mapNotNull { w -> w.jmdictId?.let { it to w.id } }.toMap().also { jmdictToWord = it }
 
-    suspend fun analyse(uid: String, deckId: Int, learnLimit: Int = LEARN_BATCH): MediaAnalysis {
+    suspend fun analyse(
+        uid: String,
+        deckId: Int,
+        level: JlptLevel,
+        includeHarder: Boolean = false,
+        learnLimit: Int = LEARN_BATCH,
+    ): MediaAnalysis {
         val words = topWords(deckId)
         val map = idMap()
         val cards = studyDao.allCards(uid).first().filter { it.itemType == ItemType.Word }
@@ -70,7 +79,11 @@ class MediaRepository @Inject constructor(
             .map { it.itemId }.toSet()
         val knownJmdict = map.filterValues { it in knownWordIds }.keys
         val started = cards.map { it.itemId }.toSet()
-        return MediaAnalysis(coverage(words, knownJmdict), wordsToLearn(words, map, started, learnLimit))
+        val byId = wordCache.all().associateBy { it.id }
+        val levelOf = { id: Int -> byId[id]?.jlpt }
+        val offered = wordsToLearn(words, map, started, learnLimit, levelOf, if (includeHarder) 1 else hardestWordToOffer(level))
+        val skipped = if (includeHarder) 0 else wordsToLearn(words, map, started, learnLimit).count { it !in offered }
+        return MediaAnalysis(coverage(words, knownJmdict), offered.mapNotNull { byId[it] }, skipped)
     }
 
     /** Adds the given words to the flashcards as new cards for today. */

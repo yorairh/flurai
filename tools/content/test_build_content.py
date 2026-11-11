@@ -90,10 +90,59 @@ class SentenceMatchingTest(unittest.TestCase):
         self.assertEqual([11, 10], meet.sentence_ids)
         self.assertEqual(2, len(used))
 
+    def test_a_kana_word_is_not_matched_to_another_word_read_the_same(self):
+        yes = word("ええ", "ええ", jmdict_id=1001140)  # ええ "yes"
+        self.assertTrue(bc.token_matches(yes, bc.parse_index_token("ええ")))
+        self.assertFalse(bc.token_matches(yes, bc.parse_index_token("良い{ええ}")))  # Kansai ええ "good"
+        unmatched = word("あれこれ", "あれこれ")  # not in JMdict: the permissive rule stays
+        self.assertTrue(bc.token_matches(unmatched, bc.parse_index_token("彼是{あれこれ}")))
+
+    def test_prefers_examples_no_harder_than_the_word(self):
+        n5 = word("本", "ほん", id=1, jlpt=5)
+        indexed = [
+            bc.IndexedSentence(10, 100, [bc.parse_index_token("本")]),
+            bc.IndexedSentence(11, 101, [bc.parse_index_token("本")]),
+        ]
+        japanese = {10: "この法案は本当に長い話だ。", 11: "これは本です。"}
+        grades = {10: 1, 11: 5}
+        bc.pick_sentences([n5], indexed, japanese, {100: "a", 101: "b"}, grades)
+        self.assertEqual([11, 10], n5.sentence_ids)  # the N5 sentence first, although it is farther from the ideal length
+
     def test_affixes_get_no_examples(self):
         counter = word("～人", "～じん")
         bc.pick_sentences([counter], [bc.IndexedSentence(1, 2, [bc.parse_index_token("人")])], {1: "人"}, {2: "x"})
         self.assertEqual([], counter.sentence_ids)
+
+
+class JmdictMatchTest(unittest.TestCase):
+    def entry(self, id, kanji, kana, *glosses):
+        return {"id": str(id), "kanji": [{"text": k} for k in kanji], "kana": [{"text": k} for k in kana],
+                "sense": [{"partOfSpeech": ["x"], "gloss": [{"text": g} for g in glosses]}]}
+
+    def test_picks_the_entry_whose_glosses_match_the_deck_meaning(self):
+        roe = self.entry(1, [], ["いくら"], "salted salmon roe")
+        price = self.entry(2, ["幾ら"], ["いくら"], "how much?", "how many?")
+        w = word("いくら", "いくら", meanings="how much, how many")
+        bc.attach_jmdict([w], {"words": [roe, price]})
+        self.assertEqual(2, w.jmdict_id)
+        self.assertEqual(["幾ら"], w.jmdict_forms)
+
+    def test_without_any_overlap_several_candidates_leave_the_word_unmatched(self):
+        a = self.entry(1, [], ["ぼろ"], "tremendous")
+        b = self.entry(2, [], ["ぼろ"], "enormous")
+        w = word("ぼろ", "ぼろ", meanings="rag, tattered clothes")
+        bc.attach_jmdict([w], {"words": [a, b]})
+        self.assertIsNone(w.jmdict_id)
+        sole = word("ぼろ", "ぼろ", meanings="rag")
+        bc.attach_jmdict([sole], {"words": [a]})
+        self.assertEqual(1, sole.jmdict_id)
+
+    def test_polite_family_words_are_not_called_formal(self):
+        mother = word("お母さん", "おかあさん", meanings="mother (formal)")
+        other = word("丁寧", "ていねい", meanings="polite (formal)")
+        bc.tidy_meanings([mother, other])
+        self.assertEqual("mother (polite)", mother.meanings)
+        self.assertEqual("polite (formal)", other.meanings)
 
 
 class SentenceGradeTest(unittest.TestCase):

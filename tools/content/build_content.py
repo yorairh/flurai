@@ -210,26 +210,50 @@ def save_registry(path: Path, registry: dict[str, int]) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+_STOP_WORDS = frozenset("a an the to of in on at or and be is for with by as it one".split())
+
+
+def gloss_words(text: str) -> set[str]:
+    return set(re.findall(r"[a-z]+", text.lower())) - _STOP_WORDS
+
+
+def best_entry(entries: list[dict], meanings: str) -> dict | None:
+    """The JMdict entry whose glosses share the most words with a deck meaning. A kana word such as ああ or
+    いくら has several entries (a salmon roe, a price); with no overlap at all only a sole candidate is safe to take."""
+    wanted = gloss_words(meanings)
+    scored = [(len(wanted & {w for s in e["sense"] for g in s["gloss"] for w in gloss_words(g["text"])}), e) for e in entries]
+    top = max((n for n, _ in scored), default=0)
+    if top > 0:
+        return next(e for n, e in scored if n == top)
+    return entries[0] if len(entries) == 1 else None
+
+
 def attach_jmdict(words: list[Word], jmdict: dict) -> None:
     """Fills in the JMdict entry id and part of speech for words found in JMdict."""
     by_form: dict[tuple[str, str], dict] = {}
-    by_kana: dict[str, dict] = {}
+    by_kana: dict[str, list[dict]] = {}
     for entry in jmdict["words"]:
         kanas = [k["text"] for k in entry["kana"]]
         for kanji in entry["kanji"]:
             for kana in kanas:
                 by_form.setdefault((kanji["text"], kana), entry)
-        if not entry["kanji"]:
-            for kana in kanas:
-                by_kana.setdefault(kana, entry)
+        for kana in kanas:
+            by_kana.setdefault(kana, []).append(entry)  # also entries with kanji: 通貨 is つうか too
     for word in words:
         entry = by_form.get((word.expression, word.reading))
         if entry is None and word.expression == word.reading:
-            entry = by_kana.get(word.reading)
+            entry = best_entry(by_kana.get(word.reading, []), word.meanings)
         if entry is not None:
             word.jmdict_id = int(entry["id"])
             word.parts_of_speech = ",".join(entry["sense"][0]["partOfSpeech"]) or None
             word.jmdict_forms = [k["text"] for k in entry["kanji"]]
+
+
+def tidy_meanings(words: list[Word]) -> None:
+    """Small wording fixes for the deck's meanings. "(formal)" on お母さん, お父さん ... means polite, not formal."""
+    for word in words:
+        if word.expression.startswith("お") and word.expression.endswith("さん"):
+            word.meanings = word.meanings.replace("(formal)", "(polite)")
 
 
 # --------------------------------------------------------------------------------------------
@@ -341,16 +365,21 @@ def token_matches(word: Word, token: IndexToken) -> bool:
         return token.reading is None or token.reading == word.reading
     # Kana-only words are often indexed under their kanji spelling, e.g. 直ぐに{すぐに} for すぐに.
     if word.expression == word.reading:
-        return token.reading == word.reading or token.form == word.reading
+        if token.reading == word.reading or token.form == word.reading:
+            # The headword must be one of this entry's own spellings: ええ "yes" is not 良い read ええ.
+            return token.headword in word.spellings or word.jmdict_id is None
+        return False
     return False
 
 
-def sentence_score(word: Word, token: IndexToken, text: str) -> tuple:
-    """Lower is better. Prefers sentences that write a kanji word in kanji (あった could be 会う or
-    遭う), then verified examples, then sentences close to a comfortable length."""
+def sentence_score(word: Word, token: IndexToken, text: str, grade: int | None = None) -> tuple:
+    """Lower is better. Prefers sentences no harder than the word itself (a learner of an N5 word should
+    not meet it among N1 vocabulary), then sentences that write a kanji word in kanji (あった could be
+    会う or 遭う), then verified examples, then sentences close to a comfortable length."""
     surface = token.form or token.headword
     kana_only = bool(word.allowed_kanji) and not any(is_kanji(c) for c in surface)
-    return (kana_only, not token.good_example, abs(len(text) - IDEAL_SENTENCE_LENGTH), text)
+    too_hard = 0 if grade is not None and grade >= word.jlpt else (word.jlpt - grade if grade is not None else 9)
+    return (too_hard, kana_only, not token.good_example, abs(len(text) - IDEAL_SENTENCE_LENGTH), text)
 
 
 def pick_sentences(
@@ -358,6 +387,7 @@ def pick_sentences(
     indexed: list[IndexedSentence],
     japanese: dict[int, str],
     english: dict[int, str],
+    grades: dict[int, int | None] | None = None,
 ) -> dict[int, tuple[str, str, bool]]:
     """Chooses up to MAX_SENTENCES_PER_WORD examples per word; returns the sentences used."""
     by_headword: dict[str, list[tuple[IndexToken, IndexedSentence]]] = {}
@@ -383,7 +413,7 @@ def pick_sentences(
                 if not token_matches(word, token):
                     continue
                 text = japanese[sentence.japanese_id]
-                score = sentence_score(word, token, text)
+                score = sentence_score(word, token, text, (grades or {}).get(sentence.japanese_id))
                 best = candidates.get(sentence.japanese_id)
                 if best is None or score < best[0]:
                     candidates[sentence.japanese_id] = (score, sentence, token.good_example)
@@ -541,7 +571,7 @@ def pick_reading_sentences(
     indexed: list["IndexedSentence"],
     japanese: dict[int, str],
     english: dict[int, str],
-    levels: dict[str, int],
+    grades: dict[int, int | None],
     taken: set[int],
     per_level: dict[int, int] = READING_SENTENCES_PER_LEVEL,
 ) -> tuple[dict[int, tuple[str, str, bool]], dict[int, int]]:
@@ -554,7 +584,7 @@ def pick_reading_sentences(
             continue
         if not READING_LENGTH[0] <= len(text) <= READING_LENGTH[1]:
             continue
-        grade = grade_sentence(text, sentence.tokens, levels)
+        grade = grades.get(sentence.japanese_id)
         if grade not in candidates:
             continue
         verified = any(t.good_example for t in sentence.tokens)
@@ -673,6 +703,7 @@ def main() -> None:
     words = merge_levels(levels)
     registry = assign_ids(words, load_registry(WORD_IDS))
     attach_jmdict(words, read_zipped_json(fetch("jmdict-eng.json.zip")))
+    tidy_meanings(words)
 
     print("Kanji")
     kanji = build_kanji(
@@ -682,19 +713,17 @@ def main() -> None:
 
     print("Example sentences")
     indexed = parse_indices(read_indices(fetch("jpn_indices.tar.bz2")))
-    sentences = pick_sentences(
-        words,
-        indexed,
-        read_tatoeba_sentences(fetch("jpn_sentences.tsv.bz2")),
-        read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2")),
-    )
+    japanese = read_tatoeba_sentences(fetch("jpn_sentences.tsv.bz2"))
+    english = read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2"))
     levels = word_levels(words)
-    tokens_by_id = {s.japanese_id: s.tokens for s in indexed}
-    sentence_levels = {sid: grade_sentence(jp, tokens_by_id.get(sid, []), levels) for sid, (jp, _, _) in sentences.items()}
-    extra, extra_levels = pick_reading_sentences(
-        indexed, read_tatoeba_sentences(fetch("jpn_sentences.tsv.bz2")), read_tatoeba_sentences(fetch("eng_sentences.tsv.bz2")),
-        levels, set(sentences),
-    )
+    grades = {
+        s.japanese_id: grade_sentence(japanese[s.japanese_id], s.tokens, levels)
+        for s in indexed
+        if s.japanese_id in japanese and len(japanese[s.japanese_id]) <= MAX_SENTENCE_LENGTH
+    }
+    sentences = pick_sentences(words, indexed, japanese, english, grades)
+    sentence_levels = {sid: grades.get(sid) for sid in sentences}
+    extra, extra_levels = pick_reading_sentences(indexed, japanese, english, grades, set(sentences))
     sentences.update(extra)
     sentence_levels.update(extra_levels)
 

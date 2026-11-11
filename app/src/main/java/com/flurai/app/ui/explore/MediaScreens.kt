@@ -49,6 +49,7 @@ import coil3.compose.AsyncImage
 import com.flurai.app.core.media.Deck
 import com.flurai.app.core.media.MediaType
 import com.flurai.app.core.model.JlptLevel
+import com.flurai.app.core.quiz.firstGloss
 import com.flurai.app.ui.theme.japanese
 import kotlin.math.roundToInt
 
@@ -215,12 +216,28 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                                 style = MaterialTheme.typography.bodyMedium,
                             )
                             if (analysis.learnable.isNotEmpty()) {
+                                Text("Words to learn first", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 4.dp))
+                                analysis.learnable.forEach { word ->
+                                    Text(
+                                        "${word.expression}${if (word.reading != word.expression) "（${word.reading}）" else ""}  ${firstGloss(word.meanings)}",
+                                        style = MaterialTheme.typography.bodyMedium.japanese(),
+                                    )
+                                }
                                 Button(onClick = { viewModel.addWords() }, modifier = Modifier.fillMaxWidth()) {
-                                    Text("Learn the top ${analysis.learnable.size} words first")
+                                    Text("Learn these ${analysis.learnable.size} words first")
                                 }
                                 OutlinedButton(onClick = { viewModel.saveAsDeck() }, modifier = Modifier.fillMaxWidth(), enabled = state.savedDeck == null) {
                                     Text("Save them as a deck")
                                 }
+                            }
+                            if (analysis.skippedHarder > 0 && !state.includeHarder) {
+                                Text(
+                                    "${analysis.skippedHarder} common words that are well above your level were left out.",
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                                TextButton(onClick = { viewModel.setIncludeHarder(true) }) { Text("Include harder words") }
+                            } else if (state.includeHarder) {
+                                TextButton(onClick = { viewModel.setIncludeHarder(false) }) { Text("Only words near my level") }
                             }
                         }
                     }

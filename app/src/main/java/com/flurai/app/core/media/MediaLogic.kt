@@ -42,11 +42,24 @@ fun coverage(words: List<DeckWord>, known: Set<Int>): MediaCoverage {
 
 /**
  * Our word ids to learn before watching: the title's common words that are in the app's word
- * lists ([jmdictToWord]) and are not started yet ([started]), most common first.
+ * lists ([jmdictToWord]) and are not started yet ([started]), most common first. [levelOf] gives a
+ * word's JLPT number; words harder than [hardestAllowed] (a smaller number is harder) are left out,
+ * so a beginner is not handed N1 words just because a show says them a lot.
  */
-fun wordsToLearn(words: List<DeckWord>, jmdictToWord: Map<Int, Int>, started: Set<Int>, limit: Int): List<Int> =
+fun wordsToLearn(
+    words: List<DeckWord>,
+    jmdictToWord: Map<Int, Int>,
+    started: Set<Int>,
+    limit: Int,
+    levelOf: (Int) -> Int? = { null },
+    hardestAllowed: Int = 1,
+): List<Int> =
     words.sortedByDescending { it.occurrences }
         .mapNotNull { jmdictToWord[it.wordId] }
         .filter { it !in started }
+        .filter { (levelOf(it) ?: 1) >= hardestAllowed }
         .distinct()
         .take(limit)
+
+/** The hardest JLPT number to offer a learner studying from [level]: one level above their own, at most N1. */
+fun hardestWordToOffer(level: JlptLevel): Int = ((level.jlpt ?: 5) - 1).coerceAtLeast(1)
