@@ -55,13 +55,13 @@ fun EditProfileScreen(
             Text("設定", style = MaterialTheme.typography.labelLarge.japanese(), color = MaterialTheme.colorScheme.secondary)
             Text("Level & goals", style = MaterialTheme.typography.headlineMedium)
             Text(
-                "Changes apply right away. Later, tests will also suggest a level based on what you know.",
+                "Changes apply right away. This chooses which word list new words come from; your level is worked out from what you know and your checkpoints.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
             Spacer(Modifier.height(4.dp))
-            Text("Level", style = MaterialTheme.typography.titleMedium)
+            Text("Study new words from", style = MaterialTheme.typography.titleMedium)
             JlptLevel.entries.forEach { level ->
                 LevelCard(level, state.level == level) { viewModel.selectLevel(level) }
             }

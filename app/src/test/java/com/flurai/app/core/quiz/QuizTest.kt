@@ -102,53 +102,43 @@ class QuizTest {
 
     // Placement ------------------------------------------------------------------------------
 
-    private fun PlacementTest.stage(correct: Int, of: Int = 5) = repeat(of) { answer(it < correct) }
+    private fun PlacementTest.stage(correct: Int, of: Int = 6) = repeat(of) { answer(it < correct) }
 
     @Test
-    fun strongLearnerClimbsToN1() {
+    fun placementStartsAtN5AndClimbsWhileEachLevelIsPassed() {
         val t = PlacementTest()
-        listOf(4, 3, 2, 1).forEach { level ->
+        listOf(5, 4, 3, 2, 1).forEach { level ->
             assertEquals(level, t.level)
-            t.stage(5)
+            assertEquals(false, t.finished)
+            t.stage(5) // 5 of 6 passes
         }
         assertTrue(t.finished)
         assertEquals(JlptLevel.N1, t.result)
     }
 
     @Test
-    fun stopsWhenTheNextStepWasAlreadyTested() {
+    fun placementStopsAtTheFirstLevelNotPassed() {
         val t = PlacementTest()
-        t.stage(5) // N4 pass, up to N3
-        assertEquals(3, t.level)
-        t.stage(1) // N3 fail, back to N4 which was tested
+        t.stage(6) // N5
+        t.stage(6) // N4
+        t.stage(4) // N3: one short
         assertTrue(t.finished)
         assertEquals(JlptLevel.N4, t.result)
     }
 
     @Test
-    fun weakLearnerDropsToN5ThenBeginner() {
+    fun failingN5GivesBeginner() {
         val t = PlacementTest()
-        t.stage(2) // N4 fail, down
-        assertEquals(5, t.level)
-        t.stage(3) // N5 fail (needs 4), nowhere lower
+        t.stage(4)
         assertTrue(t.finished)
         assertEquals(JlptLevel.Beginner, t.result)
     }
 
     @Test
-    fun failingN4ButPassingN5GivesN5() {
-        val t = PlacementTest()
-        t.stage(3)
-        t.stage(4)
-        assertTrue(t.finished)
-        assertEquals(JlptLevel.N5, t.result)
-    }
-
-    @Test
     fun levelDoesNotChangeInTheMiddleOfAStage() {
         val t = PlacementTest()
-        repeat(4) { t.answer(true) }
-        assertEquals(4, t.level)
+        repeat(5) { t.answer(true) }
+        assertEquals(5, t.level)
         assertEquals(false, t.finished)
     }
 
@@ -158,21 +148,26 @@ class QuizTest {
         TestResultEntity(uid = "u", type = type, level = level, correct = correct, total = total, takenAt = 0)
 
     @Test
-    fun testedLevelIsTheHardestPlacementOrPassedCheckpoint() {
-        assertNull(testedLevel(emptyList()))
-        assertEquals(JlptLevel.N3, testedLevel(listOf(result(TestType.Placement, 3, 5, 5))))
-        assertEquals(JlptLevel.Beginner, testedLevel(listOf(result(TestType.Placement, 0, 1, 5))))
-        assertEquals(
-            JlptLevel.N2,
-            testedLevel(listOf(result(TestType.Placement, 4, 5, 5), result(TestType.Checkpoint, 2, 17))),
-        )
+    fun onlyPassedCheckpointsCountAsEvidenceOfALevel() {
+        assertEquals(emptySet<Int>(), passedCheckpoints(emptyList()))
+        assertEquals(emptySet<Int>(), passedCheckpoints(listOf(result(TestType.Placement, 3, 5, 5)))) // a placement is a suggestion
+        assertEquals(setOf(2, 5), passedCheckpoints(listOf(result(TestType.Checkpoint, 2, 17), result(TestType.Checkpoint, 5, 20), result(TestType.Placement, 1, 6, 6))))
     }
 
     @Test
     fun failedCheckpointsAndQuickQuizzesDoNotCount() {
         val failed = result(TestType.Checkpoint, 1, 15) // 75%
         val quick = result(TestType.Quick, null, 10, 10)
-        assertNull(testedLevel(listOf(failed, quick)))
-        assertNotNull(testedLevel(listOf(result(TestType.Checkpoint, 1, 16)))) // exactly 80%
+        assertEquals(emptySet<Int>(), passedCheckpoints(listOf(failed, quick)))
+        assertEquals(setOf(1), passedCheckpoints(listOf(result(TestType.Checkpoint, 1, 16)))) // exactly 80%
+    }
+
+    @Test
+    fun theLatestPlacementIsTheSuggestedLevel() {
+        assertNull(suggestedLevel(emptyList()))
+        val older = result(TestType.Placement, 3, 5, 6).copy(takenAt = 1)
+        val newer = result(TestType.Placement, 0, 1, 6).copy(takenAt = 2)
+        assertEquals(JlptLevel.Beginner, suggestedLevel(listOf(older, newer)))
+        assertEquals(JlptLevel.N3, suggestedLevel(listOf(older)))
     }
 }

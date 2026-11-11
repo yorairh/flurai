@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import com.flurai.app.core.content.WordCache
 import com.flurai.app.core.content.ContentDao
-import com.flurai.app.core.model.JlptLevel
+import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.quiz.TestResultDao
-import com.flurai.app.core.quiz.testedLevel
+import com.flurai.app.core.quiz.passedCheckpoints
 import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.StudyDao
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +23,7 @@ class ProgressRepository @Inject constructor(
     private val content: ContentDao,
     private val wordCache: WordCache,
     private val tests: TestResultDao,
+    private val grammar: GrammarProgressDao,
 ) {
     @Volatile
     private var cachedCatalog: Catalog? = null
@@ -31,16 +32,18 @@ class ProgressRepository @Inject constructor(
     suspend fun catalog(): Catalog = cachedCatalog ?: Catalog(
         words = wordCache.all().associateBy { it.id },
         kanjiLevels = content.kanjiLevels().associate { it.literal to it.jlpt },
+        grammarLevels = content.allGrammarPoints().associate { it.id to it.jlpt },
     ).also { cachedCatalog = it }
 
-    /** Recomputed whenever the user's cards change. */
-    fun snapshot(uid: String, start: JlptLevel): Flow<ProgressSnapshot> =
+    /** Recomputed whenever the user's cards, grammar answers or test results change. */
+    fun snapshot(uid: String): Flow<ProgressSnapshot> =
         // Room re-emits on any write to these tables (other accounts, sync): skip identical lists.
-        combine(study.allCards(uid).distinctUntilChanged(), tests.results(uid).distinctUntilChanged()) { cards, results ->
-            // A placement result or a passed checkpoint can lift the starting point of the estimate.
-            val tested = testedLevel(results)
-            val effectiveStart = if (tested != null && tested.ordinal > start.ordinal) tested else start
-            computeProgress(cards, catalog(), effectiveStart, Instant.now())
+        combine(
+            study.allCards(uid).distinctUntilChanged(),
+            grammar.progress(uid).distinctUntilChanged(),
+            tests.results(uid).distinctUntilChanged(),
+        ) { cards, grammarProgress, results ->
+            computeProgress(cards, catalog(), grammarProgress, passedCheckpoints(results), Instant.now())
         }
             .flowOn(Dispatchers.Default)
             // While answering fast, only the latest state matters.

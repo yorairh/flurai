@@ -57,8 +57,8 @@ fun TestsHubScreen(
             TestCard(
                 japanese = "配置",
                 title = "Placement test",
-                body = placement?.let { "Last result: ${placementLabel(it)}" }
-                    ?: "About 15 to 25 questions that find your level. It adapts as you answer.",
+                body = placement?.let { "Last suggestion: start at ${placementLabel(it)}" }
+                    ?: "Words and grammar from N5 upward, 6 questions per level. It suggests where to start; checkpoints confirm your level.",
                 onClick = { onStart(QuizKind.Placement) },
             )
             TestCard(
@@ -76,7 +76,7 @@ fun TestsHubScreen(
                 onClick = { onStart(QuizKind.Listening) },
             )
 
-            SectionHeader("級", "Level checkpoints", "20 questions on one level's words and kanji. Score 80% to pass.")
+            SectionHeader("級", "Level checkpoints", "30 questions: a level's words, kanji and grammar. Score 80% to pass and confirm the level.")
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                 Column {
                     JlptNumbers.forEachIndexed { index, jlpt ->

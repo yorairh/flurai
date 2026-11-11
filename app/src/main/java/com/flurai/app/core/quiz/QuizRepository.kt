@@ -47,16 +47,15 @@ interface TestResultDao {
 }
 
 /**
- * The hardest level the learner has shown they know: a placement result, or a checkpoint passed
- * with at least 80%. Null when no test says anything yet.
+ * The JLPT numbers whose checkpoint the learner passed (at least 80%). Only checkpoints count as
+ * evidence of a level: a placement result is a starting suggestion, see [suggestedLevel].
  */
-fun testedLevel(results: List<TestResultEntity>): JlptLevel? = results.mapNotNull { r ->
-    when {
-        r.type == TestType.Placement -> if (r.level == 0) JlptLevel.Beginner else r.level?.let { JlptLevel.ofJlpt(it) }
-        r.type == TestType.Checkpoint && r.fraction >= CHECKPOINT_PASS_FRACTION -> r.level?.let { JlptLevel.ofJlpt(it) }
-        else -> null
-    }
-}.maxByOrNull { it.ordinal }
+fun passedCheckpoints(results: List<TestResultEntity>): Set<Int> =
+    results.filter { it.type == TestType.Checkpoint && it.fraction >= CHECKPOINT_PASS_FRACTION }.mapNotNull { it.level }.toSet()
+
+/** Where the latest placement test put the learner (Beginner when N5 was too hard); null when none was taken. */
+fun suggestedLevel(results: List<TestResultEntity>): JlptLevel? =
+    results.filter { it.type == TestType.Placement }.maxByOrNull { it.takenAt }?.let { if (it.level == 0) JlptLevel.Beginner else it.level?.let(JlptLevel::ofJlpt) }
 
 /** Builds quizzes from the content database and saves results. */
 @Singleton
@@ -79,14 +78,17 @@ class QuizRepository @Inject constructor(
 
     suspend fun save(result: TestResultEntity) = results.insert(result)
 
-    /** [count] vocabulary questions at one level (a placement stage). */
+    /**
+     * [count] vocabulary questions at one level (a placement stage). The reading is not shown under
+     * a kanji word: placement should test whether the word is known, not whether kana can be read.
+     */
     suspend fun placementStage(jlpt: Int, count: Int, random: Random = Random): List<Question> {
         val pool = words()[jlpt].orEmpty()
-        return pool.shuffled(random).asSequence().mapNotNull { wordQuestion(it, pool, random) }.take(count).toList()
+        return pool.shuffled(random).asSequence().mapNotNull { wordQuestion(it, pool, random)?.copy(hint = null) }.take(count).toList()
     }
 
-    /** A level checkpoint: mostly vocabulary, some kanji readings. */
-    suspend fun checkpoint(jlpt: Int, wordCount: Int = 14, kanjiCount: Int = 6, random: Random = Random): List<Question> {
+    /** The word and kanji part of a level checkpoint (the backend adds grammar questions). */
+    suspend fun checkpoint(jlpt: Int, wordCount: Int = 12, kanjiCount: Int = 6, random: Random = Random): List<Question> {
         val wordPool = words()[jlpt].orEmpty()
         val kanjiPool = kanji()[jlpt].orEmpty()
         val wordQs = wordPool.shuffled(random).asSequence().mapNotNull { wordQuestion(it, wordPool, random) }.take(wordCount).toList()

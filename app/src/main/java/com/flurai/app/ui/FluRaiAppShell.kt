@@ -109,6 +109,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
+    // Progress and the word browser are reachable from Home and from Me: the tab you came from stays selected.
+    val openedFromProfile = navController.previousBackStackEntry?.destination?.hasRoute(ProfileRoute::class) == true
 
     Scaffold(
         bottomBar = bottomBar@{
@@ -118,8 +120,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {
                         it.hasRoute(destination.routeClass) ||
-                            (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class))) ||
-                            (destination == TopLevelDestination.Home && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
+                            (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class) || (openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))))) ||
+                            (destination == TopLevelDestination.Home && !openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
                             (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
                             (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
@@ -230,7 +232,14 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onStart = { navController.navigate(QuizRoute(it.encode())) },
                 )
             }
-            screen<QuizRoute> { QuizScreen(onBack = { navController.popBackStack() }) }
+            screen<QuizRoute> {
+                QuizScreen(
+                    onBack = { navController.popBackStack() },
+                    onTakeCheckpoint = { jlpt ->
+                        navController.navigate(QuizRoute(QuizKind.Checkpoint(jlpt).encode())) { popUpTo<QuizRoute> { inclusive = true } }
+                    },
+                )
+            }
             screen<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }
             screen<ExploreRoute> { ExploreScreen(onOpenVideos = { navController.navigate(VideosRoute) }, onOpenMedia = { navController.navigate(MediaRoute) }) }
             screen<MediaRoute> {

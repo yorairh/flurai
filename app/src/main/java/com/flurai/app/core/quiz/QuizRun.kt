@@ -110,8 +110,13 @@ class RepositoryQuizBackend @Inject constructor(
     private val profiles: StudyProfileRepository,
 ) : QuizBackend {
     override suspend fun questions(uid: String, kind: QuizKind, profileLevel: JlptLevel, stageLevel: Int): List<Question> = when (kind) {
-        QuizKind.Placement -> quizzes.placementStage(stageLevel, STAGE_SIZE)
-        is QuizKind.Checkpoint -> quizzes.checkpoint(kind.jlpt)
+        QuizKind.Placement -> (
+            quizzes.placementStage(stageLevel, PLACEMENT_WORDS) +
+                grammar.practice(uid, stageLevel, null, PLACEMENT_GRAMMAR, favorUnknown = false)
+            ).shuffled()
+        is QuizKind.Checkpoint -> (
+            quizzes.checkpoint(kind.jlpt) + grammar.practice(uid, kind.jlpt, null, CHECKPOINT_GRAMMAR, favorUnknown = false)
+            ).shuffled()
         QuizKind.Quick -> quizzes.quick(uid, profileLevel)
         QuizKind.Listening -> quizzes.listening(uid, profileLevel)
         is QuizKind.Reading -> reading.questions(kind.jlpt)
@@ -126,7 +131,12 @@ class RepositoryQuizBackend @Inject constructor(
     override suspend fun saveProfile(uid: String, profile: StudyProfile) = profiles.save(uid, profile)
 
     private companion object {
-        const val STAGE_SIZE = 5
+        /** A placement stage: words and grammar of one level (see [PlacementTest]). */
+        const val PLACEMENT_WORDS = 4
+        const val PLACEMENT_GRAMMAR = 2
+
+        /** A checkpoint: 12 words and 6 kanji from [QuizRepository.checkpoint], plus this many grammar blanks. */
+        const val CHECKPOINT_GRAMMAR = 12
     }
 }
 
