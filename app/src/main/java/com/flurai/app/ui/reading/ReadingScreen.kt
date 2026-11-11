@@ -44,6 +44,10 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -201,7 +205,7 @@ private fun WordSheet(word: WordEntity, added: Boolean, onAdd: () -> Unit, onDet
 @Composable
 private fun RubySentence(tokens: List<Token>, onWord: (WordEntity) -> Unit) {
     val main = MaterialTheme.typography.titleLarge.japanese()
-    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 12.sp, textAlign = TextAlign.Center)
+    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, textAlign = TextAlign.Center)
     val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
     // Units that may wrap as a whole: a tappable word, or one plain character. Closing punctuation
     // is stuck to the unit before it, so a lone 。 never lands on a line of its own.
@@ -218,7 +222,18 @@ private fun RubySentence(tokens: List<Token>, onWord: (WordEntity) -> Unit) {
             }
         }
     }
-    FlowRow(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+    val sentence = tokens.joinToString("") { it.text }
+    // The cells are drawn one by one, so a screen reader would read them one kana at a time: describe the sentence once instead.
+    FlowRow(
+        verticalArrangement = Arrangement.spacedBy(0.dp),
+        modifier = Modifier.clearAndSetSemantics {
+            contentDescription = sentence
+            // The tappable words stay reachable for a screen reader as actions.
+            customActions = units.mapNotNull { u ->
+                u.word?.let { w -> CustomAccessibilityAction("Look up ${u.parts.joinToString("") { it.text }}") { onWord(w); true } }
+            }
+        },
+    ) {
         units.forEach { u ->
             Row(if (u.word != null) Modifier.clickable { onWord(u.word) } else Modifier) {
                 u.parts.forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = u.word != null) }
@@ -233,6 +248,10 @@ private fun RubyCell(text: String, reading: String?, main: androidx.compose.ui.t
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         // A space keeps the line, so cells without a reading line up with the ones that have it.
         Text(reading ?: " ", style = ruby, color = rubyColor, maxLines = 1)
-        Text(text, style = main, textDecoration = if (underline) TextDecoration.Underline else null)
+        Text(
+            text,
+            style = main.copy(lineHeight = 26.sp),
+            textDecoration = if (underline) TextDecoration.Underline else null,
+        )
     }
 }

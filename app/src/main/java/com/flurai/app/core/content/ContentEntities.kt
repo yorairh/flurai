@@ -56,6 +56,8 @@ data class SentenceEntity(
     val english: String,
     /** Marked as a good example sentence in Tatoeba's Japanese index. */
     val verified: Boolean,
+    /** JLPT number of the hardest word or grammar in the sentence (5 = N5 ... 1 = N1); null when it is not fit for reading practice. */
+    val jlpt: Int? = null,
 )
 
 @Entity(

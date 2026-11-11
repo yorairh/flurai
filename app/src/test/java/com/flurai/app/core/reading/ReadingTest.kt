@@ -44,14 +44,16 @@ class ReadingTest {
     }
 
     @Test
-    fun sentenceLevelIsTheHardestWordAndRejectsUnknownKanji() {
-        val lex = Lexicon(listOf(word(1, "学生", jlpt = 5), word(2, "本", jlpt = 3)))
-        assertEquals(3, sentenceLevel(lex.tokenize("学生の本です")))
-        assertNull(sentenceLevel(lex.tokenize("学生は釈放された"))) // 釈放 is not in the lists
-        assertNull(sentenceLevel(lex.tokenize("これはです")))      // no known word
+    fun theCommonReadingWinsBetweenWordsSharingASpelling() {
+        // 私 is both わたし (id 713, common) and わたくし (id 714, formal) at N5: わたし must be the one shown.
+        val watashi = word(713, "私").copy(reading = "わたし")
+        val watakushi = word(714, "私").copy(reading = "わたくし")
+        for (order in listOf(listOf(watashi, watakushi), listOf(watakushi, watashi))) {
+            assertEquals("わたし", Lexicon(order).tokenize("私は").first().word?.reading)
+        }
     }
 
-    private fun sentence(id: Int, en: String) = SentenceEntity(id, "文$id", en, true)
+    private fun sentence(id: Int, en: String, jp: String = "文$id") = SentenceEntity(id, jp, en, true, 5)
 
     @Test
     fun sentenceQuestionOffersFourDifferentTranslations() {
@@ -61,6 +63,31 @@ class ReadingTest {
             assertEquals("I read a book.", q.correctOption)
             assertEquals(4, q.options.map { it.lowercase() }.toSet().size)
         }
+    }
+
+    @Test
+    fun wrongOptionsComeFromSentencesThatShareAWord() {
+        val target = sentence(1, "I read a book.", jp = "私は本を読む。")
+        val sharing = listOf(
+            sentence(2, "She bought a book yesterday.", jp = "彼女は昨日本を買った。"),
+            sentence(3, "A book is on the desk.", jp = "机の上に本がある。"),
+            sentence(4, "This book is old.", jp = "この本は古い。"),
+        )
+        val unrelated = (5..30).map { sentence(it, "Another sentence $it.", jp = "別の文$it") }
+        repeat(20) { seed ->
+            val q = sentenceQuestion(target, listOf(target) + unrelated + sharing, 5, Random(seed), keywords = listOf("本"))!!
+            val wrong = q.options.filter { it != q.correctOption }
+            assertEquals(setOf("She bought a book yesterday.", "A book is on the desk.", "This book is old."), wrong.toSet())
+        }
+    }
+
+    @Test
+    fun fewRelatedSentencesAreTopedUpWithOthers() {
+        val target = sentence(1, "I read a book.", jp = "私は本を読む。")
+        val pool = listOf(target, sentence(2, "A book is on the desk.", jp = "机の上に本がある。")) + (3..10).map { sentence(it, "Other $it.") }
+        val q = sentenceQuestion(target, pool, 5, Random(1), keywords = listOf("本"))!!
+        assertTrue("A book is on the desk." in q.options)
+        assertEquals(4, q.options.toSet().size)
     }
 
     @Test

@@ -96,6 +96,58 @@ class SentenceMatchingTest(unittest.TestCase):
         self.assertEqual([], counter.sentence_ids)
 
 
+class SentenceGradeTest(unittest.TestCase):
+    levels = {"私": 5, "学校": 5, "行く": 5, "寒い": 5, "着る": 5, "車": 5, "掛ける": 4, "電話": 5, "繋がる": 3, "呼ぶ": 5, "旅行": 5}
+
+    def grade(self, text, *tokens):
+        return bc.grade_sentence(text, [bc.parse_index_token(t) for t in tokens], self.levels)
+
+    def test_a_simple_sentence_is_n5(self):
+        self.assertEqual(5, self.grade("私は学校に行く。", "私", "は", "学校", "に", "行く"))
+
+    def test_the_hardest_word_decides(self):
+        self.assertEqual(3, self.grade("電話がつながった。", "電話", "が", "繋がる{つながった}"))
+
+    def test_unknown_words_by_kind(self):
+        self.assertEqual(1, self.grade("田中が行く。", "田中", "が", "行く"))  # kanji outside the lists
+        self.assertEqual(3, self.grade("ワックスを買う。", "ワックス", "を", "行く"))  # katakana outside the lists
+        self.assertEqual(5, self.grade("私は行く。", "私", "は", "行く"))  # particles ask nothing
+
+    def test_grammar_beyond_n5_raises_the_level(self):
+        self.assertEqual(3, self.grade("寒いからコートを着るべきだ。", "寒い", "から", "着る", "可き{べき}", "だ"))  # べき
+        self.assertEqual(4, self.grade("友達がいるので行く。", "私", "ので", "行く"))
+        self.assertEqual(3, self.grade("いつ旅行においでになりますか。", "旅行", "に", "お出でになる{おいでになります}", "か"))
+
+    def test_the_bad_n5_sentences_from_the_play_test_are_not_n5(self):
+        cases = [
+            ("もう～、なにやってんだよ。", ["もう{もう～}", "何{なに}", "遣る{やって}", "のだ{んだ}", "よ"]),
+            ("いつ旅行においでになりますか。", ["何時(いつ){いつ}", "旅行", "に", "お出でになる{おいでになります}", "か"]),
+            ("その車はワックスがかけられてピカピカしている。", ["其の{その}", "車(くるま)", "は", "ワックス", "が", "掛ける{かけられて}", "ぴかぴか{ピカピカ}", "為る(する){している}"]),
+            ("寒いからコートを着るべきだ。", ["寒い(さむい)", "から", "コート", "を", "着る", "可き{べき}", "だ"]),
+            ("あなたをケパと呼ぶことにします。", ["貴方(あなた){あなた}", "を", "と", "呼ぶ", "事にする{ことにします}"]),
+        ]
+        levels = {**self.levels, "何": 5, "何時": 5, "其の": 5, "コート": 5}
+        for text, tokens in cases:
+            grade = bc.grade_sentence(text, [bc.parse_index_token(t) for t in tokens], levels)
+            self.assertTrue(grade is None or grade < 5, f"{text} graded {grade}")
+
+    def test_godan_passive_and_causative_forms_are_not_n5(self):
+        levels = {**self.levels, "書く": 5, "本": 5, "英語": 5}
+        passive = bc.grade_sentence("英語で書かれた本。", [bc.parse_index_token(t) for t in ("英語", "で", "書く{書かれた}", "本")], levels)
+        plain = bc.grade_sentence("英語で書いた本。", [bc.parse_index_token(t) for t in ("英語", "で", "書く{書いた}", "本")], levels)
+        self.assertEqual(3, passive)
+        self.assertEqual(5, plain)
+
+    def test_placeholders_make_a_sentence_unreadable(self):
+        self.assertIsNone(self.grade("もう～、行く。", "もう", "行く"))
+        self.assertIsNone(bc.grade_sentence("私は行く。", [], self.levels))
+
+    def test_word_levels_take_the_easiest_word_written_that_way(self):
+        levels = bc.word_levels([word("私", "わたし", jlpt=5), word("私", "わたくし", jlpt=3, guid="b"), word("ええ", "ええ", jlpt=5, guid="c")])
+        self.assertEqual(5, levels["私"])
+        self.assertEqual(5, levels["ええ"])
+
+
 @unittest.skipUnless(bc.OUTPUT.exists(), "content.db not built yet")
 class BuiltDatabaseTest(unittest.TestCase):
     """Checks the committed asset against Room's schema and expected sizes."""
@@ -137,6 +189,18 @@ class BuiltDatabaseTest(unittest.TestCase):
         with_examples = self.db.execute("SELECT COUNT(DISTINCT word_id) FROM word_sentence").fetchone()[0]
         total = self.db.execute("SELECT COUNT(*) FROM word").fetchone()[0]
         self.assertGreater(with_examples / total, 0.8)
+
+    def test_reading_sentences_are_graded_and_every_level_has_enough(self):
+        counts = dict(self.db.execute(
+            "SELECT jlpt, COUNT(*) FROM sentence WHERE verified = 1 AND length(japanese) BETWEEN 8 AND 30 AND jlpt IS NOT NULL GROUP BY jlpt"
+        ))
+        for jlpt, minimum in {5: 100, 4: 200, 3: 300, 2: 200, 1: 100}.items():
+            self.assertGreaterEqual(counts.get(jlpt, 0), minimum, f"N{jlpt} reading sentences")
+
+    def test_n5_sentences_use_no_hard_grammar(self):
+        for (japanese,) in self.db.execute("SELECT japanese FROM sentence WHERE jlpt = 5"):
+            for pattern, level in bc.GRAMMAR_GATES:
+                self.assertFalse(pattern.search(japanese), f"N5 sentence matches a level {level} gate: {japanese}")
 
     def test_ids_match_registry(self):
         registry = bc.load_registry(bc.WORD_IDS)
