@@ -34,7 +34,7 @@ val featuredVideos = listOf(
     FeaturedVideo(
         title = "Lesson 1: Japanese made easy! The core Japanese sentence",
         by = "Organic Japanese with Cure Dolly",
-        note = "A calm, step-by-step course that builds Japanese from the simplest sentence. Great for simple lessons.",
+        note = "A calm, step-by-step course that builds Japanese from the simplest sentence.",
         levels = setOf(5, 4),
         url = "https://youtu.be/pSvH9vH60Ig",
     ),

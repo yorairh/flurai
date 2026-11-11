@@ -86,7 +86,7 @@ fun MediaScreen(onBack: () -> Unit, onOpen: (Int) -> Unit, viewModel: MediaViewM
                 }
             }
             Text(
-                "Titles whose difficulty suits ${state.level.label}, most popular first.",
+                "Titles with a difficulty close to ${state.level.label}, most popular first. Even easy shows use thousands of words, so open one to see how much you would understand.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

@@ -19,7 +19,7 @@ import javax.inject.Inject
 /** What a card shows. */
 sealed interface CardContent {
     data class Word(val word: WordEntity, val example: SentenceEntity?) : CardContent
-    data class KanaCard(val kana: Kana) : CardContent
+    data class KanaCard(val kana: Kana, val example: WordEntity? = null) : CardContent
 
     /** Text to read aloud: the kana reading, so the speech engine can't misread kanji. */
     val speech: String
@@ -38,7 +38,10 @@ interface CardContentSource {
 /** [CardContentSource] on the content database (words) and the built-in kana table. */
 class DatabaseCardContent @Inject constructor(private val content: ContentDao) : CardContentSource {
     override suspend fun contentFor(item: ItemRef): CardContent? = when (item.itemType) {
-        ItemType.Kana -> KanaData.byId(item.itemId)?.let { CardContent.KanaCard(it) }
+        ItemType.Kana -> KanaData.byId(item.itemId)?.let { kana ->
+            val example = if (kana.script == KanaScript.Hiragana) content.wordStartingWith(kana.kana) else content.loanwordStartingWith(kana.kana)
+            CardContent.KanaCard(kana, example)
+        }
         ItemType.Word -> content.word(item.itemId)?.let { word ->
             CardContent.Word(word, content.sentencesForWord(word.id).firstOrNull())
         }

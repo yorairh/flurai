@@ -56,6 +56,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.flurai.app.core.study.CardContent
 import com.flurai.app.core.study.CurrentCard
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flurai.app.core.quiz.firstGloss
 import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.ui.components.ExampleSentence
 import com.flurai.app.ui.components.SentenceSpeakButton
@@ -181,6 +182,13 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit, 
                     HorizontalDivider()
                     Text(content.kana.romaji, style = MaterialTheme.typography.displayMedium)
                     SpeakButton(onSpeak)
+                    content.example?.let { word ->
+                        Text(
+                            "As in ${word.expression}" + if (word.reading != word.expression) "（${word.reading}）" else "",
+                            style = MaterialTheme.typography.titleMedium.japanese(),
+                        )
+                        Text(firstGloss(word.meanings), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
                 }
             }
             is CardContent.Word -> if (card.item.kind == CardKind.Listening) {

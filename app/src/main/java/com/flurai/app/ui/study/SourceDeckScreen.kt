@@ -33,6 +33,9 @@ import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.study.ItemRef
 import com.flurai.app.core.study.ItemType
 import com.flurai.app.core.study.KanaData
+import com.flurai.app.core.study.KanaScript
+import com.flurai.app.core.study.Kana
+import androidx.compose.foundation.layout.Spacer
 import com.flurai.app.core.study.StudyRepository
 import com.flurai.app.core.study.StudySource
 import com.flurai.app.ui.SourceDeckRoute
@@ -129,7 +132,11 @@ fun SourceDeckScreen(
                     )
                 }
             }
-            items(state.rows, key = { it.key }) { row ->
+            val script = (viewModel.source as? StudySource.KanaDeck)?.script
+            if (script != null) {
+                item { KanaChart(script, started = state.rows.filter { it.started }.map { it.key.toInt() }.toSet()) }
+            }
+            items(if (script != null) emptyList() else state.rows, key = { it.key }) { row ->
                 Card(
                     modifier = Modifier.fillMaxWidth().let { m -> if (row.wordId != null) m.clickable { onOpenWord(row.wordId) } else m },
                     colors = CardDefaults.cardColors(
@@ -146,6 +153,39 @@ fun SourceDeckScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+/** The kana as a chart, a row per consonant; the ones you have started are shaded. */
+@Composable
+private fun KanaChart(script: KanaScript, started: Set<Int>) {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        KanaData.chart(script).forEach { section ->
+            Text(section.title, style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 8.dp))
+            section.rows.forEach { row ->
+                val columns = if (row.size == 1) 5 else row.size
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    row.forEach { kana -> KanaCell(kana, kana != null && kana.id in started, Modifier.weight(1f)) }
+                    repeat(columns - row.size) { Spacer(Modifier.weight(1f)) }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun KanaCell(kana: Kana?, started: Boolean, modifier: Modifier) {
+    if (kana == null) return Spacer(modifier)
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = if (started) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainerLow,
+        ),
+    ) {
+        Column(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(kana.kana, style = MaterialTheme.typography.titleLarge.japanese())
+            Text(kana.romaji, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
