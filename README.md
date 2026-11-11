@@ -10,7 +10,7 @@ FluRai (流) is an Android app for learning Japanese. It teaches vocabulary with
 
 New versions install over the old one and keep your progress. Always download the newest release.
 
-> The project is private. To open the release link you need a GitHub account that has been invited to this repository. If you cannot open it, ask for the APK file to be sent to you directly.
+If you cannot install it, ask for the APK file to be sent to you directly.
 
 ## What you can do
 
