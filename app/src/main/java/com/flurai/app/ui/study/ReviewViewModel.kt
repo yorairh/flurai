@@ -11,6 +11,7 @@ import com.flurai.app.core.auth.uid
 import com.flurai.app.core.profile.StudyProfileRepository
 import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.srs.Rating
+import com.flurai.app.core.study.CardContent
 import com.flurai.app.core.study.CardContentSource
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.SessionState
@@ -87,6 +88,12 @@ class ReviewViewModel @Inject constructor(
 
     fun speakCurrent() {
         _state.value.current?.let { speaker.speak(it.content.speech) }
+    }
+
+    /** The example sentence on the answer side (only shown once the card is revealed). */
+    fun speakExample(slow: Boolean) {
+        val example = (_state.value.current?.content as? CardContent.Word)?.example ?: return
+        speaker.speak(example.japanese, slow)
     }
 
     /** After finishing: keep going with more new words from [from] (default: the same deck). */

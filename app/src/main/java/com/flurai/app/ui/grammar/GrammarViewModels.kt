@@ -14,6 +14,7 @@ import com.flurai.app.core.content.GrammarExampleEntity
 import com.flurai.app.core.content.GrammarPointEntity
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.grammar.GrammarRepository
+import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.grammar.GrammarStatus
 import com.flurai.app.core.grammar.KNOWN_AFTER_CORRECT
 import com.flurai.app.core.grammar.grammarStatus
@@ -93,6 +94,7 @@ class GrammarDetailViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val grammar: GrammarRepository,
     activity: StudyActivityRepository,
+    val speaker: JapaneseSpeaker,
 ) : ViewModel() {
     /** Reading a grammar point counts as study time. */
     val clock = StudyClock(activity, { auth.uid })
@@ -101,8 +103,11 @@ class GrammarDetailViewModel @Inject constructor(
     private val _state = MutableStateFlow(GrammarDetailState())
     val state: StateFlow<GrammarDetailState> = _state
 
+    fun speak(text: String, slow: Boolean) = speaker.speak(text, slow)
+
     init {
         clock.start()
+        speaker.start()
         viewModelScope.launch {
             _state.update { it.copy(point = grammar.point(id), examples = grammar.examples(id)) }
         }

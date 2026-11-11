@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.material3.OutlinedButton
 import com.flurai.app.core.auth.uid
 import com.flurai.app.ui.components.LoadingBox
+import com.flurai.app.ui.components.MissingVoiceBanner
+import com.flurai.app.ui.components.SentenceSpeakButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -81,7 +83,7 @@ class WordDetailViewModel @Inject constructor(
     content: ContentDao,
     private val auth: AuthRepository,
     private val study: StudyRepository,
-    private val speaker: JapaneseSpeaker,
+    val speaker: JapaneseSpeaker,
     private val decks: DeckRepository,
 ) : ViewModel() {
     private val item = ItemRef(ItemType.Word, savedStateHandle.toRoute<WordRoute>().id)
@@ -113,6 +115,8 @@ class WordDetailViewModel @Inject constructor(
     fun speak() {
         _detail.value?.let { speaker.speak(it.word.reading) }
     }
+
+    fun speakSentence(text: String, slow: Boolean) = speaker.speak(text, slow)
 
     private fun withUid(action: suspend (String) -> Unit) {
         val uid = auth.uid ?: return
@@ -148,6 +152,7 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
             // The app Scaffold already pads for the status bar.
             windowInsets = WindowInsets(0),
         )
+        MissingVoiceBanner(viewModel.speaker)
         val d = detail ?: return LoadingBox()
         val word = d.word
         Column(
@@ -192,7 +197,7 @@ fun WordDetailScreen(onBack: () -> Unit, viewModel: WordDetailViewModel = hiltVi
             if (d.sentences.isEmpty()) {
                 Text("No example sentences yet.", color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            d.sentences.forEach { ExampleCard(it) }
+            d.sentences.forEach { ExampleCard(it, onSpeak = { slow -> viewModel.speakSentence(it.japanese, slow) }) }
             Text(
                 "Examples from Tatoeba (CC BY 2.0 FR).",
                 style = MaterialTheme.typography.bodySmall,
@@ -225,14 +230,18 @@ private fun Tag(text: String) {
 }
 
 @Composable
-private fun ExampleCard(sentence: SentenceEntity) {
+private fun ExampleCard(sentence: SentenceEntity, onSpeak: (slow: Boolean) -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(sentence.japanese, style = MaterialTheme.typography.titleMedium.japanese())
-            Text(sentence.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(sentence.japanese, style = MaterialTheme.typography.titleMedium.japanese())
+                Text(sentence.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Spacer(Modifier.width(8.dp))
+            SentenceSpeakButton(onSpeak = onSpeak)
         }
     }
 }

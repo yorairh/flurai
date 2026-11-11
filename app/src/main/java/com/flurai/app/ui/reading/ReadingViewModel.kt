@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.profile.StudyProfileRepository
+import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.reading.Lexicon
 import com.flurai.app.core.reading.ReadingRepository
 import com.flurai.app.core.reading.Token
@@ -44,6 +45,7 @@ class ReadingViewModel @Inject constructor(
     private val settings: SettingsRepository,
     private val study: StudyRepository,
     activity: StudyActivityRepository,
+    val speaker: JapaneseSpeaker,
 ) : ViewModel() {
     private val _state = MutableStateFlow(ReadingUiState())
     val state: StateFlow<ReadingUiState> = _state
@@ -53,6 +55,7 @@ class ReadingViewModel @Inject constructor(
 
     init {
         clock.start()
+        speaker.start()
         viewModelScope.launch {
             val uid = auth.uid
             val start = uid?.let { profiles.profile(it).first()?.level?.jlpt } ?: 5
@@ -87,6 +90,12 @@ class ReadingViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    /** Reads a whole sentence aloud (a tap on the page keeps the study clock going). */
+    fun speak(text: String, slow: Boolean) {
+        clock.tap()
+        speaker.speak(text, slow)
     }
 
     fun toggleTranslations() {
