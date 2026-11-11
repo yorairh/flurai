@@ -81,10 +81,8 @@ fun ProgressScreen(
             item { SectionHeader("漢字", "Kanji", "Kanji that appear in words you know.") }
             item { KanjiCard(snapshot.kanji) }
 
-            item { SectionHeader("文法", "Grammar") }
-            item {
-                InfoCard("Grammar progress will show up here once grammar lessons arrive.")
-            }
+            item { SectionHeader("文法", "Grammar", "Grammar points you answered right three times, with the latest answer right.") }
+            item { GrammarCard(snapshot.vocab) }
 
             item { SectionHeader("弱点", "Improve now", "Words you've forgotten before, worst first.") }
             if (snapshot.weak.isEmpty()) {
@@ -137,8 +135,9 @@ private fun LevelCard(snapshot: ProgressSnapshot) {
                 Text("Next goal: ${goal.label}", style = MaterialTheme.typography.titleMedium)
                 LinearProgressIndicator(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
                 Text(
-                    "You know ${(estimate.goalFraction * 100).roundToInt()}% of ${goal.label} words. " +
-                        "Reach ${(KnowledgeRules.LEVEL_PASSED_FRACTION * 100).roundToInt()}% to level up.",
+                    "You know ${(estimate.goalWords * 100).roundToInt()}% of ${goal.label} words and " +
+                        "${(estimate.goalGrammar * 100).roundToInt()}% of its grammar. " +
+                        "Reach ${(KnowledgeRules.LEVEL_PASSED_FRACTION * 100).roundToInt()}% of both, or pass the ${goal.label} checkpoint, to level up.",
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -147,8 +146,7 @@ private fun LevelCard(snapshot: ProgressSnapshot) {
                 style = MaterialTheme.typography.bodySmall,
             )
             Text(
-                "This starts from the level you chose and moves up as you learn the next level's words. " +
-                    "Tests will refine it later.",
+                "Your level comes from what you know and the checkpoints you passed, not from the level you study from.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f),
             )
@@ -184,12 +182,12 @@ private fun VocabRow(level: LevelProgress) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("N${level.jlpt}", style = MaterialTheme.typography.titleMedium)
-                if (level.assumed) {
+                if (level.checkpointPassed) {
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "assumed (your starting level)",
+                        "checkpoint passed",
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = MaterialTheme.colorScheme.tertiary,
                     )
                 }
                 Spacer(Modifier.weight(1f))
@@ -239,6 +237,28 @@ private fun KanjiCard(kanji: List<KanjiProgress>) {
                     )
                     Text(
                         "${level.known} / ${level.total}",
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = Modifier.width(76.dp).padding(start = 8.dp),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun GrammarCard(levels: List<LevelProgress>) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            levels.forEach { level ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("N${level.jlpt}", style = MaterialTheme.typography.titleSmall, modifier = Modifier.width(40.dp))
+                    LinearProgressIndicator(progress = { level.grammarFraction.toFloat() }, modifier = Modifier.weight(1f))
+                    Text(
+                        "${level.grammarKnown} / ${level.grammarTotal}",
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.width(76.dp).padding(start = 8.dp),
                     )

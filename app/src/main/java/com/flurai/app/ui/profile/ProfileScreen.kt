@@ -125,7 +125,7 @@ private fun AccountCard(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
-            InfoRow("Level", profile.level.label)
+            InfoRow("Studying from", profile.level.label)
             InfoRow("Daily goal", "${profile.dailyMinutes} minutes")
             InfoRow("New words per day", profile.newCardsPerDay.toString())
             Button(onClick = onEditProfile, modifier = Modifier.fillMaxWidth()) {

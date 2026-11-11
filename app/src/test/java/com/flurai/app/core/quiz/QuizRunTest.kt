@@ -29,7 +29,7 @@ class QuizRunTest {
         override suspend fun questions(uid: String, kind: QuizKind, profileLevel: JlptLevel, stageLevel: Int): List<Question> {
             if (kind != QuizKind.Placement) return questions
             stagesAsked += stageLevel
-            return (0 until 5).map { question(100 * stageLevel + it, level = stageLevel) }
+            return (0 until 6).map { question(100 * stageLevel + it, level = stageLevel) }
         }
 
         override suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long) { grammar += Triple(grammarId, correct, at) }
@@ -214,54 +214,57 @@ class QuizRunTest {
     // -- the placement test ----------------------------------------------------------------------------
 
     @Test
-    fun answeringEverythingRightClimbsFromN4ToN1() = runTest {
+    fun answeringEverythingRightClimbsFromN5ToN1() = runTest {
         val run = run(QuizKind.Placement)
         run.start()
         assertNull(run.state.value.total) // the length is not known in advance
 
-        repeat(20) { run.answer(true) }
+        repeat(30) { run.answer(true) }
 
-        assertEquals(listOf(4, 3, 2, 1), backend.stagesAsked)
+        assertEquals(listOf(5, 4, 3, 2, 1), backend.stagesAsked)
         assertEquals(JlptLevel.N1, run.state.value.result!!.placementLevel)
         assertEquals(1, backend.saved.single().level)
         assertEquals(TestType.Placement, backend.saved.single().type)
     }
 
     @Test
-    fun answeringEverythingWrongEndsAtBeginner() = runTest {
+    fun failingN5EndsAtBeginnerAfterOneStage() = runTest {
         val run = run(QuizKind.Placement)
         run.start()
 
-        repeat(10) { run.answer(false) }
+        repeat(6) { run.answer(false) }
 
-        assertEquals(listOf(4, 5), backend.stagesAsked)
+        assertEquals(listOf(5), backend.stagesAsked)
         assertEquals(JlptLevel.Beginner, run.state.value.result!!.placementLevel)
         assertEquals(0, backend.saved.single().level)
     }
 
     @Test
-    fun passingN4ButFailingN3PlacesTheLearnerAtN4() = runTest {
+    fun passingN5AndN4ButFailingN3PlacesTheLearnerAtN4() = runTest {
         val run = run(QuizKind.Placement)
         run.start()
 
-        repeat(5) { run.answer(true) }
+        repeat(12) { run.answer(true) }
         assertFalse(run.state.value.loading)
         assertEquals(3, run.state.value.question!!.level)
-        repeat(5) { run.answer(false) }
+        repeat(6) { run.answer(false) }
 
         assertEquals(JlptLevel.N4, run.state.value.result!!.placementLevel)
-        assertEquals(listOf(4, 3), backend.stagesAsked)
+        assertEquals(listOf(5, 4, 3), backend.stagesAsked)
     }
 
     @Test
-    fun thePlacementLevelCanBeAdoptedAsTheStudyLevel() = runTest {
+    fun aPlacementResultOnlyChangesTheProfileWhenTheLearnerChoosesToStudyFromIt() = runTest {
         val run = run(QuizKind.Placement)
         run.start()
-        repeat(10) { run.answer(it < 5) }
+        repeat(12) { run.answer(it < 6) } // N5 passed, N4 failed: the suggestion is N5
+
+        assertEquals(JlptLevel.N5, run.state.value.result!!.placementLevel)
+        assertNull(backend.savedProfile) // finishing the test changes nothing
 
         run.applyPlacementLevel()
 
-        assertEquals(JlptLevel.N4, backend.savedProfile!!.level)
+        assertEquals(profile.copy(level = JlptLevel.N5), backend.savedProfile)
         assertTrue(run.state.value.result!!.levelApplied)
     }
 

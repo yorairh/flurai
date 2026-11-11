@@ -108,12 +108,14 @@ fun kanjiQuestion(kanji: KanjiEntity, pool: List<KanjiEntity>, random: Random): 
 }
 
 /**
- * Adaptive placement: five vocabulary questions per level, starting at N4. Four right passes a
- * level and moves up to the next harder one; fewer moves down. It stops when the next step would
- * revisit a level that was already tested, so the result is the hardest level passed.
+ * Adaptive placement: from N5 upward, [perStage] questions per level; [passAt] right passes the
+ * level and moves on to the next harder one, anything less stops the test. The result is the
+ * hardest level passed, or Beginner when even N5 was too hard. It only suggests where to start:
+ * a level counts for the learner's estimate once its checkpoint is passed or its words and
+ * grammar are known.
  */
-class PlacementTest(private val perStage: Int = 5, private val passAt: Int = 4, start: Int = 4) {
-    private val scores = mutableMapOf<Int, Int>()
+class PlacementTest(private val perStage: Int = 6, private val passAt: Int = 5, start: Int = 5) {
+    private val passed = mutableSetOf<Int>()
     private var asked = 0
     private var correct = 0
 
@@ -128,16 +130,16 @@ class PlacementTest(private val perStage: Int = 5, private val passAt: Int = 4, 
         asked++
         if (isCorrect) correct++
         if (asked < perStage) return
-        scores[level] = correct
-        val next = if (correct >= passAt) level - 1 else level + 1
+        val passedStage = correct >= passAt
+        if (passedStage) passed += level
         asked = 0
         correct = 0
-        if (next !in 1..5 || next in scores) finished = true else level = next
+        if (passedStage && level > 1) level-- else finished = true
     }
 
     /** Hardest level passed, or Beginner when even N5 was too hard. */
     val result: JlptLevel
-        get() = scores.filterValues { it >= passAt }.keys.minOrNull()?.let { JlptLevel.ofJlpt(it) } ?: JlptLevel.Beginner
+        get() = passed.minOrNull()?.let { JlptLevel.ofJlpt(it) } ?: JlptLevel.Beginner
 }
 
 /** How a finished checkpoint or placement counts toward the level estimate. */

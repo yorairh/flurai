@@ -39,7 +39,7 @@ class ProgressViewModel @Inject constructor(
         if (user == null) return@flatMapLatest emptyFlow()
         profiles.profile(user.uid).filterNotNull().flatMapLatest { profile ->
             combine(
-                progress.snapshot(user.uid, profile.level),
+                progress.snapshot(user.uid),
                 study.dueCount(user.uid),
                 study.introducedToday(user.uid),
                 study.unstartedCount(user.uid),

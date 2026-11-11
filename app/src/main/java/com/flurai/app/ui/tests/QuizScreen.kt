@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.quiz.Question
 import com.flurai.app.core.quiz.QuizResult
 import com.flurai.app.core.quiz.QuizRunState
@@ -46,7 +47,7 @@ private val WrongRed = Color(0xFFD9483B)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuizScreen(onBack: () -> Unit, viewModel: QuizViewModel = hiltViewModel()) {
+fun QuizScreen(onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit, viewModel: QuizViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     StudyClockEffects(onResume = viewModel::onResume, onPause = viewModel::onPause)
 
@@ -57,7 +58,7 @@ fun QuizScreen(onBack: () -> Unit, viewModel: QuizViewModel = hiltViewModel()) {
         when {
             state.error != null -> Message(state.error.orEmpty(), onBack)
             state.loading -> LoadingBox()
-            result != null -> ResultView(result, viewModel, onBack)
+            result != null -> ResultView(result, viewModel, onBack, onTakeCheckpoint)
             question != null -> QuestionView(state, question, viewModel::choose, viewModel::next, viewModel::replay)
         }
     }
@@ -161,7 +162,7 @@ private fun OptionButton(option: String, index: Int, question: Question, selecte
 }
 
 @Composable
-private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () -> Unit) {
+private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit) {
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -177,19 +178,29 @@ private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () 
             )
         }
         result.placementLevel?.let { level ->
-            Text("Your level looks like ${level.label}.", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
             Text(
-                "Your progress estimate now starts from here.",
+                if (level == JlptLevel.Beginner) "A good place to start: the basics." else "A good place to start: ${level.label}.",
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                "This is a suggestion and does not change your level. Your level goes up when you pass a level checkpoint, " +
+                    "or know 80% of a level's words and grammar.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
             )
+            level.jlpt?.let { jlpt ->
+                Button(onClick = { onTakeCheckpoint(jlpt) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Take the ${level.label} checkpoint")
+                }
+            }
             if (level != result.currentLevel) {
                 if (result.levelApplied) {
-                    Text("Study level set to ${level.label}.", color = MaterialTheme.colorScheme.primary)
+                    Text("Words now come from ${level.label}.", color = MaterialTheme.colorScheme.primary)
                 } else {
-                    Button(onClick = viewModel::applyPlacementLevel, modifier = Modifier.fillMaxWidth()) {
-                        Text("Set my study level to ${level.label}")
+                    OutlinedButton(onClick = viewModel::applyPlacementLevel, modifier = Modifier.fillMaxWidth()) {
+                        Text("Study new words from ${level.label}")
                     }
                 }
             }

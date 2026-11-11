@@ -32,30 +32,43 @@ fun CardEntity.knowledge(): Knowledge = when {
 }
 
 /**
- * The learner's level and next goal. [goalFraction] is the share of the goal level's words that
- * count as known (1.0 when there is no higher level).
+ * What is known about one JLPT level: the share of its words and of its grammar points the learner
+ * knows, and whether they passed its checkpoint test.
  */
-data class LevelEstimate(val current: JlptLevel, val goal: JlptLevel?, val goalFraction: Double) {
-    /** Progress toward passing the goal level, 0..1. */
-    val goalProgress: Float
-        get() = (goalFraction / KnowledgeRules.LEVEL_PASSED_FRACTION).coerceIn(0.0, 1.0).toFloat()
+data class LevelEvidence(val jlpt: Int, val words: Double, val grammar: Double, val checkpointPassed: Boolean) {
+    /** Enough of the level is known from studying: both words and grammar reach the pass share. */
+    val studied: Boolean get() = words >= KnowledgeRules.LEVEL_PASSED_FRACTION && grammar >= KnowledgeRules.LEVEL_PASSED_FRACTION
 }
 
 /**
- * Estimates the level from vocabulary coverage ([fractions]: JLPT number → share of words known).
- * It starts from the level the learner chose (that level and everything below it counts as already
- * reached) and moves up one level at a time while the next level's words are known well enough.
- * Tests will refine this later; until then the estimate can only go up from the chosen start.
+ * The learner's level and next goal. [goalWords] and [goalGrammar] are the shares of the goal
+ * level's words and grammar points that count as known.
  */
-fun estimateLevel(fractions: Map<Int, Double>, start: JlptLevel): LevelEstimate {
-    fun effective(level: JlptLevel): Double {
-        val jlpt = level.jlpt ?: return 1.0
-        return if (level.ordinal <= start.ordinal) 1.0 else fractions[jlpt] ?: 0.0
-    }
+data class LevelEstimate(
+    val current: JlptLevel,
+    val goal: JlptLevel?,
+    val goalWords: Double,
+    val goalGrammar: Double,
+) {
+    /** Progress toward passing the goal level by studying, 0..1: the weaker of words and grammar. */
+    val goalProgress: Float
+        get() = (minOf(goalWords, goalGrammar) / KnowledgeRules.LEVEL_PASSED_FRACTION).coerceIn(0.0, 1.0).toFloat()
+}
+
+/**
+ * The level the evidence supports, climbing one level at a time from Beginner. A level is reached
+ * when its checkpoint was passed (a passed harder checkpoint covers the easier levels too), or when
+ * at least [KnowledgeRules.LEVEL_PASSED_FRACTION] of both its words and its grammar points are
+ * known. What the learner chose at sign-up, or a placement result, is not evidence: placement only
+ * suggests where to start.
+ */
+fun estimateLevel(evidence: Map<Int, LevelEvidence>): LevelEstimate {
+    val levels = JlptLevel.entries.drop(1)
+    val hardestCheckpoint = levels.filter { evidence[it.jlpt]?.checkpointPassed == true }.maxOfOrNull { it.ordinal } ?: 0
+    fun reached(level: JlptLevel) = level.ordinal <= hardestCheckpoint || evidence[level.jlpt]?.studied == true
     var current = JlptLevel.Beginner
-    for (level in JlptLevel.entries.drop(1)) {
-        if (effective(level) >= KnowledgeRules.LEVEL_PASSED_FRACTION) current = level else break
-    }
+    for (level in levels) if (reached(level)) current = level else break
     val goal = current.next()
-    return LevelEstimate(current, goal, goal?.let(::effective) ?: 1.0)
+    val goalEvidence = goal?.let { evidence[it.jlpt] }
+    return LevelEstimate(current, goal, goalEvidence?.words ?: if (goal == null) 1.0 else 0.0, goalEvidence?.grammar ?: if (goal == null) 1.0 else 0.0)
 }

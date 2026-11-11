@@ -122,6 +122,7 @@ class GrammarRepository @Inject constructor(
         pointId: Int?,
         count: Int = 10,
         random: Random = Random,
+        favorUnknown: Boolean = true,
     ): List<Question> {
         val points = content.allGrammarPoints()
         val byId = points.associateBy { it.id }
@@ -133,11 +134,12 @@ class GrammarRepository @Inject constructor(
         } else {
             val status = HashMap<Int, GrammarStatus>()
             levelExamples.map { it.grammarId }.distinct().forEach { status[it] = grammarStatus(progress.get(uid, it)) }
-            // Points that are not Known yet first (random within each group).
+            // Points that are not Known yet first (random within each group), unless the test must cover the whole level.
             val (open, known) = levelExamples.shuffled(random).partition { status[it.grammarId] != GrammarStatus.Known }
-            (open + known).distinctBy { it.grammarId }.take(count)
+            (if (favorUnknown) open + known else levelExamples.shuffled(random)).distinctBy { it.grammarId }
         }
-        return chosen.mapNotNull { e -> byId[e.grammarId]?.let { grammarQuestion(it, e, pool, random) } }
+        val questions = chosen.mapNotNull { e -> byId[e.grammarId]?.let { grammarQuestion(it, e, pool, random) } }
+        return if (pointId == null) questions.take(count) else questions
     }
 
     suspend fun record(uid: String, grammarId: Int, correct: Boolean, at: Long) {

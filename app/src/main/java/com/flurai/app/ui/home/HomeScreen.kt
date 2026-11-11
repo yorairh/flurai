@@ -116,7 +116,7 @@ private fun WelcomeCard(user: AuthUser, profile: StudyProfile, returning: Boolea
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Pill(profile.level.label)
+                    Pill("Studying ${profile.level.label}")
                     Pill("${profile.dailyMinutes} min/day")
                     Pill("${profile.newCardsPerDay} new/day")
                 }
@@ -196,7 +196,7 @@ private fun LevelCard(snapshot: ProgressSnapshot, onClick: () -> Unit) {
             estimate.goal?.let { goal ->
                 LinearProgressIndicator(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
                 Text(
-                    "${(estimate.goalFraction * 100).roundToInt()}% of ${goal.label} words known",
+                    "${goal.label}: ${(estimate.goalWords * 100).roundToInt()}% of words, ${(estimate.goalGrammar * 100).roundToInt()}% of grammar known",
                     style = MaterialTheme.typography.bodySmall,
                 )
             }

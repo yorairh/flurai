@@ -1,7 +1,9 @@
 package com.flurai.app.core.knowledge
 
 import com.flurai.app.core.content.WordEntity
-import com.flurai.app.core.model.JlptLevel
+import com.flurai.app.core.grammar.GrammarProgressEntity
+import com.flurai.app.core.grammar.GrammarStatus
+import com.flurai.app.core.grammar.grammarStatus
 import com.flurai.app.core.srs.FsrsScheduler
 import com.flurai.app.core.srs.SrsState
 import com.flurai.app.core.study.CardEntity
@@ -21,9 +23,12 @@ class Catalog(
     val words: Map<Int, WordEntity>,
     /** Kanji literal → JLPT number. */
     val kanjiLevels: Map<String, Int>,
+    /** Grammar point id → JLPT number. */
+    val grammarLevels: Map<Int, Int> = emptyMap(),
 ) {
     val wordsPerLevel: Map<Int, Int> = words.values.groupingBy { it.jlpt }.eachCount()
     val kanjiPerLevel: Map<Int, Int> = kanjiLevels.values.groupingBy { it }.eachCount()
+    val grammarPerLevel: Map<Int, Int> = grammarLevels.values.groupingBy { it }.eachCount()
 }
 
 data class LevelProgress(
@@ -32,11 +37,15 @@ data class LevelProgress(
     val mature: Int,
     val known: Int,
     val learning: Int,
-    /** True for the learner's starting level and below: counted as reached in the estimate. */
-    val assumed: Boolean,
+    /** Grammar points of the level, and how many of them are known (see `grammarStatus`). */
+    val grammarTotal: Int,
+    val grammarKnown: Int,
+    /** The level's checkpoint test was passed. */
+    val checkpointPassed: Boolean,
 ) {
     val knownCount: Int get() = known + mature
     val fraction: Double get() = if (total == 0) 0.0 else knownCount.toDouble() / total
+    val grammarFraction: Double get() = if (grammarTotal == 0) 0.0 else grammarKnown.toDouble() / grammarTotal
 }
 
 /** Kanji of a level that appear in at least one known word. */
@@ -59,11 +68,15 @@ data class ProgressSnapshot(
 
 private val scheduler = FsrsScheduler(fuzz = null)
 
-/** What the dashboard shows, computed from the learner's cards. Pure, so it is easy to test. */
+/**
+ * What the dashboard shows, computed from the learner's cards, their grammar answers and the
+ * checkpoints they passed ([passedCheckpoints]: JLPT numbers). Pure, so it is easy to test.
+ */
 fun computeProgress(
     cards: List<CardEntity>,
     catalog: Catalog,
-    start: JlptLevel,
+    grammar: List<GrammarProgressEntity>,
+    passedCheckpoints: Set<Int>,
     now: Instant,
     zone: ZoneId = ZoneId.systemDefault(),
 ): ProgressSnapshot {
@@ -83,6 +96,8 @@ fun computeProgress(
         }
         counts.getOrPut(jlpt) { IntArray(3) }[slot]++
     }
+    val knownGrammar = grammar.filter { grammarStatus(it) == GrammarStatus.Known }.mapNotNull { catalog.grammarLevels[it.grammarId] }
+        .groupingBy { it }.eachCount()
     val vocab = (5 downTo 1).map { jlpt ->
         val c = counts[jlpt] ?: IntArray(3)
         LevelProgress(
@@ -91,7 +106,9 @@ fun computeProgress(
             mature = c[2],
             known = c[1],
             learning = c[0],
-            assumed = (JlptLevel.ofJlpt(jlpt)?.ordinal ?: 0) <= start.ordinal,
+            grammarTotal = catalog.grammarPerLevel[jlpt] ?: 0,
+            grammarKnown = knownGrammar[jlpt] ?: 0,
+            checkpointPassed = jlpt in passedCheckpoints,
         )
     }
 
@@ -125,7 +142,7 @@ fun computeProgress(
     return ProgressSnapshot(
         vocab = vocab,
         kanji = kanji,
-        estimate = estimateLevel(vocab.associate { it.jlpt to it.fraction }, start),
+        estimate = estimateLevel(vocab.associate { it.jlpt to LevelEvidence(it.jlpt, it.fraction, it.grammarFraction, it.checkpointPassed) }),
         weak = weak,
         forecast = forecast(cards, now, zone),
         studiedWords = knowledgeByWord.values.count { it != Knowledge.Unseen },
