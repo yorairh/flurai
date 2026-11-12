@@ -140,6 +140,25 @@ class SyncEngineTest {
     }
 
     @Test
+    fun aLessonMarkedLearnedReachesTheOtherPhoneAndKeepsLaterAnswers() {
+        val a = Phone()
+        val b = Phone()
+        a.local.grammarRows += GrammarProgressEntity(UID, 526, 0, 0, false, 1_000) // learned, not practiced yet
+        a.sync()
+        b.sync()
+        assertEquals(a.local.grammarRows, b.local.grammarRows)
+
+        // Practiced on B afterwards: the answers win over A's bare "learned" row.
+        b.now = 20_000
+        b.local.grammarRows[0] = GrammarProgressEntity(UID, 526, 1, 0, true, 21_000)
+        b.now = 30_000
+        b.sync()
+        a.now = 40_000
+        a.sync()
+        assertEquals(1, a.local.grammarRows.single().correct)
+    }
+
+    @Test
     fun grammarProgressMadeBetweenTwoSyncsIsUploadedToo() {
         val a = Phone()
         a.local.grammarRows += GrammarProgressEntity(UID, 7, 1, 0, true, 1_000)

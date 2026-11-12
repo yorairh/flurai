@@ -18,6 +18,8 @@ import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.grammar.GrammarStatus
 import com.flurai.app.core.grammar.KNOWN_AFTER_CORRECT
 import com.flurai.app.core.grammar.grammarStatus
+import com.flurai.app.core.grammar.lessonOrder
+import com.flurai.app.core.grammar.nextLesson
 import com.flurai.app.ui.GrammarRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,9 +36,16 @@ import javax.inject.Inject
 
 data class PointItem(val point: GrammarPointEntity, val status: GrammarStatus)
 
+/** One level's points in lesson order. */
 data class GrammarLevel(val jlpt: Int, val points: List<PointItem>) {
     val known: Int get() = points.count { it.status == GrammarStatus.Known }
     val learning: Int get() = points.count { it.status == GrammarStatus.Learning }
+
+    /** Points the learner has started: what practice asks about. */
+    val started: Int get() = known + learning
+
+    /** The lesson to take next: the first point not started yet. Null when every point is. */
+    val next: GrammarPointEntity? get() = points.firstOrNull { it.status == GrammarStatus.New }?.point
 }
 
 data class GrammarListState(val levels: List<GrammarLevel> = emptyList())
@@ -73,7 +82,7 @@ class GrammarListViewModel @Inject constructor(
         combine(grammar.points(), progress) { points, progress ->
             val byId = progress.associateBy { it.grammarId }
             GrammarListState(
-                levels = points.groupBy { it.jlpt }.toSortedMap(compareByDescending { it }).map { (jlpt, list) ->
+                levels = lessonOrder(points).groupBy { it.jlpt }.map { (jlpt, list) ->
                     GrammarLevel(jlpt, list.map { PointItem(it, grammarStatus(byId[it.id])) })
                 },
             )
@@ -85,6 +94,10 @@ data class GrammarDetailState(
     val point: GrammarPointEntity? = null,
     val examples: List<GrammarExampleEntity> = emptyList(),
     val progressText: String? = null,
+    /** Null until the learner's progress is read. */
+    val status: GrammarStatus? = null,
+    /** The next lesson of this level that is not started yet (never this point). */
+    val next: GrammarPointEntity? = null,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -113,16 +126,32 @@ class GrammarDetailViewModel @Inject constructor(
         }
         viewModelScope.launch {
             val uid = auth.uid ?: return@launch
-            grammar.progress(uid).collect { all ->
-                _state.update { it.copy(progressText = progressText(all.firstOrNull { p -> p.grammarId == id })) }
+            combine(grammar.points(), grammar.progress(uid)) { points, all ->
+                val mine = all.firstOrNull { p -> p.grammarId == id }
+                val jlpt = points.firstOrNull { it.id == id }?.jlpt
+                val next = jlpt?.let { nextLesson(points, all.mapTo(HashSet()) { p -> p.grammarId } + id, it) }
+                mine to next
+            }.collect { (mine, next) ->
+                _state.update { it.copy(progressText = progressText(mine), status = grammarStatus(mine), next = next) }
             }
         }
     }
 
+    /** "I've learned this": the point joins the learner's practice. */
+    fun markLearned() {
+        val uid = auth.uid ?: return
+        clock.tap()
+        viewModelScope.launch { grammar.markLearned(uid, id, System.currentTimeMillis()) }
+    }
+
     private fun progressText(progress: GrammarProgressEntity?): String? = when (grammarStatus(progress)) {
-        GrammarStatus.New -> "Not practiced yet."
+        GrammarStatus.New -> "Not learned yet. Read the lesson, then mark it learned or try a question: it joins your practice."
         GrammarStatus.Learning ->
-            "${progress?.correct ?: 0} right, ${progress?.wrong ?: 0} wrong so far. Answer $KNOWN_AFTER_CORRECT right (the latest one included) to mark it known."
+            if ((progress?.correct ?: 0) + (progress?.wrong ?: 0) == 0) {
+                "Learned. It is in your practice now: answer $KNOWN_AFTER_CORRECT right to make it known."
+            } else {
+                "Learned: ${progress?.correct ?: 0} right, ${progress?.wrong ?: 0} wrong in practice. Answer $KNOWN_AFTER_CORRECT right (the latest one included) to make it known."
+            }
         GrammarStatus.Known -> "Known: ${progress?.correct ?: 0} right answers."
     }
 }
