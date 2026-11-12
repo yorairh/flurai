@@ -7,6 +7,10 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import kotlin.random.Random
 
 class GrammarTest {
@@ -33,6 +37,59 @@ class GrammarTest {
         assertEquals(GrammarStatus.Learning, grammarStatus(p))
         assertEquals(3, p.correct)
         assertEquals(1, p.wrong)
+    }
+
+    @Test
+    fun markingALessonLearnedStartsThePointWithoutAnyAnswer() {
+        val started = startedGrammar("u", 1, 5)
+        assertEquals(GrammarStatus.Learning, grammarStatus(started))
+        assertEquals(0, started.correct + started.wrong)
+        // Practice then counts on top of it.
+        val known = started.afterAnswer("u", 1, true, 6).afterAnswer("u", 1, true, 7).afterAnswer("u", 1, true, 8)
+        assertEquals(GrammarStatus.Known, grammarStatus(known))
+    }
+
+    @Test
+    fun n5LessonsStartWithDesuAndCoverEveryPointOnce() {
+        val file = generateSequence(java.io.File("").absoluteFile) { it.parentFile }
+            .map { java.io.File(it, "tools/content/grammar.json") }.first { it.exists() }
+        val n5 = kotlinx.serialization.json.Json.parseToJsonElement(file.readText()).jsonArray
+            .map { it.jsonObject }.filter { it["jlpt"]!!.jsonPrimitive.int == 5 }.map { it["id"]!!.jsonPrimitive.int }
+        assertEquals(n5.sorted(), N5_LESSON_ORDER.sorted())
+        assertEquals(526, N5_LESSON_ORDER.first()) // です before the particles
+    }
+
+    @Test
+    fun lessonsGoEasiestLevelFirstAndUnlistedPointsById() {
+        fun p(id: Int, jlpt: Int) = GrammarPointEntity(id, jlpt, "p$id", "t", "m", "f", "e")
+        val points = listOf(p(402, 4), p(501, 5), p(401, 4), p(526, 5), p(590, 5))
+        assertEquals(listOf(526, 501, 590, 401, 402), lessonOrder(points).map { it.id })
+        assertEquals(526, nextLesson(points, emptySet(), 5)?.id)
+        assertEquals(590, nextLesson(points, setOf(526, 501), 5)?.id)
+        assertEquals(401, nextLesson(points, setOf(526), 4)?.id)
+        assertNull(nextLesson(points, setOf(526, 501, 590), 5))
+    }
+
+    @Test
+    fun practiceAsksOnlyAboutLearnedPoints() {
+        val examples = (1..6).flatMap { id -> listOf(example(id, "a$id", "x"), example(id, "b$id", "y")) }
+        val status = mapOf(1 to GrammarStatus.Known, 2 to GrammarStatus.Learning, 3 to GrammarStatus.Learning)
+        repeat(10) { seed ->
+            val chosen = practiceExamples(examples, status, learnedOnly = true, favorUnknown = true, random = Random(seed))
+            assertEquals(setOf(1, 2, 3), chosen.map { it.grammarId }.toSet())
+            // One sentence per point first, the points still being learned before the known one; then the other sentences.
+            assertEquals(setOf(2, 3), chosen.take(2).map { it.grammarId }.toSet())
+            assertEquals(1, chosen[2].grammarId)
+            assertEquals(6, chosen.size)
+        }
+        assertTrue(practiceExamples(examples, emptyMap(), learnedOnly = true, favorUnknown = true, random = Random(1)).isEmpty())
+    }
+
+    @Test
+    fun aTestCoversTheWholeLevel() {
+        val examples = (1..6).map { id -> example(id, "a$id", "x") }
+        val chosen = practiceExamples(examples, mapOf(1 to GrammarStatus.Learning), learnedOnly = false, favorUnknown = false, random = Random(1))
+        assertEquals((1..6).toSet(), chosen.map { it.grammarId }.toSet())
     }
 
     @Test

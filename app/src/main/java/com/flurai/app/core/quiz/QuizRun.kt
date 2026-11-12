@@ -36,7 +36,7 @@ sealed class QuizKind(
     /** Hear a word and pick its meaning. */
     data object Listening : QuizKind(TestType.Listening)
 
-    /** Fill-in-the-blank grammar practice for one level, or one point when [pointId] is not 0. */
+    /** Fill-in-the-blank grammar practice over the points of one level the learner has started, or one point when [pointId] is not 0. */
     data class Grammar(override val jlpt: Int, val pointId: Int = 0) : QuizKind(TestType.Grammar)
 
     /** "What does this sentence mean?" over Tatoeba sentences of one level. */
@@ -123,7 +123,7 @@ class RepositoryQuizBackend @Inject constructor(
         QuizKind.Quick -> quizzes.quick(uid, profileLevel)
         QuizKind.Listening -> quizzes.listening(uid, profileLevel)
         is QuizKind.Reading -> reading.questions(kind.jlpt)
-        is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 })
+        is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 }, learnedOnly = true)
     }
 
     override suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long) = grammar.record(uid, grammarId, correct, at)

@@ -46,7 +46,7 @@ import com.flurai.app.core.grammar.GrammarStatus
 import com.flurai.app.ui.components.SectionHeader
 import com.flurai.app.ui.theme.japanese
 
-/** All grammar points grouped by level, with how well each is known. */
+/** One level's grammar: the next lesson to take, practice of what was learned, and every point in lesson order. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GrammarListScreen(
@@ -76,14 +76,34 @@ fun GrammarListScreen(
                         SectionHeader(
                             "N${level.jlpt}",
                             "N${level.jlpt} grammar",
-                            "${level.known} of ${level.points.size} known · ${level.learning} in progress",
+                            "${level.started} of ${level.points.size} learned · ${level.known} known",
                         )
                     }
                 }
+                item(key = "next-${level.jlpt}") { NextLessonCard(level, onOpenPoint) }
                 item(key = "practice-${level.jlpt}") {
-                    OutlinedButton(onClick = { onPractice(level.jlpt) }, modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
-                        Text("Practice N${level.jlpt} grammar")
+                    // Practice only asks about lessons the learner has taken.
+                    OutlinedButton(
+                        onClick = { onPractice(level.jlpt) },
+                        enabled = level.started > 0,
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+                    ) {
+                        Text(
+                            when (level.started) {
+                                0 -> "Practice opens after your first lesson"
+                                1 -> "Practice what you learned (1 point)"
+                                else -> "Practice what you learned (${level.started} points)"
+                            },
+                        )
                     }
+                }
+                item(key = "all-${level.jlpt}") {
+                    Text(
+                        "All lessons, in order",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 10.dp, bottom = 6.dp),
+                    )
                 }
                 // The rows of one level look like a single card: round only the first and last.
                 itemsIndexed(level.points, key = { _, item -> item.point.id }) { index, item ->
@@ -111,6 +131,36 @@ fun GrammarListScreen(
                 )
             }
         }
+        }
+    }
+}
+
+/** The lesson to take now, so the learner goes through a level one point at a time. */
+@Composable
+private fun NextLessonCard(level: GrammarLevel, onOpenPoint: (Int) -> Unit) {
+    val next = level.next
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            if (next == null) {
+                Text("Every N${level.jlpt} lesson learned", style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(4.dp))
+                Text("Keep practicing until each point is known.", style = MaterialTheme.typography.bodyMedium)
+            } else {
+                Text(
+                    if (level.started == 0) "Start here" else "Next lesson · ${level.started + 1} of ${level.points.size}",
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(next.pattern, style = MaterialTheme.typography.headlineSmall.japanese())
+                Text(next.meaning, style = MaterialTheme.typography.bodyMedium)
+                Spacer(Modifier.height(12.dp))
+                Button(onClick = { onOpenPoint(next.id) }, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (level.started == 0) "Start the first lesson" else "Learn this")
+                }
+            }
         }
     }
 }
@@ -143,6 +193,7 @@ private fun PointRow(point: GrammarPointEntity, status: GrammarStatus, onClick: 
 fun GrammarDetailScreen(
     onBack: () -> Unit,
     onPractice: (jlpt: Int, pointId: Int) -> Unit,
+    onNextLesson: (pointId: Int) -> Unit,
     viewModel: GrammarDetailViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -187,10 +238,29 @@ fun GrammarDetailScreen(
             state.progressText?.let {
                 Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Button(
-                onClick = { onPractice(point.jlpt, point.id) },
-                modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Practice this point") }
+            val next = state.next
+            when (state.status) {
+                null -> {}
+                // Not started: either button starts it. Answering a practice question counts as well.
+                GrammarStatus.New -> {
+                    Button(onClick = viewModel::markLearned, modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                        Text("I've learned this")
+                    }
+                    OutlinedButton(onClick = { onPractice(point.jlpt, point.id) }, modifier = Modifier.fillMaxWidth()) {
+                        Text("Try a few questions")
+                    }
+                }
+                else -> {
+                    if (next != null) {
+                        Button(onClick = { onNextLesson(next.id) }, modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                            Text("Next lesson: ${next.pattern}", style = MaterialTheme.typography.labelLarge.japanese(), maxLines = 1)
+                        }
+                    }
+                    OutlinedButton(onClick = { onPractice(point.jlpt, point.id) }, modifier = Modifier.fillMaxWidth()) {
+                        Text("Practice this point")
+                    }
+                }
+            }
             val context = androidx.compose.ui.platform.LocalContext.current
             OutlinedButton(
                 onClick = {

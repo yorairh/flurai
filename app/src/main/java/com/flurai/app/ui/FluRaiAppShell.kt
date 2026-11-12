@@ -225,6 +225,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                 GrammarDetailScreen(
                     onBack = { navController.popBackStack() },
                     onPractice = { jlpt, id -> navController.navigate(QuizRoute(QuizKind.Grammar(jlpt, id).encode())) },
+                    // The next lesson takes this one's place, so Back returns to the list.
+                    onNextLesson = { navController.navigate(GrammarRoute(it)) { popUpTo<GrammarRoute> { inclusive = true } } },
                 )
             }
             screen<TestsRoute> {
