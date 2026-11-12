@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.CustomAccessibilityAction
@@ -33,7 +35,9 @@ import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.reading.ReadingRepository
 import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
+import com.flurai.app.core.reading.parseRuby
 import com.flurai.app.core.reading.rubyParts
+import com.flurai.app.core.reading.rubyPartsOf
 import com.flurai.app.ui.theme.japanese
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,52 +50,70 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 /**
- * A sentence with the reading above each kanji word. Text cannot draw ruby by itself, so each piece
- * is a small two-line cell (reading over text) in a flow layout; kana and symbols are one cell per
- * character, so the sentence wraps like normal text. When [onWord] is given, words you can tap are
- * underlined and open it; without it the sentence is only for reading.
+ * A sentence with the reading above each kanji word. Text cannot draw ruby by itself, so each piece is a
+ * small two-line cell (reading over text) in a flow layout; kana and symbols are one cell per character,
+ * so the sentence wraps like normal text. [parts] come from the furigana markup of the database. With
+ * [tokens] and [onWord] the words you can tap are underlined and open [onWord]; without them the sentence
+ * is only for reading.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun RubySentence(tokens: List<Token>, main: TextStyle, onWord: ((WordEntity) -> Unit)? = null) {
+fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = emptyList(), onWord: ((WordEntity) -> Unit)? = null) {
     val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, textAlign = TextAlign.Center)
     val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
-    // Units that may wrap as a whole: a word, or one plain character. Closing punctuation
-    // is stuck to the unit before it, so a lone 。 never lands on a line of its own.
-    class Unit(val word: WordEntity?, val parts: List<RubyPart>, val tail: String = "")
-    val units = mutableListOf<Unit>()
-    tokens.forEach { token ->
-        val word = token.word
-        if (word != null) {
-            units += Unit(word, rubyParts(token.text, word.reading))
-        } else {
-            token.text.forEach { c ->
-                if (c in "。、．，！？!?」』）)…" && units.isNotEmpty()) units[units.lastIndex] = units.last().let { Unit(it.word, it.parts, it.tail + c) }
-                else units += Unit(null, listOf(RubyPart(c.toString(), null)))
-            }
-        }
-    }
-    val sentence = tokens.joinToString("") { it.text }
+    val text = parts.joinToString("") { it.text }
+    val cells = remember(parts, tokens) { rubyCells(parts, tokens) }
     // The cells are drawn one by one, so a screen reader would read them one kana at a time: describe the sentence once instead.
     FlowRow(
         verticalArrangement = Arrangement.spacedBy(0.dp),
         modifier = Modifier.clearAndSetSemantics {
-            contentDescription = sentence
+            contentDescription = text
             // The tappable words stay reachable for a screen reader as actions.
             if (onWord != null) {
-                customActions = units.mapNotNull { u ->
-                    u.word?.let { w -> CustomAccessibilityAction("Look up ${u.parts.joinToString("") { it.text }}") { onWord(w); true } }
-                }
+                customActions = cells.mapNotNull { c -> c.word?.let { w -> CustomAccessibilityAction("Look up ${c.text}") { onWord(w); true } } }
+                    .distinctBy { it.label }
             }
         },
     ) {
-        units.forEach { u ->
-            Row(if (u.word != null && onWord != null) Modifier.clickable { onWord(u.word) } else Modifier) {
-                u.parts.forEach { RubyCell(it.text, it.ruby, main, ruby, rubyColor, underline = u.word != null && onWord != null) }
-                u.tail.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
+        cells.forEach { cell ->
+            val tappable = cell.word != null && onWord != null
+            Row(if (tappable) Modifier.clickable { onWord?.invoke(cell.word!!) } else Modifier) {
+                RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable)
+                cell.tail.forEach { RubyCell(it.toString(), null, main, ruby, rubyColor, underline = false) }
             }
         }
     }
+}
+
+/** One piece of a sentence on screen: a word with kanji and its reading, or a single character. */
+internal class RubyCellData(val text: String, val ruby: String?, val word: WordEntity?, val tail: String = "")
+
+/** Splits [parts] into cells; closing punctuation sticks to the cell before it, so a lone 。 never lands on a line of its own. */
+internal fun rubyCells(parts: List<RubyPart>, tokens: List<Token>): List<RubyCellData> {
+    // Which word (if any) covers each character, from the tokens.
+    val wordAt = HashMap<Int, WordEntity>()
+    var offset = 0
+    tokens.forEach { token ->
+        token.word?.let { w -> for (k in offset until offset + token.text.length) wordAt[k] = w }
+        offset += token.text.length
+    }
+    val cells = mutableListOf<RubyCellData>()
+    offset = 0
+    parts.forEach { part ->
+        if (part.ruby != null) {
+            cells += RubyCellData(part.text, part.ruby, wordAt[offset])
+        } else {
+            part.text.forEachIndexed { k, c ->
+                if (c in "。、．，！？!?」』）)…" && cells.isNotEmpty()) {
+                    cells[cells.lastIndex] = cells.last().let { RubyCellData(it.text, it.ruby, it.word, it.tail + c) }
+                } else {
+                    cells += RubyCellData(c.toString(), null, wordAt[offset + k])
+                }
+            }
+        }
+        offset += part.text.length
+    }
+    return cells
 }
 
 @Composable
@@ -123,19 +145,16 @@ class FuriganaViewModel @Inject constructor(
 }
 
 /**
- * An example sentence for reading, with furigana over its kanji words unless the learner turned
- * furigana off. [style] is the Japanese text style (already `.japanese()`).
+ * An example sentence for reading, with furigana over its kanji unless the learner turned furigana off. [ruby] is the
+ * markup from the database; without it the sentence is read with the app's own word list. [style] is the Japanese
+ * text style (already `.japanese()`).
  */
 @Composable
-fun ExampleSentence(japanese: String, style: TextStyle, modifier: Modifier = Modifier, viewModel: FuriganaViewModel = hiltViewModel()) {
+fun ExampleSentence(japanese: String, ruby: String?, style: TextStyle, modifier: Modifier = Modifier, viewModel: FuriganaViewModel = hiltViewModel()) {
     val show by viewModel.showFurigana.collectAsStateWithLifecycle()
-    val tokens: State<List<Token>?> = produceState<List<Token>?>(null, japanese, show) {
-        value = if (show) viewModel.tokens(japanese) else null
-    }
+    if (!show) return Text(japanese, style = style, modifier = modifier)
+    if (ruby != null) return Box(modifier) { RubySentence(parseRuby(ruby), style) }
+    val tokens: State<List<Token>?> = produceState<List<Token>?>(null, japanese) { value = viewModel.tokens(japanese) }
     val loaded = tokens.value
-    if (show && loaded != null) {
-        androidx.compose.foundation.layout.Box(modifier) { RubySentence(loaded, style) }
-    } else {
-        Text(japanese, style = style, modifier = modifier)
-    }
+    if (loaded != null) Box(modifier) { RubySentence(rubyPartsOf(loaded), style) } else Text(japanese, style = style, modifier = modifier)
 }

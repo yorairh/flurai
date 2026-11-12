@@ -107,7 +107,7 @@ fun ReadingScreen(
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                         Column(Modifier.fillMaxWidth().padding(16.dp)) {
                             if (state.showFurigana) {
-                                RubySentence(line.tokens, MaterialTheme.typography.titleLarge.japanese(), onWord = { viewModel.select(it) })
+                                RubySentence(line.parts, MaterialTheme.typography.titleLarge.japanese(), tokens = line.tokens, onWord = { viewModel.select(it) })
                             } else {
                                 val linkStyle = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline))
                                 Text(

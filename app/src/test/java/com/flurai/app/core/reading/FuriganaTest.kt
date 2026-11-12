@@ -7,6 +7,27 @@ class FuriganaTest {
     private fun parts(surface: String, reading: String) = rubyParts(surface, reading).map { it.text to it.ruby }
 
     @Test
+    fun aReadingThatRepeatsItsOkuriganaIsStillAligned() {
+        // かしだし: the し after 貸出 is the last one, not the first
+        assertEquals(listOf("貸出" to "かしだ", "し" to null), parts("貸出し", "かしだし"))
+        assertEquals(listOf("取" to "と", "り" to null, "出" to "だ", "す" to null), parts("取り出す", "とりだす"))
+    }
+
+    @Test
+    fun markupIsReadIntoParts() {
+        val parsed = parseRuby("{誰|だれ}が{来|き}ました。").map { it.text to it.ruby }
+        assertEquals(listOf("誰" to "だれ", "が" to null, "来" to "き", "ました。" to null), parsed)
+        assertEquals(listOf("ありがとう" to null), parseRuby("ありがとう").map { it.text to it.ruby })
+        assertEquals(listOf("貸出し" to "かしだし", "を" to null), parseRuby("{貸出し|かしだし}を").map { it.text to it.ruby })
+    }
+
+    @Test
+    fun aBraceThatIsNotMarkupStaysText() {
+        assertEquals(listOf("a{b" to null), parseRuby("a{b").map { it.text to it.ruby })
+        assertEquals(listOf("{x}" to null), parseRuby("{x}").map { it.text to it.ruby })
+    }
+
+    @Test
     fun allKanjiWordGetsOneReading() {
         assertEquals(listOf("医者" to "いしゃ"), parts("医者", "いしゃ"))
     }

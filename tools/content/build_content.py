@@ -31,6 +31,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import ruby  # noqa: E402  (furigana markup for sentences, see ruby.py)
 ROOT = HERE.parent.parent
 CACHE = HERE / ".cache"
 WORD_IDS = HERE / "word_ids.tsv"
@@ -720,6 +722,7 @@ def write_database(
     grammar: list[dict],
     info: dict[str, str],
     sentence_levels: dict[int, int | None] | None = None,
+    sentence_ruby: dict[int, str | None] | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
@@ -743,8 +746,11 @@ def write_database(
         [(k.literal, k.jlpt, k.meanings, k.onyomi, k.kunyomi, k.stroke_count, k.grade, k.frequency) for k in kanji],
     )
     db.executemany(
-        "INSERT INTO sentence (id, japanese, english, verified, jlpt) VALUES (?, ?, ?, ?, ?)",
-        [(sid, jp, en, int(good), (sentence_levels or {}).get(sid)) for sid, (jp, en, good) in sorted(sentences.items())],
+        "INSERT INTO sentence (id, japanese, english, verified, jlpt, ruby) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (sid, jp, en, int(good), (sentence_levels or {}).get(sid), (sentence_ruby or {}).get(sid))
+            for sid, (jp, en, good) in sorted(sentences.items())
+        ],
     )
     db.executemany(
         "INSERT INTO word_sentence (word_id, sentence_id, rank) VALUES (?, ?, ?)",
@@ -755,9 +761,9 @@ def write_database(
         [(g["id"], g["jlpt"], g["pattern"], g["title"], g["meaning"], g["formation"], g["explanation"]) for g in grammar],
     )
     db.executemany(
-        "INSERT INTO grammar_example (grammar_id, rank, japanese, english, answer) VALUES (?, ?, ?, ?, ?)",
-        [(g["id"], rank, e["jp"], e["en"], e["answer"]) for g in grammar for rank, e in enumerate(g["examples"])]
-        + [(g["id"], EXTRA_EXAMPLE_RANK + i, e["jp"], e["en"], e["answer"]) for g in grammar for i, e in enumerate(g.get("extras", []))],
+        "INSERT INTO grammar_example (grammar_id, rank, japanese, english, answer, ruby) VALUES (?, ?, ?, ?, ?, ?)",
+        [(g["id"], rank, e["jp"], e["en"], e["answer"], e.get("ruby")) for g in grammar for rank, e in enumerate(g["examples"])]
+        + [(g["id"], EXTRA_EXAMPLE_RANK + i, e["jp"], e["en"], e["answer"], e.get("ruby")) for g in grammar for i, e in enumerate(g.get("extras", []))],
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
     db.commit()
@@ -775,8 +781,17 @@ def main() -> None:
     levels = {n: parse_jlpt_csv(fetch(f"n{n}.csv").read_text(encoding="utf-8"), n) for n in range(1, 6)}
     words = merge_levels(levels)
     registry = assign_ids(words, load_registry(WORD_IDS))
-    attach_jmdict(words, read_zipped_json(fetch("jmdict-eng.json.zip")))
+    jmdict = read_zipped_json(fetch("jmdict-eng.json.zip"))
+    attach_jmdict(words, jmdict)
     tidy_meanings(words)
+    jlpt_readings: dict[str, list[str]] = {}
+    for w in sorted(words, key=lambda w: -w.jlpt):  # N5 (the biggest number) first: the common reading
+        if w.expression == w.reading:
+            continue  # a kana word (あれ) does not decide how its kanji spelling (彼) is read
+        for spelling in (w.expression, *w.other_forms):  # not JMdict's other spellings: they belong to other words
+            if w.reading not in jlpt_readings.setdefault(spelling, []):
+                jlpt_readings[spelling].append(w.reading)
+    reader = ruby.Reader.build(jmdict["words"], jlpt_readings)
 
     print("Kanji")
     kanji = build_kanji(
@@ -799,11 +814,15 @@ def main() -> None:
     extra, extra_levels = pick_reading_sentences(indexed, japanese, english, grades, set(sentences))
     sentences.update(extra)
     sentence_levels.update(extra_levels)
+    tokens_by_id = {s.japanese_id: [(t.headword, t.reading, t.form) for t in s.tokens] for s in indexed}
+    sentence_ruby = {sid: ruby.sentence_markup(reader, jp, tokens_by_id.get(sid, [])) for sid, (jp, _, _) in sentences.items()}
 
     grammar = json.loads(GRAMMAR.read_text(encoding="utf-8"))
     extras = pick_grammar_extras(grammar, indexed, japanese, english, grades)
     for point in grammar:
         point["extras"] = extras.get(point["id"], [])
+        for example in point["examples"] + point["extras"]:
+            example["ruby"] = ruby.text_markup(reader, example["jp"])
 
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -815,7 +834,7 @@ def main() -> None:
         "sentence_count": str(len(sentences)),
         "grammar_count": str(len(grammar)),
     }
-    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info, sentence_levels)
+    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info, sentence_levels, sentence_ruby)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)
@@ -825,6 +844,8 @@ def main() -> None:
     graded = {n: sum(1 for g in sentence_levels.values() if g == n) for n in range(5, 0, -1)}
     print(f"  sentence levels: {graded}, ungraded {sum(1 for g in sentence_levels.values() if g is None)}")
     print(f"  grammar: {sum(1 for g in grammar if g['extras'])}/{len(grammar)} points have extra practice sentences")
+    print(f"  furigana: {sum(1 for v in sentence_ruby.values() if v)}/{len(sentence_ruby)} sentences, "
+          f"{sum(1 for g in grammar for e in g['examples'] + g['extras'] if e.get('ruby'))} grammar examples")
     print(f"  {len(sentences)} sentences; {with_examples}/{len(words)} words have examples;"
           f" {sum(w.jmdict_id is not None for w in words)} matched in JMdict")
 

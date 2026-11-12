@@ -58,6 +58,8 @@ data class SentenceEntity(
     val verified: Boolean,
     /** JLPT number of the hardest word or grammar in the sentence (5 = N5 ... 1 = N1); null when it is not fit for reading practice. */
     val jlpt: Int? = null,
+    /** Furigana as markup (a kanji run followed by its reading in braces: 来{き}ました), worked out by the content pipeline; null when unknown. */
+    val ruby: String? = null,
 )
 
 @Entity(
@@ -99,6 +101,8 @@ data class GrammarExampleEntity(
     val japanese: String,
     val english: String,
     val answer: String,
+    /** Furigana markup like [SentenceEntity.ruby]; null when unknown. */
+    val ruby: String? = null,
 )
 
 /** Build metadata: data versions, build date, row counts. */

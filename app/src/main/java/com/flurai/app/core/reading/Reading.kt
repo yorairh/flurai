@@ -36,7 +36,8 @@ class Lexicon(words: List<WordEntity>) {
     }
 
     private fun spellings(word: WordEntity): List<String> =
-        (listOf(word.expression) + word.otherForms.orEmpty().split("; ")).map { it.trim() }.filter { isLookupWorthy(it) }
+        if (isAffix(word)) emptyList()
+        else (listOf(word.expression) + word.otherForms.orEmpty().split("; ")).map { it.trim() }.filter { isLookupWorthy(it) }
 
     /** Splits [text] into tokens; unmatched characters are merged into plain runs. */
     fun tokenize(text: String): List<Token> {
@@ -67,6 +68,19 @@ class Lexicon(words: List<WordEntity>) {
         flush()
         return tokens
     }
+}
+
+/**
+ * Prefixes and suffixes such as ～人, 何～ or 来 (らい～, "next ~") are not words of a sentence: the list may write
+ * them without the tilde, so the reading is checked as well. 来ました would otherwise be read らい.
+ */
+internal fun isAffix(word: WordEntity): Boolean =
+    listOf(word.expression, word.reading).any { '～' in it || '〜' in it }
+
+/** The parts of a sentence read from its [tokens] (the app's own guess, used when the database has no furigana for it). */
+fun rubyPartsOf(tokens: List<Token>): List<RubyPart> = tokens.flatMap { token ->
+    val word = token.word
+    if (word != null) rubyParts(token.text, word.reading) else listOf(RubyPart(token.text, null))
 }
 
 /** One character kanji words are fine; a lone kana is a particle or an ending, so it is not tappable. */
