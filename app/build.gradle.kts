@@ -21,8 +21,8 @@ android {
         targetSdk = 36
         // Bump both in every release PR. versionCode goes up by one each time; 1.0.0 is the first release for friends,
         // after it a fix is 1.0.x and a milestone is 1.N.0.
-        versionCode = 33
-        versionName = "1.3.1"
+        versionCode = 34
+        versionName = "1.4.0"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
