@@ -40,7 +40,7 @@ The master plan for FluRai: what the app should become, the decisions behind it,
 | 31 | Search and library | ✅ Merged | [#37](https://github.com/yorairh/flurai/pull/37) | [v1.2.0](https://github.com/yorairh/flurai/releases/tag/v1.2.0) |
 | 32 | Quizzes and grammar practice | ✅ Merged | [#39](https://github.com/yorairh/flurai/pull/39) | [v1.3.0](https://github.com/yorairh/flurai/releases/tag/v1.3.0) |
 | 33 | Kana and polish | ✅ Merged | [#40](https://github.com/yorairh/flurai/pull/40) | [v1.3.0](https://github.com/yorairh/flurai/releases/tag/v1.3.0) |
-| 34 | Grammar lesson by lesson: next-lesson card, "I've learned this", practice only of learned points, N5 teaching order | 🚧 PR open | branch `ccr-4192fdb2-hjwjk2` | 1.4.0 |
+| 34 | Grammar lesson by lesson: next lesson, "I've learned this", practice only of learned points, N5 teaching order | ✅ Merged | [#44](https://github.com/yorairh/flurai/pull/44) | [v1.4.0](https://github.com/yorairh/flurai/releases/tag/v1.4.0) |
 
 ## Goal
 
