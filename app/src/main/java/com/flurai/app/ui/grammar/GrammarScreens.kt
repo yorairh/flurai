@@ -253,7 +253,12 @@ fun GrammarDetailScreen(
                 else -> {
                     if (next != null) {
                         Button(onClick = { onNextLesson(next.id) }, modifier = Modifier.fillMaxWidth().height(52.dp)) {
-                            Text("Next lesson: ${next.pattern}", style = MaterialTheme.typography.labelLarge.japanese(), maxLines = 1)
+                            Text(
+                                "Next lesson: ${next.pattern}",
+                                style = MaterialTheme.typography.labelLarge.japanese(),
+                                maxLines = 1,
+                                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                            )
                         }
                     }
                     OutlinedButton(onClick = { onPractice(point.jlpt, point.id) }, modifier = Modifier.fillMaxWidth()) {
