@@ -174,7 +174,7 @@ fun GrammarDetailScreen(
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
-                            ExampleSentence(example.japanese, MaterialTheme.typography.titleLarge.japanese())
+                            ExampleSentence(example.japanese, example.ruby, MaterialTheme.typography.titleLarge.japanese())
                             Spacer(Modifier.width(4.dp))
                             Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }

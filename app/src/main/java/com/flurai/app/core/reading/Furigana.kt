@@ -16,7 +16,6 @@ private fun toHiragana(text: String): String =
  */
 fun rubyParts(surface: String, reading: String): List<RubyPart> {
     if (surface.none(::isKanji)) return listOf(RubyPart(surface, null))
-    val whole = listOf(RubyPart(surface, reading))
     val r = toHiragana(reading)
 
     // Runs of kanji and runs of everything else, in order.
@@ -27,22 +26,44 @@ fun rubyParts(surface: String, reading: String): List<RubyPart> {
         else runs += c.toString() to kanji
     }
 
-    val parts = mutableListOf<RubyPart>()
-    var pos = 0
-    for ((i, run) in runs.withIndex()) {
-        val (text, kanji) = run
+    // Kana of the reading can repeat (かしだし for 貸出し), so a kanji run tries every length until the rest fits.
+    fun solve(i: Int, pos: Int): List<RubyPart>? {
+        if (i == runs.size) return if (pos == r.length) emptyList() else null
+        val (text, kanji) = runs[i]
         if (!kanji) {
             val kana = toHiragana(text)
-            if (!r.startsWith(kana, pos)) return whole
-            pos += kana.length
-            parts += RubyPart(text, null)
+            if (!r.startsWith(kana, pos)) return null
+            return solve(i + 1, pos + kana.length)?.let { listOf(RubyPart(text, null)) + it }
+        }
+        for (end in pos + 1..r.length) {
+            solve(i + 1, end)?.let { return listOf(RubyPart(text, r.substring(pos, end))) + it }
+        }
+        return null
+    }
+    return solve(0, 0) ?: listOf(RubyPart(surface, reading))
+}
+
+/**
+ * Reads the furigana markup the content pipeline writes: a word with kanji is `{base|reading}`, anything
+ * else is plain text (`{誰|だれ}が{来|き}ました`). Text without braces is one plain part.
+ */
+fun parseRuby(markup: String): List<RubyPart> {
+    val parts = mutableListOf<RubyPart>()
+    val plain = StringBuilder()
+    var i = 0
+    while (i < markup.length) {
+        val c = markup[i]
+        val close = if (c == '{') markup.indexOf('}', i) else -1
+        val bar = if (close > 0) markup.indexOf('|', i) else -1
+        if (close > 0 && bar in i + 1 until close) {
+            if (plain.isNotEmpty()) parts += RubyPart(plain.toString(), null).also { plain.clear() }
+            parts += RubyPart(markup.substring(i + 1, bar), markup.substring(bar + 1, close))
+            i = close + 1
         } else {
-            // A kanji run's reading lasts up to where the next kana run starts, or to the end.
-            val end = if (i == runs.lastIndex) r.length else r.indexOf(toHiragana(runs[i + 1].first), pos + 1)
-            if (end <= pos) return whole
-            parts += RubyPart(text, r.substring(pos, end))
-            pos = end
+            plain.append(c)
+            i++
         }
     }
-    return if (pos == r.length) parts else whole
+    if (plain.isNotEmpty()) parts += RubyPart(plain.toString(), null)
+    return parts
 }

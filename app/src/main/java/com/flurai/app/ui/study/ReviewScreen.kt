@@ -242,7 +242,7 @@ private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpe
         ) {
             Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    ExampleSentence(example.japanese, MaterialTheme.typography.titleMedium.japanese())
+                    ExampleSentence(example.japanese, example.ruby, MaterialTheme.typography.titleMedium.japanese())
                     Text(example.english, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.width(8.dp))

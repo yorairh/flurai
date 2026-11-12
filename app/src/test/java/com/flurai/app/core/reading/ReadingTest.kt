@@ -44,6 +44,23 @@ class ReadingTest {
     }
 
     @Test
+    fun anAffixIsNeverMatchedAsAWord() {
+        // 来 is listed as らい～ ("next ~"): 来ました must not be read らい
+        val next = word(20, "来").copy(reading = "らい～", meanings = "next ~", jlpt = 3)
+        val counter = word(21, "～人").copy(reading = "～にん")
+        val lex = Lexicon(listOf(next, counter, word(22, "人")))
+        assertNull(lex.tokenize("来ました").first().word)
+        assertEquals(22, lex.tokenize("人").single().word?.id)
+    }
+
+    @Test
+    fun partsFromTokensUseTheWordsReading() {
+        val tokens = lexicon.tokenize("学生")
+        assertEquals(1, rubyPartsOf(tokens).size)
+        assertEquals("学生", rubyPartsOf(tokens).single().text)
+    }
+
+    @Test
     fun theCommonReadingWinsBetweenWordsSharingASpelling() {
         // 私 is both わたし (id 713, common) and わたくし (id 714, formal) at N5: わたし must be the one shown.
         val watashi = word(713, "私").copy(reading = "わたし")

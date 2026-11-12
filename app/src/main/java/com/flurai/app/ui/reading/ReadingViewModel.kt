@@ -12,7 +12,10 @@ import com.flurai.app.core.profile.StudyProfileRepository
 import com.flurai.app.core.speech.JapaneseSpeaker
 import com.flurai.app.core.reading.Lexicon
 import com.flurai.app.core.reading.ReadingRepository
+import com.flurai.app.core.reading.RubyPart
 import com.flurai.app.core.reading.Token
+import com.flurai.app.core.reading.parseRuby
+import com.flurai.app.core.reading.rubyPartsOf
 import com.flurai.app.core.study.ItemRef
 import com.flurai.app.core.study.ItemType
 import com.flurai.app.core.study.StudyRepository
@@ -25,7 +28,8 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import javax.inject.Inject
 
-data class ReadLine(val tokens: List<Token>, val english: String)
+/** One sentence of the reading page: its words (for tapping), the furigana parts to draw, and the translation. */
+data class ReadLine(val tokens: List<Token>, val english: String, val parts: List<RubyPart>)
 
 data class ReadingUiState(
     val jlpt: Int = 5,
@@ -86,7 +90,10 @@ class ReadingViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     loading = false,
-                    lines = set.sentences.map { s -> ReadLine(lexicon.tokenize(s.japanese), s.english) },
+                    lines = set.sentences.map { s ->
+                        val tokens = lexicon.tokenize(s.japanese)
+                        ReadLine(tokens, s.english, s.ruby?.let(::parseRuby) ?: rubyPartsOf(tokens))
+                    },
                 )
             }
         }
