@@ -13,38 +13,6 @@ class MediaTest {
     private val words = listOf(word(1, 600), word(2, 300), word(3, 100))
 
     @Test
-    fun coverageWeighsWordsByHowOftenTheyOccur() {
-        val c = coverage(words, known = setOf(1, 3))
-        assertEquals(2, c.knownWords)
-        assertEquals(3, c.checkedWords)
-        assertEquals(0.7, c.occurrenceShare, 1e-9)
-        assertEquals(2.0 / 3, c.wordShare, 1e-9)
-    }
-
-    @Test
-    fun coverageOfNothingIsZero() {
-        val c = coverage(emptyList(), setOf(1))
-        assertEquals(0.0, c.occurrenceShare, 0.0)
-        assertEquals(0.0, c.wordShare, 0.0)
-    }
-
-    @Test
-    fun wordsToLearnAreCommonListedAndNotStarted() {
-        val map = mapOf(1 to 101, 2 to 102) // word 3 is not in our lists
-        assertEquals(listOf(101, 102), wordsToLearn(words, map, started = emptySet(), limit = 10))
-        assertEquals(listOf(102), wordsToLearn(words, map, started = setOf(101), limit = 10))
-        assertEquals(listOf(101), wordsToLearn(words, map, started = emptySet(), limit = 1))
-    }
-
-    @Test
-    fun wordsWellAboveTheLearnersLevelAreLeftOut() {
-        val map = mapOf(1 to 101, 2 to 102) // 101 is an N5 word, 102 an N1 word
-        val levelOf = { id: Int -> if (id == 101) 5 else 1 }
-        assertEquals(listOf(101), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = hardestWordToOffer(JlptLevel.N5)))
-        assertEquals(listOf(101, 102), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = 1))
-    }
-
-    @Test
     fun allWordsOfATitleAreReadPageByPage() = runBlocking {
         val all = (1..5).map { word(it, 100 - it) }
         val asked = ArrayList<Int>()
@@ -65,17 +33,18 @@ class MediaTest {
     }
 
     @Test
-    fun allListedWordsKeepStartedWordsAndTheMostCommonFirst() {
+    fun listedWordsAreOurIdsMostCommonFirst() {
         val map = mapOf(3 to 103, 1 to 101) // word 2 is not in our lists
-        assertEquals(listOf(101, 103), allListedWords(words.reversed(), map))
+        assertEquals(listOf(101, 103), listedWordIds(words.reversed(), map))
     }
 
     @Test
-    fun oneLevelAboveTheLearnerIsStillOffered() {
-        assertEquals(4, hardestWordToOffer(JlptLevel.N5))
-        assertEquals(4, hardestWordToOffer(JlptLevel.Beginner))
-        assertEquals(2, hardestWordToOffer(JlptLevel.N3))
-        assertEquals(1, hardestWordToOffer(JlptLevel.N1))
+    fun progressCountsKnownAmongListedWords() {
+        val p = showProgress(listOf(101, 102, 103, 104), knownWordIds = setOf(101, 104, 999))
+        assertEquals(2, p.knownWords)
+        assertEquals(4, p.listedWords)
+        assertEquals(0.5, p.share, 1e-9)
+        assertEquals(0.0, showProgress(emptyList(), setOf(1)).share, 0.0)
     }
 
     @Test

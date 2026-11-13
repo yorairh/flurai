@@ -92,15 +92,9 @@ data class MediaDetailState(
     val loading: Boolean = true,
     val analysis: MediaAnalysis? = null,
     val error: String? = null,
-    val added: Int? = null,
-    /** Name of the deck the top words were saved into. */
+    /** Name of the deck the title's words were saved into, and how many words it holds. */
     val savedDeck: String? = null,
-    /** How many words the saved deck holds. */
     val savedDeckWords: Int = 0,
-    /** The title's whole word list is being fetched for a deck. */
-    val savingAll: Boolean = false,
-    val saveAllError: String? = null,
-    val includeHarder: Boolean = false,
 )
 
 @HiltViewModel
@@ -109,7 +103,6 @@ class MediaDetailViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val media: MediaRepository,
     private val decks: DeckRepository,
-    private val profiles: StudyProfileRepository,
 ) : ViewModel() {
     private val deckId = savedStateHandle.toRoute<MediaDetailRoute>().deckId
     private val _state = MutableStateFlow(MediaDetailState(deck = media.deck(deckId)))
@@ -128,8 +121,7 @@ class MediaDetailViewModel @Inject constructor(
         _state.update { it.copy(loading = true, error = null) }
         viewModelScope.launch {
             try {
-                val level = profiles.profile(uid).first()?.level ?: JlptLevel.N5
-                val analysis = media.analyse(uid, deckId, level, _state.value.includeHarder)
+                val analysis = media.analyse(uid, deckId)
                 _state.update { it.copy(loading = false, analysis = analysis) }
             } catch (e: Exception) {
                 _state.update { it.copy(loading = false, error = e.message ?: "Something went wrong.") }
@@ -137,51 +129,16 @@ class MediaDetailViewModel @Inject constructor(
         }
     }
 
-    fun setIncludeHarder(include: Boolean) {
-        _state.update { it.copy(includeHarder = include) }
-        load()
-    }
-
-    /** Saves the top words as one of the learner's decks, named after the title, without starting any cards. */
+    /** Saves every word of the title that the app teaches as a deck, most common first, without starting any cards. */
     fun saveAsDeck() {
         val uid = auth.uid ?: return
-        val words = _state.value.analysis?.learnable?.map { it.id }?.takeIf { it.isNotEmpty() } ?: return
+        val words = _state.value.analysis?.wordIds?.takeIf { it.isNotEmpty() } ?: return
         val deck = _state.value.deck ?: return
+        if (_state.value.savedDeck != null) return
         val name = "Words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
         viewModelScope.launch {
             decks.create(uid, name, words) ?: return@launch
             _state.update { it.copy(savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
-        }
-    }
-
-    /** Saves every word of the title that the app teaches as a deck, most common first, known words included. */
-    fun saveAllAsDeck() {
-        val uid = auth.uid ?: return
-        val deck = _state.value.deck ?: return
-        if (_state.value.savingAll) return
-        val name = "All words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
-        _state.update { it.copy(savingAll = true, saveAllError = null) }
-        viewModelScope.launch {
-            try {
-                val words = media.allWordIds(deckId)
-                if (words.isEmpty()) {
-                    _state.update { it.copy(savingAll = false, saveAllError = "None of this title's words are in the app's word lists.") }
-                    return@launch
-                }
-                decks.create(uid, name, words)
-                _state.update { it.copy(savingAll = false, savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
-            } catch (e: Exception) {
-                _state.update { it.copy(savingAll = false, saveAllError = e.message ?: "Something went wrong.") }
-            }
-        }
-    }
-
-    fun addWords() {
-        val uid = auth.uid ?: return
-        val words = _state.value.analysis?.learnable?.map { it.id } ?: return
-        viewModelScope.launch {
-            media.addToFlashcards(uid, words)
-            _state.update { it.copy(added = words.size, analysis = it.analysis?.copy(learnable = emptyList())) }
         }
     }
 }
