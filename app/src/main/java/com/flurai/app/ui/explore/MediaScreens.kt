@@ -49,7 +49,6 @@ import coil3.compose.AsyncImage
 import com.flurai.app.core.media.Deck
 import com.flurai.app.core.media.MediaType
 import com.flurai.app.core.model.JlptLevel
-import com.flurai.app.core.quiz.firstGloss
 import com.flurai.app.ui.theme.japanese
 import kotlin.math.roundToInt
 
@@ -197,52 +196,42 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
 
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
                 Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("How much you know", style = MaterialTheme.typography.titleMedium)
+                    Text("Words from this title", style = MaterialTheme.typography.titleMedium)
                     val analysis = state.analysis
                     when {
-                        state.loading -> CircularProgressIndicator()
+                        state.loading -> {
+                            CircularProgressIndicator()
+                            Text("Getting all the words…", style = MaterialTheme.typography.bodyMedium)
+                        }
                         state.error != null -> {
                             Text(state.error.orEmpty())
                             TextButton(onClick = { viewModel.load() }) { Text("Try again") }
                         }
                         analysis != null -> {
-                            val c = analysis.coverage
-                            val share = (c.occurrenceShare * 100).roundToInt()
-                            Text("About $share% of what is said", style = MaterialTheme.typography.headlineSmall)
-                            LinearProgressIndicator(progress = { c.occurrenceShare.toFloat() }, modifier = Modifier.fillMaxWidth())
+                            val p = analysis.progress
+                            Text("You know ${p.knownWords} of ${p.listedWords} words", style = MaterialTheme.typography.headlineSmall)
+                            LinearProgressIndicator(progress = { p.share.toFloat() }, modifier = Modifier.fillMaxWidth())
                             Text(
-                                "You know ${c.knownWords} of the ${c.checkedWords} most common words. Only words from the JLPT lists " +
-                                    "you study can count as known, so the real figure is a little higher.",
-                                style = MaterialTheme.typography.bodyMedium,
+                                "Counts the words of this title that are in the app's JLPT word lists.",
+                                style = MaterialTheme.typography.bodySmall,
                             )
-                            if (analysis.learnable.isNotEmpty()) {
-                                Text("Words to learn first", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 4.dp))
-                                analysis.learnable.forEach { word ->
-                                    Text(
-                                        "${word.expression}${if (word.reading != word.expression) "（${word.reading}）" else ""}  ${firstGloss(word.meanings)}",
-                                        style = MaterialTheme.typography.bodyMedium.japanese(),
-                                    )
+                            if (analysis.wordIds.isNotEmpty()) {
+                                Button(
+                                    onClick = { viewModel.saveAsDeck() },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    enabled = state.savedDeck == null,
+                                ) {
+                                    Text("Save all its words as a deck")
                                 }
-                                Button(onClick = { viewModel.addWords() }, modifier = Modifier.fillMaxWidth()) {
-                                    Text("Learn these ${analysis.learnable.size} words first")
-                                }
-                                OutlinedButton(onClick = { viewModel.saveAsDeck() }, modifier = Modifier.fillMaxWidth(), enabled = state.savedDeck == null) {
-                                    Text("Save them as a deck")
-                                }
-                            }
-                            if (analysis.skippedHarder > 0 && !state.includeHarder) {
-                                Text(
-                                    "${analysis.skippedHarder} common words that are well above your level were left out.",
-                                    style = MaterialTheme.typography.bodySmall,
-                                )
-                                TextButton(onClick = { viewModel.setIncludeHarder(true) }) { Text("Include harder words") }
-                            } else if (state.includeHarder) {
-                                TextButton(onClick = { viewModel.setIncludeHarder(false) }) { Text("Only words near my level") }
                             }
                         }
                     }
-                    state.savedDeck?.let { Text("Saved as the deck \"$it\" (Learn → Flashcards → My decks).", style = MaterialTheme.typography.bodyMedium) }
-                    state.added?.let { Text("Added $it words to your flashcards.", style = MaterialTheme.typography.bodyMedium) }
+                    state.savedDeck?.let {
+                        Text(
+                            "Saved ${state.savedDeckWords} words as the deck \"$it\" (Learn → Flashcards → My decks).",
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
                 }
             }
 

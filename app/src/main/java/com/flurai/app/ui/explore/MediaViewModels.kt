@@ -1,6 +1,6 @@
 package com.flurai.app.ui.explore
 
-import com.flurai.app.core.study.MAX_DECK_NAME
+import com.flurai.app.core.study.cleanDeckName
 import com.flurai.app.core.study.DeckRepository
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
@@ -92,10 +92,9 @@ data class MediaDetailState(
     val loading: Boolean = true,
     val analysis: MediaAnalysis? = null,
     val error: String? = null,
-    val added: Int? = null,
-    /** Name of the deck the top words were saved into. */
+    /** Name of the deck the title's words were saved into, and how many words it holds. */
     val savedDeck: String? = null,
-    val includeHarder: Boolean = false,
+    val savedDeckWords: Int = 0,
 )
 
 @HiltViewModel
@@ -104,7 +103,6 @@ class MediaDetailViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val media: MediaRepository,
     private val decks: DeckRepository,
-    private val profiles: StudyProfileRepository,
 ) : ViewModel() {
     private val deckId = savedStateHandle.toRoute<MediaDetailRoute>().deckId
     private val _state = MutableStateFlow(MediaDetailState(deck = media.deck(deckId)))
@@ -123,8 +121,7 @@ class MediaDetailViewModel @Inject constructor(
         _state.update { it.copy(loading = true, error = null) }
         viewModelScope.launch {
             try {
-                val level = profiles.profile(uid).first()?.level ?: JlptLevel.N5
-                val analysis = media.analyse(uid, deckId, level, _state.value.includeHarder)
+                val analysis = media.analyse(uid, deckId)
                 _state.update { it.copy(loading = false, analysis = analysis) }
             } catch (e: Exception) {
                 _state.update { it.copy(loading = false, error = e.message ?: "Something went wrong.") }
@@ -132,29 +129,16 @@ class MediaDetailViewModel @Inject constructor(
         }
     }
 
-    fun setIncludeHarder(include: Boolean) {
-        _state.update { it.copy(includeHarder = include) }
-        load()
-    }
-
-    /** Saves the top words as one of the learner's decks, named after the title, without starting any cards. */
+    /** Saves every word of the title that the app teaches as a deck, most common first, without starting any cards. */
     fun saveAsDeck() {
         val uid = auth.uid ?: return
-        val words = _state.value.analysis?.learnable?.map { it.id }?.takeIf { it.isNotEmpty() } ?: return
+        val words = _state.value.analysis?.wordIds?.takeIf { it.isNotEmpty() } ?: return
         val deck = _state.value.deck ?: return
+        if (_state.value.savedDeck != null) return
         val name = "Words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
         viewModelScope.launch {
             decks.create(uid, name, words) ?: return@launch
-            _state.update { it.copy(savedDeck = name.take(MAX_DECK_NAME)) }
-        }
-    }
-
-    fun addWords() {
-        val uid = auth.uid ?: return
-        val words = _state.value.analysis?.learnable?.map { it.id } ?: return
-        viewModelScope.launch {
-            media.addToFlashcards(uid, words)
-            _state.update { it.copy(added = words.size, analysis = it.analysis?.copy(learnable = emptyList())) }
+            _state.update { it.copy(savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
         }
     }
 }
