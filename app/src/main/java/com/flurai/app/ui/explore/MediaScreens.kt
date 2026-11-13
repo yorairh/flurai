@@ -226,10 +226,28 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                                 Button(onClick = { viewModel.addWords() }, modifier = Modifier.fillMaxWidth()) {
                                     Text("Learn these ${analysis.learnable.size} words first")
                                 }
-                                OutlinedButton(onClick = { viewModel.saveAsDeck() }, modifier = Modifier.fillMaxWidth(), enabled = state.savedDeck == null) {
+                                OutlinedButton(
+                                    onClick = { viewModel.saveAsDeck() },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    enabled = state.savedDeck == null && !state.savingAll,
+                                ) {
                                     Text("Save them as a deck")
                                 }
                             }
+                            OutlinedButton(
+                                onClick = { viewModel.saveAllAsDeck() },
+                                modifier = Modifier.fillMaxWidth(),
+                                enabled = state.savedDeck == null && !state.savingAll,
+                            ) {
+                                if (state.savingAll) {
+                                    CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp)
+                                    Spacer(Modifier.width(8.dp))
+                                    Text("Getting all the words…")
+                                } else {
+                                    Text("Save all its words as a deck")
+                                }
+                            }
+                            state.saveAllError?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             if (analysis.skippedHarder > 0 && !state.includeHarder) {
                                 Text(
                                     "${analysis.skippedHarder} common words that are well above your level were left out.",
@@ -241,7 +259,12 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                             }
                         }
                     }
-                    state.savedDeck?.let { Text("Saved as the deck \"$it\" (Learn → Flashcards → My decks).", style = MaterialTheme.typography.bodyMedium) }
+                    state.savedDeck?.let {
+                        Text(
+                            "Saved ${state.savedDeckWords} words as the deck \"$it\" (Learn → Flashcards → My decks).",
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
                     state.added?.let { Text("Added $it words to your flashcards.", style = MaterialTheme.typography.bodyMedium) }
                 }
             }

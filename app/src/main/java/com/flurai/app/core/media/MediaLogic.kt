@@ -63,3 +63,21 @@ fun wordsToLearn(
 
 /** The hardest JLPT number to offer a learner studying from [level]: one level above their own, at most N1. */
 fun hardestWordToOffer(level: JlptLevel): Int = ((level.jlpt ?: 5) - 1).coerceAtLeast(1)
+
+/**
+ * Every word of a title, read page by page with [fetch] (given the offset of the page). Stops at
+ * the title's total, at an empty page, or after [maxPages] pages, so a wrong total cannot loop.
+ */
+suspend fun allDeckWords(maxPages: Int = 150, fetch: suspend (offset: Int) -> VocabularyPage): List<DeckWord> {
+    val words = ArrayList<DeckWord>()
+    repeat(maxPages) {
+        val page = fetch(words.size)
+        words += page.data.words
+        if (page.data.words.isEmpty() || words.size >= page.totalItems) return words
+    }
+    return words
+}
+
+/** Our ids of all of a title's words that are in the app's word lists, most common first, started or not. */
+fun allListedWords(words: List<DeckWord>, jmdictToWord: Map<Int, Int>): List<Int> =
+    wordsToLearn(words, jmdictToWord, started = emptySet(), limit = Int.MAX_VALUE)

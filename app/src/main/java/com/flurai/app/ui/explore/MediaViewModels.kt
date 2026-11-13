@@ -1,6 +1,6 @@
 package com.flurai.app.ui.explore
 
-import com.flurai.app.core.study.MAX_DECK_NAME
+import com.flurai.app.core.study.cleanDeckName
 import com.flurai.app.core.study.DeckRepository
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
@@ -95,6 +95,11 @@ data class MediaDetailState(
     val added: Int? = null,
     /** Name of the deck the top words were saved into. */
     val savedDeck: String? = null,
+    /** How many words the saved deck holds. */
+    val savedDeckWords: Int = 0,
+    /** The title's whole word list is being fetched for a deck. */
+    val savingAll: Boolean = false,
+    val saveAllError: String? = null,
     val includeHarder: Boolean = false,
 )
 
@@ -145,7 +150,29 @@ class MediaDetailViewModel @Inject constructor(
         val name = "Words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
         viewModelScope.launch {
             decks.create(uid, name, words) ?: return@launch
-            _state.update { it.copy(savedDeck = name.take(MAX_DECK_NAME)) }
+            _state.update { it.copy(savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
+        }
+    }
+
+    /** Saves every word of the title that the app teaches as a deck, most common first, known words included. */
+    fun saveAllAsDeck() {
+        val uid = auth.uid ?: return
+        val deck = _state.value.deck ?: return
+        if (_state.value.savingAll) return
+        val name = "All words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
+        _state.update { it.copy(savingAll = true, saveAllError = null) }
+        viewModelScope.launch {
+            try {
+                val words = media.allWordIds(deckId)
+                if (words.isEmpty()) {
+                    _state.update { it.copy(savingAll = false, saveAllError = "None of this title's words are in the app's word lists.") }
+                    return@launch
+                }
+                decks.create(uid, name, words)
+                _state.update { it.copy(savingAll = false, savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
+            } catch (e: Exception) {
+                _state.update { it.copy(savingAll = false, saveAllError = e.message ?: "Something went wrong.") }
+            }
         }
     }
 

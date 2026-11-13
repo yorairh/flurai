@@ -98,7 +98,8 @@ interface DeckDao {
     @Transaction
     suspend fun create(deck: DeckEntity, wordIds: List<Int>, now: Long): Long {
         val id = insert(deck)
-        wordIds.forEach { addWord(DeckWordEntity(id, it, now)) }
+        // A millisecond apart, so the deck keeps the order of the list (wordIds sorts by added_at).
+        wordIds.distinct().forEachIndexed { i, wordId -> addWord(DeckWordEntity(id, wordId, now + i)) }
         return id
     }
 }

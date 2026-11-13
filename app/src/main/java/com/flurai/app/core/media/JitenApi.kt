@@ -95,6 +95,12 @@ class JitenApi @Inject constructor() {
         "sortBy" to "deckFreq", "sortOrder" to 1, "offset" to 0, "limit" to limit,
     ).let { json.decodeFromString(VocabularyPage.serializer(), it).data.words }
 
+    /** One page of a deck's words, most frequent first, starting at [offset]. */
+    suspend fun vocabularyPage(deckId: Int, offset: Int, limit: Int = VOCABULARY_PAGE): VocabularyPage = get(
+        "/api/media-deck/$deckId/vocabulary",
+        "sortBy" to "deckFreq", "sortOrder" to 1, "offset" to offset, "limit" to limit,
+    ).let { json.decodeFromString(VocabularyPage.serializer(), it) }
+
     private suspend fun get(path: String, vararg params: Pair<String, Any>): String = withContext(Dispatchers.IO) {
         val query = params.filter { it.second.toString().isNotEmpty() }
             .joinToString("&") { "${it.first}=${URLEncoder.encode(it.second.toString(), "UTF-8")}" }
@@ -118,7 +124,9 @@ class JitenApi @Inject constructor() {
         }
     }
 
-    private companion object {
-        const val BASE = "https://api.jiten.moe"
+    companion object {
+        /** The most words jiten.moe gives in one answer. */
+        const val VOCABULARY_PAGE = 200
+        private const val BASE = "https://api.jiten.moe"
     }
 }

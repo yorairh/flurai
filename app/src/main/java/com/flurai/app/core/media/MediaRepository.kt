@@ -41,6 +41,7 @@ class MediaRepository @Inject constructor(
 
     private val pages = HashMap<String, Cached<DeckPage>>()
     private val vocab = HashMap<Int, Cached<List<DeckWord>>>()
+    private val allVocab = HashMap<Int, Cached<List<DeckWord>>>()
     private val decksById = HashMap<Int, Deck>()
     private var jmdictToWord: Map<Int, Int>? = null
 
@@ -84,6 +85,16 @@ class MediaRepository @Inject constructor(
         val offered = wordsToLearn(words, map, started, learnLimit, levelOf, if (includeHarder) 1 else hardestWordToOffer(level))
         val skipped = if (includeHarder) 0 else wordsToLearn(words, map, started, learnLimit).count { it !in offered }
         return MediaAnalysis(coverage(words, knownJmdict), offered.mapNotNull { byId[it] }, skipped)
+    }
+
+    /**
+     * Our ids of every word of the title that is in the app's word lists, most common first. Asks
+     * jiten.moe for the whole vocabulary, a page at a time, so it takes a few seconds.
+     */
+    suspend fun allWordIds(deckId: Int): List<Int> {
+        val words = fresh(allVocab[deckId])
+            ?: allDeckWords { offset -> api.vocabularyPage(deckId, offset) }.also { allVocab[deckId] = Cached(now(), it) }
+        return allListedWords(words, idMap())
     }
 
     /** Adds the given words to the flashcards as new cards for today. */

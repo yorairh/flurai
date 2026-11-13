@@ -1,6 +1,7 @@
 package com.flurai.app.core.media
 
 import com.flurai.app.core.model.JlptLevel
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -41,6 +42,32 @@ class MediaTest {
         val levelOf = { id: Int -> if (id == 101) 5 else 1 }
         assertEquals(listOf(101), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = hardestWordToOffer(JlptLevel.N5)))
         assertEquals(listOf(101, 102), wordsToLearn(words, map, emptySet(), 10, levelOf, hardestAllowed = 1))
+    }
+
+    @Test
+    fun allWordsOfATitleAreReadPageByPage() = runBlocking {
+        val all = (1..5).map { word(it, 100 - it) }
+        val asked = ArrayList<Int>()
+        val got = allDeckWords { offset ->
+            asked += offset
+            VocabularyPage(DeckVocabulary(all.drop(offset).take(2)), totalItems = all.size)
+        }
+        assertEquals(all, got)
+        assertEquals(listOf(0, 2, 4), asked)
+    }
+
+    @Test
+    fun readingStopsAtAnEmptyPageOrThePageLimit() = runBlocking {
+        // The total claims more words than there are.
+        assertEquals(1, allDeckWords { offset -> VocabularyPage(DeckVocabulary(if (offset == 0) listOf(word(1, 9)) else emptyList()), totalItems = 50) }.size)
+        // A server that never runs out is cut off.
+        assertEquals(3, allDeckWords(maxPages = 3) { offset -> VocabularyPage(DeckVocabulary(listOf(word(offset, 1))), totalItems = 1000) }.size)
+    }
+
+    @Test
+    fun allListedWordsKeepStartedWordsAndTheMostCommonFirst() {
+        val map = mapOf(3 to 103, 1 to 101) // word 2 is not in our lists
+        assertEquals(listOf(101, 103), allListedWords(words.reversed(), map))
     }
 
     @Test
