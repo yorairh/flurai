@@ -14,13 +14,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -45,6 +48,8 @@ import com.flurai.app.core.auth.uid
 import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.study.DeckRepository
+import com.flurai.app.core.study.ItemType
+import com.flurai.app.core.study.StudyRepository
 import com.flurai.app.core.study.StudySource
 import com.flurai.app.ui.DeckRoute
 import com.flurai.app.ui.components.BackTopAppBar
@@ -65,6 +70,8 @@ data class DeckUiState(
     val loading: Boolean = true,
     val name: String = "",
     val words: List<WordEntity> = emptyList(),
+    /** Ids of the deck's words that already have a flashcard. */
+    val started: Set<Int> = emptySet(),
     /** The deck no longer exists (it was deleted). */
     val gone: Boolean = false,
 )
@@ -75,17 +82,19 @@ class DeckViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val auth: AuthRepository,
     private val decks: DeckRepository,
+    study: StudyRepository,
     content: ContentDao,
 ) : ViewModel() {
     val deckId = savedStateHandle.toRoute<DeckRoute>().id
 
     val state: StateFlow<DeckUiState> = auth.currentUser.flatMapLatest { user ->
         if (user == null) return@flatMapLatest emptyFlow()
-        combine(decks.decks(user.uid), decks.wordIds(deckId)) { all, ids ->
+        combine(decks.decks(user.uid), decks.wordIds(deckId), study.introducedItems(user.uid)) { all, ids, introduced ->
             val deck = all.firstOrNull { it.id == deckId }
                 ?: return@combine DeckUiState(loading = false, gone = true)
             val byId = ids.chunked(500).flatMap { content.words(it) }.associateBy { it.id }
-            DeckUiState(loading = false, name = deck.name, words = ids.mapNotNull { byId[it] })
+            val started = introduced.filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
+            DeckUiState(loading = false, name = deck.name, words = ids.mapNotNull { byId[it] }, started = started)
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DeckUiState())
 
@@ -113,6 +122,7 @@ fun DeckScreen(
     viewModel: DeckViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var editing by remember { mutableStateOf(false) }
     var renaming by remember { mutableStateOf(false) }
     var confirmDelete by remember { mutableStateOf(false) }
     LaunchedEffect(state.gone) { if (state.gone) onBack() }
@@ -122,8 +132,9 @@ fun DeckScreen(
             title = { Text(state.name) },
             onBack = onBack,
             actions = {
-                IconButton(onClick = { renaming = true }) { Icon(Icons.Filled.Edit, contentDescription = "Rename deck") }
-                IconButton(onClick = { confirmDelete = true }) { Icon(Icons.Filled.Delete, contentDescription = "Delete deck") }
+                IconButton(onClick = { editing = !editing }) {
+                    if (editing) Icon(Icons.Filled.Check, contentDescription = "Done editing") else Icon(Icons.Filled.Edit, contentDescription = "Edit deck")
+                }
             },
         )
         if (state.loading || state.gone) return@Column LoadingBox()
@@ -141,6 +152,18 @@ fun DeckScreen(
             item {
                 OutlinedButton(onClick = { onAddWords(viewModel.deckId) }, modifier = Modifier.fillMaxWidth()) { Text("Add words") }
             }
+            if (editing) {
+                item {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        OutlinedButton(onClick = { renaming = true }, modifier = Modifier.weight(1f)) { Text("Rename deck") }
+                        OutlinedButton(
+                            onClick = { confirmDelete = true },
+                            modifier = Modifier.weight(1f),
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error),
+                        ) { Text("Delete deck") }
+                    }
+                }
+            }
             if (state.words.isEmpty()) {
                 item {
                     Text(
@@ -151,28 +174,43 @@ fun DeckScreen(
                 }
             } else {
                 item {
-                    Text(
-                        if (state.words.size == 1) "1 word" else "${state.words.size} words",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    val started = state.words.count { it.id in state.started }
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            "$started of ${state.words.size} started",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        LinearProgressIndicator(progress = { started.toFloat() / state.words.size }, modifier = Modifier.fillMaxWidth())
+                    }
                 }
             }
             items(state.words, key = { it.id }) { word ->
+                val started = word.id in state.started
                 Card(
                     modifier = Modifier.fillMaxWidth().clickable { onOpenWord(word.id) },
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+                    colors = CardDefaults.cardColors(
+                        containerColor = if (started) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.surfaceContainerLow,
+                    ),
                 ) {
-                    Row(Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        Modifier.padding(start = 16.dp, top = 10.dp, bottom = 10.dp, end = if (editing) 4.dp else 16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
                         Column(Modifier.weight(1f)) {
-                            Text(word.expression, style = MaterialTheme.typography.titleMedium.japanese())
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(word.expression, style = MaterialTheme.typography.titleMedium.japanese(), modifier = Modifier.weight(1f))
+                                if (started && !editing) Text("started", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                            }
                             if (word.reading != word.expression) {
                                 Text(word.reading, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.secondary)
                             }
                             Text(word.meanings, style = MaterialTheme.typography.bodyMedium, maxLines = 1)
                         }
-                        IconButton(onClick = { viewModel.remove(word.id) }) {
-                            Icon(Icons.Filled.Close, contentDescription = "Remove from deck")
+                        if (editing) {
+                            IconButton(onClick = { viewModel.remove(word.id) }) {
+                                Icon(Icons.Filled.Close, contentDescription = "Remove from deck")
+                            }
                         }
                     }
                 }
