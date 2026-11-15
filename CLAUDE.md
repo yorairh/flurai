@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Guidance for Claude Code (claude.ai/code) when working in this repository. It describes what exists today. Plans and research live in [docs/ROADMAP.md](docs/ROADMAP.md): read it at the start of a session, and update its status table when you open or merge a PR.
+Guidance for Claude Code (claude.ai/code) when working in this repository. It describes what exists today.
 
 ## What FluRai is
 
@@ -22,7 +22,7 @@ An Android app (Kotlin + Jetpack Compose, package `com.flurai.app`) for learning
 
 ### Not built
 
-The AI conversation partner and AI-generated graded content. A parked branch `feature/12-conversation` (PR #15) exists; it needs a provider decision first. Details are in the roadmap. Do not describe these as features.
+The AI conversation partner and AI-generated graded content. A parked branch `feature/12-conversation` (PR #15) exists; it needs a provider decision first. Do not describe these as features.
 
 ## Commands
 
@@ -138,5 +138,5 @@ All accounts' settings share one DataStore as `<uid>.<name>`. `UserKeys` builds 
 
 - One branch per piece of work (`feature/NN-name`, `fix/...`, `docs/...`); push and open a PR with `gh`; merge only after the user has tested the APK and approved. Send the signed release APK for phone testing each time.
 - **Versions:** 1.0.0 was the first release for friends. A fix is `1.0.x`, a milestone `1.N.0`; `versionCode` goes up by one every release. Bump `versionCode`/`versionName` in `app/build.gradle.kts` in the release PR, and write `docs/releases/<version>.md` (see earlier ones for the format).
-- **After merging a release PR:** check out an up-to-date `main` and run `tools/release.sh <version> "<title>"`. It builds the signed APK, verifies the signature, and creates GitHub release `v<version>` with the notes. Then update the roadmap's status table.
+- **After merging a release PR:** check out an up-to-date `main` and run `tools/release.sh <version> "<title>"`. It builds the signed APK, verifies the signature, and creates GitHub release `v<version>` with the notes.
 - **Before every release:** unit tests and lint pass; install the release APK over the previous one (an in-place update) and check About shows the new version; if the content db changed, `ContentDatabase.version` was bumped; if `user.db` changed, there is a migration; if sync or security rules changed, the rules are deployed.

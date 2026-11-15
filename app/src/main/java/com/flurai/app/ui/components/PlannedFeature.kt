@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.flurai.app.ui.theme.japanese
 
-/** A feature on the roadmap that isn't built yet, shown so each tab already explains what it will hold. */
+/** A planned feature that is not built yet, shown so each tab already explains what it will hold. */
 data class PlannedFeature(
     val japanese: String,
     val title: String,

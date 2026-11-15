@@ -38,7 +38,7 @@ FluRai is built on open data: the JMdict and KANJIDIC dictionaries (EDRDG), the 
 
 ## For developers
 
-Built with Kotlin and Jetpack Compose. The project plan and status of each milestone are in [docs/ROADMAP.md](docs/ROADMAP.md), release notes are in [docs/releases](docs/releases), and [CLAUDE.md](CLAUDE.md) describes the architecture and the commands.
+Built with Kotlin and Jetpack Compose. Release notes are in [docs/releases](docs/releases), and [CLAUDE.md](CLAUDE.md) describes the architecture and the commands.
 
 Build (needs the Android SDK via Android Studio, and JDK 17 or newer; Android Studio's bundled JDK works):
 
