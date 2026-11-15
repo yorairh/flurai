@@ -1,0 +1,43 @@
+{
+  "id": 420,
+  "number": "42",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "まま: the unchanged condition",
+  "summary": "まま is a noun meaning \"an unchanged condition\". Every use of it, from そのまま to わがまま, comes from that one idea.",
+  "video": "https://www.youtube.com/watch?v=rCdhDCmhMZc",
+  "related": [349, 350],
+  "blocks": [
+    {"type": "text", "text": "Grammar lists give まま a pile of meanings (\"as it is\", \"as one wishes\", \"a state\") and even call it a particle. Use the word-type test from lesson 41 instead. まま does not end in an う-row kana and does not end in い, so it is a **noun**. Which noun? An **unchanged condition**. Whenever you see まま, read \"unchanged condition\"."},
+    {"type": "heading", "text": "Modifiers go in front"},
+    {"type": "text", "text": "Because まま is a noun, anything that describes it comes before it: another noun with **の**, an い-adjective, or a whole verb phrase. The word carries an extra hint: the condition could have changed, but it has not."},
+    {"type": "example", "jp": "自然のままの森を歩いた。", "en": "(I) walked through a forest in its natural, untouched state."},
+    {"type": "example", "jp": "パジャマのまま朝ごはんを食べた。", "en": "(I) ate breakfast still in my pajamas."},
+    {"type": "example", "jp": "いつまでも若いままでいたい。", "en": "(I) want to stay young forever."},
+    {"type": "example", "jp": "窓を開けたまま寝てしまった。", "en": "(I) fell asleep with the window left open."},
+    {"type": "heading", "text": "The copula can drop"},
+    {"type": "text", "text": "まま often takes the copula で (\"being the unchanged condition\"). Like a time expression it may drop that で, which is why そのままで食べる and そのまま食べる are both fine. The meaning is \"while it stays in its unchanged condition\"."},
+    {"type": "heading", "text": "Outside matches inside"},
+    {"type": "text", "text": "In 思いのまま and 心のまま, the \"unchanged condition\" is a match with your own thoughts or heart. The world outside stays just as the inside wants it. 思いのままに動けない means \"(I) cannot move as I wish\". From the same idea comes **わがまま**: わが is \"my\", so it is \"my own unchanged condition\", a person who wants the world to follow their will. That is selfishness."},
+    {"type": "keypoints", "items": [
+      "まま is a **noun**: an **unchanged condition**.",
+      "The describing part goes before it: **Nのまま**, **い-adjective + まま**, **verb (た / ない) + まま**.",
+      "The で after it can drop: そのまま食べる.",
+      "**思いのまま** = as one wishes; **わがまま** = my own way, selfish."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What kind of word is まま?", "prompt": "", "options": ["Noun", "Verb", "Adjective", "Particle"], "answer": 0, "note": "It has no verb or adjective ending, so it is a noun."},
+    {"id": 2, "type": "choice", "instruction": "Pick the meaning of まま", "prompt": "", "options": ["An unchanged condition", "A mother", "A sudden change", "A future plan"], "answer": 0, "note": "Every use of まま comes back to this."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap", "prompt": "靴を履いた＿＿部屋に入った。 ((I) went into the room with shoes still on.)", "options": ["まま", "ため", "ところ", "はず"], "answer": 0, "note": "履いた + まま: the shoes stayed on, an unchanged condition."},
+    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "テレビをつけたまま寝た。", "options": ["(I) fell asleep with the TV left on", "(I) turned on the TV after sleeping", "(I) slept and the TV broke", "(I) will sleep and watch TV"], "answer": 0, "note": "つけた + まま: the TV stayed on."},
+    {"id": 5, "type": "tap", "instruction": "Tap the noun that means \"unchanged condition\"", "options": ["パジャマの", "まま", "食べた"], "answer": 1, "note": "パジャマの describes it; 食べた is the engine."},
+    {"id": 6, "type": "choice", "instruction": "Which phrase means \"in its natural, untouched state\"?", "prompt": "", "options": ["自然のまま", "自然まま", "自然をまま", "自然がまま"], "answer": 0, "note": "A noun describes まま with の."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "In そのまま食べる, the で may be dropped because まま behaves like a time expression.", "options": ["True", "False"], "answer": 0, "note": "そのままで食べる and そのまま食べる are both used."},
+    {"id": 8, "type": "choice", "instruction": "What is the literal sense of わがまま?", "prompt": "", "options": ["My own unchanged condition (my way)", "A loving mother", "Lasting forever", "Doing nothing"], "answer": 0, "note": "わが is \"my\"; wanting the world to follow your will reads as selfish."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence says \"(I) want to stay as I am\"?", "prompt": "", "options": ["このままでいたい。", "このまでいたい。", "このままをいたい。", "このまませいたい。"], "answer": 0, "note": "このまま + で + いたい: be in this unchanged condition."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "(I) ate breakfast still in my pajamas.", "options": ["パジャマの", "まま", "朝ごはんを", "食べた"], "note": "パジャマのまま describes the condition, then the object and the verb."},
+    {"id": 11, "type": "choice", "instruction": "What does 思いのまま suggest?", "prompt": "", "options": ["The outside matches what is inside one's heart", "A one-sided love", "A forgotten thought", "A sudden idea"], "answer": 0, "note": "The world stays in the same condition as one's own thoughts."},
+    {"id": 12, "type": "choice", "instruction": "Which part tells you the condition could have changed but did not?", "prompt": "", "options": ["The word まま itself", "The particle を", "The verb ending た", "The kanji 自然"], "answer": 0, "note": "That hint is part of what まま means."}
+  ]
+}

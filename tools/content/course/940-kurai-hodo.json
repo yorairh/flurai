@@ -1,0 +1,242 @@
+{
+ "id": 940,
+ "number": "94",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "くらい vs ほど",
+ "summary": "Both give an extent, but ほど stresses a large degree and くらい is approximate or small.",
+ "video": "https://www.youtube.com/watch?v=6PEQTcDnbBk",
+ "related": [
+  568,
+  714,
+  715
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**くらい** (also ぐらい) and **ほど** are nouns of extent: they say how much, how far, how long. The difference is in the size they suggest."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Word",
+     "Suggests",
+     "Examples"
+    ],
+    [
+     "ほど",
+     "a large degree, an upper limit",
+     "死ぬほど眠い"
+    ],
+    [
+     "くらい",
+     "approximate, indefinite, or small",
+     "十分ぐらい"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "ほど: a large degree"
+  },
+  {
+   "type": "example",
+   "jp": "これほど難しいとは思わなかった。",
+   "en": "I didn't think it was this difficult."
+  },
+  {
+   "type": "example",
+   "jp": "それほど高くない。",
+   "en": "It isn't that expensive."
+  },
+  {
+   "type": "example",
+   "jp": "彼ほど速く走れない。",
+   "en": "I can't run as fast as he can."
+  },
+  {
+   "type": "example",
+   "jp": "涙が出るほど笑った。",
+   "en": "I laughed so hard that tears came."
+  },
+  {
+   "type": "text",
+   "text": "ほど is also the upper side of a comparison: the thing in front of ほど has the larger amount."
+  },
+  {
+   "type": "heading",
+   "text": "くらい: about, or at least"
+  },
+  {
+   "type": "example",
+   "jp": "駅まで十分ぐらいかかる。",
+   "en": "It takes about ten minutes to the station."
+  },
+  {
+   "type": "example",
+   "jp": "一言くらい謝ってほしい。",
+   "en": "I want at least a word of apology."
+  },
+  {
+   "type": "text",
+   "text": "When くらい marks something small, it often means \"at least\", often with a complaint."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**ほど** = a great extent; negative: not that much.",
+    "**くらい** = about; or \"at least\" when small.",
+    "これくらい = about this much; これほど = this much (a lot)."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which word suggests a large degree?",
+   "prompt": "",
+   "options": [
+    "ほど",
+    "くらい",
+    "ばかり",
+    "だけ"
+   ],
+   "answer": 0,
+   "note": "ほど points at the upper limit."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Which word is used for \"about ten minutes\"?",
+   "prompt": "",
+   "options": [
+    "くらい",
+    "ほど",
+    "しか",
+    "まで"
+   ],
+   "answer": 0,
+   "note": "Approximation."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "死ぬ＿＿眠い。 (I'm so sleepy I could die.)",
+   "options": [
+    "ほど",
+    "くらい",
+    "しか",
+    "から"
+   ],
+   "answer": 0,
+   "note": "An exaggeration to a large degree."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "What does それほど高くない mean?",
+   "prompt": "",
+   "options": [
+    "It isn't that expensive",
+    "It is very expensive",
+    "It was expensive",
+    "It is cheap"
+   ],
+   "answer": 0,
+   "note": "ほど marks the upper limit it falls short of."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does 一言くらい謝ってほしい imply?",
+   "prompt": "",
+   "options": [
+    "At least a single word",
+    "About one word",
+    "A long apology",
+    "No apology"
+   ],
+   "answer": 0,
+   "note": "くらい marking something small."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "Which sentence uses ほど for comparison?",
+   "prompt": "",
+   "options": [
+    "私は彼ほど背が高くない。",
+    "駅まで十分ぐらいだ。",
+    "笑うくらい楽しい。",
+    "今日くらい休もう。"
+   ],
+   "answer": 0,
+   "note": "The larger one comes before ほど."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "ほど suggests a small amount.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It suggests a large degree."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "ぐらい is another sound of くらい.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "It's the same word."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word of approximation",
+   "options": [
+    "三時",
+    "ぐらい",
+    "に着く"
+   ],
+   "answer": 1,
+   "note": "ぐらい = about."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "It takes about an hour.",
+   "options": [
+    "一時間",
+    "ぐらい",
+    "かかる"
+   ],
+   "note": "Number + ぐらい."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "What does どのくらいかかりますか ask?",
+   "prompt": "",
+   "options": [
+    "About how long or how much does it take",
+    "Exactly how many",
+    "Whether it is large",
+    "Whether it is small"
+   ],
+   "answer": 0,
+   "note": "It asks softly for an estimate."
+  }
+ ]
+}

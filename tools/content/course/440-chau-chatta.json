@@ -1,0 +1,50 @@
+{
+  "id": 440,
+  "number": "44",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "ちゃう / ちゃった: the helper verb しまう",
+  "summary": "ちゃう is しまう squeezed onto the て-form: \"it is done\". It can describe regrets, surprises, good news, and even the future.",
+  "video": "https://www.youtube.com/watch?v=VyZWoJCSQ5Q",
+  "related": [463, 739],
+  "blocks": [
+    {"type": "text", "text": "Textbooks hand you separate meanings of ちゃった (\"finished\", \"by accident\", \"regret\") like the blind men describing an elephant. Look at the elephant instead. **ちゃう** is a contraction of **てしまう**, the helper verb **しまう** (finish, put away) attached to the て-form."},
+    {"type": "heading", "text": "How it is built"},
+    {"type": "table", "rows": [
+      ["Full form", "Contracted", "Example"],
+      ["〜てしまう", "〜ちゃう", "忘れてしまう → 忘れちゃう"],
+      ["〜てしまった", "〜ちゃった", "忘れてしまった → 忘れちゃった"],
+      ["〜でしまう (て-form ends in で)", "〜じゃう", "飲んでしまう → 飲んじゃう"],
+      ["〜でしまった", "〜じゃった", "踏んでしまった → 踏んじゃった"]
+    ]},
+    {"type": "text", "text": "The word しまった on its own is an exclamation: \"That's done it!\" And おしまい, the \"end\" of a fairy tale, is the noun made from しまう."},
+    {"type": "heading", "text": "One idea: \"it's done\""},
+    {"type": "text", "text": "Imagine English with a helper word **done**: \"I done forgot\", \"I done became a superhero\". The sentence says the thing happened, is finished, is a fact, and usually that it was not what anyone expected. The result can be a regret (忘れちゃった), an accident, or great news (なっちゃった). You never need to memorize separate meanings, only the idea \"it is done\"."},
+    {"type": "heading", "text": "It can point to the future"},
+    {"type": "text", "text": "しまう itself is a plain present-tense verb, so ちゃう can look ahead. 今日はどんどん飲んじゃう means \"today I'm going to just drink away\". 夏休みが終わっちゃう means \"the summer vacation will be over before we know it, and nothing can stop it\"."},
+    {"type": "example", "jp": "大事な本を電車に忘れちゃった。", "en": "(I) left my important book on the train, oh no."},
+    {"type": "example", "jp": "猫のしっぽを踏んじゃった。", "en": "(I) stepped on the cat's tail."},
+    {"type": "example", "jp": "まだ七時なのに、もう寝ちゃった。", "en": "It is only seven and (he's) already gone to sleep."},
+    {"type": "example", "jp": "この漫画は読んだら笑っちゃうよ。", "en": "(You) will end up laughing if you read this comic."},
+    {"type": "keypoints", "items": [
+      "**〜てしまう** becomes **〜ちゃう**; **〜でしまう** becomes **〜じゃう**.",
+      "The core idea is \"it is done / it happened\", often something unexpected.",
+      "It can be regret, accident, surprise or good news.",
+      "In the present tense it points to the future."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the contraction", "prompt": "食べてしまった", "options": ["食べちゃった", "食べじゃった", "食べてちゃった", "食べしまった"], "answer": 0, "note": "てしまった contracts to ちゃった."},
+    {"id": 2, "type": "choice", "instruction": "Pick the contraction", "prompt": "飲んでしまった", "options": ["飲んじゃった", "飲んちゃった", "飲みちゃった", "飲んでちゃった"], "answer": 0, "note": "A て-form ending in で contracts to じゃった."},
+    {"id": 3, "type": "choice", "instruction": "Which verb is the helper inside ちゃう?", "prompt": "", "options": ["しまう", "ちゃる", "くれる", "いる"], "answer": 0, "note": "ちゃう is てしまう squeezed together."},
+    {"id": 4, "type": "choice", "instruction": "What idea ties all uses of ちゃった together?", "prompt": "", "options": ["It is done: it happened, usually unexpectedly", "It is polite", "It is a question", "It is something I plan"], "answer": 0, "note": "Think \"I done forgot\", \"I done became\"."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "宿題を忘れちゃった。", "options": ["(I) forgot my homework, oh no", "(I) will do my homework", "(I) finished my homework early", "(I) did not need homework"], "answer": 0, "note": "A regretful \"it's done\"."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "ちゃう can only be used about the past.", "options": ["True", "False"], "answer": 1, "note": "It is the present form of しまう, so it can point ahead: 今日は飲んじゃう."},
+    {"id": 7, "type": "tap", "instruction": "Tap the word that holds the helper しまう", "options": ["財布を", "落としちゃった", "駅で"], "answer": 1, "note": "落とし + ちゃった = 落としてしまった."},
+    {"id": 8, "type": "choice", "instruction": "What does the sentence say?", "prompt": "もう終わっちゃった。", "options": ["It has already ended (and that is that)", "It is just starting", "It might end", "I will end it later"], "answer": 0, "note": "終わって + しまった: finished and done."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence can show good news?", "prompt": "", "options": ["彼は医者になっちゃった。", "彼は医者です。", "彼は医者でした。", "彼は医者だ。"], "answer": 0, "note": "ちゃった presents a fact as done and surprising; it need not be bad."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "(I) stepped on the cat's tail.", "options": ["猫の", "しっぽを", "踏んじゃった"], "note": "猫の describes しっぽ, then を marks it, then the verb."},
+    {"id": 11, "type": "choice", "instruction": "Which is the noun made from しまう, as in fairy-tale endings?", "prompt": "", "options": ["おしまい", "しまった", "しまう", "しめる"], "answer": 0, "note": "しまい is the い-stem noun: the end."},
+    {"id": 12, "type": "choice", "instruction": "Which sentence is a future ちゃう?", "prompt": "", "options": ["今夜は食べちゃうぞ。", "昨日は食べちゃった。", "さっき食べちゃった。", "もう食べちゃった。"], "answer": 0, "note": "A present-tense ちゃう looks ahead: \"tonight I'm going to eat it all\"."}
+  ]
+}

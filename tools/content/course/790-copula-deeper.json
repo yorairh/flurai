@@ -1,0 +1,224 @@
+{
+  "id": 790,
+  "number": "79",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "The deeper secret of the copula",
+  "summary": "The copula だ / です is a one-way equals sign that puts something in a set. It is not the verb of being: ある says something exists.",
+  "video": "https://www.youtube.com/watch?v=euHYPcMoao4",
+  "related": [
+    526,
+    511
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "The **copula** is a **one-way equals sign**: A is B, but B is not necessarily A. さくらは日本人だ means Sakura belongs to the set of Japanese people. It places things in **sets**, the most basic way humans think about the world. When the set has only one member, the sign works both ways: あの人はさくらだ."
+    },
+    {
+      "type": "heading",
+      "text": "Not the same as ある"
+    },
+    {
+      "type": "text",
+      "text": "English uses one verb, **be**, for two jobs: the copula (I am an American) and **existence** (I think, therefore I am). Spanish separates them (ser / estar versus haber), and so does Japanese: **だ / です** is the copula, **ある / いる** says something exists. Mixing the two causes a lot of confusion."
+    },
+    {
+      "type": "example",
+      "jp": "これは本です。",
+      "en": "This is a book. (it belongs to the set \"book\")"
+    },
+    {
+      "type": "example",
+      "jp": "机の上に本がある。",
+      "en": "There is a book on the desk. (it exists)"
+    },
+    {
+      "type": "example",
+      "jp": "私は学生です。",
+      "en": "I am a student."
+    },
+    {
+      "type": "example",
+      "jp": "さくらは日本人だ。",
+      "en": "Sakura is a Japanese person."
+    },
+    {
+      "type": "heading",
+      "text": "だ and です"
+    },
+    {
+      "type": "text",
+      "text": "The course treats だ and です as the **same copula**; です is the polite version with one eccentricity. Any logical sentence ends in a verb, an adjective, or a noun plus the copula: a noun cannot end a logical sentence by itself."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "The copula is a one-way equals sign: A belongs to set B.",
+        "It is not the verb of existence: that is ある / いる.",
+        "A logical sentence ends in a verb, an adjective, or noun + copula.",
+        "だ and です are one copula in two speech styles."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "What does the copula do?",
+      "prompt": "",
+      "options": [
+        "It puts A into the set B",
+        "It says something exists",
+        "It marks the object",
+        "It makes a question"
+      ],
+      "answer": 0,
+      "note": "A one-way equals sign.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "さくらは日本人だ means that every Japanese person is Sakura.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "The equals sign only works one way.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence says that a book exists?",
+      "prompt": "",
+      "options": [
+        "机の上に本がある",
+        "これは本です",
+        "本は机です",
+        "私は本だ"
+      ],
+      "answer": 0,
+      "note": "ある is the verb of existence.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "私は学生＿＿。",
+      "options": [
+        "です",
+        "ある",
+        "いる",
+        "する"
+      ],
+      "answer": 0,
+      "note": "学生 is a noun, so it takes the copula.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Which one can end a logical sentence?",
+      "prompt": "",
+      "options": [
+        "学生だ",
+        "学生",
+        "学生の",
+        "学生を"
+      ],
+      "answer": 0,
+      "note": "A bare noun is not an engine; noun + copula is.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "だ and です are two different words with unrelated jobs.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "They are the same copula in different politeness styles.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "これは本です。",
+      "options": [
+        "This is a book",
+        "There is a book",
+        "I want a book",
+        "I read a book"
+      ],
+      "answer": 0,
+      "note": "The thing belongs to the set \"book\".",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "A noun alone can be the engine of a logical sentence.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "It needs the copula.",
+      "id": 8
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Sakura is a Japanese person.",
+      "options": [
+        "さくらは",
+        "日本人",
+        "だ"
+      ],
+      "note": "Topic, noun, copula.",
+      "id": 9
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the copula in 彼は先生だ",
+      "options": [
+        "彼は",
+        "先生",
+        "だ"
+      ],
+      "answer": 2,
+      "note": "だ is the copula.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "Why is the copula confusing for English speakers?",
+      "prompt": "",
+      "options": [
+        "English uses one verb \"be\" for both the copula and existence",
+        "English has no nouns",
+        "English has too many particles",
+        "English has no sets"
+      ],
+      "answer": 0,
+      "note": "Japanese keeps the two jobs apart.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "When can the equals sign work both ways?",
+      "prompt": "",
+      "options": [
+        "When the set has only one member",
+        "Never",
+        "Always",
+        "Only in questions"
+      ],
+      "answer": 0,
+      "note": "That person is Sakura: a set of one.",
+      "id": 12
+    }
+  ]
+}

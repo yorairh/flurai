@@ -1,0 +1,44 @@
+{
+  "id": 400,
+  "number": "40",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Three pitfalls: で, が and に",
+  "summary": "Three small kana each do two different jobs: で (particle or te-form of だ), が (subject marker or \"but\") and に (target or an old \"and\"). Look at what comes before and what ends the phrase.",
+  "video": "https://www.youtube.com/watch?v=Qf7IGkrnnjY",
+  "related": [505, 502, 504],
+  "blocks": [
+    {"type": "text", "text": "Three look-alikes catch learners out. For each pair there is one job you know and one you may not."},
+    {"type": "heading", "text": "で"},
+    {"type": "text", "text": "As a **particle**, で follows a noun and marks where an action happens or the means used: 図書館で勉強する. As the **て-form of だ**, it connects descriptions or clauses: さくらはきれいで優しい. It also hides in phrases such as お元気で (\"take care\") and 無事でよかった (\"I'm glad you're safe\")."},
+    {"type": "example", "jp": "図書館で勉強する。", "en": "I study at the library."},
+    {"type": "example", "jp": "さくらはきれいで優しい。", "en": "Sakura is pretty and kind."},
+    {"type": "heading", "text": "が"},
+    {"type": "text", "text": "As a **subject particle**, が always follows a noun. As a **connector**, が follows a complete clause (ending in a verb, an adjective or だ) and means \"but\". It can also end a sentence, leaving the rest unsaid and polite."},
+    {"type": "example", "jp": "お店に行ったが、パンがなかった。", "en": "I went to the shop, but there was no bread."},
+    {"type": "example", "jp": "コーヒーがほしいのですが……", "en": "I would like some coffee, but... (if it's no trouble)"},
+    {"type": "heading", "text": "に"},
+    {"type": "text", "text": "The usual **target** particle, plus an old, written use meaning \"and\" in lists: 靴に指輪に帽子. The set phrase **それに** means \"besides, in addition\"."},
+    {"type": "example", "jp": "雨が降っている。それに、風も強い。", "en": "It is raining. On top of that, the wind is strong."},
+    {"type": "keypoints", "items": [
+      "**Noun + で**: place or means; **predicate + で**: て-form of だ.",
+      "**Noun + が**: subject; **complete clause + が**: but.",
+      "**に**: target; in lists, \"and\"; **それに**: besides.",
+      "Check what comes before the kana and how the phrase ends."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is で in お元気で?", "prompt": "", "options": ["The て-form of だ", "The place particle", "The means particle", "A verb"], "answer": 0, "note": "A set phrase using the connective form of だ."},
+    {"id": 2, "type": "choice", "instruction": "What is で in 図書館で勉強する?", "prompt": "", "options": ["The place particle", "The て-form of だ", "A conjunction", "An adverb"], "answer": 0, "note": "A noun followed by で marks where it happens."},
+    {"id": 3, "type": "choice", "instruction": "What does で do in さくらはきれいで優しい?", "prompt": "", "options": ["Links two descriptions", "Marks a place", "Marks a tool", "Asks a question"], "answer": 0, "note": "The て-form of だ connects predicates."},
+    {"id": 4, "type": "choice", "instruction": "What does が mean here?", "prompt": "お店に行ったが、パンがなかった。", "options": ["But", "Because", "And then", "Even"], "answer": 0, "note": "A connector after a complete clause."},
+    {"id": 5, "type": "choice", "instruction": "How do you tell the subject が from the connector が?", "prompt": "", "options": ["The subject が follows a noun; the connector follows a full clause", "The connector が follows a noun", "There is no difference", "The subject が ends a sentence"], "answer": 0, "note": "Check what comes before."},
+    {"id": 6, "type": "choice", "instruction": "What does a sentence-final が do?", "prompt": "コーヒーがほしいのですが……", "options": ["Leaves a polite \"but...\" unsaid", "Asks a question", "Makes it negative", "Marks the subject"], "answer": 0, "note": "The listener fills in the rest."},
+    {"id": 7, "type": "choice", "instruction": "What does に mean in 靴に指輪に帽子?", "prompt": "", "options": ["And (listing)", "To", "At", "Because"], "answer": 0, "note": "An old written use of に."},
+    {"id": 8, "type": "choice", "instruction": "What does それに mean?", "prompt": "", "options": ["Besides / in addition", "Therefore", "Instead", "Afterward"], "answer": 0, "note": "それ + に: on top of that."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "The connector が can come right after a plain noun.", "options": ["True", "False"], "answer": 1, "note": "A connector needs a complete clause before it."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "Sakura is pretty and kind.", "options": ["さくらは", "きれいで", "優しい"], "note": "The て-form of だ links descriptions."},
+    {"id": 11, "type": "tap", "instruction": "Tap the word that holds the て-form of だ (not a place particle)", "options": ["無事で", "よかった"], "answer": 0, "note": "無事 + で: safe, so glad."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "学校＿＿勉強する。 (I study at school.)", "options": ["で", "を", "が", "と"], "answer": 0, "note": "Place of action: で."}
+  ]
+}

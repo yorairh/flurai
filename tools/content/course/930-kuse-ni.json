@@ -1,0 +1,254 @@
+{
+ "id": 930,
+ "number": "93",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "くせに: cussing them out",
+ "summary": "くせに is a contrastive connector like のに, but sharper: it blames someone for acting against what they are.",
+ "video": "https://www.youtube.com/watch?v=QvuNXIYqFNM",
+ "related": [
+  316,
+  443
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**くせに** means \"even though / despite\", like のに, but with a harsh edge. It takes a person's status or character and says their behavior is the opposite of what you would expect. The 癖 (habit) meaning is not helpful here."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Word",
+     "Feel"
+    ],
+    [
+     "のに",
+     "regret, disappointment"
+    ],
+    [
+     "くせに",
+     "blame, criticism, contempt"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "Attaching it"
+  },
+  {
+   "type": "text",
+   "text": "くせ is a noun, so what comes before it modifies it in the usual way."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Before くせに",
+     "Joined with",
+     "Example"
+    ],
+    [
+     "noun",
+     "の",
+     "金持ちのくせに"
+    ],
+    [
+     "な-noun",
+     "な",
+     "下手なくせに"
+    ],
+    [
+     "い-adjective",
+     "nothing",
+     "若いくせに"
+    ],
+    [
+     "verb",
+     "dictionary / plain form",
+     "知っているくせに"
+    ]
+   ]
+  },
+  {
+   "type": "example",
+   "jp": "お金持ちのくせにケチだ。",
+   "en": "Though (he) is rich, (he) is stingy."
+  },
+  {
+   "type": "example",
+   "jp": "知っているくせに教えてくれない。",
+   "en": "(You) know it, and yet you won't tell me."
+  },
+  {
+   "type": "example",
+   "jp": "下手なくせに威張っている。",
+   "en": "(He) is bad at it, and yet he swaggers."
+  },
+  {
+   "type": "text",
+   "text": "The second clause is often dropped, as an insult that trails off. Be careful: what follows is a separate sentence, not part of the くせに clause."
+  },
+  {
+   "type": "example",
+   "jp": "大人のくせに。泣かないでよ。",
+   "en": "And you call yourself an adult. Stop crying."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "くせに = despite, with blame.",
+    "Noun の / な-noun な / adjective / verb + くせに.",
+    "Usually rude; don't use it with people above you."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What is くせに?",
+   "prompt": "",
+   "options": [
+    "A harsh contrastive connector",
+    "A polite thanks",
+    "A question marker",
+    "A noun"
+   ],
+   "answer": 0,
+   "note": "Like のに, but accusing."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "子供の＿＿大人のふりをする。 (Though a child, he acts like an adult.)",
+   "options": [
+    "くせに",
+    "から",
+    "ので",
+    "ために"
+   ],
+   "answer": 0,
+   "note": "くせに blames the contrast."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Pick the correct form",
+   "prompt": "下手＿＿くせに自慢する。",
+   "options": [
+    "な",
+    "の",
+    "に",
+    "で"
+   ],
+   "answer": 0,
+   "note": "な-noun + な + くせに."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Pick the correct form",
+   "prompt": "若い＿＿くせに疲れたと言う。",
+   "options": [
+    "(nothing)",
+    "な",
+    "の",
+    "が"
+   ],
+   "answer": 0,
+   "note": "い-adjectives attach directly."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "Which is stronger criticism?",
+   "prompt": "",
+   "options": [
+    "くせに",
+    "のに",
+    "けれど",
+    "でも"
+   ],
+   "answer": 0,
+   "note": "くせに often sounds like severe criticism."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does くせ in くせに mean?",
+   "prompt": "",
+   "options": [
+    "A noun that follows the modifier",
+    "\"habit\", literally",
+    "A verb",
+    "A particle"
+   ],
+   "answer": 0,
+   "note": "The \"habit\" meaning is not helpful here."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "くせに can be used to praise someone.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It is nearly always negative."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "The second clause after くせに is sometimes left out.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "It is implied."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the connector",
+   "options": [
+    "男の",
+    "くせに",
+    "泣く"
+   ],
+   "answer": 1,
+   "note": "くせに joins the two clauses."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Though he is rich, he is stingy.",
+   "options": [
+    "お金持ちの",
+    "くせに",
+    "ケチだ"
+   ],
+   "note": "Noun の + くせに."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which sentence is natural?",
+   "prompt": "",
+   "options": [
+    "知っているくせに教えてくれない。",
+    "知るくせに教えない人。",
+    "知ったくせ教えない。",
+    "知るのくせに教える。"
+   ],
+   "answer": 0,
+   "note": "A plain-form verb before くせに."
+  }
+ ]
+}

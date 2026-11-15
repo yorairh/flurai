@@ -1,0 +1,52 @@
+{
+  "id": 310,
+  "number": "31",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The ば / れば conditional",
+  "summary": "ば is the hypothetical \"if\". Its hypothetical nature gives you advice (どうすればいい), regret (ばよかった) and obligation (なければいけない).",
+  "video": "https://www.youtube.com/watch?v=O81EPCsPUpw",
+  "related": [418, 756, 429],
+  "blocks": [
+    {"type": "text", "text": "Where と says \"this always leads to that\", **ば** (also called れば) says **\"suppose this\"**. It is always \"if\", never \"when\", because it states a hypothesis, not a fact."},
+    {"type": "heading", "text": "How to make it"},
+    {"type": "table", "rows": [
+      ["Word", "Rule", "Example"],
+      ["Godan verb", "え-stem + ば", "行く → 行けば"],
+      ["Ichidan verb", "drop る + れば", "食べる → 食べれば"],
+      ["する / 来る", "すれば / 来れば", "すれば, 来れば"],
+      ["い-adjective", "drop い + ければ", "高い → 高ければ"],
+      ["Negative ない", "なければ", "食べない → 食べなければ"]
+    ]},
+    {"type": "text", "text": "The **え-stem** is the vowel row the ば form uses for godan verbs. Adjectives follow the same か-行 pattern: くない, かった, ければ."},
+    {"type": "heading", "text": "Three expressions that come from hypotheticals"},
+    {"type": "text", "text": "Japanese has no single word for \"should\" or \"must\". It uses a hypothetical instead, and that is why ば appears in so many set phrases. Think of する as \"act\" here."},
+    {"type": "text", "text": "**どうすればいい?** is literally \"if I act how, would it be good?\", which is \"What should I do?\""},
+    {"type": "example", "jp": "どうすればいいですか。", "en": "What should I do?"},
+    {"type": "text", "text": "**〜ばよかった** is \"if I had done it, it would have been good\", which is regret: \"I should have\"."},
+    {"type": "example", "jp": "傘を持ってくればよかった。", "en": "I should have brought an umbrella."},
+    {"type": "text", "text": "**〜なければいけない** is \"if I do not do it, it will not do\": obligation. Casually it shrinks to **〜なきゃ**."},
+    {"type": "example", "jp": "もう行かなければいけない。", "en": "I have to go now."},
+    {"type": "example", "jp": "早く寝なきゃ。", "en": "I have to go to bed early."},
+    {"type": "keypoints", "items": [
+      "**ば** = hypothetical \"if\"; never a known fact.",
+      "**どうすればいい**: what should I do?",
+      "**〜ばよかった**: I should have / I wish I had.",
+      "**〜なければいけない / 〜なきゃ**: must."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the ば form of 食べる", "prompt": "", "options": ["食べれば", "食べば", "食べるば", "食べけば"], "answer": 0, "note": "Ichidan: drop る, add れば."},
+    {"id": 2, "type": "choice", "instruction": "Pick the ば form of 行く", "prompt": "", "options": ["行けば", "行きば", "行くば", "行かば"], "answer": 0, "note": "Godan: え-stem + ば."},
+    {"id": 3, "type": "choice", "instruction": "Pick the ば form of 高い", "prompt": "", "options": ["高ければ", "高いば", "高くれば", "高かれば"], "answer": 0, "note": "Drop い, add ければ."},
+    {"id": 4, "type": "choice", "instruction": "Pick the ば form of 来る", "prompt": "", "options": ["来れば", "来くば", "来ば", "来えば"], "answer": 0, "note": "来る behaves like an ichidan verb here."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "どうすればいいですか。", "options": ["What should I do?", "How did you do it?", "I did it well", "Do it somehow"], "answer": 0, "note": "Literally: if I act how, will it be good?"},
+    {"id": 6, "type": "choice", "instruction": "What does this mean?", "prompt": "傘を持ってくればよかった。", "options": ["I should have brought an umbrella", "I brought an umbrella", "Bring an umbrella tomorrow", "I do not need an umbrella"], "answer": 0, "note": "ばよかった expresses regret."},
+    {"id": 7, "type": "choice", "instruction": "What does this mean?", "prompt": "もう行かなければいけない。", "options": ["I have to go now", "I must not go", "I will not go", "I went already"], "answer": 0, "note": "If I don't go, it won't do: must."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "ば can describe something certain to happen \"when\" the time comes.", "options": ["True", "False"], "answer": 1, "note": "ば is always hypothetical: if."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "If I study every day, I can pass.", "options": ["毎日", "勉強すれば", "合格できる"], "note": "Hypothetical clause, then the result."},
+    {"id": 10, "type": "choice", "instruction": "What is 行かなきゃ a casual form of?", "prompt": "", "options": ["行かなければ(いけない)", "行けば", "行かない", "行こう"], "answer": 0, "note": "なければ shrinks to なきゃ."},
+    {"id": 11, "type": "tap", "instruction": "Tap the part that turns this into regret", "options": ["傘を", "持ってくれば", "よかった"], "answer": 2, "note": "Past よかった: it would have been good."},
+    {"id": 12, "type": "choice", "instruction": "Pick the ば form of 食べない", "prompt": "", "options": ["食べなければ", "食べないれば", "食べなくれば", "食べなけば"], "answer": 0, "note": "ない works like an い-adjective: なければ."}
+  ]
+}

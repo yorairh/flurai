@@ -1,0 +1,258 @@
+{
+  "id": 720,
+  "number": "72",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The い-stem: the great connector",
+  "summary": "The い-stem is the verb's connecting form: it takes ます, helper adjectives like やすい, compounds, joins clauses and makes a noun.",
+  "video": "https://www.youtube.com/watch?v=_qj9ZkAC2tE",
+  "related": [
+    402,
+    457,
+    458,
+    406
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Take a verb's う-row ending and shift it to the い-row (読む → 読み, 食べる → 食べ). That is the **い-stem**, the \"connective use form\" (連用形). The course calls it **the great connector**, because it does so many different joining jobs. It is not the \"base form\": ます is just one helper attached to it."
+    },
+    {
+      "type": "heading",
+      "text": "What it connects"
+    },
+    {
+      "type": "text",
+      "text": "It takes **ます**, plenty of dedicated helper adjectives and nouns, and it joins verbs into compounds, much as the て-form does."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Job",
+          "Example"
+        ],
+        [
+          "Helper adjective",
+          "読みやすい (easy to read), 読みにくい"
+        ],
+        [
+          "While doing",
+          "歩きながら読む"
+        ],
+        [
+          "Looks like",
+          "雨が降りそうだ"
+        ],
+        [
+          "Compound verb",
+          "読み始める, 読み込む"
+        ],
+        [
+          "Joining clauses",
+          "店に行き、パンを買った"
+        ],
+        [
+          "Noun form",
+          "休む → 休み, 読む → 読み"
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "この本は読みやすい。",
+      "en": "This book is easy to read."
+    },
+    {
+      "type": "example",
+      "jp": "歩きながらスマホを見ないでください。",
+      "en": "Please don't look at your phone while walking."
+    },
+    {
+      "type": "example",
+      "jp": "店に行き、パンを買った。",
+      "en": "I went to the store and bought bread."
+    },
+    {
+      "type": "example",
+      "jp": "夏休みは楽しかった。",
+      "en": "The summer vacation was fun."
+    },
+    {
+      "type": "text",
+      "text": "The い-stem can also join with a noun to make a new noun: 泣き + 虫 = 泣き虫 (a crybaby), 読み + 方 = 読み方 (way of reading). A compound takes on the character of its last element, so 読み込み中 is a noun."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "い-stem = う-ending shifted to the い-row (読む → 読み).",
+        "It connects ます, やすい / にくい, ながら, そう, and compounds.",
+        "It can join two clauses like the て-form: 行き、買った.",
+        "It is also the **noun form** of a verb: 休む → 休み."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "What is the い-stem of 読む?",
+      "prompt": "",
+      "options": [
+        "読み",
+        "読ま",
+        "読め",
+        "読も"
+      ],
+      "answer": 0,
+      "note": "う shifts to い-row: む → み.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "What is the い-stem of 食べる?",
+      "prompt": "",
+      "options": [
+        "食べ",
+        "食べら",
+        "食べれ",
+        "食べよ"
+      ],
+      "answer": 0,
+      "note": "Drop る.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "この本は読み＿＿。 (easy to read)",
+      "options": [
+        "やすい",
+        "たがる",
+        "ながら",
+        "ます"
+      ],
+      "answer": 0,
+      "note": "い-stem + やすい.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "What is the noun form of 休む?",
+      "prompt": "",
+      "options": [
+        "休み",
+        "休む",
+        "休め",
+        "休も"
+      ],
+      "answer": 0,
+      "note": "い-stem is the noun form.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 読み方 mean?",
+      "prompt": "",
+      "options": [
+        "Way of reading",
+        "Reading time",
+        "Reading room",
+        "A reader"
+      ],
+      "answer": 0,
+      "note": "い-stem + 方.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "The い-stem can join two clauses, like the て-form.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "行き、買った is equivalent to 行って買った.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "歩き＿＿スマホを見ないでください。 (while walking)",
+      "options": [
+        "ながら",
+        "やすい",
+        "ます",
+        "そう"
+      ],
+      "answer": 0,
+      "note": "い-stem + ながら: while.",
+      "id": 7
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I started reading the book.",
+      "options": [
+        "本を",
+        "読み",
+        "始めた"
+      ],
+      "note": "い-stem compound: 読み始める.",
+      "id": 8
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the い-stem in 読み始める",
+      "options": [
+        "読み",
+        "始める"
+      ],
+      "answer": 0,
+      "note": "読み is the い-stem, joined to 始める.",
+      "id": 9
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 泣き虫 mean?",
+      "prompt": "",
+      "options": [
+        "Crybaby",
+        "A noisy insect",
+        "A sad story",
+        "A night bug"
+      ],
+      "answer": 0,
+      "note": "い-stem 泣き + 虫.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 雨が降りそうだ mean?",
+      "prompt": "",
+      "options": [
+        "It looks like rain",
+        "It rained yesterday",
+        "I want rain",
+        "It is not raining"
+      ],
+      "answer": 0,
+      "note": "い-stem + そう: it looks like.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these attaches to the い-stem?",
+      "prompt": "",
+      "options": [
+        "ます",
+        "ない",
+        "よう",
+        "れる"
+      ],
+      "answer": 0,
+      "note": "読みます; the others use other stems.",
+      "id": 12
+    }
+  ]
+}

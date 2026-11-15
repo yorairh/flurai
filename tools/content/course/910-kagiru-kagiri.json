@@ -1,0 +1,249 @@
+{
+ "id": 910,
+ "number": "91",
+ "kind": "lesson",
+ "jlpt": 2,
+ "title": "限る and 限り",
+ "summary": "限る means to limit; its noun 限り is the edge of a boundary, and many set phrases come from that image.",
+ "video": "https://www.youtube.com/watch?v=jWCLPJwZS5E",
+ "related": [
+  393,
+  327,
+  308
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "The verb **限る** means to limit, and its い-stem noun **限り** means the limit, the edge. Where うち looks at the inside of a boundary, 限り looks at its edge."
+  },
+  {
+   "type": "heading",
+   "text": "Literal and \"the best\""
+  },
+  {
+   "type": "example",
+   "jp": "参加は会員に限る。",
+   "en": "Participation is limited to members."
+  },
+  {
+   "type": "text",
+   "text": "**Noun に限る** pushes the idea to the extreme: \"X is the pinnacle, nothing goes beyond it\". It means \"X is the best\"."
+  },
+  {
+   "type": "example",
+   "jp": "暑い日はかき氷に限る。",
+   "en": "On a hot day, nothing beats shaved ice."
+  },
+  {
+   "type": "example",
+   "jp": "彼に限って、そんなことはしない。",
+   "en": "He, of all people, would never do such a thing."
+  },
+  {
+   "type": "heading",
+   "text": "Not limited to: とは限らない"
+  },
+  {
+   "type": "text",
+   "text": "A statement + **とは限らない** denies it as always true: \"it is not necessarily the case\"."
+  },
+  {
+   "type": "example",
+   "jp": "高い物が良い物だとは限らない。",
+   "en": "Expensive things are not necessarily good things."
+  },
+  {
+   "type": "heading",
+   "text": "限り: as far as"
+  },
+  {
+   "type": "example",
+   "jp": "私の知る限り、そんな店はない。",
+   "en": "As far as I know, there is no such shop."
+  },
+  {
+   "type": "text",
+   "text": "The modifier fills the noun 限り: \"to the limit of what I know\"."
+  },
+  {
+   "type": "example",
+   "jp": "急いでいる時に限って電車が遅れる。",
+   "en": "It is just when I'm in a hurry that the train is late."
+  },
+  {
+   "type": "example",
+   "jp": "約束はその場限りだった。",
+   "en": "The promise held only for that occasion."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**Noun に限る** = the best.",
+    "**Noun に限って** = of all (people / times).",
+    "**とは限らない** = not necessarily.",
+    "**Modifier + 限り** = as far as / as long as."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What does 夏はビールに限る mean?",
+   "prompt": "",
+   "options": [
+    "Nothing beats beer in summer",
+    "Beer is forbidden in summer",
+    "Summer is limited",
+    "Only in summer is beer sold"
+   ],
+   "answer": 0,
+   "note": "に限る = it reaches its limit at beer, the best."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "What does とは限らない express?",
+   "prompt": "",
+   "options": [
+    "Not necessarily",
+    "Always",
+    "Never",
+    "Only"
+   ],
+   "answer": 0,
+   "note": "It denies \"always\"."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "知っている＿＿、彼は来ない。 (As far as I know, he isn't coming.)",
+   "options": [
+    "限り",
+    "限る",
+    "限って",
+    "限れ"
+   ],
+   "answer": 0,
+   "note": "限り is the noun, modified by 知っている."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "忙しい日＿＿客が多い。 (It's just on busy days that there are many customers.)",
+   "options": [
+    "に限って",
+    "に限る",
+    "とは限らない",
+    "の限り"
+   ],
+   "answer": 0,
+   "note": "に限って picks out the exact occasion."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does 参加は大人に限る mean?",
+   "prompt": "",
+   "options": [
+    "Participation is for adults only",
+    "Adults are tired",
+    "Adults are limited in number",
+    "Participation is forbidden for adults"
+   ],
+   "answer": 0,
+   "note": "The literal meaning of limiting."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does 彼に限って嘘はつかない suggest?",
+   "prompt": "",
+   "options": [
+    "He of all people wouldn't lie",
+    "Only he lies",
+    "He lies a little",
+    "He has a limit"
+   ],
+   "answer": 0,
+   "note": "He is the extreme of people who would not."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "What is 限り in terms of the verb 限る?",
+   "prompt": "",
+   "options": [
+    "Its い-stem noun",
+    "Its past tense",
+    "Its te-form",
+    "A particle"
+   ],
+   "answer": 0,
+   "note": "An い-stem makes a noun."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "限り can be used to say \"as far as I know\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "私の知る限り."
+  },
+  {
+   "id": 9,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "とは限らない means \"always\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It is a denial of always."
+  },
+  {
+   "id": 10,
+   "type": "tap",
+   "instruction": "Tap the phrase meaning \"not necessarily\"",
+   "options": [
+    "そうだ",
+    "とは限らない"
+   ],
+   "answer": 1,
+   "note": "とは限らない after a statement."
+  },
+  {
+   "id": 11,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Nothing beats curry for lunch.",
+   "options": [
+    "昼ご飯は",
+    "カレーに",
+    "限る"
+   ],
+   "note": "Noun に限る."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "What does その場限り imply?",
+   "prompt": "",
+   "options": [
+    "It only counts for that occasion",
+    "It is a limited edition",
+    "It is permanent",
+    "It is expensive"
+   ],
+   "answer": 0,
+   "note": "Limited to the moment."
+  }
+ ]
+}

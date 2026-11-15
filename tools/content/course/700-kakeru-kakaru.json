@@ -1,0 +1,252 @@
+{
+  "id": 700,
+  "number": "70",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "かける and かかる: the all-purpose pair",
+  "summary": "A long list of meanings becomes one picture: hang something so that it stays. かける is the other-move verb, かかる the self-move verb.",
+  "video": "https://www.youtube.com/watch?v=1MbqmZPySPQ",
+  "related": [
+    585
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Dictionaries give かける twenty or more meanings. They all come from one picture: **hang or hook** something on something, so that it **clings** and does not easily fall off. It is neither \"put\" nor \"hang\" in English, and **かける** (other-move) and **かかる** (self-move) are a pair."
+    },
+    {
+      "type": "heading",
+      "text": "かける: hang it on"
+    },
+    {
+      "type": "example",
+      "jp": "毛布をかける。",
+      "en": "Put a blanket over (something)."
+    },
+    {
+      "type": "example",
+      "jp": "眼鏡をかける。",
+      "en": "Put on glasses."
+    },
+    {
+      "type": "example",
+      "jp": "電話をかける。",
+      "en": "Make a phone call."
+    },
+    {
+      "type": "example",
+      "jp": "先生に迷惑をかけてしまった。",
+      "en": "I have caused the teacher trouble."
+    },
+    {
+      "type": "example",
+      "jp": "鍵をかける。",
+      "en": "Lock (the door)."
+    },
+    {
+      "type": "example",
+      "jp": "椅子に腰をかける。",
+      "en": "Sit down on a chair."
+    },
+    {
+      "type": "text",
+      "text": "The last two are old pictures: a heavy bar hung across a door was the lock and the key at once, and sitting means hanging your hips on the seat."
+    },
+    {
+      "type": "heading",
+      "text": "かかる: it hangs on"
+    },
+    {
+      "type": "text",
+      "text": "**時間がかかる** is not \"it takes time\" but \"time hangs\" (on the activity). With the other-move verb you spend it on purpose: **時間をかける**."
+    },
+    {
+      "type": "example",
+      "jp": "日本語を覚えるのに時間がかかる。",
+      "en": "Learning Japanese takes time."
+    },
+    {
+      "type": "example",
+      "jp": "この仕事にはお金がかかる。",
+      "en": "This job costs money."
+    },
+    {
+      "type": "example",
+      "jp": "料理に時間をかける。",
+      "en": "(I) spend time on cooking."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**かける**: hang or hook something on (cover, wear, call, lock, spend).",
+        "**かかる**: it hangs on: time and money \"hang\" on a task.",
+        "The core feeling: stuck on, not easily dislodged.",
+        "迷惑をかける = put annoyance on someone."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "時間が＿＿。 (It takes time.)",
+      "options": [
+        "かかる",
+        "かける",
+        "かえる",
+        "かたる"
+      ],
+      "answer": 0,
+      "note": "The self-move verb: time hangs.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "毛布を＿＿。 (Put a blanket over.)",
+      "options": [
+        "かける",
+        "かかる",
+        "かえる",
+        "かたる"
+      ],
+      "answer": 0,
+      "note": "Other-move かける: you do it.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Which one is self-move?",
+      "prompt": "",
+      "options": [
+        "かかる",
+        "かける",
+        "どちらも",
+        "どちらでもない"
+      ],
+      "answer": 0,
+      "note": "かかる is self-move; かける is other-move.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "迷惑をかける",
+      "options": [
+        "Cause trouble for someone",
+        "Receive help",
+        "Avoid trouble",
+        "Apologize"
+      ],
+      "answer": 0,
+      "note": "Put annoyance on someone.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "鍵をかける",
+      "options": [
+        "Lock",
+        "Lose a key",
+        "Cut a key",
+        "Open a lock"
+      ],
+      "answer": 0,
+      "note": "The old bar hung across the door.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "日本語を覚えるのに時間がかかる。",
+      "options": [
+        "Learning Japanese takes time",
+        "I took time to learn Japanese",
+        "Japanese takes my time away",
+        "I hung Japanese on time"
+      ],
+      "answer": 0,
+      "note": "Time hangs on the activity of learning.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "The core picture of かける is hanging something so that it clings.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "That one picture explains most of the meanings.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "先生に迷惑を＿＿しまった。",
+      "options": [
+        "かけて",
+        "かかって",
+        "かって",
+        "かいて"
+      ],
+      "answer": 0,
+      "note": "You do the bothering: かけて.",
+      "id": 8
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Making this takes a lot of money.",
+      "options": [
+        "これを作るのに",
+        "お金が",
+        "かかる"
+      ],
+      "note": "Money is the A-car that hangs.",
+      "id": 9
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that is doing the hanging (the A-car)",
+      "options": [
+        "日本語を覚えるのに",
+        "時間が",
+        "かかる"
+      ],
+      "answer": 1,
+      "note": "時間 is what hangs on the activity.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 眼鏡をかける mean?",
+      "prompt": "",
+      "options": [
+        "Put on glasses",
+        "Break glasses",
+        "Buy glasses",
+        "Clean glasses"
+      ],
+      "answer": 0,
+      "note": "You hook them on your ears.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 腰をかける mean?",
+      "prompt": "",
+      "options": [
+        "Sit down",
+        "Stand up",
+        "Hurt your back",
+        "Lie down"
+      ],
+      "answer": 0,
+      "note": "Hang your hips on the seat.",
+      "id": 12
+    }
+  ]
+}

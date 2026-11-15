@@ -1,0 +1,48 @@
+{
+  "id": 460,
+  "number": "46",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Word order: two simple rules",
+  "summary": "The engine goes last, and anything that describes something goes before it. Particles do the rest of the work.",
+  "video": "https://www.youtube.com/watch?v=T5PD1lORiwk",
+  "related": [533, 604],
+  "blocks": [
+    {"type": "text", "text": "You will hear two claims about Japanese word order: \"it is subject-object-verb\" and \"order does not matter\". Both come from asking European questions about Japanese. Mary-hit-Susan can be メアリーがスーザンをなぐった or スーザンをメアリーがなぐった. Who did what to whom is decided by **が** and **を**, not by position. Yet order does matter in two other places."},
+    {"type": "heading", "text": "Rule 1: the engine goes last"},
+    {"type": "text", "text": "Whatever the engine is (a verb, an い-adjective, or a noun plus だ / です), it closes the logical sentence. A few sentence-ending particles such as ね may follow, but the engine is the true end."},
+    {"type": "heading", "text": "Rule 2: a describer goes before what it describes"},
+    {"type": "text", "text": "Anything that modifies a thing (a noun) must stand in front of it: a blue dress, the dress I bought at the market. Japanese never wraps a clause on the other side, as English does with \"the dress **I bought**\". So you always read in the same direction."},
+    {"type": "text", "text": "Take a full clause and move one piece to the engine end: it stops being a sentence and becomes a describer for that piece."},
+    {"type": "diagram", "cars": [
+      {"text": "市場で", "role": "white", "label": "where"},
+      {"text": "（ゼロ）が", "role": "zero", "label": "I"},
+      {"text": "買った", "role": "engine", "label": "bought"},
+      {"text": "ドレス", "role": "carriage", "label": "the dress I bought at the market"}
+    ], "text": "市場で買ったドレス。 The dress (I) bought at the market."},
+    {"type": "text", "text": "How do you know whether something is a full sentence or a describer? Look at the end. If it ends in an engine, it is a logical clause. If it ends in a noun, that noun is the thing being described by everything in front of it."},
+    {"type": "example", "jp": "市場で買ったドレスを友達にあげた。", "en": "(I) gave my friend the dress I bought at the market."},
+    {"type": "example", "jp": "ドレスを買った市場は駅の近くだ。", "en": "The market where (I) bought the dress is near the station."},
+    {"type": "example", "jp": "赤い帽子をかぶっている少女が笑った。", "en": "The girl wearing a red hat laughed."},
+    {"type": "keypoints", "items": [
+      "**Rule 1:** the engine (verb, adjective or noun + copula) goes at the end.",
+      "**Rule 2:** anything that modifies a noun goes before it.",
+      "**が** and **を** show who and what; position does not.",
+      "A clause that ends in a noun is a describer, not a sentence."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Where does the engine go?", "prompt": "", "options": ["At the end", "At the start", "Right after the topic", "Anywhere"], "answer": 0, "note": "Rule 1."},
+    {"id": 2, "type": "choice", "instruction": "Where does a describer go?", "prompt": "", "options": ["Before the thing it describes", "After it", "Either side", "Inside it"], "answer": 0, "note": "Rule 2: modifiers come first."},
+    {"id": 3, "type": "choice", "instruction": "True or false?", "prompt": "Japanese word order never matters, because you can put words in any order.", "options": ["True", "False"], "answer": 1, "note": "It matters for the engine position and for modifiers; only the が/を order is flexible."},
+    {"id": 4, "type": "choice", "instruction": "Both sentences say the same. What tells you who hit whom?", "prompt": "メアリーがスーザンをなぐった / スーザンをメアリーがなぐった", "options": ["が and を", "Word order", "The verb ending", "The kanji"], "answer": 0, "note": "が marks who did it, を marks what it was done to."},
+    {"id": 5, "type": "tap", "instruction": "Tap the noun being described", "options": ["昨日", "読んだ", "本"], "answer": 2, "note": "In 昨日読んだ本 the noun at the end is described by 昨日読んだ."},
+    {"id": 6, "type": "choice", "instruction": "What does this phrase mean?", "prompt": "妹が作ったケーキ", "options": ["The cake my sister made", "My sister who made cake", "The cake made my sister", "My sister and the cake"], "answer": 0, "note": "The clause 妹が作った describes ケーキ."},
+    {"id": 7, "type": "choice", "instruction": "Which is a complete logical clause?", "prompt": "", "options": ["弟がケーキを食べた。", "弟が食べたケーキ", "ケーキを食べた弟", "弟の食べたケーキ"], "answer": 0, "note": "It ends in an engine; the others end in a noun."},
+    {"id": 8, "type": "choice", "instruction": "Make the noun \"the market\" the modified noun", "prompt": "（私が）市場でドレスを買った。", "options": ["ドレスを買った市場", "市場を買ったドレス", "ドレスが買った市場", "市場でドレスの買った"], "answer": 0, "note": "Move 市場 to the engine end and drop its で."},
+    {"id": 9, "type": "order", "instruction": "Build the phrase", "prompt": "the dress that my mother bought", "options": ["母が", "買った", "ドレス"], "note": "The clause comes first and the noun it describes comes last."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "(I) ate the cake my brother baked.", "options": ["弟が", "焼いた", "ケーキを", "食べた"], "note": "弟が焼いた describes ケーキ; the engine 食べた closes the sentence."},
+    {"id": 11, "type": "choice", "instruction": "Which is not allowed in Japanese?", "prompt": "", "options": ["The describer after its noun, as in \"dress I bought\"", "A topic first", "The engine at the end", "A noun with a clause in front"], "answer": 0, "note": "A describing clause always comes before the noun."},
+    {"id": 12, "type": "choice", "instruction": "A clause ends in a noun. What does that tell you?", "prompt": "", "options": ["It is a describer for that noun", "It is a finished sentence", "It has no engine, but still counts as a sentence", "It is a question"], "answer": 0, "note": "Only a clause ending in an engine is a logical clause."}
+  ]
+}

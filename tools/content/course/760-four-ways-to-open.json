@@ -1,0 +1,229 @@
+{
+  "id": 760,
+  "number": "76",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The right opening: あく, あける, ひらく, ひらける",
+  "summary": "Four words for opening that show how flexible self-move and other-move are: あく / あける for open and shut, ひらく for unfolding.",
+  "video": "https://www.youtube.com/watch?v=QEInorgR6Rs",
+  "related": [
+    465
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "開く and 開ける look like two pairs of self-move / other-move verbs, and up to a point they are: **あく** (self-move) and **あける** (other-move). The kanji is the same for ひらく and ひらける, so the writer uses hiragana when she specifically wants ひらく."
+    },
+    {
+      "type": "heading",
+      "text": "あく and あける"
+    },
+    {
+      "type": "example",
+      "jp": "ドアが開く。",
+      "en": "The door opens."
+    },
+    {
+      "type": "example",
+      "jp": "瓶を開ける。",
+      "en": "(I) open the bottle."
+    },
+    {
+      "type": "text",
+      "text": "Japanese speakers sometimes use 開く in an other-move way, as in 目を開く. The advice is to stay safe: **あける** is always right for other-move, whether the object is a door, a mouth or a bottle."
+    },
+    {
+      "type": "heading",
+      "text": "ひらく and ひらける"
+    },
+    {
+      "type": "text",
+      "text": "**ひらく** is about the kind of opening: something that **unfolds or spreads out**, like a flower or a hand. It is both self-move and other-move. **あく / あける** is simply becoming open instead of closed, like a lid. For an umbrella the usual verb is **さす**. **ひらける** is closer to a state: 運がひらける means your luck opens and stays open from then on."
+    },
+    {
+      "type": "example",
+      "jp": "花がひらく。",
+      "en": "The flower opens."
+    },
+    {
+      "type": "example",
+      "jp": "店をひらく。",
+      "en": "(I) open a shop."
+    },
+    {
+      "type": "example",
+      "jp": "運がひらける。",
+      "en": "One's luck opens up (and stays that way)."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**あく / あける**: simply become open or open it (doors, bottles, mouths).",
+        "**ひらく**: unfold, spread out (flowers, hands); both self- and other-move.",
+        "**ひらける**: a state of being opened out (luck, a view).",
+        "If unsure, あける is a safe other-move verb."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "ドア＿＿開く。 (The door opens.)",
+      "options": [
+        "が",
+        "を",
+        "に",
+        "で"
+      ],
+      "answer": 0,
+      "note": "Self-move: the door is the A-car.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "瓶＿＿開ける。 (I open the bottle.)",
+      "options": [
+        "を",
+        "が",
+        "に",
+        "で"
+      ],
+      "answer": 0,
+      "note": "Other-move: を.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the always-safe other-move verb for opening a door?",
+      "prompt": "",
+      "options": [
+        "あける",
+        "あく",
+        "ひらける",
+        "ひらいた"
+      ],
+      "answer": 0,
+      "note": "あける is never wrong.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Which verb suits a flower opening out?",
+      "prompt": "",
+      "options": [
+        "ひらく",
+        "あける",
+        "しめる",
+        "おす"
+      ],
+      "answer": 0,
+      "note": "Unfolding: ひらく.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Which verb suits taking the lid off a box?",
+      "prompt": "",
+      "options": [
+        "あける",
+        "ひらく",
+        "ひらける",
+        "さす"
+      ],
+      "answer": 0,
+      "note": "Becoming open instead of closed: あける.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "ひらく can only be self-move.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "It works as both self-move and other-move.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "In the children's hand song, what does ひらく describe?",
+      "prompt": "",
+      "options": [
+        "A hand spread open like a flower",
+        "A tightly closed fist",
+        "A door",
+        "A book"
+      ],
+      "answer": 0,
+      "note": "Unfolding, spreading out.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 運がひらける suggest?",
+      "prompt": "",
+      "options": [
+        "Your luck opens and stays that way",
+        "Your luck ran out",
+        "You open a lucky box",
+        "You cannot open it"
+      ],
+      "answer": 0,
+      "note": "ひらける leans toward a lasting state.",
+      "id": 8
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Please open the window.",
+      "options": [
+        "窓を",
+        "開けて",
+        "ください"
+      ],
+      "note": "窓を + other-move あける.",
+      "id": 9
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that shows the door opens by itself",
+      "options": [
+        "ドアが",
+        "開く"
+      ],
+      "answer": 1,
+      "note": "A self-move verb with が.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "Which verb is the usual one for putting up an umbrella?",
+      "prompt": "",
+      "options": [
+        "さす",
+        "あける",
+        "ひらける",
+        "だす"
+      ],
+      "answer": 0,
+      "note": "傘をさす.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "The kanji 開 alone shows whether you read it あく or ひらく.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "Both share the same kanji; hiragana picks one.",
+      "id": 12
+    }
+  ]
+}

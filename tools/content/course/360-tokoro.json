@@ -1,0 +1,51 @@
+{
+  "id": 360,
+  "number": "36",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "所: the concept of place",
+  "summary": "ところ is a place, and then a point in a thing or a point in time: ところだ means about to, in the middle of, or just done.",
+  "video": "https://www.youtube.com/watch?v=z2cgY9o-cO0",
+  "related": [436, 363],
+  "blocks": [
+    {"type": "text", "text": "**ところ** (所) begins as a physical **place**: 私のところ, \"my place\". Japanese stretches the idea much further than English does."},
+    {"type": "heading", "text": "A place in a thing: an aspect"},
+    {"type": "text", "text": "A person or object has \"places\" too: the parts or points of it. Asking どこが好き? about a person means \"which point do you like?\"."},
+    {"type": "example", "jp": "さくらのやさしいところが好きだ。", "en": "I like Sakura's kind side."},
+    {"type": "example", "jp": "分からないところがあった。", "en": "There were parts I did not understand."},
+    {"type": "heading", "text": "A place in time: ところだ"},
+    {"type": "text", "text": "Put a clause before ところ and you point at a **moment**. The sentence ends in だ, so it is an \"A is B\" sentence: \"the present moment is the place of ...\". The tense of the clause chooses the point."},
+    {"type": "table", "rows": [
+      ["Clause form", "Meaning", "Example"],
+      ["Dictionary form", "about to", "食べるところだ"],
+      ["〜ている", "in the middle of", "食べているところだ"],
+      ["Past た", "just did", "食べたところだ"]
+    ]},
+    {"type": "example", "jp": "今から昼ご飯を食べるところだ。", "en": "I am just about to eat lunch."},
+    {"type": "example", "jp": "今、昼ご飯を食べているところだ。", "en": "I am in the middle of eating lunch right now."},
+    {"type": "example", "jp": "昼ご飯を食べたところだ。", "en": "I have just eaten lunch."},
+    {"type": "text", "text": "Compare **ばかり** (lesson 27): 食べたばかり is close to 食べたところ. But ばかり can follow a plain noun (パンばかり) and ところ cannot, because \"a place of bread\" says nothing about amount."},
+    {"type": "heading", "text": "Casual speech and context"},
+    {"type": "text", "text": "In casual speech だ may vanish and ところ shortens to **とこ**: 今、着いたとこ. And context decides between meanings: いいところに来たね is probably \"you came at a good moment\"."},
+    {"type": "keypoints", "items": [
+      "**ところ** = place, a part of something, or a moment.",
+      "**Dictionary form + ところだ**: about to.",
+      "**〜ているところだ**: in the middle of.",
+      "**〜たところだ**: just did."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "昼ご飯を食べるところだ。", "options": ["I am about to eat lunch", "I am eating lunch", "I just ate lunch", "I never eat lunch"], "answer": 0, "note": "Dictionary form + ところだ."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "昼ご飯を食べているところだ。", "options": ["I am in the middle of eating lunch", "I am about to eat lunch", "I have just eaten lunch", "I will eat lunch tomorrow"], "answer": 0, "note": "〜ているところ."},
+    {"id": 3, "type": "choice", "instruction": "What does this mean?", "prompt": "昼ご飯を食べたところだ。", "options": ["I have just eaten lunch", "I am about to eat lunch", "I am eating lunch", "I will not eat lunch"], "answer": 0, "note": "Past + ところ."},
+    {"id": 4, "type": "choice", "instruction": "What does ところ mean in 彼のいいところ?", "prompt": "", "options": ["A good point of his", "A good place to live", "A good time", "A good address"], "answer": 0, "note": "A place in a person means an aspect."},
+    {"id": 5, "type": "choice", "instruction": "Why can ばかり say \"only bread\" (パンばかり) but ところ cannot?", "prompt": "", "options": ["ところ means a place or point in time, not an amount", "ところ is a verb", "ところ is rude", "ところ is only written"], "answer": 0, "note": "\"A place of bread\" does not make sense."},
+    {"id": 6, "type": "choice", "instruction": "What does this casual sentence mean?", "prompt": "名古屋に着いたとこ。", "options": ["I have just arrived in Nagoya", "I will arrive in Nagoya soon", "I like Nagoya", "I am leaving Nagoya"], "answer": 0, "note": "とこ = ところ."},
+    {"id": 7, "type": "choice", "instruction": "What is the most likely meaning?", "prompt": "いいところに来たね。", "options": ["You came at a good moment", "You came to a good city", "You are a good person", "Good place, isn't it?"], "answer": 0, "note": "Context favors time."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "I am just about to leave the house.", "options": ["今", "家を", "出る", "ところだ"], "note": "Clause + ところだ."},
+    {"id": 9, "type": "tap", "instruction": "Tap the word that marks \"just now\"", "options": ["電話を", "かけた", "ところだ"], "answer": 2, "note": "かけた + ところだ: just made the call."},
+    {"id": 10, "type": "choice", "instruction": "True or false?", "prompt": "ところ can only mean a physical place.", "options": ["True", "False"], "answer": 1, "note": "It also means aspects and moments."},
+    {"id": 11, "type": "choice", "instruction": "Fill the gap", "prompt": "今、ご飯を作って＿＿だ。 (I am cooking right now.)", "options": ["いるところ", "いたところ", "いくところ", "いるばかり"], "answer": 0, "note": "In the middle of: 〜ているところ."},
+    {"id": 12, "type": "choice", "instruction": "What does どこが mean here?", "prompt": "さくらのどこが好きなの？", "options": ["Which point of her?", "Which place is she?", "Where is she?", "When is she?"], "answer": 0, "note": "A figurative place: an aspect."}
+  ]
+}

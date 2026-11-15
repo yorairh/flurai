@@ -1,0 +1,49 @@
+{
+  "id": 240,
+  "number": "24",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Hearsay and guesses: そう, そうだ, そうです",
+  "summary": "そう after the stem of a word means \"looks like\"; そうだ after a whole sentence means \"I heard that\". Two different jobs that look alike.",
+  "video": "https://www.youtube.com/watch?v=uSJukXcyccw",
+  "related": [406, 439],
+  "blocks": [
+    {"type": "text", "text": "**そう** belongs to the family こう, そう, ああ, どう (lesson 20): it means \"that way\". From that it grows two jobs, and the trick is to know which one you are looking at."},
+    {"type": "heading", "text": "Job 1: how it looks (appearance)"},
+    {"type": "text", "text": "Here **そう** is attached to a **single word** and makes an adjectival noun. How the word is trimmed depends on its engine:"},
+    {"type": "table", "rows": [
+      ["Word", "Rule", "Result"],
+      ["静か (adjectival noun)", "drop だ / な", "静かそう (looks quiet)"],
+      ["おいしい (い-adjective)", "drop い", "おいしそう (looks tasty)"],
+      ["降る (verb)", "use the い-stem", "降りそう (looks about to fall)"],
+      ["食べる (ichidan verb)", "drop る", "食べそう"]
+    ]},
+    {"type": "text", "text": "Plain nouns cannot take this そう. Japanese is careful about what you claim: you can only say おいしい after tasting, but おいしそう from the look of it."},
+    {"type": "example", "jp": "このケーキはおいしそうだ。", "en": "This cake looks delicious."},
+    {"type": "example", "jp": "空が暗くて、雨が降りそうだ。", "en": "The sky is dark and it looks like rain."},
+    {"type": "example", "jp": "静かそうな女の子が来た。", "en": "A quiet-looking girl came."},
+    {"type": "heading", "text": "Job 2: I heard (hearsay)"},
+    {"type": "text", "text": "Here **そうだ / そうです** is **not** a suffix. It attaches to a **whole sentence** in its plain form, and that sentence becomes the content of what you heard. The sentence itself keeps its own tense."},
+    {"type": "example", "jp": "先生は来週戻るそうだ。", "en": "I hear the teacher will be back next week."},
+    {"type": "example", "jp": "さくらは日本人だそうだ。", "en": "I have heard that Sakura is Japanese."},
+    {"type": "keypoints", "items": [
+      "**Stem + そう** = looks like (appearance); no noun allowed.",
+      "**Plain sentence + そうだ** = I heard that (hearsay).",
+      "い-adjective: drop **い**; verb: use the **い-stem**; adjectival noun: drop **だ / な**.",
+      "降りそう (about to rain) and 降るそう (I hear it rains) are different."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the \"looks\" form of 面白い", "prompt": "", "options": ["面白そう", "面白いそう", "面白くそう", "面白そうい"], "answer": 0, "note": "Drop the final い and add そう."},
+    {"id": 2, "type": "choice", "instruction": "Pick \"looks like it will fall\" for 降る", "prompt": "", "options": ["降りそう", "降るそう", "降らそう", "降ってそう"], "answer": 0, "note": "Verbs use the い-stem before そう."},
+    {"id": 3, "type": "choice", "instruction": "Pick the right form", "prompt": "＿＿女の子 (a quiet-looking girl)", "options": ["静かそうな", "静かいそうな", "静かなそうな", "静かのそうな"], "answer": 0, "note": "Drop だ/な: 静か + そう, then な before the noun."},
+    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "雨が降るそうだ。", "options": ["I hear it will rain", "It looks like rain is about to come", "It rained", "Rain is fun"], "answer": 0, "note": "Dictionary form + そうだ is hearsay."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "雨が降りそうだ。", "options": ["It looks like it is about to rain", "I hear it will rain", "It never rains", "It rained yesterday"], "answer": 0, "note": "The い-stem + そう is appearance."},
+    {"id": 6, "type": "choice", "instruction": "Which sentence is hearsay?", "prompt": "", "options": ["彼は来るそうだ", "彼は来そうだ", "おいしそうだ", "泣きそうだ"], "answer": 0, "note": "Only a plain full sentence + そうだ reports what you heard."},
+    {"id": 7, "type": "tap", "instruction": "Tap the part that says \"looks\"", "options": ["このケーキは", "おいし", "そうだ"], "answer": 2, "note": "おいし + そうだ: looks delicious."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "You can say an untasted dish is おいしい just by looking at it.", "options": ["True", "False"], "answer": 1, "note": "Without tasting, say おいしそう."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "The sky is dark and it looks like rain.", "options": ["空が", "暗くて", "雨が", "降りそうだ"], "note": "Two linked clauses; the verb stem + そう goes last."},
+    {"id": 10, "type": "choice", "instruction": "Fill the gap", "prompt": "先生は来週戻る＿＿だ。 (I hear the teacher is coming back next week.)", "options": ["そう", "そうな", "のそう", "ように"], "answer": 0, "note": "Plain sentence + そうだ."},
+    {"id": 11, "type": "choice", "instruction": "Which cannot take appearance そう?", "prompt": "", "options": ["犬 (a plain noun)", "元気", "高い", "食べる"], "answer": 0, "note": "Only adjectives, adjectival nouns and verbs can."}
+  ]
+}

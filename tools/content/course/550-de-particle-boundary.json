@@ -1,0 +1,44 @@
+{
+  "id": 550,
+  "number": "55",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "で draws a boundary: みんなで and 世界で一番",
+  "summary": "で marks the limit inside which an action or a state holds: a place, a group, a number, a region. It works with adjectives too.",
+  "video": "https://www.youtube.com/watch?v=OiKgudW9xB8",
+  "related": [505],
+  "blocks": [
+    {"type": "heading", "text": "Static words and active words"},
+    {"type": "text", "text": "Besides noun / verb / adjective, Japanese grammar sorts words into **static** words (体言: nouns and noun-like things) and **active** words (用言: verbs, adjectives and noun + copula). Active words **change shape** in their final kana and can modify. Static words never change, but they take **particles and the copula**. A noun plus だ or です becomes an active unit: 綺麗だ can become 綺麗だった or 綺麗で."},
+    {"type": "text", "text": "So the three possible engines (verb, adjective, noun + copula) are all active words."},
+    {"type": "heading", "text": "What で really does"},
+    {"type": "text", "text": "**に** says where something goes or where it is. **へ** says its direction. **で** says the **boundary within which** an action or state takes place. Usually that is a place, but it need not be. Because で modifies active words, it works with verbs *and* with adjectives."},
+    {"type": "example", "jp": "公園で遊ぶ。", "en": "(I) play in the park. (place boundary)"},
+    {"type": "example", "jp": "この町で一番おいしいラーメン", "en": "The tastiest ramen in this town. (the boundary of the comparison)"},
+    {"type": "example", "jp": "世界で一番有名な歌手", "en": "The most famous singer in the world."},
+    {"type": "heading", "text": "Numbers and groups are boundaries too"},
+    {"type": "text", "text": "二人で踊る (\"two of us dance\"), 一人で行く (\"go alone\"), みんなで歌う (\"we all sing\"). The number or group is the limit of those who do it, just as a room is the limit of where. This is why one particle covers \"where\", \"how many people\" and \"within what range\"."},
+    {"type": "heading", "text": "で vs の with an adjective"},
+    {"type": "text", "text": "世界の一番おいしいラーメン is possible: の links 世界 to the noun ラーメン, \"the world's tastiest ramen\". But in このラーメンは世界で一番おいしい you need で, because 世界 must modify the adjective おいしい, and の can only modify a noun that comes after it. (Modifiers always go before what they modify.)"},
+    {"type": "keypoints", "items": [
+      "Static words (nouns) take particles; active words (verb, adjective, noun + copula) change shape.",
+      "**で** marks the boundary of an action or state: place, group, number, range.",
+      "**Nで一番** = the most … within N.",
+      "**の** modifies a noun; **で** modifies an active word."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does で really mark?", "prompt": "", "options": ["The boundary within which something holds", "The goal of movement", "The object of an action", "The speaker's feeling"], "answer": 0, "note": "Place, group, number or range."},
+    {"id": 2, "type": "choice", "instruction": "Fill the gap", "prompt": "日本＿＿一番高い山は富士山だ。", "options": ["で", "を", "に", "が"], "answer": 0, "note": "で marks the range within which \"highest\" applies."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap", "prompt": "三人＿＿旅行した。 ((We) traveled, the three of us.)", "options": ["で", "に", "を", "は"], "answer": 0, "note": "で marks the group within which the action happens."},
+    {"id": 4, "type": "choice", "instruction": "Which sentence is natural?", "prompt": "", "options": ["このクラスで一番背が高い。", "このクラスの一番背が高い。", "このクラスを一番背が高い。", "このクラスは一番背が高いで。"], "answer": 0, "note": "で sets the boundary for the adjective phrase."},
+    {"id": 5, "type": "choice", "instruction": "True or false?", "prompt": "で can only appear in sentences with a verb engine.", "options": ["True", "False"], "answer": 1, "note": "It can modify an adjective engine or noun + copula."},
+    {"id": 6, "type": "tap", "instruction": "Tap the word that sets the boundary", "options": ["この町で", "一番", "おいしい"], "answer": 0, "note": "この町で defines the limit of the comparison."},
+    {"id": 7, "type": "choice", "instruction": "Why can you not say このラーメンは世界の一番おいしい?", "prompt": "", "options": ["の cannot modify the adjective that follows it", "世界 is not a noun", "ラーメン needs を", "一番 cannot follow の"], "answer": 0, "note": "の only links to the noun coming right after it."},
+    {"id": 8, "type": "choice", "instruction": "Which category contains verbs, adjectives and noun + copula?", "prompt": "", "options": ["Active words (用言)", "Static words (体言)", "Particles", "Counters"], "answer": 0, "note": "They can all change shape and modify."},
+    {"id": 9, "type": "choice", "instruction": "What does 一人で行く mean?", "prompt": "", "options": ["(I) go alone", "(I) go first", "(I) go every day", "(I) go to one place"], "answer": 0, "note": "One person is the boundary of those who go."},
+    {"id": 10, "type": "choice", "instruction": "Which noun + copula phrase can be modified by 世界で?", "prompt": "", "options": ["有名な", "有名", "犬", "歌"], "answer": 0, "note": "有名な is an active unit; plain 有名 alone is just a noun."},
+    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "the tastiest shop in this town", "options": ["この町で", "一番", "おいしい", "店"], "note": "Boundary, degree, adjective, noun."},
+    {"id": 12, "type": "order", "instruction": "Build the phrase", "prompt": "the most famous android in the world", "options": ["世界で", "一番", "有名な", "アンドロイド"], "note": "Boundary, degree, adjective unit, noun."}
+  ]
+}

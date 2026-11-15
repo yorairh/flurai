@@ -1,0 +1,258 @@
+{
+  "id": 730,
+  "number": "73",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "The secrets of 気: 気になる, 気にする, 気がする, 気に入る",
+  "summary": "気 is a flowing spirit. The particle shows who does what: 気になる (it occupies my spirit), 気にする (I make it so), 気がする (a feeling is active).",
+  "video": "https://www.youtube.com/watch?v=ZHHd3nHkFb0",
+  "related": [
+    496
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "**気** is the flowing spirit in a person, close to breath, energy or mind. One end is the steady energy: **元気** (original vigor), **病気** (sick spirit). The other end is a particular will: **やる気** (a doing-spirit). 気を付ける literally attaches your spirit to something: pay attention."
+    },
+    {
+      "type": "heading",
+      "text": "Same word, different particles"
+    },
+    {
+      "type": "text",
+      "text": "The expressions are confusing until you notice that **the particles tell you who does what**."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Phrase",
+          "What it really says"
+        ],
+        [
+          "Xが気になる",
+          "X turns into my spirit: it occupies my mind"
+        ],
+        [
+          "Xを気にする",
+          "I turn X into my spirit: I worry about it (on purpose)"
+        ],
+        [
+          "気がする",
+          "a feeling is active, like a smell or a sound"
+        ],
+        [
+          "Xが気に入る",
+          "X enters my spirit: I like it"
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "あの人が気になる。",
+      "en": "I can't stop thinking about that person."
+    },
+    {
+      "type": "example",
+      "jp": "小さなことを気にしないで。",
+      "en": "Don't worry about small things."
+    },
+    {
+      "type": "example",
+      "jp": "変な気がする。",
+      "en": "I have a strange feeling."
+    },
+    {
+      "type": "example",
+      "jp": "強くなった気がする。",
+      "en": "I feel like I've gotten stronger."
+    },
+    {
+      "type": "example",
+      "jp": "この部屋が気に入った。",
+      "en": "I like this room."
+    },
+    {
+      "type": "example",
+      "jp": "留学する気がある。",
+      "en": "I'm inclined to study abroad."
+    },
+    {
+      "type": "text",
+      "text": "**気になる** is something happening to you, and can range from intrigued to worried. **気にする** is you doing it, so it tends to mean worried, and 気にしないで is a request to control it. In **気がする**, the feeling itself acts, just as いい匂いがする means a good smell is active."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "気: the spirit, energy or mind.",
+        "**気になる**: it occupies my mind; **気にする**: I make it my concern.",
+        "**気がする**: a feeling is active; I sense it.",
+        "**気に入る**: it enters my spirit, I like it."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "What does 気にしないで mean?",
+      "prompt": "",
+      "options": [
+        "Don't worry about it",
+        "Be careful",
+        "I like it",
+        "Come in"
+      ],
+      "answer": 0,
+      "note": "Don't turn it into your concern.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "あの人＿＿気になる。 (That person occupies my mind.)",
+      "options": [
+        "が",
+        "を",
+        "に",
+        "で"
+      ],
+      "answer": 0,
+      "note": "The person is the A-car: the one who turns into my spirit.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "小さなことを＿＿しないで。 (Don't worry about small things.)",
+      "options": [
+        "気に",
+        "気が",
+        "気を",
+        "気で"
+      ],
+      "answer": 0,
+      "note": "We make a thing into our spirit: 気にする.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Which one has ME as the doer, turning something into my concern?",
+      "prompt": "",
+      "options": [
+        "気にする",
+        "気になる",
+        "気がする",
+        "気に入る"
+      ],
+      "answer": 0,
+      "note": "する: I do it.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 変な気がする mean?",
+      "prompt": "",
+      "options": [
+        "I have a strange feeling",
+        "I make a strange feeling",
+        "I dislike a strange person",
+        "I am strange"
+      ],
+      "answer": 0,
+      "note": "The feeling itself is active.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "In 気がする, the 気 (the feeling) is the one acting, like a smell or a sound.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "Like いい匂いがする.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "What is やる気?",
+      "prompt": "",
+      "options": [
+        "The will to do something",
+        "A healthy body",
+        "A sick spirit",
+        "A careful attitude"
+      ],
+      "answer": 0,
+      "note": "The doing-spirit.",
+      "id": 7
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I have a feeling that I got stronger.",
+      "options": [
+        "強くなった",
+        "気が",
+        "する"
+      ],
+      "note": "Clause + 気がする.",
+      "id": 8
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word meaning \"spirit\" in 階段に気を付けて",
+      "options": [
+        "階段に",
+        "気を",
+        "付けて"
+      ],
+      "answer": 1,
+      "note": "気 is the spirit.",
+      "id": 9
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 気に入る mean?",
+      "prompt": "",
+      "options": [
+        "To like, be pleased with",
+        "To worry about",
+        "To enter a room",
+        "To be sick"
+      ],
+      "answer": 0,
+      "note": "It enters my spirit: it suits me.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "この家は＿＿入った。 (I like this house.)",
+      "options": [
+        "気に",
+        "気が",
+        "気を",
+        "気で"
+      ],
+      "answer": 0,
+      "note": "気に入る.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 勉強する気がある mean?",
+      "prompt": "",
+      "options": [
+        "I intend to study",
+        "I will study tomorrow",
+        "I am sick of studying",
+        "I finished studying"
+      ],
+      "answer": 0,
+      "note": "The spirit to study exists in me.",
+      "id": 12
+    }
+  ]
+}

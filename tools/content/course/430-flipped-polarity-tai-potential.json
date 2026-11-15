@@ -1,0 +1,52 @@
+{
+  "id": 430,
+  "number": "43",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Flipped polarity: たい, potential and そう",
+  "summary": "In 〜が食べたい the main carriage is the thing that makes you want it. With no such thing in the sentence, the feeling flips back to the person.",
+  "video": "https://www.youtube.com/watch?v=X_HlngOAvX8",
+  "related": [514, 576, 577],
+  "blocks": [
+    {"type": "text", "text": "Every sentence has an **engine** and a **が main carriage**. Everything else tells you more about one of the two. Now look at クレープが食べたい. The carriage is **クレープ**, not \"I\". The engine is the helper adjective **たい**, so the sentence describes the crepes as having a quality: they stir up the wish to eat them. English puts an ego in the center (\"I want\"); Japanese is happy to put the thing that causes the feeling in the center."},
+    {"type": "heading", "text": "Polarity flips when the cause is missing"},
+    {"type": "text", "text": "Feelings can be described from the **inducer** (the crepes that stir the wish) or from the **experiencer** (the person who feels it). Japanese treats the two as halves of one event, so the default points at the inducer, but when no inducer is in the sentence the feeling swings to the person. In 東京に行きたい, 東京 already has に and 行く is a verb, so the only possible carriage is a zero: **(私が)** 東京に行きたい."},
+    {"type": "diagram", "cars": [
+      {"text": "クレープが", "role": "carriage", "label": "inducer"},
+      {"text": "食べたい", "role": "engine", "label": "makes me want to eat"}
+    ], "text": "クレープが食べたい。 Crepes are eat-wanting (to me)."},
+    {"type": "diagram", "cars": [
+      {"text": "（ゼロ）が", "role": "zero", "label": "me"},
+      {"text": "東京に", "role": "white"},
+      {"text": "行きたい", "role": "engine"}
+    ], "text": "（私が）東京に行きたい。 (I) want to go to Tokyo."},
+    {"type": "heading", "text": "The same flip in the potential"},
+    {"type": "text", "text": "本が読める really says \"the book does readable\". The carriage is the book. But 私が読める or さくらが読める (no particular thing to read) points at the person: \"I can read, I am literate\". When no object is the focus, the polarity flips to the doer."},
+    {"type": "heading", "text": "And in そう"},
+    {"type": "text", "text": "不思議そう on its own would mean \"seems mysterious\", but mysterious is already a feeling. In 不思議そうに言った it flips to the person: \"said in a puzzled way\". It describes someone who senses mystery in something."},
+    {"type": "example", "jp": "お腹が空いた。早く食べたい。", "en": "(I'm) hungry. (I) want to eat soon."},
+    {"type": "example", "jp": "あのケーキが食べたい。", "en": "That cake makes (me) want to eat it."},
+    {"type": "example", "jp": "この漢字が読める。", "en": "(I) can read this kanji. (the kanji does readable)"},
+    {"type": "example", "jp": "子供は不思議そうに空を見た。", "en": "The child looked at the sky with a puzzled look."},
+    {"type": "keypoints", "items": [
+      "In **Aが + 〜たい**, the thing wanted is the carriage and たい is an adjective engine.",
+      "With no inducer in the sentence, the feeling or ability points to the **person** (a zero carriage).",
+      "The potential and **〜そう** flip in the same way.",
+      "Never read が as marking an object; it only ever marks the main carriage."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "In ラーメンが食べたい, which word is the main carriage?", "prompt": "", "options": ["ラーメン", "食べ", "たい", "I (an invisible word)"], "answer": 0, "note": "が marks the carriage: the ramen is what stirs the wish."},
+    {"id": 2, "type": "choice", "instruction": "What kind of engine is たい?", "prompt": "", "options": ["A helper adjective", "A helper verb", "A particle", "A noun"], "answer": 0, "note": "たい ends in い and conjugates like an adjective."},
+    {"id": 3, "type": "tap", "instruction": "Tap the engine", "options": ["お寿司が", "食べたい", "今日は"], "answer": 1, "note": "食べたい is the engine pulling the sentence."},
+    {"id": 4, "type": "choice", "instruction": "Who is the invisible carriage here?", "prompt": "（ゼロ）が京都に行きたい。", "options": ["The speaker", "Kyoto", "The wish itself", "Nobody"], "answer": 0, "note": "京都 already has に, so the only free carriage is a zero pointing at the feeler."},
+    {"id": 5, "type": "choice", "instruction": "True or false?", "prompt": "In 本が読める, the main carriage is the person who reads.", "options": ["True", "False"], "answer": 1, "note": "The book is the carriage: the book does readable."},
+    {"id": 6, "type": "choice", "instruction": "What does this say?", "prompt": "さくらが読める。", "options": ["Sakura can read (is literate)", "Sakura is readable", "Sakura wants to read", "Sakura is being read"], "answer": 0, "note": "With no thing to read named, the potential flips to the person."},
+    {"id": 7, "type": "choice", "instruction": "Why can が not be an object marker in この本が読みたい?", "prompt": "", "options": ["が only ever marks the main carriage", "Because たい is a verb", "Because 本 is not a noun", "Because は must replace it"], "answer": 0, "note": "The book is the carriage, not an object."},
+    {"id": 8, "type": "choice", "instruction": "What does 不思議そうに言った describe?", "prompt": "", "options": ["The speaker sounding puzzled", "A mysterious house", "A speech that cannot be heard", "Something that seems strange to nobody"], "answer": 0, "note": "そう flips here to the person feeling the mystery."},
+    {"id": 9, "type": "choice", "instruction": "Pick the sentence where the feeler is only a zero", "prompt": "", "options": ["早く家に帰りたい。", "ケーキが食べたい。", "この歌が聞きたい。", "あの本が読みたい。"], "answer": 0, "note": "家に is already に-marked and nothing else could be the carriage."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "(I) want to go to the sea tomorrow. (time first)", "options": ["明日", "海に", "行きたい"], "note": "Time, destination, then the たい engine at the end."},
+    {"id": 11, "type": "choice", "instruction": "Why does Japanese happily put the thing that causes the feeling at the center?", "prompt": "", "options": ["It does not need an ego at the center of every feeling", "Because verbs are forbidden", "Because には is required", "Because English works the same way"], "answer": 0, "note": "Inducer and experiencer are two halves of one event."},
+    {"id": 12, "type": "choice", "instruction": "Which sentence points at a person's ability, not at a thing?", "prompt": "", "options": ["さくらが読める。", "この手紙が読める。", "あの看板が読める。", "その本が読める。"], "answer": 0, "note": "Only さくら is a person; in the others the readable thing is the carriage."}
+  ]
+}

@@ -1,0 +1,251 @@
+{
+ "id": 900,
+ "number": "90",
+ "kind": "lesson",
+ "jlpt": 4,
+ "title": "Japanese punctuation",
+ "summary": "Most Japanese punctuation is a modern import with loose rules; only the full stop is structural.",
+ "video": "https://www.youtube.com/watch?v=LDQlGnqElTU",
+ "related": [],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "Japanese marks like 、 and ？ mostly arrived about 150 years ago, partly to translate Western books. So, unlike in English, they have few firm rules. The exception is the full stop."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Mark",
+     "Name",
+     "What it does"
+    ],
+    [
+     "。",
+     "maru (full stop)",
+     "ends a sentence; structural"
+    ],
+    [
+     "、",
+     "comma",
+     "a pause, wherever you like; no rules"
+    ],
+    [
+     "？",
+     "question mark",
+     "shows rising intonation; optional"
+    ],
+    [
+     "「 」",
+     "quotation marks",
+     "what someone says (not thinks)"
+    ],
+    [
+     "『 』",
+     "double quotes",
+     "a quote inside a quote"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "The full stop tells you where a sentence ends"
+  },
+  {
+   "type": "text",
+   "text": "Japanese uses long modifiers: whole clauses that describe a noun. A clause that ends in a noun is a **modifier**, not a sentence. A real logical clause ends in one of two ways: with 。, or with a connector like て, から or けど."
+  },
+  {
+   "type": "example",
+   "jp": "昨日駅で拾って交番に届けた財布は、まだ見つかっていない。",
+   "en": "The wallet that I picked up at the station yesterday and took to the police box has not been claimed yet."
+  },
+  {
+   "type": "text",
+   "text": "Here 拾って and 届けた do not make statements: they just describe 財布. Only the final 見つかっていない (before 。) is the sentence's engine."
+  },
+  {
+   "type": "heading",
+   "text": "Commas, question marks and quotes"
+  },
+  {
+   "type": "text",
+   "text": "The comma has no grammar: schools even discourage too many, because commas should not carry your meaning. Questions and statements have the same structure, so か, an ending の or a rising voice marks a question; ？ just shows that rising tone in text. 「 」 mark speech (not thoughts). Dots beside a word in vertical text mean emphasis, like italics."
+  },
+  {
+   "type": "example",
+   "jp": "「早く行こう」と友達が言った。",
+   "en": "\"Let's go quickly,\" my friend said."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**。** is the only structural mark: a logical clause ends before it or before a clause connector.",
+    "**、** is just a pause.",
+    "**？** marks a rising tone; **か** is not required to use it."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which punctuation mark is structural?",
+   "prompt": "",
+   "options": [
+    "。",
+    "、",
+    "？",
+    "『 』"
+   ],
+   "answer": 0,
+   "note": "The full stop ends a sentence."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "What are the two ways a logical clause can end?",
+   "prompt": "",
+   "options": [
+    "With 。 or a clause connector",
+    "With 、 or ？",
+    "With a noun or particle",
+    "With a quote or comma"
+   ],
+   "answer": 0,
+   "note": "Otherwise it is a modifier."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "In 拾って届けた財布, what do 拾って and 届けた do?",
+   "prompt": "",
+   "options": [
+    "Modify 財布",
+    "End the sentence",
+    "Ask a question",
+    "Quote someone"
+   ],
+   "answer": 0,
+   "note": "They are a modifier for the noun."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Which mark shows a question with no か?",
+   "prompt": "",
+   "options": [
+    "？",
+    "、",
+    "。",
+    "「"
+   ],
+   "answer": 0,
+   "note": "The question mark shows the rising tone."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What do 「 」 mark?",
+   "prompt": "",
+   "options": [
+    "What someone says",
+    "What someone thinks",
+    "A heading",
+    "A pause"
+   ],
+   "answer": 0,
+   "note": "Quotation marks for speech."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What do 『 』 mark?",
+   "prompt": "",
+   "options": [
+    "A quote inside a quote",
+    "A comma",
+    "A question",
+    "A title only"
+   ],
+   "answer": 0,
+   "note": "Double quotes."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "Japanese commas follow strict rules for subordinate clauses.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "There are no comma rules; use them for pauses."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "Japanese punctuation mostly arrived in the Meiji era.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "It came with the translation of Western books."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the sentence-ending mark",
+   "options": [
+    "財布を",
+    "拾った",
+    "。"
+   ],
+   "answer": 2,
+   "note": "。 ends the sentence."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "The book that I bought yesterday is interesting.",
+   "options": [
+    "昨日買った",
+    "本は",
+    "面白い"
+   ],
+   "note": "昨日買った modifies 本; 面白い is the engine."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which sentence is a complete sentence?",
+   "prompt": "",
+   "options": [
+    "財布を拾いました。",
+    "昨日拾った財布",
+    "駅で買った本",
+    "友達と行った店"
+   ],
+   "answer": 0,
+   "note": "Only the first has an engine and 。."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "Dots beside a word in vertical text mean...",
+   "prompt": "",
+   "options": [
+    "Emphasis, like italics",
+    "A question",
+    "A quote",
+    "The end of the sentence"
+   ],
+   "answer": 0,
+   "note": "Side marks work like italics."
+  }
+ ]
+}

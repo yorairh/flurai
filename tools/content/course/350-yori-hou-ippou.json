@@ -1,0 +1,47 @@
+{
+  "id": 350,
+  "number": "35",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "より, のほう and 一方",
+  "summary": "より marks the baseline of a comparison, ほう is a noun meaning \"side\", and 一方 means \"one side\": it opens a contrast or a steady one-way trend.",
+  "video": "https://www.youtube.com/watch?v=ma1yZwt1XAc",
+  "related": [555, 556, 735],
+  "blocks": [
+    {"type": "text", "text": "Textbooks teach より and ほう together in one sentence, which hides what each does. Learn them separately first."},
+    {"type": "heading", "text": "より: a baseline"},
+    {"type": "text", "text": "**より** means \"from\" in the sense of distance from a point. Used as a baseline, it says \"measured from here\". It is not a case particle, so it can follow nouns, clauses, verbs and adjectives. (**から** is the \"starting point\" one: 日本から来た.)"},
+    {"type": "example", "jp": "さくらはメアリーよりきれいだ。", "en": "Sakura is prettier than Mary."},
+    {"type": "example", "jp": "今年の冬はいつもより寒い。", "en": "This winter is colder than usual."},
+    {"type": "text", "text": "Note that the sentence does not say Mary is not pretty. より only sets a reference point."},
+    {"type": "heading", "text": "ほう: a side"},
+    {"type": "text", "text": "**ほう** is a noun: a direction or **side**. If there is one side, there is another, so it fits comparisons: Xのほう is \"the X side\"."},
+    {"type": "example", "jp": "肉より魚のほうが好きだ。", "en": "I like fish better than meat."},
+    {"type": "example", "jp": "バスより電車のほうが速い。", "en": "The train is faster than the bus."},
+    {"type": "text", "text": "Either part can be dropped when the comparison is clear. Using both adds emphasis or formality."},
+    {"type": "heading", "text": "一方: the other side"},
+    {"type": "text", "text": "**一方** is literally \"one side\". In narration it turns to the opposite side of the story: \"meanwhile, on the other hand\". After an adjective it makes a contrast. After a plain verb + だ it means \"only going one way\"."},
+    {"type": "example", "jp": "この辺りは静かな一方で、不便だ。", "en": "This area is quiet, but on the other hand it is inconvenient."},
+    {"type": "example", "jp": "人口は減る一方だ。", "en": "The population just keeps decreasing."},
+    {"type": "keypoints", "items": [
+      "**AよりB**: B compared with baseline A.",
+      "**Xのほう**: the X side; used to pick one in a comparison.",
+      "**一方で**: on the other hand.",
+      "**Verb + 一方だ**: keeps going in one direction."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "さくらはメアリーよりきれいだ。", "options": ["Sakura is prettier than Mary", "Mary is prettier than Sakura", "Sakura and Mary are the same", "Sakura is ugly"], "answer": 0, "note": "より marks the baseline."},
+    {"id": 2, "type": "choice", "instruction": "Does the sentence above say Mary is not pretty?", "prompt": "", "options": ["No, より only sets a reference point", "Yes", "Yes, she is ugly", "It is a question"], "answer": 0, "note": "A comparison does not deny the baseline."},
+    {"id": 3, "type": "choice", "instruction": "What is より at its root?", "prompt": "", "options": ["\"From\" (distance from a point)", "\"To\"", "\"Because\"", "\"And\""], "answer": 0, "note": "From a reference point comes comparison."},
+    {"id": 4, "type": "choice", "instruction": "What does ほう mean?", "prompt": "", "options": ["Side / direction", "Edge", "Reason", "Time"], "answer": 0, "note": "A noun; hence のほう."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "今年の冬はいつもより寒い。", "options": ["Colder than usual", "Warmer than usual", "As cold as ever", "I am cold"], "answer": 0, "note": "いつも is the baseline."},
+    {"id": 6, "type": "choice", "instruction": "What does this mean?", "prompt": "人口は減る一方だ。", "options": ["The population just keeps decreasing", "The population is stable", "The population grew", "The population is one person"], "answer": 0, "note": "Verb + 一方だ: one direction only."},
+    {"id": 7, "type": "choice", "instruction": "What does this mean?", "prompt": "この辺りは静かな一方で、不便だ。", "options": ["It is quiet here, but on the other hand inconvenient", "It is quiet because it is inconvenient", "It is noisy and inconvenient", "It was quiet once"], "answer": 0, "note": "一方で sets up the other side."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "Cats are cuter than dogs.", "options": ["猫は", "犬より", "かわいい"], "note": "Topic, baseline, adjective."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "The train is faster than the bus.", "options": ["バスより", "電車の", "ほうが", "速い"], "note": "Baseline + より, then X のほうが."},
+    {"id": 10, "type": "choice", "instruction": "True or false?", "prompt": "ほう is a noun.", "options": ["True", "False"], "answer": 0, "note": "That is why it takes の."},
+    {"id": 11, "type": "tap", "instruction": "Tap the baseline of the comparison", "options": ["兄は", "私より", "背が", "高い"], "answer": 1, "note": "私より: measured from me."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "肉＿＿魚のほうが好きだ。", "options": ["より", "から", "まで", "へ"], "answer": 0, "note": "より sets up the baseline."}
+  ]
+}

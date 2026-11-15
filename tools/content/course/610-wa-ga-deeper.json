@@ -1,0 +1,252 @@
+{
+  "id": 610,
+  "number": "61",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "は and が: the deeper secrets",
+  "summary": "は marks old, known information and throws the weight onto what follows; が marks the new information, often the answer to a question.",
+  "video": "https://www.youtube.com/watch?v=o-hK4-qv9Yk",
+  "related": [
+    501,
+    502,
+    580
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Every Japanese sentence has a **topic** and a **subject**. When you see neither, both are **zero**: 日本人です is really (zero は)(zero が)日本人です. The choice between **は** and **が** only exists when the topic and the subject are the same thing, and then you are not creating either one. You are **stressing** which role the word plays, and that changes what the sentence implies."
+    },
+    {
+      "type": "heading",
+      "text": "Old information and new information"
+    },
+    {
+      "type": "text",
+      "text": "**は** can only mark **old information**: something the listener already knows or will easily accept. Old information is the unimportant part of a sentence, so **は** pushes the weight onto whatever comes after it. **が** can mark new information, and when it does, the new thing is the word itself."
+    },
+    {
+      "type": "example",
+      "jp": "本を買った。",
+      "en": "(I) bought a book. (neutral: nothing is stressed)"
+    },
+    {
+      "type": "example",
+      "jp": "私は本を買った。",
+      "en": "As for me, I bought a book. (answers \"What did you do?\")"
+    },
+    {
+      "type": "example",
+      "jp": "私が本を買った。",
+      "en": "I am the one who bought the book. (answers \"Who bought it?\")"
+    },
+    {
+      "type": "text",
+      "text": "Imagine two friends staring at an empty gap on a shelf. They know the book is gone, so the book is old information. The new information is **who** took it, so you say 私**が**買った."
+    },
+    {
+      "type": "heading",
+      "text": "Particular or general"
+    },
+    {
+      "type": "text",
+      "text": "Because of this, **が** tends to point at particular things and **は** at general ones. These are tendencies, not laws: the listener decides from what sounds natural."
+    },
+    {
+      "type": "example",
+      "jp": "花が美しい。",
+      "en": "These flowers are beautiful. (particular flowers)"
+    },
+    {
+      "type": "example",
+      "jp": "花は美しい。",
+      "en": "Flowers are beautiful. (flowers in general are the topic)"
+    },
+    {
+      "type": "heading",
+      "text": "は for contrast and for emphasis"
+    },
+    {
+      "type": "text",
+      "text": "The plain way to report weather is 雨**が**降っている. Say 雨**は**降っている and you imply a contrast: rain, at least, is falling (perhaps you expected snow). Used as a sub-topic, **は** also throws emphasis forward onto the engine, as in 休み**は**ない: \"as for rest, there is none.\""
+    },
+    {
+      "type": "example",
+      "jp": "雨が降っている。",
+      "en": "It is raining. (neutral report)"
+    },
+    {
+      "type": "example",
+      "jp": "雨は降っている。",
+      "en": "Rain is falling (but something else you expected is not)."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "A sentence always has a topic and a subject, visible or zero.",
+        "**は** marks old information and pushes the weight forward; it cannot introduce something new.",
+        "**が** can mark new information: the word itself is the answer.",
+        "**が** leans toward the particular, **は** toward the general. Learn what sounds natural by immersion."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Which sentence answers \"Who bought the book?\"",
+      "prompt": "",
+      "options": [
+        "私が本を買った",
+        "私は本を買った",
+        "本を買った",
+        "私も本を買った"
+      ],
+      "answer": 0,
+      "note": "が marks the new information: I am the one.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "What can は mark?",
+      "prompt": "",
+      "options": [
+        "Old, already known information",
+        "Brand-new information the listener lacks",
+        "The object of an action",
+        "The place where something happens"
+      ],
+      "answer": 0,
+      "note": "は marks a topic, and a topic must already be known.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "は is a good way to introduce something the listener has never heard of.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "Introduce it first; then you can make it the topic.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "花は美しい。",
+      "options": [
+        "Flowers in general are beautiful",
+        "Those particular flowers are beautiful",
+        "The flowers will be beautiful",
+        "I want flowers"
+      ],
+      "answer": 0,
+      "note": "は tends toward the general.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence points at particular flowers in front of you?",
+      "prompt": "",
+      "options": [
+        "花が美しい",
+        "花は美しい",
+        "花に美しい",
+        "花で美しい"
+      ],
+      "answer": 0,
+      "note": "が tends toward the particular and new.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 雨は降っている suggest?",
+      "prompt": "",
+      "options": [
+        "Rain, at least, is falling (contrast with something else)",
+        "It is raining for the first time ever",
+        "I dislike rain",
+        "It has stopped raining"
+      ],
+      "answer": 0,
+      "note": "は implies a contrast with other possible topics.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the plain, neutral way to say \"It is raining\"?",
+      "prompt": "",
+      "options": [
+        "雨が降っている",
+        "雨は降っている",
+        "雨を降っている",
+        "雨も降っている"
+      ],
+      "answer": 0,
+      "note": "A neutral weather report uses が.",
+      "id": 7
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that carries the NEW information in 私が本を買った",
+      "options": [
+        "私が",
+        "本を",
+        "買った"
+      ],
+      "answer": 0,
+      "note": "In 私が本を買った, 私 is the answer to \"who?\".",
+      "id": 8
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word marked as old information in 私は本を買った",
+      "options": [
+        "私は",
+        "本を",
+        "買った"
+      ],
+      "answer": 0,
+      "note": "私は makes 私 the known topic.",
+      "id": 9
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is the natural answer to \"What did you do?\"",
+      "prompt": "",
+      "options": [
+        "私は本を買った",
+        "私が本を買った",
+        "本が買った",
+        "私に本を買った"
+      ],
+      "answer": 0,
+      "note": "The topic 私 is known; the comment is the news.",
+      "id": 10
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "As for me, I bought a book.",
+      "options": [
+        "私は",
+        "本を",
+        "買った"
+      ],
+      "note": "Topic, object, engine.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "In 本を買った, the topic and the subject have both gone missing, so the sentence is wrong.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "They are zero pronouns: the sentence is complete and defaults to I.",
+      "id": 12
+    }
+  ]
+}

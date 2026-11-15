@@ -1,0 +1,36 @@
+{
+ "id": 920,
+ "number": "92",
+ "kind": "note",
+ "title": "Will English eat Japanese?",
+ "summary": "A talk, not a grammar lesson: why English words enter Japanese, and why this does not change its structure.",
+ "video": "https://www.youtube.com/watch?v=bPWt-8Ecd7Y",
+ "blocks": [
+  {
+   "type": "text",
+   "text": "This episode is a talk about vocabulary and culture, so there is no test. Its main points:"
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "English words enter Japanese for the same reasons they enter other languages: English is the school language, the language of technology, and it carries prestige (cool, cute, clever).",
+    "Katakana makes loan words stand out on the page, especially to foreigners, so they seem more numerous than they are.",
+    "Loan words usually live beside native words rather than replacing them; the tiger is still 虎, though ライオン has largely replaced 獅子.",
+    "Foreign words arrive as **nouns** (you add する to make a verb), so they do not change how sentences are built."
+   ]
+  },
+  {
+   "type": "text",
+   "text": "A quick check from the talk: open any Japanese book and count the katakana words. Most are names or invented words, not loan words."
+  },
+  {
+   "type": "example",
+   "jp": "今日はコーヒーを飲みながらメールを送った。",
+   "en": "Today I sent an email while drinking coffee."
+  },
+  {
+   "type": "text",
+   "text": "The history behind the talk: Chinese words, now about sixty percent of the vocabulary, changed Japanese vocabulary but not its structure, just as French changed English vocabulary and not its structure."
+  }
+ ]
+}

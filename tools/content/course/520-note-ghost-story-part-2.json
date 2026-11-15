@@ -1,0 +1,19 @@
+{
+  "id": 520,
+  "number": "52",
+  "kind": "note",
+  "title": "Note: reading a ghost story, part 2",
+  "summary": "The story continues: a time statement, a verb that carries something back, and a quiet realization.",
+  "video": "https://www.youtube.com/watch?v=I38yhYh4Lfg",
+  "blocks": [
+    {"type": "text", "text": "This episode carries on with the same ghost story and works through the next few sentences. It is a reading practice rather than a new grammar topic."},
+    {"type": "heading", "text": "Things worth noticing"},
+    {"type": "keypoints", "items": [
+      "A sentence often opens with a time statement, such as \"after the party ended\", that sets the scene. In relaxed speech the particle after it may be dropped.",
+      "One verb can be chained to 来る: 忘れてくる means to leave something behind and then come away without it.",
+      "A long phrase can be packed into a noun with こと, and a verb such as 気づく (to notice) then uses it as its content.",
+      "Small words like ふと (suddenly, by chance) set the mood."
+    ]},
+    {"type": "text", "text": "The aim is a habit: read a long sentence from the engine backwards, and ask for each piece which word it modifies."}
+  ]
+}

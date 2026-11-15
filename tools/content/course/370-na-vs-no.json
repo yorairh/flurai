@@ -1,0 +1,45 @@
+{
+  "id": 370,
+  "number": "37",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "な versus の, and なる / たる adjectives",
+  "summary": "Japanese is noun-centered: な-adjectives, の-adjectives and する-verbs are all nouns. な is the copula before a noun, の links a noun to a noun, and なる / たる are old-style forms.",
+  "video": "https://www.youtube.com/watch?v=GB8fWjQuz9A",
+  "related": [532, 535],
+  "blocks": [
+    {"type": "text", "text": "The course models a sentence as a **train**: three kinds of **engines** (verbs, い-adjectives, and noun + だ) pull noun **carriages** marked by particles. Almost everything that is not an engine is a noun, even words dictionaries file under \"adjective\"."},
+    {"type": "heading", "text": "Adjectival nouns (\"な-adjectives\")"},
+    {"type": "text", "text": "A word like 綺麗 is a **noun** that is used as a description. The copula だ becomes **な** before a noun, so だ and な are the same word."},
+    {"type": "example", "jp": "あの女の子は綺麗だ。", "en": "That girl is pretty."},
+    {"type": "example", "jp": "綺麗な女の子が来た。", "en": "A pretty girl came."},
+    {"type": "text", "text": "Some such words also work as ordinary nouns and take particles: 元気 (healthy) can be 元気な子供, but also 元気を出して (\"cheer up\"). Only nouns take case particles like を, so that proves it."},
+    {"type": "heading", "text": "の: noun to noun"},
+    {"type": "text", "text": "Any noun can describe another with **の**: 魔法の帽子, a magic hat. Some words take either: 不思議な国 makes the country itself strange, while 不思議の国 keeps 不思議 more noun-like, a country of wonder."},
+    {"type": "heading", "text": "する-verbs"},
+    {"type": "text", "text": "A noun + **する** becomes a verb: 勉強 + する = 勉強する. It is the one big exception where an imported noun really acts as a verb."},
+    {"type": "heading", "text": "Compounds with no particle"},
+    {"type": "text", "text": "Two nouns can simply sit side by side: 本棚 (bookshelf), 日本語 (the Japanese language). In longer chains each noun describes the one after it. A word written only in kanji, with no okurigana, is almost always a noun."},
+    {"type": "heading", "text": "なる and たる: the literary forms"},
+    {"type": "text", "text": "Words like 華麗なる探偵 or 堂々たる態度 sound old-fashioned and grand. They are nouns too, in an old-style attributive form, and work like \"magnificent\" in a title."},
+    {"type": "keypoints", "items": [
+      "**Noun + な + noun**: an adjectival noun described by the copula.",
+      "**Noun + の + noun**: any noun modifies another.",
+      "**Noun + する**: a verb.",
+      "**なる / たる**: grand, literary descriptive forms."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is the な in 綺麗な花?", "prompt": "", "options": ["The copula だ in its before-a-noun form", "A particle meaning \"and\"", "A verb ending", "An adverb"], "answer": 0, "note": "だ and な are the same copula."},
+    {"id": 2, "type": "choice", "instruction": "What does の do in 魔法の帽子?", "prompt": "", "options": ["Lets one noun describe another", "Marks the object", "Makes a question", "Marks a place"], "answer": 0, "note": "Noun + の + noun."},
+    {"id": 3, "type": "choice", "instruction": "Which word can take both な and の?", "prompt": "", "options": ["不思議", "綺麗", "元気", "静か"], "answer": 0, "note": "不思議な国 and 不思議の国 both exist."},
+    {"id": 4, "type": "choice", "instruction": "What is 勉強する made of?", "prompt": "", "options": ["The noun 勉強 + する", "A verb + する", "An adjective + する", "A particle + する"], "answer": 0, "note": "Noun + する = a verb."},
+    {"id": 5, "type": "choice", "instruction": "What is 本棚?", "prompt": "", "options": ["Two nouns joined (book + shelf)", "A verb", "An adjective", "A particle"], "answer": 0, "note": "Nouns can sit side by side."},
+    {"id": 6, "type": "choice", "instruction": "What feel does 華麗なる探偵 have?", "prompt": "", "options": ["Grand and old-fashioned", "Casual and slangy", "Rude", "Childlike"], "answer": 0, "note": "なる forms sound literary."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "Words traditionally called な-adjectives are really nouns.", "options": ["True", "False"], "answer": 0, "note": "Hence 元気を出して works."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "She is a pretty girl.", "options": ["彼女は", "綺麗な", "女の子だ"], "note": "Adjectival noun + な before the noun."},
+    {"id": 9, "type": "tap", "instruction": "Tap the noun carrying a case particle (proof it is a noun)", "options": ["元気を", "出して"], "answer": 0, "note": "Only nouns take を."},
+    {"id": 10, "type": "choice", "instruction": "Fill the gap", "prompt": "魔法＿＿帽子", "options": ["の", "な", "に", "で"], "answer": 0, "note": "魔法 is an ordinary noun, so it takes の."},
+    {"id": 11, "type": "choice", "instruction": "Which is wrong?", "prompt": "", "options": ["綺麗の女の子", "綺麗な女の子", "魔法の帽子", "元気な子供"], "answer": 0, "note": "綺麗 takes な, not の."}
+  ]
+}

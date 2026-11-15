@@ -1,0 +1,288 @@
+{
+ "id": 820,
+ "number": "82",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "なんて, なんか and など",
+ "summary": "Three small words that mean \"and so on\" or \"things like\": など is neutral, なんて and なんか add surprise or a belittling tone.",
+ "video": "https://www.youtube.com/watch?v=OlUG9ym-b4Y",
+ "related": [
+  711,
+  712,
+  454
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "These three words overlap, so a dictionary list of meanings feels random. Think of them as a scale from neutral to casual."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Word",
+     "Feel",
+     "Main jobs"
+    ],
+    [
+     "など",
+     "neutral, fine in formal writing",
+     "\"and so on\"; mildly downplays"
+    ],
+    [
+     "なんて",
+     "in the middle",
+     "\"what a ...\", surprise, downplaying, a vague という"
+    ],
+    [
+     "なんか",
+     "very casual",
+     "downplaying, \"something\", \"sort of\""
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "など: and so on"
+  },
+  {
+   "type": "text",
+   "text": "**など** is not a cop-out like \"etc.\" can be in English. It lists examples and sits right after the noun, even before other particles."
+  },
+  {
+   "type": "example",
+   "jp": "机の上に本やペンなどがある。",
+   "en": "On the desk there are books, pens and so on."
+  },
+  {
+   "type": "text",
+   "text": "In casual speech it can also make light of a noun: the speaker rejects \"things like that\"."
+  },
+  {
+   "type": "example",
+   "jp": "お世辞など言わない。",
+   "en": "(I) don't say flattery or the like."
+  },
+  {
+   "type": "heading",
+   "text": "なんか: things like, something, somehow"
+  },
+  {
+   "type": "text",
+   "text": "なんか is a squashed 何か (something). From \"something\" it grows: **vague** (なんか変だ), **for some reason** (なんか眠い), and in sloppy talk a filler like \"kinda\". Attached to a noun it belittles it, often with real feeling, and it is common with oneself."
+  },
+  {
+   "type": "example",
+   "jp": "兄なんか大嫌い。",
+   "en": "I can't stand a person like my big brother."
+  },
+  {
+   "type": "example",
+   "jp": "私なんかには無理です。",
+   "en": "Someone like me can't do that."
+  },
+  {
+   "type": "example",
+   "jp": "なんか寒いね。",
+   "en": "Somehow it's cold, isn't it."
+  },
+  {
+   "type": "heading",
+   "text": "なんて: a squashed なんと / 何という"
+  },
+  {
+   "type": "text",
+   "text": "なんて asks \"what?\" (なんて言ったの？), but it is also the exclamation **\"what a ...!\"**, a belittling marker after a noun, and a surprise marker after a whole clause."
+  },
+  {
+   "type": "example",
+   "jp": "なんて広い部屋なんだ。",
+   "en": "What a big room!"
+  },
+  {
+   "type": "example",
+   "jp": "勉強なんて嫌いだ。",
+   "en": "I hate studying and things like it."
+  },
+  {
+   "type": "example",
+   "jp": "雪が降るなんて信じられない。",
+   "en": "I can't believe it's snowing! (of all things)"
+  },
+  {
+   "type": "example",
+   "jp": "田中なんて人は知らない。",
+   "en": "I don't know anybody called Tanaka. (and I doubt there is one)"
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**など** is neutral, **なんて** is in the middle, **なんか** is the most casual.",
+    "After a noun, なんか and なんて belittle it and replace が and を.",
+    "After a whole clause, **なんて** shows surprise or disbelief; なんか never does that."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which word is the most casual?",
+   "prompt": "",
+   "options": [
+    "なんか",
+    "など",
+    "なんて",
+    "から"
+   ],
+   "answer": 0,
+   "note": "なんか is the strongest and most colloquial."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "机の上に本やペン＿＿がある。 (... books, pens and so on.)",
+   "options": [
+    "など",
+    "なんて",
+    "なんだ",
+    "のに"
+   ],
+   "answer": 0,
+   "note": "など lists examples neutrally."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Pick the meaning",
+   "prompt": "なんか寒いね。",
+   "options": [
+    "Somehow it is cold",
+    "Something is cold",
+    "It is not cold",
+    "It is very cold, and so on"
+   ],
+   "answer": 0,
+   "note": "なんか = 何か, here \"somehow, for some reason\"."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Which sentence shows surprise at a whole event?",
+   "prompt": "",
+   "options": [
+    "雪が降るなんて信じられない。",
+    "雪なんて嫌いだ。",
+    "雪など嫌いだ。",
+    "雪が降るなんか。"
+   ],
+   "answer": 0,
+   "note": "なんて after a clause shows surprise."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does なんて do in 勉強なんて嫌いだ?",
+   "prompt": "",
+   "options": [
+    "Belittles 勉強",
+    "Asks \"what?\"",
+    "Lists examples",
+    "Shows surprise at an event"
+   ],
+   "answer": 0,
+   "note": "After a noun it makes light of it."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does なんて do in なんて広い部屋なんだ。?",
+   "prompt": "",
+   "options": [
+    "Says \"what a ...!\"",
+    "Asks \"what?\"",
+    "Belittles the room",
+    "Means \"and so on\""
+   ],
+   "answer": 0,
+   "note": "It opens an exclamation."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "なんか is a squashed form of 何か.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "何か → なんか."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "In 私なんかには無理です, なんか shows pride.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It belittles oneself: someone like me."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word that belittles the noun",
+   "options": [
+    "お金",
+    "なんて",
+    "いらない"
+   ],
+   "answer": 1,
+   "note": "お金なんていらない = I don't want money or such."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Somehow I'm sleepy.",
+   "options": [
+    "なんか",
+    "眠い",
+    "ね"
+   ],
+   "note": "なんか opens the sentence as a vague \"somehow\"."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which sentence means \"I don't know anyone called Tanaka\"?",
+   "prompt": "",
+   "options": [
+    "田中なんて人は知らない。",
+    "田中なんか人を知らなくない。",
+    "田中など人は知らなくない。",
+    "田中なんて人を知る。"
+   ],
+   "answer": 0,
+   "note": "A vague, doubtful という."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "Which particle disappears in 宿題など必要ない (compare 宿題は必要ない)?",
+   "prompt": "",
+   "options": [
+    "は",
+    "を",
+    "に",
+    "で"
+   ],
+   "answer": 0,
+   "note": "The topic は is dropped when など belittles the noun; it is not a logical particle."
+  }
+ ]
+}

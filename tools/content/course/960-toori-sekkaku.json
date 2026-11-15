@@ -1,0 +1,215 @@
+{
+ "id": 960,
+ "number": "96",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "通り and せっかく",
+ "summary": "通り is a road of agreement (\"just as\"), and せっかく marks something precious or gained with effort.",
+ "video": "https://www.youtube.com/watch?v=G3qc0esEbvE",
+ "related": [
+  474
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**通り** is the い-stem noun of 通る (pass through): a road, a way. **Modifier + 通り** means \"following the way of ...\", i.e. \"just as ...\"."
+  },
+  {
+   "type": "example",
+   "jp": "あなたの言う通りだ。",
+   "en": "It's just as you say."
+  },
+  {
+   "type": "example",
+   "jp": "ご覧の通り、店は閉まっている。",
+   "en": "As you can see, the shop is closed."
+  },
+  {
+   "type": "example",
+   "jp": "計画通りに進んだ。",
+   "en": "It went according to plan."
+  },
+  {
+   "type": "text",
+   "text": "その通り (\"that road\") means \"exactly right\": you are thinking along the right road. After a noun it is read どおり (思い通り, 予定通り)."
+  },
+  {
+   "type": "heading",
+   "text": "せっかく: precious and hard to replace"
+  },
+  {
+   "type": "text",
+   "text": "The dictionary offers many meanings (with effort, precious, especially), but all come from one idea: this thing is valuable and not easily replaced, so something should be done with it, or it is a pity it is lost."
+  },
+  {
+   "type": "example",
+   "jp": "せっかく京都に来たのだから、お寺に行こう。",
+   "en": "Since we've come all the way to Kyoto, let's go to a temple."
+  },
+  {
+   "type": "example",
+   "jp": "せっかくの休日が雨で台無しだ。",
+   "en": "My precious day off is ruined by rain."
+  },
+  {
+   "type": "example",
+   "jp": "せっかく作ったのに、誰も食べない。",
+   "en": "I went to the trouble of making it, but nobody eats it."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**Modifier + 通り** = just as ...; その通り = exactly.",
+    "**せっかく** = a rare chance or effort, so make use of it (or what a pity)."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What does その通り mean?",
+   "prompt": "",
+   "options": [
+    "Exactly right",
+    "That road",
+    "Go through",
+    "Not that way"
+   ],
+   "answer": 0,
+   "note": "Following the same road of thought."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "計画＿＿に進んだ。 (It went just as planned.)",
+   "options": [
+    "通り",
+    "通る",
+    "通って",
+    "通れ"
+   ],
+   "answer": 0,
+   "note": "Noun + どおり."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "What does ご覧の通り mean?",
+   "prompt": "",
+   "options": [
+    "As you can see",
+    "Please watch",
+    "I'm watching",
+    "Look out"
+   ],
+   "answer": 0,
+   "note": "Along the lines of your seeing."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "What does 思い通りにならない mean?",
+   "prompt": "",
+   "options": [
+    "Things don't go as I want",
+    "I don't think",
+    "I think too much",
+    "I don't pass"
+   ],
+   "answer": 0,
+   "note": "思い = will, desire."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does せっかく emphasize?",
+   "prompt": "",
+   "options": [
+    "Something rare, valuable, or the effort taken",
+    "Something cheap",
+    "Something dangerous",
+    "Something fast"
+   ],
+   "answer": 0,
+   "note": "Preciousness."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "Which sentence fits せっかくの休日?",
+   "prompt": "",
+   "options": [
+    "雨で台無しになった",
+    "雨が好きだ",
+    "雨を見た",
+    "雨が降る"
+   ],
+   "answer": 0,
+   "note": "A precious thing ruined."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "通り after a noun can be read どおり.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "予定どおり."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "せっかく always means \"with great haste\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It means precious or hard-won."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word meaning \"just as\"",
+   "options": [
+    "言う",
+    "通り",
+    "だ"
+   ],
+   "answer": 1,
+   "note": "Modifier + 通り."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "It is just as you say.",
+   "options": [
+    "あなたの",
+    "言う",
+    "通りだ"
+   ],
+   "note": "Modifier + 通り + だ."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which expression means \"since I took the trouble to come\"?",
+   "prompt": "",
+   "options": [
+    "せっかく来たのだから",
+    "やっぱり来たので",
+    "どうも来たから",
+    "しか来ない"
+   ],
+   "answer": 0,
+   "note": "せっかく + reason."
+  }
+ ]
+}

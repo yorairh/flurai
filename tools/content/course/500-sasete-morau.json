@@ -1,0 +1,54 @@
+{
+  "id": 500,
+  "number": "50",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "させてもらう: receiving a caused action",
+  "summary": "The causative (cause someone to do) plus もらう (receive) gives させてもらう: \"receive being caused to\", often a polite way to ask or to announce.",
+  "video": "https://www.youtube.com/watch?v=r2j1o9wj2oA",
+  "related": [718, 719, 431, 425],
+  "blocks": [
+    {"type": "text", "text": "させてもらう looks scary, but it is built from two pieces you already know. The **causative** せる / させる means **cause** someone to do something (lesson 19), and **もらう** receives an action (lesson 49). Put them together and you get \"receive someone's causing\"."},
+    {"type": "heading", "text": "The causative means cause, not only make or allow"},
+    {"type": "text", "text": "English splits \"make\" from \"let\", but the Japanese causative covers any way of causing. Even English cheats on this: \"I'll **let** you know tomorrow\" does not mean \"allow\" or \"force\". It means \"cause you to know\". Japanese says it with the causative of 知る: **知らせる**. In the same way, **聞かせる** is \"cause to hear\", and 読み聞かせる is to read aloud to someone."},
+    {"type": "table", "rows": [
+      ["Verb", "Causative", "Meaning"],
+      ["知る", "知らせる", "let someone know"],
+      ["聞く", "聞かせる", "let someone hear, tell"],
+      ["食べる", "食べさせる", "have someone eat"]
+    ]},
+    {"type": "heading", "text": "Stacking: Vさせてもらう"},
+    {"type": "text", "text": "Make the causative て-form and add もらう. 聞かせてもらえますか is \"may I receive your causing me to hear?\", that is \"could you tell me?\" The doer takes に, as usual with もらう. The one being caused is not always you: メガネを合わせてもらった means \"I received the glasses being caused to fit\", that is, \"I had my glasses fitted\"."},
+    {"type": "diagram", "cars": [
+      {"text": "（私は）", "role": "zero", "label": "receiver"},
+      {"text": "先生に", "role": "white", "label": "who causes"},
+      {"text": "聞かせ", "role": "plain", "label": "cause to hear"},
+      {"text": "てもらった", "role": "engine", "label": "received"}
+    ], "text": "先生に聞かせてもらった。 (I) was told by the teacher. (lit. received the teacher causing me to hear)"},
+    {"type": "heading", "text": "Polite asking and announcing"},
+    {"type": "text", "text": "帰らせてもらいます means \"I will receive your allowing me to go home\", close to English \"with your permission, I'll go home now\". Whether it is truly polite or a thin polite wrapper depends on tone. The humble verb **いただく** replaces もらう in very polite speech: 帰らせていただきます. It means the same thing and adds humility."},
+    {"type": "example", "jp": "ちょっと考えさせてもらえますか。", "en": "Could you let me think about it for a moment?"},
+    {"type": "example", "jp": "明日、早く帰らせてもらいます。", "en": "(With your leave) I'll head home early tomorrow."},
+    {"type": "example", "jp": "説明を聞かせてもらえませんか。", "en": "Could you tell me the explanation?"},
+    {"type": "keypoints", "items": [
+      "The causative means **cause**, which covers make, allow and arrange.",
+      "**Vさせてもらう** = receive someone's causing (me) to V.",
+      "**〜てもらえますか / もらえませんか** asks politely: can I receive …?",
+      "**いただく** is the humble form of もらう."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which verb means \"cause someone to know\"?", "prompt": "", "options": ["知らせる", "知られる", "知れる", "知る"], "answer": 0, "note": "知る + せる."},
+    {"id": 2, "type": "choice", "instruction": "Build the causative て-form + もらう for 休む", "prompt": "", "options": ["休ませてもらう", "休まれてもらう", "休めてもらう", "休んでもらう"], "answer": 0, "note": "休ま + せて + もらう."},
+    {"id": 3, "type": "choice", "instruction": "What does 聞かせてもらえますか ask?", "prompt": "", "options": ["Could you tell me?", "May I ask you to leave?", "Do you want to hear?", "Did you listen?"], "answer": 0, "note": "Receive your causing me to hear."},
+    {"id": 4, "type": "choice", "instruction": "Which is the humble form of もらう?", "prompt": "", "options": ["いただく", "くださる", "さしあげる", "おっしゃる"], "answer": 0, "note": "いただきます literally \"I humbly receive\"."},
+    {"id": 5, "type": "choice", "instruction": "True or false?", "prompt": "The causative can only mean \"force\".", "options": ["True", "False"], "answer": 1, "note": "It means cause, which includes allow and arrange."},
+    {"id": 6, "type": "choice", "instruction": "Which sentence means \"I'll go home now (with your leave)\"?", "prompt": "", "options": ["帰らせてもらいます。", "帰ってあげます。", "帰らされます。", "帰ってくれます。"], "answer": 0, "note": "帰らせて + もらいます."},
+    {"id": 7, "type": "tap", "instruction": "Tap the engine", "options": ["先生に", "意見を", "言わせてもらった"], "answer": 2, "note": "言わせてもらった carries the whole receive-caused-saying chain."},
+    {"id": 8, "type": "choice", "instruction": "In メガネを合わせてもらった, who is caused to fit?", "prompt": "", "options": ["The glasses", "The speaker", "The shop", "Nobody"], "answer": 0, "note": "The glasses are made to fit; I receive that."},
+    {"id": 9, "type": "choice", "instruction": "Which particle marks the person who does the causing?", "prompt": "", "options": ["に", "を", "が", "で"], "answer": 0, "note": "As with もらう in general."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "Could you let me think about it for a moment?", "options": ["ちょっと", "考えさせて", "もらえますか"], "note": "The amount comes first, then the causative て-form, then もらえますか."},
+    {"id": 11, "type": "choice", "instruction": "Which is more polite?", "prompt": "", "options": ["使わせていただきます。", "使わせてもらいます。", "使わせて。", "使う。"], "answer": 0, "note": "いただく is the humble form."},
+    {"id": 12, "type": "choice", "instruction": "What does 読み聞かせる describe?", "prompt": "", "options": ["Reading aloud to someone", "Reading silently", "Hearing a story told", "Forgetting a story"], "answer": 0, "note": "読み + 聞かせる: read and cause to hear."}
+  ]
+}

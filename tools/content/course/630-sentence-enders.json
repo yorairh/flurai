@@ -1,0 +1,254 @@
+{
+  "id": 630,
+  "number": "63",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Wild sentence enders: かい, だい, ぜ, ぞ, さ, から, し",
+  "summary": "The informal enders you meet in anime and manga: かい, だい, ちょうだい, ぜ, ぞ, さ, plus から and し left hanging.",
+  "video": "https://www.youtube.com/watch?v=CVJ4jTlxyno",
+  "related": [
+    579,
+    738
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Real, casual Japanese ends sentences in more ways than ね, よ and な. Here are the common ones outside the walled garden. You cannot learn the exact feel from structure alone, but knowing what each one is makes immersion much easier."
+    },
+    {
+      "type": "heading",
+      "text": "かい, だい, どうだい, ちょうだい"
+    },
+    {
+      "type": "text",
+      "text": "**かい** is a softened, rather folksy version of the question か, often heard from men and older speakers. **だい** is だ + かい, used after nouns and な-adjectives. The set phrase **どうだい** (\"how is it?\") is widely used. **ちょうだい** is an informal equivalent of ください, added to a て-form."
+    },
+    {
+      "type": "example",
+      "jp": "最近、元気かい。",
+      "en": "Have you been well lately?"
+    },
+    {
+      "type": "example",
+      "jp": "そこにいるのは誰だい。",
+      "en": "Who is that over there?"
+    },
+    {
+      "type": "example",
+      "jp": "この料理はどうだい。",
+      "en": "How is this dish?"
+    },
+    {
+      "type": "example",
+      "jp": "ちょっと待ってちょうだい。",
+      "en": "Wait a moment, please."
+    },
+    {
+      "type": "heading",
+      "text": "ぜ, ぞ, さ"
+    },
+    {
+      "type": "text",
+      "text": "**ぜ** and **ぞ** are verbal exclamation marks. They are rough and masculine and you will meet them mostly in anime and manga. **さ** is gentler and heard in real life from all kinds of people. Do not confuse the ender **さ** with **さあ** at the start of a sentence, a pause for thought."
+    },
+    {
+      "type": "example",
+      "jp": "俺が行くぞ。",
+      "en": "I'm going!"
+    },
+    {
+      "type": "example",
+      "jp": "そんなの簡単さ。",
+      "en": "That's easy, you know."
+    },
+    {
+      "type": "heading",
+      "text": "から and し left hanging"
+    },
+    {
+      "type": "text",
+      "text": "**から** is a conjunction, but speakers often stop after it and leave the rest unsaid. It can soften (an explanation) or harden (\"you ought to understand\"). **し** lists reasons; with one reason it hints that there are others, which takes the pressure off and sounds friendlier."
+    },
+    {
+      "type": "example",
+      "jp": "さくらが来ないから。",
+      "en": "Because Sakura isn't coming. (the rest is obvious)"
+    },
+    {
+      "type": "example",
+      "jp": "遅くなったし、帰ります。",
+      "en": "It has gotten late (and other things too), so I'm going home."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**かい / だい**: soft, folksy question enders; **どうだい** is very common.",
+        "**ちょうだい**: informal ください after a て-form.",
+        "**ぜ / ぞ**: rough masculine exclamation marks; **さ** is milder and widely used.",
+        "**から / し**: left hanging, they imply more; し hints at other reasons."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Which is the softened, folksy form of the question marker か?",
+      "prompt": "",
+      "options": [
+        "かい",
+        "ぜ",
+        "さ",
+        "し"
+      ],
+      "answer": 0,
+      "note": "かい is the informal question ender.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "What does どうだい ask?",
+      "prompt": "",
+      "options": [
+        "How is it? / What do you think?",
+        "Who is it?",
+        "Where is it?",
+        "Is it over?"
+      ],
+      "answer": 0,
+      "note": "どうだい is a casual \"how about it?\".",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "ちょっと待って＿＿。 (Wait a moment, please.)",
+      "options": [
+        "ちょうだい",
+        "ぜ",
+        "し",
+        "かい"
+      ],
+      "answer": 0,
+      "note": "ちょうだい follows a て-form to ask for something.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Which ender is a rough, masculine \"verbal exclamation mark\"?",
+      "prompt": "",
+      "options": [
+        "ぞ",
+        "から",
+        "し",
+        "ちょうだい"
+      ],
+      "answer": 0,
+      "note": "ぞ (and ぜ).",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "さ is just as rough as ぜ and ぞ.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "さ is much milder and heard in real life.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "遅くなったし、帰ります。",
+      "options": [
+        "It's late (and for other reasons too), so I'm going home",
+        "Because it is late only",
+        "I will come home late",
+        "I wonder if it is late"
+      ],
+      "answer": 0,
+      "note": "One reason with し hints there are others.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "What does a hanging から do in 「さくらが来ないから。」?",
+      "prompt": "",
+      "options": [
+        "Leaves the consequence unsaid because it is obvious",
+        "Turns the sentence into a question",
+        "Puts it in the past",
+        "Marks the topic"
+      ],
+      "answer": 0,
+      "note": "The speaker stops, trusting you to finish it.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "し can take the pressure off a statement by suggesting there are other reasons too.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "That softening is why it feels friendly.",
+      "id": 8
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Who is that over there?",
+      "options": [
+        "そこに",
+        "いるのは",
+        "誰だい"
+      ],
+      "note": "だい follows the noun-like 誰.",
+      "id": 9
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the sentence ender",
+      "options": [
+        "俺が",
+        "行く",
+        "ぞ"
+      ],
+      "answer": 2,
+      "note": "ぞ adds a rough exclamation mark.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "Where do you meet ぜ and ぞ most often?",
+      "prompt": "",
+      "options": [
+        "In anime and manga",
+        "In business emails",
+        "In textbooks",
+        "In news broadcasts"
+      ],
+      "answer": 0,
+      "note": "They sound rough, so fiction is where they live.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence uses さ as an ender (not as a pause at the start)?",
+      "prompt": "",
+      "options": [
+        "そんなの簡単さ",
+        "さあ行こう",
+        "さあ、どうかな",
+        "さあね"
+      ],
+      "answer": 0,
+      "note": "The others begin with さあ, a pause for thought.",
+      "id": 12
+    }
+  ]
+}
