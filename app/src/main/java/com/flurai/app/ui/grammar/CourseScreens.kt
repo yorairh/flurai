@@ -1,6 +1,7 @@
 package com.flurai.app.ui.grammar
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -13,10 +14,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -38,6 +42,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -351,14 +360,35 @@ private fun TableView(block: CourseBlock) {
 }
 
 /**
- * The course's train: an engine pulling carriages. The main carriage (the subject) is dark, the
- * engine is the colored one, a topic is a flag, and the zero pronoun is an empty, dashed-looking car.
+ * The course's train, drawn as a train: an engine (chimney, smoke, headlight) pulling carriages on a
+ * rail, with wheels and couplings. The main carriage (the subject) is dark, the engine is the colored
+ * one, a topic is green, and the zero pronoun is an empty, outlined car.
  */
 @Composable
 fun TrainDiagram(cars: List<TrainCar>) {
-    Row(Modifier.horizontalScroll(rememberScrollState()), verticalAlignment = Alignment.CenterVertically) {
+    val rail = MaterialTheme.colorScheme.outline
+    Row(
+        Modifier
+            .horizontalScroll(rememberScrollState())
+            .drawBehind {
+                val railY = size.height - 6.dp.toPx()
+                drawLine(rail, Offset(0f, railY), Offset(size.width, railY), 3.dp.toPx())
+                var x = 4.dp.toPx()
+                while (x < size.width) {
+                    drawLine(rail, Offset(x, railY), Offset(x, railY + 5.dp.toPx()), 2.dp.toPx())
+                    x += 14.dp.toPx()
+                }
+            }
+            .padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.Bottom,
+    ) {
         cars.forEachIndexed { index, car ->
-            if (index > 0) Text("—", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (index > 0) {
+                Box(
+                    Modifier.padding(bottom = 20.dp).width(12.dp).height(4.dp)
+                        .background(MaterialTheme.colorScheme.onSurfaceVariant),
+                )
+            }
             Car(car)
         }
     }
@@ -376,10 +406,51 @@ private fun Car(car: TrainCar) {
         "particle" -> Triple(scheme.secondaryContainer, scheme.onSecondaryContainer, null)
         else -> Triple(scheme.surfaceContainerHighest, scheme.onSurface, null)
     }
-    Surface(shape = RoundedCornerShape(10.dp), color = background, contentColor = content, border = border) {
-        Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(car.text, style = MaterialTheme.typography.titleMedium.japanese())
-            car.label?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
+    val engine = car.role == "engine"
+    val smoke = scheme.outlineVariant
+    val chimney = scheme.onSurfaceVariant
+    val lamp = Color(0xFFFFC83D)
+    val wheel = scheme.onSurface
+    val shape = if (engine) {
+        RoundedCornerShape(topStart = 8.dp, topEnd = 26.dp, bottomEnd = 8.dp, bottomStart = 6.dp)
+    } else {
+        RoundedCornerShape(8.dp)
+    }
+    Column(
+        Modifier.drawBehind {
+            if (engine) {
+                // chimney and smoke above the boiler
+                val cx = 22.dp.toPx()
+                drawRect(chimney, Offset(cx - 5.dp.toPx(), 12.dp.toPx()), Size(10.dp.toPx(), 12.dp.toPx()))
+                drawCircle(smoke, 4.dp.toPx(), Offset(cx + 2.dp.toPx(), 8.dp.toPx()))
+                drawCircle(smoke, 5.dp.toPx(), Offset(cx + 9.dp.toPx(), 3.dp.toPx()))
+            }
+        },
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(Modifier.height(16.dp))
+        Box {
+            Surface(shape = shape, color = background, contentColor = content, border = border) {
+                Column(
+                    Modifier.padding(start = 12.dp, end = if (engine) 20.dp else 12.dp, top = 8.dp, bottom = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(car.text, style = MaterialTheme.typography.titleMedium.japanese())
+                    car.label?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
+                }
+            }
+            if (engine) {
+                Box(
+                    Modifier.align(Alignment.CenterEnd).padding(end = 6.dp).size(8.dp)
+                        .clip(CircleShape).background(lamp),
+                )
+            }
+        }
+        Row(
+            Modifier.offset(y = (-6).dp),
+            horizontalArrangement = Arrangement.spacedBy(if (engine) 28.dp else 22.dp),
+        ) {
+            repeat(2) { Box(Modifier.size(12.dp).clip(CircleShape).background(wheel)) }
         }
     }
 }
