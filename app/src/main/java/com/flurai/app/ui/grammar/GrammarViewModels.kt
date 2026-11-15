@@ -98,6 +98,8 @@ data class GrammarDetailState(
     val status: GrammarStatus? = null,
     /** The next lesson of this level that is not started yet (never this point). */
     val next: GrammarPointEntity? = null,
+    /** The course lesson that explains this point, if there is one. */
+    val courseLesson: com.flurai.app.core.content.CourseLessonEntity? = null,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -106,6 +108,7 @@ class GrammarDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val auth: AuthRepository,
     private val grammar: GrammarRepository,
+    private val course: com.flurai.app.core.course.CourseRepository,
     activity: StudyActivityRepository,
     val speaker: JapaneseSpeaker,
 ) : ViewModel() {
@@ -122,7 +125,7 @@ class GrammarDetailViewModel @Inject constructor(
         clock.start()
         speaker.start()
         viewModelScope.launch {
-            _state.update { it.copy(point = grammar.point(id), examples = grammar.examples(id)) }
+            _state.update { it.copy(point = grammar.point(id), examples = grammar.examples(id), courseLesson = course.lessonForPoint(id)) }
         }
         viewModelScope.launch {
             val uid = auth.uid ?: return@launch

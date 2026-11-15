@@ -1,6 +1,9 @@
 package com.flurai.app.core.quiz
 
 import com.flurai.app.core.activity.StudyClock
+import com.flurai.app.core.course.COURSE_PASS_FRACTION
+import com.flurai.app.core.course.CourseAnswer
+import com.flurai.app.core.course.CourseRepository
 import com.flurai.app.core.grammar.GrammarRepository
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
@@ -42,6 +45,12 @@ sealed class QuizKind(
     /** "What does this sentence mean?" over Tatoeba sentences of one level. */
     data class Reading(override val jlpt: Int) : QuizKind(TestType.Reading)
 
+    /** The test after one course lesson (its hand-written questions). */
+    data class CourseLesson(val lessonId: Int) : QuizKind(TestType.Course)
+
+    /** "Test yourself": [count] random questions over every course lesson passed. */
+    data class CourseReview(val count: Int) : QuizKind(TestType.Course)
+
     /** Round-trips through navigation arguments. */
     fun encode(): String = when (this) {
         Placement -> "placement"
@@ -50,6 +59,8 @@ sealed class QuizKind(
         Listening -> "listening"
         is Grammar -> "grammar-$jlpt-$pointId"
         is Reading -> "reading-$jlpt"
+        is CourseLesson -> "course-$lessonId"
+        is CourseReview -> "courseself-$count"
     }
 
     val title: String
@@ -60,6 +71,8 @@ sealed class QuizKind(
             Listening -> "Listening quiz"
             is Grammar -> "N$jlpt grammar"
             is Reading -> "N$jlpt reading"
+            is CourseLesson -> "Lesson test"
+            is CourseReview -> "Test yourself"
         }
 
     /**
@@ -68,9 +81,12 @@ sealed class QuizKind(
      */
     fun savedLevel(placementLevel: JlptLevel?): Int? = if (this == Placement) placementLevel?.jlpt ?: 0 else jlpt
 
-    /** Only a checkpoint is passed or failed. */
-    fun passed(correct: Int, total: Int): Boolean? =
-        if (this is Checkpoint) total > 0 && correct.toDouble() / total >= CHECKPOINT_PASS_FRACTION else null
+    /** Only a checkpoint and a course lesson test are passed or failed. */
+    fun passed(correct: Int, total: Int): Boolean? = when (this) {
+        is Checkpoint -> total > 0 && correct.toDouble() / total >= CHECKPOINT_PASS_FRACTION
+        is CourseLesson -> total > 0 && correct.toDouble() / total >= COURSE_PASS_FRACTION
+        else -> null
+    }
 
     /** The number of questions is not known up front. */
     val adaptive: Boolean get() = this == Placement
@@ -82,6 +98,8 @@ sealed class QuizKind(
             value.startsWith("checkpoint-") -> Checkpoint(value.removePrefix("checkpoint-").toInt())
             value.startsWith("grammar-") -> value.removePrefix("grammar-").split("-").let { Grammar(it[0].toInt(), it[1].toInt()) }
             value.startsWith("reading-") -> Reading(value.removePrefix("reading-").toInt())
+            value.startsWith("courseself-") -> CourseReview(value.removePrefix("courseself-").toInt())
+            value.startsWith("course-") -> CourseLesson(value.removePrefix("course-").toInt())
             else -> Quick
         }
     }
@@ -96,6 +114,13 @@ interface QuizBackend {
     suspend fun questions(uid: String, kind: QuizKind, profileLevel: JlptLevel, stageLevel: Int): List<Question>
 
     suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long)
+
+    /**
+     * Saves the answers of a course test ([kind] is a course kind). Returns the course entry to take
+     * next, when the kind has one to suggest.
+     */
+    suspend fun recordCourse(uid: String, kind: QuizKind, answers: List<CourseAnswer>, at: Long): Int? = null
+
     suspend fun saveResult(result: TestResultEntity)
     suspend fun addWordsToFlashcards(uid: String, wordIds: List<Int>, now: Instant)
 
@@ -108,6 +133,7 @@ interface QuizBackend {
 class RepositoryQuizBackend @Inject constructor(
     private val quizzes: QuizRepository,
     private val grammar: GrammarRepository,
+    private val course: CourseRepository,
     private val reading: ReadingRepository,
     private val study: StudyRepository,
     private val profiles: StudyProfileRepository,
@@ -124,6 +150,14 @@ class RepositoryQuizBackend @Inject constructor(
         QuizKind.Listening -> quizzes.listening(uid, profileLevel)
         is QuizKind.Reading -> reading.questions(kind.jlpt)
         is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 }, learnedOnly = true)
+        is QuizKind.CourseLesson -> course.lessonTest(uid, kind.lessonId)
+        is QuizKind.CourseReview -> course.selfTest(uid, kind.count)
+    }
+
+    override suspend fun recordCourse(uid: String, kind: QuizKind, answers: List<CourseAnswer>, at: Long): Int? = when (kind) {
+        is QuizKind.CourseLesson -> course.recordLessonTest(uid, kind.lessonId, answers, at)
+        is QuizKind.CourseReview -> { course.recordSelfTest(uid, answers, at); null }
+        else -> null
     }
 
     override suspend fun recordGrammar(uid: String, grammarId: Int, correct: Boolean, at: Long) = grammar.record(uid, grammarId, correct, at)
@@ -167,6 +201,8 @@ data class QuizResult(
     val currentLevel: JlptLevel?,
     val missedAdded: Boolean = false,
     val levelApplied: Boolean = false,
+    /** Course lesson test: the entry to take next, if any. */
+    val nextLessonId: Int? = null,
 )
 
 data class QuizRunState(
@@ -178,6 +214,8 @@ data class QuizRunState(
     /** Known total, or null for the adaptive placement test. */
     val total: Int? = null,
     val selected: Int? = null,
+    /** An order question that was answered: the arrangement the learner made, pieces joined. */
+    val arranged: String? = null,
     val result: QuizResult? = null,
     val error: String? = null,
     /** Goes up by one each time a question is put on screen (so a listening question's audio plays once). */
@@ -202,7 +240,7 @@ class QuizRun(
     val state: StateFlow<QuizRunState> = _state.asStateFlow()
 
     private val queue = ArrayDeque<Question>()
-    private val answered = mutableListOf<Triple<Question, Boolean, Int>>()
+    private val answered = mutableListOf<Answered>()
     private val placement = PlacementTest()
     private val profileLevel = profile?.level ?: JlptLevel.N5
     private var advancing = false
@@ -220,13 +258,24 @@ class QuizRun(
 
     suspend fun choose(index: Int) {
         val current = _state.value.question ?: return
-        if (_state.value.selected != null) return
+        if (_state.value.selected != null || index !in current.options.indices) return
         val correct = index == current.answer
-        answered += Triple(current, correct, index)
+        answered += Answered(current, correct, current.options[index])
         if (kind.adaptive) placement.answer(correct)
         clock.tap(reviews = 1)
         _state.update { it.copy(selected = index) }
         current.grammarId?.let { backend.recordGrammar(uid, it, correct, now().toEpochMilli()) }
+    }
+
+    /** Answers an order question: [order] holds the indexes of its tiles in the order the learner put them. */
+    suspend fun arrange(order: List<Int>) {
+        val current = _state.value.question ?: return
+        val tiles = current.tiles ?: return
+        if (_state.value.selected != null || order.sorted() != tiles.indices.toList()) return
+        val text = order.joinToString("") { tiles[it] }
+        answered += Answered(current, text == current.correctText, text)
+        clock.tap(reviews = 1)
+        _state.update { it.copy(selected = 0, arranged = text) }
     }
 
     suspend fun next() {
@@ -266,18 +315,21 @@ class QuizRun(
         advancing = false
         val question = queue.removeFirst()
         _state.update {
-            it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null, shown = it.shown + 1)
+            it.copy(loading = false, question = question, number = answered.size + 1, total = total, selected = null, arranged = null, shown = it.shown + 1)
         }
     }
 
     private suspend fun finish() {
-        val correct = answered.count { it.second }
+        val correct = answered.count { it.correct }
         val total = answered.size
-        val missedAnswers = answered.filter { !it.second }
-        val missed = missedAnswers.mapNotNull { it.first.wordId }.distinct()
+        val missedAnswers = answered.filter { !it.correct }
+        val missed = missedAnswers.mapNotNull { it.question.wordId }.distinct()
         val missedNew = if (missed.isEmpty()) emptyList() else backend.withoutFlashcards(uid, missed)
         val missedList = missedAnswers.map { (q, _, chosen) ->
-            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: q.prompt, q.hint, q.correctOption, q.options[chosen], q.note?.takeIf { q.kind != QuestionKind.WordListening })
+            // A course question may have no prompt text, only an instruction ("Spot the mistake"): that is then what was asked.
+            val asked = q.prompt.ifBlank { q.instruction.orEmpty() }
+            val detail = if (q.prompt.isBlank()) q.hint else listOfNotNull(q.instruction, q.hint).joinToString(" · ").ifBlank { null }
+            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: asked, detail, q.correctOption, chosen, q.note?.takeIf { q.kind != QuestionKind.WordListening })
         }
         val placementLevel = if (kind.adaptive) placement.result else null
         backend.saveResult(
@@ -286,6 +338,12 @@ class QuizRun(
                 correct = correct, total = total, takenAt = now().toEpochMilli(),
             ),
         )
+        val courseAnswers = answered.mapNotNull { a ->
+            val lesson = a.question.courseLesson ?: return@mapNotNull null
+            val id = a.question.courseQuestion ?: return@mapNotNull null
+            CourseAnswer(lesson, id, a.correct)
+        }
+        val nextLessonId = if (courseAnswers.isEmpty()) null else backend.recordCourse(uid, kind, courseAnswers, now().toEpochMilli())
         clock.finish()
         _state.update {
             it.copy(
@@ -294,9 +352,12 @@ class QuizRun(
                 result = QuizResult(
                     title = kind.title, correct = correct, total = total, passed = kind.passed(correct, total),
                     placementLevel = placementLevel, missedWordIds = missed, missed = missedList, missedNewWordIds = missedNew,
-                    currentLevel = profile?.level,
+                    currentLevel = profile?.level, nextLessonId = nextLessonId,
                 ),
             )
         }
     }
 }
+
+/** One answered question: [chosen] is the text of the option picked, or of the arrangement made. */
+private data class Answered(val question: Question, val correct: Boolean, val chosen: String)

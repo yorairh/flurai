@@ -16,6 +16,7 @@ import com.flurai.app.core.study.MIGRATION_2_3
 import com.flurai.app.core.study.MIGRATION_3_4
 import com.flurai.app.core.study.MIGRATION_4_5
 import com.flurai.app.core.study.MIGRATION_5_6
+import com.flurai.app.core.study.MIGRATION_6_7
 import com.flurai.app.core.video.CustomChannelDao
 import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.study.StudyDao
@@ -69,7 +70,7 @@ object AppModule {
     @Provides
     @Singleton
     fun userDatabase(@ApplicationContext context: Context): UserDatabase =
-        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6).build()
+        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7).build()
 
     @Provides
     fun studyDao(db: UserDatabase): StudyDao = db.studyDao()
@@ -104,6 +105,9 @@ object AppModule {
 
     @Provides
     fun grammarProgressDao(db: UserDatabase): GrammarProgressDao = db.grammarProgressDao()
+
+    @Provides
+    fun courseProgressDao(db: UserDatabase): com.flurai.app.core.course.CourseProgressDao = db.courseProgressDao()
 }
 
 @Module

@@ -70,6 +70,12 @@ class FakeContentDao : ContentDao {
     override suspend fun grammarPoint(id: Int): com.flurai.app.core.content.GrammarPointEntity? = null
     override suspend fun grammarExamples(id: Int) = emptyList<com.flurai.app.core.content.GrammarExampleEntity>()
     override suspend fun allGrammarExamples() = emptyList<com.flurai.app.core.content.GrammarExampleEntity>()
+    override fun courseLessons() = kotlinx.coroutines.flow.flowOf(emptyList<com.flurai.app.core.content.CourseLessonEntity>())
+    override suspend fun allCourseLessons() = emptyList<com.flurai.app.core.content.CourseLessonEntity>()
+    override suspend fun courseLesson(id: Int): com.flurai.app.core.content.CourseLessonEntity? = null
+    override suspend fun courseLessonForPoint(grammarId: Int): com.flurai.app.core.content.CourseLessonEntity? = null
+    override suspend fun courseQuestions(lessonId: Int) = emptyList<com.flurai.app.core.content.CourseQuestionEntity>()
+    override suspend fun courseQuestionsOf(lessonIds: List<Int>) = emptyList<com.flurai.app.core.content.CourseQuestionEntity>()
     override suspend fun allWords(): List<WordEntity> = throw NotImplementedError()
     override suspend fun kanjiLevels(): List<KanjiLevel> = throw NotImplementedError()
     override suspend fun words(ids: List<Int>): List<WordEntity> = throw NotImplementedError()

@@ -1,0 +1,53 @@
+{
+  "id": 90,
+  "number": "9",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "The subject of the sentence and expressing desire",
+  "summary": "Japanese happily lets things be the main carriage, so \"I like coffee\" is really \"coffee is pleasing\". The same logic explains ほしい, たい and たがる.",
+  "video": "https://www.youtube.com/watch?v=vk3aKqMQwhM",
+  "related": [576, 514, 486, 487, 577, 580],
+  "blocks": [
+    {"type": "text", "text": "English wants a person, usually \"I\", to be the actor of every sentence. Japanese is happy to put a **thing** in the main carriage. This explains the sentences that confuse learners most."},
+    {"type": "heading", "text": "\"I like coffee\" is not about I"},
+    {"type": "example", "jp": "私はコーヒーが好きだ。", "en": "As for me, coffee is pleasing. (I like coffee.)"},
+    {"type": "diagram", "cars": [
+      {"text": "私は", "role": "topic", "label": "topic"},
+      {"text": "コーヒー", "role": "carriage", "label": "main carriage"},
+      {"text": "が", "role": "particle"},
+      {"text": "好きだ", "role": "engine", "label": "engine"}
+    ], "text": "The main carriage is コーヒー. 好き is a な-type word meaning \"pleasing\"."},
+    {"type": "text", "text": "\"I\" is only the **topic**. The main carriage is **coffee**, and the engine says coffee is \"pleasing\". Textbooks that say が marks \"the object\" here teach you something that never happens: が always marks the main carriage."},
+    {"type": "example", "jp": "本がわかる。", "en": "The book is understandable. (I understand the book.)"},
+    {"type": "heading", "text": "Wanting: ほしい and たい"},
+    {"type": "text", "text": "**ほしい** is an い-adjective meaning \"is wanted\". The thing wanted is the main carriage. The wish itself belongs to the speaker, so it is not written."},
+    {"type": "example", "jp": "（私は）子猫がほしい。", "en": "(I) want a kitten. (A kitten is wanted.)"},
+    {"type": "text", "text": "To want to **do** something, attach the adjective **たい** to the **い-stem** of the verb: 食べる → 食べ**たい**. Again the thing is the main carriage: \"crepes are eating-desired\". With nothing else named, the zero is the speaker."},
+    {"type": "example", "jp": "私はクレープが食べたい。", "en": "I want to eat crepes."},
+    {"type": "example", "jp": "（私が）食べたい。", "en": "(I) want to eat."},
+    {"type": "heading", "text": "Feelings of other people: がる"},
+    {"type": "text", "text": "Words like ほしい, たい and 怖い describe a feeling **from the inside**: the speaker's. They cannot describe someone else's feelings, because you cannot see them. For other people, attach **がる** (\"shows signs of\") to the stem. がる makes a verb, because all you can see is behavior."},
+    {"type": "example", "jp": "おばけが怖い。", "en": "Ghosts are scary. (I am scared of ghosts.)"},
+    {"type": "example", "jp": "さくらがケーキを欲しがる。", "en": "Sakura wants cake. (she shows signs of wanting it)"},
+    {"type": "keypoints", "items": [
+      "**が** marks the main carriage even in **好きだ**, **ほしい**, **たい** and **わかる**.",
+      "**ほしい**: \"is wanted\" (い-adjective). **い-stem + たい**: \"is desired to do\".",
+      "Feelings from the inside belong to the **speaker**; for someone else, add **がる**.",
+      "The topic (**私は**) is only the one who feels it."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "In 私はコーヒーが好きだ, which word is the main carriage?", "prompt": "", "options": ["コーヒー", "私", "好き", "だ"], "answer": 0, "note": "コーヒーが is the main carriage; 私は is only the topic."},
+    {"id": 2, "type": "tap", "instruction": "Tap the main carriage", "options": ["私は", "コーヒーが", "好きだ"], "answer": 1, "note": "が marks the main carriage, even here."},
+    {"id": 3, "type": "choice", "instruction": "What is ほしい?", "prompt": "", "options": ["An い-adjective meaning \"is wanted\"", "A verb", "A particle", "A noun"], "answer": 0, "note": "That is why the thing wanted takes が."},
+    {"id": 4, "type": "choice", "instruction": "Which says \"I want to eat crepes\"?", "prompt": "", "options": ["私はクレープが食べたい", "私はクレープを食べるたい", "私はクレープが食べるたい", "私はクレープが食べない"], "answer": 0, "note": "食べ + たい, on the い-stem."},
+    {"id": 5, "type": "choice", "instruction": "Whose wish is it?", "prompt": "（ゼロが）食べたい。", "options": ["The speaker's", "The listener's", "Someone else's", "Nobody's"], "answer": 0, "note": "A hidden main carriage defaults to the speaker."},
+    {"id": 6, "type": "choice", "instruction": "Which describes someone else wanting cake?", "prompt": "", "options": ["さくらがケーキを欲しがる", "さくらがケーキがほしい", "さくらはケーキがほしい", "さくらがケーキをほしいる"], "answer": 0, "note": "For another person, use がる: she shows signs of wanting it."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "\"I like coffee\" mirrors the Japanese grammar exactly.", "options": ["True", "False"], "answer": 1, "note": "Japanese says: as for me, coffee is pleasing."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "I want a kitten.", "options": ["私は", "子猫が", "ほしい"], "note": "Topic, main carriage, engine."},
+    {"id": 9, "type": "choice", "instruction": "What does 本がわかる mean, literally?", "prompt": "", "options": ["The book is understandable", "The book understands", "I am a book", "The book is mine"], "answer": 0, "note": "The book is the main carriage; わかる says it is understandable."},
+    {"id": 10, "type": "choice", "instruction": "What does がる add?", "prompt": "", "options": ["It shows signs of a feeling, for another person", "It makes the sentence past", "It makes it polite", "It marks the object"], "answer": 0, "note": "さくらが欲しがる."},
+    {"id": 11, "type": "choice", "instruction": "おばけが怖い。 Who is scared, and what is the cause?", "prompt": "", "options": ["The speaker (a zero) is scared; the ghost is the cause", "The ghost is scared", "Nobody is scared", "Everyone is scared"], "answer": 0, "note": "怖い describes a feeling from the inside; the ghost is the main carriage."},
+    {"id": 12, "type": "choice", "instruction": "Which stem does たい attach to?", "prompt": "", "options": ["い-stem", "あ-stem", "て-form", "Dictionary form"], "answer": 0, "note": "食べる → 食べたい."}
+  ]
+}

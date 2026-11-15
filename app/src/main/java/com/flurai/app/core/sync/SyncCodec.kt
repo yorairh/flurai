@@ -1,6 +1,7 @@
 package com.flurai.app.core.sync
 
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultEntity
 import com.flurai.app.core.quiz.TestType
@@ -15,7 +16,7 @@ import com.flurai.app.core.video.CustomChannelEntity
 // must stay readable, so field names here never change.
 
 /** The collections that hold one document per row, in the order the pull reads them. */
-internal val ROW_COLLECTIONS = listOf("cards", "days", "tests", "grammar")
+internal val ROW_COLLECTIONS = listOf("cards", "days", "tests", "grammar", "course")
 
 /** Small whole-document items (profile, channels, decks). */
 internal const val META_COLLECTION = "meta"
@@ -97,6 +98,18 @@ internal fun grammarDoc(g: GrammarProgressEntity): Map<String, Any?> = mapOf(
 internal fun grammarFrom(uid: String, d: Map<String, Any?>): GrammarProgressEntity? = GrammarProgressEntity(
     uid, d.int("grammarId") ?: return null, d.int("correct") ?: 0, d.int("wrong") ?: 0,
     d["lastCorrect"] as? Boolean ?: false, d.long("lastAt") ?: 0,
+)
+
+// -- grammar course progress -----------------------------------------------------------------------
+
+internal fun courseDoc(c: CourseProgressEntity): Map<String, Any?> = mapOf(
+    "lessonId" to c.lessonId, "bestCorrect" to c.bestCorrect, "bestTotal" to c.bestTotal, "passedAt" to c.passedAt,
+    "attempts" to c.attempts, "missed" to c.missed, "lastAt" to c.lastAt,
+)
+
+internal fun courseFrom(uid: String, d: Map<String, Any?>): CourseProgressEntity? = CourseProgressEntity(
+    uid, d.int("lessonId") ?: return null, d.int("bestCorrect") ?: 0, d.int("bestTotal") ?: 0, d.long("passedAt"),
+    d.int("attempts") ?: 0, d["missed"] as? String ?: "", d.long("lastAt") ?: 0,
 )
 
 // -- channels and decks (whole-document lists) -----------------------------------------------------

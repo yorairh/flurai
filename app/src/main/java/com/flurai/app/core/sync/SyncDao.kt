@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultEntity
 import com.flurai.app.core.study.CardEntity
@@ -37,6 +38,9 @@ interface SyncDao {
 
     @Query("SELECT * FROM grammar_progress WHERE uid = :uid AND last_at > :since")
     suspend fun grammarSince(uid: String, since: Long): List<GrammarProgressEntity>
+
+    @Query("SELECT * FROM course_progress WHERE uid = :uid AND last_at > :since")
+    suspend fun courseSince(uid: String, since: Long): List<CourseProgressEntity>
 
     @Query("SELECT * FROM custom_channel WHERE uid = :uid ORDER BY added_at")
     suspend fun channels(uid: String): List<com.flurai.app.core.video.CustomChannelEntity>

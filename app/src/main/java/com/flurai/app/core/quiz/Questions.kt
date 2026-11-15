@@ -4,7 +4,7 @@ import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.model.JlptLevel
 import kotlin.random.Random
 
-enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank, SentenceMeaning, WordListening }
+enum class QuestionKind { WordMeaning, KanjiReading, GrammarBlank, SentenceMeaning, WordListening, CourseChoice, CourseTap, CourseOrder }
 
 /**
  * A multiple-choice question. [wordId] is set for vocabulary questions so a missed word can be
@@ -23,8 +23,17 @@ data class Question(
     val grammarId: Int? = null,
     /** Shown once the question is answered, e.g. which grammar point it tested. */
     val note: String? = null,
+    /** Course questions: what to do ("Pick the subject"), shown above the prompt. */
+    val instruction: String? = null,
+    /** Course order questions: the pieces to arrange, shuffled. The answer is [correctText]. */
+    val tiles: List<String>? = null,
+    /** Course order questions: the right arrangement, pieces joined. */
+    val correctText: String? = null,
+    /** Course questions: which lesson and which of its questions this is, so the result can be saved. */
+    val courseLesson: Int? = null,
+    val courseQuestion: Int? = null,
 ) {
-    val correctOption: String get() = options[answer]
+    val correctOption: String get() = correctText ?: options[answer]
 }
 
 /**

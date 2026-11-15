@@ -1,0 +1,59 @@
+{
+  "id": 60,
+  "number": "6",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Adjectives",
+  "summary": "Any engine can turn white and describe a noun: verbs, い-adjectives, noun + だ (the な form), and the の car.",
+  "video": "https://www.youtube.com/watch?v=iyVZlaEqU24",
+  "related": [532, 533, 506],
+  "blocks": [
+    {"type": "text", "text": "You already know three kinds of engine: a **verb** (う-train), a **noun + だ** (だ-train) and an **い-adjective** (い-train). Each of them can also be turned into a **white engine**: a describing word that sits **in front of a noun** and cannot pull a train by itself. It simply tells you more about the noun behind it."},
+    {"type": "heading", "text": "1. い-adjectives"},
+    {"type": "text", "text": "An い-adjective is already in the right shape. Put it in front of the noun."},
+    {"type": "diagram", "cars": [
+      {"text": "赤い", "role": "white", "label": "white engine"},
+      {"text": "ペン", "role": "carriage"},
+      {"text": "が", "role": "particle"},
+      {"text": "小さい", "role": "engine"}
+    ], "text": "赤いペンが小さい。 The red pen is small."},
+    {"type": "example", "jp": "ペンが赤い。", "en": "The pen is red. (engine)"},
+    {"type": "example", "jp": "赤いペンが小さい。", "en": "The red pen is small. (white engine + engine)"},
+    {"type": "heading", "text": "2. Verbs: whole clauses can describe a noun"},
+    {"type": "text", "text": "A verb in any tense can describe the noun that comes after it, and so can everything attached to it. This is not a passive; it is simply a sentence squeezed in front of a noun."},
+    {"type": "example", "jp": "歌った少女が寝ている。", "en": "The girl who sang is sleeping."},
+    {"type": "example", "jp": "犬が辞書を食べた。", "en": "The dog ate the dictionary."},
+    {"type": "example", "jp": "辞書を食べた犬がやんちゃだ。", "en": "The dog that ate the dictionary is naughty."},
+    {"type": "example", "jp": "犬が食べた辞書", "en": "the dictionary that the dog ate"},
+    {"type": "heading", "text": "3. Noun + だ becomes な"},
+    {"type": "text", "text": "A copula engine (noun + だ) turns into **な** in front of a noun. Words that behave this way are called な-adjectives (textbooks) or adjectival nouns. They are nouns of a special class, which is why they need だ as an engine."},
+    {"type": "example", "jp": "犬がやんちゃだ。", "en": "The dog is naughty."},
+    {"type": "example", "jp": "やんちゃな犬が寝ている。", "en": "The naughty dog is sleeping."},
+    {"type": "example", "jp": "静かな町", "en": "a quiet town"},
+    {"type": "heading", "text": "4. The の car"},
+    {"type": "text", "text": "An ordinary noun describes another noun with **の**. It works like English 's, but it also puts something in a **class**: ピンクのドレス (a dress of the class \"pink\"), ウサギのオスカー (Oscar of the class \"rabbit\"). You do not have to memorize which nouns take の and which take な. You will pick it up from exposure, and a wrong choice is only a small mistake."},
+    {"type": "example", "jp": "さくらのドレス", "en": "Sakura's dress"},
+    {"type": "example", "jp": "私の鼻", "en": "my nose"},
+    {"type": "example", "jp": "ピンクのドレス", "en": "a pink dress"},
+    {"type": "keypoints", "title": "Four ways to describe a noun", "items": [
+      "**い-adjective** straight in front of the noun: **赤いペン**.",
+      "**Verb clause** in front of the noun: **歌った少女**.",
+      "**だ → な**: **静かな町**.",
+      "**Noun + の**: **さくらのドレス**."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Fill the gap: a quiet town", "prompt": "静か＿＿町", "options": ["な", "の", "い", "が"], "answer": 0, "note": "静か is a noun-like word whose だ turns into な before a noun."},
+    {"id": 2, "type": "choice", "instruction": "Fill the gap: my friend", "prompt": "私＿＿友達", "options": ["の", "な", "い", "を"], "answer": 0, "note": "An ordinary noun describes another noun with の."},
+    {"id": 3, "type": "tap", "instruction": "Tap the white engine (the describing word)", "options": ["赤い", "ペン", "が", "小さい"], "answer": 0, "note": "赤い describes ペン. 小さい is the real engine of the sentence."},
+    {"id": 4, "type": "order", "instruction": "Build the phrase", "prompt": "The dog that ate the dictionary", "options": ["辞書を", "食べた", "犬"], "note": "The whole clause 辞書を食べた describes 犬."},
+    {"id": 5, "type": "order", "instruction": "Build the sentence", "prompt": "The red pen is small.", "options": ["赤い", "ペンが", "小さい"], "note": "White engine, carriage, engine."},
+    {"id": 6, "type": "choice", "instruction": "Which is correct for \"a naughty dog\"?", "prompt": "", "options": ["やんちゃな犬", "やんちゃの犬", "やんちゃい犬", "やんちゃだ犬"], "answer": 0, "note": "やんちゃ + だ → やんちゃな before a noun."},
+    {"id": 7, "type": "choice", "instruction": "Which means \"Sakura's dress\"?", "prompt": "", "options": ["さくらのドレス", "さくらなドレス", "さくらがドレス", "さくらをドレス"], "answer": 0, "note": "Noun + の + noun."},
+    {"id": 8, "type": "choice", "instruction": "What is 歌った in 歌った少女?", "prompt": "", "options": ["A white engine describing 少女", "The main carriage", "A particle", "The object"], "answer": 0, "note": "A verb can be a white engine: \"the girl who sang\"."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "A whole clause with its own object can describe a noun.", "options": ["True", "False"], "answer": 0, "note": "辞書を食べた犬: the clause 辞書を食べた describes 犬."},
+    {"id": 10, "type": "choice", "instruction": "Why does ピンクのドレス use の?", "prompt": "", "options": ["Pink is a noun, and の joins nouns", "Pink is a verb", "Pink is an い-adjective", "の makes it polite"], "answer": 0, "note": "ピンク has no い and no な form, so it describes with の."},
+    {"id": 11, "type": "choice", "instruction": "Which word takes な before a noun?", "prompt": "", "options": ["静か", "高い", "食べる", "学生"], "answer": 0, "note": "静か is a な-adjective. 高い needs nothing; 食べる is a verb; 学生 would take の."},
+    {"id": 12, "type": "choice", "instruction": "Which means \"the dictionary that the dog ate\"?", "prompt": "", "options": ["犬が食べた辞書", "辞書が食べた犬", "犬を食べた辞書", "辞書の犬が食べた"], "answer": 0, "note": "The dog is the doer (犬が) and the dictionary is the noun being described."}
+  ]
+}

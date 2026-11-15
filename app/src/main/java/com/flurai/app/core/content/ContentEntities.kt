@@ -105,6 +105,48 @@ data class GrammarExampleEntity(
     val ruby: String? = null,
 )
 
+/**
+ * One entry of the grammar course (tools/content/course): a lesson, or a study note that has no test.
+ * [jlpt] is the level the topic is usually met at (5 = N5), null for a note. [related] holds ids of
+ * [GrammarPointEntity] rows, comma separated. [body] is the lesson text as JSON blocks (see core/course).
+ */
+@Entity(tableName = "course_lesson", indices = [Index("position")])
+data class CourseLessonEntity(
+    @PrimaryKey val id: Int,
+    val position: Int,
+    /** The number the entry has in the course, e.g. "7.5". */
+    val number: String,
+    /** "lesson" (has a test) or "note". */
+    val kind: String,
+    val jlpt: Int?,
+    val title: String,
+    val summary: String,
+    /** The original lesson's video, shown as credit; null when none. */
+    val video: String?,
+    val related: String,
+    val body: String,
+)
+
+/**
+ * A hand-written test question of a course lesson. [type] is "choice" (pick one of [options]), "tap"
+ * (tap one word of the sentence in [options]) or "order" ([options] are the pieces of the answer in
+ * the right order and the app shuffles them). [options] is a JSON array of strings.
+ */
+@Entity(tableName = "course_question", primaryKeys = ["lesson_id", "id"])
+data class CourseQuestionEntity(
+    @ColumnInfo(name = "lesson_id") val lessonId: Int,
+    val id: Int,
+    val type: String,
+    val instruction: String,
+    val prompt: String,
+    val hint: String?,
+    val options: String,
+    /** Index of the right option (choice and tap); 0 for order. */
+    val answer: Int,
+    /** One line shown after answering: why. */
+    val note: String?,
+)
+
 /** Build metadata: data versions, build date, row counts. */
 @Entity(tableName = "content_info")
 data class ContentInfoEntity(

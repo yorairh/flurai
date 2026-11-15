@@ -48,6 +48,10 @@ import com.flurai.app.core.quiz.Question
 import com.flurai.app.core.quiz.QuizResult
 import com.flurai.app.core.quiz.QuizRunState
 import com.flurai.app.core.quiz.QuestionKind
+import com.flurai.app.core.quiz.QuizKind
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.runtime.mutableStateOf
 import com.flurai.app.ui.theme.japanese
 
 private val CorrectGreen = Color(0xFF3C9A4E)
@@ -55,7 +59,13 @@ private val WrongRed = Color(0xFFD9483B)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuizScreen(onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit, viewModel: QuizViewModel = hiltViewModel()) {
+fun QuizScreen(
+    onBack: () -> Unit,
+    onTakeCheckpoint: (Int) -> Unit,
+    onRetry: (kind: String) -> Unit,
+    onOpenLesson: (Int) -> Unit,
+    viewModel: QuizViewModel = hiltViewModel(),
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     StudyClockEffects(onResume = viewModel::onResume, onPause = viewModel::onPause)
 
@@ -80,8 +90,8 @@ fun QuizScreen(onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit, viewModel: Q
         when {
             state.error != null -> Message(state.error.orEmpty(), onBack)
             state.loading -> LoadingBox()
-            result != null -> ResultView(result, viewModel, onBack, onTakeCheckpoint)
-            question != null -> QuestionView(state, question, viewModel::choose, viewModel::next, viewModel::replay)
+            result != null -> ResultView(result, viewModel, onBack, onTakeCheckpoint, { onRetry(viewModel.kind.encode()) }, onOpenLesson)
+            question != null -> QuestionView(state, question, viewModel::choose, viewModel::arrange, viewModel::next, viewModel::replay)
         }
     }
 }
@@ -96,7 +106,14 @@ private fun Message(text: String, onBack: () -> Unit) {
 }
 
 @Composable
-private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int) -> Unit, onNext: () -> Unit, onReplay: () -> Unit) {
+private fun QuestionView(
+    state: QuizRunState,
+    question: Question,
+    onChoose: (Int) -> Unit,
+    onArrange: (List<Int>) -> Unit,
+    onNext: () -> Unit,
+    onReplay: () -> Unit,
+) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp)) {
         val total = state.total
         if (total != null) {
@@ -106,15 +123,28 @@ private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int
             Text("Question ${state.number}", style = MaterialTheme.typography.labelLarge)
         }
         Spacer(Modifier.height(24.dp))
+        val course = question.kind == QuestionKind.CourseChoice || question.kind == QuestionKind.CourseTap || question.kind == QuestionKind.CourseOrder
+        if (course) {
+            question.instruction?.let {
+                Text(it, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                Spacer(Modifier.height(12.dp))
+            }
+        }
         if (question.kind == QuestionKind.WordListening) {
             Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 FilledTonalIconButton(onClick = onReplay, modifier = Modifier.size(96.dp)) {
                     Icon(Icons.Filled.PlayArrow, contentDescription = "Play the word again", modifier = Modifier.size(56.dp))
                 }
             }
-        } else Text(
+        } else if (question.kind != QuestionKind.CourseTap && question.prompt.isNotBlank()) Text(
             question.prompt,
-            style = (if (question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displayMedium).japanese(),
+            style = (
+                when {
+                    course -> MaterialTheme.typography.headlineSmall
+                    question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning -> MaterialTheme.typography.headlineMedium
+                    else -> MaterialTheme.typography.displayMedium
+                }
+                ).japanese(),
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -127,7 +157,7 @@ private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
             )
         }
-        if (question.kind != QuestionKind.KanjiReading) {
+        if (question.kind != QuestionKind.KanjiReading && !course) {
             Text(
                 when (question.kind) {
                     QuestionKind.GrammarBlank -> "Which part fits the gap?"
@@ -141,9 +171,13 @@ private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int
             )
         }
         Spacer(Modifier.height(24.dp))
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            question.options.forEachIndexed { index, option ->
-                OptionButton(option, index, question, state.selected, onChoose)
+        when (question.kind) {
+            QuestionKind.CourseTap -> TapSentence(question, state.selected, onChoose)
+            QuestionKind.CourseOrder -> OrderTiles(question, state.selected != null, state.arranged, onArrange)
+            else -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                question.options.forEachIndexed { index, option ->
+                    OptionButton(option, index, question, state.selected, onChoose)
+                }
             }
         }
         if (state.selected != null) {
@@ -161,6 +195,86 @@ private fun QuestionView(state: QuizRunState, question: Question, onChoose: (Int
     }
 }
 
+/** Tap the one word of a sentence that answers the question. */
+@Composable
+private fun TapSentence(question: Question, selected: Int?, onChoose: (Int) -> Unit) {
+    androidx.compose.foundation.layout.FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        question.options.forEachIndexed { index, word ->
+            val color = when {
+                selected == null -> null
+                index == question.answer -> CorrectGreen
+                index == selected -> WrongRed
+                else -> null
+            }
+            androidx.compose.material3.Surface(
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+                color = color ?: MaterialTheme.colorScheme.surfaceContainerHigh,
+                contentColor = if (color != null) Color.White else MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.androidxClickable(enabled = selected == null) { onChoose(index) },
+            ) {
+                Text(word, style = MaterialTheme.typography.headlineSmall.japanese(), modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp))
+            }
+        }
+    }
+}
+
+private fun Modifier.androidxClickable(enabled: Boolean, onClick: () -> Unit): Modifier =
+    this.then(Modifier.clickable(enabled = enabled, onClick = onClick))
+
+/** Build the sentence from its pieces: tap a piece to place it, tap a placed piece to take it back, then check. */
+@Composable
+private fun OrderTiles(question: Question, answered: Boolean, arranged: String?, onArrange: (List<Int>) -> Unit) {
+    val tiles = question.tiles.orEmpty()
+    var placed by remember(question) { mutableStateOf(listOf<Int>()) }
+    val right = answered && arranged == question.correctText
+    val border = when {
+        !answered -> MaterialTheme.colorScheme.outline
+        right -> CorrectGreen
+        else -> WrongRed
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        androidx.compose.material3.Surface(
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            border = androidx.compose.foundation.BorderStroke(1.dp, border),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            androidx.compose.foundation.layout.FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(10.dp),
+            ) {
+                placed.forEach { i -> Tile(tiles[i]) { if (!answered) placed = placed - i } }
+            }
+        }
+        androidx.compose.foundation.layout.FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            tiles.indices.filter { it !in placed }.forEach { i -> Tile(tiles[i]) { if (!answered) placed = placed + i } }
+        }
+        if (!answered) {
+            Button(onClick = { onArrange(placed) }, enabled = placed.size == tiles.size, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Check") }
+        } else {
+            Text(
+                if (right) "Correct" else "Right: ${question.correctText}",
+                style = MaterialTheme.typography.titleMedium.japanese(),
+                color = if (right) CorrectGreen else WrongRed,
+            )
+        }
+    }
+}
+
+@Composable
+private fun Tile(text: String, onClick: () -> Unit) {
+    OutlinedButton(onClick = onClick) { Text(text, style = MaterialTheme.typography.titleMedium.japanese()) }
+}
+
 @Composable
 private fun OptionButton(option: String, index: Int, question: Question, selected: Int?, onChoose: (Int) -> Unit) {
     val revealed = selected != null
@@ -171,15 +285,15 @@ private fun OptionButton(option: String, index: Int, question: Question, selecte
         else -> null
     }
     if (color == null) {
-        OutlinedButton(onClick = { onChoose(index) }, modifier = Modifier.fillMaxWidth().height(52.dp)) {
-            Text(option, style = MaterialTheme.typography.titleMedium.japanese())
+        OutlinedButton(onClick = { onChoose(index) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
+            Text(option, style = MaterialTheme.typography.titleMedium.japanese(), textAlign = TextAlign.Center)
         }
     } else {
         Button(
             onClick = {},
-            modifier = Modifier.fillMaxWidth().height(52.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
             colors = ButtonDefaults.buttonColors(containerColor = color, contentColor = Color.White),
-        ) { Text(option, style = MaterialTheme.typography.titleMedium.japanese()) }
+        ) { Text(option, style = MaterialTheme.typography.titleMedium.japanese(), textAlign = TextAlign.Center) }
     }
 }
 
@@ -197,6 +311,7 @@ private fun MissedList(missed: List<MissedQuestion>) {
                     m.hint?.let { Text(it, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
                     Text("Right: ${m.correct}", style = MaterialTheme.typography.bodyMedium.japanese(), color = CorrectGreen)
                     Text("You chose: ${m.chosen}", style = MaterialTheme.typography.bodyMedium.japanese(), color = WrongRed)
+                    m.note?.let { Text(it, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
                 }
             }
         }
@@ -204,7 +319,15 @@ private fun MissedList(missed: List<MissedQuestion>) {
 }
 
 @Composable
-private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () -> Unit, onTakeCheckpoint: (Int) -> Unit) {
+private fun ResultView(
+    result: QuizResult,
+    viewModel: QuizViewModel,
+    onBack: () -> Unit,
+    onTakeCheckpoint: (Int) -> Unit,
+    onRetry: () -> Unit,
+    onOpenLesson: (Int) -> Unit,
+) {
+    val lessonTest = viewModel.kind is QuizKind.CourseLesson
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -214,7 +337,12 @@ private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () 
         Text("${result.correct} / ${result.total}", style = MaterialTheme.typography.displayLarge)
         result.passed?.let { passed ->
             Text(
-                if (passed) "Passed! You know ${result.title.substringBefore(' ')} well." else "Not yet. Keep studying and try again.",
+                when {
+                    lessonTest && passed -> "Lesson passed!"
+                    lessonTest -> "Not yet: ${kotlin.math.ceil(result.total * 0.8).toInt()} right out of ${result.total} passes the lesson. Look over what you missed, then try again."
+                    passed -> "Passed! You know ${result.title.substringBefore(' ')} well."
+                    else -> "Not yet. Keep studying and try again."
+                },
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
             )
@@ -259,6 +387,12 @@ private fun ResultView(result: QuizResult, viewModel: QuizViewModel, onBack: () 
             Text("The words you missed are already in your flashcards.", color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
         }
         if (result.missed.isNotEmpty()) MissedList(result.missed)
-        TextButton(onClick = onBack) { Text("Done") }
+        if (lessonTest) {
+            result.nextLessonId?.takeIf { result.passed == true }?.let { next ->
+                Button(onClick = { onOpenLesson(next) }, modifier = Modifier.fillMaxWidth()) { Text("Next lesson") }
+            }
+            OutlinedButton(onClick = onRetry, modifier = Modifier.fillMaxWidth()) { Text("Try again") }
+        }
+        TextButton(onClick = onBack) { Text(if (lessonTest) "Back to the lesson" else "Done") }
     }
 }

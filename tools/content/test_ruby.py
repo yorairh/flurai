@@ -1,5 +1,6 @@
 """Tests for the furigana markup. Run: python -X utf8 -m unittest discover tools/content"""
 
+import json
 import re
 import sqlite3
 import sys
@@ -181,6 +182,10 @@ class BuiltFuriganaTest(unittest.TestCase):
     def rows(self):
         yield from ((t, m) for t, m in self.db.execute("SELECT japanese, ruby FROM sentence"))
         yield from ((t, m) for t, m in self.db.execute("SELECT japanese, ruby FROM grammar_example"))
+        for (body,) in self.db.execute("SELECT body FROM course_lesson"):
+            for block in json.loads(body):
+                if block["type"] == "example":
+                    yield block["jp"], block.get("ruby")
 
     def test_the_markup_is_the_sentence_with_readings_added(self):
         for text, marked in self.rows():

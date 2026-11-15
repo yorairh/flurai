@@ -2,6 +2,8 @@ package com.flurai.app.core.sync
 
 import com.flurai.app.core.activity.StudyDayDao
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.course.CourseProgressDao
+import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultDao
@@ -38,6 +40,10 @@ interface SyncLocal {
     suspend fun grammar(uid: String, id: Int): GrammarProgressEntity?
     suspend fun upsertGrammar(progress: GrammarProgressEntity)
 
+    suspend fun courseSince(uid: String, since: Long): List<CourseProgressEntity>
+    suspend fun course(uid: String, lessonId: Int): CourseProgressEntity?
+    suspend fun upsertCourse(progress: CourseProgressEntity)
+
     suspend fun channels(uid: String): List<CustomChannelEntity>
 
     /** Makes [channels] the whole list of [uid]. */
@@ -56,6 +62,7 @@ class RoomSyncLocal @Inject constructor(
     private val studyDays: StudyDayDao,
     private val testResults: TestResultDao,
     private val grammarProgress: GrammarProgressDao,
+    private val courseProgress: CourseProgressDao,
     private val customChannels: CustomChannelDao,
     private val deckDao: DeckDao,
 ) : SyncLocal {
@@ -74,6 +81,10 @@ class RoomSyncLocal @Inject constructor(
     override suspend fun grammarSince(uid: String, since: Long) = sync.grammarSince(uid, since)
     override suspend fun grammar(uid: String, id: Int) = grammarProgress.get(uid, id)
     override suspend fun upsertGrammar(progress: GrammarProgressEntity) = grammarProgress.upsert(progress)
+
+    override suspend fun courseSince(uid: String, since: Long) = sync.courseSince(uid, since)
+    override suspend fun course(uid: String, lessonId: Int) = courseProgress.get(uid, lessonId)
+    override suspend fun upsertCourse(progress: CourseProgressEntity) = courseProgress.upsert(progress)
 
     override suspend fun channels(uid: String) = sync.channels(uid)
     override suspend fun replaceChannels(uid: String, channels: List<CustomChannelEntity>) = customChannels.replaceAll(uid, channels)

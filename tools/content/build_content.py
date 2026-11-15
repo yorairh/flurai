@@ -33,10 +33,12 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import ruby  # noqa: E402  (furigana markup for sentences, see ruby.py)
+import course  # noqa: E402  (the grammar course, see course.py)
 ROOT = HERE.parent.parent
 CACHE = HERE / ".cache"
 WORD_IDS = HERE / "word_ids.tsv"
 GRAMMAR = HERE / "grammar.json"
+COURSE_DIR = HERE / "course"
 WORD_IDS_HEADER = "guid\tword_id"
 SCHEMA_DIR = ROOT / "app" / "schemas" / "com.flurai.app.core.content.ContentDatabase"
 OUTPUT = ROOT / "app" / "src" / "main" / "assets" / "content.db"
@@ -720,6 +722,7 @@ def write_database(
     kanji: list[Kanji],
     sentences: dict[int, tuple[str, str, bool]],
     grammar: list[dict],
+    course_entries: list[dict],
     info: dict[str, str],
     sentence_levels: dict[int, int | None] | None = None,
     sentence_ruby: dict[int, str | None] | None = None,
@@ -764,6 +767,16 @@ def write_database(
         "INSERT INTO grammar_example (grammar_id, rank, japanese, english, answer, ruby) VALUES (?, ?, ?, ?, ?, ?)",
         [(g["id"], rank, e["jp"], e["en"], e["answer"], e.get("ruby")) for g in grammar for rank, e in enumerate(g["examples"])]
         + [(g["id"], EXTRA_EXAMPLE_RANK + i, e["jp"], e["en"], e["answer"], e.get("ruby")) for g in grammar for i, e in enumerate(g.get("extras", []))],
+    )
+    db.executemany(
+        "INSERT INTO course_lesson (id, position, number, kind, jlpt, title, summary, video, related, body)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        course.lesson_rows(course_entries),
+    )
+    db.executemany(
+        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        course.question_rows(course_entries),
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
     db.commit()
@@ -824,6 +837,15 @@ def main() -> None:
         for example in point["examples"] + point["extras"]:
             example["ruby"] = ruby.text_markup(reader, example["jp"])
 
+    course_entries = course.load(COURSE_DIR)
+    found = course.problems(course_entries, {g["id"] for g in grammar})
+    if found:
+        sys.exit("The grammar course has problems:\n  " + "\n  ".join(found))
+    for entry in course_entries:
+        for block in entry["blocks"]:
+            if block["type"] == "example":
+                block["ruby"] = ruby.text_markup(reader, block["jp"])
+
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
         "jlpt_decks_commit": JLPT_DECKS_COMMIT,
@@ -833,8 +855,9 @@ def main() -> None:
         "kanji_count": str(len(kanji)),
         "sentence_count": str(len(sentences)),
         "grammar_count": str(len(grammar)),
+        "course_lessons": str(len(course_entries)),
     }
-    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, info, sentence_levels, sentence_ruby)
+    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, course_entries, info, sentence_levels, sentence_ruby)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)
@@ -846,6 +869,7 @@ def main() -> None:
     print(f"  grammar: {sum(1 for g in grammar if g['extras'])}/{len(grammar)} points have extra practice sentences")
     print(f"  furigana: {sum(1 for v in sentence_ruby.values() if v)}/{len(sentence_ruby)} sentences, "
           f"{sum(1 for g in grammar for e in g['examples'] + g['extras'] if e.get('ruby'))} grammar examples")
+    print(f"  course: {len(course_entries)} entries, {sum(len(e.get('questions', [])) for e in course_entries)} questions")
     print(f"  {len(sentences)} sentences; {with_examples}/{len(words)} words have examples;"
           f" {sum(w.jmdict_id is not None for w in words)} matched in JMdict")
 

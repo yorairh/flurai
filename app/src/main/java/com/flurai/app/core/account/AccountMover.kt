@@ -50,6 +50,12 @@ interface AccountDao {
     @Query("DELETE FROM grammar_progress WHERE uid = :from")
     suspend fun dropGrammar(from: String)
 
+    @Query("UPDATE OR IGNORE course_progress SET uid = :to WHERE uid = :from")
+    suspend fun moveCourse(from: String, to: String)
+
+    @Query("DELETE FROM course_progress WHERE uid = :from")
+    suspend fun dropCourse(from: String)
+
     @Query("UPDATE custom_channel SET uid = :to WHERE uid = :from")
     suspend fun moveChannels(from: String, to: String)
 
@@ -75,7 +81,7 @@ interface AccountDao {
     /** Removes every row of [uid] (account deletion). */
     @Transaction
     suspend fun wipe(uid: String) {
-        dropCards(uid); dropLogs(uid); dropDays(uid); dropTests(uid); dropGrammar(uid); dropChannels(uid)
+        dropCards(uid); dropLogs(uid); dropDays(uid); dropTests(uid); dropGrammar(uid); dropCourse(uid); dropChannels(uid)
         dropDeckWords(uid); dropDeckRows(uid)
     }
 
@@ -90,6 +96,7 @@ interface AccountDao {
         mergeDays(from, to); moveDays(from, to); dropDays(from)
         moveTests(from, to)
         moveGrammar(from, to); dropGrammar(from)
+        moveCourse(from, to); dropCourse(from)
         moveChannels(from, to)
         moveDecks(from, to)
     }

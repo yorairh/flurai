@@ -76,7 +76,7 @@ fun LearnScreen(
                 EntryCard(
                     japanese = "文法",
                     title = "Grammar",
-                    body = "N5 to N1 grammar points with explanations, examples and practice.",
+                    body = "A recommended course with a test after each lesson, plus N5 to N1 grammar points to look up.",
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer,

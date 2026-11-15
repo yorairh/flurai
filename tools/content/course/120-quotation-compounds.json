@@ -1,0 +1,55 @@
+{
+  "id": 120,
+  "number": "12",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The quotation と, compound verbs and nouns",
+  "summary": "と closes whatever came before it into a single quoted unit. Verbs and nouns can also be glued together to make new words.",
+  "video": "https://www.youtube.com/watch?v=7dYT6Xf1BkA",
+  "related": [570, 451, 450, 483],
+  "blocks": [
+    {"type": "heading", "text": "もの and こと"},
+    {"type": "text", "text": "Two words for \"thing\". **もの** is a concrete object (a hat, a book, a mountain). **こと** is an abstract matter or circumstance: something that happens or is the case."},
+    {"type": "heading", "text": "The quotation と"},
+    {"type": "text", "text": "This と is a different particle from the \"and\" と. It works like a spoken quotation mark. It follows speech or thought, usually with **言う** (say) or **思う** (think). Whatever comes before it, a single word or an entire clause with its own grammar, is wrapped up into one unit that modifies the verb after it."},
+    {"type": "example", "jp": "猫は「面白いことがない」と言った。", "en": "The cat said, \"Nothing interesting is happening.\""},
+    {"type": "example", "jp": "兄は「遅い！」と言って、走り出した。", "en": "My brother said \"I'm late!\" and burst into a run."},
+    {"type": "text", "text": "The same idea carries to sounds and manner: ぴょんぴょんと is a hopping \"quote\" that describes how someone moves."},
+    {"type": "example", "jp": "うさぎはぴょんぴょんと走り続けた。", "en": "The rabbit kept running, hopping along."},
+    {"type": "heading", "text": "Compound verbs"},
+    {"type": "text", "text": "Stick the **い-stem** of one verb onto another verb and you get a new meaning. 出す adds \"suddenly begin\", 続ける adds \"keep doing\", 過ぎる adds \"pass\", and 込む adds \"into, with force\"."},
+    {"type": "table", "rows": [
+      ["Compound", "Meaning"],
+      ["走り出す", "burst into running"],
+      ["泣き出す", "burst into tears"],
+      ["走り続ける", "keep running"],
+      ["通り過ぎる", "pass by"],
+      ["飛び込む", "jump into"]
+    ]},
+    {"type": "heading", "text": "Compound nouns"},
+    {"type": "text", "text": "Two nouns can simply be placed side by side, with no の. The first sound of the second noun often turns voiced (a **か** becomes **が**, a **そ** becomes **ぞ**, a **と** becomes **ど**). This is called 連濁. As a rough rule it happens often with native (kun) readings: 青 + 空 = 青空 (あおぞら), 懐中 + 時計 = 懐中時計 (かいちゅうどけい)."},
+    {"type": "text", "text": "Finally, a て-form plus **ください** is a polite request, and ください can be dropped: ちょっと待って(ください)."},
+    {"type": "example", "jp": "ちょっと待ってください。", "en": "Please wait a moment."},
+    {"type": "keypoints", "items": [
+      "**もの** = concrete thing; **こと** = abstract matter.",
+      "**…と言う / 思う**: と wraps what comes before it into a quote.",
+      "Compound verb: **い-stem + another verb** (走り出す, 飛び込む).",
+      "Compound noun: two nouns side by side, the second often voiced (**青空**).",
+      "**て-form + ください** = polite request."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which word means an abstract \"matter\"?", "prompt": "", "options": ["こと", "もの", "ひと", "ところ"], "answer": 0, "note": "もの is a concrete object; こと is an abstract matter."},
+    {"id": 2, "type": "choice", "instruction": "What does と do after a quotation?", "prompt": "「遅い！」と言った", "options": ["It closes the quote like a quotation mark", "It means \"and\"", "It marks the object", "It makes it polite"], "answer": 0, "note": "The quotation と follows speech or thought."},
+    {"id": 3, "type": "order", "instruction": "Build the sentence", "prompt": "The cat said, \"I'm late!\"", "options": ["猫は", "「遅い！」と", "言った"], "note": "Quote + と + 言う."},
+    {"id": 4, "type": "choice", "instruction": "What does 走り出す mean?", "prompt": "", "options": ["Burst into running", "Keep running", "Run away", "Stop running"], "answer": 0, "note": "出す adds \"suddenly begin\"."},
+    {"id": 5, "type": "choice", "instruction": "What does 走り続ける mean?", "prompt": "", "options": ["Keep running", "Burst into running", "Run past", "Run into"], "answer": 0, "note": "続ける adds \"keep doing\"."},
+    {"id": 6, "type": "choice", "instruction": "Which stem joins the two verbs in a compound verb?", "prompt": "", "options": ["The い-stem of the first", "The あ-stem of the first", "The て-form of the first", "The dictionary form of the first"], "answer": 0, "note": "走り + 出す, 飛び + 込む."},
+    {"id": 7, "type": "choice", "instruction": "How is 青空 read?", "prompt": "", "options": ["あおぞら", "あおそら", "せいくう", "あおくう"], "answer": 0, "note": "The そ of 空 becomes ぞ in the compound (連濁)."},
+    {"id": 8, "type": "tap", "instruction": "Tap the word the quotation ends with", "options": ["猫は", "「面白いことがない」と", "言った"], "answer": 1, "note": "と closes the quote."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "The quotation と can wrap a whole clause with its own grammar.", "options": ["True", "False"], "answer": 0, "note": "と takes anything before it and turns it into one unit."},
+    {"id": 10, "type": "choice", "instruction": "Which makes a polite request?", "prompt": "", "options": ["待ってください", "待つください", "待たないください", "待いてください"], "answer": 0, "note": "て-form + ください."},
+    {"id": 11, "type": "choice", "instruction": "What does 飛び込む mean?", "prompt": "", "options": ["Jump into", "Fly away", "Jump out", "Keep flying"], "answer": 0, "note": "込む adds \"into\"."},
+    {"id": 12, "type": "choice", "instruction": "Which one shows the voicing change (連濁)?", "prompt": "", "options": ["青空 (あおぞら)", "青い (あおい)", "空気 (くうき)", "空色 (そらいろ)"], "answer": 0, "note": "In あおぞら the そ of 空 becomes ぞ. 青い is not a compound, 空気 is an on'yomi compound, and 空色 keeps its そ."}
+  ]
+}

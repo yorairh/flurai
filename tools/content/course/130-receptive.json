@@ -1,0 +1,57 @@
+{
+  "id": 130,
+  "number": "13",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The receptive helper verb (passive)",
+  "summary": "れる / られる means \"to receive or get\" the action of the verb before it. The receiver is the main carriage, and the real doer is marked with に.",
+  "video": "https://www.youtube.com/watch?v=cvV6d-RETs8",
+  "related": [415, 717],
+  "blocks": [
+    {"type": "text", "text": "Textbooks call this the \"passive\" and label it a conjugation. The course prefers **receptive helper verb**, because that is what it does: it makes a verb that means \"to get\" or \"to receive\" the action. Both names point at the same form. What matters is that the particles keep doing their usual jobs."},
+    {"type": "heading", "text": "Form"},
+    {"type": "text", "text": "Attach the helper to the **あ-stem** (the same stem ない uses). Godan: **れる**. Ichidan: **られる**. It looks exactly like the ichidan potential られる, but real sentences make the difference clear."},
+    {"type": "table", "rows": [
+      ["Verb", "Receptive", "Meaning"],
+      ["叱る", "叱られる", "get scolded"],
+      ["飲む", "飲まれる", "get drunk (by someone)"],
+      ["盗む", "盗まれる", "get stolen"],
+      ["食べる", "食べられる", "get eaten"]
+    ]},
+    {"type": "heading", "text": "Who is the main carriage?"},
+    {"type": "text", "text": "The engine of the sentence is **れる / られる**, so the main carriage is the one who **receives**. It does not have to be a person. The real doer is marked with **に**. The picture: れる is a **pull** verb, so に marks the **source** the thing is pulled from, not a target."},
+    {"type": "example", "jp": "さくらが叱られた。", "en": "Sakura got scolded."},
+    {"type": "example", "jp": "水が犬に飲まれた。", "en": "The water got drunk by the dog."},
+    {"type": "example", "jp": "かばんが誰かに盗まれた。", "en": "The bag was stolen by someone."},
+    {"type": "diagram", "cars": [
+      {"text": "水", "role": "carriage", "label": "receiver"},
+      {"text": "が", "role": "particle"},
+      {"text": "犬に", "role": "white", "label": "doer (source)"},
+      {"text": "飲まれた", "role": "engine", "label": "got drunk"}
+    ], "text": "水が犬に飲まれた。"},
+    {"type": "heading", "text": "The suffering receptive"},
+    {"type": "text", "text": "Japanese also uses the receptive when something happens **to a person** and it bothers them. The affected person becomes the main carriage (が), while the thing that was taken keeps its **を**."},
+    {"type": "example", "jp": "さくらが誰かにかばんを盗まれた。", "en": "Sakura had her bag stolen by someone."},
+    {"type": "text", "text": "Keep the receptive in **two separate verbs**: the head verb れる / られる belongs to the receiver, the attached verb is done by someone else. Unlike the potential, they must never be merged into one."},
+    {"type": "keypoints", "items": [
+      "**あ-stem + れる** (godan), **られる** (ichidan): \"to get X-ed\".",
+      "The **receiver** is the main carriage (**が**). The **doer** takes **に**.",
+      "The suffering receptive: **person が + other に + thing を + 〜られた**.",
+      "Do not mix it up with the potential: **食べられる** can be either, and the sentence tells you which."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the receptive", "prompt": "叱る", "options": ["叱られる", "叱れる", "叱らせる", "叱ろう"], "answer": 0, "note": "あ-stem 叱ら + れる."},
+    {"id": 2, "type": "choice", "instruction": "Who is the main carriage in 水が犬に飲まれた?", "prompt": "", "options": ["水 (the receiver)", "犬", "飲む", "Nobody"], "answer": 0, "note": "The one who receives the action is the main carriage."},
+    {"id": 3, "type": "tap", "instruction": "Tap the doer (who did the drinking)", "options": ["水が", "犬に", "飲まれた"], "answer": 1, "note": "に marks the doer in a receptive sentence."},
+    {"id": 4, "type": "order", "instruction": "Build the sentence", "prompt": "The bag was stolen by someone.", "options": ["かばんが", "誰かに", "盗まれた"], "note": "Receiver が, doer に, receptive verb."},
+    {"id": 5, "type": "choice", "instruction": "Which means \"Sakura had her bag stolen\" (it bothered her)?", "prompt": "", "options": ["さくらが誰かにかばんを盗まれた", "さくらが誰かにかばんが盗んだ", "さくらを誰かにかばんが盗まれた", "さくらは誰かをかばんに盗まれた"], "answer": 0, "note": "The affected person takes が; the stolen thing keeps を."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "In a receptive sentence, に can mark who did the action.", "options": ["True", "False"], "answer": 0, "note": "れる is a pull verb: に marks where the action comes from."},
+    {"id": 7, "type": "choice", "instruction": "Which ending does an ichidan verb take for the receptive?", "prompt": "", "options": ["られる", "れる", "せる", "える"], "answer": 0, "note": "食べる → 食べられる."},
+    {"id": 8, "type": "choice", "instruction": "Which stem does the receptive attach to?", "prompt": "", "options": ["あ-stem", "い-stem", "え-stem", "お-stem"], "answer": 0, "note": "The same stem as ない."},
+    {"id": 9, "type": "choice", "instruction": "Pick the receptive", "prompt": "盗む", "options": ["盗まれる", "盗める", "盗みれる", "盗ませる"], "answer": 0, "note": "盗ま + れる."},
+    {"id": 10, "type": "choice", "instruction": "What does 食べられる mean here?", "prompt": "魚が猫に食べられた。", "options": ["The fish got eaten by the cat", "The fish could eat the cat", "The cat can eat the fish", "The fish ate the cat"], "answer": 0, "note": "Receiver 魚が, doer 猫に: the receptive, not the potential."},
+    {"id": 11, "type": "choice", "instruction": "Why must the receptive not be merged into one engine?", "prompt": "", "options": ["It has two verbs with two different doers", "It is irregular", "It only works with nouns", "It is always polite"], "answer": 0, "note": "The receiver owns れる; someone else does the attached verb."},
+    {"id": 12, "type": "choice", "instruction": "Which sentence is about a thing getting something done to it?", "prompt": "", "options": ["窓が割られた", "窓を割った", "窓が割れる", "窓で割った"], "answer": 0, "note": "窓が割られた: the window got broken (by someone)."}
+  ]
+}

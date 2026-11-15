@@ -25,7 +25,7 @@ data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = nu
  * phone or a reinstall. Local data stays the source of truth: each sync first pulls what changed
  * remotely and merges it (the newer row wins), then pushes what changed locally.
  *
- * Synced: flashcards, study days, test results, grammar progress, custom channels and decks, and
+ * Synced: flashcards, study days, test results, grammar progress, grammar course progress, custom channels and decks, and
  * the profile/settings. Not synced: the review log (nothing reads it) and suspended/buried flags
  * set without a review.
  *
@@ -109,18 +109,25 @@ class SyncEngine internal constructor(
      * What the pull took from the cloud. Ids listed here already match the cloud copy, so the push
      * skips them; rows where the local copy won the merge are not listed and get uploaded.
      */
-    private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>)
+    private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>, val courseIds: Set<Int>)
 
     private suspend fun pull(uid: String, since: Long): Pulled {
         var max = since
         val cardIds = HashSet<String>()
         val dayIds = HashSet<Long>()
         val grammarIds = HashSet<Int>()
+        val courseIds = HashSet<Int>()
 
         // The downloads are independent: start them together, then merge one by one.
-        val (cardDocs, dayDocs, testDocs, grammarDocs, metaDocs) = coroutineScope {
+        val downloaded = coroutineScope {
             CLOUD_COLLECTIONS.map { name -> async { cloud.changedSince(uid, name, since) } }.awaitAll()
         }
+        val cardDocs = downloaded[0]
+        val dayDocs = downloaded[1]
+        val testDocs = downloaded[2]
+        val grammarDocs = downloaded[3]
+        val courseDocs = downloaded[4]
+        val metaDocs = downloaded[5]
 
         for (doc in cardDocs) {
             max = maxOf(max, doc.updatedAt)
@@ -148,6 +155,13 @@ class SyncEngine internal constructor(
             if (mine == null || remote.lastAt > mine.lastAt) local.upsertGrammar(remote)
             if (cloudCovers(remote.lastAt, mine?.lastAt)) grammarIds += remote.grammarId
         }
+        for (doc in courseDocs) {
+            max = maxOf(max, doc.updatedAt)
+            val remote = courseFrom(uid, doc.data) ?: continue
+            val mine = local.course(uid, remote.lessonId)
+            if (mine == null || remote.lastAt > mine.lastAt) local.upsertCourse(remote)
+            if (cloudCovers(remote.lastAt, mine?.lastAt)) courseIds += remote.lessonId
+        }
 
         // Profile and settings: only restored onto a phone that has none yet (a fresh install).
         if (!prefs.hasProfile(uid)) {
@@ -174,7 +188,7 @@ class SyncEngine internal constructor(
                 prefs.saveUploadedHash(uid, "decks", fingerprint(localDeckDocs(uid)))
             }
         }
-        return Pulled(max, cardIds, dayIds, grammarIds)
+        return Pulled(max, cardIds, dayIds, grammarIds, courseIds)
     }
 
     private suspend fun localDeckDocs(uid: String) = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
@@ -206,6 +220,8 @@ class SyncEngine internal constructor(
             .forEach { writes += CloudWrite("tests", testId(it), testDoc(it)) }
         local.grammarSince(uid, since).filter { it.lastAt > since && it.grammarId !in pulled.grammarIds }
             .forEach { writes += CloudWrite("grammar", it.grammarId.toString(), grammarDoc(it)) }
+        local.courseSince(uid, since).filter { it.lastAt > since && it.lessonId !in pulled.courseIds }
+            .forEach { writes += CloudWrite("course", it.lessonId.toString(), courseDoc(it)) }
 
         // Small whole-document items: written only when they changed since the last upload (or on a full push).
         // Each is written only when it changed here since it was last uploaded or taken (or on a full push).

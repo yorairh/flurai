@@ -1,0 +1,52 @@
+{
+  "id": 30,
+  "number": "3",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "The は particle",
+  "summary": "は is not a carriage. It is a flag that says what the sentence is about, and it never changes who does what.",
+  "video": "https://www.youtube.com/watch?v=U9_T4eObNXg",
+  "related": [501, 580, 504],
+  "blocks": [
+    {"type": "text", "text": "Many courses teach **は** on day one, so learners think it means \"is\" or \"the subject\". It is neither. は (read \"wa\" when it is a particle) can never be a black carriage, and it is not a white carriage like を. It is a **flag** that you plant on the **topic**: what the sentence is about. It does not say anything about the topic; the real sentence does that."},
+    {"type": "text", "text": "Because は is not a logical particle, the sentence underneath still needs its own main carriage and が (often a zero)."},
+    {"type": "diagram", "cars": [
+      {"text": "私は", "role": "topic", "label": "topic flag"},
+      {"text": "（ゼロ）が", "role": "zero"},
+      {"text": "学生だ", "role": "engine"}
+    ], "text": "私は学生だ。 Literally: \"As for me, (I) am a student.\""},
+    {"type": "example", "jp": "私は学生だ。", "en": "As for me, (I) am a student."},
+    {"type": "heading", "text": "The eel sentence"},
+    {"type": "text", "text": "A famous puzzle: 「私はうなぎだ」 does **not** mean \"I am an eel\". At a restaurant the zero carriage is the **dish**, not the speaker: \"As for me, (it) is eel,\" so \"I'll have the eel.\" The topic flag shapes which zero you hear."},
+    {"type": "example", "jp": "私はうなぎだ。", "en": "As for me, (it) is eel: I'll have the eel."},
+    {"type": "heading", "text": "The logical particles decide who does what"},
+    {"type": "text", "text": "**が** marks the doer, **を** marks what is done to, and **に** marks the **target** it is aimed at. Because these three fix the roles, word order is flexible. Even a silly sentence stays grammatical: the particles decide."},
+    {"type": "example", "jp": "私がさくらにボールを投げる。", "en": "I throw the ball to Sakura."},
+    {"type": "example", "jp": "さくらに私がボールを投げる。", "en": "I throw the ball to Sakura. (same roles, different order)"},
+    {"type": "example", "jp": "ボールがさくらを私に投げる。", "en": "The ball throws Sakura to me. (nonsense, but perfectly grammatical)"},
+    {"type": "heading", "text": "Moving は changes emphasis, never logic"},
+    {"type": "text", "text": "Changing a logical particle changes the event. Moving the は flag only changes what you are talking about."},
+    {"type": "example", "jp": "私はさくらにボールを投げる。", "en": "As for me, I throw the ball to Sakura."},
+    {"type": "example", "jp": "ボールは私がさくらに（ゼロを）投げる。", "en": "As for the ball, I throw (it) to Sakura."},
+    {"type": "keypoints", "items": [
+      "**は** flags the **topic**. It says nothing about it.",
+      "は is not a main carriage and not a white carriage.",
+      "The sentence under the topic still has its own が, often a zero.",
+      "**が・を・に** decide who does what to whom. Moving **は** never changes that."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does は do?", "prompt": "", "options": ["Flags the topic: what the sentence is about", "Marks the object", "Marks the doer", "Makes the sentence polite"], "answer": 0, "note": "は plants a flag on the topic and says nothing more."},
+    {"id": 2, "type": "choice", "instruction": "At a restaurant, what does this most likely mean?", "prompt": "私はうなぎだ。", "options": ["I'll have the eel", "I am an eel", "I like eels", "I cook the eel"], "answer": 0, "note": "As for me, (it) is eel: the zero is the dish."},
+    {"id": 3, "type": "choice", "instruction": "True or false?", "prompt": "は can be the main carriage of a sentence.", "options": ["True", "False"], "answer": 1, "note": "は is only a topic flag; the sentence below it keeps its own が."},
+    {"id": 4, "type": "tap", "instruction": "Tap the topic (the word with the flag)", "options": ["ボールは", "私が", "さくらに", "投げる"], "answer": 0, "note": "は flags the topic: the ball."},
+    {"id": 5, "type": "tap", "instruction": "Tap the doer (the main carriage)", "options": ["ボールは", "私が", "さくらに", "投げる"], "answer": 1, "note": "が marks the doer: 私. The topic is the ball, but I am the one throwing."},
+    {"id": 6, "type": "order", "instruction": "Build the sentence", "prompt": "I throw the ball to Sakura.", "options": ["私が", "さくらに", "ボールを", "投げる"], "note": "Doer, target, thing thrown, then the engine."},
+    {"id": 7, "type": "choice", "instruction": "Which particle marks the target (who it is thrown to)?", "prompt": "", "options": ["に", "を", "が", "は"], "answer": 0, "note": "に marks the target of the action."},
+    {"id": 8, "type": "choice", "instruction": "What happens if you move は to another word?", "prompt": "", "options": ["Only the emphasis changes", "The roles swap", "The tense changes", "The sentence becomes polite"], "answer": 0, "note": "は is not a logical particle, so it never changes who does what."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence means \"Sakura throws the ball to me\"?", "prompt": "", "options": ["さくらが私にボールを投げる", "私がさくらにボールを投げる", "ボールがさくらを私に投げる", "私にボールがさくらを投げる"], "answer": 0, "note": "さくら is marked が (the doer) and 私 is marked に (the target)."},
+    {"id": 10, "type": "choice", "instruction": "How is the literal meaning of 私は学生だ best put?", "prompt": "", "options": ["As for me, (I) am a student", "I am the topic student", "Student am I", "The student is me"], "answer": 0, "note": "は introduces the topic; 学生だ is the real sentence."},
+    {"id": 11, "type": "choice", "instruction": "Which of these is a logical particle (it decides who does what)?", "prompt": "", "options": ["は", "が", "も", "ね"], "answer": 1, "note": "が, を and に are logical. は and も only flag topics."},
+    {"id": 12, "type": "choice", "instruction": "True or false?", "prompt": "ボールがさくらを私に投げる is grammatical, but it means the ball throws Sakura to me.", "options": ["True", "False"], "answer": 0, "note": "The particles fix the roles, so the sentence is grammatical, even if the scene is silly."}
+  ]
+}

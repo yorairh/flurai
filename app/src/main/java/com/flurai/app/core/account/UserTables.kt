@@ -25,6 +25,7 @@ object UserTables {
         UserTable("study_day", "streaks and study time", cloud = "days"),
         UserTable("test_result", "test results", cloud = "tests"),
         UserTable("grammar_progress", "grammar progress", cloud = "grammar"),
+        UserTable("course_progress", "grammar course progress", cloud = "course"),
         UserTable("custom_channel", "channels you added", cloud = "meta"),
         UserTable("deck", "decks", cloud = "meta"),
         UserTable("deck_word", null, cloud = "meta", ownedBy = "deck"),

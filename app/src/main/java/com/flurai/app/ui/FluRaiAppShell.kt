@@ -52,6 +52,7 @@ import com.flurai.app.ui.study.ReviewScreen
 import com.flurai.app.ui.tests.TestsHubScreen
 import com.flurai.app.ui.tests.QuizScreen
 import com.flurai.app.core.quiz.QuizKind
+import com.flurai.app.ui.grammar.CourseLessonScreen
 import com.flurai.app.ui.grammar.GrammarDetailScreen
 import com.flurai.app.ui.grammar.GrammarListScreen
 import com.flurai.app.ui.reading.ReadingScreen
@@ -85,6 +86,7 @@ import kotlin.reflect.KClass
 @Serializable object MediaRoute
 @Serializable data class MediaDetailRoute(val deckId: Int)
 @Serializable data class GrammarRoute(val id: Int)
+@Serializable data class CourseLessonRoute(val id: Int)
 
 /** [kind] is a QuizKind.encode() value. */
 @Serializable data class QuizRoute(val kind: String)
@@ -122,7 +124,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class) || (openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))))) ||
                             (destination == TopLevelDestination.Home && !openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(ReadingRoute::class))) ||
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(CourseLessonRoute::class) || it.hasRoute(ReadingRoute::class))) ||
                             (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
                     NavigationBarItem(
@@ -219,6 +221,17 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onBack = { navController.popBackStack() },
                     onOpenPoint = { navController.navigate(GrammarRoute(it)) },
                     onPractice = { navController.navigate(QuizRoute(QuizKind.Grammar(it).encode())) },
+                    onOpenLesson = { navController.navigate(CourseLessonRoute(it)) },
+                    onSelfTest = { navController.navigate(QuizRoute(QuizKind.CourseReview(it).encode())) },
+                )
+            }
+            screen<CourseLessonRoute> {
+                CourseLessonScreen(
+                    onBack = { navController.popBackStack() },
+                    onTakeTest = { navController.navigate(QuizRoute(QuizKind.CourseLesson(it).encode())) },
+                    onOpenPoint = { navController.navigate(GrammarRoute(it)) },
+                    // The next entry takes this one's place, so Back returns to the list.
+                    onNext = { navController.navigate(CourseLessonRoute(it)) { popUpTo<CourseLessonRoute> { inclusive = true } } },
                 )
             }
             screen<GrammarRoute> {
@@ -227,6 +240,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onPractice = { jlpt, id -> navController.navigate(QuizRoute(QuizKind.Grammar(jlpt, id).encode())) },
                     // The next lesson takes this one's place, so Back returns to the list.
                     onNextLesson = { navController.navigate(GrammarRoute(it)) { popUpTo<GrammarRoute> { inclusive = true } } },
+                    onOpenCourseLesson = { navController.navigate(CourseLessonRoute(it)) },
                 )
             }
             screen<TestsRoute> {
@@ -241,6 +255,9 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onTakeCheckpoint = { jlpt ->
                         navController.navigate(QuizRoute(QuizKind.Checkpoint(jlpt).encode())) { popUpTo<QuizRoute> { inclusive = true } }
                     },
+                    // A new run of the same test (a fresh set of questions) takes this one's place.
+                    onRetry = { kind -> navController.navigate(QuizRoute(kind)) { popUpTo<QuizRoute> { inclusive = true } } },
+                    onOpenLesson = { id -> navController.navigate(CourseLessonRoute(id)) { popUpTo<QuizRoute> { inclusive = true } } },
                 )
             }
             screen<StudyRoute> { ReviewScreen(onBack = { navController.popBackStack() }) }

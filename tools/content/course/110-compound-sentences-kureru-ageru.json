@@ -1,0 +1,50 @@
+{
+  "id": 110,
+  "number": "11",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Compound sentences, くれる, あげる and the て-form",
+  "summary": "The て-form links clauses into one long sentence with a single tense at the end, and くれる / あげる describe giving and doing something for someone.",
+  "video": "https://www.youtube.com/watch?v=3X2ZCWazrDw",
+  "related": [414, 423, 578, 542],
+  "blocks": [
+    {"type": "text", "text": "Until now each sentence has been a single train. Real Japanese chains them. This lesson shows how, with a little story: a cat sits by a river while her big sister reads and ignores her."},
+    {"type": "heading", "text": "Positions and ある"},
+    {"type": "text", "text": "A **position noun** like そば (beside) or 上 (top) works like any noun, so the place takes **に**: 川のそばにいる. And ある, \"to exist\", turns into a describing word in front of a noun: ある日 is \"a certain day\" (\"one day\") and ある本 is \"a certain book\"."},
+    {"type": "example", "jp": "ある日、猫は川のそばにいた。", "en": "One day the cat was beside the river."},
+    {"type": "heading", "text": "The て-form joins clauses"},
+    {"type": "text", "text": "A verb in **て-form** that is not the last word says: this clause is finished, and **more is coming**. Tense is marked **only once, at the very end**, and it covers the whole sentence. So 読んでいて on its own could be \"is reading\" or \"was reading\" until the final past marker settles it."},
+    {"type": "diagram", "cars": [
+      {"text": "姉は本を読んでいて", "role": "white", "label": "clause 1 (て)"},
+      {"text": "（猫と）遊んでくれなかった", "role": "engine", "label": "clause 2 + tense"}
+    ], "text": "Two clauses, one tense at the end."},
+    {"type": "example", "jp": "姉は本を読んでいて、遊んでくれなかった。", "en": "My sister was reading a book and did not play with me."},
+    {"type": "heading", "text": "くれる and あげる: giving"},
+    {"type": "text", "text": "Both mean \"give\", and the difference is direction. In Japanese you always place yourself **below** other people. **くれる** is giving **down to me or my group**; **あげる** is giving **up and out to someone else**."},
+    {"type": "example", "jp": "友達が私に本をくれた。", "en": "A friend gave me a book."},
+    {"type": "example", "jp": "私は友達にプレゼントをあげた。", "en": "I gave my friend a present."},
+    {"type": "text", "text": "Put either after a **て-form verb** and it means doing the action **for someone's benefit**: 〜てくれる (someone does it for me), 〜てあげる (I do it for someone)."},
+    {"type": "example", "jp": "友達が宿題を手伝ってくれた。", "en": "A friend helped me with my homework."},
+    {"type": "example", "jp": "弟に宿題を手伝ってあげた。", "en": "I helped my little brother with his homework."},
+    {"type": "keypoints", "items": [
+      "**て-form** = \"this clause is done, more follows\". The **tense is marked once**, at the end.",
+      "**くれる**: giving **to me / my group**. **あげる**: giving **to someone else**.",
+      "**〜てくれる / 〜てあげる**: doing something **for** someone.",
+      "**ある日** = \"one day\"; position nouns take **に** (**川のそばに**)."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does a て-form in the middle of a sentence tell you?", "prompt": "", "options": ["This clause is finished and more follows", "The sentence is a question", "The action is in the past", "The action is polite"], "answer": 0, "note": "て links clauses; the final verb carries the tense."},
+    {"id": 2, "type": "choice", "instruction": "Which says a friend gave ME a book?", "prompt": "", "options": ["友達が私に本をくれた", "友達が私に本をあげた", "私が友達に本をくれた", "友達が私に本をいた"], "answer": 0, "note": "Giving toward me or my group is くれる."},
+    {"id": 3, "type": "choice", "instruction": "Which says I gave a friend a present?", "prompt": "", "options": ["私は友達にプレゼントをあげた", "私は友達にプレゼントをくれた", "友達は私にプレゼントをあげた", "私は友達にプレゼントがあげた"], "answer": 0, "note": "Giving out to someone else is あげる."},
+    {"id": 4, "type": "tap", "instruction": "Tap the verb that carries the tense of the whole sentence", "options": ["読んで", "いて", "遊んで", "くれなかった"], "answer": 3, "note": "Only the last verb is marked for tense."},
+    {"id": 5, "type": "order", "instruction": "Build the sentence", "prompt": "A friend helped me with my homework.", "options": ["友達が", "宿題を", "手伝って", "くれた"], "note": "て-form + くれた = did it for me."},
+    {"id": 6, "type": "choice", "instruction": "What does ある mean in ある日?", "prompt": "", "options": ["A certain (one day)", "Every", "Today", "Yesterday"], "answer": 0, "note": "ある in front of a noun means \"a certain\"."},
+    {"id": 7, "type": "choice", "instruction": "Which particle marks the place in 川のそば＿＿いた?", "prompt": "", "options": ["に", "を", "が", "と"], "answer": 0, "note": "Position nouns are nouns: they take に."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "In a long て-chain, every verb carries its own tense.", "options": ["True", "False"], "answer": 1, "note": "The tense is marked only once, at the end."},
+    {"id": 9, "type": "choice", "instruction": "What does 〜てあげる express?", "prompt": "", "options": ["Doing something for someone else", "Someone doing it for me", "A wish", "A past habit"], "answer": 0, "note": "弟に宿題を手伝ってあげた."},
+    {"id": 10, "type": "choice", "instruction": "Why can 読んでいて be \"is reading\" or \"was reading\"?", "prompt": "", "options": ["Tense is decided by the verb at the end of the sentence", "Because it is irregular", "Because て is a past marker", "Because いる has no tense"], "answer": 0, "note": "て-form verbs carry no tense of their own."},
+    {"id": 11, "type": "choice", "instruction": "Which one means \"My sister did not play with me\"?", "prompt": "", "options": ["姉は遊んでくれなかった", "姉は遊んであげなかった", "姉は遊んでくれた", "姉は遊ばなかったあげる"], "answer": 0, "note": "The sister's action goes toward me, so くれる; negative past: くれなかった."},
+    {"id": 12, "type": "choice", "instruction": "Which pairs the verb with the right giving word?", "prompt": "\"I carried my grandmother's bag for her.\"", "options": ["おばあちゃんの荷物を持ってあげた", "おばあちゃんの荷物を持ってくれた", "おばあちゃんの荷物を持ってもらった", "おばあちゃんの荷物を持っていた"], "answer": 0, "note": "I did it for someone else: 〜てあげる."}
+  ]
+}

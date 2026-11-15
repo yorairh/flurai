@@ -1,0 +1,54 @@
+{
+  "id": 150,
+  "number": "15",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Transitive and intransitive verbs",
+  "summary": "Self-move verbs move the subject itself; other-move verbs move something else. Many verbs come in pairs, and their endings tell you which is which.",
+  "video": "https://www.youtube.com/watch?v=ELk1dqaEmyk",
+  "related": [465, 421],
+  "blocks": [
+    {"type": "text", "text": "The course replaces the Western labels \"intransitive\" and \"transitive\" with **self-move** (自動詞) and **other-move** (他動詞). A **self-move** verb moves the subject itself: the door **opens**, a ball **falls**. An **other-move** verb moves something else: I **open** the door, I **drop** the ball. The two ideas overlap heavily with the Western labels, but self-move / other-move describes what Japanese really does."},
+    {"type": "heading", "text": "Verbs come in pairs"},
+    {"type": "table", "rows": [
+      ["Self-move", "Other-move"],
+      ["出る (come out)", "出す (take out)"],
+      ["落ちる (fall)", "落とす (drop)"],
+      ["上がる (go up)", "上げる (raise)"],
+      ["止まる (stop)", "止める (stop it)"],
+      ["始まる (begin)", "始める (begin it)"],
+      ["消える (vanish)", "消す (erase)"],
+      ["壊れる (break)", "壊す (break it)"],
+      ["開く (open)", "開ける (open it)"]
+    ]},
+    {"type": "heading", "text": "The mother and father of all verbs"},
+    {"type": "text", "text": "**ある** (to be, to exist) is the \"mother\" of every self-move verb: it only looks inward. **する** (to do) is the \"father\" of every other-move verb: it must do something to something."},
+    {"type": "heading", "text": "Three rules of thumb"},
+    {"type": "keypoints", "items": [
+      "A verb ending in **-す** is **other-move**: 出す, 落とす, 壊す.",
+      "A verb ending in **-ある** (あがる, とまる, はじまる) is **self-move**.",
+      "**-める** (止める, 始める) is usually **other-move**, and **-れる / -える** (壊れる, 消える) is usually **self-move**."
+    ]},
+    {"type": "text", "text": "These are guides, not laws. Some pairs have to be decided by meaning, but the pairs above cover most everyday verbs."},
+    {"type": "example", "jp": "ドアが開く。", "en": "The door opens. (self-move)"},
+    {"type": "example", "jp": "（私が）ドアを開ける。", "en": "(I) open the door. (other-move)"},
+    {"type": "example", "jp": "ボールが落ちた。", "en": "The ball fell."},
+    {"type": "example", "jp": "（私が）ボールを落とした。", "en": "(I) dropped the ball."},
+    {"type": "example", "jp": "電気が消えた。", "en": "The light went out."},
+    {"type": "example", "jp": "（私が）電気を消した。", "en": "(I) turned off the light."}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which verb is other-move?", "prompt": "", "options": ["落とす", "落ちる", "止まる", "始まる"], "answer": 0, "note": "Verbs ending in す are other-move."},
+    {"id": 2, "type": "choice", "instruction": "Fill the gap", "prompt": "ドア＿＿開く。 (The door opens.)", "options": ["が", "を", "に", "で"], "answer": 0, "note": "A self-move verb has no object: the door is the main carriage."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）ドア＿＿開ける。 (I open the door.)", "options": ["を", "が", "に", "で"], "answer": 0, "note": "An other-move verb does something to a thing: を."},
+    {"id": 4, "type": "choice", "instruction": "Pick the other-move partner", "prompt": "壊れる (break by itself)", "options": ["壊す", "壊る", "壊める", "壊ける"], "answer": 0, "note": "壊れる / 壊す."},
+    {"id": 5, "type": "choice", "instruction": "Pick the self-move partner", "prompt": "上げる (raise)", "options": ["上がる", "上かる", "上せる", "上れる"], "answer": 0, "note": "上げる / 上がる."},
+    {"id": 6, "type": "choice", "instruction": "What is ある, according to the course?", "prompt": "", "options": ["The mother of all self-move verbs", "The father of all other-move verbs", "An other-move verb", "A noun"], "answer": 0, "note": "ある is the purely inward verb; する is the father of other-move verbs."},
+    {"id": 7, "type": "order", "instruction": "Build the sentence", "prompt": "I turned off the light.", "options": ["私が", "電気を", "消した"], "note": "Other-move 消す takes を."},
+    {"id": 8, "type": "choice", "instruction": "Which sentence says the ball fell by itself?", "prompt": "", "options": ["ボールが落ちた", "ボールを落とした", "ボールが落とした", "ボールを落ちた"], "answer": 0, "note": "落ちる is self-move and takes が."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "A verb ending in -す is usually other-move.", "options": ["True", "False"], "answer": 0, "note": "落とす, 出す, 消す."},
+    {"id": 10, "type": "tap", "instruction": "Tap the self-move verb", "options": ["電気が", "消えた"], "answer": 1, "note": "消える (go out) is self-move."},
+    {"id": 11, "type": "choice", "instruction": "Pick the other-move partner", "prompt": "出る (come out)", "options": ["出す", "出ける", "出める", "出らす"], "answer": 0, "note": "出る / 出す."},
+    {"id": 12, "type": "choice", "instruction": "Which pair is correctly matched (self-move / other-move)?", "prompt": "", "options": ["止まる / 止める", "止める / 止まる", "始める / 始まる", "消す / 消える"], "answer": 0, "note": "止まる (stop by itself) / 止める (stop it)."}
+  ]
+}

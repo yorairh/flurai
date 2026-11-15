@@ -83,6 +83,7 @@ class InMemoryLocal : SyncLocal {
     val dayRows = mutableListOf<StudyDayEntity>()
     val testRows = mutableListOf<TestResultEntity>()
     val grammarRows = mutableListOf<GrammarProgressEntity>()
+    val courseRows = mutableListOf<com.flurai.app.core.course.CourseProgressEntity>()
     val channelRows = mutableListOf<CustomChannelEntity>()
     val deckRows = mutableListOf<DeckEntity>()
     val deckWords = mutableMapOf<Long, List<Int>>()
@@ -115,6 +116,13 @@ class InMemoryLocal : SyncLocal {
     override suspend fun upsertGrammar(progress: GrammarProgressEntity) {
         grammarRows.removeAll { it.uid == progress.uid && it.grammarId == progress.grammarId }
         grammarRows += progress
+    }
+
+    override suspend fun courseSince(uid: String, since: Long) = courseRows.filter { it.uid == uid }
+    override suspend fun course(uid: String, lessonId: Int) = courseRows.firstOrNull { it.uid == uid && it.lessonId == lessonId }
+    override suspend fun upsertCourse(progress: com.flurai.app.core.course.CourseProgressEntity) {
+        courseRows.removeAll { it.uid == progress.uid && it.lessonId == progress.lessonId }
+        courseRows += progress
     }
 
     override suspend fun channels(uid: String) = channelRows.filter { it.uid == uid }

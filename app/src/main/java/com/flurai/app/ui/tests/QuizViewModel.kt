@@ -38,7 +38,7 @@ class QuizViewModel @Inject constructor(
     val speaker: JapaneseSpeaker,
 ) : ViewModel() {
 
-    private val kind = QuizKind.decode(savedStateHandle.toRoute<QuizRoute>().kind)
+    val kind = QuizKind.decode(savedStateHandle.toRoute<QuizRoute>().kind)
     private val _state = MutableStateFlow(QuizRunState(title = kind.title))
     val state: StateFlow<QuizRunState> = _state.asStateFlow()
 
@@ -68,6 +68,8 @@ class QuizViewModel @Inject constructor(
     }
 
     fun choose(index: Int) = withRun { choose(index) }
+
+    fun arrange(order: List<Int>) = withRun { arrange(order) }
 
     fun next() = withRun { next() }
 
