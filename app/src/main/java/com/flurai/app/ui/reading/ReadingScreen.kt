@@ -92,10 +92,6 @@ fun ReadingScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Show furigana", modifier = Modifier.weight(1f))
-                Switch(checked = state.showFurigana, onCheckedChange = { viewModel.toggleFurigana() })
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("Show translations", modifier = Modifier.weight(1f))
                 Switch(checked = state.showTranslations, onCheckedChange = { viewModel.toggleTranslations() })
             }
