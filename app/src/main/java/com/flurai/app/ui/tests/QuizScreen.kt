@@ -242,7 +242,7 @@ private fun Modifier.androidxClickable(enabled: Boolean, onClick: () -> Unit): M
 private fun OrderTiles(question: Question, answered: Boolean, arranged: String?, onArrange: (List<Int>) -> Unit) {
     val tiles = question.tiles.orEmpty()
     var placed by remember(question) { mutableStateOf(listOf<Int>()) }
-    val right = answered && arranged == question.correctText
+    val right = answered && arranged != null && question.isArrangementRight(arranged)
     val border = when {
         !answered -> MaterialTheme.colorScheme.outline
         right -> CorrectGreen

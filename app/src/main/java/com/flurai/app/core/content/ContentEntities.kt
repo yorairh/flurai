@@ -151,6 +151,8 @@ data class CourseQuestionEntity(
     val ruby: String? = null,
     /** English translation of the question's Japanese sentence, shown only after answering; null when it has none. */
     val en: String? = null,
+    /** Order questions: other arrangements of the pieces that are also right, a JSON array of arrays of pieces; null when none. */
+    val alt: String? = null,
 )
 
 /** Build metadata: data versions, build date, row counts. */

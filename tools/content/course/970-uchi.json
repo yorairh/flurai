@@ -122,34 +122,6 @@
    "note": "Group identity."
   },
   {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "若い＿＿に旅行したい。 (I want to travel while I'm young.)",
-   "options": [
-    "うち",
-    "まま",
-    "ころ",
-    "から"
-   ],
-   "answer": 0,
-   "note": "うちに = while."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "What does 温かいうちに mean?",
-   "prompt": "",
-   "options": [
-    "While it's still warm",
-    "After it is warm",
-    "Because it is warm",
-    "Though it is warm"
-   ],
-   "answer": 0,
-   "note": "The enclosure ends when it's no longer warm."
-  },
-  {
    "id": 5,
    "type": "choice",
    "instruction": "What does 今のうち mean?",
@@ -199,31 +171,8 @@
     "False"
    ],
    "answer": 0,
-   "note": "It is defined by its content."
-  },
-  {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word that means \"while\"",
-   "options": [
-    "冷めない",
-    "うちに",
-    "食べて"
-   ],
-   "answer": 1,
-   "note": "うちに."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Let's eat while it's hot.",
-   "options": [
-    "熱い",
-    "うちに",
-    "食べよう"
-   ],
-   "note": "Adjective + うちに."
+   "note": "It is defined by its content.",
+   "en": "While you are young."
   },
   {
    "id": 11,
@@ -232,12 +181,238 @@
    "prompt": "",
    "options": [
     "外",
-    "中",
+    "前",
     "上",
     "下"
    ],
    "answer": 0,
    "note": "うち / そと."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "忙しくならない＿＿に、友達に会おう。",
+   "options": [
+    "まま",
+    "くせ",
+    "うち",
+    "ほど"
+   ],
+   "answer": 2,
+   "note": "Clause + うちに: while it lasts.",
+   "en": "Let's see our friends while we're not busy yet."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "冷たい＿＿に飲んでください。",
+   "options": [
+    "あと",
+    "うち",
+    "ため",
+    "ところ"
+   ],
+   "answer": 1,
+   "note": "冷たいうちに: while it is still cold.",
+   "en": "Please drink it while it's cold."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "＿＿の父は、先生です。",
+   "options": [
+    "いえ",
+    "へや",
+    "やね",
+    "うち"
+   ],
+   "answer": 3,
+   "note": "うちの: our family's.",
+   "en": "My father (our dad) is a teacher."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "＿＿また会いましょう。",
+   "options": [
+    "そのうち",
+    "そのまま",
+    "そのほど",
+    "そのくせ"
+   ],
+   "answer": 0,
+   "note": "そのうち: sooner or later.",
+   "en": "Let's meet again sooner or later."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "若い＿＿に、いろいろな国へ行きたい。",
+   "options": [
+    "くせ",
+    "ほど",
+    "うち",
+    "まで"
+   ],
+   "answer": 2,
+   "note": "若いうちに: while I'm young.",
+   "en": "I want to visit many countries while I'm young."
+  },
+  {
+   "id": 17,
+   "type": "choice",
+   "instruction": "What does 今のうちに mean here?",
+   "prompt": "今のうちに宿題をしておこう。",
+   "options": [
+    "While we still can",
+    "After everything is done",
+    "Never",
+    "Because of now"
+   ],
+   "answer": 0,
+   "note": "今のうち: while the present situation lasts.",
+   "en": "Let's do the homework while we still can."
+  },
+  {
+   "id": 18,
+   "type": "choice",
+   "instruction": "Which sentence uses うち for the in-group (family)?",
+   "prompt": "",
+   "options": [
+    "先生の兄は、大学生です。",
+    "うちの兄は、大学生です。",
+    "あの人の兄は、大学生です。",
+    "お兄さんは、大学生ですか。"
+   ],
+   "answer": 1,
+   "note": "うちの marks my own group."
+  },
+  {
+   "id": 19,
+   "type": "choice",
+   "instruction": "What does うち mean here?",
+   "prompt": "この三つのうち、どれが好きですか。",
+   "options": [
+    "Home",
+    "A span of time",
+    "Among (a group to choose from)",
+    "Outside"
+   ],
+   "answer": 2,
+   "note": "A group to choose from.",
+   "en": "Of these three, which do you like?"
+  },
+  {
+   "id": 20,
+   "type": "tap",
+   "instruction": "Tap the word that means \"while\"",
+   "options": [
+    "雨が",
+    "降らない",
+    "うちに",
+    "帰ろう"
+   ],
+   "answer": 2,
+   "note": "Clause + うちに: while it lasts.",
+   "en": "Let's go home while it isn't raining."
+  },
+  {
+   "id": 21,
+   "type": "tap",
+   "instruction": "Tap the word that means \"our\"",
+   "options": [
+    "うちの",
+    "猫は",
+    "魚が",
+    "好きだ"
+   ],
+   "answer": 0,
+   "note": "うちの: our (my group's).",
+   "en": "Our cat likes fish."
+  },
+  {
+   "id": 22,
+   "type": "tap",
+   "instruction": "Tap the word that means \"sooner or later\"",
+   "options": [
+    "そのうち",
+    "雨が",
+    "止むよ"
+   ],
+   "answer": 0,
+   "note": "そのうち: some time soon.",
+   "en": "It'll stop raining sooner or later."
+  },
+  {
+   "id": 23,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Let's go while it's still early.",
+   "options": [
+    "早い",
+    "うちに",
+    "行こう"
+   ],
+   "note": "い-adjective + うちに.",
+   "en": "Let's go while it's still early."
+  },
+  {
+   "id": 24,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Let's buy it while it's cheap.",
+   "options": [
+    "安い",
+    "うちに",
+    "買おう"
+   ],
+   "note": "い-adjective + うちに.",
+   "en": "Let's buy it while it's cheap."
+  },
+  {
+   "id": 25,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Our school is big.",
+   "options": [
+    "うちの",
+    "学校は",
+    "大きい"
+   ],
+   "note": "うちの: our.",
+   "en": "Our school is big."
+  },
+  {
+   "id": 26,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Sooner or later you'll surely understand.",
+   "options": [
+    "そのうち",
+    "きっと",
+    "わかるよ"
+   ],
+   "note": "そのうち: sooner or later.",
+   "alt": [["きっと", "そのうち", "わかるよ"]],
+   "en": "Sooner or later you'll surely understand."
+  },
+  {
+   "id": 27,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "In 若いうちに, うち means the place called home.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "Here it is an enclosure of time: while I'm young.",
+   "en": "while I'm young"
   }
  ]
 }

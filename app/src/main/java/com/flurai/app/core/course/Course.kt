@@ -198,6 +198,10 @@ internal fun rubyMap(stored: String?, texts: Map<String, String?>, lists: Map<St
 fun lessonRuby(lesson: CourseLessonEntity): Map<String, String> =
     rubyMap(lesson.ruby, mapOf("title" to lesson.title, "summary" to lesson.summary))
 
+private fun parseAlternatives(alt: String?): Set<String> =
+    runCatching { json.decodeFromString(ListSerializer(ListSerializer(String.serializer())), alt ?: "[]") }
+        .getOrDefault(emptyList()).map { it.joinToString("") }.toSet()
+
 private fun parseOptions(options: String): List<String> =
     runCatching { json.decodeFromString(ListSerializer(String.serializer()), options) }.getOrDefault(emptyList())
 
@@ -242,6 +246,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
         }
         "order" -> {
             if (options.size < 2) return null
+            val alternatives = parseAlternatives(entity.alt)
             var tiles = options.shuffled(random)
             var tries = 0
             while (tiles == options && tries++ < 10) tiles = options.shuffled(random)
@@ -249,6 +254,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
                 kind = QuestionKind.CourseOrder, prompt = entity.prompt, hint = entity.hint, options = options,
                 answer = 0, level = jlpt, note = entity.note, instruction = entity.instruction, tiles = tiles,
                 correctText = options.joinToString(""), courseLesson = key.first, courseQuestion = key.second, ruby = ruby, translation = entity.en,
+                alsoCorrect = alternatives,
             )
         }
         else -> null

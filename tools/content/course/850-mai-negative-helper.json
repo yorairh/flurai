@@ -85,165 +85,26 @@
   }
  ],
  "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "What does そんなことはあるまい mean?",
-   "prompt": "",
-   "options": [
-    "Such a thing is surely not so",
-    "Let's not do such a thing",
-    "I did such a thing",
-    "Such a thing exists"
-   ],
-   "answer": 0,
-   "note": "あるまい = ないだろう."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "What does 二度と行くまい express?",
-   "prompt": "",
-   "options": [
-    "A firm decision never to go",
-    "A polite invitation",
-    "A past event",
-    "A question"
-   ],
-   "answer": 0,
-   "note": "A strong determination not to do something."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Which of these is NOT possible?",
-   "prompt": "",
-   "options": [
-    "まかった",
-    "行くまい",
-    "あるまい",
-    "こまい"
-   ],
-   "answer": 0,
-   "note": "まい never changes; there is no past form."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Pick the equivalent",
-   "prompt": "彼は来るまい。 ≈ 彼は＿＿。",
-   "options": [
-    "来ないだろう",
-    "来なかった",
-    "来たい",
-    "来させる"
-   ],
-   "answer": 0,
-   "note": "The negative guess with でしょう / だろう."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "Pick the irregular form",
-   "prompt": "来る + まい →",
-   "options": [
-    "こまい",
-    "きまい",
-    "くまい",
-    "こないまい"
-   ],
-   "answer": 0,
-   "note": "来る also has こまい."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "Pick the irregular form",
-   "prompt": "する + まい →",
-   "options": [
-    "しまい",
-    "さまい",
-    "せまい",
-    "すまい"
-   ],
-   "answer": 0,
-   "note": "する → しまい / するまい."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "行くまい means \"let's not go\".",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "まい cannot make a call to action; it says unlikely or a resolve."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "まい has a past tense, まかった.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It is a static helper and never changes."
-  },
-  {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word that carries the \"surely not\" meaning",
-   "options": [
-    "雨は",
-    "降る",
-    "まい"
-   ],
-   "answer": 2,
-   "note": "まい is the negative volitional."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I will never lie again.",
-   "options": [
-    "二度と",
-    "嘘は",
-    "つくまい"
-   ],
-   "note": "A strong resolution with まい."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "What does 行こうか行くまいか mean?",
-   "prompt": "",
-   "options": [
-    "Whether I go or not",
-    "Let's go and not go",
-    "I will go and I will not go",
-    "I have gone"
-   ],
-   "answer": 0,
-   "note": "Positive and negative volitional together."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "子供ではあるまい＿＿、泣くな。 (You're not a child, so don't cry.)",
-   "options": [
-    "し",
-    "が",
-    "を",
-    "に"
-   ],
-   "answer": 0,
-   "note": "まいし gives \"it's not as if\"."
-  }
- ]
+    {"id": 34, "type": "choice", "instruction": "What kind of helper is まい?", "prompt": "", "options": ["A negative volitional", "A past helper", "A polite helper", "A noun"], "answer": 0, "note": "よう means will / let's; まい means will not."},
+    {"id": 35, "type": "choice", "instruction": "How do you attach まい to 飲む?", "prompt": "", "options": ["飲みまい", "飲むまい", "飲んまい", "飲まないまい"], "answer": 1, "note": "まい goes on the end of the dictionary form."},
+    {"id": 36, "type": "choice", "instruction": "Which is the まい form of 見る?", "prompt": "", "options": ["見まい", "見てまい", "見らまい", "見ないまい"], "answer": 0, "note": "An ichidan verb can lose its る: 見まい."},
+    {"id": 37, "type": "choice", "instruction": "Which is the まい form of 来る in kana?", "prompt": "", "options": ["きまい", "こまい", "くらまい", "こないまい"], "answer": 1, "note": "来る → 来るまい / こまい."},
+    {"id": 38, "type": "choice", "instruction": "What does the sentence express?", "prompt": "この天気では、雪は降るまい。", "options": ["It is unlikely that snow will fall", "I will never let it snow", "Let's not make snow", "Snow fell"], "answer": 0, "note": "The first job of まい: it is unlikely.", "en": "In this weather, it surely won't snow."},
+    {"id": 39, "type": "choice", "instruction": "What does まい express?", "prompt": "もう二度と彼には会うまい。", "options": ["A guess", "A firm resolution", "An invitation", "A past event"], "answer": 1, "note": "The second job of まい: I will never.", "en": "I will never see him again."},
+    {"id": 40, "type": "choice", "instruction": "True or false?", "prompt": "行くまい means \"let's not go\".", "options": ["True", "False"], "answer": 1, "note": "まい never makes a negative invitation.", "en": "行くまい: I won't go."},
+    {"id": 41, "type": "choice", "instruction": "True or false?", "prompt": "まい changes into a past form like ない does.", "options": ["True", "False"], "answer": 1, "note": "まい never changes: no past, no て-form.", "en": "まい vs ない: does まい have a past?"},
+    {"id": 42, "type": "choice", "instruction": "あるまい means the same as...", "prompt": "", "options": ["ないだろう", "あるだろう", "なかった", "あります"], "answer": 0, "note": "まい is the negative partner of だろう."},
+    {"id": 43, "type": "choice", "instruction": "ではあるまい means the same as...", "prompt": "", "options": ["ではあるだろう", "ではないだろう", "ではなかった", "でもある"], "answer": 1, "note": "あるまい = ないだろう."},
+    {"id": 44, "type": "choice", "instruction": "Pick the \"surely not\" form", "prompt": "彼は今日は学校へ＿＿＿。", "options": ["来よう", "来ます", "来るまい", "来たい"], "answer": 2, "note": "まい on the dictionary form says it is unlikely.", "en": "He surely won't come to school today."},
+    {"id": 45, "type": "choice", "instruction": "Fill the gap", "prompt": "いいえ、もう二度と食べ＿＿＿。", "options": ["よう", "まい", "たい", "ます"], "answer": 1, "note": "A firm resolution: 食べまい.", "en": "No, I will never eat it again."},
+    {"id": 46, "type": "choice", "instruction": "Which sentence says \"whether to go or not\"?", "prompt": "", "options": ["行くまいか行くまいか迷う", "行こうか行こうか迷う", "行こうか行くまいか迷う", "行くか行かまいか迷う"], "answer": 2, "note": "Positive volitional + negative volitional: ようか～まいか."},
+    {"id": 47, "type": "choice", "instruction": "What does ～まいし mean?", "prompt": "学生ではあるまいし、毎日遊んではいられない。", "options": ["It's not as if (you are a student)", "Because I am a student", "Whether or not", "Let's not"], "answer": 0, "note": "Adding し to まい gives \"it's not as if ...\".", "en": "It's not as if you are a student; you can't play every day."},
+    {"id": 48, "type": "tap", "instruction": "Tap the negative helper", "prompt": "", "options": ["そんな", "ことは", "言う", "まい"], "answer": 3, "note": "まい makes 言う a \"surely not / never\".", "en": "I won't say such a thing."},
+    {"id": 49, "type": "tap", "instruction": "Tap the negative helper", "prompt": "", "options": ["こんな", "夜に、", "誰も", "来る", "まい"], "answer": 4, "note": "まい is the negative helper at the end.", "en": "On a night like this, surely no one will come."},
+    {"id": 50, "type": "order", "instruction": "Build the sentence", "prompt": "I will never be late again.", "options": ["二度と", "遅れ", "まい"], "note": "An ichidan verb loses る before まい.", "en": "I will never be late again."},
+    {"id": 51, "type": "order", "instruction": "Build the sentence", "prompt": "He surely won't know such a thing.", "options": ["そんなことは", "彼も", "知るまい"], "note": "まい on the dictionary form: unlikely.", "alt": [["彼も", "そんなことは", "知るまい"]], "en": "He surely won't know such a thing."},
+    {"id": 52, "type": "order", "instruction": "Build the sentence", "prompt": "I can't decide whether to go or not.", "options": ["行こうか", "行くまいか", "迷う"], "note": "ようか～まいか means whether or not.", "en": "I can't decide whether to go or not."},
+    {"id": 53, "type": "choice", "instruction": "Which is the opposite of ~よう (will)?", "prompt": "", "options": ["まい", "たい", "ない", "そう"], "answer": 0, "note": "よう is will; まい is will not."},
+    {"id": 54, "type": "choice", "instruction": "Which sentence means the same as 彼は行くまい?", "prompt": "", "options": ["彼は行きたい", "彼は行った", "彼は行かないだろう", "彼は行こう"], "answer": 2, "note": "まい: surely not."}
+  ]
 }

@@ -284,7 +284,7 @@ class QuizRun(
         val tiles = current.tiles ?: return
         if (_state.value.selected != null || order.sorted() != tiles.indices.toList()) return
         val text = order.joinToString("") { tiles[it] }
-        answered += Answered(current, text == current.correctText, text)
+        answered += Answered(current, current.isArrangementRight(text), text)
         clock.tap(reviews = 1)
         _state.update { it.copy(selected = 0, arranged = text) }
     }

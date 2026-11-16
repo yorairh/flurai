@@ -124,165 +124,26 @@
   }
  ],
  "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "Which word is the most casual?",
-   "prompt": "",
-   "options": [
-    "なんか",
-    "など",
-    "なんて",
-    "から"
-   ],
-   "answer": 0,
-   "note": "なんか is the strongest and most colloquial."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "机の上に本やペン＿＿がある。 (... books, pens and so on.)",
-   "options": [
-    "など",
-    "なんて",
-    "なんだ",
-    "のに"
-   ],
-   "answer": 0,
-   "note": "など lists examples neutrally."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Pick the meaning",
-   "prompt": "なんか寒いね。",
-   "options": [
-    "Somehow it is cold",
-    "Something is cold",
-    "It is not cold",
-    "It is very cold, and so on"
-   ],
-   "answer": 0,
-   "note": "なんか = 何か, here \"somehow, for some reason\"."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Which sentence shows surprise at a whole event?",
-   "prompt": "",
-   "options": [
-    "雪が降るなんて信じられない。",
-    "雪なんて嫌いだ。",
-    "雪など嫌いだ。",
-    "雪が降るなんか。"
-   ],
-   "answer": 0,
-   "note": "なんて after a clause shows surprise."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "What does なんて do in 勉強なんて嫌いだ?",
-   "prompt": "",
-   "options": [
-    "Belittles 勉強",
-    "Asks \"what?\"",
-    "Lists examples",
-    "Shows surprise at an event"
-   ],
-   "answer": 0,
-   "note": "After a noun it makes light of it."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "What does なんて do in なんて広い部屋なんだ。?",
-   "prompt": "",
-   "options": [
-    "Says \"what a ...!\"",
-    "Asks \"what?\"",
-    "Belittles the room",
-    "Means \"and so on\""
-   ],
-   "answer": 0,
-   "note": "It opens an exclamation."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "なんか is a squashed form of 何か.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "何か → なんか."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "In 私なんかには無理です, なんか shows pride.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It belittles oneself: someone like me."
-  },
-  {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word that belittles the noun",
-   "options": [
-    "お金",
-    "なんて",
-    "いらない"
-   ],
-   "answer": 1,
-   "note": "お金なんていらない = I don't want money or such."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Somehow I'm sleepy.",
-   "options": [
-    "なんか",
-    "眠い",
-    "ね"
-   ],
-   "note": "なんか opens the sentence as a vague \"somehow\"."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "Which sentence means \"I don't know anyone called Tanaka\"?",
-   "prompt": "",
-   "options": [
-    "田中なんて人は知らない。",
-    "田中なんか人を知らなくない。",
-    "田中など人は知らなくない。",
-    "田中なんて人を知る。"
-   ],
-   "answer": 0,
-   "note": "A vague, doubtful という."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Which particle disappears in 宿題など必要ない (compare 宿題は必要ない)?",
-   "prompt": "",
-   "options": [
-    "は",
-    "を",
-    "に",
-    "で"
-   ],
-   "answer": 0,
-   "note": "The topic は is dropped when など belittles the noun; it is not a logical particle."
-  }
- ]
+    {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "かばんの中に本＿＿ノートなどがある。", "options": ["を", "が", "や", "に"], "answer": 2, "note": "や lists examples, and など closes the list.", "en": "In the bag there are books, notebooks and so on."},
+    {"id": 14, "type": "choice", "instruction": "Which one is the most casual?", "prompt": "", "options": ["など", "なんて", "なんか", "なにか"], "answer": 2, "note": "など is neutral, なんて is in the middle, なんか is the most casual."},
+    {"id": 15, "type": "choice", "instruction": "Which one is neutral and fine in formal writing?", "prompt": "", "options": ["なんか", "など", "なんて", "なんだか"], "answer": 1, "note": "など sits right after the noun and suits formal writing."},
+    {"id": 16, "type": "choice", "instruction": "Fill the gap", "prompt": "＿＿きれいな花なんだ！", "options": ["なんで", "どこ", "いつ", "なんて"], "answer": 3, "note": "なんて + noun phrase makes the exclamation \"what a ...!\".", "en": "What a beautiful flower!"},
+    {"id": 17, "type": "choice", "instruction": "What does なんか add?", "prompt": "あんな人なんかに会いたくない。", "options": ["It belittles the noun", "It asks what", "It lists examples", "It makes it polite"], "answer": 0, "note": "After a noun, なんか belittles it.", "en": "I don't want to meet a person like that."},
+    {"id": 18, "type": "choice", "instruction": "What does なんか mean here?", "prompt": "なんか頭が痛い。", "options": ["A list of things", "A question about what", "Somehow, for some reason", "A command"], "answer": 2, "note": "なんか at the start of a clause is a vague \"somehow\".", "en": "My head hurts somehow."},
+    {"id": 19, "type": "choice", "instruction": "Fill the gap", "prompt": "テレビ＿＿＿見たくない。", "options": ["いつ", "どこ", "なんで", "なんか"], "answer": 3, "note": "なんか after a noun belittles it and replaces を.", "en": "I don't want to watch TV or the like."},
+    {"id": 20, "type": "choice", "instruction": "True or false?", "prompt": "After a whole clause, なんか shows surprise or disbelief.", "options": ["True", "False"], "answer": 1, "note": "Only なんて shows surprise after a whole clause."},
+    {"id": 21, "type": "choice", "instruction": "True or false?", "prompt": "なんて can show surprise after a whole clause.", "options": ["True", "False"], "answer": 0, "note": "After a clause, なんて means \"I can't believe...\"."},
+    {"id": 22, "type": "choice", "instruction": "What does なんて express?", "prompt": "雨が降るなんて思わなかった。", "options": ["A question", "A list", "A command", "Surprise at the whole event"], "answer": 3, "note": "なんて after a whole clause shows surprise.", "en": "I never thought it would rain!"},
+    {"id": 23, "type": "choice", "instruction": "Which means \"someone like me\"?", "prompt": "", "options": ["私なにか", "私なんで", "私なんか", "私なら"], "answer": 2, "note": "なんか after a noun belittles it, often oneself."},
+    {"id": 24, "type": "tap", "instruction": "Tap the word that belittles", "prompt": "", "options": ["友だち", "なんて", "いらない"], "answer": 1, "note": "なんて after a noun belittles it.", "en": "I don't need friends or anything like that."},
+    {"id": 25, "type": "tap", "instruction": "Tap the word that means \"and so on\"", "prompt": "", "options": ["本や", "ノート", "など", "を", "買った"], "answer": 2, "note": "など closes a list of examples.", "en": "I bought books, notebooks and so on."},
+    {"id": 26, "type": "order", "instruction": "Build the sentence", "prompt": "What a kind teacher!", "options": ["なんて", "親切な", "先生なんだ"], "note": "なんて opens the exclamation.", "en": "What a kind teacher!"},
+    {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "It's somehow hot today, isn't it.", "options": ["今日は", "なんか", "暑いね"], "note": "なんか: a vague \"somehow\" before the clause.", "en": "It's somehow hot today, isn't it.", "alt": [["なんか", "今日は", "暑いね"]]},
+    {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "I don't eat vegetables or anything like that.", "options": ["私は", "野菜なんか", "食べない"], "note": "なんか after the noun replaces を and belittles it.", "en": "I don't eat vegetables or anything like that.", "alt": [["野菜なんか", "私は", "食べない"]]},
+    {"id": 29, "type": "choice", "instruction": "Which pair belittles a noun and can replace が / を?", "prompt": "", "options": ["など and や", "から and まで", "なんか and なんて", "だけ and しか"], "answer": 2, "note": "なんか and なんて are the belittling pair."},
+    {"id": 30, "type": "choice", "instruction": "Which sentence lists examples?", "prompt": "", "options": ["箱の中にりんごやバナナなどがある", "母なんか大嫌い", "なんて高い建物", "なんか暑い"], "answer": 0, "note": "や ... など lists examples."},
+    {"id": 31, "type": "choice", "instruction": "なんか is a squashed what?", "prompt": "", "options": ["何か", "何と", "何で", "何も"], "answer": 0, "note": "なんか is a squashed 何か, \"something\"."},
+    {"id": 32, "type": "choice", "instruction": "なんて is a squashed what?", "prompt": "", "options": ["何か", "何という", "何で", "何も"], "answer": 1, "note": "なんて is a squashed なんと / 何という."},
+    {"id": 33, "type": "choice", "instruction": "Who is being belittled?", "prompt": "私なんかが先生になれない。", "options": ["The speaker", "The teacher", "A friend", "Nobody"], "answer": 0, "note": "なんか after 私 belittles oneself.", "en": "Someone like me can't become a teacher."}
+  ]
 }

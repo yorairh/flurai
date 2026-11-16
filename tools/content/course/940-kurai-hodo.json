@@ -121,48 +121,6 @@
    "note": "Approximation."
   },
   {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "死ぬ＿＿眠い。 (I'm so sleepy I could die.)",
-   "options": [
-    "ほど",
-    "くらい",
-    "しか",
-    "から"
-   ],
-   "answer": 0,
-   "note": "An exaggeration to a large degree."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "What does それほど高くない mean?",
-   "prompt": "",
-   "options": [
-    "It isn't that expensive",
-    "It is very expensive",
-    "It was expensive",
-    "It is cheap"
-   ],
-   "answer": 0,
-   "note": "ほど marks the upper limit it falls short of."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "What does 一言くらい謝ってほしい imply?",
-   "prompt": "",
-   "options": [
-    "At least a single word",
-    "About one word",
-    "A long apology",
-    "No apology"
-   ],
-   "answer": 0,
-   "note": "くらい marking something small."
-  },
-  {
    "id": 6,
    "type": "choice",
    "instruction": "Which sentence uses ほど for comparison?",
@@ -198,31 +156,8 @@
     "False"
    ],
    "answer": 0,
-   "note": "It's the same word."
-  },
-  {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word of approximation",
-   "options": [
-    "三時",
-    "ぐらい",
-    "に着く"
-   ],
-   "answer": 1,
-   "note": "ぐらい = about."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "It takes about an hour.",
-   "options": [
-    "一時間",
-    "ぐらい",
-    "かかる"
-   ],
-   "note": "Number + ぐらい."
+   "note": "It's the same word.",
+   "en": "ぐらい is another form of くらい (about)."
   },
   {
    "id": 11,
@@ -237,6 +172,214 @@
    ],
    "answer": 0,
    "note": "It asks softly for an estimate."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "せめて「ありがとう」＿＿言ってください。",
+   "options": [
+    "ほど",
+    "より",
+    "まで",
+    "くらい"
+   ],
+   "answer": 3,
+   "note": "Small thing + くらい means at least.",
+   "en": "At least say thank you."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "今日は昨日＿＿暑くない。",
+   "options": [
+    "ほど",
+    "から",
+    "まで",
+    "しか"
+   ],
+   "answer": 0,
+   "note": "ほど marks the larger side of a comparison: not as hot as yesterday.",
+   "en": "Today isn't as hot as yesterday."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "What does this suggest?",
+   "prompt": "宿題はそれほど難しくなかった。",
+   "options": [
+    "It wasn't that difficult",
+    "It was extremely difficult",
+    "It was very easy",
+    "It was never given"
+   ],
+   "answer": 0,
+   "note": "ほど with a negative means not that much.",
+   "en": "The homework wasn't that difficult."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "What does くらい mean here?",
+   "prompt": "一度くらい行ってみたい。",
+   "options": [
+    "As many times as possible",
+    "About one time exactly",
+    "At least once",
+    "I never want to go"
+   ],
+   "answer": 2,
+   "note": "くらい after a small amount means at least.",
+   "en": "I'd like to go at least once."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Which sentence says I can't sing as well as my sister?",
+   "prompt": "",
+   "options": [
+    "私は姉に上手に歌えない。",
+    "私は姉ほど上手に歌えない。",
+    "私は姉ばかり上手に歌えない。",
+    "私は姉だけ上手に歌えた。"
+   ],
+   "answer": 1,
+   "note": "ほど + negative: not as much as."
+  },
+  {
+   "id": 17,
+   "type": "choice",
+   "instruction": "Which sentence says \"It was so cold that my hands hurt\"?",
+   "prompt": "",
+   "options": [
+    "寒くて手が痛くなるまでだった。",
+    "寒くて手が痛くなるしかなかった。",
+    "寒くて手が痛くなるほどだった。",
+    "寒くて手が痛くなるだけだった。"
+   ],
+   "answer": 2,
+   "note": "ほど shows a large degree."
+  },
+  {
+   "id": 18,
+   "type": "tap",
+   "instruction": "Tap the word that gives the approximate amount",
+   "options": [
+    "バスで",
+    "二十分",
+    "ぐらい",
+    "かかる"
+   ],
+   "answer": 2,
+   "note": "ぐらい means about.",
+   "en": "It takes about twenty minutes by bus."
+  },
+  {
+   "id": 19,
+   "type": "tap",
+   "instruction": "Tap the word that marks the larger side of the comparison",
+   "options": [
+    "彼女",
+    "ほど",
+    "親切な",
+    "人は",
+    "いない"
+   ],
+   "answer": 1,
+   "note": "彼女ほど: nobody is as kind as she is.",
+   "en": "There is nobody as kind as she is."
+  },
+  {
+   "id": 20,
+   "type": "tap",
+   "instruction": "Tap the word meaning \"at least\"",
+   "options": [
+    "名前",
+    "ぐらい",
+    "書きなさい"
+   ],
+   "answer": 1,
+   "note": "ぐらい after a small thing means at least.",
+   "en": "At least write your name."
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "It takes about thirty minutes.",
+   "options": [
+    "三十分",
+    "ぐらい",
+    "かかる"
+   ],
+   "note": "Amount + ぐらい: about.",
+   "en": "It takes about thirty minutes."
+  },
+  {
+   "id": 22,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I can't run as fast as my brother.",
+   "options": [
+    "兄ほど",
+    "速く",
+    "走れない"
+   ],
+   "note": "ほど + negative.",
+   "en": "I can't run as fast as my brother."
+  },
+  {
+   "id": 23,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I want you to at least call me.",
+   "options": [
+    "電話くらい",
+    "して",
+    "ほしい"
+   ],
+   "note": "くらい: at least, with a mild complaint.",
+   "en": "I want you to at least call me."
+  },
+  {
+   "id": 24,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I was so hungry I couldn't walk.",
+   "options": [
+    "歩けない",
+    "ほど",
+    "おなかがすいた"
+   ],
+   "note": "Clause + ほど: to the extent that.",
+   "en": "I was so hungry I couldn't walk."
+  },
+  {
+   "id": 25,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "これくらい means \"about this much\", and これほど means \"this much (a lot)\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "くらい is approximate; ほど is a large degree.",
+   "en": "About this much / this much (a lot)."
+  },
+  {
+   "id": 26,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "彼ほど料理が上手な人はいない means that he is not good at cooking.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It means nobody is as good at cooking as he is.",
+   "en": "There is nobody as good at cooking as he is."
   }
  ]
 }

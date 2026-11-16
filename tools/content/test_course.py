@@ -62,6 +62,13 @@ class RulesTest(unittest.TestCase):
         bad["questions"][0] = {"id": 1, "type": "order", "instruction": "Order", "prompt": "I eat", "options": ["は", "は", "は"], "note": "n"}
         self.assertTrue(any("same" in p for p in self.check(bad)))
 
+    def test_an_alternative_arrangement_must_reorder_the_same_pieces(self):
+        bad = good_lesson()
+        bad["questions"][0] = {"id": 1, "type": "order", "instruction": "Order", "prompt": "I eat", "en": "I eat.", "options": ["a", "b", "c"], "alt": [["a", "b", "x"]], "note": "n"}
+        self.assertTrue(any("alt arrangement" in p for p in self.check(bad)))
+        bad["questions"][0]["alt"] = [["b", "a", "c"]]
+        self.assertFalse(any("alt arrangement" in p for p in self.check(bad)))
+
     def test_related_points_must_exist(self):
         self.assertTrue(any("does not exist" in p for p in self.check(good_lesson(related=[1]))))
 

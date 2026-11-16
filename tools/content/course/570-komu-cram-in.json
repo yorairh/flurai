@@ -6,6 +6,7 @@
   "title": "込む and words with many meanings",
   "summary": "A word with many dictionary meanings usually has one concrete picture behind it. For 込む the picture is cramming something in.",
   "video": "https://www.youtube.com/watch?v=31xnxSFUCiw",
+  "extraKanji": "黙",
   "related": [],
   "blocks": [
     {"type": "text", "text": "Dictionaries sometimes list a dozen unrelated-looking meanings for one word. Almost always there is a single **concrete picture** and the rest are metaphors from it. Languages talk about abstract things with physical pictures: we speak of time \"going forward\" as if it were space. Learn the picture, and you can guess the meanings instead of memorizing them."},
@@ -34,17 +35,27 @@
     ]}
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What is the basic picture of 込む?", "prompt": "", "options": ["Cramming something in", "Cutting something off", "Pulling something out", "Leaving something behind"], "answer": 0, "note": "A fast road leading into a space."},
-    {"id": 2, "type": "choice", "instruction": "What does 込んでいる mean?", "prompt": "", "options": ["Crowded", "Empty", "Closed", "Forgotten"], "answer": 0, "note": "A lot of people crammed into the same place."},
-    {"id": 3, "type": "choice", "instruction": "What does 飛び込む mean?", "prompt": "", "options": ["Jump into", "Fly away", "Run past", "Climb up"], "answer": 0, "note": "飛び + 込む."},
-    {"id": 4, "type": "choice", "instruction": "What does 黙り込む describe?", "prompt": "", "options": ["Clamming up and keeping everything inside", "Shouting out", "Whispering a secret", "Forgetting a name"], "answer": 0, "note": "黙る + 込む: silence locked in."},
-    {"id": 5, "type": "choice", "instruction": "A screen says 読み込み中. What is happening?", "prompt": "", "options": ["It is loading data", "It is deleting a book", "It is asking you a question", "It is closed"], "answer": 0, "note": "読み込む = read and put into memory; 中 = in the middle of."},
-    {"id": 6, "type": "choice", "instruction": "Which stem does 込む attach to as a helper?", "prompt": "", "options": ["い-stem", "あ-stem", "て-form", "Dictionary form"], "answer": 0, "note": "思い込む, 飛び込む, 読み込む."},
-    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "思い込む always means being in love.", "options": ["True", "False"], "answer": 1, "note": "Its main use is to be convinced; love is one possible reading."},
-    {"id": 8, "type": "tap", "instruction": "Tap the verb with the cramming picture", "options": ["彼は", "部屋に", "駆け込んだ"], "answer": 2, "note": "駆け込む = run in."},
-    {"id": 9, "type": "choice", "instruction": "Which sentence means \"(I) was convinced the test was easy\"?", "prompt": "", "options": ["試験は簡単だと思い込んでいた。", "試験は簡単だと思い出した。", "試験は簡単だと思わせた。", "試験は簡単に読み込んだ。"], "answer": 0, "note": "思い込む: a thought firmly lodged."},
-    {"id": 10, "type": "choice", "instruction": "Why does a word often have many meanings?", "prompt": "", "options": ["They come from one concrete picture", "They are unrelated words", "They are always honorific", "They are rare"], "answer": 0, "note": "Metaphors grow out of the physical base meaning."},
-    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "He jumped into the river.", "options": ["彼は", "川に", "飛び込んだ"], "note": "Topic, destination, verb."},
-    {"id": 12, "type": "choice", "instruction": "What would 教え込む most likely mean?", "prompt": "", "options": ["Drill something into someone", "Forget a lesson", "Stop teaching", "Ask a question"], "answer": 0, "note": "教える + cram in."}
+    {"id": 13, "type": "choice", "instruction": "What is the picture behind 込む?", "prompt": "", "options": ["To cram in, quickly or in great quantity", "To go out", "To cut", "To wait"], "answer": 0, "note": "入 on a road: sliding in fast, so crammed in."},
+    {"id": 14, "type": "choice", "instruction": "What does 込んでいる describe?", "prompt": "今日のバスは込んでいる。", "options": ["The bus is crowded", "The bus is late", "The bus is new", "The bus is free"], "answer": 0, "note": "Many people are crammed into one space.", "en": "Today's bus is crowded."},
+    {"id": 15, "type": "choice", "instruction": "What happened?", "prompt": "子供がプールに飛び込んだ。", "options": ["The child walked around the pool", "The child left the pool", "The child jumped into the pool", "The child fell asleep"], "answer": 2, "note": "飛び込む = jump + cram in: jump into.", "en": "The child jumped into the pool."},
+    {"id": 16, "type": "choice", "instruction": "What does 黙り込む suggest?", "prompt": "彼は急に黙り込んだ。", "options": ["He started shouting", "He fell silent", "He ran away", "He laughed"], "answer": 1, "note": "黙る + 込む: keep it all inside, clam up.", "en": "He suddenly fell silent."},
+    {"id": 17, "type": "choice", "instruction": "What does 思い込んでいた suggest?", "prompt": "私は彼が先生だと思い込んでいた。", "options": ["Hoped", "Forgot", "Was convinced, perhaps wrongly", "Doubted"], "answer": 2, "note": "思い + 込む: the idea is lodged in tightly.", "en": "I was convinced he was a teacher."},
+    {"id": 18, "type": "choice", "instruction": "Which verb means \"drill something into someone\"?", "prompt": "", "options": ["教え込む", "飛び込む", "黙り込む", "読み込む"], "answer": 0, "note": "教える + 込む: cram in by teaching."},
+    {"id": 19, "type": "choice", "instruction": "What does 中 mean in 読み込み中?", "prompt": "写真を読み込み中です。", "options": ["Inside a box", "In the middle of doing it", "Last", "Middle-sized"], "answer": 1, "note": "読み込み中 = in the middle of loading.", "en": "The photo is loading."},
+    {"id": 20, "type": "choice", "instruction": "Guess the meaning of 書き込む", "prompt": "", "options": ["Erase", "Write into something, fill in", "Copy", "Read again"], "answer": 1, "note": "書く + 込む: write into."},
+    {"id": 21, "type": "choice", "instruction": "Guess the meaning of 乗り込む", "prompt": "", "options": ["Get off", "Miss a train", "Wait for a train", "Get on board, go into a vehicle"], "answer": 3, "note": "乗る + 込む: ride into."},
+    {"id": 22, "type": "choice", "instruction": "What does 走り込む picture?", "prompt": "彼は急いで店に走り込んだ。", "options": ["Running away", "Dashing into a place", "Running slowly", "Stopping"], "answer": 1, "note": "走り + 込む: run and cram in.", "en": "He ran into the shop in a hurry."},
+    {"id": 23, "type": "choice", "instruction": "How is a 〜込む compound built?", "prompt": "", "options": ["Dictionary form + 込む", "て-form + 込む", "い-stem + 込む", "ない-form + 込む"], "answer": 2, "note": "The い-stem of the verb joins 込む."},
+    {"id": 24, "type": "choice", "instruction": "Why does the lesson use 切る as an example?", "prompt": "", "options": ["Its kanji is hard", "One concrete picture covers many metaphors", "It is irregular", "It is always other-move"], "answer": 1, "note": "Cut paper, cut short, cut across, cut a tie: all are \"cut\"."},
+    {"id": 25, "type": "choice", "instruction": "True or false: a many-meaning word usually has one concrete picture behind it.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "Learn the picture and you can guess the meanings."},
+    {"id": 26, "type": "choice", "instruction": "True or false: 思い込む always means to be in love.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "It usually means being convinced; love is only one possible reading."},
+    {"id": 27, "type": "choice", "instruction": "What does the い-stem + 込む add to the verb?", "prompt": "", "options": ["Into, thoroughly, inwardly", "A past meaning", "A question", "Respect"], "answer": 0, "note": "It adds the cramming picture: into, deeply, thoroughly."},
+    {"id": 28, "type": "tap", "instruction": "Tap the compound that adds 込む", "options": ["先生は", "学生に", "漢字を", "教え込んだ"], "answer": 3, "note": "教え + 込んだ: drilled in.", "en": "The teacher drilled kanji into the students."},
+    {"id": 29, "type": "tap", "instruction": "Tap the word that means \"stayed silent\"", "options": ["彼は", "黙り込んだまま、", "何も", "言わなかった"], "answer": 1, "note": "黙り込む = fall silent.", "en": "He stayed silent and said nothing."},
+    {"id": 30, "type": "tap", "instruction": "Tap the word that means \"loading\"", "options": ["写真を", "読み込み中", "です"], "answer": 1, "note": "読み込み is the cram-in picture for data; 中 means in the middle of it.", "en": "The photo is loading now."},
+    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "The child jumped into the pool.", "options": ["子供が", "プールに", "飛び込んだ"], "note": "飛び込む: jump into.", "en": "The child jumped into the pool."},
+    {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "He ran into the room.", "options": ["彼は", "部屋に", "走り込んだ"], "note": "走り込む: dash in.", "en": "He ran into the room."},
+    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "Today's bus is very crowded.", "options": ["今日の", "バスは", "とても", "込んでいる"], "note": "込んでいる means crowded.", "en": "Today's bus is very crowded."},
+    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "I was convinced the shop was open.", "options": ["私は", "店が", "開いていると", "思い込んでいた"], "note": "思い込む: be convinced.", "en": "I was convinced the shop was open."}
   ]
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 13,
-    "identityHash": "9c2cc60f263f6ffe8c8f577f16b9cbea",
+    "identityHash": "75a6ee971ef4494ed4eaee60ffa3af0a",
     "entities": [
       {
         "tableName": "word",
@@ -453,7 +453,7 @@
       },
       {
         "tableName": "course_question",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`lesson_id` INTEGER NOT NULL, `id` INTEGER NOT NULL, `type` TEXT NOT NULL, `instruction` TEXT NOT NULL, `prompt` TEXT NOT NULL, `hint` TEXT, `options` TEXT NOT NULL, `answer` INTEGER NOT NULL, `note` TEXT, `ruby` TEXT, `en` TEXT, PRIMARY KEY(`lesson_id`, `id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`lesson_id` INTEGER NOT NULL, `id` INTEGER NOT NULL, `type` TEXT NOT NULL, `instruction` TEXT NOT NULL, `prompt` TEXT NOT NULL, `hint` TEXT, `options` TEXT NOT NULL, `answer` INTEGER NOT NULL, `note` TEXT, `ruby` TEXT, `en` TEXT, `alt` TEXT, PRIMARY KEY(`lesson_id`, `id`))",
         "fields": [
           {
             "fieldPath": "lessonId",
@@ -516,6 +516,11 @@
             "fieldPath": "en",
             "columnName": "en",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "alt",
+            "columnName": "alt",
+            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
@@ -553,7 +558,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9c2cc60f263f6ffe8c8f577f16b9cbea')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '75a6ee971ef4494ed4eaee60ffa3af0a')"
     ]
   }
 }

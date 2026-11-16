@@ -93,166 +93,28 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What is the い-stem of 読む?",
-      "prompt": "",
-      "options": [
-        "読み",
-        "読ま",
-        "読め",
-        "読も"
-      ],
-      "answer": 0,
-      "note": "う shifts to い-row: む → み.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the い-stem of 食べる?",
-      "prompt": "",
-      "options": [
-        "食べ",
-        "食べら",
-        "食べれ",
-        "食べよ"
-      ],
-      "answer": 0,
-      "note": "Drop る.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "この本は読み＿＿。 (easy to read)",
-      "options": [
-        "やすい",
-        "たがる",
-        "ながら",
-        "ます"
-      ],
-      "answer": 0,
-      "note": "い-stem + やすい.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the noun form of 休む?",
-      "prompt": "",
-      "options": [
-        "休み",
-        "休む",
-        "休め",
-        "休も"
-      ],
-      "answer": 0,
-      "note": "い-stem is the noun form.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 読み方 mean?",
-      "prompt": "",
-      "options": [
-        "Way of reading",
-        "Reading time",
-        "Reading room",
-        "A reader"
-      ],
-      "answer": 0,
-      "note": "い-stem + 方.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "The い-stem can join two clauses, like the て-form.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "行き、買った is equivalent to 行って買った.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "歩き＿＿スマホを見ないでください。 (while walking)",
-      "options": [
-        "ながら",
-        "やすい",
-        "ます",
-        "そう"
-      ],
-      "answer": 0,
-      "note": "い-stem + ながら: while.",
-      "id": 7
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I started reading the book.",
-      "options": [
-        "本を",
-        "読み",
-        "始めた"
-      ],
-      "note": "い-stem compound: 読み始める.",
-      "id": 8
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the い-stem in 読み始める",
-      "options": [
-        "読み",
-        "始める"
-      ],
-      "answer": 0,
-      "note": "読み is the い-stem, joined to 始める.",
-      "id": 9
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 泣き虫 mean?",
-      "prompt": "",
-      "options": [
-        "Crybaby",
-        "A noisy insect",
-        "A sad story",
-        "A night bug"
-      ],
-      "answer": 0,
-      "note": "い-stem 泣き + 虫.",
-      "id": 10
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 雨が降りそうだ mean?",
-      "prompt": "",
-      "options": [
-        "It looks like rain",
-        "It rained yesterday",
-        "I want rain",
-        "It is not raining"
-      ],
-      "answer": 0,
-      "note": "い-stem + そう: it looks like.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "Which of these attaches to the い-stem?",
-      "prompt": "",
-      "options": [
-        "ます",
-        "ない",
-        "よう",
-        "れる"
-      ],
-      "answer": 0,
-      "note": "読みます; the others use other stems.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "What is the い-stem of 飲む?", "prompt": "", "options": ["飲ま", "飲め", "飲み", "飲も"], "answer": 2, "note": "Shift the う-row ending to the い-row: む becomes み."},
+    {"id": 102, "type": "choice", "instruction": "What is the い-stem of 食べる?", "prompt": "", "options": ["食べ", "食べる", "食べて", "食べた"], "answer": 0, "note": "For る-verbs, drop る."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "このペンは書き＿＿＿。", "options": ["そう", "ながら", "やすい", "たがる"], "answer": 2, "en": "This pen is easy to write with.", "note": "い-stem + やすい = easy to do."},
+    {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "音楽を聞き＿＿＿勉強する。", "options": ["やすい", "ながら", "にくい", "そう"], "answer": 1, "en": "(I) study while listening to music.", "note": "い-stem + ながら = while doing."},
+    {"id": 105, "type": "choice", "instruction": "Fill the gap", "prompt": "今にも泣き＿＿＿だ。", "options": ["ながら", "やすい", "そう", "にくい"], "answer": 2, "en": "(She) looks like she's about to cry.", "note": "い-stem + そう = looks like."},
+    {"id": 106, "type": "choice", "instruction": "Fill the gap", "prompt": "この靴は歩き＿＿＿。", "options": ["にくい", "ながら", "そう", "に"], "answer": 0, "en": "These shoes are hard to walk in.", "note": "い-stem + にくい = hard to do."},
+    {"id": 107, "type": "choice", "instruction": "Fill the gap (the noun form)", "prompt": "今日は仕事が＿＿＿だ。", "options": ["休む", "休み", "休んで", "休めば"], "answer": 1, "en": "I have today off work.", "note": "The い-stem of 休む is also the noun 休み."},
+    {"id": 108, "type": "choice", "instruction": "Which is the noun form of 遊ぶ?", "prompt": "", "options": ["遊ぶ", "遊ば", "遊び", "遊べ"], "answer": 2, "note": "The い-stem doubles as a noun."},
+    {"id": 109, "type": "choice", "instruction": "Which sentence joins two clauses with the い-stem?", "prompt": "", "options": ["朝は七時に起きる、顔を洗った。", "朝は七時に起き、顔を洗った。", "朝は七時に起きない、顔を洗った。", "朝は七時に起きれば、顔を洗った。"], "answer": 1, "note": "起き is the い-stem, joining the clauses like て."},
+    {"id": 110, "type": "choice", "instruction": "What does 食べ終わる mean?", "prompt": "", "options": ["Begin eating", "Eat again", "Cannot eat", "Finish eating"], "answer": 3, "note": "い-stem + a verb makes a compound verb."},
+    {"id": 111, "type": "choice", "instruction": "How do you say \"way of making\"?", "prompt": "", "options": ["作る方", "作り方", "作った方", "作って方"], "answer": 1, "note": "い-stem + 方 = way of doing."},
+    {"id": 112, "type": "choice", "instruction": "True or false? The い-stem is used only with ます.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "ます is just one helper; the い-stem has many jobs."},
+    {"id": 113, "type": "choice", "instruction": "Which phrase is wrong?", "prompt": "", "options": ["走りやすい靴", "走りながら話す", "走るながら話す", "走りそうだ"], "answer": 2, "note": "ながら attaches to the い-stem, not the dictionary form."},
+    {"id": 114, "type": "choice", "instruction": "What does にくい add?", "prompt": "この漢字は覚えにくい。", "options": ["Easy to do", "Hard to do", "Want to do", "Looks like"], "answer": 1, "en": "This kanji is hard to remember.", "note": "い-stem + にくい = hard to do."},
+    {"id": 115, "type": "tap", "instruction": "Tap the word with an い-stem plus a helper meaning \"while\"", "options": ["朝ごはんを", "食べながら", "テレビを", "見る"], "answer": 1, "en": "(I) watch TV while eating breakfast.", "note": "食べ + ながら."},
+    {"id": 116, "type": "tap", "instruction": "Tap the い-stem that joins two clauses", "options": ["駅で", "友達に", "会い、", "一緒に", "帰った"], "answer": 2, "en": "I met my friend at the station and we went home together.", "note": "会い joins the clauses like a て-form."},
+    {"id": 117, "type": "order", "instruction": "Build the sentence", "prompt": "This park is easy to run in.", "options": ["この公園は", "走り", "やすい"], "en": "This park is easy to run in.", "note": "い-stem 走り + やすい."},
+    {"id": 118, "type": "order", "instruction": "Build the sentence", "prompt": "Please don't talk while eating.", "options": ["食べながら", "話さないで", "ください"], "en": "Please don't talk while eating.", "note": "い-stem 食べ + ながら."},
+    {"id": 119, "type": "order", "instruction": "Build the sentence", "prompt": "I went to the library and borrowed a book.", "options": ["図書館に", "行き、", "本を", "借りた"], "en": "I went to the library and borrowed a book.", "note": "行き joins two clauses."},
+    {"id": 120, "type": "order", "instruction": "Build the sentence", "prompt": "The winter break was very long.", "options": ["冬休みは", "とても", "長かった"], "en": "The winter break was very long.", "note": "休み is the noun form of 休む."},
+    {"id": 121, "type": "order", "instruction": "Build the sentence", "prompt": "It looks like it will snow soon.", "options": ["もうすぐ", "雪が", "降りそうだ"], "en": "It looks like it will snow soon.", "note": "い-stem 降り + そうだ.", "alt": [["雪が", "もうすぐ", "降りそうだ"]]},
+    {"id": 124, "type": "choice", "instruction": "Which is the い-stem of 飲む?", "prompt": "", "options": ["飲ま", "飲み", "飲んで", "飲め"], "answer": 1, "note": "The last う-sound becomes the い-sound: 飲む → 飲み."},
+    {"id": 123, "type": "choice", "instruction": "In 読み込み中, which element decides that the whole word is a noun?", "prompt": "", "options": ["The first one", "The last one (中)", "Both", "None"], "answer": 1, "note": "A compound takes on the character of its last element."}
   ]
 }

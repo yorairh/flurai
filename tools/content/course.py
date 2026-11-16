@@ -96,6 +96,11 @@ def _question_problems(where: str, q: dict) -> list[str]:
             out.append(f"{where}: order needs at least 3 pieces")
         if len(set(options)) == 1:
             out.append(f"{where}: order pieces are all the same")
+        for arrangement in q.get("alt", []):
+            if sorted(arrangement) != sorted(options) or arrangement == options:
+                out.append(f"{where}: an alt arrangement must reorder exactly the same pieces")
+    elif q.get("alt"):
+        out.append(f"{where}: only order questions have alt arrangements")
     return out
 
 
@@ -267,11 +272,12 @@ def lesson_rows(entries: list[dict]) -> list[tuple]:
 
 
 def question_rows(entries: list[dict]) -> list[tuple]:
-    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en."""
+    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en, alt."""
     return [
         (
             e["id"], q["id"], q["type"], q["instruction"], q.get("prompt", ""), q.get("hint"),
             json.dumps(q["options"], ensure_ascii=False), q.get("answer", 0), q["note"], q.get("_ruby"), q.get("en"),
+            json.dumps(q["alt"], ensure_ascii=False) if q.get("alt") else None,
         )
         for e in entries
         for q in e.get("questions", [])

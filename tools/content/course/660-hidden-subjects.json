@@ -56,165 +56,27 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What is the subject (A-car) in コーヒーが好きだ?",
-      "prompt": "",
-      "options": [
-        "コーヒー",
-        "The speaker",
-        "好き",
-        "Nobody"
-      ],
-      "answer": 0,
-      "note": "好きだ describes the coffee, which is the be-er.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Which particle marks the subject?",
-      "prompt": "",
-      "options": [
-        "が",
-        "を",
-        "に",
-        "で"
-      ],
-      "answer": 0,
-      "note": "The subject always carries が.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Who does the correcting in 先生に作文を直してもらった?",
-      "prompt": "",
-      "options": [
-        "The teacher",
-        "The speaker",
-        "A friend",
-        "The composition"
-      ],
-      "answer": 0,
-      "note": "に marks the person who does the て-form action.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Who is the zero-pronoun subject of 友達に写真を撮ってもらった?",
-      "prompt": "",
-      "options": [
-        "I (by default)",
-        "The friend",
-        "A stranger",
-        "The photo"
-      ],
-      "answer": 0,
-      "note": "The one who has it done is the zero subject: I.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "A clause placed directly before a noun works like an adjective for that noun.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "食べる料理: \"the dish that (they) eat\".",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "In 選手が食べる料理をみんなに教えてもらう, what does 選手が食べる do?",
-      "prompt": "",
-      "options": [
-        "It describes 料理",
-        "It is the main clause",
-        "It is the subject of もらう",
-        "It is a question"
-      ],
-      "answer": 0,
-      "note": "A clause directly before a noun is only a description.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "What kind of subject does that sentence have?",
-      "prompt": "",
-      "options": [
-        "An undefined zero pronoun",
-        "The athletes",
-        "みんな",
-        "料理"
-      ],
-      "answer": 0,
-      "note": "Nothing names who is collecting the opinions.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "先生＿＿作文を直してもらった。",
-      "options": [
-        "に",
-        "が",
-        "を",
-        "で"
-      ],
-      "answer": 0,
-      "note": "The doer of the て-form verb takes に with もらう.",
-      "id": 8
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I had a friend teach me the way.",
-      "options": [
-        "友達に",
-        "道を",
-        "教えてもらった"
-      ],
-      "note": "Doer に, thing を, engine.",
-      "id": 9
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the engine of the sentence 友達に道を教えてもらった",
-      "options": [
-        "友達に",
-        "道を",
-        "教えてもらった"
-      ],
-      "answer": 2,
-      "note": "もらった is the engine; 教えて is the helped verb.",
-      "id": 10
-    },
-    {
-      "type": "choice",
-      "instruction": "What does English \"they\" in \"They're putting a man on Mars\" correspond to in Japanese?",
-      "prompt": "",
-      "options": [
-        "Nothing: an undefined zero pronoun",
-        "彼ら",
-        "あの人",
-        "私"
-      ],
-      "answer": 0,
-      "note": "Japanese leaves the unnamed doer out.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "A が inside a descriptive clause is the subject of the whole sentence.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It is the subject of the description only.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "Who is the carriage of the main engine 食べた?", "prompt": "兄が作った料理を食べた。", "options": ["兄", "料理", "A zero pronoun (I)", "Nobody"], "answer": 2, "en": "(I) ate the dish my older brother made.", "note": "兄が belongs to the clause describing 料理; the main subject is a zero."},
+    {"id": 102, "type": "choice", "instruction": "Which clause does 犬が belong to?", "prompt": "犬が好きな人に会った。", "options": ["The main clause", "Both clauses", "The clause describing 人", "Neither"], "answer": 2, "en": "(I) met a person who likes dogs.", "note": "A clause directly before a noun only describes that noun."},
+    {"id": 103, "type": "choice", "instruction": "True or false? A clause sitting directly before a noun only describes that noun.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "Whatever が it contains, it is not the subject of the whole sentence."},
+    {"id": 104, "type": "choice", "instruction": "Who is the zero subject?", "prompt": "兄に自転車を直してもらった。", "options": ["My brother", "The bicycle", "I (the one who had it done)", "Nobody"], "answer": 2, "en": "I had my older brother fix my bicycle.", "note": "もらう: the unnamed subject gets someone else (に) to do it."},
+    {"id": 105, "type": "choice", "instruction": "Fill the gap", "prompt": "母＿＿料理を教えてもらった。", "options": ["が", "に", "を", "で"], "answer": 1, "en": "I had my mother teach me cooking.", "note": "The person who does it for the subject takes に."},
+    {"id": 106, "type": "tap", "instruction": "Tap the person who did the action for the zero subject", "options": ["妹に", "手伝って", "もらった"], "answer": 0, "en": "I had my younger sister help me.", "note": "に marks the person asked; the subject is the zero."},
+    {"id": 107, "type": "tap", "instruction": "Tap the main engine of the whole sentence", "options": ["妹が", "作った", "料理を", "食べた"], "answer": 3, "en": "I ate the dish my younger sister made.", "note": "作った only describes 料理; 食べた is the main engine."},
+    {"id": 108, "type": "order", "instruction": "Build the sentence", "prompt": "I had the doctor look at my leg.", "options": ["医者に", "足を", "見て", "もらった"], "en": "I had the doctor look at my leg.", "note": "Person に + thing を + て-form + もらう."},
+    {"id": 109, "type": "order", "instruction": "Build the sentence", "prompt": "I had my friend carry my bag.", "options": ["友達に", "かばんを", "持って", "もらった"], "en": "I had my friend carry my bag.", "note": "The zero subject gets the friend (に) to carry it."},
+    {"id": 110, "type": "order", "instruction": "Build the sentence", "prompt": "(I) will have the store clerk call.", "options": ["店の人に", "電話して", "もらう"], "en": "(I) will have the store clerk call.", "note": "The clerk takes に; the subject stays a zero."},
+    {"id": 111, "type": "choice", "instruction": "By the lesson's default rule, who is the zero subject of a 〜てもらう sentence when nothing else tells you?", "prompt": "", "options": ["The teacher", "You", "I", "Nobody"], "answer": 2, "note": "The zero subject defaults to I."},
+    {"id": 112, "type": "choice", "instruction": "Which particle marks the person who is asked in 〜てもらう?", "prompt": "", "options": ["が", "に", "を", "は"], "answer": 1, "note": "We say 友達に〜てもらう."},
+    {"id": 113, "type": "choice", "instruction": "True or false? The subject of the whole sentence must carry が and belong to the main engine.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "が in a describing clause does not count."},
+    {"id": 114, "type": "choice", "instruction": "Which noun with が belongs only to the describing clause?", "prompt": "母が作ったケーキを友達に食べてもらった。", "options": ["友達", "母", "ケーキ", "私"], "answer": 1, "en": "I had my friend eat the cake my mother made.", "note": "母が作った describes ケーキ."},
+    {"id": 115, "type": "choice", "instruction": "What is the zero subject of パーティーをした?", "prompt": "友達が来たので、パーティーをした。", "options": ["友達", "パーティー", "Nobody", "A zero pronoun (we)"], "answer": 3, "en": "Because friends came, (we) had a party.", "note": "友達 is the subject of 来た, not of the main engine."},
+    {"id": 116, "type": "choice", "instruction": "What is an undefined zero pronoun?", "prompt": "", "options": ["A subject that is always I", "A particle", "A subject that is simply unnamed, like English \"they\"", "A verb"], "answer": 2, "note": "The subject is there but unnamed."},
+    {"id": 117, "type": "order", "instruction": "Build the sentence", "prompt": "I had a friend tell me where the station is.", "options": ["友達に", "駅の場所を", "教えて", "もらった"], "en": "I had a friend tell me where the station is.", "note": "The friend takes に; the zero subject receives the favor."},
+    {"id": 118, "type": "choice", "instruction": "True or false? In 兄に手伝ってもらった, my brother is the subject.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "The subject is the zero; the brother is the one asked (に)."},
+    {"id": 119, "type": "choice", "instruction": "Which noun is the carriage of the whole sentence?", "prompt": "雨が降ったので、試合がなくなった。", "options": ["雨", "試合", "A zero (I)", "Nobody"], "answer": 1, "en": "Because it rained, the game was canceled.", "note": "雨が belongs to the first clause; 試合が goes with the main engine."},
+    {"id": 120, "type": "tap", "instruction": "Tap the carriage of the main engine", "options": ["犬が", "ほえたので、", "赤ちゃんが", "起きた"], "answer": 2, "en": "Because the dog barked, the baby woke up.", "note": "The first clause ends at ので; the main engine 起きた goes with 赤ちゃんが."},
+    {"id": 121, "type": "choice", "instruction": "True or false? Every sentence has an A-car; if you cannot see it, it is a zero pronoun.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "The carriage can be invisible."},
+    {"id": 122, "type": "choice", "instruction": "Which noun is the carriage of 好きだ?", "prompt": "弟は魚が好きだ。", "options": ["は", "弟", "好き", "魚"], "answer": 3, "en": "My younger brother likes fish.", "note": "好きだ is built on an adjectival noun: the fish is the one liked."}
   ]
 }

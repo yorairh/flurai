@@ -63,166 +63,26 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What is the usual Japanese equivalent of English \"it\"?",
-      "prompt": "",
-      "options": [
-        "Zero (say nothing)",
-        "それ",
-        "あれ",
-        "これ"
-      ],
-      "answer": 0,
-      "note": "Japanese leaves it out.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "What does さくらとその犬 mean?",
-      "prompt": "",
-      "options": [
-        "Sakura and her dog",
-        "Sakura and that other dog",
-        "Sakura and I",
-        "Sakura or a dog"
-      ],
-      "answer": 0,
-      "note": "その: the related one.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Who benefits in 先生が教えてくれた?",
-      "prompt": "",
-      "options": [
-        "I do",
-        "The teacher",
-        "A stranger",
-        "Nobody"
-      ],
-      "answer": 0,
-      "note": "くれる: it was done for me.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Who is going home in 今帰る?",
-      "prompt": "",
-      "options": [
-        "I",
-        "You",
-        "He",
-        "They"
-      ],
-      "answer": 0,
-      "note": "A plain future action defaults to I.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "あなた is the polite default for \"you\".",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It is not polite: use the person's name or title.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ある日 mean at the start of a story?",
-      "prompt": "",
-      "options": [
-        "One day",
-        "Every day",
-        "Today",
-        "Tomorrow"
-      ],
-      "answer": 0,
-      "note": "An existing day: some day.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "友達が宿題を手伝って＿＿。 (A friend helped me with my homework.)",
-      "options": [
-        "くれた",
-        "あげた",
-        "しまった",
-        "おいた"
-      ],
-      "answer": 0,
-      "note": "くれる: someone did it for me.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "How do you most naturally address your teacher?",
-      "prompt": "",
-      "options": [
-        "先生",
-        "あなた",
-        "お前",
-        "君"
-      ],
-      "answer": 0,
-      "note": "Titles and names replace you.",
-      "id": 8
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "彼 and 彼女 were brought into Japanese to translate European novels.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "They entered in the late Edo and Meiji periods.",
-      "id": 9
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "One day I met a bear in the forest.",
-      "options": [
-        "ある日",
-        "森で",
-        "熊に",
-        "会った"
-      ],
-      "note": "Time first, then place, partner, engine.",
-      "id": 10
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the word that shows the speaker received the favor in 母が作ってくれた",
-      "options": [
-        "母が",
-        "作って",
-        "くれた"
-      ],
-      "answer": 2,
-      "note": "くれた points the favor toward me.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "Who is helping in 私が手伝ってあげる?",
-      "prompt": "",
-      "options": [
-        "I help someone else",
-        "Someone helps me",
-        "We all help",
-        "Nobody helps"
-      ],
-      "answer": 0,
-      "note": "あげる: I do it for others.",
-      "id": 12
-    }
+    {"id": 34, "type": "choice", "instruction": "How do you start a story with \"one day\"?", "prompt": "", "options": ["毎日", "今日", "ある日", "その日"], "answer": 2, "note": "ある日 (an existing day) opens a story."},
+    {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "さくらには犬がいる。＿＿犬の名前はポチだ。", "options": ["どの", "その", "いつ", "何"], "answer": 1, "note": "その points to the related thing already in the topic: her dog.", "en": "Sakura has a dog. The dog's name is Pochi."},
+    {"id": 36, "type": "choice", "instruction": "True or false?", "prompt": "Japanese needs a word for \"it\" in every sentence.", "options": ["True", "False"], "answer": 1, "note": "Japanese has no word for it: it uses zero."},
+    {"id": 37, "type": "choice", "instruction": "Who benefits?", "prompt": "友だちが日本語を教えてくれた。", "options": ["The friend", "The speaker", "Nobody", "The teacher"], "answer": 1, "note": "くれる says someone did it for me.", "en": "A friend taught me Japanese."},
+    {"id": 38, "type": "choice", "instruction": "Who did the buying?", "prompt": "弟に本を買ってあげた。", "options": ["The younger brother", "A stranger", "The speaker", "The shop"], "answer": 2, "note": "あげる: I did it for someone else.", "en": "I bought my younger brother a book."},
+    {"id": 39, "type": "choice", "instruction": "Who taught the kanji?", "prompt": "先生に漢字を教えてもらった。", "options": ["The speaker", "The teacher", "The class", "A friend"], "answer": 1, "note": "もらう: I received the favor from the person marked に.", "en": "I had the teacher teach me kanji."},
+    {"id": 40, "type": "choice", "instruction": "Who is going to school?", "prompt": "明日、学校へ行く。", "options": ["The speaker", "You", "He", "They"], "answer": 0, "note": "A plain action about the future defaults to I.", "en": "I am going to school tomorrow."},
+    {"id": 41, "type": "choice", "instruction": "Which is rude to call your teacher?", "prompt": "", "options": ["先生", "あなた", "名前＋先生", "先生のお名前"], "answer": 1, "note": "Use a name or title for a teacher or boss, never あなた."},
+    {"id": 42, "type": "choice", "instruction": "Why do 彼 and 彼女 appear in Japanese?", "prompt": "", "options": ["They were brought in to translate European novels", "They are ancient words from poems", "They come from Chinese cooking", "They come from anime"], "answer": 0, "note": "Late Edo and Meiji translators needed words for he and she."},
+    {"id": 43, "type": "order", "instruction": "Build the sentence", "prompt": "I'll make dinner for you.", "options": ["晩ごはんを", "作って", "あげる"], "note": "あげる shows I do it for you, so no pronoun is needed.", "en": "I'll make dinner for you."},
+    {"id": 44, "type": "tap", "instruction": "Tap the word that shows someone did it for me", "prompt": "", "options": ["母が", "弁当を", "作って", "くれた"], "answer": 3, "note": "くれた carries the 'for me'.", "en": "My mother made me a lunch box."},
+    {"id": 45, "type": "tap", "instruction": "Tap the word that opens a story", "prompt": "", "options": ["ある日、", "駅で", "友だちに", "会った"], "answer": 0, "note": "ある日 is the storytelling \"one day\".", "en": "One day, I met a friend at the station."},
+    {"id": 46, "type": "choice", "instruction": "Which is the more natural way to say \"I ate breakfast\"?", "prompt": "", "options": ["私は私の朝ごはんを食べました", "朝ごはんを食べました", "あなたは朝ごはんを食べました", "彼が朝ごはんを食べました"], "answer": 1, "note": "The zero pronoun is far more common than 私は私の..."},
+    {"id": 47, "type": "choice", "instruction": "True or false?", "prompt": "Calling your boss あなた is polite.", "options": ["True", "False"], "answer": 1, "note": "あなた is rude toward a boss or teacher."},
+    {"id": 48, "type": "choice", "instruction": "教えてくれた has no word for \"me\". What shows it?", "prompt": "", "options": ["The verb くれる", "The verb 教える", "The ending た", "Nothing"], "answer": 0, "note": "くれる says someone else did it for me."},
+    {"id": 49, "type": "order", "instruction": "Build the sentence", "prompt": "One day I found money on the road.", "options": ["ある日、", "道で", "お金を", "見つけた"], "note": "ある日 opens, and the zero pronoun hides I.", "en": "One day I found money on the road.", "alt": [["ある日、", "お金を", "道で", "見つけた"]]},
+    {"id": 50, "type": "choice", "instruction": "Who gave the present?", "prompt": "友だちが私にプレゼントをくれた。", "options": ["The speaker", "The friend", "The teacher", "Nobody"], "answer": 1, "note": "くれる: the giver is the one marked が, and the receiver is me.", "en": "A friend gave me a present."},
+    {"id": 55, "type": "choice", "instruction": "Fill the gap", "prompt": "私は妹にプレゼントを買って＿＿。", "options": ["くれた", "あげた", "もらった", "ほしい"], "answer": 1, "note": "I did it for my sister: あげる.", "en": "I bought my sister a present."},
+    {"id": 52, "type": "choice", "instruction": "Who is going to bed?", "prompt": "今、寝る。", "options": ["The speaker", "You", "My mother", "The dog"], "answer": 0, "note": "A plain action in the present defaults to I.", "en": "I'm going to bed now."},
+    {"id": 53, "type": "choice", "instruction": "True or false?", "prompt": "私 and あなた are true pronouns in Japanese.", "options": ["True", "False"], "answer": 1, "note": "They are roundabout ways of pointing at yourself and others.", "en": "私, あなた: I, you."},
+    {"id": 54, "type": "choice", "instruction": "Whose friend came?", "prompt": "田中さんとその友だちが来た。", "options": ["Tanaka's friend", "The speaker's friend", "A teacher's friend", "Nobody's"], "answer": 0, "note": "その means the related one: Tanaka's.", "en": "Tanaka and his friend came."}
   ]
 }

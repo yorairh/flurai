@@ -34,16 +34,27 @@
     ]}
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "Pick the \"looks\" form of 面白い", "prompt": "", "options": ["面白そう", "面白いそう", "面白くそう", "面白そうい"], "answer": 0, "note": "Drop the final い and add そう."},
-    {"id": 2, "type": "choice", "instruction": "Pick \"looks like it will fall\" for 降る", "prompt": "", "options": ["降りそう", "降るそう", "降らそう", "降ってそう"], "answer": 0, "note": "Verbs use the い-stem before そう."},
-    {"id": 3, "type": "choice", "instruction": "Pick the right form", "prompt": "＿＿女の子 (a quiet-looking girl)", "options": ["静かそうな", "静かいそうな", "静かなそうな", "静かのそうな"], "answer": 0, "note": "Drop だ/な: 静か + そう, then な before the noun."},
-    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "雨が降るそうだ。", "options": ["I hear it will rain", "It looks like rain is about to come", "It rained", "Rain is fun"], "answer": 0, "note": "Dictionary form + そうだ is hearsay."},
-    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "雨が降りそうだ。", "options": ["It looks like it is about to rain", "I hear it will rain", "It never rains", "It rained yesterday"], "answer": 0, "note": "The い-stem + そう is appearance."},
-    {"id": 6, "type": "choice", "instruction": "Which sentence is hearsay?", "prompt": "", "options": ["彼は来るそうだ", "彼は来そうだ", "おいしそうだ", "泣きそうだ"], "answer": 0, "note": "Only a plain full sentence + そうだ reports what you heard."},
-    {"id": 7, "type": "tap", "instruction": "Tap the part that says \"looks\"", "options": ["このケーキは", "おいし", "そうだ"], "answer": 2, "note": "おいし + そうだ: looks delicious."},
-    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "You can say an untasted dish is おいしい just by looking at it.", "options": ["True", "False"], "answer": 1, "note": "Without tasting, say おいしそう."},
-    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "The sky is dark and it looks like rain.", "options": ["空が", "暗くて", "雨が", "降りそうだ"], "note": "Two linked clauses; the verb stem + そう goes last."},
-    {"id": 10, "type": "choice", "instruction": "Fill the gap", "prompt": "先生は来週戻る＿＿だ。 (I hear the teacher is coming back next week.)", "options": ["そう", "そうな", "のそう", "ように"], "answer": 0, "note": "Plain sentence + そうだ."},
-    {"id": 11, "type": "choice", "instruction": "Which cannot take appearance そう?", "prompt": "", "options": ["犬 (a plain noun)", "元気", "高い", "食べる"], "answer": 0, "note": "Only adjectives, adjectival nouns and verbs can."}
+    {"id": 20, "type": "choice", "instruction": "Make \"looks like\"", "prompt": "高い", "options": ["高いそう", "高くそう", "高そう", "高さそう"], "answer": 2, "note": "い-adjective: drop い, add そう."},
+    {"id": 21, "type": "choice", "instruction": "Make \"looks like\"", "prompt": "元気", "options": ["元気そう", "元気だそう", "元気なそう", "元気にそう"], "answer": 0, "note": "Adjectival noun: drop だ / な."},
+    {"id": 22, "type": "choice", "instruction": "Make \"looks like\"", "prompt": "泣く", "options": ["泣くそう", "泣かそう", "泣いそう", "泣きそう"], "answer": 3, "note": "Verb: い-stem + そう."},
+    {"id": 23, "type": "choice", "instruction": "Fill the gap", "prompt": "この本は難し＿＿だ。", "options": ["いそう", "そう", "くそう", "なそう"], "answer": 1, "note": "Drop the い of 難しい before そう.", "en": "This book looks difficult."},
+    {"id": 24, "type": "choice", "instruction": "Fill the gap", "prompt": "このかばんはじょうぶ＿＿だ。", "options": ["なそう", "そう", "だそう", "にそう"], "answer": 1, "note": "Adjectival noun: drop だ / な, add そう.", "en": "This bag looks sturdy."},
+    {"id": 25, "type": "choice", "instruction": "Which says \"I heard that it will snow\"?", "prompt": "", "options": ["雪が降りそうだ", "雪が降そうだ", "雪が降ますそうだ", "雪が降るそうだ"], "answer": 3, "note": "Plain sentence + そうだ is hearsay."},
+    {"id": 26, "type": "choice", "instruction": "Which says \"The cup looks like it will fall\"?", "prompt": "", "options": ["コップが落ちそうだ", "コップが落ちるそうだ", "コップが落そうだ", "コップが落ちたそうだ"], "answer": 0, "note": "い-stem + そうだ: it looks about to happen."},
+    {"id": 27, "type": "choice", "instruction": "Which can NOT take the \"looks like\" そう?", "prompt": "", "options": ["静か", "おいしい", "学生 (a plain noun)", "降り (the stem of 降る)"], "answer": 2, "note": "Plain nouns cannot take appearance そう."},
+    {"id": 28, "type": "choice", "instruction": "Which says \"I heard that my friend came yesterday\"?", "prompt": "", "options": ["友達は昨日来そうだ", "友達は昨日来るそうだ", "友達は昨日来たそうだ", "友達は昨日来たそうに"], "answer": 2, "note": "Past plain form + そうだ: the sentence keeps its own tense."},
+    {"id": 29, "type": "choice", "instruction": "Fill the gap", "prompt": "あの店は人が多＿＿ですね。", "options": ["そう", "さそう", "いそう", "ようそう"], "answer": 0, "note": "多い: drop い, add そう.", "en": "That shop looks crowded, doesn't it?"},
+    {"id": 30, "type": "choice", "instruction": "Fill the gap (I heard that)", "prompt": "田中さんは病気だ＿＿。", "options": ["のそうだ", "そうなだ", "ですそうだ", "そうだ"], "answer": 3, "note": "Plain sentence + そうだ: 病気だ keeps its だ.", "en": "I hear Mr. Tanaka is ill."},
+    {"id": 31, "type": "choice", "instruction": "What does this say?", "prompt": "友達は来月結婚するそうだ。", "options": ["It looks like …", "I heard that …", "Because …", "Even if …"], "answer": 1, "note": "A whole plain sentence + そうだ: hearsay.", "en": "I hear my friend is getting married next month."},
+    {"id": 32, "type": "tap", "instruction": "Tap the word that says how it looks", "options": ["あの子は、", "とても", "元気そうだ"], "answer": 2, "note": "Stem + そう: appearance.", "en": "That child looks very healthy."},
+    {"id": 33, "type": "tap", "instruction": "Tap the part that is hearsay", "options": ["先生は", "旅行に", "行くそうだ"], "answer": 2, "note": "Plain form + そうだ: I heard.", "en": "I hear the teacher is going on a trip."},
+    {"id": 42, "type": "tap", "instruction": "Tap the word that means \"looks about to\"", "options": ["バスが", "もうすぐ", "来そうだ"], "answer": 2, "note": "い-stem + そうだ.", "en": "The bus looks like it is about to come soon."},
+    {"id": 35, "type": "order", "instruction": "Build the sentence", "prompt": "This curry looks very delicious.", "options": ["このカレーは", "とても", "おいしそうだ"], "note": "い-adjective: drop い + そうだ.", "en": "This curry looks very delicious."},
+    {"id": 36, "type": "order", "instruction": "Build the sentence", "prompt": "I hear that Mr. Tanaka is a teacher.", "options": ["田中さんは", "先生だ", "そうだ"], "note": "Plain sentence 先生だ + そうだ.", "en": "I hear that Mr. Tanaka is a teacher."},
+    {"id": 37, "type": "order", "instruction": "Build the sentence", "prompt": "A kind-looking man came.", "options": ["やさしそうな", "男の人が", "来た"], "note": "そうな before a noun.", "en": "A kind-looking man came."},
+    {"id": 38, "type": "choice", "instruction": "True or false?", "prompt": "The \"looks like\" ending can follow a plain noun such as \"student\".", "options": ["True", "False"], "answer": 1, "note": "Plain nouns need another word, such as らしい or ようだ."},
+    {"id": 39, "type": "choice", "instruction": "True or false?", "prompt": "The two kinds of そう in this lesson mean the same thing.", "options": ["True", "False"], "answer": 1, "note": "One is how it looks, the other is I heard."},
+    {"id": 40, "type": "choice", "instruction": "Make \"looks like\"", "prompt": "寝る", "options": ["寝るそう", "寝そう", "寝りそう", "寝いそう"], "answer": 1, "note": "Ichidan verb: drop る, add そう."},
+    {"id": 41, "type": "choice", "instruction": "Which says \"The weather looks bad\"?", "prompt": "", "options": ["天気が悪いそうだ", "天気が悪くそうだ", "天気が悪いそう", "天気が悪そうだ"], "answer": 3, "note": "い-adjective: drop い, add そうだ."}
   ]
 }

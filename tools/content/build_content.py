@@ -774,8 +774,8 @@ def write_database(
         course.lesson_rows(course_entries),
     )
     db.executemany(
-        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en, alt)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         course.question_rows(course_entries),
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))

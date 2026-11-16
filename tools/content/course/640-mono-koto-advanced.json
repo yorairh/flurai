@@ -85,168 +85,27 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "日本に行った＿＿がある。 (I have been to Japan.)",
-      "options": [
-        "こと",
-        "もの",
-        "ところ",
-        "ため"
-      ],
-      "answer": 0,
-      "note": "The fact of having gone exists: ことがある.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "日本に行くことがある。",
-      "options": [
-        "I sometimes go to Japan",
-        "I have been to Japan",
-        "I will never go to Japan",
-        "I want to go to Japan"
-      ],
-      "answer": 0,
-      "note": "Present tense: it sometimes happens.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "日本に行ったことがある。",
-      "options": [
-        "I have been to Japan",
-        "I sometimes go to Japan",
-        "I am going to Japan",
-        "I used to want to go to Japan"
-      ],
-      "answer": 0,
-      "note": "Past tense: the fact of having gone exists.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Why does 愛は素晴らしいものだ use もの?",
-      "prompt": "",
-      "options": [
-        "Love is a noun, a thing, even though abstract",
-        "Love can be held in your hand",
-        "The sentence is in the past",
-        "こと is rude here"
-      ],
-      "answer": 0,
-      "note": "もの simply means a thing, and love is a noun.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "冬は寒いものだ。",
-      "options": [
-        "Winter is cold; that is just how it is",
-        "Winter was cold once",
-        "Winter is a cold object",
-        "I want winter to be cold"
-      ],
-      "answer": 0,
-      "note": "Present ものだ states a generalization you must accept.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "子供のころ、よくここに来たものだ。",
-      "options": [
-        "I used to come here often as a child",
-        "I came here once",
-        "I will come here often",
-        "I have never come here"
-      ],
-      "answer": 0,
-      "note": "Past ものだ is a feeling-laden memory.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "もの can only refer to objects you can hold in your hand.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "もの is any noun-thing, including abstract ones like love.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence carries the warm, remembering feeling of \"I used to\"?",
-      "prompt": "",
-      "options": [
-        "よくここに来たものだ",
-        "ここに来たことがある",
-        "ここに来ている",
-        "ここに来ない"
-      ],
-      "answer": 0,
-      "note": "Past ものだ.",
-      "id": 8
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I have been to Japan.",
-      "options": [
-        "日本に",
-        "行った",
-        "ことが",
-        "ある"
-      ],
-      "note": "Past verb + ことがある.",
-      "id": 9
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the part that means \"the fact exists\"",
-      "options": [
-        "外国に",
-        "住んだ",
-        "ことがある"
-      ],
-      "answer": 2,
-      "note": "ことがある.",
-      "id": 10
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 宿題は必ず出すこと。 mean on a classroom wall?",
-      "prompt": "",
-      "options": [
-        "Hand in your homework without fail",
-        "You may hand in homework",
-        "Homework was handed in",
-        "I wonder about homework"
-      ],
-      "answer": 0,
-      "note": "こと at the end of a rule is an instruction.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "誰でも失敗する＿＿がある。 (Everyone fails sometimes.)",
-      "options": [
-        "こと",
-        "もの",
-        "ほう",
-        "はず"
-      ],
-      "answer": 0,
-      "note": "することがある: sometimes happens.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "Which sentence says \"I have (once) eaten sushi\"?", "prompt": "", "options": ["すしを食べることがある。", "すしを食べたことがある。", "すしを食べるものだ。", "すしを食べたものがある。"], "answer": 1, "note": "Past verb + ことがある = the fact of having done it exists."},
+    {"id": 102, "type": "choice", "instruction": "What does this sentence say?", "prompt": "朝ごはんを食べないことがある。", "options": ["Eating breakfast is a rule", "(I) have never eaten breakfast", "There are times when (I) don't eat breakfast", "(I) used to skip breakfast"], "answer": 2, "en": "There are times when (I) don't eat breakfast.", "note": "Present tense + ことがある = it sometimes happens."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "一度もパンダを見た＿＿がない。", "options": ["もの", "ところ", "こと", "よう"], "answer": 2, "en": "I have never seen a panda.", "note": "たことがない: the fact of having done it does not exist."},
+    {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "年を取ると、体が弱くなる＿＿だ。", "options": ["こと", "もの", "とき", "ところ"], "answer": 1, "en": "As you get older, the body gets weaker; that's just how it is.", "note": "Present ものだ states how things are."},
+    {"id": 105, "type": "choice", "instruction": "Fill the gap", "prompt": "学生のころ、毎日この道を歩いた＿＿だ。", "options": ["こと", "ばかり", "もの", "うち"], "answer": 2, "en": "When I was a student, I used to walk this road every day.", "note": "Past たものだ is a personal memory: I used to."},
+    {"id": 106, "type": "choice", "instruction": "Fill the gap", "prompt": "ここでは大きい声を出さない＿＿。", "options": ["もの", "こと", "ところ", "とき"], "answer": 1, "en": "Do not raise your voice here.", "note": "こと at the end of a written rule is a firm instruction."},
+    {"id": 107, "type": "choice", "instruction": "Which sentence is a general \"that's how it is\"?", "prompt": "", "options": ["子供は元気なものだ。", "子供のころ、よく泣いたものだ。", "宿題は出すこと。", "日本へ行ったことがある。"], "answer": 0, "note": "Present ものだ states reality; past たものだ is a memory."},
+    {"id": 108, "type": "choice", "instruction": "What does 〜たものだ express?", "prompt": "", "options": ["A rule", "A question", "A command", "A personal memory: \"I used to...\""], "answer": 3, "note": "In the past, ものだ turns into a memory with feeling."},
+    {"id": 109, "type": "choice", "instruction": "What does もの really mean?", "prompt": "", "options": ["Only concrete objects", "A state of affairs", "A thing, a noun (concrete or abstract)", "A particle"], "answer": 2, "note": "もの can be an apple or love."},
+    {"id": 110, "type": "choice", "instruction": "What does こと mean?", "prompt": "", "options": ["A fact or state of affairs", "Only abstract ideas", "A counter", "A verb"], "answer": 0, "note": "こと is something that happens or exists."},
+    {"id": 111, "type": "choice", "instruction": "True or false? A past verb + ことがある means \"have done\".", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "The fact of having done it exists."},
+    {"id": 112, "type": "tap", "instruction": "Tap the word whose tense makes this an experience", "options": ["外国に", "住んだ", "ことが", "ある"], "answer": 1, "en": "I have lived abroad.", "note": "The past 住んだ before ことがある gives \"have done\"."},
+    {"id": 113, "type": "tap", "instruction": "Tap the word that turns the sentence into an order", "options": ["ここに", "名前を", "書く", "こと"], "answer": 3, "en": "Write your name here.", "note": "こと at the end of a rule is a firm instruction."},
+    {"id": 114, "type": "order", "instruction": "Build the sentence", "prompt": "I sometimes forget my keys.", "options": ["かぎを", "忘れる", "ことが", "ある"], "en": "I sometimes forget my keys.", "note": "Present verb + ことがある = it sometimes happens."},
+    {"id": 115, "type": "order", "instruction": "Build the sentence", "prompt": "I have never eaten fish.", "options": ["魚を", "食べた", "ことが", "ない"], "en": "I have never eaten fish.", "note": "Past verb + ことがない = never."},
+    {"id": 116, "type": "order", "instruction": "Build the sentence", "prompt": "Children love to play; that's just how it is.", "options": ["子供は", "遊ぶのが", "好きな", "ものだ"], "en": "Children love to play; that's just how it is.", "note": "Present ものだ states a reality to accept."},
+    {"id": 117, "type": "order", "instruction": "Build the sentence", "prompt": "When I was little, I used to swim every day.", "options": ["小さいころ、", "毎日", "泳いだ", "ものだ"], "en": "When I was little, I used to swim every day.", "note": "Past たものだ is a nostalgic \"used to\"."},
+    {"id": 118, "type": "choice", "instruction": "True or false? もの can only be a physical object.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "もの is a noun: it can be an apple or love."},
+    {"id": 119, "type": "choice", "instruction": "Which sentence is a written rule on a notice?", "prompt": "", "options": ["廊下を走ったことがある。", "廊下を走ることがある。", "廊下を走るものだ。", "廊下を走らないこと。"], "answer": 3, "note": "こと at the end is a firm instruction."},
+    {"id": 120, "type": "choice", "instruction": "Why can ことがある mean both \"have done\" and \"sometimes does\"?", "prompt": "", "options": ["The tense of the verb before it changes the meaning", "It depends on the particle", "It is always past", "こと changes its meaning"], "answer": 0, "note": "Past gives experience; present gives something that sometimes happens."},
+    {"id": 121, "type": "choice", "instruction": "Fill the gap", "prompt": "ここで写真をとった＿＿がありますか。", "options": ["こと", "もの", "とき", "うち"], "answer": 0, "en": "Have you ever taken a photo here?", "note": "たことがある asks about experience."},
+    {"id": 122, "type": "choice", "instruction": "Which form of the verb before ことがある means \"sometimes happens\"?", "prompt": "", "options": ["Past", "Present", "Te-form", "Negative only"], "answer": 1, "note": "Present gives something that sometimes happens."}
   ]
 }

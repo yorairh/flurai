@@ -115,34 +115,6 @@
    "note": "It denies \"always\"."
   },
   {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "知っている＿＿、彼は来ない。 (As far as I know, he isn't coming.)",
-   "options": [
-    "限り",
-    "限る",
-    "限って",
-    "限れ"
-   ],
-   "answer": 0,
-   "note": "限り is the noun, modified by 知っている."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "忙しい日＿＿客が多い。 (It's just on busy days that there are many customers.)",
-   "options": [
-    "に限って",
-    "に限る",
-    "とは限らない",
-    "の限り"
-   ],
-   "answer": 0,
-   "note": "に限って picks out the exact occasion."
-  },
-  {
    "id": 5,
    "type": "choice",
    "instruction": "What does 参加は大人に限る mean?",
@@ -206,30 +178,8 @@
     "False"
    ],
    "answer": 1,
-   "note": "It is a denial of always."
-  },
-  {
-   "id": 10,
-   "type": "tap",
-   "instruction": "Tap the phrase meaning \"not necessarily\"",
-   "options": [
-    "そうだ",
-    "とは限らない"
-   ],
-   "answer": 1,
-   "note": "とは限らない after a statement."
-  },
-  {
-   "id": 11,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Nothing beats curry for lunch.",
-   "options": [
-    "昼ご飯は",
-    "カレーに",
-    "限る"
-   ],
-   "note": "Noun に限る."
+   "note": "It is a denial of always.",
+   "en": "Not necessarily."
   },
   {
    "id": 12,
@@ -244,6 +194,188 @@
    ],
    "answer": 0,
    "note": "Limited to the moment."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "あの人＿＿、そんな悪いことはしない。",
+   "options": [
+    "に限る",
+    "に限って",
+    "とは限らない",
+    "の限り"
+   ],
+   "answer": 1,
+   "note": "に限って means \"of all people\".",
+   "en": "That person, of all people, would never do such a bad thing."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "寒い日は、温かいラーメン＿＿。",
+   "options": [
+    "とは限らない",
+    "の限り",
+    "に限る",
+    "に限って"
+   ],
+   "answer": 2,
+   "note": "Noun に限る ends the sentence: nothing beats it.",
+   "en": "On a cold day, nothing beats hot ramen."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "お金持ちが親切＿＿。",
+   "options": [
+    "に限る",
+    "だとは限らない",
+    "だと限る",
+    "の限り"
+   ],
+   "answer": 1,
+   "note": "だとは限らない denies that something is always true.",
+   "en": "Rich people are not necessarily kind."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "私が知っている＿＿、この町に図書館はない。",
+   "options": [
+    "限る",
+    "限って",
+    "限り",
+    "限れば"
+   ],
+   "answer": 2,
+   "note": "Modifier + 限り means as far as.",
+   "en": "As far as I know, there is no library in this town."
+  },
+  {
+   "id": 17,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "出かける時＿＿、雨が降る。",
+   "options": [
+    "に限る",
+    "とは限らない",
+    "の限り",
+    "に限って"
+   ],
+   "answer": 3,
+   "note": "に限って picks out just those times.",
+   "en": "It's just when I go out that it rains."
+  },
+  {
+   "id": 18,
+   "type": "tap",
+   "instruction": "Tap the phrase that means \"not necessarily\"",
+   "options": [
+    "大きい犬が",
+    "強い",
+    "とは限らない"
+   ],
+   "answer": 2,
+   "note": "とは限らない denies it is always the case.",
+   "en": "Big dogs are not necessarily strong."
+  },
+  {
+   "id": 19,
+   "type": "tap",
+   "instruction": "Tap the word that says X is the best",
+   "options": [
+    "夏は",
+    "スイカに",
+    "限る"
+   ],
+   "answer": 2,
+   "note": "Noun に限る means nothing beats it.",
+   "en": "In summer, nothing beats watermelon."
+  },
+  {
+   "id": 20,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I'll help as far as I can.",
+   "options": [
+    "できる",
+    "限り",
+    "手伝います"
+   ],
+   "note": "Modifier + 限り: as far as I can.",
+   "en": "I'll help as far as I can."
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Nothing beats a hot bath in winter.",
+   "options": [
+    "冬は",
+    "熱いお風呂に",
+    "限る"
+   ],
+   "note": "Noun に限る ends the sentence.",
+   "en": "Nothing beats a hot bath in winter."
+  },
+  {
+   "id": 22,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Cheap things are not necessarily bad.",
+   "options": [
+    "安い物が",
+    "悪いとは",
+    "限らない"
+   ],
+   "note": "とは限らない: not necessarily.",
+   "en": "Cheap things are not necessarily bad."
+  },
+  {
+   "id": 23,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "彼女に限って約束を忘れない means that she, of all people, would not forget a promise.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "に限って picks out one person.",
+   "en": "She, of all people, would not forget a promise."
+  },
+  {
+   "id": 24,
+   "type": "choice",
+   "instruction": "What does this sentence mean?",
+   "prompt": "このクラスは学生に限る。",
+   "options": [
+    "Only students can join",
+    "Students are tired",
+    "Students are the best teachers",
+    "No students can join"
+   ],
+   "answer": 0,
+   "note": "Noun に限る can also mean limited to.",
+   "en": "This class is limited to students."
+  },
+  {
+   "id": 25,
+   "type": "choice",
+   "instruction": "Which sentence says \"That's not necessarily true\"?",
+   "prompt": "",
+   "options": [
+    "そうに限る。",
+    "そうと限る。",
+    "そうの限り。",
+    "そうとは限らない。"
+   ],
+   "answer": 3,
+   "note": "とは限らない is the not-necessarily pattern."
   }
  ]
 }

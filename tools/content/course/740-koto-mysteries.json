@@ -72,167 +72,25 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What nuance does あなたのことが好きだ carry?",
-      "prompt": "",
-      "options": [
-        "I like things about you",
-        "I like your house",
-        "I used to like you",
-        "I want to meet you"
-      ],
-      "answer": 0,
-      "note": "のこと points to what you know of a person.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "田中さんのことを考えている。",
-      "options": [
-        "I'm thinking about Tanaka and his situation",
-        "I'm thinking Tanaka is a thing",
-        "Tanaka is thinking about me",
-        "I'm thinking about doing it"
-      ],
-      "answer": 0,
-      "note": "Xのこと: the matter concerning X.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "What does どういうことですか mean?",
-      "prompt": "",
-      "options": [
-        "What do you mean?",
-        "Where is it?",
-        "When is it?",
-        "Who are you?"
-      ],
-      "answer": 0,
-      "note": "A request for an explanation.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "What does そういうことか express?",
-      "prompt": "",
-      "options": [
-        "I see, so that's how it is",
-        "I refuse",
-        "I'm not sure",
-        "See you later"
-      ],
-      "answer": 0,
-      "note": "A realization.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "友達の＿＿が心配だ。 (I worry about my friend.)",
-      "options": [
-        "こと",
-        "もの",
-        "ほか",
-        "うち"
-      ],
-      "answer": 0,
-      "note": "友達のこと: the matter concerning the friend.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "言う and こと are closely related: a こと is a matter that needs words.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "They even share a kanji reading in kun-yomi.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "先生のことが怖い。",
-      "options": [
-        "I'm afraid of the teacher",
-        "I'm afraid for the teacher",
-        "The teacher is afraid",
-        "The teacher is a thing"
-      ],
-      "answer": 0,
-      "note": "のことが marks what the feeling is about.",
-      "id": 7
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "What do you mean?",
-      "options": [
-        "どういう",
-        "こと",
-        "ですか"
-      ],
-      "note": "どういうこと + polite ending.",
-      "id": 8
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the word that stands for \"things about me\"",
-      "options": [
-        "私の",
-        "ことが",
-        "嫌いらしい"
-      ],
-      "answer": 1,
-      "note": "こと covers the things about me.",
-      "id": 9
-    },
-    {
-      "type": "choice",
-      "instruction": "Why is こと called \"agile\"?",
-      "prompt": "",
-      "options": [
-        "A few syllables can say a lot",
-        "It is only used in sports",
-        "It changes shape",
-        "It is always rude"
-      ],
-      "answer": 0,
-      "note": "One short word covers many ideas.",
-      "id": 10
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 彼のことを忘れた mean?",
-      "prompt": "",
-      "options": [
-        "I forgot about him",
-        "I forgot him physically",
-        "He forgot me",
-        "I forgot to go"
-      ],
-      "answer": 0,
-      "note": "Xのこと again.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ということ mean in 彼が来ないということは、忙しい...?",
-      "prompt": "",
-      "options": [
-        "The fact that",
-        "The place where",
-        "The person who",
-        "The time when"
-      ],
-      "answer": 0,
-      "note": "という + こと quotes a fact.",
-      "id": 12
-    }
+    {"id": 53, "type": "choice", "instruction": "Fill the gap", "prompt": "私は妹＿＿ことが心配だ。", "options": ["が", "の", "を", "に"], "answer": 1, "note": "Xのこと: the matter of X, things about X.", "en": "I worry about my younger sister."},
+    {"id": 54, "type": "choice", "instruction": "Which sentence is a gentle way to say \"I like Mr. Yamada\"?", "prompt": "", "options": ["山田さんことの好きだ", "山田さんのことが好きです", "山田さんが好きこと", "山田さんのこと好きに"], "answer": 1, "note": "Xのことが好き: you like the things you know about X."},
+    {"id": 55, "type": "choice", "instruction": "What does Xのことが好き focus on?", "prompt": "", "options": ["X's body", "The things you notice about X, like how X laughs", "X's clothes", "X's money"], "answer": 1, "note": "It suggests liking grown through knowing someone, not a physical feel."},
+    {"id": 56, "type": "choice", "instruction": "Which expression asks for an explanation?", "prompt": "", "options": ["そういうこと。", "ということ。", "どういうこと？", "こと。"], "answer": 2, "note": "どういうこと means \"what do you mean?\""},
+    {"id": 57, "type": "choice", "instruction": "Fill the gap", "prompt": "明日は休みだ＿＿ことです。", "options": ["から", "まで", "という", "ので"], "answer": 2, "note": "〜ということ: it means that, the fact that.", "en": "It means tomorrow is a day off."},
+    {"id": 58, "type": "tap", "instruction": "Tap the word that means \"matter, things about\"", "prompt": "", "options": ["彼女は", "私の", "こと", "を", "知らない"], "answer": 2, "note": "のこと links a person to the matters about them.", "en": "She doesn't know about me."},
+    {"id": 59, "type": "order", "instruction": "Build the sentence", "prompt": "Please tell me about your friend.", "options": ["友だちの", "ことを", "教えて", "ください"], "note": "友だちのこと: the matter of your friend.", "en": "Please tell me about your friend."},
+    {"id": 60, "type": "choice", "instruction": "Who is being thought about?", "prompt": "弟のことを考えている。", "options": ["The younger brother", "The speaker", "A friend", "Nobody"], "answer": 0, "note": "Xのことを考える: to think about X and his situation.", "en": "I'm thinking about my younger brother."},
+    {"id": 61, "type": "choice", "instruction": "True or false?", "prompt": "そういうこと is what you say when you understand \"so that's how it is\".", "options": ["True", "False"], "answer": 0, "note": "That's how it is: a matter that has just been explained.", "en": "そういうこと: that's how it is."},
+    {"id": 62, "type": "choice", "instruction": "Which sentence is NOT natural?", "prompt": "", "options": ["私のことが好きだ", "先生のことを考える", "友だちことのが好き", "母のことが心配だ"], "answer": 2, "note": "The order must be Xのこと; こと cannot come before の."},
+    {"id": 63, "type": "choice", "instruction": "Fill the gap", "prompt": "毎日あなた＿＿ことを考えています。", "options": ["が", "は", "の", "も"], "answer": 2, "note": "の links あなた and こと: the matter of you.", "en": "I think about you every day."},
+    {"id": 64, "type": "choice", "instruction": "What does ということは express?", "prompt": "ケーキが売れたということは、人気があるのだろう。", "options": ["A command", "Drawing a conclusion from a fact", "A question", "Dislike"], "answer": 1, "note": "ということは takes a fact and draws a conclusion from it.", "en": "The fact that the cake sold well probably means it is popular."},
+    {"id": 65, "type": "order", "instruction": "Build the sentence", "prompt": "What does that story mean?", "options": ["今の", "話は", "どういう", "ことなの"], "note": "どういうこと asks what matter is behind the words.", "en": "What does that story mean?"},
+    {"id": 66, "type": "choice", "instruction": "True or false?", "prompt": "父のことが心配だ means I worry about my father's situation.", "options": ["True", "False"], "answer": 0, "note": "のこと covers the person's circumstances, not only the person.", "en": "I worry about my father."},
+    {"id": 67, "type": "tap", "instruction": "Tap the word for the person who is liked", "prompt": "", "options": ["先生", "のこと", "が", "好きな", "人が", "多い"], "answer": 0, "note": "Xのこと: X is the one the feeling is about.", "en": "Many people like the teacher."},
+    {"id": 68, "type": "choice", "instruction": "Who knows whom?", "prompt": "田中さんは私のことを知っている。", "options": ["Tanaka knows the speaker", "The speaker knows Tanaka", "Both know each other", "Nobody knows anyone"], "answer": 0, "note": "のこと marks the matter known: me. Tanaka is the one who knows.", "en": "Tanaka knows about me."},
+    {"id": 69, "type": "order", "instruction": "Build the sentence", "prompt": "It means the shop is closed today.", "options": ["今日は", "店が", "休みだ", "ということです"], "note": "という turns a whole sentence into 'the fact that'.", "en": "It means the shop is closed today.", "alt": [["店が", "今日は", "休みだ", "ということです"]]},
+    {"id": 70, "type": "choice", "instruction": "Which noun fits? こと means roughly...", "prompt": "", "options": ["A thing that happens, a matter", "A person", "A place", "A color"], "answer": 0, "note": "こと is a word for a matter or event."},
+    {"id": 71, "type": "tap", "instruction": "Tap the word that means \"that kind of\" (そういう)", "prompt": "", "options": ["なるほど", "そういう", "ことだ", "ね"], "answer": 1, "note": "そう + いう + こと: that is what it is.", "en": "I see, so that's how it is."},
+    {"id": 72, "type": "choice", "instruction": "Which sentence means \"I am worried about her\"?", "prompt": "", "options": ["彼女のことが心配だ", "彼女が心配のこと", "彼女のが心配こと", "彼女ことの心配だ"], "answer": 0, "note": "Xのことが心配: worried about X and her situation."}
   ]
 }
