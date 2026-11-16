@@ -1,0 +1,45 @@
+{
+  "id": 220,
+  "number": "22",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "ては and ても",
+  "summary": "ても means \"even if\" and joins two clauses without taking sides; ては points at an unwelcome result and shrinks to ちゃ in casual speech.",
+  "video": "https://www.youtube.com/watch?v=qV-TZbsH1kI",
+  "related": [416, 519, 520],
+  "blocks": [
+    {"type": "text", "text": "Both endings sit after the **て-form** and add a particle. Notice which particle: **も** is the \"also / even\" particle, and **は** is the topic particle that draws a line around something. Their personalities come straight from that."},
+    {"type": "heading", "text": "ても: even if, even though"},
+    {"type": "text", "text": "も says \"even as far as that\". 雨が降っても means \"even going as far as rain\". The result that follows is simply not stopped by it, and it can be good or bad. This is the same も that appears in でも, where で is the て-form of だ."},
+    {"type": "example", "jp": "雨が降っても公園に行く。", "en": "Even if it rains, I will go to the park."},
+    {"type": "example", "jp": "寒くても散歩に行く。", "en": "Even though it is cold, I go for a walk."},
+    {"type": "heading", "text": "Asking permission"},
+    {"type": "text", "text": "Turn ても into a question and you have permission: \"even if I did that, would it be fine?\""},
+    {"type": "example", "jp": "ここに座ってもいいですか。", "en": "May I sit here?"},
+    {"type": "heading", "text": "ては: that would be a problem"},
+    {"type": "text", "text": "は narrows things down: **\"as soon as you do just this\"**. The result tends to be **unwelcome**: a ban, a complaint, a trouble. Because it is so often used to forbid, casual speech squeezes ては into **ちゃ** (and では into **じゃ**)."},
+    {"type": "example", "jp": "雨が降っては遠足に行けない。", "en": "If it rains, we cannot go on the trip (and that is a nuisance)."},
+    {"type": "example", "jp": "ここで泣いては恥ずかしい。", "en": "It would be embarrassing to cry here."},
+    {"type": "example", "jp": "ここで寝ちゃだめだよ。", "en": "You mustn't sleep here."},
+    {"type": "keypoints", "items": [
+      "**て-form + も**: even if / even though, any kind of result.",
+      "**て-form + もいい**: permission.",
+      "**て-form + は**: when that happens, trouble; often forbids.",
+      "**ては → ちゃ**, **では → じゃ** in casual speech."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Fill the gap", "prompt": "雨が降＿＿、公園に行く。 (Even if it rains, I will go.)", "options": ["っても", "っては", "っに", "っで"], "answer": 0, "note": "Even if: て-form + も."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "先生、帰ってもいいですか。", "options": ["May I go home?", "Must I go home?", "Please do not go home.", "I went home."], "answer": 0, "note": "て-form + もいい asks for permission."},
+    {"id": 3, "type": "choice", "instruction": "What does this mean?", "prompt": "ここで笑っちゃだめだよ。", "options": ["You mustn't laugh here.", "You may laugh here.", "I laughed here.", "Laugh more."], "answer": 0, "note": "ちゃ is the casual form of ては, and it forbids."},
+    {"id": 4, "type": "choice", "instruction": "Which is the casual contraction of 食べては?", "prompt": "", "options": ["食べちゃ", "食べじゃ", "食べっても", "食べても"], "answer": 0, "note": "ては → ちゃ after a verb like 食べる."},
+    {"id": 5, "type": "choice", "instruction": "True or false?", "prompt": "ては usually points to an unwelcome result.", "options": ["True", "False"], "answer": 0, "note": "は draws the line: just doing that is already a problem."},
+    {"id": 6, "type": "choice", "instruction": "What mood does ては give this sentence?", "prompt": "雨が降っては遠足に行けない。", "options": ["The rain is an unwelcome obstacle", "The rain is a welcome gift", "Nothing; the sentence is neutral good news", "It is a question about rain"], "answer": 0, "note": "ては: that situation causes trouble."},
+    {"id": 7, "type": "choice", "instruction": "What does this mean?", "prompt": "寒くても、散歩に行く。", "options": ["Even though it is cold, I go for a walk", "Because it is cold, I stay home", "If it is cold, I will not walk", "It is cold, so I took a walk"], "answer": 0, "note": "ても: the result is not stopped by the cold."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "Even if it rains, I will go to the park.", "options": ["雨が", "降っても", "公園に", "行く"], "note": "Condition first, then the main verb."},
+    {"id": 9, "type": "tap", "instruction": "Tap the word that sets up an unwelcome \"if I did that\"", "options": ["ここで", "泣いては", "恥ずかしい"], "answer": 1, "note": "泣いては: ては points at the trouble to come."},
+    {"id": 10, "type": "choice", "instruction": "In 空っぽのびんでも, what is で?", "prompt": "", "options": ["The て-form of だ", "The place particle", "The means particle", "A verb"], "answer": 0, "note": "でも = で (て-form of だ) + も: even though it is an empty jar."},
+    {"id": 11, "type": "choice", "instruction": "Fill the gap", "prompt": "ここに座っ＿＿いいですか。 (May I sit here?)", "options": ["ても", "ては", "と", "を"], "answer": 0, "note": "Permission is て-form + もいい."},
+    {"id": 12, "type": "choice", "instruction": "True or false?", "prompt": "ても can only be used when the result is bad.", "options": ["True", "False"], "answer": 1, "note": "ても joins any contrast; it takes no side."}
+  ]
+}

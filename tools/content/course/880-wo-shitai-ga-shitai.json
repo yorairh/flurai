@@ -1,0 +1,258 @@
+{
+ "id": 880,
+ "number": "88",
+ "kind": "lesson",
+ "jlpt": 4,
+ "title": "Xをしたい vs Xがしたい",
+ "summary": "Both are fine: が says that X is making you want it; を says that you want to do the action.",
+ "video": "https://www.youtube.com/watch?v=Gi3BmIRZZPs",
+ "related": [
+  514,
+  576
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "The adjective of desire たい points at something. In **パンが食べたい**, it points at the bread: \"the bread is want-inducing (to me)\". But you also hear **パンを食べたい**. Are the particles changing their meaning? No. They always mean the same thing; only the point of view changes."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Sentence",
+     "The adjective points at",
+     "Feel"
+    ],
+    [
+     "パンが食べたい",
+     "the bread (A-car)",
+     "the bread is tempting me, right now"
+    ],
+    [
+     "パンを食べたい",
+     "me (zero A-car)",
+     "I want to do the action \"eat bread\""
+    ]
+   ]
+  },
+  {
+   "type": "diagram",
+   "cars": [
+    {
+     "text": "パンが",
+     "role": "carriage"
+    },
+    {
+     "text": "食べたい",
+     "role": "engine"
+    }
+   ],
+   "text": "パンが食べたい。 The bread makes me want to eat it."
+  },
+  {
+   "type": "diagram",
+   "cars": [
+    {
+     "text": "(私が)",
+     "role": "zero"
+    },
+    {
+     "text": "パンを",
+     "role": "white"
+    },
+    {
+     "text": "食べ",
+     "role": "plain"
+    },
+    {
+     "text": "たい",
+     "role": "engine"
+    }
+   ],
+   "text": "(私が)パンを食べたい。 I want to eat bread."
+  },
+  {
+   "type": "text",
+   "text": "How can an adjective have an object? Because たい is attached to the whole unit パンを食べ, not to the verb 食べ alone. We can glue verbs and objects into one block and add たい to it."
+  },
+  {
+   "type": "heading",
+   "text": "When を is the natural choice"
+  },
+  {
+   "type": "text",
+   "text": "With abstract things or people, we do not feel the thing is \"pulling\" us. It is our own decision: 国を守りたい, 友達を助けたい, 平和を守りたい. It is also more respectful for people: 友達を助けたい, not 友達が助けたい, because the friend is not a tempting object."
+  },
+  {
+   "type": "example",
+   "jp": "友達を助けたい。",
+   "en": "I want to help my friend."
+  },
+  {
+   "type": "example",
+   "jp": "冷たい水が飲みたい。",
+   "en": "I feel like having cold water. (the water tempts me)"
+  },
+  {
+   "type": "example",
+   "jp": "お腹がすいたから、早く食べたい。",
+   "en": "I'm hungry, so I want to eat soon. (the adjective points back at me)"
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "が + たい: the thing is the cause of the wish.",
+    "を + たい: I want to do that action; common with people and abstract things.",
+    "The particles never change meaning; the point of view does."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "In パンが食べたい, what does たい point at?",
+   "prompt": "",
+   "options": [
+    "The bread",
+    "The speaker only",
+    "The verb 食べる",
+    "Nobody"
+   ],
+   "answer": 0,
+   "note": "The bread is the A-car."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap for a general wish to defend the country",
+   "prompt": "国＿＿守りたい。",
+   "options": [
+    "を",
+    "が",
+    "に",
+    "で"
+   ],
+   "answer": 0,
+   "note": "For abstract things, we want to do the action."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Which sentence sounds more respectful toward a person?",
+   "prompt": "",
+   "options": [
+    "さくらを助けたい。",
+    "さくらが助けたい。",
+    "さくらに助けたい。",
+    "さくらは助けたい。"
+   ],
+   "answer": 0,
+   "note": "A person is not an object that tempts us."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Which is more natural when you suddenly smell fresh bread?",
+   "prompt": "",
+   "options": [
+    "パンが食べたい。",
+    "国を守りたい。",
+    "平和を守りたい。",
+    "正義を助けたい。"
+   ],
+   "answer": 0,
+   "note": "An impulse caused by a visible thing."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What is the hidden A-car in パンを食べたい?",
+   "prompt": "",
+   "options": [
+    "私 (zero)",
+    "パン",
+    "食べ",
+    "たい"
+   ],
+   "answer": 0,
+   "note": "I want to eat bread."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "Why can たい take を?",
+   "prompt": "",
+   "options": [
+    "It attaches to the whole unit パンを食べ",
+    "Adjectives always take を",
+    "を became が",
+    "It is a mistake"
+   ],
+   "answer": 0,
+   "note": "The verb and object become one block."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "The particles change meaning between パンが食べたい and パンを食べたい.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "They mean the same; the viewpoint differs."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "お腹がすいた、早く食べたい has たい pointing at me.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "There is no tempting thing, so it points back at the speaker."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the object of the wish",
+   "options": [
+    "友達を",
+    "助け",
+    "たい"
+   ],
+   "answer": 0,
+   "note": "友達を is the direct object."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I want to protect the town.",
+   "options": [
+    "町を",
+    "守り",
+    "たい"
+   ],
+   "note": "を + stem + たい."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which pair is a correct explanation?",
+   "prompt": "",
+   "options": [
+    "が = the thing causes the wish; を = I want the action",
+    "が = past; を = future",
+    "が = polite; を = casual",
+    "が and を are always interchangeable by accent"
+   ],
+   "answer": 0,
+   "note": "Same particles, different viewpoint."
+  }
+ ]
+}

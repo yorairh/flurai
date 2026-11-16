@@ -1,0 +1,243 @@
+{
+ "id": 970,
+ "number": "97",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "うち: inside the boundary",
+ "summary": "うち is an enclosure defined by its contents: home, our group, a span of time, and a pool to choose from.",
+ "video": "https://www.youtube.com/watch?v=56sy0qfY0Js",
+ "related": [
+  476
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**うち** is an enclosure, defined by what is inside it. Every meaning comes from that."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Meaning",
+     "Example"
+    ],
+    [
+     "home (family life, not just the building)",
+     "うちに来て"
+    ],
+    [
+     "our group, me",
+     "うちの母"
+    ],
+    [
+     "the in-group (内) vs. outsiders (外)",
+     "うちとそと"
+    ],
+    [
+     "a group to choose from",
+     "三つのうちから選ぶ"
+    ],
+    [
+     "a span of time",
+     "若いうちに"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "Home and our group"
+  },
+  {
+   "type": "text",
+   "text": "いえ is the building; **うち** is the family life inside it. Japanese often says うちの to mean \"our\": うちの母, even with no big difference between self and group. This is the **うち / そと** (in-group / out-group) split that shapes language, including くれる (giving *down to* our group)."
+  },
+  {
+   "type": "example",
+   "jp": "うちの犬はよく吠える。",
+   "en": "Our dog barks a lot."
+  },
+  {
+   "type": "heading",
+   "text": "Enclosures of time"
+  },
+  {
+   "type": "text",
+   "text": "A noun or clause + うちに means \"while it lasts\": the time is an enclosure defined by its contents."
+  },
+  {
+   "type": "example",
+   "jp": "温かいうちにどうぞ。",
+   "en": "Please enjoy it while it's warm."
+  },
+  {
+   "type": "example",
+   "jp": "今のうちに勉強しよう。",
+   "en": "Let's study while we still can."
+  },
+  {
+   "type": "example",
+   "jp": "そのうち会えるよ。",
+   "en": "We'll meet sooner or later."
+  },
+  {
+   "type": "text",
+   "text": "今のうち means \"while the present situation lasts\". そのうち is \"in that enclosure\", something vaguely coming in the near future."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "うち = an enclosure defined by its contents.",
+    "**うちに** = while a condition lasts.",
+    "**今のうち** = while we still can; **そのうち** = sooner or later."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which word means the family life inside a house?",
+   "prompt": "",
+   "options": [
+    "うち",
+    "いえ",
+    "やね",
+    "へや"
+   ],
+   "answer": 0,
+   "note": "うち is the interior; いえ is the building."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "What does うちの母 emphasize?",
+   "prompt": "",
+   "options": [
+    "Our mother (my in-group)",
+    "The building",
+    "A different mother",
+    "Other people's mother"
+   ],
+   "answer": 0,
+   "note": "Group identity."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "若い＿＿に旅行したい。 (I want to travel while I'm young.)",
+   "options": [
+    "うち",
+    "まま",
+    "ころ",
+    "から"
+   ],
+   "answer": 0,
+   "note": "うちに = while."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "What does 温かいうちに mean?",
+   "prompt": "",
+   "options": [
+    "While it's still warm",
+    "After it is warm",
+    "Because it is warm",
+    "Though it is warm"
+   ],
+   "answer": 0,
+   "note": "The enclosure ends when it's no longer warm."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does 今のうち mean?",
+   "prompt": "",
+   "options": [
+    "While we still can",
+    "Right now only",
+    "Never",
+    "The next time"
+   ],
+   "answer": 0,
+   "note": "While the present situation continues."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does そのうち mean?",
+   "prompt": "",
+   "options": [
+    "Sooner or later",
+    "Within that thing's boundary only",
+    "Immediately",
+    "Never"
+   ],
+   "answer": 0,
+   "note": "A vague future."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "いえ refers mainly to the physical building.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "うち is the family life inside."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "In 若いうちに, the enclosure ends when you stop being young.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "It is defined by its content."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word that means \"while\"",
+   "options": [
+    "冷めない",
+    "うちに",
+    "食べて"
+   ],
+   "answer": 1,
+   "note": "うちに."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Let's eat while it's hot.",
+   "options": [
+    "熱い",
+    "うちに",
+    "食べよう"
+   ],
+   "note": "Adjective + うちに."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "What is the opposite of 内?",
+   "prompt": "",
+   "options": [
+    "外",
+    "中",
+    "上",
+    "下"
+   ],
+   "answer": 0,
+   "note": "うち / そと."
+  }
+ ]
+}

@@ -13,6 +13,8 @@ import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 import com.flurai.app.core.activity.StudyDayDao
 import com.flurai.app.core.activity.StudyDayEntity
+import com.flurai.app.core.course.CourseProgressDao
+import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.quiz.TestResultDao
@@ -25,7 +27,7 @@ import kotlinx.coroutines.flow.Flow
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class], version = 6, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class, CourseProgressEntity::class], version = 7, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun studyDayDao(): StudyDayDao
@@ -33,8 +35,21 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun grammarProgressDao(): GrammarProgressDao
     abstract fun customChannelDao(): CustomChannelDao
     abstract fun deckDao(): DeckDao
+    abstract fun courseProgressDao(): CourseProgressDao
     abstract fun accountDao(): com.flurai.app.core.account.AccountDao
     abstract fun syncDao(): com.flurai.app.core.sync.SyncDao
+}
+
+/** 6 → 7: progress through the grammar course. */
+val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `course_progress` (`uid` TEXT NOT NULL, `lesson_id` INTEGER NOT NULL, " +
+                "`best_correct` INTEGER NOT NULL, `best_total` INTEGER NOT NULL, `passed_at` INTEGER, " +
+                "`attempts` INTEGER NOT NULL, `missed` TEXT NOT NULL, `last_at` INTEGER NOT NULL, " +
+                "PRIMARY KEY(`uid`, `lesson_id`))",
+        )
+    }
 }
 
 /** 5 → 6: the learner's own word decks. */

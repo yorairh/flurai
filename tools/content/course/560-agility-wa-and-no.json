@@ -1,0 +1,49 @@
+{
+  "id": 560,
+  "number": "56",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Agility: は and の as light, quick tools",
+  "summary": "Japanese can make a topic (は) or box up a whole clause (の) with almost no effort, so sentences use them where English would feel heavy.",
+  "video": "https://www.youtube.com/watch?v=FdMeXqweBJ0",
+  "related": [501, 580, 450],
+  "blocks": [
+    {"type": "text", "text": "Languages differ in **agility**: how light and fast a tool is to use. A tool that is heavy in English may be nimble in Japanese, so Japanese uses it all the time. If you do not notice this, ordinary sentences feel odd."},
+    {"type": "heading", "text": "は: a topic in one step"},
+    {"type": "text", "text": "English \"speaking of …\" or \"as for …\" is clumsy, so you use it rarely. Japanese **は** is tiny, so it can be dropped in wherever you want to **set one thing against another**. The comment after a は topic is always a complete logical clause (lesson 60), and the new topic says: \"what I say next may differ from what I said about the neighbor\"."},
+    {"type": "example", "jp": "この店はラーメンはおいしいが、カレーはまずい。", "en": "At this shop the ramen is good, but the curry is bad."},
+    {"type": "text", "text": "Here the clause carries two sub-topics. Each は contrasts: ramen against curry. If the comment is the same, use **も** instead."},
+    {"type": "heading", "text": "の: a whole clause in a noun box"},
+    {"type": "text", "text": "The **nominalizing の** is a pronoun that bundles everything before it into a single noun, \"the one that …\". English needs preparation for \"what she saw when she opened the door was …\", but Japanese slips it in anywhere, even as a topic."},
+    {"type": "diagram", "cars": [
+      {"text": "朝の町に響く", "role": "plain", "label": "resounds in the morning town"},
+      {"text": "の", "role": "particle", "label": "the one that"},
+      {"text": "は", "role": "topic"},
+      {"text": "鐘", "role": "carriage"},
+      {"text": "だ", "role": "engine"}
+    ], "text": "朝の町に響くのは鐘だ。 What resounds in the morning town is a bell."},
+    {"type": "text", "text": "So 朝の町に響くのは鐘だ is not \"a bell resounds\". It is an A-is-B sentence: A is \"the one that resounds in the morning town\" (topic), B is \"a bell\"."},
+    {"type": "example", "jp": "彼女が部屋で見たのは、古い人形だった。", "en": "What she saw in the room was an old doll."},
+    {"type": "example", "jp": "毎朝歩くのは気持ちがいい。", "en": "Walking every morning feels good."},
+    {"type": "keypoints", "items": [
+      "**Agility** = how light a tool is. は and の are very light in Japanese.",
+      "**は** can be used again and again to set topics against each other; **も** says the comment is the same.",
+      "**の** turns a clause into a noun, \"the one that …\".",
+      "In a sentence like Xのは Y だ, X is the topic and Y is the answer."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does agility mean here?", "prompt": "", "options": ["How light and quick a tool is to use in a language", "How fast a speaker talks", "How long a sentence is", "How polite a word is"], "answer": 0, "note": "Light tools are used often."},
+    {"id": 2, "type": "choice", "instruction": "Why does は feel heavy in English?", "prompt": "", "options": ["\"Speaking of ...\" is a clumsy way to set a topic", "は is a verb", "English has no topics", "English never contrasts"], "answer": 0, "note": "Japanese は is a small particle, so it is used freely."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap to say the ramen is good but the curry is bad", "prompt": "ラーメン＿＿おいしいが、カレーはまずい。", "options": ["は", "を", "に", "で"], "answer": 0, "note": "は contrasts the two topics."},
+    {"id": 4, "type": "choice", "instruction": "Which particle says the comment is the same as for another topic?", "prompt": "", "options": ["も", "は", "が", "を"], "answer": 0, "note": "も adds; は contrasts."},
+    {"id": 5, "type": "tap", "instruction": "Tap the pronoun-like word that boxes the clause", "options": ["朝の町に響く", "の", "は", "鐘だ"], "answer": 1, "note": "の turns what is before it into \"the one that\"."},
+    {"id": 6, "type": "choice", "instruction": "What does this say?", "prompt": "窓から見えるのは海だ。", "options": ["What can be seen from the window is the sea", "The sea sees the window", "The window is seen by me", "I see the sea from far away"], "answer": 0, "note": "Clause + の + は + answer."},
+    {"id": 7, "type": "choice", "instruction": "In 昨日買ったのは赤い靴だ, what is the topic?", "prompt": "", "options": ["The thing (I) bought yesterday", "Red shoes in general", "Yesterday", "The shop"], "answer": 0, "note": "昨日買ったの is boxed into a noun and marked with は."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "Xのは Y だ is an A-is-B sentence.", "options": ["True", "False"], "answer": 0, "note": "A = the boxed thing, B = Y + だ."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence uses の as a noun box?", "prompt": "", "options": ["歩くのが好きだ。", "私の本だ。", "友達のうち", "雨の日"], "answer": 0, "note": "歩く + の makes the activity into a noun."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "What I wanted was a new bag.", "options": ["欲しかったのは", "新しい", "かばんだ"], "note": "The boxed topic, then the modified noun and the copula."},
+    {"id": 11, "type": "choice", "instruction": "What does the comment after a は topic have to be?", "prompt": "", "options": ["A complete logical clause", "A single noun", "A particle", "A question"], "answer": 0, "note": "It needs its own carriage and engine."},
+    {"id": 12, "type": "choice", "instruction": "Pick the best reading of アフリカはライオンはいるがトラはいない", "prompt": "", "options": ["In Africa, lions exist but tigers do not", "Africa is a lion and a tiger", "Lions and tigers are in Africa", "Africa has neither"], "answer": 0, "note": "Two contrasting sub-topics inside the Africa topic."}
+  ]
+}

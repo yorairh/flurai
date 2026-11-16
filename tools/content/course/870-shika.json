@@ -1,0 +1,221 @@
+{
+ "id": 870,
+ "number": "87",
+ "kind": "lesson",
+ "jlpt": 4,
+ "title": "しか: the inverted selection",
+ "summary": "しか picks a noun and then makes everything else the subject, which is why the verb must be negative.",
+ "video": "https://www.youtube.com/watch?v=iEnUH0L6VYs",
+ "related": [
+  488
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**しか** looks like a simple \"only\", but its structure is unusual. Think of the invert button in a photo editor: you select an object, press invert, and now everything *except* it is selected. That is what しか does with the **A-car**."
+  },
+  {
+   "type": "diagram",
+   "cars": [
+    {
+     "text": "私しか",
+     "role": "carriage"
+    },
+    {
+     "text": "いない",
+     "role": "engine"
+    }
+   ],
+   "text": "私しかいない。 Nobody other than me is here."
+  },
+  {
+   "type": "text",
+   "text": "The A-car is not 私 but \"everyone except me\", and the engine says that group is **not** here. That is why しか always needs a negative engine. Like か, しか pushes out が (we never say がしか). It also selects for relevance: it means \"no other people\", not \"no trees or birds either\"."
+  },
+  {
+   "type": "heading",
+   "text": "With a counter"
+  },
+  {
+   "type": "text",
+   "text": "A counter works as an adverb. When しか marks it, it flips the amount, not the subject."
+  },
+  {
+   "type": "example",
+   "jp": "コップが一つしかない。",
+   "en": "There is only one glass."
+  },
+  {
+   "type": "text",
+   "text": "The subject (コップ) stays; しか takes \"one\" and inverts it to \"every amount but one\", and those do not exist."
+  },
+  {
+   "type": "heading",
+   "text": "Casual: Verb + しかない"
+  },
+  {
+   "type": "text",
+   "text": "In speech しか can follow a whole action: \"every other course of action does not exist\", i.e. \"there is nothing for it but to ...\"."
+  },
+  {
+   "type": "example",
+   "jp": "もう寝るしかない。",
+   "en": "I have no choice but to go to bed."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "**しか** selects a noun, then flips it: everything else is the A-car.",
+    "The engine is always negative.",
+    "しか replaces が and を, but keeps other particles (駅でしか)."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What does しか do in 私しかいない?",
+   "prompt": "",
+   "options": [
+    "Makes everyone but me the subject",
+    "Marks me as the topic",
+    "Makes a question",
+    "Asks \"who?\""
+   ],
+   "answer": 0,
+   "note": "It inverts the selection."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "店には客が一人＿＿いない。 (There is only one customer.)",
+   "options": [
+    "しか",
+    "だけ",
+    "も",
+    "は"
+   ],
+   "answer": 0,
+   "note": "しか + negative."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Which sentence is correct?",
+   "prompt": "",
+   "options": [
+    "水が少ししかない。",
+    "水が少ししかある。",
+    "水が少ししかです。",
+    "水しかある。"
+   ],
+   "answer": 0,
+   "note": "しか needs a negative engine."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Which particle does しか push out?",
+   "prompt": "",
+   "options": [
+    "が",
+    "に",
+    "で",
+    "から"
+   ],
+   "answer": 0,
+   "note": "Like か, しか displaces が."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does 待つしかない mean?",
+   "prompt": "",
+   "options": [
+    "There is nothing to do but wait",
+    "Waiting is impossible",
+    "I don't wait",
+    "Let's not wait"
+   ],
+   "answer": 0,
+   "note": "Every other option does not exist."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does 一枚しかない select and invert in タオルが一枚しかない?",
+   "prompt": "",
+   "options": [
+    "The counter 一枚",
+    "The subject タオル",
+    "The verb",
+    "Nothing"
+   ],
+   "answer": 0,
+   "note": "The counter works as an adverb."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "しか can be used with a positive verb like ある.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "The engine after しか is always negative."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "しか selects for relevance, not every noun in the universe.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "私しかいない means no other people."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word that inverts the selection",
+   "options": [
+    "彼しか",
+    "来なかった"
+   ],
+   "answer": 0,
+   "note": "彼しか: everyone other than him."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I have no choice but to run.",
+   "options": [
+    "走る",
+    "しか",
+    "ない"
+   ],
+   "note": "Action + しかない."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which sentence means \"Only the teacher knows\"?",
+   "prompt": "",
+   "options": [
+    "先生しか知らない。",
+    "先生しか知る。",
+    "先生が知らない。",
+    "先生だけ知らない。"
+   ],
+   "answer": 0,
+   "note": "しか + negative verb."
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": 510,
+  "number": "51",
+  "kind": "note",
+  "title": "Note: reading a ghost story, part 1",
+  "summary": "The first sentence of a spoken Japanese ghost story, taken apart with the structure from the earlier lessons.",
+  "video": "https://www.youtube.com/watch?v=uO1rHcwjADA",
+  "blocks": [
+    {"type": "text", "text": "This episode is a guided reading, made together with a Japanese storytelling channel, of a ghost story (怪談). Instead of teaching a new rule, it shows how to approach real material: stop at every sentence and ask what it is made of."},
+    {"type": "heading", "text": "What the first sentence shows"},
+    {"type": "text", "text": "The story opens with それは, like English \"It was ...\". Japanese has no visible word for English \"it\" in this role. A zero pronoun does that job, so それ is really \"that\", a pointer to something the listener is about to learn. A story-opening of this kind sets the scene before any action starts."},
+    {"type": "keypoints", "items": [
+      "Work through the story one sentence at a time.",
+      "Look for the engine and the main carriage first, including the invisible ones.",
+      "English \"it\" at the start of a story is usually a zero pronoun in Japanese.",
+      "Listen first, then analyze, then listen again."
+    ]},
+    {"type": "text", "text": "Parts 2 and 3 continue the same story and look at more of its sentences."}
+  ]
+}

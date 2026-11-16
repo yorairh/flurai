@@ -1,0 +1,49 @@
+{
+  "id": 160,
+  "number": "16",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "てみる, the や particle, から and the exclusive \"and\"",
+  "summary": "Try something and see with 〜てみる, list things with と (complete) versus や (and more), and mark a starting point with から.",
+  "video": "https://www.youtube.com/watch?v=H_jePzcPFAQ",
+  "related": [462, 558, 509, 508, 475],
+  "blocks": [
+    {"type": "heading", "text": "〜てみる: do it and see"},
+    {"type": "text", "text": "Attach **みる** to a て-form and the verb means \"do it to find out what happens\". You are confident you can do the action; you are unsure of the result (how it tastes, what it is like). It is a gentle, curious try."},
+    {"type": "example", "jp": "この料理を食べてみる。", "en": "(I) will try eating this dish."},
+    {"type": "example", "jp": "もう一度やってみてください。", "en": "Please try doing it once more."},
+    {"type": "example", "jp": "下を見てみたけど、暗すぎて何も見えなかった。", "en": "I tried looking down, but it was too dark to see anything."},
+    {"type": "text", "text": "Notice the last sentence: with **見える** (can be seen) the thing that is visible is the main carriage. The zero here is **何** (\"nothing\"), not the speaker."},
+    {"type": "heading", "text": "Time words, again"},
+    {"type": "text", "text": "**間** means a stretch of time, \"while\". A clause + 間に marks the time frame. Words ending in り (ゆっくり, たっぷり) are adverbs and take no に, and relative times (その後) take no に either."},
+    {"type": "example", "jp": "落ちる間に、ゆっくり周りを見た。", "en": "While falling, (she) looked around slowly."},
+    {"type": "heading", "text": "と or や?"},
+    {"type": "text", "text": "Both join nouns, but **と** is **exclusive**: the list is complete. **や** is **non-exhaustive**: these things, among others."},
+    {"type": "example", "jp": "ペンと鉛筆がある。", "en": "There are pens and pencils (and nothing else)."},
+    {"type": "example", "jp": "ペンや鉛筆がある。", "en": "There are pens, pencils and so on."},
+    {"type": "heading", "text": "から: from"},
+    {"type": "text", "text": "**から** marks the point something starts from: where, or when."},
+    {"type": "example", "jp": "棚から瓶を取った。", "en": "(I) took a jar from the shelf."},
+    {"type": "example", "jp": "九時から仕事です。", "en": "Work starts at nine."},
+    {"type": "keypoints", "items": [
+      "**て-form + みる**: try doing it and see what happens.",
+      "**と**: a complete list. **や**: some examples, and others.",
+      "**から**: from a place or a time.",
+      "**〜間に**: during, while."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does 〜てみる express?", "prompt": "", "options": ["Trying something to see the result", "Finishing something", "Being forced to do something", "Doing something for someone"], "answer": 0, "note": "食べてみる: try eating it and see."},
+    {"id": 2, "type": "choice", "instruction": "Pick the correct form", "prompt": "\"Try eating\"", "options": ["食べてみる", "食べるみる", "食べたみる", "食べみる"], "answer": 0, "note": "て-form + みる."},
+    {"id": 3, "type": "choice", "instruction": "Which one lists pens and pencils and nothing else?", "prompt": "", "options": ["ペンと鉛筆", "ペンや鉛筆", "ペンを鉛筆", "ペンが鉛筆"], "answer": 0, "note": "と is exclusive; や implies there are more."},
+    {"id": 4, "type": "choice", "instruction": "Which one lists pens and pencils among other things?", "prompt": "", "options": ["ペンや鉛筆", "ペンと鉛筆", "ペンに鉛筆", "ペンで鉛筆"], "answer": 0, "note": "や is non-exhaustive."},
+    {"id": 5, "type": "choice", "instruction": "Fill the gap", "prompt": "棚＿＿瓶を取った。 (took a jar from the shelf)", "options": ["から", "まで", "に", "を"], "answer": 0, "note": "から marks the starting point."},
+    {"id": 6, "type": "order", "instruction": "Build the sentence", "prompt": "Work starts at nine.", "options": ["九時から", "仕事", "です"], "note": "から marks the start time."},
+    {"id": 7, "type": "choice", "instruction": "In 何も見えなかった, who or what is the zero carriage?", "prompt": "", "options": ["The thing that could not be seen (何)", "The speaker", "The listener", "Nobody"], "answer": 0, "note": "見える says something is visible, so the visible thing is the main carriage."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "〜てみる suggests you are sure about the result.", "options": ["True", "False"], "answer": 1, "note": "You can do it, but you do not know what it will be like."},
+    {"id": 9, "type": "choice", "instruction": "Which time word takes no に?", "prompt": "", "options": ["その後", "三時", "月曜日", "八月"], "answer": 0, "note": "その後 is relative; 三時, 月曜日 and 八月 are absolute."},
+    {"id": 10, "type": "tap", "instruction": "Tap the word that marks the starting point", "options": ["九時から", "仕事", "です"], "answer": 0, "note": "から: from nine."},
+    {"id": 11, "type": "choice", "instruction": "What does 間に add to a clause?", "prompt": "落ちる間に、…", "options": ["During / while …", "Because …", "If …", "Although …"], "answer": 0, "note": "間 is a stretch of time."},
+    {"id": 12, "type": "choice", "instruction": "Pick the best sentence for \"Please try this once\"", "prompt": "", "options": ["これを一度食べてみてください", "これを一度食べるみてください", "これを一度食べてみるください", "これを一度食べたみてください"], "answer": 0, "note": "て-form + みて + ください."}
+  ]
+}

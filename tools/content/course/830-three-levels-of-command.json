@@ -1,0 +1,304 @@
+{
+ "id": 830,
+ "number": "83",
+ "kind": "lesson",
+ "jlpt": 4,
+ "title": "Three levels of command",
+ "summary": "From the gentle て-form request through なさい to the blunt command form, plus the two meanings of な.",
+ "video": "https://www.youtube.com/watch?v=zayeW4AQ0Is",
+ "related": [
+  516,
+  459,
+  460,
+  461
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "Japanese has several ways to tell someone to do something. Think of them as a ladder from soft to hard."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Level",
+     "Form",
+     "Feel",
+     "Example"
+    ],
+    [
+     "1",
+     "て-form (ないで)",
+     "least harsh, still casual",
+     "待って, 泣かないで"
+    ],
+    [
+     "2",
+     "い-stem + なさい",
+     "parent to child, teacher to class",
+     "寝なさい"
+    ],
+    [
+     "2.5",
+     "い-stem + な",
+     "short なさい",
+     "準備しな"
+    ],
+    [
+     "3",
+     "command form (命令形)",
+     "forceful, rough",
+     "黙れ, 食べろ"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "1. The て-form"
+  },
+  {
+   "type": "text",
+   "text": "A bare **て-form** is a shortened \"... please\": 待って is 待ってください with the ください dropped. A request to *stay in a state* uses いる: **待っていて** (shortened 待ってて) means \"stay waiting\", with the feeling that it will not be for long. To forbid, use the special て-form **ないで**, short for ないでください."
+  },
+  {
+   "type": "example",
+   "jp": "ここで待っていて。",
+   "en": "Stay waiting here. (just for a moment)"
+  },
+  {
+   "type": "example",
+   "jp": "心配しないで。",
+   "en": "Don't worry."
+  },
+  {
+   "type": "heading",
+   "text": "2. なさい and な"
+  },
+  {
+   "type": "text",
+   "text": "**なさい** goes on the い-stem and is a firm but legitimate order from someone with the right to give it. A short form **な** on the い-stem means the same thing."
+  },
+  {
+   "type": "example",
+   "jp": "早く寝なさい。",
+   "en": "Go to bed early."
+  },
+  {
+   "type": "example",
+   "jp": "ちゃんと説明しな。",
+   "en": "Explain properly."
+  },
+  {
+   "type": "text",
+   "text": "Do not mix it up with the **negative な**, which goes on the whole clause (the dictionary form), and means \"don't\"."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Looks like",
+     "Attached to",
+     "Meaning"
+    ],
+    [
+     "食べな",
+     "い-stem 食べ",
+     "Eat! (short なさい)"
+    ],
+    [
+     "食べるな",
+     "whole verb 食べる",
+     "Don't eat!"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "3. The real command form"
+  },
+  {
+   "type": "text",
+   "text": "The 命令形 uses the え-stem of a godan verb (行く → 行け) and ろ for an ichidan verb (食べる → 食べろ). Irregular: する → しろ, 来る → 来い, くれる → くれ. It is rough: friends, anger, sports, emergencies, or someone who really has the authority."
+  },
+  {
+   "type": "example",
+   "jp": "早く逃げろ！",
+   "en": "Run away, quick!"
+  },
+  {
+   "type": "example",
+   "jp": "こっちに来い。",
+   "en": "Come here."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "The softest is the **て-form**; **なさい** is a parent's order; the **command form** is the hardest.",
+    "A な on the い-stem means \"do\"; a な after the whole verb means \"don't\".",
+    "のだ (宿題をするのだ) and ように can also work as commands."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which command is the softest?",
+   "prompt": "",
+   "options": [
+    "待って",
+    "待て",
+    "待ちなさい",
+    "待つな"
+   ],
+   "answer": 0,
+   "note": "A bare て-form is a shortened request."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "泣か＿＿。 (Don't cry.)",
+   "options": [
+    "ないで",
+    "なさい",
+    "ろ",
+    "て"
+   ],
+   "answer": 0,
+   "note": "ないで is the special て-form of ない."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "What does 食べるな mean?",
+   "prompt": "",
+   "options": [
+    "Don't eat",
+    "Eat",
+    "Eat it, will you?",
+    "I eat"
+   ],
+   "answer": 0,
+   "note": "な on the whole verb is a negative command."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "What does 食べな mean?",
+   "prompt": "",
+   "options": [
+    "Eat (short なさい)",
+    "Don't eat",
+    "Eating",
+    "I did not eat"
+   ],
+   "answer": 0,
+   "note": "な on the い-stem is a short なさい."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "Pick the command form",
+   "prompt": "食べる → 食べ＿＿",
+   "options": [
+    "ろ",
+    "れ",
+    "な",
+    "て"
+   ],
+   "answer": 0,
+   "note": "Ichidan verbs drop る and add ろ."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "Pick the command form",
+   "prompt": "行く → ＿＿",
+   "options": [
+    "行け",
+    "行き",
+    "行こ",
+    "行か"
+   ],
+   "answer": 0,
+   "note": "The え-stem of a godan verb."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "Pick the command form",
+   "prompt": "来る → ＿＿",
+   "options": [
+    "来い",
+    "来れ",
+    "来ろ",
+    "来な"
+   ],
+   "answer": 0,
+   "note": "来る becomes 来い."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "Who would say 寝なさい naturally?",
+   "prompt": "",
+   "options": [
+    "A parent to a child",
+    "A child to a parent",
+    "A stranger to a boss",
+    "A shopkeeper to a customer"
+   ],
+   "answer": 0,
+   "note": "なさい fits someone with the right to give orders."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the negative command",
+   "options": [
+    "ここで",
+    "泣く",
+    "な"
+   ],
+   "answer": 2,
+   "note": "な after the dictionary form means don't."
+  },
+  {
+   "id": 10,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "ちょっと待ってて implies a short wait.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "待っていて asks you to stay in the state of waiting, just for a bit."
+  },
+  {
+   "id": 11,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Come here quickly.",
+   "options": [
+    "早く",
+    "こっちに",
+    "来い"
+   ],
+   "note": "The command form of 来る is 来い."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "くれ is the command form of 来る.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "くれ comes from くれる; 来る is 来い."
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": 320,
+  "number": "32",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The たら and なら conditionals",
+  "summary": "たら is the past form plus ら: \"once that has happened\". It alone can talk about the past. なら attaches to a noun or clause as \"if it is the case that\".",
+  "video": "https://www.youtube.com/watch?v=fzNo53_b8W0",
+  "related": [417, 473, 399],
+  "blocks": [
+    {"type": "text", "text": "Conditionals often swap places, but each has its own flavor. Here are the last two."},
+    {"type": "heading", "text": "たら: the past form + ら"},
+    {"type": "text", "text": "Take any verb or adjective in its **past** form (た / だ / かった) and add **ら**. It means \"once that is done\". Because it builds on the past, it fits situations that are already fulfilled."},
+    {"type": "example", "jp": "起きたら、雪が積もっていた。", "en": "When I got up, snow had piled up."},
+    {"type": "example", "jp": "家に帰ったら、さくらがいた。", "en": "When I got home, Sakura was there."},
+    {"type": "text", "text": "In the past, たら is the only conditional you can use, and it means **\"when\"** and often carries **surprise**: plain て or から would be flat; an if-word says \"I did not expect this\"."},
+    {"type": "text", "text": "For the future, たら stresses **what happens once the condition is met**, while ば stresses **whether it will be met at all**. When you expect the condition to happen, たら leans towards \"when\"."},
+    {"type": "example", "jp": "雨がやんだら、出かけよう。", "en": "Once the rain stops, let's go out."},
+    {"type": "heading", "text": "ったら: exasperation"},
+    {"type": "text", "text": "A small っ gives **ったら** (and the stronger **ってば**): a shortened \"when it comes to ...\" with a tone of mild complaint, often teasing."},
+    {"type": "example", "jp": "お母さんったら、また忘れたの。", "en": "Honestly, Mom, you forgot again?"},
+    {"type": "heading", "text": "なら: given that"},
+    {"type": "text", "text": "**なら** attaches directly to a noun or a full clause. It takes up what was said or is clearly the case: \"if it's X (as you say / as it is)\"."},
+    {"type": "example", "jp": "さくらなら、できるよ。", "en": "If it's Sakura, she can do it."},
+    {"type": "example", "jp": "駅なら、あそこです。", "en": "If you mean the station, it is over there."},
+    {"type": "keypoints", "items": [
+      "**Past form + ら**: once that has happened; the only if-form for the past.",
+      "In the past, it can carry surprise.",
+      "**ったら / ってば**: exasperation.",
+      "**Noun or clause + なら**: if it is the case that; \"since it's X\"."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the たら form of 食べる", "prompt": "", "options": ["食べたら", "食べれば", "食べると", "食べるなら"], "answer": 0, "note": "Past 食べた + ら."},
+    {"id": 2, "type": "choice", "instruction": "Pick the たら form of 高い", "prompt": "", "options": ["高かったら", "高ければ", "高いたら", "高くたら"], "answer": 0, "note": "Past 高かった + ら."},
+    {"id": 3, "type": "choice", "instruction": "What does this suggest?", "prompt": "家に帰ったら、さくらがいた。", "options": ["When I got home, Sakura was (surprisingly) there", "If I go home, Sakura will be there", "Sakura went home", "I wish Sakura were home"], "answer": 0, "note": "In the past, たら means \"when\" and implies surprise."},
+    {"id": 4, "type": "choice", "instruction": "Which conditional can talk about something already past?", "prompt": "", "options": ["たら", "ば", "なら", "と"], "answer": 0, "note": "Only たら can."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "さくらなら、できるよ。", "options": ["If it's Sakura, she can do it (I trust her)", "Sakura cannot do it", "Sakura did it", "Is Sakura able?"], "answer": 0, "note": "なら: given that it's her."},
+    {"id": 6, "type": "choice", "instruction": "How does this answer the question?", "prompt": "「駅はどこですか。」「駅なら、あそこです。」", "options": ["If you mean the station, it is over there", "There is no station", "I do not know the station", "The station is closed"], "answer": 0, "note": "なら picks up the topic that was just raised."},
+    {"id": 7, "type": "choice", "instruction": "What does this mean?", "prompt": "お母さんったら！", "options": ["Honestly, Mom!", "Mom is here", "Mom said so", "Is Mom coming?"], "answer": 0, "note": "ったら shows mild exasperation."},
+    {"id": 8, "type": "choice", "instruction": "Fill the gap", "prompt": "日本人＿＿、知っているよ。 (If he is Japanese, he knows.)", "options": ["なら", "だら", "たなら", "ならた"], "answer": 0, "note": "なら attaches straight to a noun."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "たら stresses what happens once the condition is met; ば stresses whether it will be met.", "options": ["True", "False"], "answer": 0, "note": "That is the difference in feel."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "Once the rain stops, let's go out.", "options": ["雨が", "やんだら", "出かけよう"], "note": "Condition then suggestion."},
+    {"id": 11, "type": "tap", "instruction": "Tap the conditional", "options": ["この本が", "安かったら", "買う"], "answer": 1, "note": "安かった + ら."},
+    {"id": 12, "type": "choice", "instruction": "In which sentence does たら mean \"when\" (already happened)?", "prompt": "", "options": ["起きたら、雪が積もっていた", "雪が降ったら、休もう", "お金があったら、買う", "暇だったら、来て"], "answer": 0, "note": "The past tense of the main clause shows it already happened."}
+  ]
+}

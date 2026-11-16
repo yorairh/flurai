@@ -1,0 +1,238 @@
+{
+  "id": 710,
+  "number": "71",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Counters: three simple rules",
+  "summary": "Counters are nouns that act like adverbs. You need only about a dozen, you can often use ひとつ、ふたつ instead, and sound changes only affect certain kana.",
+  "video": "https://www.youtube.com/watch?v=OA78aKz0oIQ",
+  "related": [
+    586,
+    588
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "To count things Japanese puts a **counter** between the number and the thing: 犬 is counted 一匹, a bird 一羽, a sheet 一枚. There are dozens, but only about a dozen are common, and you can pick them up as you go. When you read or hear a number followed by a little word, you already know that little word is a counter."
+    },
+    {
+      "type": "heading",
+      "text": "Rule 1: most of the time you can avoid them"
+    },
+    {
+      "type": "text",
+      "text": "The **native counting** ひとつ、ふたつ、みっつ... (一つ、二つ、三つ) needs no counter and works for nearly everything except people and small animals."
+    },
+    {
+      "type": "example",
+      "jp": "りんごを三つください。",
+      "en": "Three apples, please."
+    },
+    {
+      "type": "heading",
+      "text": "Rule 2: counters are nouns, used in two ways"
+    },
+    {
+      "type": "text",
+      "text": "Counters are **nouns**, so they take の before another noun, just like any noun. But they are also special nouns that can modify a **verb** like an adverb. 猫が三匹いる is literally \"cats exist in a three-small-animal way\", which is why the sentence ends in a verb."
+    },
+    {
+      "type": "example",
+      "jp": "三匹の猫が庭にいる。",
+      "en": "Three cats are in the garden. (counter + の + noun)"
+    },
+    {
+      "type": "example",
+      "jp": "猫が三匹いる。",
+      "en": "There are three cats. (the counter describes the verb)"
+    },
+    {
+      "type": "example",
+      "jp": "写真を三枚撮った。",
+      "en": "I took three photos."
+    },
+    {
+      "type": "example",
+      "jp": "本を二冊買った。",
+      "en": "I bought two books."
+    },
+    {
+      "type": "heading",
+      "text": "Rule 3: sound changes follow a pattern"
+    },
+    {
+      "type": "text",
+      "text": "A counter whose first kana **cannot take a dakuten** (the ten-ten) never changes: 枚 (ま), 輪 (り) stay the same after any number. Changes only happen in kana rows that can take dakuten or a small っ, such as 匹 (ひき: いっぴき, さんびき) and 本. Learn them as you meet them."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "About a dozen common counters: 枚 (flat), 本 (long), 冊 (books), 匹 (small animals), 羽 (birds), 人 (people).",
+        "Native counting (一つ、二つ) avoids counters for most objects.",
+        "Counters are nouns that can also work like adverbs: 猫が三匹いる.",
+        "If the counter's first kana can't take a ten-ten, its sound never changes."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Which counter is used for flat things like paper?",
+      "prompt": "",
+      "options": [
+        "枚",
+        "冊",
+        "匹",
+        "羽"
+      ],
+      "answer": 0,
+      "note": "枚 counts sheets, coins and other flat things.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Which counter is used for books?",
+      "prompt": "",
+      "options": [
+        "冊",
+        "枚",
+        "匹",
+        "羽"
+      ],
+      "answer": 0,
+      "note": "冊 counts bound books.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these is counted with 匹?",
+      "prompt": "",
+      "options": [
+        "猫",
+        "紙",
+        "本",
+        "鳥"
+      ],
+      "answer": 0,
+      "note": "匹 counts small animals; birds use 羽.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "紙を五＿＿ください。 (Five sheets of paper, please.)",
+      "options": [
+        "枚",
+        "冊",
+        "匹",
+        "羽"
+      ],
+      "answer": 0,
+      "note": "Flat paper takes 枚.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "本を二＿＿買った。 (I bought two books.)",
+      "options": [
+        "冊",
+        "枚",
+        "匹",
+        "羽"
+      ],
+      "answer": 0,
+      "note": "Books take 冊.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "Counters are nouns, so they can take の before another noun.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "三匹の猫 works like any noun + の + noun.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "What is 猫が三匹いる, literally?",
+      "prompt": "",
+      "options": [
+        "Cats exist in a three-small-animal way",
+        "Three cats own the house",
+        "A cat is the third small animal",
+        "Cats three and animals"
+      ],
+      "answer": 0,
+      "note": "The counter works like an adverb on the verb.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "You must memorize a long list of counters before you can read Japanese.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "You learn them as you meet them; context tells you.",
+      "id": 8
+    },
+    {
+      "type": "choice",
+      "instruction": "What can you use for most objects when you don't know the counter?",
+      "prompt": "",
+      "options": [
+        "The native count: 一つ、二つ",
+        "The counter 枚",
+        "The counter 匹",
+        "The particle の"
+      ],
+      "answer": 0,
+      "note": "The native counting system needs no counter.",
+      "id": 9
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I took three photos.",
+      "options": [
+        "写真を",
+        "三枚",
+        "撮った"
+      ],
+      "note": "Object, counter phrase, engine.",
+      "id": 10
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the counter in 猫が三匹います",
+      "options": [
+        "猫が",
+        "三",
+        "匹",
+        "います"
+      ],
+      "answer": 2,
+      "note": "匹 is the counter for small animals.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "A counter that starts with ま, ら or わ never changes its sound.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "Those kana cannot take a ten-ten.",
+      "id": 12
+    }
+  ]
+}

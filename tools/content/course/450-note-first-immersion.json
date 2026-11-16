@@ -1,0 +1,19 @@
+{
+  "id": 450,
+  "number": "45",
+  "kind": "note",
+  "title": "Note: your first step into immersion",
+  "summary": "A walk through a short native fable, as a way to move from theory to real Japanese material.",
+  "video": "https://www.youtube.com/watch?v=g5uyGx5OnuE",
+  "blocks": [
+    {"type": "text", "text": "This episode is not a grammar topic. It shows how to start working with real Japanese made for Japanese readers: a short, simple fable about a greedy dog, read sentence by sentence. Even a children's story contains words you have never met, so the method matters more than the story."},
+    {"type": "heading", "text": "How the episode works"},
+    {"type": "keypoints", "items": [
+      "Pick material that is short, simple and not rewritten for learners.",
+      "Take one sentence at a time and find its engine and main carriage before looking up details.",
+      "Expect new vocabulary: children's stories use many words that textbooks skip.",
+      "Once the text is clear, listen to the audio again and again so the rhythm and the words settle in."
+    ]},
+    {"type": "text", "text": "The episode points out that many of the structures from earlier lessons appear right away in a tiny story, such as modifiers before nouns and verbs ending in a helper. Use the video as a model for how to break down your own first reading."}
+  ]
+}

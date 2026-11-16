@@ -1,0 +1,227 @@
+{
+ "id": 950,
+ "number": "95",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "どうも, やっぱり and やはり",
+ "summary": "When history helps: どうも began as \"in no way can I say\", and やはり means returning to your original focus.",
+ "video": "https://www.youtube.com/watch?v=WUmByRnrx_U",
+ "related": [],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "It is usually not worth studying word history, but a few words are only clear with it."
+  },
+  {
+   "type": "heading",
+   "text": "どうも"
+  },
+  {
+   "type": "text",
+   "text": "Old Japanese said どうも言えぬほど: \"to the extent that I cannot say it in any way\". Said of thanks or apology, it means \"inexpressibly\", then simply \"very\". Without ほど, どうも言えぬ means \"I can't say why, but...\" and gives the meaning \"somehow\"."
+  },
+  {
+   "type": "example",
+   "jp": "どうもありがとう。",
+   "en": "Thank you so much."
+  },
+  {
+   "type": "example",
+   "jp": "どうも調子が悪い。",
+   "en": "Somehow I'm not feeling well."
+  },
+  {
+   "type": "example",
+   "jp": "どうも。",
+   "en": "Hi / thanks / bye. (an all-purpose greeting)"
+  },
+  {
+   "type": "heading",
+   "text": "やはり / やっぱり"
+  },
+  {
+   "type": "text",
+   "text": "The kanji (矢張り, a bow drawn tight) are a folk etymology, but they capture the feeling: after being distracted, you return to your original focus. That covers \"just as expected\", \"after all\", \"also\" and \"still\"."
+  },
+  {
+   "type": "example",
+   "jp": "やっぱりこの店が一番おいしい。",
+   "en": "This shop really is the best, after all."
+  },
+  {
+   "type": "example",
+   "jp": "やはり私も行かなかった。",
+   "en": "I didn't go either, just as you said."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "どうも = in no way (can I say): very much, or somehow.",
+    "やはり = back to the original focus: as expected, after all.",
+    "やっぱり is the casual form of やはり."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What did どうも originally mean?",
+   "prompt": "",
+   "options": [
+    "In no way can I say (it)",
+    "Good morning",
+    "Very bad",
+    "Please wait"
+   ],
+   "answer": 0,
+   "note": "どうも言えぬ."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "What does どうもありがとう mean?",
+   "prompt": "",
+   "options": [
+    "Thank you very much",
+    "Thank you somehow",
+    "Thank you, goodbye",
+    "Thank you maybe"
+   ],
+   "answer": 0,
+   "note": "どうも = very much."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "What does どうも調子が悪い mean?",
+   "prompt": "",
+   "options": [
+    "Somehow I'm not well",
+    "I am very well",
+    "I am well",
+    "I am never sick"
+   ],
+   "answer": 0,
+   "note": "どうも without ほど: somehow."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "What is やっぱり a casual form of?",
+   "prompt": "",
+   "options": [
+    "やはり",
+    "やはらず",
+    "やらり",
+    "やぱり"
+   ],
+   "answer": 0,
+   "note": "やはり → やっぱり."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "Which sentence fits \"as expected\"?",
+   "prompt": "",
+   "options": [
+    "やっぱり雨が降ってきた。",
+    "どうも雨が降ってきた。",
+    "なんて雨が降ってきた。",
+    "しか雨が降ってきた。"
+   ],
+   "answer": 0,
+   "note": "やっぱり = just as expected."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "The 矢張り kanji story says やはり is...",
+   "prompt": "",
+   "options": [
+    "Returning to your original focus",
+    "Forgetting a goal",
+    "Starting a new goal",
+    "Leaving a bow behind"
+   ],
+   "answer": 0,
+   "note": "A folk etymology from archery."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "The kanji story of やはり is the historical origin.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It is a folk etymology."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "どうも can be a greeting on its own.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "It stands in for a greeting."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word meaning \"after all\"",
+   "options": [
+    "彼は",
+    "やっぱり",
+    "来た"
+   ],
+   "answer": 1,
+   "note": "やっぱり."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Somehow I'm not well.",
+   "options": [
+    "どうも",
+    "調子が",
+    "悪い"
+   ],
+   "note": "どうも at the start means somehow."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Why can folk etymology be helpful?",
+   "prompt": "",
+   "options": [
+    "It shows how speakers feel the word now",
+    "It shows exact history",
+    "It lists all kanji",
+    "It changes grammar"
+   ],
+   "answer": 0,
+   "note": "Speakers' idea of the word colors its use."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "What is どうも言えぬほど?",
+   "prompt": "",
+   "options": [
+    "To the extent I can't say",
+    "Because of saying",
+    "After saying",
+    "Don't say"
+   ],
+   "answer": 0,
+   "note": "ほど = extent."
+  }
+ ]
+}

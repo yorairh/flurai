@@ -1,0 +1,52 @@
+{
+  "id": 40,
+  "number": "4",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Japanese verb tenses",
+  "summary": "Japanese has two tenses, non-past and past. \"Is doing\" is a white engine, て + いる, and time words follow a simple に rule.",
+  "video": "https://www.youtube.com/watch?v=lU5rmrAORDY",
+  "related": [552, 551, 515, 504],
+  "blocks": [
+    {"type": "text", "text": "So far every verb has been in its plain dictionary form. Japanese has just **two tenses**: the **non-past** (the dictionary form) and the **past**. There is no separate present and no separate future."},
+    {"type": "heading", "text": "The non-past is not a present tense"},
+    {"type": "text", "text": "Think of the non-past like English \"I eat at six\": it covers habits, facts, and above all **things that will happen**. So 犬が食べる most naturally means \"The dog will eat.\" The past is made by changing the ending: 食べる becomes 食べた."},
+    {"type": "example", "jp": "犬が食べる。", "en": "The dog will eat. (or: The dog eats.)"},
+    {"type": "example", "jp": "犬が食べた。", "en": "The dog ate."},
+    {"type": "heading", "text": "\"Is eating\": a white engine"},
+    {"type": "text", "text": "For something happening **right now**, Japanese uses **いる**, the \"to be\" for people and animals, together with the **て-form** of the verb. 食べて is a **white engine**: a verb that cannot pull the train alone but adds information to the real engine, いる. (You will learn how to make the て-form in the next lesson.)"},
+    {"type": "diagram", "cars": [
+      {"text": "犬", "role": "carriage"},
+      {"text": "が", "role": "particle"},
+      {"text": "食べて", "role": "white", "label": "white engine"},
+      {"text": "いる", "role": "engine", "label": "engine"}
+    ], "text": "犬が食べている。 The dog is eating."},
+    {"type": "example", "jp": "犬が食べている。", "en": "The dog is eating."},
+    {"type": "example", "jp": "さくらが歩いている。", "en": "Sakura is walking."},
+    {"type": "heading", "text": "Time words"},
+    {"type": "text", "text": "A **relative** time word (relative to now: 明日 tomorrow, 今日 today, 昨日 yesterday) goes at the start of the sentence with **no particle**. An **absolute** time (a day of the week, a clock time) takes **に**. A good rule of thumb: if English would say \"on / at / in\", Japanese uses に."},
+    {"type": "example", "jp": "明日（私が）ケーキを食べる。", "en": "Tomorrow (I) will eat cake."},
+    {"type": "example", "jp": "火曜日に（私が）ケーキを食べる。", "en": "On Tuesday (I) will eat cake."},
+    {"type": "example", "jp": "六時に（私が）起きる。", "en": "(I) get up at six o'clock."},
+    {"type": "keypoints", "items": [
+      "Two tenses only: **non-past** (dictionary form) and **past** (**た**).",
+      "The non-past usually points to the **future** or to a habit.",
+      "**て + いる** says an action is **in progress**.",
+      "Relative time (明日, 今日): **no particle**. Absolute time (火曜日, 六時): **に**."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "How many tenses does a plain Japanese verb have?", "prompt": "", "options": ["Two: non-past and past", "Three: past, present and future", "One", "Four"], "answer": 0, "note": "Non-past and past. The non-past covers present habits and the future."},
+    {"id": 2, "type": "choice", "instruction": "What does this most naturally say?", "prompt": "犬が食べる。", "options": ["The dog will eat (or eats as a habit)", "The dog is eating right now", "The dog ate", "The dog did not eat"], "answer": 0, "note": "The non-past leans toward the future."},
+    {"id": 3, "type": "choice", "instruction": "How do you say \"The dog is eating (right now)\"?", "prompt": "", "options": ["犬が食べている", "犬が食べた", "犬が食べる", "犬が食べない"], "answer": 0, "note": "て-form + いる shows an action in progress."},
+    {"id": 4, "type": "choice", "instruction": "In 犬が食べている, which part is the engine?", "prompt": "", "options": ["いる", "食べて", "犬", "が"], "answer": 0, "note": "いる pulls the train. 食べて is a white engine that adds what the dog is doing."},
+    {"id": 5, "type": "choice", "instruction": "Which time word needs the particle に?", "prompt": "", "options": ["六時", "明日", "今日", "昨日"], "answer": 0, "note": "A clock time is absolute, so it takes に. 明日, 今日 and 昨日 are relative: no particle."},
+    {"id": 6, "type": "order", "instruction": "Build the sentence", "prompt": "On Tuesday (I) will eat cake.", "options": ["火曜日に", "ケーキを", "食べる"], "note": "An absolute time word takes に."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "Japanese has a separate future-tense ending.", "options": ["True", "False"], "answer": 1, "note": "The non-past form is used for the future as well."},
+    {"id": 8, "type": "choice", "instruction": "How do you make the plain past of 食べる?", "prompt": "", "options": ["食べた", "食べるた", "食べて", "食べだ"], "answer": 0, "note": "Drop る and add た."},
+    {"id": 9, "type": "tap", "instruction": "Tap the relative time word (no particle needed)", "options": ["明日", "ケーキを", "食べる"], "answer": 0, "note": "明日 is relative to now, so it takes no particle."},
+    {"id": 10, "type": "choice", "instruction": "What does て + いる show?", "prompt": "", "options": ["An action in progress", "The past", "A wish", "Politeness"], "answer": 0, "note": "さくらが歩いている: Sakura is walking."},
+    {"id": 11, "type": "choice", "instruction": "Which sentence says \"Sakura is walking\"?", "prompt": "", "options": ["さくらが歩いている", "さくらが歩く", "さくらが歩かない", "さくらが歩いた"], "answer": 0, "note": "歩いて + いる."},
+    {"id": 12, "type": "choice", "instruction": "Where does the relative time word 明日 go?", "prompt": "", "options": ["At the start, with no particle", "After the verb", "With を", "With が"], "answer": 0, "note": "明日（私が）ケーキを食べる。"}
+  ]
+}

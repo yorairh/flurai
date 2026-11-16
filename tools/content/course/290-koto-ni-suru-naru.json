@@ -1,0 +1,43 @@
+{
+  "id": 290,
+  "number": "29",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "ことにする and ことになる",
+  "summary": "こと turns a verb clause into a noun so に can attach: ことにする is a deliberate decision, ことになる is a situation that has come about.",
+  "video": "https://www.youtube.com/watch?v=sH3iGBkA93w",
+  "related": [422, 426],
+  "blocks": [
+    {"type": "text", "text": "Lesson 28 gave you noun + **になる** (turn into) and noun + **にする** (turn something into). This lesson applies it to whole actions."},
+    {"type": "heading", "text": "Why こと?"},
+    {"type": "text", "text": "A logical particle such as に needs a **noun** in front of it. **こと** is an abstract \"thing\": a situation, an affair (compare **もの**, a concrete object). Put a verb clause in front of こと and the whole clause becomes a noun."},
+    {"type": "heading", "text": "ことにする: I settle it"},
+    {"type": "text", "text": "Literally: \"turn the situation into the one in which ...\". Someone makes this happen on purpose, so it is a **decision**. The doer is usually you."},
+    {"type": "example", "jp": "来年、結婚することにした。", "en": "I decided to get married next year."},
+    {"type": "example", "jp": "今日から毎朝走ることにした。", "en": "I decided to run every morning from today."},
+    {"type": "heading", "text": "ことになる: it has come about"},
+    {"type": "text", "text": "Literally: \"the situation became the one in which ...\". Nobody is named. Often someone did decide, so you hear it as \"it has been decided\", but the grammar itself never says so."},
+    {"type": "example", "jp": "来月、大阪で働くことになった。", "en": "It has turned out that I will work in Osaka next month."},
+    {"type": "example", "jp": "大変なことになった。", "en": "Things have turned into a serious matter."},
+    {"type": "text", "text": "Because ことになる hides the decider, people often prefer it to ことにする: 結婚することになりました sounds softer and less self-centered than 結婚することにしました."},
+    {"type": "keypoints", "items": [
+      "**Verb + こと + にする**: a deliberate decision.",
+      "**Verb + こと + になる**: a situation arises or has been arranged.",
+      "こと = an abstract thing; the clause before it becomes a noun.",
+      "大変なことになった: ことになる does not always involve a decision."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "来年、結婚することにした。", "options": ["I decided to get married next year", "It turned out that I will get married", "I got married last year", "I wish to marry"], "answer": 0, "note": "ことにする: you decide."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "来月、大阪で働くことになった。", "options": ["It has turned out that I will work in Osaka", "I decided by myself to work in Osaka", "I worked in Osaka last month", "I want to work in Osaka"], "answer": 0, "note": "ことになる: a situation arose, the decider is not named."},
+    {"id": 3, "type": "choice", "instruction": "Which expresses a personal, deliberate decision?", "prompt": "", "options": ["ことにする", "ことになる", "ようになる", "ことがある"], "answer": 0, "note": "する means someone acts on purpose."},
+    {"id": 4, "type": "choice", "instruction": "Why does こと appear before に?", "prompt": "", "options": ["に needs a noun, and こと turns the clause into one", "こと means \"must\"", "こと marks the past tense", "こと replaces the verb"], "answer": 0, "note": "Logical particles attach to nouns."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "大変なことになった。", "options": ["Things have turned into a serious matter", "I decided to do something hard", "I did something hard", "It is a very hard thing to do"], "answer": 0, "note": "No decision is implied: a situation simply arose."},
+    {"id": 6, "type": "choice", "instruction": "Fill the gap", "prompt": "毎朝走る＿＿した。 (I decided to run every morning.)", "options": ["ことに", "ことを", "ことが", "ことは"], "answer": 0, "note": "ことにする."},
+    {"id": 7, "type": "choice", "instruction": "Fill the gap", "prompt": "来年、東京で働く＿＿なった。 (It has turned out that I will work in Tokyo.)", "options": ["ことに", "ことを", "ことで", "ことは"], "answer": 0, "note": "ことになる: に attaches to the noun こと."},
+    {"id": 8, "type": "tap", "instruction": "Tap the word that shows the decision", "options": ["旅行に", "行かない", "ことにした"], "answer": 2, "note": "ことにした: decided."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "I decided to give up sweets.", "options": ["甘い物を", "やめる", "ことに", "した"], "note": "Clause + ことにした."},
+    {"id": 10, "type": "choice", "instruction": "True or false?", "prompt": "ことになる always means that someone made a decision.", "options": ["True", "False"], "answer": 1, "note": "A decision is only implied by context, as in 大変なことになった."},
+    {"id": 11, "type": "choice", "instruction": "Which sounds softer and less self-centered?", "prompt": "", "options": ["行くことになった", "行くことにした", "行ってやる", "行けなかった"], "answer": 0, "note": "It hides the decider."}
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "id": 800,
+  "number": "80",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Dropped particles and casual omissions",
+  "summary": "Casual Japanese leaves out particles, だ and parts of words. It is not random: know the three kinds of omission and what to look for.",
+  "video": "https://www.youtube.com/watch?v=wamt3AAJI6M",
+  "related": [
+    740,
+    739,
+    741
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Real, casual Japanese seems to leave out half of what is said. It is less of a problem than it looks, because the omissions are of a few kinds. Some are **legal** in every style, like the zero pronoun: (zero が)疲れた is correct and always means I am tired. Others are **casual shortcuts** that would be wrong in formal writing."
+    },
+    {
+      "type": "heading",
+      "text": "Three kinds of casual omission"
+    },
+    {
+      "type": "text",
+      "text": "First, **parts of words** get shortened: している → してる, しておく → しとく, 分からない → 分かんない, つまらない → つまんない. These are as regular as \"shouldn't\" in English."
+    },
+    {
+      "type": "text",
+      "text": "Second, the **markers attached to nouns** can disappear when the role is clear: **が, を, は** and the copula **だ**. Third, the zero pronoun and other things the listener can fill in."
+    },
+    {
+      "type": "example",
+      "jp": "疲れた。",
+      "en": "(I'm) tired."
+    },
+    {
+      "type": "example",
+      "jp": "ご飯、食べた？",
+      "en": "Did you eat?"
+    },
+    {
+      "type": "example",
+      "jp": "私、学生。",
+      "en": "I'm a student. (は and だ dropped)"
+    },
+    {
+      "type": "example",
+      "jp": "もう宿題やってる？",
+      "en": "Are you doing your homework already?"
+    },
+    {
+      "type": "example",
+      "jp": "窓を開けとく。",
+      "en": "I'll leave the window open."
+    },
+    {
+      "type": "example",
+      "jp": "この本、つまんない。",
+      "en": "This book is boring."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Words shorten: ている → てる, ておく → とく, らない → んない.",
+        "Markers drop: が, を, は and だ vanish when the role is clear.",
+        "Zero pronouns are always legal; shortcuts are for casual speech.",
+        "Not in formal writing, essays or legal documents."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "What is the casual form of 食べている?",
+      "prompt": "",
+      "options": [
+        "食べてる",
+        "食べとく",
+        "食べちゃう",
+        "食べない"
+      ],
+      "answer": 0,
+      "note": "ている → てる.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "What is the casual form of 窓を開けておく?",
+      "prompt": "",
+      "options": [
+        "窓を開けとく",
+        "窓を開けてる",
+        "窓を開けない",
+        "窓を開けちゃう"
+      ],
+      "answer": 0,
+      "note": "ておく → とく.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "What is the casual form of 分からない?",
+      "prompt": "",
+      "options": [
+        "分かんない",
+        "分からん",
+        "分かる",
+        "分かった"
+      ],
+      "answer": 0,
+      "note": "らない → んない.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Which particle is dropped in 「ご飯、食べた?」?",
+      "prompt": "",
+      "options": [
+        "を",
+        "が",
+        "に",
+        "で"
+      ],
+      "answer": 0,
+      "note": "ご飯を食べた.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Who is tired in the sentence 疲れた?",
+      "prompt": "",
+      "options": [
+        "I (zero pronoun)",
+        "You",
+        "He",
+        "She"
+      ],
+      "answer": 0,
+      "note": "The zero pronoun defaults to I.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "In casual speech が, を and は are often dropped.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "When the role is clear from context.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "Dropping particles is fine in a formal essay.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "These are casual shortcuts.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "Which markers disappear in 私、学生。?",
+      "prompt": "",
+      "options": [
+        "は and だ",
+        "を and が",
+        "に and で",
+        "の and と"
+      ],
+      "answer": 0,
+      "note": "私は学生だ.",
+      "id": 8
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I'm going to school tomorrow.",
+      "options": [
+        "明日",
+        "学校に",
+        "行く"
+      ],
+      "note": "Time, destination, engine.",
+      "id": 9
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the shortened, casual verb in 窓を開けとく",
+      "options": [
+        "窓を",
+        "開けとく"
+      ],
+      "answer": 1,
+      "note": "開けとく = 開けておく.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "What does つまんない mean?",
+      "prompt": "",
+      "options": [
+        "Boring",
+        "Delicious",
+        "Difficult",
+        "Expensive"
+      ],
+      "answer": 0,
+      "note": "つまらない shortened.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "Which kind of omission is always legal, in any style?",
+      "prompt": "",
+      "options": [
+        "The zero pronoun",
+        "Dropping を in an essay",
+        "Shortening ている in a contract",
+        "Dropping all particles"
+      ],
+      "answer": 0,
+      "note": "Zero pronouns are standard grammar.",
+      "id": 12
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "id": 670,
+  "number": "67",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "もう and まだ: the time relations",
+  "summary": "まだ means a state still holds and a change is expected; もう means the change has already happened. Both are ways of saying now.",
+  "video": "https://www.youtube.com/watch?v=sBhD_Z5_pHw",
+  "related": [
+    581
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Both words are about **now**, seen against a point where things change. **まだ** (still, not yet) says: we are inside a stretch of time that began in the past and is expected to end. **もう** (already) says: the change has happened and we are in the new stretch."
+    },
+    {
+      "type": "heading",
+      "text": "まだ"
+    },
+    {
+      "type": "example",
+      "jp": "さくらはまだ若い。",
+      "en": "Sakura is still young."
+    },
+    {
+      "type": "example",
+      "jp": "宿題はまだしていない。",
+      "en": "I haven't done my homework yet."
+    },
+    {
+      "type": "text",
+      "text": "With a negative, まだ becomes \"not yet\", but Japanese really says \"still not\". On its own, **まだまだ** is the modest reply to a compliment: \"I still have a long way to go.\""
+    },
+    {
+      "type": "example",
+      "jp": "いえ、まだまだです。",
+      "en": "No, not yet (I'm still far from good)."
+    },
+    {
+      "type": "heading",
+      "text": "もう"
+    },
+    {
+      "type": "example",
+      "jp": "「宿題をしなさい。」「もうやったよ。」",
+      "en": "\"Do your homework.\" \"I already did it.\""
+    },
+    {
+      "type": "example",
+      "jp": "もう大丈夫です。",
+      "en": "I'm all right now (no more time needed)."
+    },
+    {
+      "type": "text",
+      "text": "Because もう is also a kind of now, dictionaries sometimes translate it as \"now\". It carries the nuance that something was different before. A standalone **もう!** is exasperation, like \"Enough already!\""
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**まだ**: the present is still inside the old stretch; change is expected later.",
+        "**まだ + negative** = not yet; **まだ + positive** = still.",
+        "**もう**: the change has already happened; also \"now\" with a sense of contrast.",
+        "**まだまだ**: humble reply; **もう!**: exasperation."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "まだ食べていない。",
+      "options": [
+        "I haven't eaten yet",
+        "I already ate",
+        "I will never eat",
+        "I am eating now"
+      ],
+      "answer": 0,
+      "note": "まだ + negative: not yet.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "もう食べた。",
+      "options": [
+        "I already ate",
+        "I haven't eaten yet",
+        "I want to eat",
+        "I will eat"
+      ],
+      "answer": 0,
+      "note": "もう marks the change as already done.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "宿題は＿＿終わっていない。 (not finished yet)",
+      "options": [
+        "まだ",
+        "もう",
+        "よく",
+        "とても"
+      ],
+      "answer": 0,
+      "note": "A state that still holds: まだ.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "「宿題をしなさい。」「＿＿やったよ。」",
+      "options": [
+        "もう",
+        "まだ",
+        "よく",
+        "ずっと"
+      ],
+      "answer": 0,
+      "note": "I've already done it: もう.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "さくらはまだ若い。",
+      "options": [
+        "Sakura is still young",
+        "Sakura is no longer young",
+        "Sakura will be young",
+        "Sakura was young"
+      ],
+      "answer": 0,
+      "note": "The young stretch has not ended yet.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "Someone praises your Japanese. What is a humble reply?",
+      "prompt": "",
+      "options": [
+        "いえ、まだまだです",
+        "いえ、もう大丈夫です",
+        "いえ、よろしくお願いします",
+        "いえ、お先に"
+      ],
+      "answer": 0,
+      "note": "まだまだ: not there yet.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "まだ looks ahead to a change that is expected later.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "It places now inside a stretch that is expected to end.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "もう can only mean \"already\"; it never means \"now\".",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "もう大丈夫 is \"I'm all right now\".",
+      "id": 8
+    },
+    {
+      "type": "choice",
+      "instruction": "What does もう大丈夫 nuance?",
+      "prompt": "",
+      "options": [
+        "I wasn't all right before, but I am now",
+        "I will be all right soon",
+        "I am never all right",
+        "Are you all right?"
+      ],
+      "answer": 0,
+      "note": "もう marks a change that has already happened.",
+      "id": 9
+    },
+    {
+      "type": "choice",
+      "instruction": "What does a bare \"もう!\" express?",
+      "prompt": "",
+      "options": [
+        "Exasperation",
+        "Joy",
+        "A question",
+        "A request"
+      ],
+      "answer": 0,
+      "note": "Like \"Enough already!\".",
+      "id": 10
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Sakura is still young.",
+      "options": [
+        "さくらは",
+        "まだ",
+        "若い"
+      ],
+      "note": "まだ comes right before the word it limits.",
+      "id": 11
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that says the change has not come yet",
+      "options": [
+        "彼は",
+        "まだ",
+        "来ていない"
+      ],
+      "answer": 1,
+      "note": "まだ: the not-coming-yet stretch continues.",
+      "id": 12
+    }
+  ]
+}

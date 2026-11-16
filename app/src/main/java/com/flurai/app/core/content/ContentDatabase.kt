@@ -14,9 +14,11 @@ import kotlinx.coroutines.flow.Flow
         WordSentenceEntity::class,
         GrammarPointEntity::class,
         GrammarExampleEntity::class,
+        CourseLessonEntity::class,
+        CourseQuestionEntity::class,
         ContentInfoEntity::class,
     ],
-    version = 9,
+    version = 11,
     exportSchema = true,
 )
 abstract class ContentDatabase : RoomDatabase() {
@@ -148,6 +150,25 @@ interface ContentDao {
 
     @Query("SELECT * FROM grammar_example")
     suspend fun allGrammarExamples(): List<GrammarExampleEntity>
+
+    @Query("SELECT * FROM course_lesson ORDER BY position")
+    fun courseLessons(): Flow<List<CourseLessonEntity>>
+
+    @Query("SELECT * FROM course_lesson ORDER BY position")
+    suspend fun allCourseLessons(): List<CourseLessonEntity>
+
+    @Query("SELECT * FROM course_lesson WHERE id = :id")
+    suspend fun courseLesson(id: Int): CourseLessonEntity?
+
+    /** The first course lesson that lists the grammar point as related, for the link on the point's page. */
+    @Query("SELECT * FROM course_lesson WHERE ',' || related || ',' LIKE '%,' || :grammarId || ',%' ORDER BY position LIMIT 1")
+    suspend fun courseLessonForPoint(grammarId: Int): CourseLessonEntity?
+
+    @Query("SELECT * FROM course_question WHERE lesson_id = :lessonId ORDER BY id")
+    suspend fun courseQuestions(lessonId: Int): List<CourseQuestionEntity>
+
+    @Query("SELECT * FROM course_question WHERE lesson_id IN (:lessonIds) ORDER BY lesson_id, id")
+    suspend fun courseQuestionsOf(lessonIds: List<Int>): List<CourseQuestionEntity>
 
     @Query("SELECT * FROM content_info")
     fun info(): Flow<List<ContentInfoEntity>>

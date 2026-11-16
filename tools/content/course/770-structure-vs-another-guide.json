@@ -1,0 +1,38 @@
+{
+  "id": 770,
+  "number": "77",
+  "kind": "note",
+  "title": "A comparison with another popular grammar guide (part 1)",
+  "summary": "The course sets its structural model beside a well-known online grammar guide on three core points: が, the copula and conjugation.",
+  "video": "https://www.youtube.com/watch?v=-JuHi-yKGFc",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "This is a commentary episode, not a lesson. The speaker compares the course's model of Japanese with another widely used online grammar guide and argues that the two cannot both be right where they disagree: if one says 2 + 2 = 4, the other cannot say 5. The aim is explained as clarifying the structure, not criticizing a person; the author of the other guide is credited with noticing real problems in the standard textbook model and trying to fix them."
+    },
+    {
+      "type": "heading",
+      "text": "The three points of disagreement"
+    },
+    {
+      "type": "text",
+      "text": "According to the course, the disagreement touches the core of the language. The **が particle** always marks the subject of a sentence (the A-car, the one that is or does something), even when you cannot see it. The **copula だ** is a real logical element that makes a noun into an engine. And **conjugation**, in the Western sense, does not exist: there are stems, and helper verbs and adjectives that attach to them."
+    },
+    {
+      "type": "heading",
+      "text": "What to take from it"
+    },
+    {
+      "type": "text",
+      "text": "You do not need to study this episode to pass the course tests. It is useful if you have met the other model elsewhere and want to see where the course's explanations differ. Where models conflict, test them against real Japanese you read and hear."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "This episode is a commentary, with no new grammar to memorize.",
+        "Disputed points: the role of が, the role of the copula, and the idea of conjugation.",
+        "Choose the model that makes real Japanese easier to understand."
+      ]
+    }
+  ]
+}

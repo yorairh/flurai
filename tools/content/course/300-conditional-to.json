@@ -1,0 +1,45 @@
+{
+  "id": 300,
+  "number": "30",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Japanese conditionals: と",
+  "summary": "と after a clause means \"when this happens, that and only that follows\". It is the same exclusive と as in \"A and B\", and it grows into \"I must\".",
+  "video": "https://www.youtube.com/watch?v=IkolA524WC0",
+  "related": [417, 472],
+  "blocks": [
+    {"type": "text", "text": "Japanese has several \"if / when\" tools. This lesson starts with the oldest and simplest: **と**."},
+    {"type": "heading", "text": "The same と you already know"},
+    {"type": "text", "text": "Japanese has two \"and\" particles for nouns. **や** is open: ペン**や**本 is a pen, a book, and maybe more. **と** is **exclusive**: ペン**と**本 is exactly those two. The conditional と is this same particle, now sitting after a whole clause. (The quoting と, as in 「行くと言った」, is a different word.)"},
+    {"type": "heading", "text": "One result, nothing else"},
+    {"type": "text", "text": "Because と is exclusive, \"A と B\" says that when A is the case, **only B** follows. It suits natural laws, habits, and things that always go together."},
+    {"type": "example", "jp": "冬になると寒くなる。", "en": "When winter comes, it gets cold."},
+    {"type": "example", "jp": "このボタンを押すとドアが開く。", "en": "When you press this button, the door opens."},
+    {"type": "heading", "text": "Exaggerated certainty"},
+    {"type": "text", "text": "Speakers use the absolute feel for warnings: they present a likely result as if it were certain."},
+    {"type": "example", "jp": "食べ過ぎると病気になるよ。", "en": "If you overeat, you will get sick."},
+    {"type": "heading", "text": "\"If I don't, it's bad\": must"},
+    {"type": "text", "text": "A negative clause plus と, with a negative result left understood, becomes necessity. The result is often just ダメ (\"no good\") or nothing at all."},
+    {"type": "example", "jp": "もう行かないとダメだ。", "en": "I really have to go now."},
+    {"type": "example", "jp": "早く逃げないと！", "en": "We have to run, quickly!"},
+    {"type": "keypoints", "items": [
+      "**Clause + と**: when / if this, then (only) that.",
+      "Same と as in \"A と B\" (and nothing else).",
+      "Warnings sound absolute on purpose.",
+      "**Negative + と (+ ダメ)**: I must."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "冬になると寒くなる。", "options": ["When winter comes, it gets cold", "If winter comes, I may feel cold", "Winter is not cold", "I wish it were winter"], "answer": 0, "note": "と: one inevitable result."},
+    {"id": 2, "type": "choice", "instruction": "What does ペンと本 mean?", "prompt": "", "options": ["A pen and a book, and nothing else", "A pen and a book, and maybe other things", "A pen or a book", "Neither a pen nor a book"], "answer": 0, "note": "と is the exclusive and."},
+    {"id": 3, "type": "choice", "instruction": "What does ペンや本 mean?", "prompt": "", "options": ["A pen, a book, and perhaps more", "Only a pen and a book", "A pen instead of a book", "No pen and no book"], "answer": 0, "note": "や is open-ended."},
+    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "もう行かないとダメだ。", "options": ["I have to go now", "I must not go", "I did not go", "I cannot go"], "answer": 0, "note": "Negative + と + ダメ: necessity."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "早く逃げないと！", "options": ["We have to run, quickly!", "We never run", "Do not run", "We ran"], "answer": 0, "note": "A bare と: the bad result is left unsaid."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "The conditional と usually allows several different possible results.", "options": ["True", "False"], "answer": 1, "note": "と points to one result only."},
+    {"id": 7, "type": "choice", "instruction": "Fill the gap", "prompt": "春になる＿＿暖かくなる。", "options": ["と", "を", "が", "で"], "answer": 0, "note": "A clause followed by と, then the result."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "When you press this button, the door opens.", "options": ["このボタンを", "押すと", "ドアが", "開く"], "note": "Condition, then result."},
+    {"id": 9, "type": "tap", "instruction": "Tap the part that means \"if I don't study\"", "options": ["今日", "勉強しないと", "困る"], "answer": 1, "note": "Negative + と."},
+    {"id": 10, "type": "choice", "instruction": "In which sentence is と the quotation と?", "prompt": "", "options": ["彼は行くと言った", "冬になると寒い", "ペンと本", "押すと開く"], "answer": 0, "note": "と + 言う quotes someone's words."},
+    {"id": 11, "type": "choice", "instruction": "What kind of sentence is this?", "prompt": "食べ過ぎると病気になるよ。", "options": ["A warning that exaggerates a likely result", "A guarantee with no exceptions", "A question", "A past event"], "answer": 0, "note": "と sounds absolute even for likely results."}
+  ]
+}

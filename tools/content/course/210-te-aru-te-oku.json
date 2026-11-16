@@ -1,0 +1,50 @@
+{
+  "id": 210,
+  "number": "21",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "てある, ている and ておく",
+  "summary": "ている shows a thing in a state, てある shows a state left by someone's action, and ておく sets an action up and leaves its effect in place.",
+  "video": "https://www.youtube.com/watch?v=cYrqFjPvwSI",
+  "related": [465, 421, 515],
+  "blocks": [
+    {"type": "text", "text": "Textbooks give you English labels for these helpers. This lesson asks what each one really does. All three sit after the **て-form** of a verb, and the choice between them depends on one thing: **who or what is behind the action**."},
+    {"type": "heading", "text": "ている with a self-move verb"},
+    {"type": "text", "text": "A **self-move** verb (lesson 15) such as 開く describes something that happens to the subject by itself. With ている it simply describes a **state**: the window is in the open state. Nobody is mentioned. Japanese treats the window as if it were a little living thing that is \"being\" open."},
+    {"type": "heading", "text": "てある with an other-move verb"},
+    {"type": "text", "text": "An **other-move** verb such as 開ける needs someone to do it. With **ある** the window loses its \"alive\" feel: it is just a thing that someone acted on, and the result is still there. The marked noun (the window) stays the main carriage of the sentence, but a hidden person caused the state."},
+    {"type": "table", "rows": [
+      ["Sentence", "Feel"],
+      ["窓が開いている", "The window is open (just the state)"],
+      ["窓が開けてある", "The window is open because someone opened it"],
+      ["窓を開けておく", "Open the window and leave it that way"]
+    ]},
+    {"type": "example", "jp": "黒板に名前が書いてある。", "en": "A name has been written on the board (and it is there)."},
+    {"type": "example", "jp": "机の上に本が置いてある。", "en": "A book has been put on the desk (and sits there)."},
+    {"type": "example", "jp": "冷蔵庫にケーキが入れてある。", "en": "Someone has put a cake in the fridge."},
+    {"type": "text", "text": "This is also why Japanese says 「と書いてある」 for writing on an object: the words were put there by someone, and they stay."},
+    {"type": "heading", "text": "ておく: do it and leave it in place"},
+    {"type": "text", "text": "ておく is the active side of てある. The verb **おく** means \"to place\", so you carry out the action and **leave its effect in place**. Textbooks say \"do in advance\", and that is often true, but a future purpose is not required: you can put a jar in a cupboard just to get rid of it."},
+    {"type": "example", "jp": "旅行の前に切符を買っておく。", "en": "I buy the ticket before the trip and have it ready."},
+    {"type": "example", "jp": "子供を泣かせておく。", "en": "I let the child go on crying (and leave it that way)."},
+    {"type": "keypoints", "items": [
+      "**自動詞 + ている**: a state, no one behind it.",
+      "**他動詞 + てある**: a state someone left behind.",
+      "**て-form + おく**: do it and leave the effect in place.",
+      "Never use ある after a self-move verb: 開いてある is wrong."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which sentence says the window is open because someone opened it?", "prompt": "", "options": ["窓が開けてある", "窓が開いている", "窓が開く", "窓を開く"], "answer": 0, "note": "Other-move 開ける + ある leaves a state caused by someone."},
+    {"id": 2, "type": "choice", "instruction": "Pick the right form", "prompt": "ドアが＿＿ある。 (Someone closed it and it stays closed.)", "options": ["閉めて", "閉まって", "閉まる", "閉める"], "answer": 0, "note": "ある needs the other-move verb 閉める in the て-form."},
+    {"id": 3, "type": "choice", "instruction": "What does this mean?", "prompt": "机の上に本が置いてある。", "options": ["A book has been put on the desk and is there", "A book is falling off the desk", "I am about to put a book down", "Nobody has put a book there"], "answer": 0, "note": "置く + てある: someone put it there and it stays."},
+    {"id": 4, "type": "choice", "instruction": "Which kind of verb goes before てある?", "prompt": "", "options": ["An other-move verb", "A self-move verb", "Any noun", "Only する"], "answer": 0, "note": "てある needs someone behind the action."},
+    {"id": 5, "type": "tap", "instruction": "Tap the helper that leaves the result in place", "options": ["黒板に", "名前が", "書いて", "ある"], "answer": 3, "note": "書いて is the verb; ある marks the state left behind."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "窓が開いている describes a state without saying who caused it.", "options": ["True", "False"], "answer": 0, "note": "Self-move verb + ている is a plain state."},
+    {"id": 7, "type": "order", "instruction": "Build the sentence", "prompt": "The window of the room has been left open (by someone).", "options": ["部屋の", "窓が", "開けて", "ある"], "note": "Noun を-less state: 窓が + 開けて + ある."},
+    {"id": 8, "type": "choice", "instruction": "What does this mean?", "prompt": "旅行の前に切符を買っておく。", "options": ["Buy the ticket beforehand and have it ready", "Put a ticket down on the floor", "Never buy a ticket", "Buy tickets again and again"], "answer": 0, "note": "ておく: do it and leave the effect in place."},
+    {"id": 9, "type": "choice", "instruction": "Who did it?", "prompt": "冷蔵庫にケーキが入れてある。", "options": ["Someone put the cake in the fridge", "The cake went in by itself", "The fridge swallowed it", "Nobody; it is a natural event"], "answer": 0, "note": "入れる is other-move, so a hidden person did it."},
+    {"id": 10, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["窓が開いてある", "窓が開いている", "窓が開けてある", "窓を開けておく"], "answer": 0, "note": "開く is self-move, so it cannot take てある."},
+    {"id": 11, "type": "choice", "instruction": "What does this mean?", "prompt": "子供を泣かせておく。", "options": ["Leave the child to go on crying", "Make the child laugh", "Stop the child from crying", "The child cried by itself"], "answer": 0, "note": "泣かせる (causative) + おく: let it happen and leave it."}
+  ]
+}

@@ -1,0 +1,243 @@
+{
+ "id": 890,
+ "number": "89",
+ "kind": "lesson",
+ "jlpt": 3,
+ "title": "The universal subject",
+ "summary": "Every real sentence has an A-car and a B-engine; when the A-car is not spoken it is a zero pronoun, not a missing subject.",
+ "video": "https://www.youtube.com/watch?v=CEgGnitwXGA",
+ "related": [
+  580
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "Some teachers say Japanese has no subject, because so many sentences seem to start with nothing. This course disagrees: every real sentence says something (B) about something (A). Japanese is a **null-subject** language, like Spanish: the subject is not always visible, but it is there."
+  },
+  {
+   "type": "heading",
+   "text": "The zero pronoun"
+  },
+  {
+   "type": "text",
+   "text": "The invisible A-car is found from context, and when context says nothing it defaults to **I**."
+  },
+  {
+   "type": "diagram",
+   "cars": [
+    {
+     "text": "(私は)",
+     "role": "zero"
+    },
+    {
+     "text": "疲れた",
+     "role": "engine"
+    }
+   ],
+   "text": "疲れた。 (I) am tired."
+  },
+  {
+   "type": "text",
+   "text": "It is not that \"tiredness hangs over the universe\". A language must be able to say B about A."
+  },
+  {
+   "type": "heading",
+   "text": "Indeterminate subjects"
+  },
+  {
+   "type": "text",
+   "text": "Some subjects are vague, as English \"it\" is: 雨になりそうだ, \"it looks like rain\". The copula だ still needs an A-car, because だ links two things."
+  },
+  {
+   "type": "heading",
+   "text": "The one true exception"
+  },
+  {
+   "type": "text",
+   "text": "A noun with a long modifier is not a sentence:"
+  },
+  {
+   "type": "example",
+   "jp": "泣いていた子供",
+   "en": "the child who was crying"
+  },
+  {
+   "type": "example",
+   "jp": "駅に着いた私",
+   "en": "me, who had arrived at the station"
+  },
+  {
+   "type": "text",
+   "text": "There is no A and B here: just a noun with a modifier. These are used in summaries and narration."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "Every real sentence has an A-car and a B-engine.",
+    "When the A-car is not spoken it is a zero pronoun: context decides, **I** by default.",
+    "A noun with a modifier is not a subjectless sentence; it is not a sentence at all."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What is a null-subject language?",
+   "prompt": "",
+   "options": [
+    "One whose subjects are not always visible",
+    "One with no subjects",
+    "One with only nouns",
+    "One with no verbs"
+   ],
+   "answer": 0,
+   "note": "The subject is still there."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Who is tired in the sentence 疲れた。 on its own?",
+   "prompt": "",
+   "options": [
+    "Normally the speaker",
+    "The listener",
+    "The moon",
+    "Everyone"
+   ],
+   "answer": 0,
+   "note": "The zero pronoun defaults to I."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "What does 泣いていた子供 mean?",
+   "prompt": "",
+   "options": [
+    "The child who was crying",
+    "The child cried",
+    "Crying is a child",
+    "I cried"
+   ],
+   "answer": 0,
+   "note": "A noun with a modifier."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Which of these is NOT a sentence?",
+   "prompt": "",
+   "options": [
+    "駅に着いた私",
+    "私は駅に着いた。",
+    "駅に着いた。",
+    "私は疲れた。"
+   ],
+   "answer": 0,
+   "note": "A noun with a modifier has no A and B."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "Why does だ in 雨になりそうだ prove a subject exists?",
+   "prompt": "",
+   "options": [
+    "Because だ links an A-car to a B",
+    "Because だ means \"it\"",
+    "Because だ is a noun",
+    "Because だ is a particle"
+   ],
+   "answer": 0,
+   "note": "The copula needs two things to link."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does the zero pronoun default to in context-free sentences?",
+   "prompt": "",
+   "options": [
+    "I",
+    "You",
+    "He",
+    "They"
+   ],
+   "answer": 0,
+   "note": "When nothing else is clear, it is the speaker."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "Japanese has no subject because the subject is often missing.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It is often invisible, not absent."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "English also drops the subject in some cases (such as commands).",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "\"Stop crying!\" has no spoken subject."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the engine",
+   "options": [
+    "今日は",
+    "疲れた"
+   ],
+   "answer": 1,
+   "note": "疲れた is the engine; the A-car (I) is zero."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I am hungry today.",
+   "options": [
+    "今日は",
+    "お腹が",
+    "すいた"
+   ],
+   "note": "The topic is today, the A-car is the stomach, and I is zero."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "When is a sequence like 泣いていた子供 typically used?",
+   "prompt": "",
+   "options": [
+    "Narration and summaries",
+    "Everyday questions",
+    "Commands",
+    "Polite requests"
+   ],
+   "answer": 0,
+   "note": "Games and stories use it to sum up."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "What is this course's view of grammar models?",
+   "prompt": "",
+   "options": [
+    "Tools to describe language, not its source code",
+    "The real source code",
+    "Always correct",
+    "Only for Japanese"
+   ],
+   "answer": 0,
+   "note": "Grammar describes language after the fact."
+  }
+ ]
+}

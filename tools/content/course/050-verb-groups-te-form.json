@@ -1,0 +1,54 @@
+{
+  "id": 50,
+  "number": "5",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Verb groups and the て-form",
+  "summary": "Verbs come in three groups. Each group has its own recipe for the て-form and the た-form.",
+  "video": "https://www.youtube.com/watch?v=GzEVLMDC8nw",
+  "related": [515, 551, 578, 516],
+  "blocks": [
+    {"type": "text", "text": "To make the て-form (and the past た-form, which follows the very same rules) you first need to know which of three groups a verb belongs to."},
+    {"type": "heading", "text": "Group 1: ichidan verbs (\"one-level\")"},
+    {"type": "text", "text": "Ichidan verbs end in **いる** or **える**, and conjugation is easy: **drop る and add the ending**. 食べる becomes 食べて and 食べた. 見る becomes 見て and 見た."},
+    {"type": "heading", "text": "Group 2: godan verbs (\"five-level\")"},
+    {"type": "text", "text": "This is the biggest group. A godan verb can end in **any** う-row sound, and the て-form depends on that last kana. Careful: some verbs that end in いる or える are godan, not ichidan: 帰る (to return) and 走る (to run) are godan."},
+    {"type": "table", "title": "How godan verbs make the て-form", "rows": [
+      ["Ending", "て-form", "Example"],
+      ["う・つ・る", "って", "買う→買って"],
+      ["ぬ・ぶ・む", "んで", "飲む→飲んで"],
+      ["く", "いて", "歩く→歩いて"],
+      ["ぐ", "いで", "泳ぐ→泳いで"],
+      ["す", "して", "話す→話して"]
+    ]},
+    {"type": "text", "text": "The た-form works the same way with た (and だ after ん and いで): 飲む→飲んだ, 歩く→歩いた, 泳ぐ→泳いだ. 死ぬ is the only verb that ends in ぬ. One exception: **行く** becomes **行って**, not 行いて."},
+    {"type": "heading", "text": "Group 3: irregular verbs"},
+    {"type": "text", "text": "Only two: **来る** (to come, て-form 来て) and **する** (to do, て-form して)."},
+    {"type": "example", "jp": "水を飲んでいる。", "en": "(I) am drinking water."},
+    {"type": "example", "jp": "友達と遊んでいる。", "en": "(I) am playing with a friend."},
+    {"type": "example", "jp": "公園を歩いている。", "en": "(I) am walking in the park."},
+    {"type": "example", "jp": "昨日、友達に会った。", "en": "Yesterday (I) met a friend."},
+    {"type": "keypoints", "items": [
+      "**Ichidan**: drop **る**, add て / た.",
+      "**Godan**: look at the last kana (**う つ る → って**, **ぬ ぶ む → んで**, **く → いて**, **ぐ → いで**, **す → して**).",
+      "**行く → 行って** is the one godan exception.",
+      "Irregular: **来る → 来て**, **する → して**.",
+      "Do not trust the look of a verb: **帰る** and **走る** are godan."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the て-form", "prompt": "飲む", "options": ["飲んで", "飲って", "飲いて", "飲みて"], "answer": 0, "note": "む → んで."},
+    {"id": 2, "type": "choice", "instruction": "Pick the て-form", "prompt": "買う", "options": ["買って", "買んで", "買いて", "買うて"], "answer": 0, "note": "う → って."},
+    {"id": 3, "type": "choice", "instruction": "Pick the て-form", "prompt": "泳ぐ", "options": ["泳いで", "泳いて", "泳んで", "泳って"], "answer": 0, "note": "ぐ → いで (the dots carry over)."},
+    {"id": 4, "type": "choice", "instruction": "Pick the て-form", "prompt": "話す", "options": ["話して", "話いて", "話って", "話んで"], "answer": 0, "note": "す → して."},
+    {"id": 5, "type": "choice", "instruction": "Pick the て-form", "prompt": "行く", "options": ["行って", "行いて", "行んで", "行きて"], "answer": 0, "note": "行く is the exception to the く → いて rule."},
+    {"id": 6, "type": "choice", "instruction": "Which verb looks ichidan but is actually godan?", "prompt": "", "options": ["食べる", "帰る", "見る", "起きる"], "answer": 1, "note": "帰る is godan: 帰って, not 帰て."},
+    {"id": 7, "type": "choice", "instruction": "Which are the only two irregular verbs?", "prompt": "", "options": ["来る and する", "行く and ある", "見る and いる", "話す and 買う"], "answer": 0, "note": "来る→来て and する→して."},
+    {"id": 8, "type": "choice", "instruction": "Pick the past (た-form)", "prompt": "死ぬ", "options": ["死んだ", "死いた", "死った", "死した"], "answer": 0, "note": "ぬ → んだ."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "(I) am drinking water.", "options": ["水を", "飲んで", "いる"], "note": "て-form of 飲む plus いる."},
+    {"id": 10, "type": "choice", "instruction": "True or false?", "prompt": "An ichidan verb drops its final る before て.", "options": ["True", "False"], "answer": 0, "note": "食べる → 食べて."},
+    {"id": 11, "type": "choice", "instruction": "Which rule makes 歩く into 歩いた?", "prompt": "", "options": ["く → いて / いた", "う → って", "む → んで", "す → して"], "answer": 0, "note": "く verbs take い (and ぐ verbs take いで)."},
+    {"id": 12, "type": "choice", "instruction": "Pick the て-form", "prompt": "待つ", "options": ["待って", "待んで", "待いて", "待して"], "answer": 0, "note": "つ → って."},
+    {"id": 13, "type": "tap", "instruction": "Tap the word in て-form", "options": ["友達と", "話して", "帰った"], "answer": 1, "note": "話して is the て-form of 話す."}
+  ]
+}

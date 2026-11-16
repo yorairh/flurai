@@ -1,0 +1,48 @@
+{
+  "id": 470,
+  "number": "47",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Your secret weapon: break any sentence into carriage, engine and modifiers",
+  "summary": "Every long sentence is a が carriage and an engine, with everything else telling you more about one of them.",
+  "video": "https://www.youtube.com/watch?v=z9S2J8tlnUE",
+  "related": [604, 503, 504],
+  "blocks": [
+    {"type": "text", "text": "A very long Japanese sentence is usually less complicated than it looks. Every logical clause has just two core parts: the **が main carriage** (visible or zero) and the **engine**. They are not just part of the sentence: **they are the sentence**. Everything else only gives more information about one of them."},
+    {"type": "heading", "text": "Modifying anything"},
+    {"type": "text", "text": "Lesson 46 said modifiers go before the noun. The full rule is wider: **anything that modifies anything goes before it**. That includes the engine. In an other-move sentence, the nouns marked by **を, に, で and へ** are all modifiers of the verb: each tells you more about the action. (の is different: it links one noun to another noun.)"},
+    {"type": "heading", "text": "A worked example"},
+    {"type": "text", "text": "Take the sentence below. Its core is only (私が) あげた, \"I gave\". Everything else answers a question about it."},
+    {"type": "example", "jp": "（私が）母が焼いたケーキを眼鏡をかけた女の子にあげた。", "en": "(I) gave the cake my mother baked to the girl wearing glasses."},
+    {"type": "table", "rows": [
+      ["Question", "Answer from the sentence", "Which part"],
+      ["Gave what?", "ケーキを", "を modifies あげた"],
+      ["What kind of cake?", "母が焼いた", "describes ケーキ"],
+      ["Gave to whom?", "女の子に", "に modifies あげた"],
+      ["What kind of girl?", "眼鏡をかけた", "describes 女の子"]
+    ]},
+    {"type": "text", "text": "Peel the sentence like this: find the final engine, find its carriage, then ask each other piece \"what are you telling me more about?\" Pieces ending in an engine in front of a noun are simply clauses describing that noun."},
+    {"type": "heading", "text": "Compound sentences"},
+    {"type": "text", "text": "A sentence can hold two complete clauses, such as 店に行ってパンを買った (\"went to the shop and bought bread\"). Both clauses have a carriage, and the second one shares the first one's zero carriage. English does the same with \"I went to the shop and bought bread\". The more clauses you can recognize, the more manageable long sentences become."},
+    {"type": "keypoints", "items": [
+      "Every logical clause is a **carriage + engine**; the rest modifies one of the two.",
+      "**を, に, で, へ** nouns modify the verb; **の** links two nouns.",
+      "Anything that modifies something stands **before** it.",
+      "To read a long sentence: find the engine, find the carriage, then attach each piece."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What are the two core parts of a sentence?", "prompt": "", "options": ["The が carriage and the engine", "The topic and the object", "The subject and the particle", "Two nouns"], "answer": 0, "note": "Everything else only adds information."},
+    {"id": 2, "type": "choice", "instruction": "What do を, に, で and へ nouns do in a verb sentence?", "prompt": "", "options": ["Modify the verb", "Mark the carriage", "Replace the engine", "Link two nouns"], "answer": 0, "note": "They tell us more about the action."},
+    {"id": 3, "type": "choice", "instruction": "Which particle links one noun to another?", "prompt": "", "options": ["の", "を", "で", "へ"], "answer": 0, "note": "の couples nouns; it does not describe the verb."},
+    {"id": 4, "type": "tap", "instruction": "Tap the engine", "options": ["弟が", "新しい本を", "買った"], "answer": 2, "note": "買った ends the clause and carries the action."},
+    {"id": 5, "type": "tap", "instruction": "Tap the part that describes ケーキ", "options": ["母が焼いた", "ケーキを", "あげた"], "answer": 0, "note": "A clause in front of a noun describes it."},
+    {"id": 6, "type": "choice", "instruction": "In 駅で友達に会った, which part modifies the verb with a place?", "prompt": "", "options": ["駅で", "友達に", "会った", "None of them"], "answer": 0, "note": "で gives the place of the action."},
+    {"id": 7, "type": "choice", "instruction": "What does 友達に tell you in the same sentence?", "prompt": "", "options": ["Whom (I) met", "Where it happened", "When it happened", "Why it happened"], "answer": 0, "note": "に marks the person the action reached."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "In 眼鏡をかけた女の子, the part 眼鏡をかけた describes 女の子.", "options": ["True", "False"], "answer": 0, "note": "It ends in an engine and comes before the noun."},
+    {"id": 9, "type": "choice", "instruction": "Which part of this sentence is in the zero carriage?", "prompt": "店に行ってパンを買った。", "options": ["The person who went and bought", "The shop", "The bread", "Nothing is missing"], "answer": 0, "note": "Both clauses share the same zero carriage."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "(I) read the book my friend lent me.", "options": ["友達が貸した", "本を", "読んだ"], "note": "The clause 友達が貸した describes 本; then the engine closes the sentence."},
+    {"id": 11, "type": "choice", "instruction": "How many logical clauses are in this sentence?", "prompt": "朝起きて、顔を洗って、コーヒーを飲んだ。", "options": ["Three", "One", "Two", "Four"], "answer": 0, "note": "起きて, 洗って and 飲んだ each have their own action."},
+    {"id": 12, "type": "choice", "instruction": "What is the best first step with a very long sentence?", "prompt": "", "options": ["Find the final engine and its carriage", "Translate the first word", "Remove all particles", "Look for the longest noun"], "answer": 0, "note": "The core is the sentence; everything else attaches to it."}
+  ]
+}

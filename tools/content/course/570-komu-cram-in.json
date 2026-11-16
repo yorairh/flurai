@@ -1,0 +1,50 @@
+{
+  "id": 570,
+  "number": "57",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "込む and words with many meanings",
+  "summary": "A word with many dictionary meanings usually has one concrete picture behind it. For 込む the picture is cramming something in.",
+  "video": "https://www.youtube.com/watch?v=31xnxSFUCiw",
+  "related": [],
+  "blocks": [
+    {"type": "text", "text": "Dictionaries sometimes list a dozen unrelated-looking meanings for one word. Almost always there is a single **concrete picture** and the rest are metaphors from it. Languages talk about abstract things with physical pictures: we speak of time \"going forward\" as if it were space. Learn the picture, and you can guess the meanings instead of memorizing them."},
+    {"type": "text", "text": "Cutting (**切る**) shows how it works. The same word covers cut paper, cut a conversation short, cut across a field, and sever a relationship. All of these are \"cut\"."},
+    {"type": "heading", "text": "The picture of 込む"},
+    {"type": "text", "text": "**込む** has no exact English match. The kanji is 入 (go in) on a road, as if sliding in fast. So it means **to put in quickly, vigorously or in great quantity: to cram in**. On its own, 込んでいる means crowded, as in a lot of people crammed into one space. The same word can describe a complicated situation, as in many ideas crammed in."},
+    {"type": "heading", "text": "As a helper on the い-stem"},
+    {"type": "table", "rows": [
+      ["Compound", "Picture", "Meaning"],
+      ["飛び込む", "jump + cram in", "jump into water, or into a conversation"],
+      ["黙り込む", "be silent + keep it all in", "clam up, fall silent"],
+      ["思い込む", "think + cram in", "be convinced (often wrongly)"],
+      ["読み込む", "read + cram in", "load data; read thoroughly; read meaning into something"],
+      ["教え込む", "teach + cram in", "drill into someone"]
+    ]},
+    {"type": "text", "text": "思い can also mean love or desire (片思い is one-sided love), so 思い込む can mean to be in love, or to have your heart set on something: the wish is lodged in tightly. 読み込み中, \"loading\", on a screen comes from the same picture, with 中 meaning \"in the middle of\"."},
+    {"type": "example", "jp": "彼は川に飛び込んだ。", "en": "He jumped into the river."},
+    {"type": "example", "jp": "駅はとても込んでいた。", "en": "The station was very crowded."},
+    {"type": "example", "jp": "（私は）彼が来ると思い込んでいた。", "en": "(I) was convinced that he would come."},
+    {"type": "example", "jp": "データを読み込み中です。", "en": "The data is loading now."},
+    {"type": "keypoints", "items": [
+      "A many-meaning word usually has one concrete picture behind it.",
+      "**込む** = cram in: quickly, in quantity, thoroughly.",
+      "As a helper on the い-stem it adds \"into, thoroughly, inwardly\".",
+      "Guess a new 〜込む compound from the verb plus the cramming picture."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is the basic picture of 込む?", "prompt": "", "options": ["Cramming something in", "Cutting something off", "Pulling something out", "Leaving something behind"], "answer": 0, "note": "A fast road leading into a space."},
+    {"id": 2, "type": "choice", "instruction": "What does 込んでいる mean?", "prompt": "", "options": ["Crowded", "Empty", "Closed", "Forgotten"], "answer": 0, "note": "A lot of people crammed into the same place."},
+    {"id": 3, "type": "choice", "instruction": "What does 飛び込む mean?", "prompt": "", "options": ["Jump into", "Fly away", "Run past", "Climb up"], "answer": 0, "note": "飛び + 込む."},
+    {"id": 4, "type": "choice", "instruction": "What does 黙り込む describe?", "prompt": "", "options": ["Clamming up and keeping everything inside", "Shouting out", "Whispering a secret", "Forgetting a name"], "answer": 0, "note": "黙る + 込む: silence locked in."},
+    {"id": 5, "type": "choice", "instruction": "A screen says 読み込み中. What is happening?", "prompt": "", "options": ["It is loading data", "It is deleting a book", "It is asking you a question", "It is closed"], "answer": 0, "note": "読み込む = read and put into memory; 中 = in the middle of."},
+    {"id": 6, "type": "choice", "instruction": "Which stem does 込む attach to as a helper?", "prompt": "", "options": ["い-stem", "あ-stem", "て-form", "Dictionary form"], "answer": 0, "note": "思い込む, 飛び込む, 読み込む."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "思い込む always means being in love.", "options": ["True", "False"], "answer": 1, "note": "Its main use is to be convinced; love is one possible reading."},
+    {"id": 8, "type": "tap", "instruction": "Tap the verb with the cramming picture", "options": ["彼は", "部屋に", "駆け込んだ"], "answer": 2, "note": "駆け込む = run in."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence means \"(I) was convinced the test was easy\"?", "prompt": "", "options": ["試験は簡単だと思い込んでいた。", "試験は簡単だと思い出した。", "試験は簡単だと思わせた。", "試験は簡単に読み込んだ。"], "answer": 0, "note": "思い込む: a thought firmly lodged."},
+    {"id": 10, "type": "choice", "instruction": "Why does a word often have many meanings?", "prompt": "", "options": ["They come from one concrete picture", "They are unrelated words", "They are always honorific", "They are rare"], "answer": 0, "note": "Metaphors grow out of the physical base meaning."},
+    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "He jumped into the river.", "options": ["彼は", "川に", "飛び込んだ"], "note": "Topic, destination, verb."},
+    {"id": 12, "type": "choice", "instruction": "What would 教え込む most likely mean?", "prompt": "", "options": ["Drill something into someone", "Forget a lesson", "Stop teaching", "Ask a question"], "answer": 0, "note": "教える + cram in."}
+  ]
+}

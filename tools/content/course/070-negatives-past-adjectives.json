@@ -1,0 +1,59 @@
+{
+  "id": 70,
+  "number": "7",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Negative forms and adjectives in the past",
+  "summary": "ない is an い-adjective meaning \"is not\", and it builds every negative. い-adjectives make their past with かった.",
+  "video": "https://www.youtube.com/watch?v=KIPhvGxp43c",
+  "related": [521, 523, 511, 512],
+  "blocks": [
+    {"type": "text", "text": "Everything negative in Japanese is built on one word: **ない**. It is an **い-adjective** meaning \"does not exist\" or \"is not\". The picture: **doing** something is a verb, but **not doing** it is a **state**, so it takes an adjective as its engine."},
+    {"type": "heading", "text": "Existence and the copula"},
+    {"type": "example", "jp": "ペンがある。", "en": "There is a pen."},
+    {"type": "example", "jp": "ペンがない。", "en": "There is no pen."},
+    {"type": "text", "text": "The copula works the same way. だ becomes **ではない** (で is the て-form of だ, plus は for emphasis, plus ない). In speech it is often じゃない."},
+    {"type": "example", "jp": "これはペンだ。", "en": "This is a pen."},
+    {"type": "example", "jp": "これはペンではない。", "en": "This is not a pen."},
+    {"type": "heading", "text": "Verbs"},
+    {"type": "text", "text": "Attach ない to the **あ-stem** of the verb: change the last kana to its **あ** sound. The one exception is verbs ending in う, which use **わ**. Ichidan verbs just drop る."},
+    {"type": "table", "rows": [
+      ["Verb", "Negative"],
+      ["聞く", "聞かない"],
+      ["話す", "話さない"],
+      ["待つ", "待たない"],
+      ["買う", "買わない"],
+      ["食べる", "食べない"]
+    ]},
+    {"type": "heading", "text": "い-adjectives"},
+    {"type": "text", "text": "Change the final **い** to **く**, then add ない: 赤い → **赤くない**. The same く form also makes the て-form (赤くて). For the **past**, change い to **かった**: 怖い → **怖かった** (it was scary). The negative past of anything is **なかった**."},
+    {"type": "example", "jp": "さくらが走らなかった。", "en": "Sakura did not run."},
+    {"type": "example", "jp": "さくらが走っている。", "en": "Sakura is running."},
+    {"type": "example", "jp": "さくらが走っていなかった。", "en": "Sakura was not running."},
+    {"type": "example", "jp": "あの映画は怖かった。", "en": "That movie was scary."},
+    {"type": "heading", "text": "Two small exceptions"},
+    {"type": "text", "text": "**ます** has its own negative, **ません** (not ますない). And **いい** (good) uses its old stem **よい** for every change: **よかった** (it was good), **よくない** (not good). Never いくない or いかった."},
+    {"type": "keypoints", "items": [
+      "**ない** is an い-adjective: it changes like one (**なかった**, **なくて**).",
+      "Verb: **あ-stem + ない** (う-verbs use **わ**); ichidan: drop る.",
+      "い-adjective: **い → くない**; past **い → かった**.",
+      "Noun / copula: **ではない**; polite verb: **ません**.",
+      "**いい → よくない / よかった**."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the negative", "prompt": "食べる", "options": ["食べない", "食べらない", "食べくない", "食べるない"], "answer": 0, "note": "Ichidan verbs drop る and add ない."},
+    {"id": 2, "type": "choice", "instruction": "Pick the negative", "prompt": "買う", "options": ["買わない", "買あない", "買うない", "買らない"], "answer": 0, "note": "う-verbs use わ in front of ない."},
+    {"id": 3, "type": "choice", "instruction": "Pick \"not red\"", "prompt": "赤い", "options": ["赤くない", "赤いない", "赤じゃない", "赤くなかった"], "answer": 0, "note": "い becomes く, then ない."},
+    {"id": 4, "type": "choice", "instruction": "Pick the past", "prompt": "かわいい", "options": ["かわいかった", "かわいいた", "かわいだった", "かわいくた"], "answer": 0, "note": "い becomes かった."},
+    {"id": 5, "type": "choice", "instruction": "Pick the past of いい (good)", "prompt": "", "options": ["よかった", "いかった", "いいだった", "いくなった"], "answer": 0, "note": "いい uses its old stem よい for every change."},
+    {"id": 6, "type": "choice", "instruction": "Which means \"This is not a pen\"?", "prompt": "", "options": ["これはペンではない", "これはペンがない", "これはペンくない", "これはペンじゃある"], "answer": 0, "note": "だ becomes ではない."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "ない is itself an い-adjective.", "options": ["True", "False"], "answer": 0, "note": "That is why it can become なかった and なくて."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "Sakura was not running.", "options": ["さくらが", "走って", "いなかった"], "note": "走って + いる, then いる turns into いなかった."},
+    {"id": 9, "type": "choice", "instruction": "Pick the negative past", "prompt": "食べない", "options": ["食べなかった", "食べないだった", "食べなくった", "食べなた"], "answer": 0, "note": "ない → なかった, like any い-adjective."},
+    {"id": 10, "type": "choice", "instruction": "Pick the polite negative", "prompt": "話します", "options": ["話しません", "話しませる", "話しなます", "話さません"], "answer": 0, "note": "ます has its own negative: ません."},
+    {"id": 11, "type": "tap", "instruction": "Tap the part that makes the sentence negative past", "options": ["さくらが", "走ら", "なかった"], "answer": 2, "note": "なかった is the past of ない."},
+    {"id": 12, "type": "choice", "instruction": "Which verb ending uses わ in front of ない?", "prompt": "", "options": ["う", "く", "す", "る"], "answer": 0, "note": "買う → 買わない. This is the only irregular stem."},
+    {"id": 13, "type": "choice", "instruction": "Which is the correct negative of いい (good)?", "prompt": "", "options": ["よくない", "いくない", "いいない", "いじゃない"], "answer": 0, "note": "いい borrows よい: よくない."}
+  ]
+}

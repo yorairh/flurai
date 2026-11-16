@@ -1,0 +1,46 @@
+{
+  "id": 270,
+  "number": "27",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "ばかり",
+  "summary": "ばかり is a noun meaning \"just that\". Every use is a kind of exaggeration: just happened, nothing but, a great deal of, and the links ばかりか and ばかりに.",
+  "video": "https://www.youtube.com/watch?v=jqC60f-c1ng",
+  "related": [437, 490, 367],
+  "blocks": [
+    {"type": "text", "text": "**ばかり** is in essence a **noun**, so it can take だ after it. Its core is \"just this and nothing else\", used the way English uses \"nothing but\": as a **hyperbole**. Seen that way, its uses stop looking like a list."},
+    {"type": "heading", "text": "1. Just happened"},
+    {"type": "text", "text": "After a **past** verb it says that nothing has happened since: the action is very recent. The past tense is needed because the idea is about something completed."},
+    {"type": "example", "jp": "昼ご飯を食べたばかりだ。", "en": "I have just eaten lunch."},
+    {"type": "example", "jp": "日本に来たばかりです。", "en": "I have just come to Japan."},
+    {"type": "heading", "text": "2. A great deal of one thing"},
+    {"type": "text", "text": "After a noun it exaggerates: there is so much of it that it feels like nothing else exists."},
+    {"type": "example", "jp": "この町は観光客ばかりだ。", "en": "This town is nothing but tourists."},
+    {"type": "heading", "text": "3. Doing only one thing"},
+    {"type": "text", "text": "After a verb in the **て-form**, plus いる: you keep doing that and nothing else."},
+    {"type": "example", "jp": "弟はゲームをしてばかりいる。", "en": "My little brother does nothing but play games."},
+    {"type": "heading", "text": "Two links"},
+    {"type": "text", "text": "**ばかりか** adds か, which here turns the limit around: \"not just that, but also\". **ばかりに** adds に and means **\"just because\"**, with a stronger and usually unlucky cause than から or ので."},
+    {"type": "example", "jp": "彼女は歌ったばかりか、踊った。", "en": "She did not only sing, she danced too."},
+    {"type": "example", "jp": "傘を忘れたばかりに、濡れてしまった。", "en": "Just because I forgot my umbrella, I got wet."},
+    {"type": "keypoints", "items": [
+      "**Past verb + ばかり**: just did it.",
+      "**Noun + ばかり**: nothing but / loads of.",
+      "**Verb て-form + ばかり + いる**: keeps doing only that.",
+      "**ばかりか**: not only, but also; **ばかりに**: just because."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "昼ご飯を食べたばかりだ。", "options": ["I have just eaten lunch", "I am about to eat lunch", "I only ate lunch", "I never eat lunch"], "answer": 0, "note": "Past verb + ばかり: just done."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "弟はゲームをしてばかりいる。", "options": ["My brother does nothing but play games", "My brother just played a game", "My brother likes to watch games", "My brother never plays games"], "answer": 0, "note": "て-form + ばかり + いる: keeps doing only that."},
+    {"id": 3, "type": "choice", "instruction": "What does this mean?", "prompt": "この町は観光客ばかりだ。", "options": ["There are a great many tourists (an exaggeration)", "There is only one tourist", "There are no tourists", "The tourists just arrived"], "answer": 0, "note": "Noun + ばかり is hyperbole for \"loads of\"."},
+    {"id": 4, "type": "choice", "instruction": "What does ばかりか mean in this sentence?", "prompt": "彼女は歌ったばかりか、踊った。", "options": ["Not only ... but also", "Just because", "Just now", "Nothing but"], "answer": 0, "note": "ばかりか: not only that; more is added."},
+    {"id": 5, "type": "choice", "instruction": "What does ばかりに mean?", "prompt": "傘を忘れたばかりに、濡れてしまった。", "options": ["Just because (of one bad cause)", "Not only", "Just now", "Every time"], "answer": 0, "note": "ばかりに gives a single, usually unlucky reason."},
+    {"id": 6, "type": "choice", "instruction": "Fill the gap", "prompt": "彼は泣い＿＿いる。 (He does nothing but cry.)", "options": ["てばかり", "たばかり", "ればかり", "くばかり"], "answer": 0, "note": "て-form + ばかり + いる."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "To say \"just did it\" with ばかり, the verb goes in the plain past.", "options": ["True", "False"], "answer": 0, "note": "食べたばかり, 来たばかり."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "I have just eaten lunch.", "options": ["昼ご飯を", "食べた", "ばかりだ"], "note": "Past verb + ばかり + だ."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "He does nothing but sleep.", "options": ["彼は", "寝て", "ばかり", "いる"], "note": "て-form + ばかり + いる."},
+    {"id": 10, "type": "tap", "instruction": "Tap the word that means \"not only\"", "options": ["彼女は", "歌った", "ばかりか", "踊った"], "answer": 2, "note": "ばかりか links a second, added fact."},
+    {"id": 11, "type": "choice", "instruction": "Which means \"just came\"?", "prompt": "", "options": ["来たばかり", "来るばかり", "来ばかり", "来ないばかり"], "answer": 0, "note": "The recent action is in the past."}
+  ]
+}

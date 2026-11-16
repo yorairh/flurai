@@ -1,6 +1,7 @@
 package com.flurai.app.core.quiz
 
 import com.flurai.app.core.activity.StudyClock
+import com.flurai.app.core.course.CourseAnswer
 import com.flurai.app.core.model.JlptLevel
 import com.flurai.app.core.profile.StudyProfile
 import kotlinx.coroutines.test.runTest
@@ -39,6 +40,13 @@ class QuizRunTest {
         val alreadyStudied = mutableSetOf<Int>()
         override suspend fun withoutFlashcards(uid: String, wordIds: List<Int>): List<Int> = wordIds.filter { it !in alreadyStudied }
         override suspend fun saveProfile(uid: String, profile: StudyProfile) { savedProfile = profile }
+
+        val course = mutableListOf<CourseAnswer>()
+        var nextLesson: Int? = null
+        override suspend fun recordCourse(uid: String, kind: QuizKind, answers: List<CourseAnswer>, at: Long): Int? {
+            course += answers
+            return nextLesson
+        }
     }
 
     private val backend = FakeBackend()
@@ -304,11 +312,108 @@ class QuizRunTest {
 
     // -- the kinds themselves ----------------------------------------------------------------------------
 
+    // -- the grammar course -----------------------------------------------------------------------------
+
+    private fun courseQuestion(n: Int, lesson: Int = 3) = question(n).copy(
+        kind = QuestionKind.CourseChoice, instruction = "Pick the subject", courseLesson = lesson, courseQuestion = n,
+    )
+
+    @Test
+    fun aCourseLessonTestIsPassedAtEightyPercentAndEveryAnswerIsRecordedAgainstItsQuestion() = runTest {
+        backend.questions = (1..10).map { courseQuestion(it) }
+        backend.nextLesson = 40
+        val run = run(QuizKind.CourseLesson(3))
+        run.start()
+
+        repeat(10) { run.answer(right = it < 8) }
+
+        val result = run.state.value.result!!
+        assertEquals(true, result.passed)
+        assertEquals(40, result.nextLessonId)
+        assertEquals(10, backend.course.size)
+        assertEquals(listOf(9, 10), backend.course.filter { !it.correct }.map { it.questionId })
+        assertTrue(backend.course.all { it.lessonId == 3 })
+        val saved = backend.saved.single()
+        assertEquals(TestType.Course, saved.type)
+        assertNull(saved.level)
+    }
+
+    @Test
+    fun aCourseLessonTestUnderEightyPercentIsNotPassed() = runTest {
+        backend.questions = (1..10).map { courseQuestion(it) }
+        val run = run(QuizKind.CourseLesson(3))
+        run.start()
+        repeat(10) { run.answer(right = it < 7) }
+        assertEquals(false, run.state.value.result!!.passed)
+    }
+
+    @Test
+    fun testYourselfHasNoPassMarkButStillRecordsWhatWasMissed() = runTest {
+        backend.questions = (1..4).map { courseQuestion(it, lesson = it) }
+        val run = run(QuizKind.CourseReview(10))
+        run.start()
+        repeat(4) { run.answer(right = it != 2) }
+        assertNull(run.state.value.result!!.passed)
+        assertEquals(listOf(3), backend.course.filter { !it.correct }.map { it.lessonId })
+    }
+
+    @Test
+    fun anOrderQuestionIsRightOnlyWhenThePiecesAreInTheRightOrder() = runTest {
+        val order = Question(
+            kind = QuestionKind.CourseOrder, prompt = "I eat sushi.", hint = null, options = listOf("私は", "すしを", "食べる"), answer = 0,
+            level = 5, instruction = "Put the pieces in order", tiles = listOf("食べる", "私は", "すしを"), correctText = "私はすしを食べる",
+            courseLesson = 3, courseQuestion = 1,
+        )
+        backend.questions = listOf(order, order.copy(courseQuestion = 2))
+        val run = run(QuizKind.CourseLesson(3))
+        run.start()
+
+        run.arrange(listOf(0, 0, 1)) // not every piece exactly once: ignored
+        assertNull(run.state.value.selected)
+        run.arrange(listOf(1, 2, 0))
+        assertEquals("私はすしを食べる", run.state.value.arranged)
+        run.next()
+        run.arrange(listOf(0, 1, 2)) // 食べる first: wrong
+        run.next()
+
+        val result = run.state.value.result!!
+        assertEquals(1, result.correct)
+        assertEquals("食べる私はすしを", result.missed.single().chosen)
+        assertEquals("私はすしを食べる", result.missed.single().correct)
+    }
+
+    @Test
+    fun aMissedCourseQuestionWithoutAPromptShowsItsInstructionAsWhatWasAsked() = runTest {
+        backend.questions = listOf(courseQuestion(1).copy(prompt = ""), courseQuestion(2).copy(prompt = "さくらが歩く"))
+        val run = run(QuizKind.CourseLesson(3))
+        run.start()
+        run.answer(right = false)
+        run.answer(right = false)
+
+        val missed = run.state.value.result!!.missed
+        assertEquals("Pick the subject", missed[0].prompt)
+        assertNull(missed[0].hint)
+        assertEquals("さくらが歩く", missed[1].prompt)
+        assertEquals("Pick the subject", missed[1].hint)
+    }
+
+    @Test
+    fun courseKindsHaveTheirOwnTitlesAndNoLevel() {
+        assertEquals("Lesson test", QuizKind.CourseLesson(3).title)
+        assertEquals("Test yourself", QuizKind.CourseReview(20).title)
+        assertEquals(TestType.Course, QuizKind.CourseReview(20).testType)
+        assertNull(QuizKind.CourseLesson(3).savedLevel(null))
+        assertEquals(true, QuizKind.CourseLesson(3).passed(8, 10))
+        assertEquals(false, QuizKind.CourseLesson(3).passed(7, 10))
+        assertNull(QuizKind.CourseReview(20).passed(20, 20))
+    }
+
     @Test
     fun everyKindSurvivesTheRouteRoundTrip() {
         val kinds = listOf(
             QuizKind.Placement, QuizKind.Quick, QuizKind.Listening, QuizKind.Checkpoint(3),
             QuizKind.Grammar(4), QuizKind.Grammar(2, 777), QuizKind.Reading(1),
+            QuizKind.CourseLesson(750), QuizKind.CourseReview(20),
         )
         kinds.forEach { assertEquals(it, QuizKind.decode(it.encode())) }
     }

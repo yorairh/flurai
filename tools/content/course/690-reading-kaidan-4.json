@@ -1,0 +1,45 @@
+{
+  "id": 690,
+  "number": "69",
+  "kind": "note",
+  "title": "Reading in the wild: a ghost story, part 4",
+  "summary": "A walk through the next part of a short Japanese ghost story, using the tools from earlier lessons on real text.",
+  "video": "https://www.youtube.com/watch?v=Iezf0NR-cTE",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "This episode is practice, not new grammar. It continues a short ghost story in Japanese that began a few episodes earlier, and takes it sentence by sentence to show how the earlier tools work on real text. In the story so far, a young woman went back to her senpai's apartment late at night to fetch her phone, found the door unlocked and the room dark, and left without turning the light on."
+    },
+    {
+      "type": "heading",
+      "text": "What the episode shows"
+    },
+    {
+      "type": "text",
+      "text": "The next morning she passes the apartment and finds police there. The sentences show several things you already know: a **と** that links two clauses, **receptive** verbs for \"was killed\" and \"was ransacked\" (殺された, 荒らされて), the て-form + **おり** as a written way of joining clauses, and a run of **〜たら** clauses in which she imagines what might have been different if she had acted otherwise."
+    },
+    {
+      "type": "example",
+      "jp": "翌日、先輩のアパートの前を通りかかると、大勢の警官が集まっていた。",
+      "en": "The next day, as she passed her senpai's apartment, a crowd of police had gathered."
+    },
+    {
+      "type": "example",
+      "jp": "先輩が部屋で殺されたというのだ。",
+      "en": "It turned out that her senpai had been killed in the room."
+    },
+    {
+      "type": "example",
+      "jp": "あの時、電気をつけていたら、先輩を起こしていたら。",
+      "en": "If I had turned on the light back then... if I had woken my senpai..."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "The point is practice: break each sentence into clauses before reading the meaning.",
+        "Look for 〜た / 〜たら chains, receptive verbs, and clause connectors.",
+        "Words met here: 翌日, 通りかかる, 大勢, 警官, 事情, 驚く, 荒らす."
+      ]
+    }
+  ]
+}

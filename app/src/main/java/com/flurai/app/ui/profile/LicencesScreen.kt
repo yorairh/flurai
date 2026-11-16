@@ -42,6 +42,13 @@ private val sources = listOf(
         "Sentences from tatoeba.org, including the Tanaka Corpus, by the Tatoeba community.",
     ),
     Source(
+        "Cure Dolly",
+        "The recommended grammar course",
+        "Lessons written for FluRai",
+        "The grammar course follows the teaching model and lesson order of Cure Dolly's Organic Japanese video course. " +
+            "The lesson text, examples and questions are written for FluRai; each lesson links to the original video.",
+    ),
+    Source(
         "jiten.moe",
         "Difficulty and vocabulary of anime, dramas, books and games",
         "Creative Commons Attribution-ShareAlike 4.0",

@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flurai.app.core.activity.StudyDayEntity
 import com.flurai.app.core.auth.GUEST_UID
+import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.prefs.UserPreferences
 import com.flurai.app.core.quiz.TestResultEntity
@@ -156,6 +157,40 @@ class SyncEngineTest {
         a.now = 40_000
         a.sync()
         assertEquals(1, a.local.grammarRows.single().correct)
+    }
+
+    @Test
+    fun aPassedCourseLessonReachesTheOtherPhoneAndABetterLaterResultWins() {
+        val a = Phone()
+        val b = Phone()
+        a.local.courseRows += CourseProgressEntity(UID, 10, 7, 10, null, 1, "3,5", 1_000) // tried, not passed
+        a.sync()
+        b.sync()
+        assertEquals(a.local.courseRows, b.local.courseRows)
+
+        // Passed on B afterwards: that wins over A's earlier attempt.
+        b.now = 20_000
+        b.local.courseRows[0] = CourseProgressEntity(UID, 10, 9, 10, 21_000, 2, "", 21_000)
+        b.now = 30_000
+        b.sync()
+        a.now = 40_000
+        a.sync()
+        assertEquals(21_000L, a.local.courseRows.single().passedAt)
+        assertEquals(9L, cloud.doc(UID, "course", "10")!!["bestCorrect"])
+    }
+
+    @Test
+    fun courseProgressMadeOnTwoPhonesAtTheSameTimeKeepsBothLessons() {
+        val a = Phone()
+        val b = Phone()
+        a.local.courseRows += CourseProgressEntity(UID, 10, 9, 10, 1_000, 1, "", 1_000)
+        b.local.courseRows += CourseProgressEntity(UID, 20, 8, 10, 2_000, 1, "", 2_000)
+        a.sync()
+        b.sync()
+        a.now = 20_000
+        a.sync()
+        assertEquals(setOf(10, 20), a.local.courseRows.map { it.lessonId }.toSet())
+        assertEquals(setOf(10, 20), b.local.courseRows.map { it.lessonId }.toSet())
     }
 
     @Test

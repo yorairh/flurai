@@ -1,0 +1,52 @@
+{
+  "id": 10,
+  "number": "1",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "The basic types of sentences",
+  "summary": "Every Japanese sentence is a little train: a main carriage and an engine, joined by が.",
+  "video": "https://www.youtube.com/watch?v=pSvH9vH60Ig",
+  "related": [526, 502, 529, 552],
+  "blocks": [
+    {"type": "text", "text": "Picture every Japanese sentence as a small **train**. It always has two black cars at its core: the **main carriage** (A), which is the thing the sentence is about, and the **engine** (B), which makes the sentence go and says something about A. Textbooks call these the subject and the predicate."},
+    {"type": "diagram", "cars": [
+      {"text": "さくら", "role": "carriage", "label": "main carriage"},
+      {"text": "が", "role": "particle", "label": "links them"},
+      {"text": "歩く", "role": "engine", "label": "engine"}
+    ], "text": "The core of every sentence: main carriage + が + engine."},
+    {"type": "text", "text": "The little word **が** joins the main carriage to the engine. It is the heart of Japanese grammar. Sometimes it is invisible (you will meet that in the next lesson), but it is always there. All sentences, in any language, come down to two kinds: **A does B** and **A is B**. Japanese has three kinds of engine to say them."},
+    {"type": "heading", "text": "Type 1: verb sentences (A does B)"},
+    {"type": "text", "text": "The engine is a verb. In the plain form every verb ends in a **う-row sound** (う, く, す, つ, ぬ, ふ, む, る…)."},
+    {"type": "example", "jp": "さくらが歩く。", "en": "Sakura walks."},
+    {"type": "example", "jp": "犬が走る。", "en": "The dog runs."},
+    {"type": "heading", "text": "Type 2: copula sentences (A is B)"},
+    {"type": "text", "text": "The engine is a noun, so it needs help to pull the train. That help is **だ**, the copula. Think of だ as an **equals sign in a box that works one way only**: Sakura is a Japanese person, but not every Japanese person is Sakura. **です** is the polite form of だ."},
+    {"type": "example", "jp": "さくらが日本人だ。", "en": "Sakura is Japanese."},
+    {"type": "example", "jp": "犬が動物だ。", "en": "A dog is an animal."},
+    {"type": "heading", "text": "Type 3: adjective sentences (A is adjective)"},
+    {"type": "text", "text": "An **い-adjective** (a word ending in い like 赤い) can pull the train by itself, because it already carries the meaning \"is\". So there is **no だ**."},
+    {"type": "example", "jp": "ペンが赤い。", "en": "The pen is red."},
+    {"type": "example", "jp": "空が青い。", "en": "The sky is blue."},
+    {"type": "keypoints", "title": "Three engines", "items": [
+      "A verb engine: **さくらが歩く** (ends in a う-row sound).",
+      "A noun + **だ** engine: **さくらが日本人だ**.",
+      "An **い-adjective** engine: **ペンが赤い** (never add だ).",
+      "In every one, the main carriage takes **が**."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the engine", "prompt": "さくらが歩く", "options": ["さくら", "が", "歩く", "the whole sentence"], "answer": 2, "note": "The engine is the part that makes the sentence go: here the verb 歩く."},
+    {"id": 2, "type": "tap", "instruction": "Tap the main carriage (the thing the sentence is about)", "options": ["ペン", "が", "赤い"], "answer": 0, "note": "ペン is the main carriage; 赤い is the engine."},
+    {"id": 3, "type": "choice", "instruction": "Which one is a copula sentence (A is B with a noun)?", "prompt": "", "options": ["さくらが歩く", "さくらが日本人だ", "ペンが赤い"], "answer": 1, "note": "A noun engine (日本人) needs だ to pull the train."},
+    {"id": 4, "type": "choice", "instruction": "True or false?", "prompt": "ペンが赤い needs だ at the end to mean \"The pen is red.\"", "options": ["True", "False"], "answer": 1, "note": "An い-adjective already carries \"is\", so no だ."},
+    {"id": 5, "type": "order", "instruction": "Build the sentence", "prompt": "Sakura walks.", "options": ["さくら", "が", "歩く"], "note": "Main carriage, が, engine."},
+    {"id": 6, "type": "order", "instruction": "Build the sentence", "prompt": "Sakura is Japanese.", "options": ["さくら", "が", "日本人", "だ"], "note": "A noun engine takes だ."},
+    {"id": 7, "type": "choice", "instruction": "What is the picture for だ?", "prompt": "", "options": ["An equals sign that works one way: A is B, not B is A", "A question mark", "A past-tense marker", "A particle that marks the object"], "answer": 0, "note": "Sakura is a Japanese person, but not every Japanese person is Sakura."},
+    {"id": 8, "type": "choice", "instruction": "Which particle links the main carriage to the engine?", "prompt": "", "options": ["を", "は", "が", "に"], "answer": 2, "note": "が is the link at the core of every basic sentence."},
+    {"id": 9, "type": "choice", "instruction": "Spot the mistake", "prompt": "", "options": ["犬が走る", "犬が白い", "犬が白いだ", "犬が動物だ"], "answer": 2, "note": "白い is an い-adjective, so it must not take だ."},
+    {"id": 10, "type": "choice", "instruction": "What is です?", "prompt": "", "options": ["The polite form of だ", "The past of だ", "A verb ending", "A particle for questions"], "answer": 0, "note": "です does the same job as だ, politely."},
+    {"id": 11, "type": "choice", "instruction": "Which word is an い-adjective that can be an engine alone?", "prompt": "", "options": ["静か", "嬉しい", "学生", "走る"], "answer": 1, "note": "嬉しい (happy) ends in い. 静か is a different kind of word (a な-adjective), and 学生 is a noun."},
+    {"id": 12, "type": "tap", "instruction": "Tap the engine", "options": ["空", "が", "青い"], "answer": 2, "note": "青い is an い-adjective, so it pulls the train by itself."},
+    {"id": 13, "type": "choice", "instruction": "Which name do textbooks give the engine?", "prompt": "", "options": ["The predicate", "The subject", "The object", "The particle"], "answer": 0, "note": "Subject = main carriage; predicate = engine."}
+  ]
+}

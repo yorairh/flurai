@@ -1,0 +1,49 @@
+{
+  "id": 380,
+  "number": "38",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "When \"isn't\" means \"is\": じゃない and ではない",
+  "summary": "じゃない is the negative of the copula, but as a question or an exclamation it means \"isn't it?\" or \"well, it is!\". It is a tag, like ね.",
+  "video": "https://www.youtube.com/watch?v=so7BXOwSyEU",
+  "related": [484, 511],
+  "blocks": [
+    {"type": "text", "text": "**じゃない** is a shortening of **ではない**, the negative of the copula だ / です. As a plain negative it just denies: これはペンじゃない, \"This is not a pen\". But in casual speech it often means the opposite."},
+    {"type": "heading", "text": "Negative questions seek agreement"},
+    {"type": "text", "text": "Many languages ask for agreement with a negative: \"It's nice, isn't it?\". Japanese does too: さくらじゃないですか is \"Isn't that Sakura?\", and the speaker thinks it is. In casual speech か disappears, so the form stays and **tone** does the work."},
+    {"type": "table", "rows": [
+      ["Casual sentence", "Tone", "Meaning"],
+      ["あれはさくらじゃない。", "Flat", "That is not Sakura."],
+      ["あれはさくらじゃない？", "Rising", "That's Sakura, isn't it?"],
+      ["さくらじゃない！", "Excited", "Well, if it isn't Sakura!"]
+    ]},
+    {"type": "heading", "text": "A tag that stretches to anything"},
+    {"type": "text", "text": "As a tag, じゃない works like **ね**, on adjectives and verbs too. It is **not** the negative of the word before it. The true negative of 暑い is 暑くない."},
+    {"type": "example", "jp": "今日は暑いじゃない。", "en": "It's hot today, isn't it?"},
+    {"type": "example", "jp": "もう言ったじゃない。", "en": "I already told you, didn't I?"},
+    {"type": "text", "text": "Even shorter and very casual: **じゃん**."},
+    {"type": "heading", "text": "The polite, persuasive version"},
+    {"type": "text", "text": "Politely, **のではないでしょうか** sums up an argument gently: の turns the clause into a noun, ではない links it, and でしょうか adds a question. Japanese writers prefer this soft suggestion to a blunt assertion."},
+    {"type": "example", "jp": "その理論は間違っているのではないでしょうか。", "en": "Might that theory not be mistaken? (I think it is.)"},
+    {"type": "keypoints", "items": [
+      "**じゃない** = ではない (negative of だ).",
+      "Rising tone or exclamation: it means \"isn't it? / well, it is!\".",
+      "As a tag, じゃない ≈ ね; じゃん is its casual form.",
+      "Plain negatives of adjectives and verbs stay くない / ない."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is じゃない a contraction of?", "prompt": "", "options": ["ではない", "だから", "なので", "じゃなく"], "answer": 0, "note": "ではない → じゃない."},
+    {"id": 2, "type": "choice", "instruction": "What does a rising tone mean here?", "prompt": "あれはさくらじゃない？", "options": ["That's Sakura, isn't it?", "That is not Sakura", "Who is Sakura?", "Sakura left"], "answer": 0, "note": "A tag question."},
+    {"id": 3, "type": "choice", "instruction": "What does this exclamation mean?", "prompt": "さくらじゃない！", "options": ["Well, if it isn't Sakura!", "That is not Sakura!", "Where is Sakura?", "Do not call Sakura!"], "answer": 0, "note": "Recognition: it is her."},
+    {"id": 4, "type": "choice", "instruction": "What does this flat sentence mean?", "prompt": "あれはさくらじゃない。", "options": ["That is not Sakura", "That is Sakura", "Is that Sakura?", "Sakura is coming"], "answer": 0, "note": "A plain negative."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "今日は暑いじゃない。", "options": ["It's hot today, isn't it?", "It is not hot today", "It will be hot", "I am hot"], "answer": 0, "note": "A tag like ね, not a negative."},
+    {"id": 6, "type": "choice", "instruction": "What is the real negative of 暑い?", "prompt": "", "options": ["暑くない", "暑いじゃない", "暑じゃない", "暑いない"], "answer": 0, "note": "い-adjectives negate with くない."},
+    {"id": 7, "type": "choice", "instruction": "What does this mean?", "prompt": "もう言ったじゃない。", "options": ["I already told you, didn't I?", "I did not tell you", "Do not say it", "Have you said it?"], "answer": 0, "note": "A tag after a verb."},
+    {"id": 8, "type": "choice", "instruction": "What is じゃん?", "prompt": "", "options": ["A very casual form of this tag", "A formal negative", "A question word", "A name"], "answer": 0, "note": "A further shortening of じゃない."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "じゃない can be attached to a verb as its negative (食べるじゃない = does not eat).", "options": ["True", "False"], "answer": 1, "note": "Verbs negate with ない: 食べない."},
+    {"id": 10, "type": "choice", "instruction": "What is the tone of のではないでしょうか?", "prompt": "", "options": ["A soft, polite way to assert a conclusion", "A rude order", "A casual greeting", "A simple negative"], "answer": 0, "note": "A softened suggestion."},
+    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "This is not a pen.", "options": ["これは", "ペンでは", "ない"], "note": "Noun + ではない."},
+    {"id": 12, "type": "tap", "instruction": "Tap the word that asks for agreement", "options": ["今日は", "暑い", "じゃない"], "answer": 2, "note": "じゃない works like ね here."}
+  ]
+}

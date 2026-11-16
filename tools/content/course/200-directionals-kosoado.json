@@ -1,0 +1,52 @@
+{
+  "id": 200,
+  "number": "20",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Directionals: それ, その, そんな, そう and friends",
+  "summary": "こ・そ・あ・ど point to near, middle, far and \"which\". Each family adds a different ending: れ for things, の to describe, な for kinds, う for ways.",
+  "video": "https://www.youtube.com/watch?v=xLkY6whr7T4",
+  "related": [536, 537, 538, 589, 540],
+  "blocks": [
+    {"type": "text", "text": "The **こそあど** words all start with one of four sounds. **こ** is near the speaker (a memory hook: こ like 心, the heart, where the speaker is). **そ** is near the listener, or the thing just mentioned. **あ** is far from both. **ど** asks \"which?\"."},
+    {"type": "table", "title": "The four families", "rows": [
+      ["", "こ (near me)", "そ (near you)", "あ (far)", "ど (which?)"],
+      ["Place", "ここ", "そこ", "あそこ", "どこ"],
+      ["Thing (れ)", "これ", "それ", "あれ", "どれ"],
+      ["Describes (の)", "この", "その", "あの", "どの"],
+      ["Kind (な)", "こんな", "そんな", "あんな", "どんな"],
+      ["Way (う)", "こう", "そう", "ああ", "どう"]
+    ]},
+    {"type": "heading", "text": "What each family does"},
+    {"type": "text", "text": "**れ**: a thing or being, working as a noun. **の**: the describing の you know from さくらのドレス, so この ペン is \"the pen of the class near me\". **な**: \"this kind of\", like a な-adjective. **う**: the **way** something is or is done."},
+    {"type": "example", "jp": "ここはどこですか。", "en": "Where is this place?"},
+    {"type": "example", "jp": "これはペンだ。", "en": "This is a pen."},
+    {"type": "example", "jp": "そのペンは赤い。", "en": "That pen is red."},
+    {"type": "example", "jp": "こんな食べ物が好きです。", "en": "I like this kind of food."},
+    {"type": "example", "jp": "どうすればいいですか。", "en": "What should I do?"},
+    {"type": "example", "jp": "そうですね。", "en": "That's right, isn't it."},
+    {"type": "heading", "text": "Beyond the room"},
+    {"type": "text", "text": "The same words point inside conversations. **そう** is the way that was just described, **そんな!** is a complaint (\"such a thing!\"), and the こと-words are \"kinds of matter\": **そういうこと** (that kind of thing), **どういうこと** (what do you mean?). The あ version is used for things both people know, or share emotionally."},
+    {"type": "example", "jp": "どういうことですか。", "en": "What do you mean? / What is going on?"},
+    {"type": "keypoints", "items": [
+      "**こ** near me · **そ** near you · **あ** far · **ど** which?",
+      "**れ** = a thing · **の** + noun = describes · **な** = this kind of · **う** = this way.",
+      "**そう**: that way, so; **そんな!**: complaint.",
+      "**どういうこと?** = what do you mean?"
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which word means \"over there\" (far from both)?", "prompt": "", "options": ["あそこ", "そこ", "ここ", "どこ"], "answer": 0, "note": "あ is far from both speaker and listener."},
+    {"id": 2, "type": "choice", "instruction": "Which one asks \"which?\"", "prompt": "", "options": ["どれ", "それ", "これ", "あれ"], "answer": 0, "note": "ど is the question sound."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap", "prompt": "＿＿ペンは赤い。 (That pen near you)", "options": ["その", "それ", "そこ", "そう"], "answer": 0, "note": "の-words describe a noun."},
+    {"id": 4, "type": "choice", "instruction": "Fill the gap", "prompt": "＿＿はペンだ。 (This thing near me)", "options": ["これ", "この", "ここ", "こう"], "answer": 0, "note": "れ-words stand for a thing and work as nouns."},
+    {"id": 5, "type": "choice", "instruction": "What does こんな mean?", "prompt": "", "options": ["This kind of", "This place", "This way", "This one"], "answer": 0, "note": "な-words say \"kind of\"."},
+    {"id": 6, "type": "choice", "instruction": "What does どうすればいいですか mean?", "prompt": "", "options": ["What should I do?", "Where should I go?", "Which one is good?", "Who can do it?"], "answer": 0, "note": "どう is the \"way\" family: in what way?"},
+    {"id": 7, "type": "order", "instruction": "Build the sentence", "prompt": "That pen is red.", "options": ["その", "ペンは", "赤い"], "note": "その describes ペン."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "こ, そ, あ and ど are used only for physical position, never inside a conversation.", "options": ["True", "False"], "answer": 1, "note": "They also point to things just said (そ) and things both people know (あ)."},
+    {"id": 9, "type": "tap", "instruction": "Tap the word that points to \"this kind of\"", "options": ["こんな", "食べ物が", "好きです"], "answer": 0, "note": "こんな = this kind of."},
+    {"id": 10, "type": "choice", "instruction": "Which means \"What do you mean?\"", "prompt": "", "options": ["どういうこと?", "そういうこと", "こういうこと", "ああいうこと"], "answer": 0, "note": "どういうこと asks what kind of matter."},
+    {"id": 11, "type": "choice", "instruction": "Which family describes the way something is done?", "prompt": "", "options": ["こう・そう・ああ・どう", "これ・それ・あれ・どれ", "この・その・あの・どの", "ここ・そこ・あそこ・どこ"], "answer": 0, "note": "The う family covers ways."},
+    {"id": 12, "type": "choice", "instruction": "Someone says 「そんな!」 What are they doing?", "prompt": "", "options": ["Complaining: \"such a thing!\"", "Pointing at a place", "Asking which one", "Agreeing"], "answer": 0, "note": "そんな on its own is short for そんなこと(を言う)! and sounds like a protest."}
+  ]
+}

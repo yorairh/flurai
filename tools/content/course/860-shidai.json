@@ -1,0 +1,228 @@
+{
+ "id": 860,
+ "number": "86",
+ "kind": "lesson",
+ "jlpt": 2,
+ "title": "次第 (shidai)",
+ "summary": "次第 is a noun meaning \"next in sequence\", which explains as soon as, depends on, and gradually.",
+ "video": "https://www.youtube.com/watch?v=yIv12DTlQl0",
+ "related": [
+  361,
+  254
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "A dictionary lists many meanings for 次第: \"as soon as\", \"depending on\", \"gradually\", \"circumstances\". They all grow from one idea. The kanji say it: 次 is \"next\" and 第 is the mark of an ordinal. So **次第 = the next thing in the sequence**, a noun that attaches to another noun."
+  },
+  {
+   "type": "heading",
+   "text": "As soon as: the い-stem + 次第"
+  },
+  {
+   "type": "text",
+   "text": "The い-stem of a verb is a noun, so it can sit before 次第. What follows is \"the next thing in the sequence\"."
+  },
+  {
+   "type": "example",
+   "jp": "駅に着き次第、電話します。",
+   "en": "As soon as I arrive at the station, I will call."
+  },
+  {
+   "type": "example",
+   "jp": "準備ができ次第、出発する。",
+   "en": "We'll leave as soon as the preparations are done."
+  },
+  {
+   "type": "heading",
+   "text": "Depending on: Noun + 次第"
+  },
+  {
+   "type": "text",
+   "text": "If the next thing follows *directly* from the noun, the result depends on it."
+  },
+  {
+   "type": "example",
+   "jp": "明日の予定は天気次第だ。",
+   "en": "Tomorrow's plan depends on the weather."
+  },
+  {
+   "type": "example",
+   "jp": "あとはあなた次第です。",
+   "en": "The rest is up to you."
+  },
+  {
+   "type": "heading",
+   "text": "Gradually: 次第に"
+  },
+  {
+   "type": "text",
+   "text": "A noun used as an adverb. 次第 on its own, with nothing modifying it, becomes \"step by step\"."
+  },
+  {
+   "type": "example",
+   "jp": "空は次第に暗くなった。",
+   "en": "The sky gradually grew dark."
+  },
+  {
+   "type": "text",
+   "text": "Not every 次第 + に is that adverb. In 身分次第に暮らす, the modifier is the whole 身分次第. And 手当たり次第 means \"whatever comes to hand\"."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "The **い-stem** + 次第 = as soon as.",
+    "**Noun** + 次第 = depends on, up to.",
+    "**次第に** on its own = gradually."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "What does 次第 literally mean?",
+   "prompt": "",
+   "options": [
+    "The next thing in sequence",
+    "A big surprise",
+    "A kind of weather",
+    "A question"
+   ],
+   "answer": 0,
+   "note": "次 = next, 第 = ordinal."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "家に帰り＿＿、連絡します。 (I'll contact you as soon as I get home.)",
+   "options": [
+    "次第",
+    "ばかり",
+    "だけ",
+    "しか"
+   ],
+   "answer": 0,
+   "note": "い-stem + 次第 = as soon as."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Which form goes before 次第 for \"as soon as\"?",
+   "prompt": "",
+   "options": [
+    "The い-stem",
+    "The て-form",
+    "The ない-form",
+    "The dictionary form"
+   ],
+   "answer": 0,
+   "note": "The い-stem is a noun."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "試験の結果は努力＿＿だ。 (The result depends on effort.)",
+   "options": [
+    "次第",
+    "なんか",
+    "に",
+    "から"
+   ],
+   "answer": 0,
+   "note": "Noun + 次第 = depends on."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "What does あなた次第です mean?",
+   "prompt": "",
+   "options": [
+    "It's up to you",
+    "It is you who is next",
+    "You are slow",
+    "You are the last"
+   ],
+   "answer": 0,
+   "note": "The result follows directly from you."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "What does 次第に mean in 次第に寒くなる?",
+   "prompt": "",
+   "options": [
+    "Gradually",
+    "Suddenly",
+    "Never",
+    "Exactly"
+   ],
+   "answer": 0,
+   "note": "Step by step over time."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "次第 can be added directly to the end of a past-tense た-form.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It takes the い-stem: 着き次第, not 着いた次第."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "手当たり次第 means \"whatever comes to hand\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "手当たり = touching with the hand, then 次第."
+  },
+  {
+   "id": 9,
+   "type": "tap",
+   "instruction": "Tap the word that means \"as soon as\"",
+   "options": [
+    "着き次第",
+    "連絡",
+    "する"
+   ],
+   "answer": 0,
+   "note": "着き + 次第."
+  },
+  {
+   "id": 10,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "It depends on the weather.",
+   "options": [
+    "それは",
+    "天気",
+    "次第だ"
+   ],
+   "note": "Noun + 次第 + だ."
+  },
+  {
+   "id": 11,
+   "type": "choice",
+   "instruction": "Which sentence means \"I will eat as soon as dinner is ready\"?",
+   "prompt": "",
+   "options": [
+    "夕食ができ次第食べる。",
+    "夕食ができたら次第食べる。",
+    "夕食が次第できる食べる。",
+    "夕食を次第食べる。"
+   ],
+   "answer": 0,
+   "note": "できる → できい-stem = でき."
+  }
+ ]
+}

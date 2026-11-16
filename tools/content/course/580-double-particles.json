@@ -1,0 +1,50 @@
+{
+  "id": 580,
+  "number": "58",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Double particles: には, にも, とは and の + particle",
+  "summary": "There is no such thing as a combined particle. Logical and non-logical particles can sit together; two logical particles cannot.",
+  "video": "https://www.youtube.com/watch?v=iPiLVZoYhfM",
+  "related": [501, 507, 502, 503],
+  "blocks": [
+    {"type": "text", "text": "Lists of \"particle combinations\" make you memorize which can pair with which. You do not need them. Every particle just does its own job. Two facts explain all the pairings."},
+    {"type": "heading", "text": "Logical and non-logical particles"},
+    {"type": "text", "text": "The five main **logical** particles are **が, を, に, で, へ**. They say what role each noun plays in the sentence: who does it, what it is done to, where, to what. A noun has one role, so **two logical particles cannot stand together**. The **non-logical** particles **は** and **も** do not give a role; they only make a topic or sub-topic. They fit beside a logical particle with no clash."},
+    {"type": "heading", "text": "The two direct particles"},
+    {"type": "text", "text": "**が** (main carriage) and **を** (direct object) are so basic that nothing can be put next to them. To make such a noun a topic, **drop** the particle and put は or も alone. さくらをなぐった becomes さくらはなぐった, and the missing を is understood. You never see をは or がは."},
+    {"type": "table", "rows": [
+      ["Combine", "What it does", "Example"],
+      ["に + は", "topic and contrast", "冬には雪が降る (in winter, at least)"],
+      ["に + も", "topic and \"also\"", "春にも雪が降る (in spring too)"],
+      ["で + は", "topic and contrast at a place", "ここでは泳げない"],
+      ["と + は", "topic about \"with\"", "彼とは話した"]
+    ]},
+    {"type": "text", "text": "In 明日学校に行く, に is needed to show the destination. 明日学校には行く says \"as for school, I will go (but maybe not somewhere else)\". 明日学校にも行く says \"I will go to school too\". The logical particle gives the role, and は or も adds a feeling."},
+    {"type": "heading", "text": "の combines with anything"},
+    {"type": "text", "text": "The **nominalizing の** turns whatever comes before it into a noun, and a noun can take any logical particle: 泳ぐのが好きだ, 泳ぐのを見た, 泳ぐのに疲れた."},
+    {"type": "example", "jp": "昼には家に着く。", "en": "(I) will arrive home by noon."},
+    {"type": "example", "jp": "この町にも図書館がある。", "en": "This town has a library as well."},
+    {"type": "example", "jp": "友達と一緒に走るのが楽しい。", "en": "Running together with a friend is fun."},
+    {"type": "keypoints", "items": [
+      "Logical: **が を に で へ**. Non-logical: **は も**.",
+      "Two logical particles never combine; a logical plus は or も does.",
+      "**が** and **を** drop away when は or も takes over.",
+      "**の** (the noun box) can be followed by any logical particle."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which pair is made up of logical particles only?", "prompt": "", "options": ["が, を", "は, も", "に, は", "で, も"], "answer": 0, "note": "が, を, に, で, へ are logical; は and も are not."},
+    {"id": 2, "type": "choice", "instruction": "Which is a non-logical particle?", "prompt": "", "options": ["も", "が", "を", "に"], "answer": 0, "note": "も only sets a topic."},
+    {"id": 3, "type": "choice", "instruction": "Fill the gap for \"in spring as well\"", "prompt": "春＿＿雪が降る。", "options": ["にも", "をも", "がも", "でに"], "answer": 0, "note": "に gives time, も adds \"also\"."},
+    {"id": 4, "type": "choice", "instruction": "Why can you not say さくらをはなぐった?", "prompt": "", "options": ["を cannot be combined; use は alone", "は must follow が", "なぐる is intransitive", "さくら is a verb"], "answer": 0, "note": "The direct particles drop away when は takes over."},
+    {"id": 5, "type": "choice", "instruction": "Which sentence is correct?", "prompt": "", "options": ["彼はよく知っている。", "彼がはよく知っている。", "彼にがよく知っている。", "彼をはよく知っている。"], "answer": 0, "note": "が is replaced by は."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "に and で can be written together as にで to make a place particle.", "options": ["True", "False"], "answer": 1, "note": "Two logical particles clash: a noun has one role."},
+    {"id": 7, "type": "tap", "instruction": "Tap the noun that is both a topic and a place", "options": ["学校では", "禁止", "されている"], "answer": 0, "note": "で marks the place; は makes it a topic."},
+    {"id": 8, "type": "choice", "instruction": "Which meaning does 学校には行く suggest?", "prompt": "", "options": ["(I) will go to school, even if not elsewhere", "(I) will go to school too", "(I) will never go", "Nobody goes"], "answer": 0, "note": "は adds contrast."},
+    {"id": 9, "type": "choice", "instruction": "Which meaning does 学校にも行く suggest?", "prompt": "", "options": ["(I) will go to school, in addition to elsewhere", "(I) will go only to school", "(I) will not go", "(I) went yesterday"], "answer": 0, "note": "も adds an \"also\"."},
+    {"id": 10, "type": "choice", "instruction": "Why can の take any logical particle?", "prompt": "", "options": ["It turns the clause into a noun", "It is a verb", "It is a topic marker", "It replaces を"], "answer": 0, "note": "A noun can take any role marker."},
+    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "(I) like swimming in the sea.", "options": ["海で", "泳ぐのが", "好きだ"], "note": "The boxed clause 海で泳ぐの takes が, then the engine."},
+    {"id": 12, "type": "choice", "instruction": "In 冬には雪だるまを作る, what does は add?", "prompt": "", "options": ["Winter becomes a topic set against other seasons", "The sentence becomes a question", "The verb becomes past", "The snowman becomes plural"], "answer": 0, "note": "に gives the time; は makes the topic and contrast."}
+  ]
+}

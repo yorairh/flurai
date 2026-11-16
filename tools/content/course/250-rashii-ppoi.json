@@ -1,0 +1,47 @@
+{
+  "id": 250,
+  "number": "25",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "らしい versus そうだ, and っぽい",
+  "summary": "らしい is a helper adjective for inference, hearsay and \"typical of\". Next to そうだ it is more subjective and takes any noun; っぽい is its casual, often negative cousin.",
+  "video": "https://www.youtube.com/watch?v=y3KlZ6IwtQ0",
+  "related": [440, 441],
+  "blocks": [
+    {"type": "text", "text": "Lesson 24 gave you そう. This lesson adds two more words that sit on the same sliding scale between \"it looks\" and \"it is\": **らしい** and **っぽい**."},
+    {"type": "heading", "text": "What らしい is"},
+    {"type": "text", "text": "**らしい** is a helper adjective, a member of the **-しい** family (悲しい, 嬉しい, 難しい), a family that expresses personal impressions. It attaches to a single word or a whole sentence **without changing** the form before it."},
+    {"type": "heading", "text": "After a whole sentence"},
+    {"type": "text", "text": "Here らしい means \"it seems that\". Context decides if you are repeating what you heard or reasoning from clues. A past form like 雨だったらしい is usually inference. If you only want to say \"I heard\", use **そうだ**: it is clearer."},
+    {"type": "example", "jp": "あの店は閉まったらしい。", "en": "That shop seems to have closed."},
+    {"type": "heading", "text": "After a single noun: likeness and quality"},
+    {"type": "text", "text": "Appearance そう cannot follow a plain noun, but **らしい** can follow any noun. It means \"like X\" or \"having the qualities X ought to have\"."},
+    {"type": "example", "jp": "あの人は男らしい。", "en": "That person is manly."},
+    {"type": "example", "jp": "先生らしくない先生だ。", "en": "He is a teacher who does not act like a teacher."},
+    {"type": "example", "jp": "それはさくららしくない。", "en": "That is not like Sakura."},
+    {"type": "heading", "text": "っぽい: the casual one"},
+    {"type": "text", "text": "**っぽい** is casual and attaches only to single words, never to a whole sentence. As a tendency, らしい praises (\"as it should be\") while っぽい points to a quality you might not like."},
+    {"type": "example", "jp": "彼は子供っぽい。", "en": "He is childish."},
+    {"type": "example", "jp": "このスープは水っぽい。", "en": "This soup is watery."},
+    {"type": "keypoints", "items": [
+      "**Sentence + らしい**: it seems / apparently (inference or hearsay).",
+      "**Noun + らしい**: like / typical of that noun.",
+      "**Noun + っぽい**: -ish, often a little negative; casual.",
+      "For clear hearsay use **そうだ**; appearance そう takes no plain nouns."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What kind of word is らしい?", "prompt": "", "options": ["A helper adjective (-しい family)", "A particle", "A helper verb", "A noun"], "answer": 0, "note": "Like 悲しい and 嬉しい, it ends in -しい."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "あの人は男らしい。", "options": ["That person is manly", "That person is not a man", "That person looks like a dog", "I heard that man left"], "answer": 0, "note": "Noun + らしい: having the qualities of it."},
+    {"id": 3, "type": "choice", "instruction": "We know Sakura is a teacher. What does this mean?", "prompt": "さくらは先生らしくない。", "options": ["She is a teacher but does not act like one", "She is not a teacher at all", "She looks like a student", "She will become a teacher"], "answer": 0, "note": "らしくない denies the typical qualities."},
+    {"id": 4, "type": "choice", "instruction": "Which can follow an ordinary noun like ウサギ?", "prompt": "", "options": ["らしい", "そう (appearance)", "Both", "Neither"], "answer": 0, "note": "らしい takes any noun; appearance そう does not."},
+    {"id": 5, "type": "choice", "instruction": "Which ending is the clear way to say \"I heard it was a rabbit\"?", "prompt": "", "options": ["ウサギだったそうだ", "ウサギだったっぽい", "ウサギだったらしくない", "ウサギだったそうい"], "answer": 0, "note": "そうだ is unambiguous hearsay."},
+    {"id": 6, "type": "choice", "instruction": "What does this mean?", "prompt": "彼は子供っぽい。", "options": ["He is childish", "He is a child", "He loves children", "He has a child"], "answer": 0, "note": "っぽい: -ish, often a little negative."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "As a tendency, らしい praises the quality and っぽい often points at a flaw.", "options": ["True", "False"], "answer": 0, "note": "男らしい is praise; 子供っぽい is usually a criticism."},
+    {"id": 8, "type": "choice", "instruction": "Which one is the casual \"-ish\" ending?", "prompt": "", "options": ["っぽい", "らしい", "そうだ", "ようだ"], "answer": 0, "note": "っぽい is casual and attaches to single words."},
+    {"id": 9, "type": "tap", "instruction": "Tap the helper adjective that turns this into a guess", "options": ["あの人は", "医者", "らしい"], "answer": 2, "note": "医者らしい: seems to be a doctor."},
+    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "That man is very manly.", "options": ["あの人は", "とても", "男らしい"], "note": "Topic, adverb, then the adjective."},
+    {"id": 11, "type": "choice", "instruction": "What does this mean?", "prompt": "それはさくららしくない。", "options": ["That is not like Sakura", "That is not Sakura", "Sakura is not here", "Sakura did not say that"], "answer": 0, "note": "Not typical of her."},
+    {"id": 12, "type": "choice", "instruction": "True or false?", "prompt": "Appearance そう attaches to any noun, just like らしい.", "options": ["True", "False"], "answer": 1, "note": "Plain nouns cannot take appearance そう."}
+  ]
+}

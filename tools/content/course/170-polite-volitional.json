@@ -1,0 +1,55 @@
+{
+  "id": 170,
+  "number": "17",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "Polite Japanese and the volitional",
+  "summary": "ます is a helper verb on the い-stem, です is the polite だ, and the volitional (お-stem + う) says \"let's\" or \"I intend to\".",
+  "video": "https://www.youtube.com/watch?v=ymJWb31qWI8",
+  "related": [549, 512, 550, 517, 566, 433],
+  "blocks": [
+    {"type": "text", "text": "Until now the course has used the **plain** forms. The polite forms (the course says \"formal\"; the proper word is **polite**, 丁寧語) change only how you sound, not what you say."},
+    {"type": "heading", "text": "ます"},
+    {"type": "text", "text": "**ます** is a helper verb that attaches to the **い-stem**. It changes politeness only. Its past is regular (**ました**), but its negative is **ません**, and the polite negative past is **ませんでした**. That one is simply worth memorizing."},
+    {"type": "table", "rows": [
+      ["Plain", "Polite", "Polite negative"],
+      ["歩く", "歩きます", "歩きません"],
+      ["話す", "話します", "話しません"],
+      ["食べる", "食べます", "食べません"]
+    ]},
+    {"type": "example", "jp": "毎朝、公園を歩きます。", "en": "Every morning (I) walk in the park."},
+    {"type": "example", "jp": "昨日は歩きませんでした。", "en": "(I) did not walk yesterday."},
+    {"type": "heading", "text": "です"},
+    {"type": "text", "text": "**です** is the polite form of **だ**. After a **noun or な-adjective** it is a real copula. After an **い-adjective** (赤いです) it adds only politeness, since 赤い already carries \"is\". Polite speech can also put です after ない: **話さないです**."},
+    {"type": "example", "jp": "これは赤いです。", "en": "This is red."},
+    {"type": "example", "jp": "この町は静かです。", "en": "This town is quiet."},
+    {"type": "heading", "text": "The volitional"},
+    {"type": "text", "text": "The **volitional** attaches to the **お-stem** and adds **う** (ichidan: **よう**). It expresses will: \"let's\" or \"I will\". It is not desire; for desire use たい. The polite volitional is **ましょう**."},
+    {"type": "example", "jp": "一緒に行こう。", "en": "Let's go together."},
+    {"type": "example", "jp": "一緒に行きましょう。", "en": "Let's go together. (polite)"},
+    {"type": "example", "jp": "ご飯を食べよう。", "en": "Let's eat."},
+    {"type": "heading", "text": "だろう and でしょう"},
+    {"type": "text", "text": "The volitional of the copula, **だろう / でしょう**, means \"probably\" or \"I think\"."},
+    {"type": "example", "jp": "明日は雨でしょう。", "en": "It will probably rain tomorrow."},
+    {"type": "keypoints", "items": [
+      "**い-stem + ます**; negative **ません**; past **ました**; negative past **ませんでした**.",
+      "**です** after nouns and な-words is a copula; after い-adjectives it is only polite.",
+      "**Volitional = お-stem + う** (ichidan: **よう**); polite **ましょう**.",
+      "**だろう / でしょう**: probably."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the polite form", "prompt": "歩く", "options": ["歩きます", "歩かます", "歩くます", "歩けます"], "answer": 0, "note": "い-stem + ます."},
+    {"id": 2, "type": "choice", "instruction": "Pick the polite negative", "prompt": "食べる", "options": ["食べません", "食べないます", "食べなません", "食べますない"], "answer": 0, "note": "ます has its own negative: ません."},
+    {"id": 3, "type": "choice", "instruction": "Pick the negative past, polite", "prompt": "歩く", "options": ["歩きませんでした", "歩きましたない", "歩かないました", "歩きませんだった"], "answer": 0, "note": "ません + でした."},
+    {"id": 4, "type": "choice", "instruction": "Pick the volitional (\"let's\")", "prompt": "話す", "options": ["話そう", "話そる", "話しよう", "話せう"], "answer": 0, "note": "お-stem 話そ + う."},
+    {"id": 5, "type": "choice", "instruction": "Pick the volitional (\"let's\")", "prompt": "食べる", "options": ["食べよう", "食べおう", "食べろう", "食べうる"], "answer": 0, "note": "Ichidan verbs take よう."},
+    {"id": 6, "type": "choice", "instruction": "Pick the polite volitional", "prompt": "行く", "options": ["行きましょう", "行こうます", "行かましょう", "行きようです"], "answer": 0, "note": "い-stem + ましょう."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "In 赤いです, です is a real copula that makes the sentence work.", "options": ["True", "False"], "answer": 1, "note": "赤い already means \"is red\". です only adds politeness."},
+    {"id": 8, "type": "choice", "instruction": "Which stem does the volitional attach to?", "prompt": "", "options": ["お-stem", "い-stem", "あ-stem", "え-stem"], "answer": 0, "note": "行く → 行こ + う."},
+    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "Let's go together. (polite)", "options": ["一緒に", "行き", "ましょう"], "note": "い-stem + ましょう."},
+    {"id": 10, "type": "choice", "instruction": "What does でしょう mean here?", "prompt": "明日は雨でしょう。", "options": ["It will probably rain tomorrow", "It rained tomorrow", "Let's rain tomorrow", "It must rain"], "answer": 0, "note": "だろう / でしょう: probably."},
+    {"id": 11, "type": "tap", "instruction": "Tap the polite helper verb", "options": ["公園を", "歩き", "ます"], "answer": 2, "note": "ます attaches to the い-stem 歩き."},
+    {"id": 12, "type": "choice", "instruction": "Which sentence is a polite negative of 話す?", "prompt": "", "options": ["話しません", "話さないです", "Both are polite negatives", "Neither is correct"], "answer": 2, "note": "話しません and 話さないです are both polite; ません is the more formal one."}
+  ]
+}

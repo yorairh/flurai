@@ -1,0 +1,54 @@
+{
+  "id": 20,
+  "number": "2",
+  "kind": "lesson",
+  "jlpt": 5,
+  "title": "The invisible carriage and the を particle",
+  "summary": "The main carriage can be hidden (the zero pronoun), and を adds a white carriage: what the action is done to.",
+  "video": "https://www.youtube.com/watch?v=P3n8n0u3LHA",
+  "related": [503, 502],
+  "blocks": [
+    {"type": "text", "text": "In English you must always say who or what: \"I\", \"it\", \"she\". Japanese does not. Whenever the main carriage is clear from the situation, it is simply left out. The course calls this the **invisible carriage** (textbooks: the **zero pronoun**, or a dropped subject). It is still **there** in the grammar, you just do not say it."},
+    {"type": "diagram", "cars": [
+      {"text": "（ゼロ）", "role": "zero", "label": "invisible carriage"},
+      {"text": "が", "role": "particle"},
+      {"text": "先生だ", "role": "engine", "label": "engine"}
+    ], "text": "（私が）先生だ。 The carriage is empty, but the train still runs."},
+    {"type": "heading", "text": "Who is the zero?"},
+    {"type": "text", "text": "By default the zero is **the speaker**. But context can change it: if you point at a rustling bush and say 「猫だ！」, the zero is the thing you are looking at."},
+    {"type": "example", "jp": "（私が）先生だ。", "en": "(I) am a teacher. The zero defaults to the speaker."},
+    {"type": "example", "jp": "（それが）猫だ！", "en": "(It) is a cat! The zero is what you can see."},
+    {"type": "example", "jp": "（今日が）月曜日だ。", "en": "(Today) is Monday. The zero is today."},
+    {"type": "heading", "text": "The white carriage を"},
+    {"type": "text", "text": "The two black cars are the core. **White carriages** add information to it. The first is **を**, which marks **what the action is done to** (textbooks: the **object**; a handy memory is that を is read \"o\", as in object)."},
+    {"type": "diagram", "cars": [
+      {"text": "私", "role": "carriage"},
+      {"text": "が", "role": "particle"},
+      {"text": "ケーキを", "role": "white", "label": "white carriage"},
+      {"text": "食べる", "role": "engine"}
+    ], "text": "私がケーキを食べる。 The core is \"I eat\"; ケーキを says what is eaten."},
+    {"type": "example", "jp": "私がケーキを食べる。", "en": "I eat cake."},
+    {"type": "example", "jp": "（私が）ケーキを食べる。", "en": "(I) eat cake. With the main carriage dropped, the zero is \"I\" again."},
+    {"type": "example", "jp": "犬が肉を食べる。", "en": "The dog eats meat."},
+    {"type": "keypoints", "items": [
+      "A sentence cannot exist without a **が**: an action needs someone doing it, so a missing carriage is a **zero**, not a gap.",
+      "The zero is **you (the speaker)** unless the situation points to something else.",
+      "**を** marks what the action is done to. It attaches to the word **before** it.",
+      "Dropping the zero is normal and natural. Saying 私 every time sounds heavy."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What does the invisible main carriage mean by default?", "prompt": "", "options": ["The speaker", "The listener", "The weather", "The object"], "answer": 0, "note": "With nothing else to go on, the zero is \"I\"."},
+    {"id": 2, "type": "choice", "instruction": "Who or what is the zero?", "prompt": "Pointing at a bush that rustles, someone says 「猫だ！」", "options": ["The cat (the thing seen)", "The speaker", "The bush's owner", "Nobody: there is no zero"], "answer": 0, "note": "Context decides: here the zero is the thing the speaker is looking at."},
+    {"id": 3, "type": "tap", "instruction": "Tap the white carriage marked by を", "options": ["私が", "ケーキを", "食べる"], "answer": 1, "note": "ケーキを is the thing being eaten."},
+    {"id": 4, "type": "choice", "instruction": "In （私が）ケーキを食べる, which part is hidden?", "prompt": "", "options": ["私が", "ケーキを", "食べる", "を"], "answer": 0, "note": "The main carriage is dropped; the zero is understood."},
+    {"id": 5, "type": "order", "instruction": "Build the sentence", "prompt": "I eat cake.", "options": ["私が", "ケーキを", "食べる"], "note": "Carriage, white carriage, engine."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "を marks the main carriage.", "options": ["True", "False"], "answer": 1, "note": "を marks what the action is done to. The main carriage takes が."},
+    {"id": 7, "type": "choice", "instruction": "Which sentence has a hidden main carriage?", "prompt": "", "options": ["ケーキを食べる", "私がケーキを食べる", "犬が走る", "さくらが日本人だ"], "answer": 0, "note": "There is no が part, so the carriage is a zero."},
+    {"id": 8, "type": "choice", "instruction": "In （今日が）月曜日だ, who or what is the zero?", "prompt": "", "options": ["Today", "I", "Monday", "Nobody"], "answer": 0, "note": "Saying 月曜日だ about the day says: (today) is Monday."},
+    {"id": 9, "type": "choice", "instruction": "Why does Japanese drop \"I\" so often?", "prompt": "", "options": ["The zero is understood from context", "Japanese has no pronouns", "Saying I is forbidden", "Particles replace verbs"], "answer": 0, "note": "The carriage is still there in the grammar; it just does not have to be spoken."},
+    {"id": 10, "type": "choice", "instruction": "Which particle marks what the action is done to?", "prompt": "", "options": ["が", "を", "に", "は"], "answer": 1, "note": "を: think \"o\" for object."},
+    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "The dog eats meat.", "options": ["犬が", "肉を", "食べる"], "note": "Same train: carriage + white carriage + engine."},
+    {"id": 12, "type": "choice", "instruction": "Which means \"(I) read the book\", with the subject dropped?", "prompt": "", "options": ["本を読む", "本が読む", "私を読む", "読むを本"], "answer": 0, "note": "本を marks the thing read; the zero is \"I\"."}
+  ]
+}

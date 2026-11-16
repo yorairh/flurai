@@ -1,0 +1,282 @@
+{
+ "id": 840,
+ "number": "84",
+ "kind": "lesson",
+ "jlpt": 2,
+ "title": "である and the older copulas",
+ "summary": "である is the plain, straight copula; だ and です are its short forms, and でございます is its polite version.",
+ "video": "https://www.youtube.com/watch?v=hS02cADsjfI",
+ "related": [
+  526
+ ],
+ "blocks": [
+  {
+   "type": "text",
+   "text": "**である** is the copula in its full form. Historically だ is a short で + ある, and です is a short であります. You meet である in essays, news and textbooks, because it is neutral: neither casual (だ) nor polite (です)."
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Form",
+     "Register"
+    ],
+    [
+     "だ",
+     "casual"
+    ],
+    [
+     "です",
+     "polite"
+    ],
+    [
+     "である",
+     "plain, written, objective"
+    ],
+    [
+     "であります",
+     "polite version of である"
+    ],
+    [
+     "でございます",
+     "very polite (shops, announcements)"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "Why で + ある?"
+  },
+  {
+   "type": "text",
+   "text": "The copula puts noun A inside the set named by noun B. The particle **で** draws a boundary (\"within which\") and **ある** means to exist, so で + ある means \"exists within this boundary\". Do not confuse the particle で with the て-form of the copula, which is also で."
+  },
+  {
+   "type": "example",
+   "jp": "鯨は哺乳類である。",
+   "en": "The whale is a mammal."
+  },
+  {
+   "type": "heading",
+   "text": "The big use: before a noun"
+  },
+  {
+   "type": "text",
+   "text": "だ and です can only end a clause. Only a な-noun can modify a noun, with な. For any other noun, である is the one way to build a modifier:"
+  },
+  {
+   "type": "example",
+   "jp": "医者である父は忙しい。",
+   "en": "My father, who is a doctor, is busy."
+  },
+  {
+   "type": "example",
+   "jp": "丸であるさま",
+   "en": "the state of being round"
+  },
+  {
+   "type": "diagram",
+   "cars": [
+    {
+     "text": "医者",
+     "role": "carriage"
+    },
+    {
+     "text": "である",
+     "role": "plain"
+    },
+    {
+     "text": "父は",
+     "role": "topic"
+    },
+    {
+     "text": "忙しい",
+     "role": "engine"
+    }
+   ],
+   "text": "医者である父は忙しい。"
+  },
+  {
+   "type": "text",
+   "text": "Compare 医者の父 (\"doctor father\"), which is vaguer. And 丸のさま does not work, so we need である."
+  },
+  {
+   "type": "heading",
+   "text": "Copula or verb of being?"
+  },
+  {
+   "type": "text",
+   "text": "English uses \"is\" for both. Japanese keeps them apart: **copula** (これは猫だ, this belongs to the set \"cat\") versus **ある / いる** (庭に猫がいる, a cat exists there). Japanese teachers call the copula a kind of verb; this course keeps it as its own third engine, because it has its own て-form (で) and its own linking form (な)."
+  },
+  {
+   "type": "keypoints",
+   "items": [
+    "だ = casual, です = polite, である = plain and written.",
+    "である can modify a noun; だ and です cannot.",
+    "The copula says \"A belongs to set B\"; ある says \"A exists\"."
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "type": "choice",
+   "instruction": "Which copula fits a newspaper article best?",
+   "prompt": "",
+   "options": [
+    "である",
+    "だよ",
+    "でございます",
+    "だぜ"
+   ],
+   "answer": 0,
+   "note": "である is plain and objective."
+  },
+  {
+   "id": 2,
+   "type": "choice",
+   "instruction": "What is だ historically?",
+   "prompt": "",
+   "options": [
+    "A short form of である",
+    "A short form of でした",
+    "A kind of particle",
+    "A kind of noun"
+   ],
+   "answer": 0,
+   "note": "で + ある → であ → だ."
+  },
+  {
+   "id": 3,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "弟は大学生＿＿兄は会社員だ。 (My younger brother is a college student and my older brother is an employee.)",
+   "options": [
+    "で",
+    "に",
+    "を",
+    "な"
+   ],
+   "answer": 0,
+   "note": "で is the て-form of the copula, linking two clauses."
+  },
+  {
+   "id": 4,
+   "type": "choice",
+   "instruction": "Fill the gap to modify the noun",
+   "prompt": "学生＿＿私は忙しい。 (I, who am a student, am busy.)",
+   "options": [
+    "である",
+    "だ",
+    "です",
+    "な"
+   ],
+   "answer": 0,
+   "note": "A non-な noun needs である to modify."
+  },
+  {
+   "id": 5,
+   "type": "choice",
+   "instruction": "Which is correct?",
+   "prompt": "",
+   "options": [
+    "教師である母",
+    "教師だ母",
+    "教師です母",
+    "教師な母"
+   ],
+   "answer": 0,
+   "note": "Only である can pre-modify here."
+  },
+  {
+   "id": 6,
+   "type": "choice",
+   "instruction": "Which sentence uses the copula (not the verb of being)?",
+   "prompt": "",
+   "options": [
+    "田中さんは医者だ。",
+    "机の上に本がある。",
+    "庭に犬がいる。",
+    "駅の前に店がある。"
+   ],
+   "answer": 0,
+   "note": "Only the first puts A into the set B."
+  },
+  {
+   "id": 7,
+   "type": "choice",
+   "instruction": "What does でございます do?",
+   "prompt": "",
+   "options": [
+    "Is the very polite copula",
+    "Means \"to give\"",
+    "Is a casual contraction",
+    "Marks a question"
+   ],
+   "answer": 0,
+   "note": "It is keigo, heard in shops and announcements."
+  },
+  {
+   "id": 8,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "だ can be put directly before a noun to modify it.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "だ only ends a clause; use である."
+  },
+  {
+   "id": 9,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "The で in である is the particle で.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "で (boundary) + ある (exist)."
+  },
+  {
+   "id": 10,
+   "type": "tap",
+   "instruction": "Tap the copula",
+   "options": [
+    "彼は",
+    "天才",
+    "である"
+   ],
+   "answer": 2,
+   "note": "である is the copula here."
+  },
+  {
+   "id": 11,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "My mother, who is a teacher, is kind.",
+   "options": [
+    "教師である",
+    "母は",
+    "優しい"
+   ],
+   "note": "である lets 教師 modify 母."
+  },
+  {
+   "id": 12,
+   "type": "choice",
+   "instruction": "Why does this course keep a separate word for the copula?",
+   "prompt": "",
+   "options": [
+    "It says A belongs to set B, unlike ある",
+    "It means \"exist\"",
+    "It is a particle",
+    "It is always polite"
+   ],
+   "answer": 0,
+   "note": "English hides the difference behind \"is\"."
+  }
+ ]
+}

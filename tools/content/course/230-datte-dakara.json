@@ -1,0 +1,45 @@
+{
+  "id": 230,
+  "number": "23",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "だって, だから and それから",
+  "summary": "だって is だ plus って, \"it is said\": it accepts what came before and then reports, argues or gives an example. だから and それから are built the same way, from だ and から.",
+  "video": "https://www.youtube.com/watch?v=kO89HzRQygQ",
+  "related": [713, 439, 483],
+  "blocks": [
+    {"type": "text", "text": "Dictionaries list many meanings for **だって**: because, but, even, \"I hear\". They all come from one idea once you see the parts."},
+    {"type": "heading", "text": "The parts: だ + って"},
+    {"type": "text", "text": "**だ** is the copula, and it points back at what was just said: \"that is so\". **って** is a casual shortening of the quotation particle と plus いう (\"say\"). Together: \"it is said that so\"."},
+    {"type": "example", "jp": "明日は雨だって。", "en": "They say tomorrow will be rainy."},
+    {"type": "heading", "text": "Because and but"},
+    {"type": "text", "text": "At the start of a reply, だって works like a child's protest. The speaker **accepts** the other person's statement and then adds something that pushes back. It can mean \"but...\" or \"because...\"."},
+    {"type": "example", "jp": "だって、眠いんだもん。", "en": "But I am sleepy!"},
+    {"type": "heading", "text": "Even"},
+    {"type": "text", "text": "Attached to one noun, だって means \"even\": \"take the case of me\". It has a casual, slightly defensive tone, unlike the neutral も."},
+    {"type": "example", "jp": "子供だって知っている。", "en": "Even a child knows that."},
+    {"type": "heading", "text": "だから and それから"},
+    {"type": "text", "text": "**だから** is a short form of \"since that is so\". **から** originally means \"from\", so \"from that, this follows\". **それから** is also \"from that\", but in time: **after that**."},
+    {"type": "example", "jp": "雨だから、家にいる。", "en": "It is raining, so I am staying home."},
+    {"type": "example", "jp": "ご飯を食べて、それから寝た。", "en": "I ate, and after that I went to bed."},
+    {"type": "keypoints", "items": [
+      "**だ + って**: \"it is said\" (hearsay).",
+      "A reply starting with だって accepts, then pushes back: \"but / because\".",
+      "**Noun + だって**: even (casual).",
+      "**だから**: so; **それから**: after that."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is だって made of?", "prompt": "", "options": ["だ + って (a quoted \"it is said\")", "だ + て", "で + って", "だ + から"], "answer": 0, "note": "って is a casual と + いう."},
+    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "明日は雨だって。", "options": ["I hear tomorrow will be rainy", "Even tomorrow it will rain", "It is rainy because of tomorrow", "Is it rainy tomorrow?"], "answer": 0, "note": "だって after a statement reports what was said."},
+    {"id": 3, "type": "choice", "instruction": "What does だから mean?", "prompt": "", "options": ["So / for that reason", "After that", "Even so", "I heard"], "answer": 0, "note": "だ (that is so) + から (from that)."},
+    {"id": 4, "type": "choice", "instruction": "What does それから mean?", "prompt": "", "options": ["After that", "Because of that", "Even so", "Instead of that"], "answer": 0, "note": "から = from; それから = from that point on in time."},
+    {"id": 5, "type": "choice", "instruction": "What does this mean?", "prompt": "私だってできる。", "options": ["Even I can do it", "I heard I can do it", "Because I can do it", "I cannot do it"], "answer": 0, "note": "Noun + だって = even."},
+    {"id": 6, "type": "choice", "instruction": "A: 「勉強しなさい。」 B: 「だって、眠いんだもん。」 What does だって do here?", "prompt": "", "options": ["It accepts the order, then pushes back (\"but\")", "It reports hearsay", "It says thank you", "It asks a question"], "answer": 0, "note": "A childlike protest that still accepts the statement first."},
+    {"id": 7, "type": "tap", "instruction": "Tap the word that means \"but\" (a protest)", "options": ["だって", "宿題が", "多いんだもん"], "answer": 0, "note": "だって opens the reply with a push back."},
+    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "I hear the festival is tomorrow.", "options": ["祭りは", "明日", "だって"], "note": "Statement + だって reports it."},
+    {"id": 9, "type": "choice", "instruction": "Which sentence uses だって to mean \"even\"?", "prompt": "", "options": ["子供だって知っている", "だって、知らないもん", "明日は休みだって"], "answer": 0, "note": "A noun followed by だって means even."},
+    {"id": 10, "type": "choice", "instruction": "How does 私だって differ from 私も?", "prompt": "", "options": ["だって is more colloquial and a bit defensive", "も is hearsay", "There is no difference", "だって is very formal"], "answer": 0, "note": "も is neutral; だって has an edge."},
+    {"id": 11, "type": "choice", "instruction": "True or false?", "prompt": "All the uses of だって start by accepting what was just said.", "options": ["True", "False"], "answer": 0, "note": "Then it adds a counterpoint, a reason or an example."}
+  ]
+}

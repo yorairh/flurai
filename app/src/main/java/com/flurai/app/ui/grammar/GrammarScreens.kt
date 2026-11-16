@@ -32,6 +32,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,11 +51,33 @@ import com.flurai.app.core.grammar.GrammarStatus
 import com.flurai.app.ui.components.SectionHeader
 import com.flurai.app.ui.theme.japanese
 
-/** One level's grammar: the next lesson to take, practice of what was learned, and every point in lesson order. */
+/**
+ * Grammar has two parts: the recommended course (opens first) and the reference, the level-by-level
+ * lessons.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GrammarListScreen(
     onBack: () -> Unit,
+    onOpenPoint: (Int) -> Unit,
+    onPractice: (jlpt: Int) -> Unit,
+    onOpenLesson: (Int) -> Unit,
+    onSelfTest: (count: Int) -> Unit,
+) {
+    var tab by rememberSaveable { mutableIntStateOf(0) }
+    Column(Modifier.fillMaxSize()) {
+        BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
+        PrimaryTabRow(selectedTabIndex = tab) {
+            Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Course") })
+            Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Reference") })
+        }
+        if (tab == 0) CourseTab(onOpenLesson, onSelfTest) else ReferenceTab(onOpenPoint, onPractice)
+    }
+}
+
+/** One level's grammar: the next lesson to take, practice of what was learned, and every point in lesson order. */
+@Composable
+private fun ReferenceTab(
     onOpenPoint: (Int) -> Unit,
     onPractice: (jlpt: Int) -> Unit,
     viewModel: GrammarListViewModel = hiltViewModel(),
@@ -58,7 +85,6 @@ fun GrammarListScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val selected by viewModel.selected.collectAsStateWithLifecycle()
     Column(Modifier.fillMaxSize()) {
-        BackTopAppBar(title = { Text("Grammar") }, onBack = onBack)
         // One level at a time, like the Reading screen: with hundreds of points a single list is too long.
         LevelChips(selected, viewModel::select, Modifier.padding(horizontal = 20.dp, vertical = 8.dp))
         // Nothing until the points are loaded: a list that starts with only its footer stays anchored
@@ -194,6 +220,7 @@ fun GrammarDetailScreen(
     onBack: () -> Unit,
     onPractice: (jlpt: Int, pointId: Int) -> Unit,
     onNextLesson: (pointId: Int) -> Unit,
+    onOpenCourseLesson: (lessonId: Int) -> Unit = {},
     viewModel: GrammarDetailViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -264,6 +291,11 @@ fun GrammarDetailScreen(
                     OutlinedButton(onClick = { onPractice(point.jlpt, point.id) }, modifier = Modifier.fillMaxWidth()) {
                         Text("Practice this point")
                     }
+                }
+            }
+            state.courseLesson?.let { lesson ->
+                OutlinedButton(onClick = { onOpenCourseLesson(lesson.id) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Explained in course lesson ${lesson.number}", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 }
             }
             val context = androidx.compose.ui.platform.LocalContext.current

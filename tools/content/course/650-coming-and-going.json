@@ -1,0 +1,238 @@
+{
+  "id": 650,
+  "number": "65",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Coming and going: ていく and てくる",
+  "summary": "来る always moves toward where the speaker is, 行く away from it. Attached to a て-form they describe change in space, in time and in how you feel.",
+  "video": "https://www.youtube.com/watch?v=PsTsliRe2Cg",
+  "related": [
+    464
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "**来る** can only mean moving from somewhere the speaker is **not** to the place where the speaker **is** (in mind as well). **行く** is looser: it moves away, or between two places the speaker is not at. That is why you cannot tell someone on the phone \"I'll come to you\" with 来る: you say 行く."
+    },
+    {
+      "type": "heading",
+      "text": "Physical, then metaphorical"
+    },
+    {
+      "type": "text",
+      "text": "With a て-form, the helper keeps the same direction. 持って**くる** brings something toward me; 持って**いく** takes it away. Then the picture stretches to **time** and to **feeling**."
+    },
+    {
+      "type": "example",
+      "jp": "お弁当を持ってきた。",
+      "en": "I brought a lunch (to here)."
+    },
+    {
+      "type": "example",
+      "jp": "お弁当を持っていく。",
+      "en": "I'll take a lunch (away from here)."
+    },
+    {
+      "type": "example",
+      "jp": "雨が降ってきた。",
+      "en": "It has started to rain. (rain came toward the present)"
+    },
+    {
+      "type": "example",
+      "jp": "これからも日本語を勉強していく。",
+      "en": "I will keep studying Japanese from now on. (moving forward in time)"
+    },
+    {
+      "type": "heading",
+      "text": "Subjective and objective"
+    },
+    {
+      "type": "text",
+      "text": "**くる** is also a movement toward **my own state of mind**. 分かる means \"be clear\", so as you study, math *comes* to be clear to you. And **〜てきた** sounds like the change touches me or us, while **〜ていった** reports it from outside."
+    },
+    {
+      "type": "example",
+      "jp": "だんだん数学が分かってくる。",
+      "en": "Math gradually becomes clear to me."
+    },
+    {
+      "type": "example",
+      "jp": "最近、寒くなってきた。",
+      "en": "It has been getting colder lately. (I feel it)"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**来る**: toward the speaker's place, time or state. **行く**: away from it.",
+        "**〜てくる**: change arriving toward now; **〜ていく**: change continuing away, into the future.",
+        "**くる** can be subjective (it touches me); **いく** can be objective.",
+        "There are no strict rules: use the picture, and let immersion fill it in."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "On the phone, how do you say \"I'm coming to your place now\"?",
+      "prompt": "",
+      "options": [
+        "今からそちらに行きます",
+        "今からそちらに来ます",
+        "今からそちらにいます",
+        "今からそちらにくれます"
+      ],
+      "answer": 0,
+      "note": "来る cannot be used for going to where you are not.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "お弁当を持ってきた。",
+      "options": [
+        "I brought a lunch here",
+        "I took a lunch away",
+        "I ate a lunch",
+        "I forgot a lunch"
+      ],
+      "answer": 0,
+      "note": "持ってくる: bring toward here.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "お弁当を持っていく。",
+      "options": [
+        "I will take a lunch with me",
+        "I will bring a lunch here",
+        "I will eat a lunch",
+        "I made a lunch"
+      ],
+      "answer": 0,
+      "note": "持っていく: take away.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "雨が降ってきた。",
+      "options": [
+        "It started to rain",
+        "It stopped raining",
+        "It will never rain",
+        "I took the rain"
+      ],
+      "answer": 0,
+      "note": "Rain came toward the present moment.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "これから日本語をもっと勉強して＿＿。 (I will keep going from now on)",
+      "options": [
+        "いく",
+        "くる",
+        "ある",
+        "おく"
+      ],
+      "answer": 0,
+      "note": "Moving on into the future: いく.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "最近、だんだん寒くなって＿＿。 (and I can feel it)",
+      "options": [
+        "きた",
+        "いった",
+        "おいた",
+        "みた"
+      ],
+      "answer": 0,
+      "note": "きた: the change comes toward me and I feel it.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "来る can be used for movement away from the speaker.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "来る is always toward the speaker's place.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "Why is 分かってくる used for \"come to understand\"?",
+      "prompt": "",
+      "options": [
+        "Math comes toward me in my mind",
+        "Math walks into the room",
+        "It is a mistake",
+        "Because it is future tense"
+      ],
+      "answer": 0,
+      "note": "くる covers movement toward my own state of mind.",
+      "id": 8
+    },
+    {
+      "type": "choice",
+      "instruction": "Which one feels like the change affects me or us?",
+      "prompt": "",
+      "options": [
+        "寒くなってきた",
+        "寒くなっていった",
+        "寒くない",
+        "寒かった"
+      ],
+      "answer": 0,
+      "note": "〜てきた is subjective.",
+      "id": 9
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Please bring your lunch.",
+      "options": [
+        "お弁当を",
+        "持って",
+        "きて",
+        "ください"
+      ],
+      "note": "持ってきてください.",
+      "id": 10
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that points forward in time, away from now",
+      "options": [
+        "だんだん",
+        "雨が",
+        "降っていく"
+      ],
+      "answer": 2,
+      "note": "〜ていく moves into the future.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "Which one reports the cooling from outside, without involving me?",
+      "prompt": "",
+      "options": [
+        "寒くなっていった",
+        "寒くなってきた",
+        "寒くなっておく",
+        "寒くなってみる"
+      ],
+      "answer": 0,
+      "note": "〜ていった is the outside-looking report.",
+      "id": 12
+    }
+  ]
+}

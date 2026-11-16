@@ -1,0 +1,47 @@
+{
+  "id": 480,
+  "number": "48",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Dealing with ambiguity: context, probability, absurdity",
+  "summary": "Japanese can look ambiguous, but three common-sense rules (context, probability and absurdity) settle almost every doubtful sentence.",
+  "video": "https://www.youtube.com/watch?v=gcbbSW-KuTQ",
+  "related": [415, 432, 580],
+  "blocks": [
+    {"type": "text", "text": "Japanese has a name for being vague, and part of that is because of the **zero pronoun**: you cannot see the carriage. But the carriage is always there logically, and a hidden word works like English \"it\", which can mean anything and is only clear from context. Japanese is not magic. Speaker and listener fix doubts the same way English speakers do."},
+    {"type": "heading", "text": "Three rules that settle most doubts"},
+    {"type": "table", "rows": [
+      ["Rule", "What it says", "Example"],
+      ["Context", "What was said before points to the answer.", "Talking about lunch, 私はうどんだ means \"I'll have udon\""],
+      ["Probability", "If two readings fit, take the likelier one.", "私は猫を飼っている: you keep a cat, not a cat keeps you"],
+      ["Absurdity", "Do not choose the silly reading unless the speaker makes the silliness clear.", "私は魚だ means \"I am the fish dish\" at a restaurant, not that I am a fish"]
+    ]},
+    {"type": "text", "text": "Speakers expect listeners to use these rules, and languages are built around that. A speaker who wants a strange meaning has to say so clearly. The stranger the meaning, the more the speaker has to explain."},
+    {"type": "heading", "text": "A famous overlap: potential and receptive"},
+    {"type": "text", "text": "The ichidan **potential** (食べられる, \"can eat\") and the ichidan **receptive** (食べられる, \"receive being eaten\") look the same. A single sentence 食べられた could mean either. Usually probability decides: nobody tells you \"I got eaten\" while standing there. With a pet mouse, however, ネズミが食べられた could be \"the mouse could eat\" or \"the mouse got eaten\", and only context can say. This kind of real ambiguity exists in English too."},
+    {"type": "heading", "text": "は must connect"},
+    {"type": "text", "text": "A topic with は is not logical, but it still has to be **connected** to the comment after it. If a long sentence begins with 「あの人は」 and the comment has nothing to do with that person, the は-reading is unlikely. So the reader prefers a different structure."},
+    {"type": "example", "jp": "この果物は子供でも食べられる。", "en": "Even a child can eat this fruit. (potential; the situation makes that clear)"},
+    {"type": "example", "jp": "今夜は魚だ。", "en": "Tonight is fish. (we're having fish)"},
+    {"type": "keypoints", "items": [
+      "The zero pronoun is always there, and context says who or what it is.",
+      "Three rules: **context**, **probability**, **absurdity**.",
+      "Ichidan **-られる** can be potential or receptive; use the situation to decide.",
+      "A real ambiguity can exist, as in any language; the speaker is responsible for making things clear."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which three rules settle most doubtful sentences?", "prompt": "", "options": ["Context, probability, absurdity", "Particles, verbs, adjectives", "Topic, subject, object", "Speed, volume, tone"], "answer": 0, "note": "These are common-sense rules for any language."},
+    {"id": 2, "type": "choice", "instruction": "At a restaurant a friend says 私はうなぎだ. What is the likeliest meaning?", "prompt": "", "options": ["I'll have the eel", "I am an eel", "I like eels in general", "I saw an eel"], "answer": 0, "note": "Context makes the food reading obvious."},
+    {"id": 3, "type": "choice", "instruction": "Which rule says that the silly reading needs clear signals from the speaker?", "prompt": "", "options": ["Absurdity", "Context", "Probability", "Topic"], "answer": 0, "note": "The burden of making an absurd meaning clear is on the speaker."},
+    {"id": 4, "type": "choice", "instruction": "Which two meanings can 食べられた have?", "prompt": "", "options": ["Was able to eat / was eaten", "Wanted to eat / ate", "Made to eat / let eat", "Did not eat / did eat"], "answer": 0, "note": "Potential and receptive share the form for ichidan verbs."},
+    {"id": 5, "type": "choice", "instruction": "True or false?", "prompt": "In Japanese the carriage can be missing from the logical sentence entirely.", "options": ["True", "False"], "answer": 1, "note": "It may be invisible (a zero), but it is always logically there."},
+    {"id": 6, "type": "choice", "instruction": "A speaker says 食べられた while standing there looking healthy. Which meaning wins?", "prompt": "", "options": ["(I) could eat it", "(I) got eaten", "(I) will eat it", "(I) did not eat it"], "answer": 0, "note": "Probability: nobody who is standing there was eaten."},
+    {"id": 7, "type": "choice", "instruction": "ネズミが食べられた. What is needed to decide the meaning?", "prompt": "", "options": ["Context, such as a cat nearby or food given", "A different particle", "A change of word order", "Nothing, the grammar settles it"], "answer": 0, "note": "A real ambiguity is solved by the situation."},
+    {"id": 8, "type": "tap", "instruction": "Tap the word that carries both possible meanings", "options": ["ネズミが", "食べられた", "昨日"], "answer": 1, "note": "食べられた is the verb with the ambiguous helper られる."},
+    {"id": 9, "type": "choice", "instruction": "True or false?", "prompt": "Such ambiguity is special to Japanese.", "options": ["True", "False"], "answer": 1, "note": "English has famous cases too, such as seeing a man with a telescope."},
+    {"id": 10, "type": "choice", "instruction": "A は topic and its comment must be…", "prompt": "", "options": ["connected in meaning", "in the same clause as が", "followed by に", "plural"], "answer": 0, "note": "A topic unrelated to its comment is an unlikely reading."},
+    {"id": 11, "type": "choice", "instruction": "Which invisible word is most probable in 「眠いから先に寝た」 said by a tired speaker?", "prompt": "", "options": ["I (the speaker)", "You", "The moon", "My neighbor"], "answer": 0, "note": "Context (眠い and 寝た) point back at the speaker."},
+    {"id": 12, "type": "order", "instruction": "Build the sentence", "prompt": "Tonight we're having fish. (topic first)", "options": ["今夜は", "魚", "だ"], "note": "Topic, noun, copula engine."}
+  ]
+}

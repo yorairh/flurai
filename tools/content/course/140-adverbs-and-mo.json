@@ -1,0 +1,51 @@
+{
+  "id": 140,
+  "number": "14",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Adverbs and the も particle",
+  "summary": "Three ways to make an adverb, the experience pattern たことがない, and も, the topic flag that means \"also\".",
+  "video": "https://www.youtube.com/watch?v=9DR9ifftMvs",
+  "related": [507, 401, 534],
+  "blocks": [
+    {"type": "heading", "text": "Making adverbs"},
+    {"type": "text", "text": "An adverb describes the **engine**: how, how fast, how suddenly. Japanese has three common ways to make one."},
+    {"type": "table", "rows": [
+      ["Source", "Rule", "Example"],
+      ["い-adjective", "い → く", "早い → 早く走る"],
+      ["Noun or な-word", "+ に", "急 → 急に止まった"],
+      ["Some words", "stand alone", "ゆっくり歩く"]
+    ]},
+    {"type": "example", "jp": "うさぎは早く走って、急に穴に飛び込んだ。", "en": "The rabbit ran fast and suddenly jumped into a hole."},
+    {"type": "example", "jp": "でも驚いたことに、ゆっくり落ちた。", "en": "But, surprisingly, she fell very slowly."},
+    {"type": "text", "text": "**〜ことに** after an emotion word (驚いた, 嬉しい) is a ready-made adverb meaning \"to my surprise / happily\"."},
+    {"type": "heading", "text": "The experience pattern"},
+    {"type": "text", "text": "**〜たことがある / ない** means \"have / have never done\". The grammatical subject is **こと** (a matter), not the person. The person can only be the topic with は: \"as for me, the matter of having seen it does not exist\"."},
+    {"type": "example", "jp": "私は話すうさぎを見たことがない。", "en": "I have never seen a talking rabbit."},
+    {"type": "heading", "text": "The も particle"},
+    {"type": "text", "text": "**も** is the second non-logical particle, like **は**. It replaces は when the new topic does **the same thing** as the one before: \"also\". It needs an earlier topic to refer to. Compare three versions after the rabbit jumped in:"},
+    {"type": "example", "jp": "アリスはうさぎの穴に飛び込んだ。", "en": "Alice jumped into the rabbit hole. (は: Alice, in contrast to the rabbit)"},
+    {"type": "example", "jp": "アリスがうさぎの穴に飛び込んだ。", "en": "Alice jumped into the rabbit hole. (が: a plain statement of who)"},
+    {"type": "example", "jp": "アリスもうさぎの穴に飛び込んだ。", "en": "Alice also jumped into the rabbit hole."},
+    {"type": "keypoints", "items": [
+      "**い → く**: 早く. **Noun + に**: 急に. **Alone**: ゆっくり.",
+      "**〜ことに**: surprisingly, happily, regrettably…",
+      "**〜たことがない**: never have; the subject is こと.",
+      "**も** = \"also\", and it replaces は or が when the new topic does the same thing."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Make the adverb", "prompt": "早い (fast)", "options": ["早く", "早いに", "早に", "早で"], "answer": 0, "note": "い-adjectives change い to く."},
+    {"id": 2, "type": "choice", "instruction": "Make the adverb", "prompt": "急 (sudden)", "options": ["急に", "急く", "急い", "急で"], "answer": 0, "note": "Noun-like words take に."},
+    {"id": 3, "type": "choice", "instruction": "Which adverb needs no extra ending?", "prompt": "", "options": ["ゆっくり", "早い", "急", "静か"], "answer": 0, "note": "ゆっくり is already an adverb."},
+    {"id": 4, "type": "choice", "instruction": "What does ことに mean after 驚いた?", "prompt": "驚いたことに、…", "options": ["Surprisingly, …", "Because of surprise, …", "If surprised, …", "While surprised, …"], "answer": 0, "note": "驚いたことに is an adverb: \"to my surprise\"."},
+    {"id": 5, "type": "choice", "instruction": "What does this say?", "prompt": "私は話すうさぎを見たことがない。", "options": ["I have never seen a talking rabbit", "I did not see the rabbit talk", "I will not see a talking rabbit", "The rabbit has never seen me"], "answer": 0, "note": "〜たことがない: never have."},
+    {"id": 6, "type": "choice", "instruction": "What is the grammatical subject of 見たことがない?", "prompt": "", "options": ["こと (the matter)", "The person", "The rabbit", "The verb 見る"], "answer": 0, "note": "The person is only the topic; こと is the main carriage."},
+    {"id": 7, "type": "order", "instruction": "Build the sentence", "prompt": "Alice also jumped into the hole.", "options": ["アリスも", "穴に", "飛び込んだ"], "note": "も replaces は / が when the new topic does the same thing."},
+    {"id": 8, "type": "choice", "instruction": "When can you use も?", "prompt": "", "options": ["When something similar was already said about an earlier topic", "Only in questions", "Only with verbs", "When the sentence is polite"], "answer": 0, "note": "も needs an earlier topic to match."},
+    {"id": 9, "type": "choice", "instruction": "Which one signals contrast with the earlier topic?", "prompt": "", "options": ["アリスは", "アリスも", "アリスを", "アリスと"], "answer": 0, "note": "は draws a contrast; も says \"also\"."},
+    {"id": 10, "type": "tap", "instruction": "Tap the adverb", "options": ["うさぎは", "急に", "止まった"], "answer": 1, "note": "急に describes how the rabbit stopped."},
+    {"id": 11, "type": "choice", "instruction": "Which is correct for \"to walk slowly\"?", "prompt": "", "options": ["ゆっくり歩く", "ゆっくりに歩く", "ゆっくいと歩く", "ゆっくり歩い"], "answer": 0, "note": "ゆっくり needs no particle."},
+    {"id": 12, "type": "choice", "instruction": "True or false?", "prompt": "も is a logical particle like が and を.", "options": ["True", "False"], "answer": 1, "note": "も is a non-logical topic particle, like は."}
+  ]
+}

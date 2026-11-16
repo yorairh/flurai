@@ -1,0 +1,239 @@
+{
+  "id": 620,
+  "number": "62",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "ておく vs てしまう: helper verb secrets",
+  "summary": "Japanese uses many specific helper verbs where English uses up and out. ておく puts an action in place for a purpose; てしまう says it just happened.",
+  "video": "https://www.youtube.com/watch?v=q6vDkjv4ac0",
+  "related": [
+    421,
+    463,
+    739,
+    740
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "English leans on little words like **up** and **out**: eat up, think up, cry out, lose out. Japanese has no prepositions at all. It uses **helper verbs** instead, and since there are many more of them, each one is more precise. So when you meet a helper verb you do not recognize, ask what picture its own verb carries."
+    },
+    {
+      "type": "heading",
+      "text": "ておく: put the action in place"
+    },
+    {
+      "type": "text",
+      "text": "**おく** means to put or set something down. A **て-form + おく** puts an action in place **for a purpose**, so that the situation will then be the way you want. It feels like the work of a careful workman, with no exclamation mark."
+    },
+    {
+      "type": "example",
+      "jp": "窓を開けておく。",
+      "en": "(I) open the window (and leave it so the room gets air)."
+    },
+    {
+      "type": "example",
+      "jp": "先に皆に説明しておきます。",
+      "en": "I will explain to everyone beforehand (so nobody is in the dark)."
+    },
+    {
+      "type": "example",
+      "jp": "旅行の前に切符を買っておいた。",
+      "en": "I bought the ticket before the trip (to be ready)."
+    },
+    {
+      "type": "heading",
+      "text": "てしまう: it ended up done"
+    },
+    {
+      "type": "text",
+      "text": "**しまう** means to finish or put away, and the helper adds an **exclamation mark**: it happened, whether or not you expected or wanted it (\"I done fell over\"). It is often unwelcome, but not always."
+    },
+    {
+      "type": "example",
+      "jp": "財布を忘れてしまった。",
+      "en": "Oops, I forgot my wallet."
+    },
+    {
+      "type": "example",
+      "jp": "ケーキを全部食べてしまった。",
+      "en": "I ate the whole cake."
+    },
+    {
+      "type": "text",
+      "text": "Compare **説明しておく** (prepare everyone) with **説明してしまう** (go ahead and explain regardless, perhaps at length and unasked). In casual speech they shrink: **〜とく** for ておく, **〜ちゃう / 〜じゃう** for てしまう."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**ておく**: do it ahead, for a purpose, to set things up.",
+        "**てしまう**: it got done or happened, with a feeling of \"there, it happened\".",
+        "Casual: 見ておく → 見とく; 食べてしまった → 食べちゃった.",
+        "Learn helper verbs as pictures, not as English words."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "切符を買っておいた。",
+      "options": [
+        "I bought the ticket ahead, to be ready",
+        "I accidentally bought a ticket",
+        "I finished buying every ticket",
+        "I want to buy a ticket"
+      ],
+      "answer": 0,
+      "note": "ておく sets things up beforehand.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Which helper adds an \"it happened!\" exclamation mark?",
+      "prompt": "",
+      "options": [
+        "てしまう",
+        "ておく",
+        "ている",
+        "てみる"
+      ],
+      "answer": 0,
+      "note": "てしまう.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "財布を忘れて＿＿。 (Oops, I forgot my wallet.)",
+      "options": [
+        "しまった",
+        "おいた",
+        "みた",
+        "くれた"
+      ],
+      "answer": 0,
+      "note": "An unwanted surprise: てしまった.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "会議の前に資料を読んで＿＿。 (read it in advance)",
+      "options": [
+        "おく",
+        "くれる",
+        "もらう",
+        "あげる"
+      ],
+      "answer": 0,
+      "note": "Reading it ahead: 読んでおく.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the casual contraction of 見ておく?",
+      "prompt": "",
+      "options": [
+        "見とく",
+        "見ちゃう",
+        "見てる",
+        "見ない"
+      ],
+      "answer": 0,
+      "note": "〜ておく → 〜とく.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the casual contraction of 食べてしまった?",
+      "prompt": "",
+      "options": [
+        "食べちゃった",
+        "食べとく",
+        "食べてる",
+        "食べない"
+      ],
+      "answer": 0,
+      "note": "〜てしまう → 〜ちゃう.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "ておく carries the feeling of an unplanned accident.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "That is てしまう. ておく is deliberate preparation.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "What does the speaker fear in 聞かないで。さくらは説明してしまうから。",
+      "prompt": "",
+      "options": [
+        "Sakura will launch into a long explanation",
+        "Sakura will forget to explain",
+        "Sakura will explain in advance, politely",
+        "Sakura will refuse to explain"
+      ],
+      "answer": 0,
+      "note": "てしまう here carries a sense of \"it will just happen, and at length\".",
+      "id": 8
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence fits \"Oh no, I broke the cup\"?",
+      "prompt": "",
+      "options": [
+        "コップを割ってしまった",
+        "コップを割っておいた",
+        "コップを割ってみた",
+        "コップを割ってあげた"
+      ],
+      "answer": 0,
+      "note": "An accident: てしまった.",
+      "id": 9
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I will explain it beforehand.",
+      "options": [
+        "先に",
+        "説明して",
+        "おきます"
+      ],
+      "note": "Helper おきます follows the て-form.",
+      "id": 10
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the helper verb that shows preparation",
+      "options": [
+        "窓を",
+        "開けて",
+        "おく"
+      ],
+      "answer": 2,
+      "note": "おく is the helper: put the opening in place.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "What does Japanese use in place of English up and out?",
+      "prompt": "",
+      "options": [
+        "Helper verbs",
+        "Prepositions",
+        "Articles",
+        "Nothing at all"
+      ],
+      "answer": 0,
+      "note": "Japanese has no prepositions; helper verbs do that work.",
+      "id": 12
+    }
+  ]
+}

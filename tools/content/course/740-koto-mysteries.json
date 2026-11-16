@@ -1,0 +1,238 @@
+{
+  "id": 740,
+  "number": "74",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "Love and other mysteries of こと",
+  "summary": "こと is an agile word for what concerns someone: あなたのことが好き, 田中さんのこと, そういうこと, どういうこと.",
+  "video": "https://www.youtube.com/watch?v=aoP6sFyTsIk",
+  "related": [
+    604,
+    605
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "**こと** is a very agile word. It means a thing that happens or a matter, and Japanese puts it to many uses that English cannot translate neatly."
+    },
+    {
+      "type": "heading",
+      "text": "のこと: the matter of someone"
+    },
+    {
+      "type": "text",
+      "text": "**あなたのことが好きだ** is a gentle way of saying \"I like you\". It is not quite \"I like you\" but \"I like things about you\": your laugh, your way of walking. It avoids a direct, physical feel and suggests love grown through knowing someone. The same goes for dislike: you react to what you observe of a person, not to their very being."
+    },
+    {
+      "type": "example",
+      "jp": "あなたのことが好きだ。",
+      "en": "I like you (the things about you)."
+    },
+    {
+      "type": "example",
+      "jp": "私のことが嫌いらしい。",
+      "en": "(They) seem to dislike me."
+    },
+    {
+      "type": "example",
+      "jp": "田中さんのことを考えている。",
+      "en": "I'm thinking about Tanaka (and his situation)."
+    },
+    {
+      "type": "heading",
+      "text": "ということ, そういうこと, どういうこと"
+    },
+    {
+      "type": "text",
+      "text": "言う and こと belong together: a こと is a matter that needs explaining. That is why you hear **そういうこと** (\"that's how it is\") and **どういうこと** (\"what do you mean?\")."
+    },
+    {
+      "type": "example",
+      "jp": "どういうことですか。",
+      "en": "What do you mean?"
+    },
+    {
+      "type": "example",
+      "jp": "なるほど、そういうことか。",
+      "en": "I see, so that's what it is."
+    },
+    {
+      "type": "example",
+      "jp": "彼が来ないということは、忙しいのだろう。",
+      "en": "The fact that he isn't coming probably means he is busy."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Xのこと**: the matter of X, things about X.",
+        "**Xのことが好き**: I like X and the things about X.",
+        "**そういうこと / どういうこと**: that's how it is / what do you mean?",
+        "**ということ**: the fact that / it means that."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "What nuance does あなたのことが好きだ carry?",
+      "prompt": "",
+      "options": [
+        "I like things about you",
+        "I like your house",
+        "I used to like you",
+        "I want to meet you"
+      ],
+      "answer": 0,
+      "note": "のこと points to what you know of a person.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "田中さんのことを考えている。",
+      "options": [
+        "I'm thinking about Tanaka and his situation",
+        "I'm thinking Tanaka is a thing",
+        "Tanaka is thinking about me",
+        "I'm thinking about doing it"
+      ],
+      "answer": 0,
+      "note": "Xのこと: the matter concerning X.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "What does どういうことですか mean?",
+      "prompt": "",
+      "options": [
+        "What do you mean?",
+        "Where is it?",
+        "When is it?",
+        "Who are you?"
+      ],
+      "answer": 0,
+      "note": "A request for an explanation.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "What does そういうことか express?",
+      "prompt": "",
+      "options": [
+        "I see, so that's how it is",
+        "I refuse",
+        "I'm not sure",
+        "See you later"
+      ],
+      "answer": 0,
+      "note": "A realization.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "友達の＿＿が心配だ。 (I worry about my friend.)",
+      "options": [
+        "こと",
+        "もの",
+        "ほか",
+        "うち"
+      ],
+      "answer": 0,
+      "note": "友達のこと: the matter concerning the friend.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "言う and こと are closely related: a こと is a matter that needs words.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "They even share a kanji reading in kun-yomi.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "先生のことが怖い。",
+      "options": [
+        "I'm afraid of the teacher",
+        "I'm afraid for the teacher",
+        "The teacher is afraid",
+        "The teacher is a thing"
+      ],
+      "answer": 0,
+      "note": "のことが marks what the feeling is about.",
+      "id": 7
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "What do you mean?",
+      "options": [
+        "どういう",
+        "こと",
+        "ですか"
+      ],
+      "note": "どういうこと + polite ending.",
+      "id": 8
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that stands for \"things about me\"",
+      "options": [
+        "私の",
+        "ことが",
+        "嫌いらしい"
+      ],
+      "answer": 1,
+      "note": "こと covers the things about me.",
+      "id": 9
+    },
+    {
+      "type": "choice",
+      "instruction": "Why is こと called \"agile\"?",
+      "prompt": "",
+      "options": [
+        "A few syllables can say a lot",
+        "It is only used in sports",
+        "It changes shape",
+        "It is always rude"
+      ],
+      "answer": 0,
+      "note": "One short word covers many ideas.",
+      "id": 10
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 彼のことを忘れた mean?",
+      "prompt": "",
+      "options": [
+        "I forgot about him",
+        "I forgot him physically",
+        "He forgot me",
+        "I forgot to go"
+      ],
+      "answer": 0,
+      "note": "Xのこと again.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "What does ということ mean in 彼が来ないということは、忙しい...?",
+      "prompt": "",
+      "options": [
+        "The fact that",
+        "The place where",
+        "The person who",
+        "The time when"
+      ],
+      "answer": 0,
+      "note": "という + こと quotes a fact.",
+      "id": 12
+    }
+  ]
+}

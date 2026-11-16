@@ -1,0 +1,51 @@
+{
+  "id": 100,
+  "number": "10",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Helper verbs and the potential",
+  "summary": "The potential helper る / られる attaches to the え-stem, makes an ichidan verb, and brings the same \"thing is possible\" logic you saw with 好き.",
+  "video": "https://www.youtube.com/watch?v=qcOhHmU0znI",
+  "related": [432, 404],
+  "blocks": [
+    {"type": "text", "text": "Remember: Japanese has no conjugation, only **helper words** that plug into stems. The **potential** (\"can do\") is one of them. It attaches to the **え-stem** and says that the action is **possible**."},
+    {"type": "table", "title": "Making the potential", "rows": [
+      ["Verb", "Potential", "Meaning"],
+      ["買う", "買える", "can buy"],
+      ["聞く", "聞ける", "can hear / ask"],
+      ["話す", "話せる", "can speak"],
+      ["待つ", "待てる", "can wait"],
+      ["食べる", "食べられる", "can eat"],
+      ["来る", "来られる", "can come"],
+      ["する", "できる", "can do"]
+    ]},
+    {"type": "text", "text": "For **godan** verbs the helper is just the single kana **る**, added to the え-stem. For **ichidan** verbs it is **られる**. Either way the result is an **ichidan verb**, so it changes like one: 歩ける, 歩けない, 歩けた, 歩けなかった. The potential of する is the separate verb **できる**."},
+    {"type": "heading", "text": "Watch the particles"},
+    {"type": "text", "text": "The potential says that something **is possible**, so the thing that is possible is the main carriage and takes **が**. 本が読める is literally \"the book is readable\". With a hidden carriage, the zero is again the speaker: 読める means \"(I) can read\"."},
+    {"type": "example", "jp": "日本語が話せる。", "en": "(I) can speak Japanese. (Japanese is speakable.)"},
+    {"type": "example", "jp": "本が読める。", "en": "(I) can read the book. (The book is readable.)"},
+    {"type": "example", "jp": "魚が食べられる。", "en": "(I) can eat fish."},
+    {"type": "example", "jp": "日本語ができる。", "en": "(I) can do Japanese. (Japanese is possible.)"},
+    {"type": "example", "jp": "もう歩けない。", "en": "(I) cannot walk any more."},
+    {"type": "keypoints", "items": [
+      "Godan: **え-stem + る** (買う → 買える). Ichidan: **drop る + られる**.",
+      "来る → **来られる**; する → **できる**.",
+      "The result is an **ichidan verb**: 歩ける, 歩けない, 歩けた, 歩けなかった.",
+      "The thing that is possible takes **が**: **本が読める**."
+    ]}
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Pick the potential", "prompt": "買う", "options": ["買える", "買われる", "買わせる", "買おう"], "answer": 0, "note": "え-stem 買え + る."},
+    {"id": 2, "type": "choice", "instruction": "Pick the potential", "prompt": "食べる", "options": ["食べられる", "食べえる", "食べれる", "食べせる"], "answer": 0, "note": "Ichidan verbs use られる."},
+    {"id": 3, "type": "choice", "instruction": "Pick the potential of する", "prompt": "", "options": ["できる", "すれる", "しられる", "せる"], "answer": 0, "note": "する has its own verb for \"can do\"."},
+    {"id": 4, "type": "choice", "instruction": "Pick the potential of 来る", "prompt": "", "options": ["来られる", "来える", "来れる", "来せる"], "answer": 0, "note": "来る is ichidan-like in the potential: 来られる."},
+    {"id": 5, "type": "choice", "instruction": "Pick the potential", "prompt": "話す", "options": ["話せる", "話さる", "話しる", "話そる"], "answer": 0, "note": "え-stem 話せ + る."},
+    {"id": 6, "type": "choice", "instruction": "True or false?", "prompt": "In 本が読める, the particle が marks the thing that is possible (readable).", "options": ["True", "False"], "answer": 0, "note": "The potential describes a state of the thing, so it is the main carriage."},
+    {"id": 7, "type": "order", "instruction": "Build the sentence", "prompt": "I can speak Japanese.", "options": ["私は", "日本語が", "話せる"], "note": "Topic, thing that is possible, engine."},
+    {"id": 8, "type": "tap", "instruction": "Tap the main carriage (what is possible)", "options": ["日本語が", "できる"], "answer": 0, "note": "日本語 is the carriage; できる is the engine."},
+    {"id": 9, "type": "choice", "instruction": "Pick the negative of 歩ける", "prompt": "", "options": ["歩けない", "歩けらない", "歩かない", "歩けなる"], "answer": 0, "note": "歩ける behaves like an ichidan verb: drop る, add ない."},
+    {"id": 10, "type": "choice", "instruction": "Which stem does the potential attach to?", "prompt": "", "options": ["え-stem", "い-stem", "あ-stem", "お-stem"], "answer": 0, "note": "買う → 買え + る."},
+    {"id": 11, "type": "choice", "instruction": "Why can 話せる be changed like an ichidan verb?", "prompt": "", "options": ["The helper る is ichidan, so what follows obeys ichidan rules", "It ends in せ", "It is irregular", "It is a noun"], "answer": 0, "note": "Whatever attaches after る is treated as ichidan: 話せた, 話せない."},
+    {"id": 12, "type": "choice", "instruction": "Pick the past of 読める", "prompt": "", "options": ["読めた", "読めった", "読んだ", "読みた"], "answer": 0, "note": "An ichidan verb: drop る, add た."}
+  ]
+}

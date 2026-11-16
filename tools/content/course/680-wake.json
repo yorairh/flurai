@@ -1,0 +1,231 @@
+{
+  "id": 680,
+  "number": "68",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "わけ: the underlying reasoning",
+  "summary": "わけ is a noun for the reasoning link between facts: そんなわけで (for that reason), わけが分からない, わけではない and わけがない.",
+  "video": "https://www.youtube.com/watch?v=iU79wvDyDfk",
+  "related": [
+    306,
+    307,
+    308
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Dictionaries list a pile of meanings for **わけ**: reason, cause, conclusion, circumstances. The course unites them: わけ is a **noun** for the **reasoning link** between facts, the logic that joins a cause to a result in either direction. It is related to 分ける and 分かる: to divide, to break down so that it becomes clear."
+    },
+    {
+      "type": "heading",
+      "text": "Giving the reason"
+    },
+    {
+      "type": "example",
+      "jp": "そんなわけで、宿題を忘れました。",
+      "en": "For that reason, I forgot my homework."
+    },
+    {
+      "type": "example",
+      "jp": "毎日練習したのだから、上手なわけだ。",
+      "en": "He practiced every day, so no wonder he's good."
+    },
+    {
+      "type": "heading",
+      "text": "Denying the reasoning"
+    },
+    {
+      "type": "text",
+      "text": "**わけが分からない** means \"the reasoning doesn't compute\": it is nonsense. **〜わけではない** says that this conclusion cannot be drawn: \"it's not that...\". **〜わけがない** says that no such reasoning exists at all, so it cannot be the case: \"there's no way...\"."
+    },
+    {
+      "type": "example",
+      "jp": "お金が足りないわけではない。",
+      "en": "It's not that I'm short of money."
+    },
+    {
+      "type": "example",
+      "jp": "さくらが嘘をつくわけがない。",
+      "en": "There's no way Sakura would tell a lie."
+    },
+    {
+      "type": "example",
+      "jp": "この説明ではわけが分からない。",
+      "en": "I can't make sense of this explanation."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**わけ**: the reasoning or logic linking facts (a noun).",
+        "**そんなわけで**: for that reason.",
+        "**〜わけではない**: it doesn't follow that...",
+        "**〜わけがない**: there is no reasoning for it, so it can't be."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "わけが分からない。",
+      "options": [
+        "It makes no sense",
+        "I understand everything",
+        "I will explain",
+        "I don't want to understand"
+      ],
+      "answer": 0,
+      "note": "The reasoning doesn't compute.",
+      "id": 1
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "そんなわけで宿題を忘れました。",
+      "options": [
+        "For that reason I forgot my homework",
+        "I forgot my homework on purpose",
+        "Homework is a reason",
+        "Don't forget your homework"
+      ],
+      "answer": 0,
+      "note": "そんなわけで introduces the reason.",
+      "id": 2
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "お金が足りないわけではない。",
+      "options": [
+        "It's not that I'm short of money",
+        "I have no money at all",
+        "There is no way I'd have money",
+        "I want more money"
+      ],
+      "answer": 0,
+      "note": "わけではない denies the conclusion.",
+      "id": 3
+    },
+    {
+      "type": "choice",
+      "instruction": "Pick the meaning",
+      "prompt": "さくらが嘘をつくわけがない。",
+      "options": [
+        "There's no way Sakura would lie",
+        "Sakura might lie",
+        "Sakura did not lie yesterday",
+        "Sakura is lying"
+      ],
+      "answer": 0,
+      "note": "わけがない: no reasoning exists, so it can't be.",
+      "id": 4
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "毎日練習したのだから、上手な＿＿だ。 (no wonder he's good)",
+      "options": [
+        "わけ",
+        "もの",
+        "ところ",
+        "はず"
+      ],
+      "answer": 0,
+      "note": "〜わけだ: that's why.",
+      "id": 5
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "わけ is a noun.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "A noun for the reasoning link.",
+      "id": 6
+    },
+    {
+      "type": "choice",
+      "instruction": "Which idea sits under all the uses of わけ?",
+      "prompt": "",
+      "options": [
+        "The reasoning that links facts",
+        "A physical place",
+        "A polite ending",
+        "A counting word"
+      ],
+      "answer": 0,
+      "note": "The word is linked to 分ける and 分かる.",
+      "id": 7
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the stronger denial?",
+      "prompt": "",
+      "options": [
+        "わけがない",
+        "わけではない",
+        "わけでもある",
+        "わけだ"
+      ],
+      "answer": 0,
+      "note": "がない: the reasoning does not exist at all.",
+      "id": 8
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "そんなに食べられる＿＿がない。 (There's no way I can eat that much)",
+      "options": [
+        "わけ",
+        "こと",
+        "もの",
+        "ところ"
+      ],
+      "answer": 0,
+      "note": "わけがない.",
+      "id": 9
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "There's no way Sakura would lie.",
+      "options": [
+        "さくらが",
+        "嘘を",
+        "つく",
+        "わけがない"
+      ],
+      "note": "Clause + わけがない.",
+      "id": 10
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the noun in 嫉妬したわけではありません",
+      "options": [
+        "嫉妬した",
+        "わけ",
+        "ではありません"
+      ],
+      "answer": 1,
+      "note": "わけ is the noun, the thing being denied.",
+      "id": 11
+    },
+    {
+      "type": "choice",
+      "instruction": "What does 分ける mean, the verb behind わけ?",
+      "prompt": "",
+      "options": [
+        "Divide or break down",
+        "Hide",
+        "Wait",
+        "Return"
+      ],
+      "answer": 0,
+      "note": "The core idea is separation and analysis.",
+      "id": 12
+    }
+  ]
+}
