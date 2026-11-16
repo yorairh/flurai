@@ -16,7 +16,7 @@
       {"text": "食べたい", "role": "engine", "label": "makes me want to eat"}
     ], "text": "クレープが食べたい。 Crepes are eat-wanting (to me)."},
     {"type": "diagram", "cars": [
-      {"text": "（ゼロ）が", "role": "zero", "label": "me"},
+      {"text": "Øが", "role": "zero", "label": "me"},
       {"text": "東京に", "role": "white"},
       {"text": "行きたい", "role": "engine"}
     ], "text": "（私が）東京に行きたい。 (I) want to go to Tokyo."},

@@ -15,7 +15,7 @@
     {"type": "heading", "text": "2. A purpose target: why you go"},
     {"type": "text", "text": "Take the **い-stem** of a verb (it works as a noun for the act) and mark it with に. The place is the physical target; the purpose is the volitional target. One sentence can have both."},
     {"type": "diagram", "cars": [
-      {"text": "（ゼロ）が", "role": "zero"},
+      {"text": "Øが", "role": "zero"},
       {"text": "店に", "role": "white", "label": "place"},
       {"text": "卵を", "role": "white"},
       {"text": "買いに", "role": "white", "label": "purpose"},

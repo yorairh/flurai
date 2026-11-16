@@ -16,7 +16,7 @@
     {"type": "text", "text": "Take a full clause and move one piece to the engine end: it stops being a sentence and becomes a describer for that piece."},
     {"type": "diagram", "cars": [
       {"text": "市場で", "role": "white", "label": "where"},
-      {"text": "（ゼロ）が", "role": "zero", "label": "I"},
+      {"text": "Øが", "role": "zero", "label": "I"},
       {"text": "買った", "role": "engine", "label": "bought"},
       {"text": "ドレス", "role": "carriage", "label": "the dress I bought at the market"}
     ], "text": "市場で買ったドレス。 The dress (I) bought at the market."},

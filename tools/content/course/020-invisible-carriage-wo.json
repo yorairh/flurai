@@ -10,7 +10,7 @@
   "blocks": [
     {"type": "text", "text": "In English you must always say who or what: \"I\", \"it\", \"she\". Japanese does not. Whenever the main carriage is clear from the situation, it is simply left out. The course calls this the **invisible carriage** (textbooks: the **zero pronoun**, or a dropped subject). It is still **there** in the grammar, you just do not say it."},
     {"type": "diagram", "cars": [
-      {"text": "（ゼロ）", "role": "zero", "label": "invisible carriage"},
+      {"text": "Ø", "role": "zero", "label": "invisible carriage"},
       {"text": "が", "role": "particle"},
       {"text": "先生だ", "role": "engine", "label": "engine"}
     ], "text": "（私が）先生だ。 The carriage is empty, but the train still runs."},
