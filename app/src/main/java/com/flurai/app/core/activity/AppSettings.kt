@@ -16,7 +16,7 @@ data class AppSettings(
     val reminderMinute: Int = 0,
     /** Minutes of study that make a day count toward the streak. */
     val streakMinutes: Int = 5,
-    /** Small kana readings above kanji in the Reading screen. */
+    /** Small kana readings above kanji, everywhere except where the reading is being tested. */
     val showFurigana: Boolean = true,
     /** Hear-the-word cards for words you have learned. */
     val listeningCards: Boolean = true,

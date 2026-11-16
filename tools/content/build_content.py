@@ -769,13 +769,13 @@ def write_database(
         + [(g["id"], EXTRA_EXAMPLE_RANK + i, e["jp"], e["en"], e["answer"], e.get("ruby")) for g in grammar for i, e in enumerate(g.get("extras", []))],
     )
     db.executemany(
-        "INSERT INTO course_lesson (id, position, number, kind, jlpt, title, summary, video, related, body)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO course_lesson (id, position, number, kind, jlpt, title, summary, video, related, body, ruby)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         course.lesson_rows(course_entries),
     )
     db.executemany(
-        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         course.question_rows(course_entries),
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
@@ -841,10 +841,7 @@ def main() -> None:
     found = course.problems(course_entries, {g["id"] for g in grammar})
     if found:
         sys.exit("The grammar course has problems:\n  " + "\n  ".join(found))
-    for entry in course_entries:
-        for block in entry["blocks"]:
-            if block["type"] == "example":
-                block["ruby"] = ruby.text_markup(reader, block["jp"])
+    course.add_ruby(course_entries, lambda text: ruby.text_markup(reader, text) if text else None)
 
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),

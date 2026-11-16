@@ -140,23 +140,60 @@ def problems(entries: list[dict], grammar_ids: set[int]) -> list[str]:
     return out
 
 
+def _packed(values: dict) -> str | None:
+    """A JSON object of the furigana markups that exist, or None when there are none."""
+    kept = {k: v for k, v in values.items() if v and (not isinstance(v, list) or any(v))}
+    return json.dumps(kept, ensure_ascii=False) if kept else None
+
+
+def add_ruby(entries: list[dict], markup) -> None:
+    """Adds furigana markup to everything a learner reads: `markup(text)` gives the markup or None.
+
+    Blocks keep it next to their text (`ruby`, `itemsRuby`, `rowsRuby`, a car's `ruby`); a lesson's title
+    and summary and a question's texts go into `_ruby`, stored as one JSON column.
+    """
+    for entry in entries:
+        entry["_ruby"] = _packed({"title": markup(entry["title"]), "summary": markup(entry["summary"])})
+        for block in entry["blocks"]:
+            kind = block["type"]
+            if kind == "example":
+                block["ruby"] = markup(block["jp"])
+            elif kind in ("text", "heading"):
+                block["ruby"] = markup(block["text"])
+            elif kind == "keypoints":
+                block["itemsRuby"] = [markup(item) for item in block["items"]]
+            elif kind == "table":
+                block["rowsRuby"] = [[markup(cell) for cell in row] for row in block["rows"]]
+            elif kind == "diagram":
+                for car in block["cars"]:
+                    car["ruby"] = markup(car["text"])
+        for q in entry.get("questions", []):
+            q["_ruby"] = _packed({
+                "instruction": markup(q["instruction"]),
+                "prompt": markup(q.get("prompt", "")),
+                "hint": markup(q.get("hint")),
+                "options": [markup(o) for o in q["options"]],
+                "note": markup(q["note"]),
+            })
+
+
 def lesson_rows(entries: list[dict]) -> list[tuple]:
-    """Rows for course_lesson: id, position, number, kind, jlpt, title, summary, video, related, body."""
+    """Rows for course_lesson: id, position, number, kind, jlpt, title, summary, video, related, body, ruby."""
     return [
         (
             e["id"], e["_position"], e["number"], e["kind"], e.get("jlpt"), e["title"], e["summary"], e.get("video"),
-            ",".join(str(g) for g in e.get("related", [])), json.dumps(e["blocks"], ensure_ascii=False),
+            ",".join(str(g) for g in e.get("related", [])), json.dumps(e["blocks"], ensure_ascii=False), e.get("_ruby"),
         )
         for e in entries
     ]
 
 
 def question_rows(entries: list[dict]) -> list[tuple]:
-    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note."""
+    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby."""
     return [
         (
             e["id"], q["id"], q["type"], q["instruction"], q.get("prompt", ""), q.get("hint"),
-            json.dumps(q["options"], ensure_ascii=False), q.get("answer", 0), q["note"],
+            json.dumps(q["options"], ensure_ascii=False), q.get("answer", 0), q["note"], q.get("_ruby"),
         )
         for e in entries
         for q in e.get("questions", [])

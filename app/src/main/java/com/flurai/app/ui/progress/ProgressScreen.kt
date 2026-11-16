@@ -1,5 +1,7 @@
 package com.flurai.app.ui.progress
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.LoadingBox
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.background
@@ -293,8 +295,8 @@ private fun WeakWordRow(weak: WeakWord, onClick: () -> Unit) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.Bottom) {
-                    Text(weak.word.expression, style = MaterialTheme.typography.titleLarge.japanese())
-                    if (weak.word.reading != weak.word.expression) {
+                    WordExpression(weak.word, MaterialTheme.typography.titleLarge.japanese())
+                    if (weak.word.reading != weak.word.expression && !wordHasRuby(weak.word)) {
                         Spacer(Modifier.width(8.dp))
                         Text(
                             weak.word.reading,

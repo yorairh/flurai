@@ -203,4 +203,36 @@ class CourseTest {
         assertEquals("carriage", blocks[1].cars!!.single().role)
         assertEquals(emptyList<CourseBlock>(), parseBody("not json"))
     }
+
+    // -- furigana -----------------------------------------------------------------------------------------
+
+    @Test
+    fun aQuestionCarriesTheFuriganaOfItsTextsByPlainText() {
+        val entity = CourseQuestionEntity(
+            10, 1, "choice", "Pick the verb", "犬が走る。", null, """["走る","犬"]""", 0, "走る is a verb",
+            ruby = """{"prompt": "{犬|いぬ}が{走|はし}る。", "options": ["{走|はし}る", "{犬|いぬ}"], "note": "{走|はし}る is a verb"}""",
+        )
+        val q = courseQuestion(entity, 5, Random(1))!!
+        assertEquals("{犬|いぬ}が{走|はし}る。", q.ruby["犬が走る。"])
+        assertEquals("{走|はし}る", q.ruby["走る"])
+        assertEquals("{走|はし}る is a verb", q.ruby["走る is a verb"])
+        assertNull(q.ruby["Pick the verb"])
+    }
+
+    @Test
+    fun theRightArrangementOfAnOrderQuestionHasTheJoinedFurigana() {
+        val entity = CourseQuestionEntity(
+            10, 2, "order", "Build it", "", null, """["私が","電気を","消した"]""", 0, "x",
+            ruby = """{"options": ["{私|わたし}が", "{電気|でんき}を", "{消|け}した"]}""",
+        )
+        val q = courseQuestion(entity, 5, Random(1))!!
+        assertEquals("{私|わたし}が{電気|でんき}を{消|け}した", q.ruby["私が電気を消した"])
+    }
+
+    @Test
+    fun brokenOrMissingFuriganaJustMeansNone() {
+        assertTrue(rubyMap(null, mapOf("a" to "x")).isEmpty())
+        assertTrue(rubyMap("not json", mapOf("a" to "x")).isEmpty())
+        assertTrue(rubyMap("""{"a": 5}""", mapOf("a" to "x")).isEmpty())
+    }
 }

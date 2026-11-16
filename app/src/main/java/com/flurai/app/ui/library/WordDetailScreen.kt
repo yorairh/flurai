@@ -1,5 +1,7 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import kotlinx.coroutines.flow.map
 import com.flurai.app.ui.study.DeckPickerDialog
 import com.flurai.app.core.study.DeckRepository
@@ -165,11 +167,11 @@ fun WordDetailScreen(onBack: () -> Unit, onOpenWord: (Int) -> Unit = {}, viewMod
                 .padding(horizontal = 24.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            if (word.reading != word.expression) {
+            if (word.reading != word.expression && !wordHasRuby(word)) {
                 Text(word.reading, style = MaterialTheme.typography.titleMedium.japanese(), color = MaterialTheme.colorScheme.secondary)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), modifier = Modifier.weight(1f, fill = false))
+                WordExpression(word, MaterialTheme.typography.displayMedium.japanese(), Modifier.weight(1f, fill = false))
                 Spacer(Modifier.width(12.dp))
                 FilledTonalIconButton(onClick = viewModel::speak) { Icon(Icons.Filled.PlayArrow, contentDescription = "Play audio") }
             }

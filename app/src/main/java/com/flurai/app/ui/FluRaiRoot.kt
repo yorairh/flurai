@@ -1,10 +1,13 @@
 package com.flurai.app.ui
 
+import com.flurai.app.ui.components.FuriganaViewModel
 import com.flurai.app.ui.components.LoadingBox
+import com.flurai.app.ui.components.LocalFurigana
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -15,9 +18,11 @@ import com.flurai.app.ui.onboarding.OnboardingScreen
 
 /** Routes between sign-in, onboarding and the main app based on [AppState]. */
 @Composable
-fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel()) {
+fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel(), furigana: FuriganaViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val showFurigana by furigana.showFurigana.collectAsStateWithLifecycle()
 
+    CompositionLocalProvider(LocalFurigana provides showFurigana) {
     Surface(Modifier.fillMaxSize()) {
         // Crossfade by screen kind, so the main app isn't rebuilt when the user or profile changes.
         Crossfade(targetState = state::class, label = "app-state") { kind ->
@@ -38,5 +43,6 @@ fun FluRaiRoot(viewModel: AppViewModel = hiltViewModel()) {
                 }
             }
         }
+    }
     }
 }

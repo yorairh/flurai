@@ -411,7 +411,8 @@ def text_parts(reader: Reader, text: str) -> list[tuple[str, str | None]]:
                 stem_hit = (length, [(stem, come_reading(following))]) if following and following in COME_FOLLOWERS else None
                 break
             # only everyday verbs: a rare one (朝起きる) would swallow words that are really two
-            ok = [o for o in options if stem_ok(o[1], o[2], following) and (o[3] > 0 or reader.rank(stem + o[2], o[0] + o[2]) < 99)]
+            # a gap of a fill-in question (＿) right after the stem stands for the ending that was cut out
+            ok = [o for o in options if (following == "＿" or stem_ok(o[1], o[2], following)) and (o[3] > 0 or reader.rank(stem + o[2], o[0] + o[2]) < 99)]
             if ok:
                 # the same stem can belong to several verbs (行く / 行う): the JLPT reading wins
                 spelling_options = sorted(ok, key=lambda o: (reader.rank(stem + o[2], o[0] + o[2]), len(o[0])))

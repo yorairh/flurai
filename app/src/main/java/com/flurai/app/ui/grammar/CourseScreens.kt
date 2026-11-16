@@ -40,6 +40,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,8 +62,10 @@ import com.flurai.app.core.course.CourseStatus
 import com.flurai.app.core.course.SELF_TEST_SIZES
 import com.flurai.app.core.course.TrainCar
 import com.flurai.app.core.course.isNote
+import com.flurai.app.core.course.lessonRuby
 import com.flurai.app.ui.components.BackTopAppBar
 import com.flurai.app.ui.components.ExampleSentence
+import com.flurai.app.ui.components.FuriganaText
 import com.flurai.app.ui.components.MissingVoiceBanner
 import com.flurai.app.ui.components.SentenceSpeakButton
 import com.flurai.app.ui.components.rememberStudyScroll
@@ -146,7 +149,7 @@ private fun NextEntryCard(state: CourseListState, onOpenLesson: (Int) -> Unit) {
                     style = MaterialTheme.typography.labelLarge,
                 )
                 Spacer(Modifier.height(4.dp))
-                Text(next.title, style = MaterialTheme.typography.titleLarge.japanese())
+                FuriganaText(next.title, remember(next) { lessonRuby(next) }[next.title], MaterialTheme.typography.titleLarge.japanese())
                 Text(next.summary, style = MaterialTheme.typography.bodyMedium, maxLines = 3)
                 Spacer(Modifier.height(12.dp))
                 Button(onClick = { onOpenLesson(next.id) }, modifier = Modifier.fillMaxWidth()) {
@@ -192,7 +195,7 @@ private fun CourseRow(item: CourseItem, onClick: () -> Unit) {
             modifier = Modifier.width(40.dp),
         )
         Column(Modifier.weight(1f)) {
-            Text(lesson.title, style = MaterialTheme.typography.titleMedium.japanese())
+            FuriganaText(lesson.title, remember(lesson) { lessonRuby(lesson) }[lesson.title], MaterialTheme.typography.titleMedium.japanese())
             Text(
                 listOfNotNull(
                     if (lesson.isNote()) "Study note" else lesson.jlpt?.let { "N$it" },
@@ -237,7 +240,8 @@ fun CourseLessonScreen(
             Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(lesson.title, style = MaterialTheme.typography.headlineSmall.japanese())
+            val rubyOf = remember(lesson) { lessonRuby(lesson) }
+            FuriganaText(lesson.title, rubyOf[lesson.title], MaterialTheme.typography.headlineSmall.japanese())
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (lesson.isNote()) {
                     Badge("Study note")
@@ -247,7 +251,7 @@ fun CourseLessonScreen(
                 if (state.status == CourseStatus.Done && !lesson.isNote()) Badge("Passed")
                 state.best?.let { Text("Best $it", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
             }
-            Text(lesson.summary, style = MaterialTheme.typography.bodyLarge.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant)
+            FuriganaText(lesson.summary, rubyOf[lesson.summary], MaterialTheme.typography.bodyLarge.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant)
             state.blocks.forEach { block -> BlockView(block, viewModel::speak) }
 
             if (state.related.isNotEmpty()) {
@@ -304,8 +308,8 @@ internal fun boldMarkup(text: String): AnnotatedString = buildAnnotatedString {
 @Composable
 private fun BlockView(block: CourseBlock, speak: (String, Boolean) -> Unit) {
     when (block.type) {
-        "heading" -> Text(block.text.orEmpty(), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
-        "text" -> Text(boldMarkup(block.text.orEmpty()), style = MaterialTheme.typography.bodyLarge.japanese())
+        "heading" -> FuriganaText(block.text.orEmpty(), block.ruby, MaterialTheme.typography.titleMedium.japanese(), Modifier.padding(top = 8.dp))
+        "text" -> FuriganaText(block.text.orEmpty(), block.ruby, MaterialTheme.typography.bodyLarge.japanese())
         "example" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
             Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
@@ -323,7 +327,9 @@ private fun BlockView(block: CourseBlock, speak: (String, Boolean) -> Unit) {
         "keypoints" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(block.title ?: "Key points", style = MaterialTheme.typography.labelLarge)
-                block.items.orEmpty().forEach { Text(boldMarkup("•  $it"), style = MaterialTheme.typography.bodyLarge.japanese()) }
+                block.items.orEmpty().forEachIndexed { i, item ->
+                    FuriganaText("•  $item", block.itemsRuby?.getOrNull(i)?.let { "•  $it" }, MaterialTheme.typography.bodyLarge.japanese())
+                }
             }
         }
         "table" -> TableView(block)
@@ -344,12 +350,13 @@ private fun TableView(block: CourseBlock) {
                 rows.forEachIndexed { index, row ->
                     if (index > 0) HorizontalDivider()
                     Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                        row.forEach { cell ->
-                            Text(
+                        row.forEachIndexed { col, cell ->
+                            val base = (if (index == 0) MaterialTheme.typography.labelLarge else MaterialTheme.typography.bodyMedium).japanese()
+                            FuriganaText(
                                 cell,
-                                style = (if (index == 0) MaterialTheme.typography.labelLarge else MaterialTheme.typography.bodyMedium).japanese(),
-                                fontWeight = if (index == 0) FontWeight.Bold else null,
-                                modifier = Modifier.width(110.dp).padding(end = 8.dp),
+                                block.rowsRuby?.getOrNull(index)?.getOrNull(col),
+                                if (index == 0) base.copy(fontWeight = FontWeight.Bold) else base,
+                                Modifier.width(110.dp).padding(end = 8.dp),
                             )
                         }
                     }
@@ -435,7 +442,7 @@ private fun Car(car: TrainCar) {
                     Modifier.padding(start = 12.dp, end = if (engine) 20.dp else 12.dp, top = 8.dp, bottom = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(car.text, style = MaterialTheme.typography.titleMedium.japanese())
+                    FuriganaText(car.text, car.ruby, MaterialTheme.typography.titleMedium.japanese())
                     car.label?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
                 }
             }

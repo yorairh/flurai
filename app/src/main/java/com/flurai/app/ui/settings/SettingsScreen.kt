@@ -120,6 +120,20 @@ fun SettingsScreen(
                 )
             }
 
+            SettingsCard("Furigana") {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f)) {
+                        Text("Show readings above kanji", style = MaterialTheme.typography.bodyLarge)
+                        Text(
+                            "In sentences, lessons, tests and word lists. Cards and questions that ask how a word is read never show it.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Switch(checked = settings.showFurigana, onCheckedChange = viewModel::setFurigana)
+                }
+            }
+
             SettingsCard("Flashcards") {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {

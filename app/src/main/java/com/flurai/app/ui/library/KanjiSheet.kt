@@ -1,5 +1,7 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -94,9 +96,9 @@ fun KanjiSheet(kanji: KanjiEntity, words: List<WordEntity>, onOpenWord: (Int) ->
                         Modifier.fillMaxWidth().clickable { onOpenWord(word.id) }.padding(vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(word.expression, style = MaterialTheme.typography.titleMedium.japanese(), modifier = Modifier.width(96.dp))
+                        WordExpression(word, MaterialTheme.typography.titleMedium.japanese(), Modifier.width(96.dp))
                         Column(Modifier.weight(1f)) {
-                            if (word.reading != word.expression) {
+                            if (word.reading != word.expression && !wordHasRuby(word)) {
                                 Text(word.reading, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.secondary)
                             }
                             Text(word.meanings, style = MaterialTheme.typography.bodyMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)

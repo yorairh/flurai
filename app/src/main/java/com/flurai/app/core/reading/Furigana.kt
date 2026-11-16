@@ -3,7 +3,7 @@ package com.flurai.app.core.reading
 /** A piece of a written word; [ruby] is the small kana reading shown above it, null for kana and symbols. */
 data class RubyPart(val text: String, val ruby: String?)
 
-private fun isKanji(c: Char) = c in '一'..'鿿' || c == '々' || c == '〆'
+fun isKanji(c: Char) = c in '一'..'鿿' || c == '々' || c == '〆'
 
 /** Katakana to hiragana, so 'コート' and 'こうと' can be compared. */
 private fun toHiragana(text: String): String =
