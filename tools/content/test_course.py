@@ -121,6 +121,39 @@ class NewSentenceRulesTest(unittest.TestCase):
         self.assertEqual([], self.check(self.lesson_with(q, extraKanji="猫歩"), easy))
 
 
+class ReadingsTest(unittest.TestCase):
+    """An entry's own `readings` beat the dictionary for the texts they name."""
+
+    @staticmethod
+    def fake_markup(text):  # reads every 行 as おこな, like the dictionary would for 行いて
+        return text.replace("行", "{行|おこな}") if text and "行" in text else None
+
+    def entry(self, **changes):
+        e = good_lesson(readings={"行いて": "{行|い}いて"}, blocks=[
+            {"type": "text", "text": "行くは行って、行いてではない"},
+            {"type": "diagram", "cars": [{"text": "私", "role": "carriage"}], "text": "行く"},
+        ])
+        e["questions"][0].update(options=["行って", "行いて", "行んで"], prompt="")
+        e.update(changes)
+        return e
+
+    def test_the_override_is_used_where_its_text_appears_and_the_dictionary_elsewhere(self):
+        e = self.entry()
+        course.add_ruby([e], self.fake_markup)
+        self.assertEqual("{行|おこな}くは{行|おこな}って、{行|い}いてではない", e["blocks"][0]["ruby"])
+
+    def test_options_and_captions_get_markup_too(self):
+        e = self.entry()
+        course.add_ruby([e], self.fake_markup)
+        self.assertEqual("{行|おこな}く", e["blocks"][1]["ruby"])
+        self.assertIn("{行|い}いて", json.loads(e["questions"][0]["_ruby"])["options"])
+
+    def test_an_override_must_spell_the_same_text(self):
+        bad = self.entry(readings={"行いて": "{行|い}って"})
+        self.assertTrue(any("行いて" in p for p in course.problems([bad], GRAMMAR_IDS)))
+        self.assertEqual([], [p for p in course.problems([self.entry()], GRAMMAR_IDS) if "行いて" in p])
+
+
 class CourseFilesTest(unittest.TestCase):
     """The real entries in tools/content/course."""
 

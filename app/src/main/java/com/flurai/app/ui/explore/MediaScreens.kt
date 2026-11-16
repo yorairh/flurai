@@ -26,7 +26,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -210,7 +210,7 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                         analysis != null -> {
                             val p = analysis.progress
                             Text("You know ${p.knownWords} of ${p.listedWords} words", style = MaterialTheme.typography.headlineSmall)
-                            LinearProgressIndicator(progress = { p.share.toFloat() }, modifier = Modifier.fillMaxWidth())
+                            StudyProgressBar(progress = { p.share.toFloat() }, modifier = Modifier.fillMaxWidth())
                             Text(
                                 "Counts the words of this title that are in the app's JLPT word lists.",
                                 style = MaterialTheme.typography.bodySmall,

@@ -22,7 +22,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -57,6 +57,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.mutableStateOf
 import com.flurai.app.ui.theme.japanese
+import com.flurai.app.ui.components.MissingVoiceBanner
+import com.flurai.app.ui.components.SentenceSpeakButton
+import com.flurai.app.ui.grammar.spokenText
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.ui.draw.alpha
 
 private val CorrectGreen = Color(0xFF3C9A4E)
 private val WrongRed = Color(0xFFD9483B)
@@ -91,11 +97,12 @@ fun QuizScreen(
         BackTopAppBar(title = { Text(state.title) }, onBack = { if (inProgress) confirmLeave = true else onBack() }, backDescription = "Close")
         val question = state.question
         val result = state.result
+        if (viewModel.kind is QuizKind.CourseLesson || viewModel.kind is QuizKind.CourseReview) MissingVoiceBanner(viewModel.speaker)
         when {
             state.error != null -> Message(state.error.orEmpty(), onBack)
             state.loading -> LoadingBox()
             result != null -> ResultView(result, viewModel, onBack, onTakeCheckpoint, { onRetry(viewModel.kind.encode()) }, onOpenLesson)
-            question != null -> QuestionView(state, question, viewModel::choose, viewModel::arrange, viewModel::next, viewModel::replay)
+            question != null -> QuestionView(state, question, viewModel::choose, viewModel::arrange, viewModel::next, viewModel::replay, viewModel::speak)
         }
     }
 }
@@ -117,11 +124,18 @@ private fun QuestionView(
     onArrange: (List<Int>) -> Unit,
     onNext: () -> Unit,
     onReplay: () -> Unit,
+    onSpeak: (String, Boolean) -> Unit,
 ) {
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp)) {
+    val answered = state.selected != null
+    val isOrder = question.kind == QuestionKind.CourseOrder
+    var placed by remember(question) { mutableStateOf(listOf<Int>()) }
+    val tileCount = question.tiles?.size ?: 0
+    val last = state.total != null && state.number >= state.total
+    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp)) {
         val total = state.total
         if (total != null) {
-            LinearProgressIndicator(progress = { (state.number - 1f) / total }, modifier = Modifier.fillMaxWidth())
+            StudyProgressBar(progress = { (state.number - 1f) / total }, modifier = Modifier.fillMaxWidth())
             Text("Question ${state.number} of $total", style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(top = 8.dp))
         } else {
             Text("Question ${state.number}", style = MaterialTheme.typography.labelLarge)
@@ -151,6 +165,10 @@ private fun QuestionView(
             if (!course && question.furigana && (question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning)) {
                 // a whole sentence: the readings come from the app's own word list
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { ExampleSentence(question.prompt, null, promptStyle) }
+            } else if (answered && course && filledGap(question) != null) {
+                // the gap shows the right answer once the question is answered
+                val (plain, markup) = filledGap(question)!!
+                FuriganaText(plain, markup, promptStyle, Modifier.fillMaxWidth(), show = LocalFurigana.current && question.furigana, centered = true)
             } else {
                 QText(question.prompt, question, promptStyle, Modifier.fillMaxWidth(), centered = true)
             }
@@ -178,14 +196,21 @@ private fun QuestionView(
         Spacer(Modifier.height(24.dp))
         when (question.kind) {
             QuestionKind.CourseTap -> TapSentence(question, state.selected, onChoose)
-            QuestionKind.CourseOrder -> OrderTiles(question, state.selected != null, state.arranged, onArrange)
+            QuestionKind.CourseOrder -> OrderTiles(question, answered, placed) { placed = it }
             else -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 question.options.forEachIndexed { index, option ->
                     OptionButton(option, index, question, state.selected, onChoose)
                 }
             }
         }
-        if (state.selected != null) {
+        if (answered) {
+            val right = if (isOrder) state.arranged != null && question.isArrangementRight(state.arranged) else state.selected == question.answer
+            val sentence = if (course) spokenSentence(question) else null
+            Row(Modifier.fillMaxWidth().padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Verdict(right, Modifier.weight(1f))
+                if (sentence != null) SentenceSpeakButton(onSpeak = { slow -> onSpeak(sentence, slow) })
+            }
+            if (isOrder) OrderRightAnswer(question, right, state.arranged)
             question.translation?.let {
                 Text(
                     it,
@@ -202,8 +227,61 @@ private fun QuestionView(
                 )
             }
             Spacer(Modifier.height(16.dp))
-            Button(onClick = onNext, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Next") }
         }
+    }
+    // One main button, always in the same place: Check (before an order question is answered), then Next / See result.
+    if (answered || (isOrder && tileCount > 0)) {
+        Box(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp)) {
+            if (answered) {
+                Button(onClick = onNext, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text(if (last) "See result" else "Next") }
+            } else {
+                Button(onClick = { onArrange(placed) }, enabled = placed.size == tileCount, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Check") }
+            }
+        }
+    }
+    }
+}
+
+/** Correct / not quite, with an icon as well as a color. */
+@Composable
+private fun Verdict(correct: Boolean, modifier: Modifier = Modifier) {
+    val color = if (correct) CorrectGreen else WrongRed
+    Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Icon(if (correct) Icons.Filled.Check else Icons.Filled.Close, contentDescription = null, tint = color)
+        Text(if (correct) "Correct" else "Not quite", style = MaterialTheme.typography.titleMedium, color = color)
+    }
+}
+
+/** The sentence of a "fill the gap" question with the gap filled: plain text with **bold** around the answer, and its markup. */
+private fun filledGap(question: Question): Pair<String, String?>? {
+    if (question.kind != QuestionKind.CourseChoice || '＿' !in question.prompt) return null
+    val answer = question.options.getOrNull(question.answer) ?: return null
+    val gap = Regex("＿+")
+    val plain = question.prompt.replace(gap, Regex.escapeReplacement("**$answer**"))
+    val markup = question.ruby[question.prompt]?.replace(gap, Regex.escapeReplacement("**${question.ruby[answer] ?: answer}**"))
+    return plain to markup
+}
+
+/** The whole Japanese sentence of an answered course question (for the audio), or null when there is none. */
+private fun spokenSentence(question: Question): String? {
+    val text = when (question.kind) {
+        QuestionKind.CourseOrder -> question.correctText
+        QuestionKind.CourseTap -> question.prompt
+        QuestionKind.CourseChoice -> filledGap(question)?.first?.replace("**", "")
+        else -> null
+    } ?: return null
+    return spokenText(text).takeIf { s -> s.any { it.code >= 0x3040 } }
+}
+
+/** After an order question: the usual order when another one was accepted, or the right answer when it was wrong. */
+@Composable
+private fun OrderRightAnswer(question: Question, right: Boolean, arranged: String?) {
+    val correct = question.correctText.orEmpty()
+    if (right && arranged == correct) return
+    val color = if (right) MaterialTheme.colorScheme.onSurfaceVariant else CorrectGreen
+    Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Text(if (right) "The usual order: " else "Right answer: ", style = MaterialTheme.typography.titleMedium, color = color)
+        QText(correct, question, MaterialTheme.typography.titleMedium.japanese(), Modifier.weight(1f), color = color)
     }
 }
 
@@ -237,12 +315,14 @@ private fun TapSentence(question: Question, selected: Int?, onChoose: (Int) -> U
 private fun Modifier.androidxClickable(enabled: Boolean, onClick: () -> Unit): Modifier =
     this.then(Modifier.clickable(enabled = enabled, onClick = onClick))
 
-/** Build the sentence from its pieces: tap a piece to place it, tap a placed piece to take it back, then check. */
+/**
+ * Build the sentence from its pieces: tap a piece to place it, tap a placed piece to take it back; the Check
+ * button is the screen's bottom button. A placed piece leaves an empty slot in the bank, so the others stay put.
+ */
 @Composable
-private fun OrderTiles(question: Question, answered: Boolean, arranged: String?, onArrange: (List<Int>) -> Unit) {
+private fun OrderTiles(question: Question, answered: Boolean, placed: List<Int>, onPlaced: (List<Int>) -> Unit) {
     val tiles = question.tiles.orEmpty()
-    var placed by remember(question) { mutableStateOf(listOf<Int>()) }
-    val right = answered && arranged != null && question.isArrangementRight(arranged)
+    val right = answered && placed.size == tiles.size && question.isArrangementRight(placed.joinToString("") { tiles[it] })
     val border = when {
         !answered -> MaterialTheme.colorScheme.outline
         right -> CorrectGreen
@@ -258,37 +338,30 @@ private fun OrderTiles(question: Question, answered: Boolean, arranged: String?,
             androidx.compose.foundation.layout.FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(10.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(10.dp),
             ) {
-                placed.forEach { i -> Tile(tiles[i], question) { if (!answered) placed = placed - i } }
+                placed.forEach { i -> Tile(tiles[i], question) { if (!answered) onPlaced(placed - i) } }
             }
         }
-        androidx.compose.foundation.layout.FlowRow(
+        // Once answered the empty bank goes away; before that every piece keeps its slot.
+        if (!answered) androidx.compose.foundation.layout.FlowRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxWidth(),
         ) {
-            tiles.indices.filter { it !in placed }.forEach { i -> Tile(tiles[i], question) { if (!answered) placed = placed + i } }
-        }
-        if (!answered) {
-            Button(onClick = { onArrange(placed) }, enabled = placed.size == tiles.size, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Check") }
-        } else {
-            val correct = question.correctText.orEmpty()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (right) {
-                    Text("Correct", style = MaterialTheme.typography.titleMedium, color = CorrectGreen)
-                } else {
-                    Text("Right: ", style = MaterialTheme.typography.titleMedium, color = WrongRed)
-                    QText(correct, question, MaterialTheme.typography.titleMedium.japanese(), color = WrongRed)
-                }
+            tiles.indices.forEach { i ->
+                val used = i in placed
+                Tile(tiles[i], question, enabled = !used, modifier = Modifier.alpha(if (used) 0f else 1f)) { onPlaced(placed + i) }
             }
         }
     }
 }
 
 @Composable
-private fun Tile(text: String, question: Question, onClick: () -> Unit) {
-    OutlinedButton(onClick = onClick) { QText(text, question, MaterialTheme.typography.titleMedium.japanese()) }
+private fun Tile(text: String, question: Question, enabled: Boolean = true, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    OutlinedButton(onClick = onClick, enabled = enabled, modifier = modifier.heightIn(min = 60.dp)) {
+        QText(text, question, MaterialTheme.typography.titleMedium.japanese())
+    }
 }
 
 /** A text of [question] with the furigana the database has for it, unless the setting is off or the question tests the reading. */
@@ -364,6 +437,13 @@ private fun ResultView(
     ) {
         Text("結果", style = MaterialTheme.typography.titleMedium.japanese(), color = MaterialTheme.colorScheme.secondary)
         Text("${result.correct} / ${result.total}", style = MaterialTheme.typography.displayLarge)
+        if (result.reviewTotal > 0) {
+            Text(
+                "Review of earlier lessons: ${result.reviewCorrect} of ${result.reviewTotal}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
         result.passed?.let { passed ->
             Text(
                 when {

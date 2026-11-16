@@ -37,6 +37,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -233,6 +234,10 @@ fun CourseLessonScreen(
         BackTopAppBar(
             title = { Text(lesson?.let { (if (it.isNote()) "Note " else "Lesson ") + it.number } ?: "Course") },
             onBack = onBack,
+            actions = {
+                // the test is one tap away without scrolling to the end of the lesson
+                if (lesson != null && !lesson.isNote()) TextButton(onClick = { onTakeTest(lesson.id) }) { Text("Test") }
+            },
         )
         MissingVoiceBanner(viewModel.speaker)
         if (lesson == null) return@Column
@@ -251,7 +256,6 @@ fun CourseLessonScreen(
                 if (state.status == CourseStatus.Done && !lesson.isNote()) Badge("Passed")
                 state.best?.let { Text("Best $it", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
             }
-            FuriganaText(lesson.summary, rubyOf[lesson.summary], MaterialTheme.typography.bodyLarge.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant)
             state.blocks.forEach { block -> BlockView(block, viewModel::speak) }
 
             if (state.related.isNotEmpty()) {
@@ -322,7 +326,7 @@ private fun BlockView(block: CourseBlock, speak: (String, Boolean) -> Unit) {
         }
         "diagram" -> Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             TrainDiagram(block.cars.orEmpty())
-            block.text?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            block.text?.let { FuriganaText(it, block.ruby, MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
         "keypoints" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -389,6 +393,7 @@ fun TrainDiagram(cars: List<TrainCar>) {
             .padding(horizontal = 4.dp),
         verticalAlignment = Alignment.Bottom,
     ) {
+        val anyLabel = cars.any { it.label != null }
         cars.forEachIndexed { index, car ->
             if (index > 0) {
                 Box(
@@ -396,7 +401,7 @@ fun TrainDiagram(cars: List<TrainCar>) {
                         .background(MaterialTheme.colorScheme.onSurfaceVariant),
                 )
             }
-            Car(car)
+            Car(car, reserveLabel = anyLabel)
         }
     }
 }
@@ -405,7 +410,7 @@ private val TrainBlack = Color(0xFF1F1F26)
 private val TrainWhite = Color(0xFFF6F3EC)
 
 @Composable
-private fun Car(car: TrainCar) {
+private fun Car(car: TrainCar, reserveLabel: Boolean) {
     val scheme = MaterialTheme.colorScheme
     val (background, content, border) = when (car.role) {
         "engine" -> Triple(scheme.primary, scheme.onPrimary, null)
@@ -447,7 +452,9 @@ private fun Car(car: TrainCar) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     FuriganaText(car.text, car.ruby, MaterialTheme.typography.titleMedium.japanese())
-                    car.label?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
+                    // a car without a label keeps the line, so the cars of a train are equally tall and the couplings meet
+                    if (car.label != null) Text(car.label, style = MaterialTheme.typography.labelSmall)
+                    else if (reserveLabel) Text(" ", style = MaterialTheme.typography.labelSmall)
                 }
             }
             if (engine) {

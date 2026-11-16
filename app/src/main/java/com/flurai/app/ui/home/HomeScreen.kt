@@ -16,7 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -194,7 +194,7 @@ private fun LevelCard(snapshot: ProgressSnapshot, onClick: () -> Unit) {
             }
             Text(estimate.current.label, style = MaterialTheme.typography.headlineMedium)
             estimate.goal?.let { goal ->
-                LinearProgressIndicator(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
+                StudyProgressBar(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
                 Text(
                     "${goal.label}: ${(estimate.goalWords * 100).roundToInt()}% of words, ${(estimate.goalGrammar * 100).roundToInt()}% of grammar known",
                     style = MaterialTheme.typography.bodySmall,

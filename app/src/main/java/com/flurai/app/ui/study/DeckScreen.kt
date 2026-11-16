@@ -25,7 +25,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -183,7 +183,7 @@ fun DeckScreen(
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
-                        LinearProgressIndicator(progress = { started.toFloat() / state.words.size }, modifier = Modifier.fillMaxWidth())
+                        StudyProgressBar(progress = { started.toFloat() / state.words.size }, modifier = Modifier.fillMaxWidth())
                     }
                 }
             }

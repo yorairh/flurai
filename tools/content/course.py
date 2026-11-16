@@ -201,6 +201,7 @@ def problems(entries: list[dict], grammar_ids: set[int], easy_kanji: set[str] | 
         video = entry.get("video")
         if video is not None and not str(video).startswith(VIDEO_PREFIXES):
             out.append(f"{name}: video must be a YouTube link")
+        out += _readings_problems(name, entry.get("readings"))
         for gid in entry.get("related", []):
             if gid not in grammar_ids:
                 out.append(f"{name}: related grammar point {gid} does not exist")
@@ -223,19 +224,53 @@ def problems(entries: list[dict], grammar_ids: set[int], easy_kanji: set[str] | 
     return out
 
 
+_MARKUP_WORD = re.compile(r"\{([^{}|]*)\|[^{}]*\}")
+
+
+def _readings_problems(name: str, readings) -> list[str]:
+    """`readings` maps a text to its furigana markup, for a spelling the dictionary would read the wrong way."""
+    if readings is None:
+        return []
+    if not isinstance(readings, dict) or not readings:
+        return [f"{name}: readings must be an object of text -> markup"]
+    out = []
+    for text, markup in readings.items():
+        if not _text(markup) or _MARKUP_WORD.sub(r"\1", markup) != text:
+            out.append(f"{name}: the markup of {text!r} must spell the same text, with {{word|reading}} parts")
+    return out
+
+
+def _with_readings(markup, readings: dict | None):
+    """[markup] that uses the entry's own `readings` wherever one of those texts appears, and the dictionary elsewhere."""
+    if not readings:
+        return markup
+    splitter = re.compile("(" + "|".join(re.escape(k) for k in sorted(readings, key=len, reverse=True)) + ")")
+
+    def wrapped(text):
+        if not text:
+            return markup(text)
+        pieces = splitter.split(text)
+        if len(pieces) == 1:
+            return markup(text)
+        return "".join(readings[p] if p in readings else (markup(p) or p) if p else "" for p in pieces)
+
+    return wrapped
+
+
 def _packed(values: dict) -> str | None:
     """A JSON object of the furigana markups that exist, or None when there are none."""
     kept = {k: v for k, v in values.items() if v and (not isinstance(v, list) or any(v))}
     return json.dumps(kept, ensure_ascii=False) if kept else None
 
 
-def add_ruby(entries: list[dict], markup) -> None:
+def add_ruby(entries: list[dict], base_markup) -> None:
     """Adds furigana markup to everything a learner reads: `markup(text)` gives the markup or None.
 
     Blocks keep it next to their text (`ruby`, `itemsRuby`, `rowsRuby`, a car's `ruby`); a lesson's title
     and summary and a question's texts go into `_ruby`, stored as one JSON column.
     """
     for entry in entries:
+        markup = _with_readings(base_markup, entry.get("readings"))
         entry["_ruby"] = _packed({"title": markup(entry["title"]), "summary": markup(entry["summary"])})
         for block in entry["blocks"]:
             kind = block["type"]
@@ -250,6 +285,7 @@ def add_ruby(entries: list[dict], markup) -> None:
             elif kind == "diagram":
                 for car in block["cars"]:
                     car["ruby"] = markup(car["text"])
+                block["ruby"] = markup(block["text"]) if block.get("text") else None
         for q in entry.get("questions", []):
             q["_ruby"] = _packed({
                 "instruction": markup(q["instruction"]),
