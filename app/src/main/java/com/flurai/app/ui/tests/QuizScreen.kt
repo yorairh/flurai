@@ -373,7 +373,7 @@ private fun QText(
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     centered: Boolean = false,
-) = FuriganaText(text, question.ruby[text], style, modifier, color, show = LocalFurigana.current && question.furigana, centered = centered)
+) = FuriganaText(text, question.ruby[text], style, modifier, color, show = LocalFurigana.current && question.furigana && (question.ruby.isEmpty() || text in question.ruby), centered = centered)
 
 @Composable
 private fun OptionButton(option: String, index: Int, question: Question, selected: Int?, onChoose: (Int) -> Unit) {
@@ -411,7 +411,7 @@ private fun MissedList(missed: List<MissedQuestion>) {
                     FuriganaLine("", m.prompt, m.ruby[m.prompt], MaterialTheme.typography.titleMedium.japanese(), Color.Unspecified, show)
                     m.hint?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                     FuriganaLine("Right: ", m.correct, m.ruby[m.correct], MaterialTheme.typography.bodyMedium.japanese(), CorrectGreen, show)
-                    FuriganaLine("You chose: ", m.chosen, m.ruby[m.chosen], MaterialTheme.typography.bodyMedium.japanese(), WrongRed, show)
+                    FuriganaLine("You chose: ", m.chosen, m.ruby[m.chosen], MaterialTheme.typography.bodyMedium.japanese(), WrongRed, show && m.ruby[m.chosen] != null)
                     m.translation?.let { Text(it, style = MaterialTheme.typography.bodySmall, fontStyle = androidx.compose.ui.text.font.FontStyle.Italic, color = MaterialTheme.colorScheme.onSurfaceVariant) }
                     m.note?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                 }
