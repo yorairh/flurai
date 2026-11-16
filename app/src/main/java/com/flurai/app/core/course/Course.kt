@@ -274,10 +274,31 @@ fun lessonTest(
     random: Random,
 ): List<Question> {
     val fromEarlier = earlier.shuffled(random).sortedBy { (it.lessonId to it.id) !in missed }.take(LESSON_TEST_EARLIER)
-    val fromOwn = own.shuffled(random).take(LESSON_TEST_SIZE - fromEarlier.size)
+    val fromOwn = variedPick(own.shuffled(random), LESSON_TEST_SIZE - fromEarlier.size)
     // If the lesson itself is short, earlier questions fill the gap rather than leaving a short test.
     val padding = if (fromOwn.size < LESSON_TEST_SIZE - fromEarlier.size) earlier.shuffled(random).filter { it !in fromEarlier }.take(LESSON_TEST_SIZE - fromEarlier.size - fromOwn.size) else emptyList()
     return (fromOwn + fromEarlier + padding).shuffled(random).mapNotNull { courseQuestion(it, jlptOf(it.lessonId), random) }
+}
+
+/** At most this many questions of one test may have the same right answer (three gaps that all want を feel like a drill). */
+internal const val SAME_ANSWER_LIMIT = 2
+
+/** The right answer's text of a choice or tap question; null for an order question (no limit applies). */
+private fun answerText(question: CourseQuestionEntity): String? =
+    if (question.type == "order") null else parseOptions(question.options).getOrNull(question.answer)
+
+/**
+ * The first [count] of [shuffled], but no more than [SAME_ANSWER_LIMIT] with the same right answer while
+ * others are available; if that leaves the test short, the held-back ones fill it up.
+ */
+private fun variedPick(shuffled: List<CourseQuestionEntity>, count: Int): List<CourseQuestionEntity> {
+    val seen = HashMap<String, Int>()
+    val (kept, held) = shuffled.partition { q ->
+        val key = answerText(q) ?: return@partition true
+        val n = seen.merge(key, 1, Int::plus)!!
+        n <= SAME_ANSWER_LIMIT
+    }
+    return (kept + held).take(count)
 }
 
 /**
@@ -340,6 +361,8 @@ class CourseRepository @Inject constructor(
     /** Saves a lesson test. Returns the entry to take next (the one after this lesson if it is not done), or null. */
     suspend fun recordLessonTest(uid: String, lessonId: Int, answers: List<CourseAnswer>, at: Long): Int? {
         progress.upsert(progress.get(uid, lessonId).afterLessonTest(uid, lessonId, answers, at))
+        // The review questions from earlier lessons clear (or add) those lessons' missed questions too.
+        recordSelfTest(uid, answers.filter { it.lessonId != lessonId }, at)
         val rows = progress.all(uid).associateBy { it.lessonId }
         return nextCourseEntry(content.allCourseLessons(), rows)?.id
     }

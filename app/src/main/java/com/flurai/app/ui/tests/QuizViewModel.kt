@@ -45,7 +45,7 @@ class QuizViewModel @Inject constructor(
     private var run: QuizRun? = null
 
     init {
-        if (kind == QuizKind.Listening) speaker.start()
+        if (kind == QuizKind.Listening || kind is QuizKind.CourseLesson || kind is QuizKind.CourseReview) speaker.start()
         viewModelScope.launch {
             val uid = auth.uid ?: return@launch
             val run = QuizRun(uid, kind, profiles.profile(uid).first(), backend, StudyClock(activity) { auth.uid })
@@ -72,6 +72,9 @@ class QuizViewModel @Inject constructor(
     fun arrange(order: List<Int>) = withRun { arrange(order) }
 
     fun next() = withRun { next() }
+
+    /** Says a whole sentence of a course question once it is answered ([slow] for the long press). */
+    fun speak(text: String, slow: Boolean) = speaker.speak(text, slow)
 
     fun replay() {
         _state.value.question?.let { speaker.speak(it.prompt) }

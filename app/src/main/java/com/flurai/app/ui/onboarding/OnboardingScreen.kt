@@ -24,7 +24,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -58,7 +58,7 @@ fun OnboardingScreen(
             .padding(horizontal = 24.dp, vertical = 16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            LinearProgressIndicator(
+            StudyProgressBar(
                 progress = { (state.stepIndex + 1f) / state.steps.size },
                 modifier = Modifier.weight(1f),
             )

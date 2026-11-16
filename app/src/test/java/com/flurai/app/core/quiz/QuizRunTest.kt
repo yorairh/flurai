@@ -339,6 +339,24 @@ class QuizRunTest {
     }
 
     @Test
+    fun aLessonTestScoresOnlyItsOwnQuestionsAndReportsTheReviewSeparately() = runTest {
+        // 8 questions of lesson 3 (7 right) and 2 of lesson 1 (both wrong): the lesson is 7 of 8, not 7 of 10
+        backend.questions = (1..8).map { courseQuestion(it) } + (1..2).map { courseQuestion(it, lesson = 1) }
+        val run = run(QuizKind.CourseLesson(3))
+        run.start()
+        repeat(10) { run.answer(right = it < 7) }
+
+        val result = run.state.value.result!!
+        assertEquals(7, result.correct)
+        assertEquals(8, result.total)
+        assertEquals(true, result.passed) // 7 of 8 = 87%
+        assertEquals(0, result.reviewCorrect)
+        assertEquals(2, result.reviewTotal)
+        assertEquals(7, backend.saved.single().correct)
+        assertEquals(8, backend.saved.single().total)
+    }
+
+    @Test
     fun aCourseLessonTestUnderEightyPercentIsNotPassed() = runTest {
         backend.questions = (1..10).map { courseQuestion(it) }
         val run = run(QuizKind.CourseLesson(3))

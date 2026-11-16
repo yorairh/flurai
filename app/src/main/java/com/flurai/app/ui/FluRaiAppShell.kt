@@ -118,6 +118,8 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
         bottomBar = bottomBar@{
             // Reviews get the whole screen.
             if (currentDestination?.hasRoute(StudyRoute::class) == true || currentDestination?.hasRoute(QuizRoute::class) == true) return@bottomBar
+            // A course lesson is read like a page: the whole screen, with its test in the top bar.
+            if (currentDestination?.hasRoute(CourseLessonRoute::class) == true) return@bottomBar
             NavigationBar {
                 TopLevelDestination.entries.forEach { destination ->
                     val selected = currentDestination?.hierarchy?.any {

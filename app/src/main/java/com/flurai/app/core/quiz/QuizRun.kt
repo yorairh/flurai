@@ -214,6 +214,9 @@ data class QuizResult(
     val levelApplied: Boolean = false,
     /** Course lesson test: the entry to take next, if any. */
     val nextLessonId: Int? = null,
+    /** Course lesson test: how the questions from earlier lessons went (they are not part of [correct] / [total]). */
+    val reviewCorrect: Int = 0,
+    val reviewTotal: Int = 0,
 )
 
 data class QuizRunState(
@@ -331,8 +334,13 @@ class QuizRun(
     }
 
     private suspend fun finish() {
-        val correct = answered.count { it.correct }
-        val total = answered.size
+        // A lesson test also asks a few questions from earlier lessons. The score and the pass mark are the
+        // lesson's own questions only (what is saved as the lesson's best); the review has its own line.
+        val lessonId = (kind as? QuizKind.CourseLesson)?.lessonId
+        val scored = if (lessonId == null) answered else answered.filter { it.question.courseLesson == lessonId }
+        val review = if (lessonId == null) emptyList() else answered.filter { it.question.courseLesson != lessonId }
+        val correct = scored.count { it.correct }
+        val total = scored.size
         val missedAnswers = answered.filter { !it.correct }
         val missed = missedAnswers.mapNotNull { it.question.wordId }.distinct()
         val missedNew = if (missed.isEmpty()) emptyList() else backend.withoutFlashcards(uid, missed)
@@ -364,6 +372,7 @@ class QuizRun(
                     title = kind.title, correct = correct, total = total, passed = kind.passed(correct, total),
                     placementLevel = placementLevel, missedWordIds = missed, missed = missedList, missedNewWordIds = missedNew,
                     currentLevel = profile?.level, nextLessonId = nextLessonId,
+                    reviewCorrect = review.count { it.correct }, reviewTotal = review.size,
                 ),
             )
         }

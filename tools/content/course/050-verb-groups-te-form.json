@@ -7,6 +7,7 @@
   "summary": "Verbs come in three groups. Each group has its own recipe for the て-form and the た-form.",
   "video": "https://www.youtube.com/watch?v=GzEVLMDC8nw",
   "related": [515, 551, 578, 516],
+  "readings": {"行いて": "{行|い}いて"},
   "blocks": [
     {"type": "text", "text": "To make the て-form (and the past た-form, which follows the very same rules) you first need to know which of three groups a verb belongs to."},
     {"type": "heading", "text": "Group 1: ichidan verbs (\"one-level\")"},

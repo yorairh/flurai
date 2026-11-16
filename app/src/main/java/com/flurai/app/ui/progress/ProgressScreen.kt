@@ -27,7 +27,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.LinearProgressIndicator
+import com.flurai.app.ui.components.StudyProgressBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -135,7 +135,7 @@ private fun LevelCard(snapshot: ProgressSnapshot) {
                 Text("You've reached the top level!", style = MaterialTheme.typography.titleMedium)
             } else {
                 Text("Next goal: ${goal.label}", style = MaterialTheme.typography.titleMedium)
-                LinearProgressIndicator(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
+                StudyProgressBar(progress = { estimate.goalProgress }, modifier = Modifier.fillMaxWidth())
                 Text(
                     "You know ${(estimate.goalWords * 100).roundToInt()}% of ${goal.label} words and " +
                         "${(estimate.goalGrammar * 100).roundToInt()}% of its grammar. " +
@@ -233,7 +233,7 @@ private fun KanjiCard(kanji: List<KanjiProgress>) {
             kanji.forEach { level ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("N${level.jlpt}", style = MaterialTheme.typography.titleSmall, modifier = Modifier.width(40.dp))
-                    LinearProgressIndicator(
+                    StudyProgressBar(
                         progress = { if (level.total == 0) 0f else level.known.toFloat() / level.total },
                         modifier = Modifier.weight(1f),
                     )
@@ -258,7 +258,7 @@ private fun GrammarCard(levels: List<LevelProgress>) {
             levels.forEach { level ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("N${level.jlpt}", style = MaterialTheme.typography.titleSmall, modifier = Modifier.width(40.dp))
-                    LinearProgressIndicator(progress = { level.grammarFraction.toFloat() }, modifier = Modifier.weight(1f))
+                    StudyProgressBar(progress = { level.grammarFraction.toFloat() }, modifier = Modifier.weight(1f))
                     Text(
                         "${level.grammarKnown} / ${level.grammarTotal}",
                         style = MaterialTheme.typography.labelMedium,

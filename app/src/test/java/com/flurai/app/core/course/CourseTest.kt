@@ -152,6 +152,24 @@ class CourseTest {
     }
 
     @Test
+    fun noMoreThanTwoQuestionsOfALessonTestHaveTheSameRightAnswer() {
+        // 6 gaps that all want を and 8 that each want another particle: a test of ten takes two of the を ones
+        val wo = (1..6).map { question(2, it, options = """["を","x","y"]""", answer = 0) }
+        val others = listOf("に", "で", "が", "と", "へ", "も", "の", "か").mapIndexed { i, a -> question(2, 10 + i, options = """["$a","x","y"]""", answer = 0) }
+        repeat(20) { seed ->
+            val test = lessonTest(wo + others, emptyList(), emptySet(), jlpt, Random(seed))
+            assertEquals(10, test.size)
+            assertTrue(test.count { it.options[it.answer] == "を" } <= SAME_ANSWER_LIMIT)
+        }
+    }
+
+    @Test
+    fun aLessonWithOnlyOneRightAnswerStillGetsAFullTest() {
+        val test = lessonTest((1..12).map { question(2, it, answer = 0) }, emptyList(), emptySet(), jlpt, Random(3))
+        assertEquals(10, test.size)
+    }
+
+    @Test
     fun withNothingEarlierTheTestIsTheLessonsOwn() {
         val test = lessonTest((1..12).map { question(2, it) }, emptyList(), emptySet(), jlpt, Random(7))
         assertEquals(10, test.size)

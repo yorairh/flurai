@@ -12,7 +12,7 @@
     {"type": "text", "text": "Because は is not a logical particle, the sentence underneath still needs its own main carriage and が (often a zero)."},
     {"type": "diagram", "cars": [
       {"text": "私は", "role": "topic", "label": "topic flag"},
-      {"text": "Øが", "role": "zero"},
+      {"text": "Ø", "role": "zero"}, {"text": "が", "role": "particle"},
       {"text": "学生だ", "role": "engine"}
     ], "text": "私は学生だ。 Literally: \"As for me, (I) am a student.\""},
     {"type": "example", "jp": "私は学生だ。", "en": "As for me, (I) am a student."},
@@ -43,7 +43,7 @@
     {"id": 17, "type": "choice", "instruction": "Does は say anything about the topic?", "prompt": "", "options": ["No, the rest of the sentence does", "Yes, that it is the subject", "Yes, that it exists", "Yes, that it is a verb"], "answer": 0, "note": "The flag only points; the sentence under it speaks."},
     {"id": 18, "type": "choice", "instruction": "What is the zero?", "prompt": "At a café your friend says: 私はコーヒーだ。", "options": ["Her own body", "The drink she will order", "The café", "The waiter"], "answer": 1, "note": "The topic flag shapes the zero, just like the eel sentence.", "en": "As for me, (it) is coffee: I'll have coffee."},
     {"id": 33, "type": "choice", "instruction": "Which flag is the topic flag, the one that does not mark who does what to whom?", "prompt": "", "options": ["が", "を", "は", "に"], "answer": 2, "note": "は sets the topic; が, を and に mark roles."},
-    {"id": 20, "type": "choice", "instruction": "Which sentence means the same as 子供が犬にボールを投げる。?", "prompt": "", "options": ["犬が子供にボールを投げる。", "子供が犬をボールに投げる。", "犬を子供がボールが投げる。", "ボールを犬に子供が投げる。"], "answer": 3, "note": "The particles fix the roles, so the order may change."},
+    {"id": 20, "type": "choice", "instruction": "Which sentence means the same?", "prompt": "子供が犬にボールを投げる。", "options": ["犬が子供にボールを投げる。", "子供が犬をボールに投げる。", "犬を子供がボールが投げる。", "ボールを犬に子供が投げる。"], "answer": 3, "note": "The particles fix the roles, so the order may change.", "en": "The child throws the ball to the dog."},
     {"id": 21, "type": "choice", "instruction": "Who gets the ball?", "prompt": "子供が犬にボールを投げる。", "options": ["The dog", "The child", "The ball", "Nobody"], "answer": 0, "note": "に marks the target: the dog.", "en": "The child throws the ball to the dog."},
     {"id": 22, "type": "choice", "instruction": "What is the topic?", "prompt": "ボールは私が犬に投げる。", "options": ["私", "ボール", "犬", "投げる"], "answer": 1, "note": "The は flag sits on ボール.", "en": "As for the ball, I throw (it) to the dog."},
     {"id": 23, "type": "choice", "instruction": "Which particle marks the target?", "prompt": "", "options": ["を", "が", "に", "は"], "answer": 2, "note": "に says where the action is aimed."},
