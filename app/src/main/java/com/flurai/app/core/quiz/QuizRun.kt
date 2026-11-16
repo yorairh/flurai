@@ -183,7 +183,16 @@ class RepositoryQuizBackend @Inject constructor(
 }
 
 /** A question that was answered wrong: what was asked, what was right and what the learner picked. */
-data class MissedQuestion(val prompt: String, val hint: String?, val correct: String, val chosen: String, val note: String?)
+data class MissedQuestion(
+    val prompt: String,
+    val hint: String?,
+    val correct: String,
+    val chosen: String,
+    val note: String?,
+    /** Furigana markup of the texts above, by plain text (see [Question.ruby]). */
+    val ruby: Map<String, String> = emptyMap(),
+    val furigana: Boolean = true,
+)
 
 data class QuizResult(
     val title: String,
@@ -329,7 +338,7 @@ class QuizRun(
             // A course question may have no prompt text, only an instruction ("Spot the mistake"): that is then what was asked.
             val asked = q.prompt.ifBlank { q.instruction.orEmpty() }
             val detail = if (q.prompt.isBlank()) q.hint else listOfNotNull(q.instruction, q.hint).joinToString(" · ").ifBlank { null }
-            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: asked, detail, q.correctOption, chosen, q.note?.takeIf { q.kind != QuestionKind.WordListening })
+            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: asked, detail, q.correctOption, chosen, q.note?.takeIf { q.kind != QuestionKind.WordListening }, q.ruby, q.furigana)
         }
         val placementLevel = if (kind.adaptive) placement.result else null
         backend.saveResult(

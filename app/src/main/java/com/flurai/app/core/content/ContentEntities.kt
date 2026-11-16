@@ -125,6 +125,8 @@ data class CourseLessonEntity(
     val video: String?,
     val related: String,
     val body: String,
+    /** JSON object with the furigana markup of `title` and `summary` (the pipeline writes it); null when none. */
+    val ruby: String? = null,
 )
 
 /**
@@ -145,6 +147,8 @@ data class CourseQuestionEntity(
     val answer: Int,
     /** One line shown after answering: why. */
     val note: String?,
+    /** JSON object with the furigana markup of instruction, prompt, hint, options (array) and note; null when none. */
+    val ruby: String? = null,
 )
 
 /** Build metadata: data versions, build date, row counts. */

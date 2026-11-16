@@ -1,5 +1,7 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.StudyClockEffects
 import androidx.compose.foundation.layout.size
 import com.flurai.app.ui.components.LoadingBox
@@ -226,9 +228,9 @@ private fun CardBody(card: CurrentCard, revealed: Boolean, onSpeak: () -> Unit, 
 private fun WordAnswer(content: CardContent.Word, showExpression: Boolean, onSpeak: () -> Unit, onSpeakExample: (Boolean) -> Unit, showMeaning: Boolean = false) {
     val word = content.word
     if (showExpression) {
-        Text(word.expression, style = MaterialTheme.typography.displayMedium.japanese(), textAlign = TextAlign.Center)
+        WordExpression(word, MaterialTheme.typography.displayMedium.japanese())
     }
-    if (word.reading != word.expression) {
+    if (word.reading != word.expression && !(showExpression && wordHasRuby(word))) {
         Text(word.reading, style = MaterialTheme.typography.headlineSmall.japanese(), color = MaterialTheme.colorScheme.secondary)
     }
     if (!showExpression || showMeaning) {

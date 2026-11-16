@@ -15,6 +15,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.random.Random
@@ -141,7 +145,7 @@ fun noteRead(uid: String, lessonId: Int, at: Long) =
 
 /** One car of a train diagram: [role] is "engine", "carriage", "topic", "zero" or "plain". */
 @Serializable
-data class TrainCar(val text: String, val role: String = "plain", val label: String? = null)
+data class TrainCar(val text: String, val role: String = "plain", val label: String? = null, val ruby: String? = null)
 
 /**
  * One block of a lesson. [type]: "heading" ([text]), "text" ([text]; **bold** marks emphasis), "example"
@@ -159,6 +163,9 @@ data class CourseBlock(
     val items: List<String>? = null,
     val cars: List<TrainCar>? = null,
     val rows: List<List<String>>? = null,
+    /** Furigana markup of each of [items] and of each cell of [rows] (null where a text has no kanji). */
+    val itemsRuby: List<String?>? = null,
+    val rowsRuby: List<List<String?>>? = null,
 )
 
 private val json = Json { ignoreUnknownKeys = true }
@@ -166,6 +173,30 @@ private val json = Json { ignoreUnknownKeys = true }
 /** The blocks of a lesson body; empty when the stored text cannot be read. */
 fun parseBody(body: String): List<CourseBlock> =
     runCatching { json.decodeFromString(ListSerializer(CourseBlock.serializer()), body) }.getOrDefault(emptyList())
+
+/**
+ * Furigana markup stored as a JSON object, as a map from the plain text to its markup: `{"title": "...",
+ * "options": [...]}`. [lists] names the keys that hold arrays matching their plain texts by position. Texts
+ * without kanji have no entry, so a lookup that misses just draws the text plain.
+ */
+internal fun rubyMap(stored: String?, texts: Map<String, String?>, lists: Map<String, List<String>> = emptyMap()): Map<String, String> {
+    if (stored == null) return emptyMap()
+    val root = runCatching { json.parseToJsonElement(stored).jsonObject }.getOrNull() ?: return emptyMap()
+    val out = HashMap<String, String>()
+    texts.forEach { (key, plain) ->
+        val markup = (root[key] as? JsonPrimitive)?.takeIf { it.isString }?.contentOrNull
+        if (plain != null && markup != null) out[plain] = markup
+    }
+    lists.forEach { (key, plains) ->
+        val array = root[key] as? JsonArray ?: return@forEach
+        plains.forEachIndexed { i, plain -> (array.getOrNull(i) as? JsonPrimitive)?.takeIf { it.isString }?.contentOrNull?.let { out[plain] = it } }
+    }
+    return out
+}
+
+/** Furigana markup of a lesson's title and summary, by plain text. */
+fun lessonRuby(lesson: CourseLessonEntity): Map<String, String> =
+    rubyMap(lesson.ruby, mapOf("title" to lesson.title, "summary" to lesson.summary))
 
 private fun parseOptions(options: String): List<String> =
     runCatching { json.decodeFromString(ListSerializer(String.serializer()), options) }.getOrDefault(emptyList())
@@ -181,6 +212,15 @@ private fun parseOptions(options: String): List<String> =
 fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Question? {
     val options = parseOptions(entity.options)
     val key = entity.lessonId to entity.id
+    var ruby = rubyMap(
+        entity.ruby,
+        mapOf("instruction" to entity.instruction, "prompt" to entity.prompt, "hint" to entity.hint, "note" to entity.note),
+        mapOf("options" to options),
+    )
+    if (entity.type == "order" && options.any { it in ruby }) {
+        // the right arrangement is the pieces joined: its markup is the pieces' markup joined
+        ruby = ruby + (options.joinToString("") to options.joinToString("") { ruby[it] ?: it })
+    }
     return when (entity.type) {
         "choice" -> {
             if (options.size < 2 || entity.answer !in options.indices) return null
@@ -189,7 +229,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseChoice, prompt = entity.prompt, hint = entity.hint, options = shown,
                 answer = shown.indexOf(right), level = jlpt, note = entity.note, instruction = entity.instruction,
-                courseLesson = key.first, courseQuestion = key.second,
+                courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
             )
         }
         "tap" -> {
@@ -197,7 +237,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseTap, prompt = options.joinToString(""), hint = entity.hint, options = options,
                 answer = entity.answer, level = jlpt, note = entity.note, instruction = entity.instruction,
-                courseLesson = key.first, courseQuestion = key.second,
+                courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
             )
         }
         "order" -> {
@@ -208,7 +248,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseOrder, prompt = entity.prompt, hint = entity.hint, options = options,
                 answer = 0, level = jlpt, note = entity.note, instruction = entity.instruction, tiles = tiles,
-                correctText = options.joinToString(""), courseLesson = key.first, courseQuestion = key.second,
+                correctText = options.joinToString(""), courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
             )
         }
         else -> null

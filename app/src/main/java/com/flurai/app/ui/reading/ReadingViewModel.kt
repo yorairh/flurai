@@ -71,12 +71,6 @@ class ReadingViewModel @Inject constructor(
         }
     }
 
-    fun toggleFurigana() {
-        clock.tap()
-        val uid = auth.uid ?: return
-        viewModelScope.launch { settings.update(uid) { it.copy(showFurigana = !it.showFurigana) } }
-    }
-
     fun chooseLevel(jlpt: Int) = load(jlpt)
 
     fun newSet() = load(_state.value.jlpt)

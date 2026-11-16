@@ -186,6 +186,29 @@ class BuiltFuriganaTest(unittest.TestCase):
             for block in json.loads(body):
                 if block["type"] == "example":
                     yield block["jp"], block.get("ruby")
+        yield from self.course_texts()
+
+    def course_texts(self):
+        """Every text of the course a learner reads (not the examples, which are counted above): (plain, markup)."""
+        for body, stored in self.db.execute("SELECT body, ruby FROM course_lesson"):
+            for block in json.loads(body):
+                if block["type"] in ("text", "heading"):
+                    yield block["text"], block.get("ruby")
+                for item, marked in zip(block.get("items", []), block.get("itemsRuby", [])):
+                    yield item, marked
+                for row, marks in zip(block.get("rows", []), block.get("rowsRuby", [])):
+                    yield from zip(row, marks)
+                for car in block.get("cars", []):
+                    yield car["text"], car.get("ruby")
+        for options, stored in self.db.execute("SELECT options, ruby FROM course_question"):
+            texts = json.loads(options)
+            marks = (json.loads(stored) if stored else {}).get("options", [None] * len(texts))
+            yield from zip(texts, marks)
+        for prompt, hint, note, stored in self.db.execute("SELECT prompt, hint, note, ruby FROM course_question"):
+            marks = json.loads(stored) if stored else {}
+            for key, text in (("prompt", prompt), ("hint", hint), ("note", note)):
+                if text:
+                    yield text, marks.get(key)
 
     def test_the_markup_is_the_sentence_with_readings_added(self):
         for text, marked in self.rows():
@@ -203,6 +226,10 @@ class BuiltFuriganaTest(unittest.TestCase):
             plain = self.pattern.sub(lambda m: "\0" * len(m.group(1)), marked)
             missing += sum(1 for i, c in enumerate(plain) if c != "\0" and ruby.is_kanji(text[i]))
         self.assertLess(missing / total, 0.005, f"{missing} of {total} kanji have no furigana")
+
+    def test_a_gap_in_a_fill_in_question_does_not_cost_the_reading_of_the_word_before_it(self):
+        marked = self.db.execute("SELECT ruby FROM course_question WHERE lesson_id = 150 AND id = 3").fetchone()[0]
+        self.assertIn("{開|あ}ける", json.loads(marked)["prompt"])
 
     def test_the_bug_from_the_phone_is_fixed(self):
         marked = self.db.execute("SELECT ruby FROM grammar_example WHERE japanese = ?", ("誰が来ましたか。",)).fetchone()

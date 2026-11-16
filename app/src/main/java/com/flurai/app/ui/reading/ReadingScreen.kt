@@ -1,5 +1,7 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.LevelChips
 import com.flurai.app.ui.components.MissingVoiceBanner
 import com.flurai.app.ui.components.RubySentence
@@ -90,10 +92,6 @@ fun ReadingScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Show furigana", modifier = Modifier.weight(1f))
-                Switch(checked = state.showFurigana, onCheckedChange = { viewModel.toggleFurigana() })
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("Show translations", modifier = Modifier.weight(1f))
                 Switch(checked = state.showTranslations, onCheckedChange = { viewModel.toggleTranslations() })
             }
@@ -183,8 +181,8 @@ fun ReadingScreen(
 private fun WordSheet(word: WordEntity, added: Boolean, onAdd: () -> Unit, onDetails: () -> Unit, onDismiss: () -> Unit) {
     ModalBottomSheet(onDismissRequest = onDismiss) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp).padding(bottom = 32.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(word.expression, style = MaterialTheme.typography.displaySmall.japanese())
-            if (word.reading != word.expression) Text(word.reading, style = MaterialTheme.typography.titleLarge.japanese())
+            WordExpression(word, MaterialTheme.typography.displaySmall.japanese())
+            if (word.reading != word.expression && !wordHasRuby(word)) Text(word.reading, style = MaterialTheme.typography.titleLarge.japanese())
             Text(word.meanings, style = MaterialTheme.typography.bodyLarge)
             Text("N${word.jlpt}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(8.dp))

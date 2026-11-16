@@ -11,6 +11,7 @@ import com.flurai.app.ui.components.LoadingBox
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +26,9 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import com.flurai.app.ui.components.ExampleSentence
+import com.flurai.app.ui.components.FuriganaText
+import com.flurai.app.ui.components.LocalFurigana
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -126,7 +130,7 @@ private fun QuestionView(
         val course = question.kind == QuestionKind.CourseChoice || question.kind == QuestionKind.CourseTap || question.kind == QuestionKind.CourseOrder
         if (course) {
             question.instruction?.let {
-                Text(it, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                QText(it, question, MaterialTheme.typography.titleMedium, Modifier.fillMaxWidth(), centered = true)
                 Spacer(Modifier.height(12.dp))
             }
         }
@@ -136,25 +140,26 @@ private fun QuestionView(
                     Icon(Icons.Filled.PlayArrow, contentDescription = "Play the word again", modifier = Modifier.size(56.dp))
                 }
             }
-        } else if (question.kind != QuestionKind.CourseTap && question.prompt.isNotBlank()) Text(
-            question.prompt,
-            style = (
+        } else if (question.kind != QuestionKind.CourseTap && question.prompt.isNotBlank()) {
+            val promptStyle = (
                 when {
                     course -> MaterialTheme.typography.headlineSmall
                     question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning -> MaterialTheme.typography.headlineMedium
                     else -> MaterialTheme.typography.displayMedium
                 }
-                ).japanese(),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-        )
+                ).japanese()
+            if (!course && question.furigana && (question.kind == QuestionKind.GrammarBlank || question.kind == QuestionKind.SentenceMeaning)) {
+                // a whole sentence: the readings come from the app's own word list
+                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { ExampleSentence(question.prompt, null, promptStyle) }
+            } else {
+                QText(question.prompt, question, promptStyle, Modifier.fillMaxWidth(), centered = true)
+            }
+        }
         question.hint?.let {
-            Text(
-                it,
-                style = MaterialTheme.typography.titleMedium.japanese(),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+            QText(
+                it, question, MaterialTheme.typography.titleMedium.japanese(),
+                Modifier.fillMaxWidth().padding(top = 4.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant, centered = true,
             )
         }
         if (question.kind != QuestionKind.KanjiReading && !course) {
@@ -182,11 +187,10 @@ private fun QuestionView(
         }
         if (state.selected != null) {
             question.note?.let {
-                Text(
-                    it,
-                    style = MaterialTheme.typography.bodyMedium.japanese(),
+                QText(
+                    it, question, MaterialTheme.typography.bodyMedium.japanese(),
+                    Modifier.fillMaxWidth().padding(top = 12.dp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
                 )
             }
             Spacer(Modifier.height(16.dp))
@@ -216,7 +220,7 @@ private fun TapSentence(question: Question, selected: Int?, onChoose: (Int) -> U
                 contentColor = if (color != null) Color.White else MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.androidxClickable(enabled = selected == null) { onChoose(index) },
             ) {
-                Text(word, style = MaterialTheme.typography.headlineSmall.japanese(), modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp))
+                QText(word, question, MaterialTheme.typography.headlineSmall.japanese(), Modifier.padding(horizontal = 14.dp, vertical = 10.dp))
             }
         }
     }
@@ -248,7 +252,7 @@ private fun OrderTiles(question: Question, answered: Boolean, arranged: String?,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(10.dp),
             ) {
-                placed.forEach { i -> Tile(tiles[i]) { if (!answered) placed = placed - i } }
+                placed.forEach { i -> Tile(tiles[i], question) { if (!answered) placed = placed - i } }
             }
         }
         androidx.compose.foundation.layout.FlowRow(
@@ -256,24 +260,39 @@ private fun OrderTiles(question: Question, answered: Boolean, arranged: String?,
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxWidth(),
         ) {
-            tiles.indices.filter { it !in placed }.forEach { i -> Tile(tiles[i]) { if (!answered) placed = placed + i } }
+            tiles.indices.filter { it !in placed }.forEach { i -> Tile(tiles[i], question) { if (!answered) placed = placed + i } }
         }
         if (!answered) {
             Button(onClick = { onArrange(placed) }, enabled = placed.size == tiles.size, modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Check") }
         } else {
-            Text(
-                if (right) "Correct" else "Right: ${question.correctText}",
-                style = MaterialTheme.typography.titleMedium.japanese(),
-                color = if (right) CorrectGreen else WrongRed,
-            )
+            val correct = question.correctText.orEmpty()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (right) {
+                    Text("Correct", style = MaterialTheme.typography.titleMedium, color = CorrectGreen)
+                } else {
+                    Text("Right: ", style = MaterialTheme.typography.titleMedium, color = WrongRed)
+                    QText(correct, question, MaterialTheme.typography.titleMedium.japanese(), color = WrongRed)
+                }
+            }
         }
     }
 }
 
 @Composable
-private fun Tile(text: String, onClick: () -> Unit) {
-    OutlinedButton(onClick = onClick) { Text(text, style = MaterialTheme.typography.titleMedium.japanese()) }
+private fun Tile(text: String, question: Question, onClick: () -> Unit) {
+    OutlinedButton(onClick = onClick) { QText(text, question, MaterialTheme.typography.titleMedium.japanese()) }
 }
+
+/** A text of [question] with the furigana the database has for it, unless the setting is off or the question tests the reading. */
+@Composable
+private fun QText(
+    text: String,
+    question: Question,
+    style: androidx.compose.ui.text.TextStyle,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
+    centered: Boolean = false,
+) = FuriganaText(text, question.ruby[text], style, modifier, color, show = LocalFurigana.current && question.furigana, centered = centered)
 
 @Composable
 private fun OptionButton(option: String, index: Int, question: Question, selected: Int?, onChoose: (Int) -> Unit) {
@@ -286,14 +305,14 @@ private fun OptionButton(option: String, index: Int, question: Question, selecte
     }
     if (color == null) {
         OutlinedButton(onClick = { onChoose(index) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
-            Text(option, style = MaterialTheme.typography.titleMedium.japanese(), textAlign = TextAlign.Center)
+            QText(option, question, MaterialTheme.typography.titleMedium.japanese(), centered = true)
         }
     } else {
         Button(
             onClick = {},
             modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
             colors = ButtonDefaults.buttonColors(containerColor = color, contentColor = Color.White),
-        ) { Text(option, style = MaterialTheme.typography.titleMedium.japanese(), textAlign = TextAlign.Center) }
+        ) { QText(option, question, MaterialTheme.typography.titleMedium.japanese(), centered = true) }
     }
 }
 
@@ -307,11 +326,12 @@ private fun MissedList(missed: List<MissedQuestion>) {
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
             ) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    Text(m.prompt, style = MaterialTheme.typography.titleMedium.japanese())
-                    m.hint?.let { Text(it, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
-                    Text("Right: ${m.correct}", style = MaterialTheme.typography.bodyMedium.japanese(), color = CorrectGreen)
-                    Text("You chose: ${m.chosen}", style = MaterialTheme.typography.bodyMedium.japanese(), color = WrongRed)
-                    m.note?.let { Text(it, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                    val show = LocalFurigana.current && m.furigana
+                    FuriganaLine("", m.prompt, m.ruby[m.prompt], MaterialTheme.typography.titleMedium.japanese(), Color.Unspecified, show)
+                    m.hint?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
+                    FuriganaLine("Right: ", m.correct, m.ruby[m.correct], MaterialTheme.typography.bodyMedium.japanese(), CorrectGreen, show)
+                    FuriganaLine("You chose: ", m.chosen, m.ruby[m.chosen], MaterialTheme.typography.bodyMedium.japanese(), WrongRed, show)
+                    m.note?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                 }
             }
         }
@@ -394,5 +414,18 @@ private fun ResultView(
             OutlinedButton(onClick = onRetry, modifier = Modifier.fillMaxWidth()) { Text("Try again") }
         }
         TextButton(onClick = onBack) { Text(if (lessonTest) "Back to the lesson" else "Done") }
+    }
+}
+
+/** One line of the missed list: an optional label, then the text with its furigana. */
+@Composable
+private fun FuriganaLine(label: String, text: String, ruby: String?, style: androidx.compose.ui.text.TextStyle, color: Color, show: Boolean) {
+    if (label.isEmpty()) {
+        FuriganaText(text, ruby, style, color = color, show = show)
+    } else {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(label, style = style, color = color)
+            FuriganaText(text, ruby, style, color = color, show = show)
+        }
     }
 }

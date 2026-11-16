@@ -1,5 +1,7 @@
 package com.flurai.app.ui.progress
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.LoadingBox
 import com.flurai.app.ui.components.BackTopAppBar
 import androidx.compose.foundation.clickable
@@ -104,8 +106,8 @@ private fun BrowserWordRow(row: BrowserRow, onClick: () -> Unit) {
     ) {
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(word.expression, style = MaterialTheme.typography.titleLarge.japanese())
-                if (word.reading != word.expression) {
+                WordExpression(word, MaterialTheme.typography.titleLarge.japanese())
+                if (word.reading != word.expression && !wordHasRuby(word)) {
                     Spacer(Modifier.width(8.dp))
                     Text(
                         word.reading,

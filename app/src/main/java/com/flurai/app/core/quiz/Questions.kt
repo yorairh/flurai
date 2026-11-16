@@ -32,6 +32,13 @@ data class Question(
     /** Course questions: which lesson and which of its questions this is, so the result can be saved. */
     val courseLesson: Int? = null,
     val courseQuestion: Int? = null,
+    /** Furigana markup of the texts shown (prompt, options, hint, note...), by plain text; empty when there is none. */
+    val ruby: Map<String, String> = emptyMap(),
+    /**
+     * False when the question tests how a word is read, so no furigana may be drawn over it (reading questions,
+     * listening); everything else follows the furigana setting.
+     */
+    val furigana: Boolean = true,
 ) {
     val correctOption: String get() = correctText ?: options[answer]
 }

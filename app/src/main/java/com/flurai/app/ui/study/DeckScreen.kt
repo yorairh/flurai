@@ -1,5 +1,7 @@
 package com.flurai.app.ui.study
 
+import com.flurai.app.ui.components.WordExpression
+import com.flurai.app.ui.components.wordHasRuby
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -199,10 +201,10 @@ fun DeckScreen(
                     ) {
                         Column(Modifier.weight(1f)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(word.expression, style = MaterialTheme.typography.titleMedium.japanese(), modifier = Modifier.weight(1f))
+                                WordExpression(word, MaterialTheme.typography.titleMedium.japanese(), Modifier.weight(1f))
                                 if (started && !editing) Text("started", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                             }
-                            if (word.reading != word.expression) {
+                            if (word.reading != word.expression && !wordHasRuby(word)) {
                                 Text(word.reading, style = MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.secondary)
                             }
                             Text(word.meanings, style = MaterialTheme.typography.bodyMedium, maxLines = 1)
