@@ -6,49 +6,406 @@
   "title": "Limiting terms: だけ, しか, ばかり, のみ",
   "summary": "Four ways to say \"only\", each with its own mood: だけ is neutral, しか feels too little, ばかり feels a lot, のみ is formal.",
   "video": "https://www.youtube.com/watch?v=OoJLexUR_o0",
-  "related": [567, 488, 328],
+  "related": [
+    567,
+    488,
+    328
+  ],
   "blocks": [
-    {"type": "text", "text": "All four mean \"only\" in English, which is why they confuse people. In Japanese each one has a character."},
-    {"type": "heading", "text": "だけ: the limit"},
-    {"type": "text", "text": "**だけ** is a noun meaning \"limit\". It adds no feeling: just where something stops."},
-    {"type": "example", "jp": "千円だけ持っている。", "en": "I have a thousand yen, no more (a plain fact)."},
-    {"type": "text", "text": "Two common phrases: **できるだけ** (to the limit of what is possible: as much as I can) and **だけあって** (precisely because of that, no wonder)."},
-    {"type": "example", "jp": "留学しただけあって、英語がうまい。", "en": "Having studied abroad, no wonder her English is good."},
-    {"type": "heading", "text": "しか: nothing beyond (always negative)"},
-    {"type": "text", "text": "**しか** means \"more than\" and is used with a **negative** ending, so the sentence says \"not more than\". It feels like \"too little\"."},
-    {"type": "example", "jp": "千円しか持っていない。", "en": "I have only a thousand yen (that is not much)."},
-    {"type": "example", "jp": "もう逃げるしかない。", "en": "There is nothing to do but run."},
-    {"type": "heading", "text": "ばかり: so much of one thing"},
-    {"type": "text", "text": "**ばかり** exaggerates the other way: \"just that\", with a feel of abundance (lesson 27)."},
-    {"type": "example", "jp": "この店はパンばかり売っている。", "en": "This shop sells nothing but bread (so much bread)."},
-    {"type": "heading", "text": "のみ: written and formal"},
-    {"type": "text", "text": "**のみ** means the same as だけ but belongs to signs, rules and writing. Recognize it; you will rarely say it."},
-    {"type": "table", "rows": [
-      ["Sentence", "Feel"],
-      ["パンだけ売る", "Only bread; neutral"],
-      ["パンしか売らない", "Only bread; that is too little"],
-      ["パンばかり売る", "Only bread; so much of it"],
-      ["パンのみ販売", "Only bread; formal sign"]
-    ]},
-    {"type": "keypoints", "items": [
-      "**だけ**: neutral limit.",
-      "**しか + negative**: not more than; feels scarce.",
-      "**ばかり**: just that, abundance.",
-      "**のみ**: formal だけ."
-    ]}
+    {
+      "type": "text",
+      "text": "All four mean \"only\" in English, which is why they confuse people. In Japanese each one has a character."
+    },
+    {
+      "type": "heading",
+      "text": "だけ: the limit"
+    },
+    {
+      "type": "text",
+      "text": "**だけ** is a noun meaning \"limit\". It adds no feeling: just where something stops."
+    },
+    {
+      "type": "example",
+      "jp": "千円だけ持っている。",
+      "en": "I have a thousand yen, no more (a plain fact)."
+    },
+    {
+      "type": "text",
+      "text": "Two common phrases: **できるだけ** (to the limit of what is possible: as much as I can) and **だけあって** (precisely because of that, no wonder)."
+    },
+    {
+      "type": "example",
+      "jp": "留学しただけあって、英語がうまい。",
+      "en": "Having studied abroad, no wonder her English is good."
+    },
+    {
+      "type": "heading",
+      "text": "しか: nothing beyond (always negative)"
+    },
+    {
+      "type": "text",
+      "text": "**しか** means \"more than\" and is used with a **negative** ending, so the sentence says \"not more than\". It feels like \"too little\"."
+    },
+    {
+      "type": "example",
+      "jp": "千円しか持っていない。",
+      "en": "I have only a thousand yen (that is not much)."
+    },
+    {
+      "type": "example",
+      "jp": "もう逃げるしかない。",
+      "en": "There is nothing to do but run."
+    },
+    {
+      "type": "heading",
+      "text": "ばかり: so much of one thing"
+    },
+    {
+      "type": "text",
+      "text": "**ばかり** exaggerates the other way: \"just that\", with a feel of abundance (lesson 27)."
+    },
+    {
+      "type": "example",
+      "jp": "この店はパンばかり売っている。",
+      "en": "This shop sells nothing but bread (so much bread)."
+    },
+    {
+      "type": "heading",
+      "text": "のみ: written and formal"
+    },
+    {
+      "type": "text",
+      "text": "**のみ** means the same as だけ but belongs to signs, rules and writing. Recognize it; you will rarely say it."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "Feel"
+        ],
+        [
+          "パンだけ売る",
+          "Only bread; neutral"
+        ],
+        [
+          "パンしか売らない",
+          "Only bread; that is too little"
+        ],
+        [
+          "パンばかり売る",
+          "Only bread; so much of it"
+        ],
+        [
+          "パンのみ販売",
+          "Only bread; formal sign"
+        ]
+      ]
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**だけ**: neutral limit.",
+        "**しか + negative**: not more than; feels scarce.",
+        "**ばかり**: just that, abundance.",
+        "**のみ**: formal だけ."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "千円だけ持っている。", "options": ["I have just a thousand yen (a plain fact)", "I do not have a thousand yen", "I have too many thousands", "I lost a thousand yen"], "answer": 0, "note": "だけ is neutral."},
-    {"id": 2, "type": "choice", "instruction": "What feeling does this have?", "prompt": "千円しか持っていない。", "options": ["It is too little", "It is plenty", "A neutral fact", "A question"], "answer": 0, "note": "しか suggests scarcity."},
-    {"id": 3, "type": "choice", "instruction": "What must follow しか?", "prompt": "", "options": ["A negative ending", "A question mark", "A noun", "Nothing"], "answer": 0, "note": "しか + ない."},
-    {"id": 4, "type": "choice", "instruction": "What does this suggest?", "prompt": "この店はパンばかり売っている。", "options": ["There is a lot of bread", "Just one loaf", "No bread", "The shop sold bread yesterday"], "answer": 0, "note": "ばかり gives a feeling of abundance."},
-    {"id": 5, "type": "choice", "instruction": "Which sentence feels like \"not enough\"?", "prompt": "", "options": ["パンしか売らない", "パンだけ売る", "パンばかり売る", "パンのみ売る"], "answer": 0, "note": "しか + negative."},
-    {"id": 6, "type": "choice", "instruction": "Where do you mostly see のみ?", "prompt": "", "options": ["In formal writing and on signs", "In casual chat", "In children's talk", "Only in songs"], "answer": 0, "note": "A formal だけ."},
-    {"id": 7, "type": "choice", "instruction": "What does できるだけ mean?", "prompt": "", "options": ["As much as possible", "Impossible", "Only when able", "Never possible"], "answer": 0, "note": "To the limit of what is possible."},
-    {"id": 8, "type": "choice", "instruction": "What does だけあって express?", "prompt": "留学しただけあって、英語がうまい。", "options": ["Precisely because of that, she is good", "She is good, but not because of that", "Although she studied abroad, she is bad", "She wants to study abroad"], "answer": 0, "note": "A result that fits its cause."},
-    {"id": 9, "type": "choice", "instruction": "Fill the gap", "prompt": "友達が一人＿＿来なかった。 (Only one friend came: too few.)", "options": ["しか", "だけ", "ばかり", "ごと"], "answer": 0, "note": "しか + negative verb, with a sense of scarcity."},
-    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "I have only one friend (that is few).", "options": ["友達が", "一人しか", "いない"], "note": "しか + negative."},
-    {"id": 11, "type": "tap", "instruction": "Tap the part that means \"no choice but\"", "options": ["今は", "逃げる", "しかない"], "answer": 2, "note": "逃げるしかない: nothing but to run."},
-    {"id": 12, "type": "choice", "instruction": "True or false?", "prompt": "だけ is a noun meaning \"limit\".", "options": ["True", "False"], "answer": 0, "note": "That is why it follows an amount."}
+    {
+      "type": "choice",
+      "instruction": "What feeling does this have?",
+      "prompt": "ケーキを一つだけ食べた。",
+      "options": [
+        "Far too little",
+        "A neutral fact: just one",
+        "A great deal of cake",
+        "A formal sign"
+      ],
+      "answer": 1,
+      "note": "だけ is a plain limit.",
+      "en": "I ate just one cake.",
+      "id": 21
+    },
+    {
+      "type": "choice",
+      "instruction": "What feeling does this have?",
+      "prompt": "ケーキを一つしか食べなかった。",
+      "options": [
+        "It was too little",
+        "It was plenty",
+        "A neutral fact",
+        "A formal notice"
+      ],
+      "answer": 0,
+      "note": "しか + negative: scarcity.",
+      "en": "I ate only one cake (that was too few).",
+      "id": 22
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "今日は朝ごはんを少し＿＿食べなかった。",
+      "options": [
+        "だけ",
+        "ばかり",
+        "のみ",
+        "しか"
+      ],
+      "answer": 3,
+      "note": "しか needs a negative ending.",
+      "en": "I ate only a little breakfast today.",
+      "id": 23
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "弟はゲーム＿＿している。勉強はしない。",
+      "options": [
+        "しか",
+        "まで",
+        "ばかり",
+        "ほど"
+      ],
+      "answer": 2,
+      "note": "ばかり: nothing but one thing, in abundance.",
+      "en": "My little brother does nothing but play games. He does not study.",
+      "id": 24
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence feels like \"there were too few students\"?",
+      "prompt": "",
+      "options": [
+        "学生が三人だけ来た。",
+        "学生が三人しか来なかった。",
+        "学生ばかり来た。",
+        "学生のみ来た。"
+      ],
+      "answer": 1,
+      "note": "しか + negative: scarcity.",
+      "id": 25
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "水しか飲む。",
+        "水しか飲まない。",
+        "水だけ飲む。",
+        "水ばかり飲む。"
+      ],
+      "answer": 0,
+      "note": "しか needs a negative ending.",
+      "id": 26
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence sounds the most formal, like a sign?",
+      "prompt": "",
+      "options": [
+        "学生だけ入れる。",
+        "学生ばかり入る。",
+        "学生しか入れない。",
+        "学生のみ入れます。"
+      ],
+      "answer": 3,
+      "note": "のみ is a written, formal だけ.",
+      "id": 27
+    },
+    {
+      "type": "choice",
+      "instruction": "What does できるだけ mean?",
+      "prompt": "できるだけ早く返事をください。",
+      "options": [
+        "Only when it is possible",
+        "It is impossible",
+        "As much as possible",
+        "Never"
+      ],
+      "answer": 2,
+      "note": "To the limit of what is possible.",
+      "en": "Please reply as soon as possible.",
+      "id": 28
+    },
+    {
+      "type": "choice",
+      "instruction": "What does だけあって say?",
+      "prompt": "毎日練習しているだけあって、ピアノが上手だ。",
+      "options": [
+        "Although he practices, he is bad",
+        "No wonder: the result fits the cause",
+        "Practice is the only thing he does",
+        "He wants to practice"
+      ],
+      "answer": 1,
+      "note": "だけあって: precisely because of that.",
+      "en": "No wonder he is good at the piano, since he practices every day.",
+      "id": 29
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "田中さんは十年住んだ＿＿、道をよく知っている。",
+      "options": [
+        "だけあって",
+        "だけなのに",
+        "しかなくて",
+        "のみで"
+      ],
+      "answer": 0,
+      "note": "A result that fits its cause.",
+      "en": "Having lived there for ten years, no wonder Mr. Tanaka knows the streets well.",
+      "id": 30
+    },
+    {
+      "type": "choice",
+      "instruction": "What feeling does ばかり give?",
+      "prompt": "彼は肉ばかり食べている。",
+      "options": [
+        "Too little",
+        "A formal tone",
+        "A plain fact",
+        "Too much of one thing"
+      ],
+      "answer": 3,
+      "note": "ばかり: a feeling of abundance.",
+      "en": "He eats nothing but meat.",
+      "id": 31
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "しか can be followed by a positive verb ending.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "しか always goes with a negative.",
+      "id": 32
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "もう少し待つしかない。",
+      "options": [
+        "We should not wait",
+        "There is nothing to do but wait a little longer",
+        "We waited a little",
+        "We only wait sometimes"
+      ],
+      "answer": 1,
+      "note": "Verb + しかない: no choice but to.",
+      "en": "There is nothing to do but wait a little longer.",
+      "id": 33
+    },
+    {
+      "type": "choice",
+      "instruction": "What does だけ mean at its root?",
+      "prompt": "",
+      "options": [
+        "A limit",
+        "A reason",
+        "A place",
+        "A time"
+      ],
+      "answer": 0,
+      "note": "だけ is a noun meaning \"limit\".",
+      "id": 34
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I only ate one apple.",
+      "options": [
+        "りんごを",
+        "一つだけ",
+        "食べた"
+      ],
+      "note": "Amount + だけ: a plain limit.",
+      "en": "I only ate one apple.",
+      "id": 35
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Yesterday I could sleep only two hours.",
+      "options": [
+        "昨日は",
+        "二時間しか",
+        "ねられなかった"
+      ],
+      "note": "しか + negative.",
+      "en": "Yesterday I could sleep only two hours.",
+      "id": 36
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "My older sister reads nothing but manga.",
+      "options": [
+        "姉は",
+        "マンガばかり",
+        "読んでいる"
+      ],
+      "note": "ばかり: just that, in abundance.",
+      "en": "My older sister reads nothing but manga.",
+      "id": 37
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "There is nothing to do but go by bus.",
+      "options": [
+        "バスで",
+        "行くしか",
+        "ない"
+      ],
+      "note": "Verb + しかない.",
+      "en": "There is nothing to do but go by bus.",
+      "id": 38
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that means \"too little\"",
+      "options": [
+        "今月は",
+        "一日しか",
+        "休めなかった"
+      ],
+      "answer": 1,
+      "note": "しか + negative: scarcity.",
+      "en": "This month I could rest only one day.",
+      "id": 39
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that shows abundance",
+      "options": [
+        "この子は",
+        "甘い物ばかり",
+        "食べる"
+      ],
+      "answer": 1,
+      "note": "ばかり: so much of one thing.",
+      "en": "This child eats nothing but sweets.",
+      "id": 40
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that is a neutral limit",
+      "options": [
+        "ここには",
+        "三人だけ",
+        "入れます"
+      ],
+      "answer": 1,
+      "note": "だけ: just where it stops.",
+      "en": "Only three people can enter here.",
+      "id": 41
+    }
   ]
 }

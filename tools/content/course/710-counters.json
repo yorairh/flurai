@@ -75,164 +75,28 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Which counter is used for flat things like paper?",
-      "prompt": "",
-      "options": [
-        "枚",
-        "冊",
-        "匹",
-        "羽"
-      ],
-      "answer": 0,
-      "note": "枚 counts sheets, coins and other flat things.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Which counter is used for books?",
-      "prompt": "",
-      "options": [
-        "冊",
-        "枚",
-        "匹",
-        "羽"
-      ],
-      "answer": 0,
-      "note": "冊 counts bound books.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Which of these is counted with 匹?",
-      "prompt": "",
-      "options": [
-        "猫",
-        "紙",
-        "本",
-        "鳥"
-      ],
-      "answer": 0,
-      "note": "匹 counts small animals; birds use 羽.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "紙を五＿＿ください。 (Five sheets of paper, please.)",
-      "options": [
-        "枚",
-        "冊",
-        "匹",
-        "羽"
-      ],
-      "answer": 0,
-      "note": "Flat paper takes 枚.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "本を二＿＿買った。 (I bought two books.)",
-      "options": [
-        "冊",
-        "枚",
-        "匹",
-        "羽"
-      ],
-      "answer": 0,
-      "note": "Books take 冊.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "Counters are nouns, so they can take の before another noun.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "三匹の猫 works like any noun + の + noun.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "What is 猫が三匹いる, literally?",
-      "prompt": "",
-      "options": [
-        "Cats exist in a three-small-animal way",
-        "Three cats own the house",
-        "A cat is the third small animal",
-        "Cats three and animals"
-      ],
-      "answer": 0,
-      "note": "The counter works like an adverb on the verb.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "You must memorize a long list of counters before you can read Japanese.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "You learn them as you meet them; context tells you.",
-      "id": 8
-    },
-    {
-      "type": "choice",
-      "instruction": "What can you use for most objects when you don't know the counter?",
-      "prompt": "",
-      "options": [
-        "The native count: 一つ、二つ",
-        "The counter 枚",
-        "The counter 匹",
-        "The particle の"
-      ],
-      "answer": 0,
-      "note": "The native counting system needs no counter.",
-      "id": 9
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I took three photos.",
-      "options": [
-        "写真を",
-        "三枚",
-        "撮った"
-      ],
-      "note": "Object, counter phrase, engine.",
-      "id": 10
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the counter in 猫が三匹います",
-      "options": [
-        "猫が",
-        "三",
-        "匹",
-        "います"
-      ],
-      "answer": 2,
-      "note": "匹 is the counter for small animals.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "A counter that starts with ま, ら or わ never changes its sound.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "Those kana cannot take a ten-ten.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "Fill the counter", "prompt": "犬が五＿＿いる。", "options": ["枚", "冊", "匹", "本"], "answer": 2, "en": "There are five dogs.", "note": "匹 counts small animals."},
+    {"id": 102, "type": "choice", "instruction": "Fill the counter", "prompt": "切手を十＿＿買った。", "options": ["枚", "匹", "羽", "冊"], "answer": 0, "en": "(I) bought ten stamps.", "note": "枚 counts flat things."},
+    {"id": 103, "type": "choice", "instruction": "Fill the counter", "prompt": "鳥が四＿＿木にいる。", "options": ["匹", "枚", "冊", "羽"], "answer": 3, "en": "There are four birds in the tree.", "note": "羽 counts birds."},
+    {"id": 104, "type": "choice", "instruction": "Fill the counter", "prompt": "辞書を二＿＿持っている。", "options": ["冊", "枚", "匹", "羽"], "answer": 0, "en": "(I) have two dictionaries.", "note": "冊 counts books."},
+    {"id": 105, "type": "choice", "instruction": "Fill the counter", "prompt": "ペンを二＿＿買った。", "options": ["枚", "冊", "匹", "本"], "answer": 3, "en": "(I) bought two pens.", "note": "本 counts long, thin things."},
+    {"id": 106, "type": "choice", "instruction": "Fill the gap (native counting)", "prompt": "あの店でみかんを四＿＿買った。", "options": ["枚", "つ", "匹", "冊"], "answer": 1, "en": "(I) bought four mandarin oranges at that shop.", "note": "一つ、二つ... needs no counter for most objects."},
+    {"id": 107, "type": "choice", "instruction": "Which cannot be counted with the native counting (ひとつ、ふたつ)?", "prompt": "", "options": ["Apples", "Chairs", "People and small animals", "Boxes"], "answer": 2, "note": "People and small animals have their own counters."},
+    {"id": 108, "type": "choice", "instruction": "Which sentence is correct?", "prompt": "", "options": ["ケーキを三匹食べた。", "ケーキを三冊食べた。", "ケーキを三羽食べた。", "ケーキを三つ食べた。"], "answer": 3, "note": "Native counting 三つ works for cakes."},
+    {"id": 109, "type": "choice", "instruction": "Which counter fits flat things such as paper?", "prompt": "", "options": ["本", "匹", "枚", "羽"], "answer": 2, "note": "枚 is for flat things."},
+    {"id": 110, "type": "choice", "instruction": "Which counter fits long things such as bottles?", "prompt": "", "options": ["枚", "本", "冊", "匹"], "answer": 1, "note": "本 is for long, thin things."},
+    {"id": 111, "type": "choice", "instruction": "Which counter fits books?", "prompt": "", "options": ["冊", "本", "枚", "匹"], "answer": 0, "note": "冊 is for bound books."},
+    {"id": 112, "type": "choice", "instruction": "Why does a sentence like 犬が二匹いる end in a verb?", "prompt": "", "options": ["二匹 is the engine", "The counter describes the verb like an adverb", "Counters are particles", "犬 is the engine"], "answer": 1, "note": "The counter works as an adverb: \"dogs exist in a two-animal way\"."},
+    {"id": 113, "type": "choice", "instruction": "Why do counters take の before another noun?", "prompt": "", "options": ["They are verbs", "They are particles", "They are nouns", "They are only adverbs"], "answer": 2, "note": "Counters are nouns, so they take の like any noun."},
+    {"id": 114, "type": "choice", "instruction": "Why does 枚 never change its sound?", "prompt": "", "options": ["It is irregular", "Its first kana ま cannot take a ten-ten or small っ", "It is native", "It is a verb"], "answer": 1, "note": "Sound changes happen only in rows that can take dakuten or small っ."},
+    {"id": 115, "type": "choice", "instruction": "Which counter's first kana can take a ten-ten, so its sound can change?", "prompt": "", "options": ["枚 (ま)", "匹 (ひ)"], "answer": 1, "note": "ひ can become び or ぴ: さんびき."},
+    {"id": 116, "type": "choice", "instruction": "How do you say 一匹?", "prompt": "", "options": ["いちひき", "いっぴき", "いっひき", "いちびき"], "answer": 1, "note": "The sound changes after 一."},
+    {"id": 117, "type": "choice", "instruction": "How do you say 三匹?", "prompt": "", "options": ["さんひき", "さんぴき", "さんびき", "さんぎき"], "answer": 2, "note": "After ん the sound becomes び."},
+    {"id": 118, "type": "tap", "instruction": "Tap the counter", "options": ["犬が", "二匹", "いる"], "answer": 1, "en": "There are two dogs.", "note": "二匹 is a number plus the counter 匹."},
+    {"id": 119, "type": "tap", "instruction": "Tap the counter that comes before の", "options": ["二羽の", "鳥が", "飛んでいる"], "answer": 0, "en": "Two birds are flying.", "note": "Counter + の + noun."},
+    {"id": 120, "type": "order", "instruction": "Build the sentence", "prompt": "(I) bought three notebooks.", "options": ["ノートを", "三冊", "買った"], "en": "(I) bought three notebooks.", "note": "The counter works like an adverb before the verb."},
+    {"id": 121, "type": "order", "instruction": "Build the sentence", "prompt": "There are four birds in the tree.", "options": ["木に", "鳥が", "四羽", "いる"], "en": "There are four birds in the tree.", "note": "Noun が + counter + verb.", "alt": [["鳥が", "木に", "四羽", "いる"]]},
+    {"id": 122, "type": "order", "instruction": "Build the sentence", "prompt": "Please give me five sheets of paper.", "options": ["紙を", "五枚", "ください"], "en": "Please give me five sheets of paper.", "note": "枚 counts flat things such as paper."},
+    {"id": 123, "type": "order", "instruction": "Build the sentence", "prompt": "Two dogs are playing in the park.", "options": ["二匹の", "犬が", "公園で", "遊んでいる"], "en": "Two dogs are playing in the park.", "note": "Counter + の + noun.", "alt": [["公園で", "二匹の", "犬が", "遊んでいる"]]}
   ]
 }

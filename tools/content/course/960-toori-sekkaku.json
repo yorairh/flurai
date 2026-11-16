@@ -80,34 +80,6 @@
    "note": "Following the same road of thought."
   },
   {
-   "id": 2,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "計画＿＿に進んだ。 (It went just as planned.)",
-   "options": [
-    "通り",
-    "通る",
-    "通って",
-    "通れ"
-   ],
-   "answer": 0,
-   "note": "Noun + どおり."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "What does ご覧の通り mean?",
-   "prompt": "",
-   "options": [
-    "As you can see",
-    "Please watch",
-    "I'm watching",
-    "Look out"
-   ],
-   "answer": 0,
-   "note": "Along the lines of your seeing."
-  },
-  {
    "id": 4,
    "type": "choice",
    "instruction": "What does 思い通りにならない mean?",
@@ -136,20 +108,6 @@
    "note": "Preciousness."
   },
   {
-   "id": 6,
-   "type": "choice",
-   "instruction": "Which sentence fits せっかくの休日?",
-   "prompt": "",
-   "options": [
-    "雨で台無しになった",
-    "雨が好きだ",
-    "雨を見た",
-    "雨が降る"
-   ],
-   "answer": 0,
-   "note": "A precious thing ruined."
-  },
-  {
    "id": 7,
    "type": "choice",
    "instruction": "True or false?",
@@ -159,7 +117,8 @@
     "False"
    ],
    "answer": 0,
-   "note": "予定どおり."
+   "note": "予定どおり.",
+   "en": "according to, just as"
   },
   {
    "id": 8,
@@ -171,45 +130,229 @@
     "False"
    ],
    "answer": 1,
-   "note": "It means precious or hard-won."
+   "note": "It means precious or hard-won.",
+   "en": "A rare chance; going to the trouble."
   },
   {
-   "id": 9,
+   "id": 12,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "この地図の＿＿に行けば、駅に着く。",
+   "options": [
+    "通る",
+    "通れ",
+    "通り",
+    "通って"
+   ],
+   "answer": 2,
+   "note": "Modifier + 通り: just as.",
+   "en": "If you go according to this map, you'll reach the station."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "先生が言った＿＿にやってみた。",
+   "options": [
+    "まま",
+    "ほど",
+    "通り",
+    "うち"
+   ],
+   "answer": 2,
+   "note": "言った通り: just as (the teacher) said.",
+   "en": "I tried it just as the teacher said."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "＿＿作ったのに、食べてくれなかった。",
+   "options": [
+    "せっかく",
+    "どうも",
+    "やっぱり",
+    "ちょうど"
+   ],
+   "answer": 0,
+   "note": "せっかく: I went to the trouble, but it was wasted.",
+   "en": "I went to the trouble of making it, but he didn't eat it."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "What does せっかく express?",
+   "prompt": "せっかく晴れたのだから、洗濯しよう。",
+   "options": [
+    "Haste",
+    "Danger",
+    "Cheapness",
+    "A rare chance should be used"
+   ],
+   "answer": 3,
+   "note": "せっかく: since this is valuable, make use of it.",
+   "en": "Since the weather has cleared up, let's do the laundry."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Which sentence means \"It finished exactly as planned\"?",
+   "prompt": "",
+   "options": [
+    "予定通りに終わった。",
+    "予定ほどに終わった。",
+    "予定だけ終わった。",
+    "予定しか終わった。"
+   ],
+   "answer": 0,
+   "note": "Noun + 通り: according to."
+  },
+  {
+   "id": 17,
+   "type": "choice",
+   "instruction": "How is 通り read after a noun like 約束?",
+   "prompt": "",
+   "options": [
+    "とおり",
+    "どおり",
+    "かよい",
+    "みち"
+   ],
+   "answer": 1,
+   "note": "After a noun it becomes どおり."
+  },
+  {
+   "id": 18,
    "type": "tap",
    "instruction": "Tap the word meaning \"just as\"",
    "options": [
-    "言う",
+    "私が",
+    "言った",
     "通り",
-    "だ"
+    "です"
    ],
-   "answer": 1,
-   "note": "Modifier + 通り."
+   "answer": 2,
+   "note": "言った通り: just as I said.",
+   "en": "It's just as I said."
   },
   {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "It is just as you say.",
+   "id": 19,
+   "type": "tap",
+   "instruction": "Tap the word that shows the wasted effort",
    "options": [
-    "あなたの",
-    "言う",
-    "通りだ"
-   ],
-   "note": "Modifier + 通り + だ."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "Which expression means \"since I took the trouble to come\"?",
-   "prompt": "",
-   "options": [
-    "せっかく来たのだから",
-    "やっぱり来たので",
-    "どうも来たから",
-    "しか来ない"
+    "せっかく",
+    "買ったのに",
+    "壊れた"
    ],
    "answer": 0,
-   "note": "せっかく + reason."
+   "note": "せっかく: I went to the trouble of buying it.",
+   "en": "I went to the trouble of buying it, and yet it broke."
+  },
+  {
+   "id": 20,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I went just as the map said.",
+   "options": [
+    "地図の",
+    "通りに",
+    "行った"
+   ],
+   "note": "Noun の + 通りに: according to.",
+   "en": "I went just as the map said."
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Since it's a rare chance, let's eat out.",
+   "options": [
+    "せっかくだから",
+    "外で",
+    "食べよう"
+   ],
+   "note": "せっかくだから: since it's a rare chance.",
+   "en": "Since it's a rare chance, let's eat out."
+  },
+  {
+   "id": 22,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I went to the trouble of coming, but the shop was closed.",
+   "options": [
+    "せっかく",
+    "来たのに",
+    "閉まっていた"
+   ],
+   "note": "せっかく ... のに: wasted effort.",
+   "en": "I went to the trouble of coming, but the shop was closed."
+  },
+  {
+   "id": 23,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "It turned out just as I thought.",
+   "options": [
+    "思った",
+    "通りに",
+    "なった"
+   ],
+   "note": "Modifier + 通りに.",
+   "en": "It turned out just as I thought."
+  },
+  {
+   "id": 24,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "せっかく always shows a negative feeling.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It can also push you to make use of a chance.",
+   "en": "A rare chance can be good or bad."
+  },
+  {
+   "id": 25,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "予定通り means \"according to plan\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "Noun + どおり: according to.",
+   "en": "According to plan."
+  },
+  {
+   "id": 26,
+   "type": "choice",
+   "instruction": "Which situation fits せっかく?",
+   "prompt": "",
+   "options": [
+    "You made a big dinner, but nobody came",
+    "You forgot your wallet",
+    "You greet a stranger",
+    "You ask the time"
+   ],
+   "answer": 0,
+   "note": "A valuable effort that was wasted."
+  },
+  {
+   "id": 27,
+   "type": "choice",
+   "instruction": "What is 通り, grammatically?",
+   "prompt": "",
+   "options": [
+    "A particle",
+    "The い-stem noun of 通る: a way, a road",
+    "A past tense",
+    "An adverb of speed"
+   ],
+   "answer": 1,
+   "note": "Modifier + 通り fills the noun 通り."
   }
  ]
 }

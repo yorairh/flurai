@@ -186,6 +186,14 @@ private fun QuestionView(
             }
         }
         if (state.selected != null) {
+            question.translation?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                )
+            }
             question.note?.let {
                 QText(
                     it, question, MaterialTheme.typography.bodyMedium.japanese(),
@@ -234,7 +242,7 @@ private fun Modifier.androidxClickable(enabled: Boolean, onClick: () -> Unit): M
 private fun OrderTiles(question: Question, answered: Boolean, arranged: String?, onArrange: (List<Int>) -> Unit) {
     val tiles = question.tiles.orEmpty()
     var placed by remember(question) { mutableStateOf(listOf<Int>()) }
-    val right = answered && arranged == question.correctText
+    val right = answered && arranged != null && question.isArrangementRight(arranged)
     val border = when {
         !answered -> MaterialTheme.colorScheme.outline
         right -> CorrectGreen
@@ -331,6 +339,7 @@ private fun MissedList(missed: List<MissedQuestion>) {
                     m.hint?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                     FuriganaLine("Right: ", m.correct, m.ruby[m.correct], MaterialTheme.typography.bodyMedium.japanese(), CorrectGreen, show)
                     FuriganaLine("You chose: ", m.chosen, m.ruby[m.chosen], MaterialTheme.typography.bodyMedium.japanese(), WrongRed, show)
+                    m.translation?.let { Text(it, style = MaterialTheme.typography.bodySmall, fontStyle = androidx.compose.ui.text.font.FontStyle.Italic, color = MaterialTheme.colorScheme.onSurfaceVariant) }
                     m.note?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                 }
             }

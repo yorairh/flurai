@@ -72,150 +72,26 @@
   }
  ],
  "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "What does しか do in 私しかいない?",
-   "prompt": "",
-   "options": [
-    "Makes everyone but me the subject",
-    "Marks me as the topic",
-    "Makes a question",
-    "Asks \"who?\""
-   ],
-   "answer": 0,
-   "note": "It inverts the selection."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "店には客が一人＿＿いない。 (There is only one customer.)",
-   "options": [
-    "しか",
-    "だけ",
-    "も",
-    "は"
-   ],
-   "answer": 0,
-   "note": "しか + negative."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Which sentence is correct?",
-   "prompt": "",
-   "options": [
-    "水が少ししかない。",
-    "水が少ししかある。",
-    "水が少ししかです。",
-    "水しかある。"
-   ],
-   "answer": 0,
-   "note": "しか needs a negative engine."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Which particle does しか push out?",
-   "prompt": "",
-   "options": [
-    "が",
-    "に",
-    "で",
-    "から"
-   ],
-   "answer": 0,
-   "note": "Like か, しか displaces が."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "What does 待つしかない mean?",
-   "prompt": "",
-   "options": [
-    "There is nothing to do but wait",
-    "Waiting is impossible",
-    "I don't wait",
-    "Let's not wait"
-   ],
-   "answer": 0,
-   "note": "Every other option does not exist."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "What does 一枚しかない select and invert in タオルが一枚しかない?",
-   "prompt": "",
-   "options": [
-    "The counter 一枚",
-    "The subject タオル",
-    "The verb",
-    "Nothing"
-   ],
-   "answer": 0,
-   "note": "The counter works as an adverb."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "しか can be used with a positive verb like ある.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "The engine after しか is always negative."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "しか selects for relevance, not every noun in the universe.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "私しかいない means no other people."
-  },
-  {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word that inverts the selection",
-   "options": [
-    "彼しか",
-    "来なかった"
-   ],
-   "answer": 0,
-   "note": "彼しか: everyone other than him."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I have no choice but to run.",
-   "options": [
-    "走る",
-    "しか",
-    "ない"
-   ],
-   "note": "Action + しかない."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "Which sentence means \"Only the teacher knows\"?",
-   "prompt": "",
-   "options": [
-    "先生しか知らない。",
-    "先生しか知る。",
-    "先生が知らない。",
-    "先生だけ知らない。"
-   ],
-   "answer": 0,
-   "note": "しか + negative verb."
-  }
- ]
+    {"id": 12, "type": "choice", "instruction": "What must the engine of a しか sentence be?", "prompt": "", "options": ["Always negative", "Always positive", "Always past", "Always a question"], "answer": 0, "note": "しか flips the A-car, so the engine says that group is not here."},
+    {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "かばんに千円＿＿ない。", "options": ["だけ", "しか", "まで", "から"], "answer": 1, "note": "しか needs a negative engine: ない.", "en": "I have only 1000 yen in my bag."},
+    {"id": 14, "type": "choice", "instruction": "Fill the gap", "prompt": "箱にりんごが二つ＿＿ない。", "options": ["だけ", "まで", "しか", "から"], "answer": 2, "note": "A counter marked by しか flips the amount.", "en": "There are only two apples in the box."},
+    {"id": 15, "type": "choice", "instruction": "True or false?", "prompt": "しか always needs a negative engine.", "options": ["True", "False"], "answer": 0, "note": "The engine says everyone except the selected one is not here."},
+    {"id": 16, "type": "choice", "instruction": "True or false?", "prompt": "We say がしか.", "options": ["True", "False"], "answer": 1, "note": "Like か, しか pushes out が."},
+    {"id": 17, "type": "choice", "instruction": "What does the sentence say?", "prompt": "山田さんしかいない。", "options": ["Only Yamada is here", "Yamada is not here", "Everyone is here", "Yamada is a student"], "answer": 0, "note": "Everyone except Yamada does not exist.", "en": "Only Yamada is here."},
+    {"id": 18, "type": "choice", "instruction": "Which sentence means \"I have only one pen\"?", "prompt": "", "options": ["ペンが一本だけない", "ペンが一本しかない", "ペンが一本もある", "ペンがしか一本ない"], "answer": 1, "note": "A counter + しか + a negative engine."},
+    {"id": 19, "type": "choice", "instruction": "Which two particles does しか usually take the place of?", "prompt": "", "options": ["が and を", "で and に", "と and へ", "は and も"], "answer": 0, "note": "しか replaces が and を but keeps other particles."},
+    {"id": 20, "type": "choice", "instruction": "Which one means \"I can buy it only at the station\"?", "prompt": "", "options": ["駅でしか買う", "駅しかで買えない", "駅でしか買えない", "駅がしか買えない"], "answer": 2, "note": "で is kept, and しか goes after it with a negative engine."},
+    {"id": 21, "type": "choice", "instruction": "What does しか flip?", "prompt": "りんごが三つしかない。", "options": ["The amount (three)", "The subject (apples)", "The verb", "The particle"], "answer": 0, "note": "しか takes \"three\" and inverts it to every other amount, which do not exist.", "en": "There are only three apples."},
+    {"id": 22, "type": "choice", "instruction": "Fill the gap", "prompt": "もう帰る＿＿＿ない。", "options": ["ばかり", "ほど", "しか", "だけ"], "answer": 2, "note": "Verb + しかない: nothing for it but to.", "en": "There is nothing for it but to go home."},
+    {"id": 23, "type": "choice", "instruction": "What does the sentence mean?", "prompt": "やるしかない。", "options": ["I have no choice but to do it", "I will not do it", "Let's not do it", "I did it"], "answer": 0, "note": "Every other course of action does not exist.", "en": "There is nothing to do but do it."},
+    {"id": 24, "type": "choice", "instruction": "Does the sentence say the desks and chairs are absent?", "prompt": "教室には先生しかいなかった。", "options": ["No: it means no other people", "Yes, nothing else was there", "Yes, but only desks", "It does not say anything"], "answer": 0, "note": "しか selects for relevance: other people, not furniture.", "en": "There was only the teacher in the classroom."},
+    {"id": 25, "type": "tap", "instruction": "Tap the noun that しか selects", "prompt": "", "options": ["彼女は", "野菜", "しか", "食べない"], "answer": 1, "note": "野菜 is taken, and everything else is flipped.", "en": "She eats only vegetables."},
+    {"id": 26, "type": "tap", "instruction": "Tap the negative engine", "prompt": "", "options": ["姉は", "水", "しか", "飲まない"], "answer": 3, "note": "飲まない is the negative engine that しか needs.", "en": "My older sister drinks only water."},
+    {"id": 27, "type": "tap", "instruction": "Tap the negative engine", "prompt": "", "options": ["時間が", "五分", "しか", "ない"], "answer": 3, "note": "しか always needs a negative engine.", "en": "I have only five minutes."},
+    {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "I have only one friend.", "options": ["友だちが", "一人", "しか", "いない"], "note": "A counter + しか + a negative engine.", "en": "I have only one friend."},
+    {"id": 29, "type": "order", "instruction": "Build the sentence", "prompt": "There is only one bank near the station.", "options": ["駅の近くには", "銀行が", "一つしか", "ない"], "note": "The counter 一つ is marked by しか.", "en": "There is only one bank near the station."},
+    {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "I have no choice but to wait here.", "options": ["ここで", "待つ", "しか", "ない"], "note": "Verb + しかない.", "en": "I have no choice but to wait here."},
+    {"id": 31, "type": "choice", "instruction": "What other particle does しか push out, like か?", "prompt": "", "options": ["が", "は", "の", "と"], "answer": 0, "note": "Like か, しか pushes out が."},
+    {"id": 32, "type": "choice", "instruction": "True or false?", "prompt": "しか means no trees or birds either.", "options": ["True", "False"], "answer": 1, "note": "しか selects for relevance: it means no other people."}
+  ]
 }

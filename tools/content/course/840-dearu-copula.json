@@ -118,165 +118,26 @@
   }
  ],
  "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "Which copula fits a newspaper article best?",
-   "prompt": "",
-   "options": [
-    "である",
-    "だよ",
-    "でございます",
-    "だぜ"
-   ],
-   "answer": 0,
-   "note": "である is plain and objective."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "What is だ historically?",
-   "prompt": "",
-   "options": [
-    "A short form of である",
-    "A short form of でした",
-    "A kind of particle",
-    "A kind of noun"
-   ],
-   "answer": 0,
-   "note": "で + ある → であ → だ."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "弟は大学生＿＿兄は会社員だ。 (My younger brother is a college student and my older brother is an employee.)",
-   "options": [
-    "で",
-    "に",
-    "を",
-    "な"
-   ],
-   "answer": 0,
-   "note": "で is the て-form of the copula, linking two clauses."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Fill the gap to modify the noun",
-   "prompt": "学生＿＿私は忙しい。 (I, who am a student, am busy.)",
-   "options": [
-    "である",
-    "だ",
-    "です",
-    "な"
-   ],
-   "answer": 0,
-   "note": "A non-な noun needs である to modify."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "Which is correct?",
-   "prompt": "",
-   "options": [
-    "教師である母",
-    "教師だ母",
-    "教師です母",
-    "教師な母"
-   ],
-   "answer": 0,
-   "note": "Only である can pre-modify here."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "Which sentence uses the copula (not the verb of being)?",
-   "prompt": "",
-   "options": [
-    "田中さんは医者だ。",
-    "机の上に本がある。",
-    "庭に犬がいる。",
-    "駅の前に店がある。"
-   ],
-   "answer": 0,
-   "note": "Only the first puts A into the set B."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "What does でございます do?",
-   "prompt": "",
-   "options": [
-    "Is the very polite copula",
-    "Means \"to give\"",
-    "Is a casual contraction",
-    "Marks a question"
-   ],
-   "answer": 0,
-   "note": "It is keigo, heard in shops and announcements."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "だ can be put directly before a noun to modify it.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "だ only ends a clause; use である."
-  },
-  {
-   "id": 9,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "The で in である is the particle で.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "で (boundary) + ある (exist)."
-  },
-  {
-   "id": 10,
-   "type": "tap",
-   "instruction": "Tap the copula",
-   "options": [
-    "彼は",
-    "天才",
-    "である"
-   ],
-   "answer": 2,
-   "note": "である is the copula here."
-  },
-  {
-   "id": 11,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "My mother, who is a teacher, is kind.",
-   "options": [
-    "教師である",
-    "母は",
-    "優しい"
-   ],
-   "note": "である lets 教師 modify 母."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Why does this course keep a separate word for the copula?",
-   "prompt": "",
-   "options": [
-    "It says A belongs to set B, unlike ある",
-    "It means \"exist\"",
-    "It is a particle",
-    "It is always polite"
-   ],
-   "answer": 0,
-   "note": "English hides the difference behind \"is\"."
-  }
- ]
+    {"id": 13, "type": "choice", "instruction": "What register is である?", "prompt": "", "options": ["Plain, written, objective", "Casual", "Very polite", "Rude"], "answer": 0, "note": "である is neither casual (だ) nor polite (です)."},
+    {"id": 14, "type": "choice", "instruction": "Which form is very polite, used in shops and announcements?", "prompt": "", "options": ["だ", "である", "でございます", "じゃない"], "answer": 2, "note": "でございます is the very polite copula."},
+    {"id": 15, "type": "choice", "instruction": "Which form can modify a noun that is not a な-noun?", "prompt": "", "options": ["だ", "です", "ね", "である"], "answer": 3, "note": "だ and です only end a clause; である builds a modifier."},
+    {"id": 16, "type": "choice", "instruction": "Fill the gap", "prompt": "学生＿＿＿弟は、毎日勉強している。", "options": ["だ", "です", "である", "ない"], "answer": 2, "note": "である lets a noun modify the next noun.", "en": "My younger brother, who is a student, studies every day."},
+    {"id": 17, "type": "choice", "instruction": "Fill the gap", "prompt": "会社員＿＿＿兄は、毎朝早く起きる。", "options": ["だ", "である", "です", "だった"], "answer": 1, "note": "だ cannot sit before a noun, but である can.", "en": "My older brother, who is an office worker, gets up early every morning."},
+    {"id": 18, "type": "choice", "instruction": "True or false?", "prompt": "だ and です can only end a clause.", "options": ["True", "False"], "answer": 0, "note": "To modify a noun, a plain noun needs である."},
+    {"id": 19, "type": "choice", "instruction": "True or false?", "prompt": "である is casual speech.", "options": ["True", "False"], "answer": 1, "note": "である is plain and written, not casual."},
+    {"id": 20, "type": "choice", "instruction": "What is the で in である?", "prompt": "", "options": ["The particle で, drawing a boundary", "The て-form of a verb", "A noun", "A question word"], "answer": 0, "note": "で + ある: exists within the boundary."},
+    {"id": 21, "type": "choice", "instruction": "Which sentence suits a news report?", "prompt": "", "options": ["彼は医者だよ", "彼は医者である", "彼は医者っす", "彼は医者じゃん"], "answer": 1, "note": "である is neutral and written."},
+    {"id": 22, "type": "choice", "instruction": "What does ある say?", "prompt": "", "options": ["That something exists", "That A belongs to set B", "That something is polite", "That something is a noun"], "answer": 0, "note": "ある / いる are verbs of existence."},
+    {"id": 23, "type": "choice", "instruction": "Which sentence uses the copula, not existence?", "prompt": "", "options": ["庭に猫がいる", "机の上に本がある", "公園に木がある", "これは猫である"], "answer": 3, "note": "これは猫である puts it in the set \"cat\"."},
+    {"id": 24, "type": "choice", "instruction": "Which sentence builds a modifier correctly?", "prompt": "", "options": ["学生のである弟", "学生である弟", "学生だ弟", "学生です弟"], "answer": 1, "note": "である + noun is the way to modify with a plain noun."},
+    {"id": 25, "type": "tap", "instruction": "Tap the copula", "prompt": "", "options": ["犬は", "動物", "である"], "answer": 2, "note": "である is the full-form copula.", "en": "A dog is an animal."},
+    {"id": 26, "type": "tap", "instruction": "Tap the noun that である attaches to", "prompt": "", "options": ["先生", "である", "母は", "忙しい"], "answer": 0, "note": "先生 + である modifies 母.", "en": "My mother, who is a teacher, is busy."},
+    {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "My older brother, who is a student, lives near the school.", "options": ["学生である", "兄は", "学校の", "近くに", "住んでいる"], "note": "である lets 学生 modify 兄.", "en": "My older brother, who is a student, lives near the school."},
+    {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "This is a big dog.", "options": ["これは", "大きな", "犬である"], "note": "Noun + である ends the sentence in a plain written style.", "en": "This is a big dog."},
+    {"id": 29, "type": "choice", "instruction": "Why does the course keep the copula as its own engine?", "prompt": "", "options": ["It has its own て-form and linking form", "It is a particle", "It is only polite", "It never ends a sentence"], "answer": 0, "note": "Its て-form is で and its linking form is な."},
+    {"id": 30, "type": "choice", "instruction": "Which is the polite version of である, the long form behind です?", "prompt": "", "options": ["であります", "だ", "じゃない", "ではない"], "answer": 0, "note": "であります is the polite version of である."},
+    {"id": 31, "type": "choice", "instruction": "True or false?", "prompt": "The particle で and the て-form of the copula are the same thing.", "options": ["True", "False"], "answer": 1, "note": "They look the same but do different jobs."},
+    {"id": 32, "type": "choice", "instruction": "Compare 先生の母 and 先生である母. Which is vaguer?", "prompt": "", "options": ["先生の母", "先生である母", "Equally vague", "Neither"], "answer": 0, "note": "である states plainly that she is a teacher; の is vaguer."},
+    {"id": 33, "type": "choice", "instruction": "Which nouns can modify a noun with な?", "prompt": "", "options": ["な-nouns", "All nouns", "Verbs", "Particles"], "answer": 0, "note": "Only な-nouns take な before a noun."}
+  ]
 }

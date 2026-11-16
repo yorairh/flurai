@@ -39,8 +39,15 @@ data class Question(
      * listening); everything else follows the furigana setting.
      */
     val furigana: Boolean = true,
+    /** Course questions: the English translation of the sentence asked about, shown after answering. */
+    val translation: String? = null,
+    /** Order questions: other arrangements (the pieces joined) that are also right besides [correctText]. */
+    val alsoCorrect: Set<String> = emptySet(),
 ) {
     val correctOption: String get() = correctText ?: options[answer]
+
+    /** True when [arranged] (an order question's pieces joined) is the right sentence or one of the other right ones. */
+    fun isArrangementRight(arranged: String): Boolean = arranged == correctText || arranged in alsoCorrect
 }
 
 /**

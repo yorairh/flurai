@@ -62,163 +62,26 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What does the copula do?",
-      "prompt": "",
-      "options": [
-        "It puts A into the set B",
-        "It says something exists",
-        "It marks the object",
-        "It makes a question"
-      ],
-      "answer": 0,
-      "note": "A one-way equals sign.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "さくらは日本人だ means that every Japanese person is Sakura.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "The equals sign only works one way.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence says that a book exists?",
-      "prompt": "",
-      "options": [
-        "机の上に本がある",
-        "これは本です",
-        "本は机です",
-        "私は本だ"
-      ],
-      "answer": 0,
-      "note": "ある is the verb of existence.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "私は学生＿＿。",
-      "options": [
-        "です",
-        "ある",
-        "いる",
-        "する"
-      ],
-      "answer": 0,
-      "note": "学生 is a noun, so it takes the copula.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Which one can end a logical sentence?",
-      "prompt": "",
-      "options": [
-        "学生だ",
-        "学生",
-        "学生の",
-        "学生を"
-      ],
-      "answer": 0,
-      "note": "A bare noun is not an engine; noun + copula is.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "だ and です are two different words with unrelated jobs.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "They are the same copula in different politeness styles.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "これは本です。",
-      "options": [
-        "This is a book",
-        "There is a book",
-        "I want a book",
-        "I read a book"
-      ],
-      "answer": 0,
-      "note": "The thing belongs to the set \"book\".",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "A noun alone can be the engine of a logical sentence.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It needs the copula.",
-      "id": 8
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "Sakura is a Japanese person.",
-      "options": [
-        "さくらは",
-        "日本人",
-        "だ"
-      ],
-      "note": "Topic, noun, copula.",
-      "id": 9
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the copula in 彼は先生だ",
-      "options": [
-        "彼は",
-        "先生",
-        "だ"
-      ],
-      "answer": 2,
-      "note": "だ is the copula.",
-      "id": 10
-    },
-    {
-      "type": "choice",
-      "instruction": "Why is the copula confusing for English speakers?",
-      "prompt": "",
-      "options": [
-        "English uses one verb \"be\" for both the copula and existence",
-        "English has no nouns",
-        "English has too many particles",
-        "English has no sets"
-      ],
-      "answer": 0,
-      "note": "Japanese keeps the two jobs apart.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "When can the equals sign work both ways?",
-      "prompt": "",
-      "options": [
-        "When the set has only one member",
-        "Never",
-        "Always",
-        "Only in questions"
-      ],
-      "answer": 0,
-      "note": "That person is Sakura: a set of one.",
-      "id": 12
-    }
+    {"id": 34, "type": "choice", "instruction": "Which sentence uses the copula?", "prompt": "", "options": ["机の上に猫がいる", "あれは犬です", "公園にベンチがある", "庭に花がある"], "answer": 1, "note": "あれは犬です: A belongs to the set B, with です."},
+    {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "これは私の本＿＿。", "options": ["ある", "いる", "です", "する"], "answer": 2, "note": "The copula says what A is.", "en": "This is my book."},
+    {"id": 36, "type": "choice", "instruction": "Fill the gap", "prompt": "駅の前に銀行＿＿＿。", "options": ["です", "がある", "だった", "ではない"], "answer": 1, "note": "Existence uses ある, not the copula.", "en": "There is a bank in front of the station."},
+    {"id": 37, "type": "choice", "instruction": "True or false?", "prompt": "A noun can end a logical sentence by itself.", "options": ["True", "False"], "answer": 1, "note": "A noun is not an engine: it needs the copula."},
+    {"id": 38, "type": "choice", "instruction": "What is the copula?", "prompt": "", "options": ["A verb of existence", "A particle", "A kind of adjective", "A one-way equals sign"], "answer": 3, "note": "A is B, but B is not necessarily A."},
+    {"id": 39, "type": "choice", "instruction": "What does the sentence say?", "prompt": "田中さんは学生だ。", "options": ["Tanaka belongs to the set of students", "All students are Tanaka", "Tanaka exists", "A student exists"], "answer": 0, "note": "The copula places Tanaka in a set.", "en": "Tanaka is a student."},
+    {"id": 40, "type": "choice", "instruction": "Fill the gap", "prompt": "私の姉は医者＿＿。", "options": ["が", "です", "ある", "いる"], "answer": 1, "note": "医者 is a noun, so it needs the copula to be an engine.", "en": "My older sister is a doctor."},
+    {"id": 41, "type": "choice", "instruction": "When does the equals sign work both ways?", "prompt": "", "options": ["When the set has only one member", "When the noun is long", "When you use です", "Never"], "answer": 0, "note": "あの人はさくらだ works both ways because there is one Sakura."},
+    {"id": 42, "type": "choice", "instruction": "Which sentence says something exists?", "prompt": "", "options": ["あの人は先生です", "私は学生だった", "かばんの中にペンがある", "これは木です"], "answer": 2, "note": "ある says that a thing exists."},
+    {"id": 43, "type": "tap", "instruction": "Tap the copula", "prompt": "", "options": ["弟は", "小学生", "です"], "answer": 2, "note": "です turns the noun into an engine.", "en": "My younger brother is an elementary school student."},
+    {"id": 44, "type": "tap", "instruction": "Tap the word that says something exists", "prompt": "", "options": ["部屋に", "机が", "ある"], "answer": 2, "note": "ある / いる are the verbs of existence.", "en": "There is a desk in the room."},
+    {"id": 45, "type": "order", "instruction": "Build the sentence", "prompt": "Her father is a teacher.", "options": ["彼女の", "お父さんは", "先生", "です"], "note": "Noun + copula makes the engine.", "en": "Her father is a teacher."},
+    {"id": 46, "type": "order", "instruction": "Build the sentence", "prompt": "There is a cat under the table.", "options": ["テーブルの", "下に", "猫が", "いる"], "note": "いる says a living thing exists.", "en": "There is a cat under the table.", "alt": [["猫が", "テーブルの", "下に", "いる"]]},
+    {"id": 47, "type": "choice", "instruction": "Fill the gap", "prompt": "庭に犬＿＿＿。", "options": ["がある", "です", "だ", "がいる"], "answer": 3, "note": "A dog exists: いる, not the copula.", "en": "There is a dog in the garden."},
+    {"id": 48, "type": "choice", "instruction": "True or false?", "prompt": "「田中さんは学生だ」 means that all students are Tanaka.", "options": ["True", "False"], "answer": 1, "note": "The copula goes one way: Tanaka belongs to the set of students.", "en": "Tanaka is a student."},
+    {"id": 49, "type": "choice", "instruction": "English be does two jobs. Which job does ある do?", "prompt": "", "options": ["Existence", "The copula", "Politeness", "Asking a question"], "answer": 0, "note": "ある / いる say that something exists."},
+    {"id": 50, "type": "choice", "instruction": "What is the relationship between だ and です?", "prompt": "", "options": ["The same copula in two speech styles", "Different words with different meanings", "です is for existence", "だ is a verb of existence"], "answer": 0, "note": "です is the polite copula."},
+    {"id": 51, "type": "choice", "instruction": "Which can end a logical sentence?", "prompt": "", "options": ["本", "本と", "本が", "本だ"], "answer": 3, "note": "A noun needs the copula to be an engine."},
+    {"id": 52, "type": "choice", "instruction": "Which sentence wrongly mixes the copula and existence?", "prompt": "", "options": ["弟は学生です", "机の上にペンがある", "庭に犬がです", "犬がいる"], "answer": 2, "note": "がです is wrong: existence takes ある / いる."},
+    {"id": 53, "type": "order", "instruction": "Build the sentence", "prompt": "My older sister is an office worker.", "options": ["姉は", "会社員", "です"], "note": "The noun 会社員 plus the copula です.", "en": "My older sister is an office worker."},
+    {"id": 54, "type": "choice", "instruction": "Fill the gap", "prompt": "公園に子どもが＿＿＿。", "options": ["だ", "です", "する", "いる"], "answer": 3, "note": "Children exist in the park: いる.", "en": "There are children in the park."}
   ]
 }

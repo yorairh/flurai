@@ -116,20 +116,6 @@
    "note": "Otherwise it is a modifier."
   },
   {
-   "id": 3,
-   "type": "choice",
-   "instruction": "In 拾って届けた財布, what do 拾って and 届けた do?",
-   "prompt": "",
-   "options": [
-    "Modify 財布",
-    "End the sentence",
-    "Ask a question",
-    "Quote someone"
-   ],
-   "answer": 0,
-   "note": "They are a modifier for the noun."
-  },
-  {
    "id": 4,
    "type": "choice",
    "instruction": "Which mark shows a question with no か?",
@@ -146,11 +132,11 @@
   {
    "id": 5,
    "type": "choice",
-   "instruction": "What do 「 」 mark?",
+   "instruction": "What do 「 」 mark in ordinary writing?",
    "prompt": "",
    "options": [
     "What someone says",
-    "What someone thinks",
+    "A footnote",
     "A heading",
     "A pause"
    ],
@@ -160,13 +146,13 @@
   {
    "id": 6,
    "type": "choice",
-   "instruction": "What do 『 』 mark?",
+   "instruction": "What are 『 』 used for inside a 「 」 quote?",
    "prompt": "",
    "options": [
     "A quote inside a quote",
     "A comma",
     "A question",
-    "A title only"
+    "A page number"
    ],
    "answer": 0,
    "note": "Double quotes."
@@ -196,44 +182,6 @@
    "note": "It came with the translation of Western books."
   },
   {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the sentence-ending mark",
-   "options": [
-    "財布を",
-    "拾った",
-    "。"
-   ],
-   "answer": 2,
-   "note": "。 ends the sentence."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "The book that I bought yesterday is interesting.",
-   "options": [
-    "昨日買った",
-    "本は",
-    "面白い"
-   ],
-   "note": "昨日買った modifies 本; 面白い is the engine."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "Which sentence is a complete sentence?",
-   "prompt": "",
-   "options": [
-    "財布を拾いました。",
-    "昨日拾った財布",
-    "駅で買った本",
-    "友達と行った店"
-   ],
-   "answer": 0,
-   "note": "Only the first has an engine and 。."
-  },
-  {
    "id": 12,
    "type": "choice",
    "instruction": "Dots beside a word in vertical text mean...",
@@ -246,6 +194,184 @@
    ],
    "answer": 0,
    "note": "Side marks work like italics."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Which is a complete sentence?",
+   "prompt": "",
+   "options": [
+    "昨日友達に会った人",
+    "友達に会った店",
+    "友達と食べたケーキ",
+    "昨日友達に会った。"
+   ],
+   "answer": 3,
+   "note": "Only the last one ends with an engine and 。."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "What does 読んだ do in this sentence?",
+   "prompt": "昨日読んだ本は、とても面白かった。",
+   "options": [
+    "It ends the sentence",
+    "It modifies 本",
+    "It asks a question",
+    "It quotes someone"
+   ],
+   "answer": 1,
+   "note": "A clause ending in a noun's modifier form describes the noun.",
+   "en": "The book I read yesterday was very interesting."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "Which word is a clause connector (the clause can end there without 。)?",
+   "prompt": "",
+   "options": [
+    "を",
+    "から",
+    "に",
+    "の"
+   ],
+   "answer": 1,
+   "note": "から, て, けど and similar words connect two clauses."
+  },
+  {
+   "id": 16,
+   "type": "tap",
+   "instruction": "Tap the connector that ends the first clause",
+   "options": [
+    "雨が",
+    "降った",
+    "から",
+    "家に",
+    "いた"
+   ],
+   "answer": 2,
+   "note": "から ends the first clause and joins it to the next.",
+   "en": "Since it rained, I stayed home."
+  },
+  {
+   "id": 17,
+   "type": "tap",
+   "instruction": "Tap the noun that 作った modifies",
+   "options": [
+    "友達が",
+    "作った",
+    "料理は",
+    "おいしい"
+   ],
+   "answer": 2,
+   "note": "作った describes 料理.",
+   "en": "The food my friend made is delicious."
+  },
+  {
+   "id": 18,
+   "type": "tap",
+   "instruction": "Tap the engine of the whole sentence",
+   "options": [
+    "昨日",
+    "買った",
+    "本を",
+    "読んだ"
+   ],
+   "answer": 3,
+   "note": "買った only modifies 本; 読んだ is the real engine.",
+   "en": "I read the book I bought yesterday."
+  },
+  {
+   "id": 19,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "The shop where I met my friend is old.",
+   "options": [
+    "友達に会った",
+    "店は",
+    "古い"
+   ],
+   "note": "友達に会った modifies 店; 古い is the engine.",
+   "en": "The shop where I met my friend is old."
+  },
+  {
+   "id": 20,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "The movie I saw yesterday was fun.",
+   "options": [
+    "昨日見た",
+    "映画は",
+    "楽しかった"
+   ],
+   "note": "昨日見た modifies 映画; 楽しかった ends the sentence.",
+   "en": "The movie I saw yesterday was fun."
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I wrote a letter and sent it.",
+   "options": [
+    "手紙を",
+    "書いて",
+    "送った"
+   ],
+   "note": "書いて is a clause connector; 送った ends the sentence.",
+   "en": "I wrote a letter and sent it."
+  },
+  {
+   "id": 22,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "You must write ？ to ask a question in Japanese.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "か, an ending の or a rising voice also make a question; ？ is optional."
+  },
+  {
+   "id": 23,
+   "type": "choice",
+   "instruction": "How can a spoken question be marked when it has no か?",
+   "prompt": "",
+   "options": [
+    "A comma",
+    "Rising intonation",
+    "Double quotes",
+    "A full stop"
+   ],
+   "answer": 1,
+   "note": "Questions and statements have the same structure; the tone shows a question."
+  },
+  {
+   "id": 24,
+   "type": "choice",
+   "instruction": "What do the brackets show?",
+   "prompt": "妹が「ありがとう」と言った。",
+   "options": [
+    "What my sister thought",
+    "A pause",
+    "Words my sister said aloud",
+    "The title of a book"
+   ],
+   "answer": 2,
+   "note": "「 」 mark speech.",
+   "en": "My little sister said, \"Thank you.\""
+  },
+  {
+   "id": 25,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "A comma 、 can change the grammar of a Japanese sentence.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "Commas are only pauses."
   }
  ]
 }

@@ -95,51 +95,9 @@
    "note": "The subject is still there."
   },
   {
-   "id": 2,
-   "type": "choice",
-   "instruction": "Who is tired in the sentence 疲れた。 on its own?",
-   "prompt": "",
-   "options": [
-    "Normally the speaker",
-    "The listener",
-    "The moon",
-    "Everyone"
-   ],
-   "answer": 0,
-   "note": "The zero pronoun defaults to I."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "What does 泣いていた子供 mean?",
-   "prompt": "",
-   "options": [
-    "The child who was crying",
-    "The child cried",
-    "Crying is a child",
-    "I cried"
-   ],
-   "answer": 0,
-   "note": "A noun with a modifier."
-  },
-  {
-   "id": 4,
-   "type": "choice",
-   "instruction": "Which of these is NOT a sentence?",
-   "prompt": "",
-   "options": [
-    "駅に着いた私",
-    "私は駅に着いた。",
-    "駅に着いた。",
-    "私は疲れた。"
-   ],
-   "answer": 0,
-   "note": "A noun with a modifier has no A and B."
-  },
-  {
    "id": 5,
    "type": "choice",
-   "instruction": "Why does だ in 雨になりそうだ prove a subject exists?",
+   "instruction": "In the course's terms だ links an A-car (subject) to a B. Why does 雨になりそうだ still have a hidden A-car?",
    "prompt": "",
    "options": [
     "Because だ links an A-car to a B",
@@ -189,43 +147,6 @@
    "note": "\"Stop crying!\" has no spoken subject."
   },
   {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the engine",
-   "options": [
-    "今日は",
-    "疲れた"
-   ],
-   "answer": 1,
-   "note": "疲れた is the engine; the A-car (I) is zero."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I am hungry today.",
-   "options": [
-    "今日は",
-    "お腹が",
-    "すいた"
-   ],
-   "note": "The topic is today, the A-car is the stomach, and I is zero."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "When is a sequence like 泣いていた子供 typically used?",
-   "prompt": "",
-   "options": [
-    "Narration and summaries",
-    "Everyday questions",
-    "Commands",
-    "Polite requests"
-   ],
-   "answer": 0,
-   "note": "Games and stories use it to sum up."
-  },
-  {
    "id": 12,
    "type": "choice",
    "instruction": "What is this course's view of grammar models?",
@@ -238,6 +159,197 @@
    ],
    "answer": 0,
    "note": "Grammar describes language after the fact."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "Who is sleepy in this sentence said on its own?",
+   "prompt": "眠い。",
+   "options": [
+    "The listener",
+    "Normally the speaker (zero pronoun)",
+    "Nobody: there is no subject",
+    "The whole universe"
+   ],
+   "answer": 1,
+   "note": "The invisible A-car defaults to I.",
+   "en": "(I'm) sleepy."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "Who is the zero pronoun here?",
+   "prompt": "A: 先生は？　B: もう帰りました。",
+   "options": [
+    "The speaker B",
+    "The listener A",
+    "The teacher (from context)",
+    "Nobody"
+   ],
+   "answer": 2,
+   "note": "Context says A asked about the teacher.",
+   "en": "A: What about the teacher? B: (He) already went home."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "Which of these is a noun with a modifier, not a sentence?",
+   "prompt": "",
+   "options": [
+    "昨日買った本",
+    "昨日本を買った。",
+    "私は本を買った。",
+    "本を買った。"
+   ],
+   "answer": 0,
+   "note": "It ends in a noun and says nothing (B) about an A-car."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Why isn't this a sentence?",
+   "prompt": "駅で会った人",
+   "options": [
+    "It has no particle",
+    "It is a question",
+    "It is a noun with a modifier: it says nothing about an A-car",
+    "It is in the past"
+   ],
+   "answer": 2,
+   "note": "A noun with a modifier has no A and B.",
+   "en": "the person I met at the station"
+  },
+  {
+   "id": 17,
+   "type": "tap",
+   "instruction": "Tap the engine (the A-car is a zero pronoun)",
+   "options": [
+    "買い物に",
+    "行った"
+   ],
+   "answer": 1,
+   "note": "行った is the engine; (I) is the invisible A-car.",
+   "en": "(I) went shopping."
+  },
+  {
+   "id": 18,
+   "type": "tap",
+   "instruction": "Tap the A-car",
+   "options": [
+    "妹が",
+    "来た"
+   ],
+   "answer": 0,
+   "note": "妹が is the A-car; 来た is the engine.",
+   "en": "My younger sister came."
+  },
+  {
+   "id": 19,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "眠い。 This sentence has no A-car (subject) at all, not even an invisible one.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "The A-car is a zero pronoun, invisible but present.",
+   "en": "(I'm) sleepy."
+  },
+  {
+   "id": 20,
+   "type": "choice",
+   "instruction": "Who fell asleep?",
+   "prompt": "お母さんが赤ちゃんを見て、「寝た」と言った。",
+   "options": [
+    "The baby (zero pronoun from context)",
+    "The mother",
+    "The listener",
+    "Nobody"
+   ],
+   "answer": 0,
+   "note": "Context fills the zero pronoun: the baby.",
+   "en": "Mother looked at the baby and said, \"(He) fell asleep.\""
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I'm very sleepy today.",
+   "options": [
+    "今日は",
+    "とても",
+    "眠い"
+   ],
+   "note": "Topic, adverb, then the engine; the A-car (I) is zero.",
+   "en": "I'm very sleepy today."
+  },
+  {
+   "id": 22,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "I went to bed early yesterday.",
+   "options": [
+    "昨日は",
+    "早く",
+    "寝た"
+   ],
+   "note": "Topic, adverb, engine; (I) is the zero pronoun.",
+   "en": "I went to bed early yesterday."
+  },
+  {
+   "id": 23,
+   "type": "choice",
+   "instruction": "Which sentence has a zero pronoun?",
+   "prompt": "",
+   "options": [
+    "妹が早く寝た。",
+    "早く寝た。",
+    "犬は早く寝た。",
+    "私は早く寝た。"
+   ],
+   "answer": 1,
+   "note": "Only 早く寝た。 leaves its A-car unspoken."
+  },
+  {
+   "id": 24,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "窓を開けた人 is a complete sentence.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It is a noun (人) with a modifier.",
+   "en": "the person who opened the window"
+  },
+  {
+   "id": 25,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "English also uses a vague \"it\" as a subject, as in \"It is raining.\"",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 0,
+   "note": "Vague subjects exist in many languages."
+  },
+  {
+   "id": 26,
+   "type": "choice",
+   "instruction": "Why does this feel complete in Japanese?",
+   "prompt": "暑い。",
+   "options": [
+    "The zero pronoun (usually I) is the A-car",
+    "暑い is a noun",
+    "Japanese has no subject",
+    "It is not a sentence"
+   ],
+   "answer": 0,
+   "note": "The A-car is invisible but still there.",
+   "en": "(I'm) hot."
   }
  ]
 }

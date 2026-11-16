@@ -6,43 +6,407 @@
   "title": "ように: one key to all the main uses",
   "summary": "よう means \"form, state\". Clause + ようになる is entering that state, ようにする is bringing it about, and a wish ends with ように.",
   "video": "https://www.youtube.com/watch?v=IE7WgIOOGbM",
-  "related": [447, 571, 464],
+  "related": [
+    447,
+    571,
+    464
+  ],
   "blocks": [
-    {"type": "text", "text": "Start with a reminder. **なる** (become) is the moving partner of **ある** (be). **する** (do, make) is the other-move partner. With a noun: 蛙**になる** (turn into a frog), 蛙**にする** (turn something into a frog)."},
-    {"type": "heading", "text": "よう is a noun: a state"},
-    {"type": "text", "text": "**よう** means \"form, manner, state\". Put a whole clause in front of it and the clause describes that state: 日本語が話せる**よう**, \"the state of Japanese being speakable\". Then it is a normal noun + に."},
-    {"type": "heading", "text": "ようになる: entering the state"},
-    {"type": "text", "text": "This is a **change of state**: you came to be in the state the clause describes."},
-    {"type": "example", "jp": "日本語が話せるようになった。", "en": "I have become able to speak Japanese."},
-    {"type": "example", "jp": "彼を信じるようになった。", "en": "I came to trust him."},
-    {"type": "heading", "text": "ようにする: bringing it about"},
-    {"type": "text", "text": "The other-move partner: you make the state happen, or **try to make sure** it does. Said of yourself, it means \"I make a point of ...\" without promising success."},
-    {"type": "example", "jp": "毎日運動するようにしている。", "en": "I make a point of exercising every day."},
-    {"type": "example", "jp": "忘れ物をしないようにしてください。", "en": "Please make sure you do not forget anything."},
-    {"type": "heading", "text": "Purpose: the same thing with a real verb"},
-    {"type": "text", "text": "The \"in order that\" use is not a new pattern. する is the neutral all-purpose action; swap it for a specific action and you get a purpose: \"do X so that the state comes about\"."},
-    {"type": "example", "jp": "風邪をひかないように、厚い服を着た。", "en": "I wore thick clothes so as not to catch a cold."},
-    {"type": "heading", "text": "A wish at the end"},
-    {"type": "text", "text": "A sentence can end with ように as a prayer or wish, a shortened ようにしてください addressed to a god or the stars."},
-    {"type": "example", "jp": "日本に行けますように。", "en": "May I be able to go to Japan!"},
-    {"type": "keypoints", "items": [
-      "**Clause + ようになる**: change into that state (came to ...).",
-      "**Clause + ようにする**: make it so / try to make sure.",
-      "**Action + ように, + verb**: so that (purpose).",
-      "**Clause + ように** at the end: a wish."
-    ]}
+    {
+      "type": "text",
+      "text": "Start with a reminder. **なる** (become) is the moving partner of **ある** (be). **する** (do, make) is the other-move partner. With a noun: 蛙**になる** (turn into a frog), 蛙**にする** (turn something into a frog)."
+    },
+    {
+      "type": "heading",
+      "text": "よう is a noun: a state"
+    },
+    {
+      "type": "text",
+      "text": "**よう** means \"form, manner, state\". Put a whole clause in front of it and the clause describes that state: 日本語が話せる**よう**, \"the state of Japanese being speakable\". Then it is a normal noun + に."
+    },
+    {
+      "type": "heading",
+      "text": "ようになる: entering the state"
+    },
+    {
+      "type": "text",
+      "text": "This is a **change of state**: you came to be in the state the clause describes."
+    },
+    {
+      "type": "example",
+      "jp": "日本語が話せるようになった。",
+      "en": "I have become able to speak Japanese."
+    },
+    {
+      "type": "example",
+      "jp": "彼を信じるようになった。",
+      "en": "I came to trust him."
+    },
+    {
+      "type": "heading",
+      "text": "ようにする: bringing it about"
+    },
+    {
+      "type": "text",
+      "text": "The other-move partner: you make the state happen, or **try to make sure** it does. Said of yourself, it means \"I make a point of ...\" without promising success."
+    },
+    {
+      "type": "example",
+      "jp": "毎日運動するようにしている。",
+      "en": "I make a point of exercising every day."
+    },
+    {
+      "type": "example",
+      "jp": "忘れ物をしないようにしてください。",
+      "en": "Please make sure you do not forget anything."
+    },
+    {
+      "type": "heading",
+      "text": "Purpose: the same thing with a real verb"
+    },
+    {
+      "type": "text",
+      "text": "The \"in order that\" use is not a new pattern. する is the neutral all-purpose action; swap it for a specific action and you get a purpose: \"do X so that the state comes about\"."
+    },
+    {
+      "type": "example",
+      "jp": "風邪をひかないように、厚い服を着た。",
+      "en": "I wore thick clothes so as not to catch a cold."
+    },
+    {
+      "type": "heading",
+      "text": "A wish at the end"
+    },
+    {
+      "type": "text",
+      "text": "A sentence can end with ように as a prayer or wish, a shortened ようにしてください addressed to a god or the stars."
+    },
+    {
+      "type": "example",
+      "jp": "日本に行けますように。",
+      "en": "May I be able to go to Japan!"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Clause + ようになる**: change into that state (came to ...).",
+        "**Clause + ようにする**: make it so / try to make sure.",
+        "**Action + ように, + verb**: so that (purpose).",
+        "**Clause + ように** at the end: a wish."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "日本語が話せるようになった。", "options": ["I have become able to speak Japanese", "I decided to speak Japanese", "I tried to speak Japanese", "I could speak Japanese like a native"], "answer": 0, "note": "ようになる: change of state."},
-    {"id": 2, "type": "choice", "instruction": "What does this mean?", "prompt": "毎日運動するようにしている。", "options": ["I make a point of exercising every day", "I became able to exercise", "I was made to exercise", "I used to exercise daily"], "answer": 0, "note": "ようにする: try to bring it about."},
-    {"id": 3, "type": "choice", "instruction": "Which pattern is the other-move one (someone makes it happen)?", "prompt": "", "options": ["ようにする", "ようになる", "ようだ", "ように (adverb)"], "answer": 0, "note": "する is the other-move partner of なる."},
-    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "日本に行けますように。", "options": ["May I be able to go to Japan!", "I went to Japan", "Please go to Japan", "I will not go to Japan"], "answer": 0, "note": "A sentence ending in ように is a wish."},
-    {"id": 5, "type": "choice", "instruction": "Fill the gap", "prompt": "子供が風邪をひかない＿＿、厚い服を着せた。", "options": ["ように", "ようで", "ような", "ようが"], "answer": 0, "note": "so that: clause + ように, then an action."},
-    {"id": 6, "type": "choice", "instruction": "What does this mean?", "prompt": "忘れ物をしないようにしてください。", "options": ["Please make sure you do not forget anything", "Please forget everything", "Please buy lost items", "You did not forget anything"], "answer": 0, "note": "ようにしてください: please make sure of it."},
-    {"id": 7, "type": "choice", "instruction": "Fill the gap", "prompt": "彼を信じる＿＿＿なった。 (I came to trust him.)", "options": ["ように", "のを", "ばかり", "だけ"], "answer": 0, "note": "A change of state: ようになる."},
-    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "I became able to read manga.", "options": ["マンガが", "読める", "ように", "なった"], "note": "Clause + ように + なった."},
-    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "I try to walk every day.", "options": ["私は", "毎日", "歩く", "ようにしている"], "note": "Clause + ようにしている."},
-    {"id": 10, "type": "choice", "instruction": "True or false?", "prompt": "ようになる focuses on a change of state.", "options": ["True", "False"], "answer": 0, "note": "It means coming to be in that state."},
-    {"id": 11, "type": "tap", "instruction": "Tap the part that means \"came to\"", "options": ["毎日", "勉強する", "ようになった"], "answer": 2, "note": "ようになった: entered the state of studying every day."}
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "毎日練習したら、泳げるようになった。",
+      "options": [
+        "I decided to swim every day",
+        "I became able to swim",
+        "I made sure to swim",
+        "I wished I could swim"
+      ],
+      "answer": 1,
+      "note": "ようになる: you came to be in the state of being able.",
+      "en": "After practicing every day, I became able to swim.",
+      "id": 21
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "毎晩、早く寝る＿＿している。",
+      "options": [
+        "ように",
+        "ようが",
+        "ような",
+        "ようを"
+      ],
+      "answer": 0,
+      "note": "ようにする: make a point of doing it.",
+      "en": "I make a point of going to bed early every night.",
+      "id": 22
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "子供が起きない＿＿、静かに歩いた。",
+      "options": [
+        "ような",
+        "ようが",
+        "ようを",
+        "ように"
+      ],
+      "answer": 3,
+      "note": "Purpose: clause + ように, then the action.",
+      "en": "I walked quietly so the child would not wake up.",
+      "id": 23
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence means \"I have come to eat vegetables\" (a change of state)?",
+      "prompt": "",
+      "options": [
+        "野菜を食べますように。",
+        "野菜を食べるようにしてください。",
+        "野菜を食べるようになった。",
+        "野菜を食べるようだ。"
+      ],
+      "answer": 2,
+      "note": "ようになった: entered the state of eating vegetables.",
+      "id": 24
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "ようにする guarantees that the thing really happens.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "It only says you try to bring it about.",
+      "en": "The pattern ようにする does not guarantee the result.",
+      "id": 25
+    },
+    {
+      "type": "choice",
+      "instruction": "What does よう mean on its own?",
+      "prompt": "",
+      "options": [
+        "Form, manner, state",
+        "Reason",
+        "Place",
+        "A wish only"
+      ],
+      "answer": 0,
+      "note": "よう is a noun: the state a clause describes.",
+      "id": 26
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "彼は最近、朝ごはんを食べないようになった。",
+      "options": [
+        "He makes a point of eating breakfast",
+        "He was told not to eat breakfast",
+        "He wishes he could eat breakfast",
+        "He has come to not eat breakfast"
+      ],
+      "answer": 3,
+      "note": "Negative clause + ようになる: a change into the not-doing state.",
+      "en": "Lately he has stopped eating breakfast.",
+      "id": 27
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "ここに車を止めないようにしてください。",
+      "options": [
+        "Please park here",
+        "You have become unable to park here",
+        "Please make sure you do not park here",
+        "I wish I could park here"
+      ],
+      "answer": 2,
+      "note": "ようにしてください: please make sure of it.",
+      "en": "Please make sure not to park a car here.",
+      "id": 28
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is a wish (\"May ...!\")?",
+      "prompt": "",
+      "options": [
+        "早く元気になるようにする。",
+        "早く元気になりますように。",
+        "早く元気になるようになった。",
+        "早く元気になるようだ。"
+      ],
+      "answer": 1,
+      "note": "A sentence ending in ように is a wish.",
+      "id": 29
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "毎日走るようなった。",
+        "毎日走るようになった。",
+        "毎日走るようにしている。",
+        "毎日走りますように。"
+      ],
+      "answer": 0,
+      "note": "It needs に: ようになった.",
+      "id": 30
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence says \"I left home early so as not to be late\"?",
+      "prompt": "",
+      "options": [
+        "遅れるように、早く家を出た。",
+        "遅れないように、ゆっくり家を出た。",
+        "遅れないようだ、早く家を出た。",
+        "遅れないように、早く家を出た。"
+      ],
+      "answer": 3,
+      "note": "Purpose: the action serves the state of not being late.",
+      "id": 31
+    },
+    {
+      "type": "choice",
+      "instruction": "What does ように mean here?",
+      "prompt": "漢字が書けるように、毎日練習している。",
+      "options": [
+        "A change of state",
+        "A wish at the end",
+        "So that (purpose)",
+        "A request"
+      ],
+      "answer": 2,
+      "note": "Action + ように, + verb: so that.",
+      "en": "I practice every day so that I can write kanji.",
+      "id": 32
+    },
+    {
+      "type": "choice",
+      "instruction": "How do ようになる and ようにする differ?",
+      "prompt": "",
+      "options": [
+        "なる is a wish; する is a question",
+        "なる is a change of state; する is bringing it about",
+        "なる is past; する is future",
+        "They mean the same"
+      ],
+      "answer": 1,
+      "note": "なる is the self-move partner, する the other-move one.",
+      "id": 33
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I try not to eat too much.",
+      "options": [
+        "私は",
+        "食べすぎない",
+        "ようにしている"
+      ],
+      "note": "Clause + ようにしている.",
+      "en": "I try not to eat too much.",
+      "id": 34
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I became able to ride a bicycle.",
+      "options": [
+        "自転車に",
+        "乗れる",
+        "ように",
+        "なった"
+      ],
+      "note": "Clause + ように + なった.",
+      "en": "I became able to ride a bicycle.",
+      "id": 35
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Please make sure you lock the door.",
+      "options": [
+        "ドアの",
+        "かぎを",
+        "かける",
+        "ようにしてください"
+      ],
+      "note": "ようにしてください: make sure.",
+      "en": "Please make sure you lock the door.",
+      "id": 36
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I became able to eat fish.",
+      "options": [
+        "魚が",
+        "食べられる",
+        "ように",
+        "なった"
+      ],
+      "note": "Clause + ようになった.",
+      "en": "I became able to eat fish.",
+      "id": 37
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that means \"I make a point of\"",
+      "options": [
+        "毎朝",
+        "新聞を",
+        "読む",
+        "ようにしている"
+      ],
+      "answer": 3,
+      "note": "ようにしている: trying to make it so.",
+      "en": "I make a point of reading the newspaper every morning.",
+      "id": 38
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that turns this into a wish",
+      "options": [
+        "明日、",
+        "晴れます",
+        "ように"
+      ],
+      "answer": 2,
+      "note": "A final ように is a wish.",
+      "en": "May it be sunny tomorrow!",
+      "id": 39
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that means \"so that\" (purpose)",
+      "options": [
+        "忘れない",
+        "ように、",
+        "メモを",
+        "書いた"
+      ],
+      "answer": 1,
+      "note": "Clause + ように + action.",
+      "en": "I wrote a memo so as not to forget.",
+      "id": 40
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that means \"came to\"",
+      "options": [
+        "彼女は",
+        "最近",
+        "野菜を",
+        "食べる",
+        "ようになった"
+      ],
+      "answer": 4,
+      "note": "ようになった: entered the state.",
+      "en": "She has recently come to eat vegetables.",
+      "id": 41
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "In 〜ようになる, the clause in front of よう describes the state you enter.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "よう is the noun; the clause describes it.",
+      "en": "In ようになる, the clause before よう describes the state you enter.",
+      "id": 42
+    }
   ]
 }

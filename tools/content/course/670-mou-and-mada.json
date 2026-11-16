@@ -66,165 +66,27 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "まだ食べていない。",
-      "options": [
-        "I haven't eaten yet",
-        "I already ate",
-        "I will never eat",
-        "I am eating now"
-      ],
-      "answer": 0,
-      "note": "まだ + negative: not yet.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "もう食べた。",
-      "options": [
-        "I already ate",
-        "I haven't eaten yet",
-        "I want to eat",
-        "I will eat"
-      ],
-      "answer": 0,
-      "note": "もう marks the change as already done.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "宿題は＿＿終わっていない。 (not finished yet)",
-      "options": [
-        "まだ",
-        "もう",
-        "よく",
-        "とても"
-      ],
-      "answer": 0,
-      "note": "A state that still holds: まだ.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "「宿題をしなさい。」「＿＿やったよ。」",
-      "options": [
-        "もう",
-        "まだ",
-        "よく",
-        "ずっと"
-      ],
-      "answer": 0,
-      "note": "I've already done it: もう.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "さくらはまだ若い。",
-      "options": [
-        "Sakura is still young",
-        "Sakura is no longer young",
-        "Sakura will be young",
-        "Sakura was young"
-      ],
-      "answer": 0,
-      "note": "The young stretch has not ended yet.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "Someone praises your Japanese. What is a humble reply?",
-      "prompt": "",
-      "options": [
-        "いえ、まだまだです",
-        "いえ、もう大丈夫です",
-        "いえ、よろしくお願いします",
-        "いえ、お先に"
-      ],
-      "answer": 0,
-      "note": "まだまだ: not there yet.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "まだ looks ahead to a change that is expected later.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "It places now inside a stretch that is expected to end.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "もう can only mean \"already\"; it never means \"now\".",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "もう大丈夫 is \"I'm all right now\".",
-      "id": 8
-    },
-    {
-      "type": "choice",
-      "instruction": "What does もう大丈夫 nuance?",
-      "prompt": "",
-      "options": [
-        "I wasn't all right before, but I am now",
-        "I will be all right soon",
-        "I am never all right",
-        "Are you all right?"
-      ],
-      "answer": 0,
-      "note": "もう marks a change that has already happened.",
-      "id": 9
-    },
-    {
-      "type": "choice",
-      "instruction": "What does a bare \"もう!\" express?",
-      "prompt": "",
-      "options": [
-        "Exasperation",
-        "Joy",
-        "A question",
-        "A request"
-      ],
-      "answer": 0,
-      "note": "Like \"Enough already!\".",
-      "id": 10
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "Sakura is still young.",
-      "options": [
-        "さくらは",
-        "まだ",
-        "若い"
-      ],
-      "note": "まだ comes right before the word it limits.",
-      "id": 11
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the word that says the change has not come yet",
-      "options": [
-        "彼は",
-        "まだ",
-        "来ていない"
-      ],
-      "answer": 1,
-      "note": "まだ: the not-coming-yet stretch continues.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "Fill the gap", "prompt": "「晩ごはんは食べましたか。」「いいえ、＿＿食べていません。」", "options": ["まだ", "もう", "よく", "とても"], "answer": 0, "en": "\"Have you eaten dinner?\" \"No, not yet.\"", "note": "まだ + negative = not yet."},
+    {"id": 102, "type": "choice", "instruction": "Fill the gap", "prompt": "「晩ごはんは食べましたか。」「はい、＿＿食べました。」", "options": ["あまり", "たぶん", "もう", "まだ"], "answer": 2, "en": "\"Have you eaten dinner?\" \"Yes, I already have.\"", "note": "もう: the change has already happened."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "夜の十時だけど、あの店は＿＿開いている。", "options": ["もう", "まだ", "あまり", "ぜんぜん"], "answer": 1, "en": "It's ten at night, but that store is still open.", "note": "まだ + positive = still."},
+    {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "まだ六時なのに、父は＿＿起きている。", "options": ["もう", "まだ", "あまり", "よく"], "answer": 0, "en": "It's only six, yet my father is already up.", "note": "もう: the new stretch has begun earlier than expected."},
+    {"id": 105, "type": "choice", "instruction": "What does もう add?", "prompt": "お金はもうない。", "options": ["(I) still have money", "(I) never had money", "It is a question", "The change has happened: (I) have no money left"], "answer": 3, "en": "(I) have no money left.", "note": "もう marks that things are different from before."},
+    {"id": 106, "type": "choice", "instruction": "What does まだ + negative mean?", "prompt": "", "options": ["Already", "Not yet / still not", "Always", "Never"], "answer": 1, "note": "Japanese really says \"still not\"."},
+    {"id": 107, "type": "choice", "instruction": "Someone praises your Japanese. Which is the modest reply?", "prompt": "", "options": ["もうもうです。", "まだです。", "もうだめです。", "まだまだです。"], "answer": 3, "note": "まだまだ: \"I still have a long way to go\"."},
+    {"id": 108, "type": "choice", "instruction": "What is a standalone もう! ?", "prompt": "", "options": ["Exasperation, like \"Enough already!\"", "Thanks", "Goodbye", "Praise"], "answer": 0, "note": "A cry of impatience."},
+    {"id": 109, "type": "choice", "instruction": "Which sentence says \"I have already finished my homework\"?", "prompt": "", "options": ["宿題はまだ終わっていない。", "宿題はもう終わった。", "宿題はもう終わらない。", "宿題はまだ終わった。"], "answer": 1, "note": "もう + past: the change has happened."},
+    {"id": 110, "type": "choice", "instruction": "Which sentence says \"The bus hasn't come yet\"?", "prompt": "", "options": ["バスはもう来た。", "バスはもう来ない。", "バスはまだ来ていない。", "バスはまだ来た。"], "answer": 2, "note": "まだ + negative = not yet."},
+    {"id": 111, "type": "tap", "instruction": "Tap the word that says the change has already happened", "options": ["雨は", "もう", "やんだ"], "answer": 1, "en": "The rain has already stopped.", "note": "もう marks the new stretch."},
+    {"id": 112, "type": "tap", "instruction": "Tap the word that says we are still in the old stretch", "options": ["弟は", "まだ", "小さい"], "answer": 1, "en": "My younger brother is still small.", "note": "まだ: the old stretch has not ended."},
+    {"id": 113, "type": "order", "instruction": "Build the sentence", "prompt": "(I) can already read kanji.", "options": ["もう", "漢字が", "読める"], "en": "(I) can already read kanji.", "note": "もう comes before what has changed.", "alt": [["漢字が", "もう", "読める"]]},
+    {"id": 114, "type": "order", "instruction": "Build the sentence", "prompt": "He hasn't come yet.", "options": ["彼は", "まだ", "来ていない"], "en": "He hasn't come yet.", "note": "まだ + negative = not yet.", "alt": [["まだ", "彼は", "来ていない"]]},
+    {"id": 115, "type": "order", "instruction": "Build the sentence", "prompt": "My mother is still sleeping.", "options": ["母は", "まだ", "寝ている"], "en": "My mother is still sleeping.", "note": "まだ + positive = still.", "alt": [["まだ", "母は", "寝ている"]]},
+    {"id": 116, "type": "order", "instruction": "Build the sentence", "prompt": "Dinner is already ready.", "options": ["晩ごはんは", "もう", "できている"], "en": "Dinner is already ready.", "note": "もう: the change has happened.", "alt": [["もう", "晩ごはんは", "できている"]]},
+    {"id": 117, "type": "choice", "instruction": "True or false? まだ + positive means \"still\".", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "まだ + positive = still; まだ + negative = not yet."},
+    {"id": 118, "type": "choice", "instruction": "Why do dictionaries sometimes translate もう as \"now\"?", "prompt": "", "options": ["It means tomorrow", "It is a particle", "It means always", "It is a kind of now, with a sense that things were different before"], "answer": 3, "note": "もう carries the nuance of contrast with before."},
+    {"id": 119, "type": "choice", "instruction": "What does まだ say?", "prompt": "", "options": ["We are still inside a stretch of time that began in the past and is expected to end", "The change has already happened", "Something never happens", "A sudden surprise"], "answer": 0, "note": "まだ looks forward to a change."},
+    {"id": 120, "type": "choice", "instruction": "Which word says that we have entered the new stretch?", "prompt": "", "options": ["まだ", "もう"], "answer": 1, "note": "もう: already."},
+    {"id": 121, "type": "choice", "instruction": "Fill the gap", "prompt": "「もう寝る？」「いや、＿＿寝ない。」", "options": ["もう", "まだ", "よく", "たいてい"], "answer": 1, "en": "\"Are you going to bed already?\" \"No, not yet.\"", "note": "まだ + negative = not yet."},
+    {"id": 122, "type": "choice", "instruction": "Which reply means \"Not yet\"?", "prompt": "「ごはんはもうできましたか。」", "options": ["もうです。", "いつもです。", "まだです。", "ぜんぶです。"], "answer": 2, "en": "\"Is dinner ready yet?\"", "note": "まだです = not yet."}
   ]
 }

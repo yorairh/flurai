@@ -6,45 +6,391 @@
   "title": "Three kinds of word: noun, verb, adjective",
   "summary": "Almost every Japanese word is a noun, a verb or an い-adjective, and the special kinds of noun each have just one extra power.",
   "video": "https://www.youtube.com/watch?v=8AXyP5GeJFg",
-  "related": [532, 533],
+  "related": [
+    532,
+    533
+  ],
   "blocks": [
-    {"type": "text", "text": "Textbooks pour Japanese words into English boxes (adverb, adjective, preposition) and the confusion never ends. The course makes it much simpler: nearly every word is a **noun**, a **verb** or an **adjective**. Besides those there are the **particles**, which are the nuts and bolts, and a handful of real connecting words such as けど."},
-    {"type": "heading", "text": "Verbs and adjectives are easy to spot"},
-    {"type": "text", "text": "A verb always ends in an **う-row kana** (う, く, す, る, ...). An adjective always ends in the kana **い**. Both must show that ending in kana, never inside a kanji. These last kana are the part that changes: 食べる becomes 食べた, 高い becomes 高かった."},
-    {"type": "text", "text": "So if a word has none of those endings, it is a **noun**. A word written only in kanji is a noun about 99 times out of 100. Japanese is a very **noun-centered** language."},
-    {"type": "heading", "text": "Super-nouns"},
-    {"type": "text", "text": "Some nouns have exactly one power that ordinary nouns lack. Each group is still a noun. Everything else about it is plain noun behavior."},
-    {"type": "table", "rows": [
-      ["Kind of noun", "Its one power", "Example"],
-      ["Adjectival noun (textbook: な-adjective)", "may use the soft copula **な** before a noun", "静かな町"],
-      ["する noun (textbook: する verb)", "may drop を and fuse with する", "勉強 → 勉強する"],
-      ["Adverbial noun", "may drop the に it would normally need", "ゆっくり歩く"]
-    ]},
-    {"type": "text", "text": "Any ordinary noun that suits the meaning can become an adverb by adding に. An adverbial noun like ゆっくり simply may leave it out. Without する, a word like 勉強 is still just a noun, which is why 勉強が好きだ works with no verb in sight."},
-    {"type": "example", "jp": "静かな部屋で勉強する。", "en": "(I) study in a quiet room."},
-    {"type": "example", "jp": "電車がゆっくり止まった。", "en": "The train stopped slowly."},
-    {"type": "example", "jp": "勉強が好きだ。", "en": "(I) like study. (the noun, no する needed)"},
-    {"type": "heading", "text": "Watch out for あまり and ずいぶん"},
-    {"type": "text", "text": "あまり is a noun meaning \"excess\" and ずいぶん is a noun meaning \"a fair amount\". Japanese often says less than it means (understatement). あまり食べない literally says \"I do not eat an excess\" and in practice means \"I do not eat much\". ずいぶん上手だ says \"you are skilled enough\" and means \"very skilled\"."},
-    {"type": "keypoints", "items": [
-      "Nearly every word is a **noun**, **verb** or **adjective**.",
-      "Verbs end in an **う-row kana**; adjectives end in **い**; anything else is a noun.",
-      "Adjectival nouns, する nouns and adverbial nouns are still nouns, each with one extra power.",
-      "Words that dictionaries call adverbs are nearly always nouns used without に."
-    ]}
+    {
+      "type": "text",
+      "text": "Textbooks pour Japanese words into English boxes (adverb, adjective, preposition) and the confusion never ends. The course makes it much simpler: nearly every word is a **noun**, a **verb** or an **adjective**. Besides those there are the **particles**, which are the nuts and bolts, and a handful of real connecting words such as けど."
+    },
+    {
+      "type": "heading",
+      "text": "Verbs and adjectives are easy to spot"
+    },
+    {
+      "type": "text",
+      "text": "A verb always ends in an **う-row kana** (う, く, す, る, ...). An adjective always ends in the kana **い**. Both must show that ending in kana, never inside a kanji. These last kana are the part that changes: 食べる becomes 食べた, 高い becomes 高かった."
+    },
+    {
+      "type": "text",
+      "text": "So if a word has none of those endings, it is a **noun**. A word written only in kanji is a noun about 99 times out of 100. Japanese is a very **noun-centered** language."
+    },
+    {
+      "type": "heading",
+      "text": "Super-nouns"
+    },
+    {
+      "type": "text",
+      "text": "Some nouns have exactly one power that ordinary nouns lack. Each group is still a noun. Everything else about it is plain noun behavior."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Kind of noun",
+          "Its one power",
+          "Example"
+        ],
+        [
+          "Adjectival noun (textbook: な-adjective)",
+          "may use the soft copula **な** before a noun",
+          "静かな町"
+        ],
+        [
+          "する noun (textbook: する verb)",
+          "may drop を and fuse with する",
+          "勉強 → 勉強する"
+        ],
+        [
+          "Adverbial noun",
+          "may drop the に it would normally need",
+          "ゆっくり歩く"
+        ]
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Any ordinary noun that suits the meaning can become an adverb by adding に. An adverbial noun like ゆっくり simply may leave it out. Without する, a word like 勉強 is still just a noun, which is why 勉強が好きだ works with no verb in sight."
+    },
+    {
+      "type": "example",
+      "jp": "静かな部屋で勉強する。",
+      "en": "(I) study in a quiet room."
+    },
+    {
+      "type": "example",
+      "jp": "電車がゆっくり止まった。",
+      "en": "The train stopped slowly."
+    },
+    {
+      "type": "example",
+      "jp": "勉強が好きだ。",
+      "en": "(I) like study. (the noun, no する needed)"
+    },
+    {
+      "type": "heading",
+      "text": "Watch out for あまり and ずいぶん"
+    },
+    {
+      "type": "text",
+      "text": "あまり is a noun meaning \"excess\" and ずいぶん is a noun meaning \"a fair amount\". Japanese often says less than it means (understatement). あまり食べない literally says \"I do not eat an excess\" and in practice means \"I do not eat much\". ずいぶん上手だ says \"you are skilled enough\" and means \"very skilled\"."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Nearly every word is a **noun**, **verb** or **adjective**.",
+        "Verbs end in an **う-row kana**; adjectives end in **い**; anything else is a noun.",
+        "Adjectival nouns, する nouns and adverbial nouns are still nouns, each with one extra power.",
+        "Words that dictionaries call adverbs are nearly always nouns used without に."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What kind of word is this?", "prompt": "公園", "options": ["Noun", "Verb", "Adjective"], "answer": 0, "note": "It is written only in kanji and has no verb or adjective ending."},
-    {"id": 2, "type": "choice", "instruction": "What kind of word is this?", "prompt": "優しい", "options": ["Adjective", "Noun", "Verb"], "answer": 0, "note": "It ends in the kana い, so it is an adjective."},
-    {"id": 3, "type": "choice", "instruction": "What kind of word is this?", "prompt": "歌う", "options": ["Verb", "Noun", "Adjective"], "answer": 0, "note": "It ends in an う-row kana, so it is a verb."},
-    {"id": 4, "type": "choice", "instruction": "True or false?", "prompt": "綺麗 (as in 綺麗な花) is a kind of adjective.", "options": ["True", "False"], "answer": 1, "note": "It is an adjectival noun: a noun that may take な."},
-    {"id": 5, "type": "choice", "instruction": "Which noun may drop を and fuse with する?", "prompt": "", "options": ["勉強", "静か", "ゆっくり", "あまり"], "answer": 0, "note": "勉強 is a する noun: 勉強をする becomes 勉強する."},
-    {"id": 6, "type": "choice", "instruction": "Fill the gap", "prompt": "不思議＿＿屋敷 (a mysterious mansion)", "options": ["な", "の", "い", "に"], "answer": 0, "note": "An adjectival noun uses the soft copula な before a noun."},
-    {"id": 7, "type": "tap", "instruction": "Tap the verb", "options": ["私は", "朝ごはんを", "食べた"], "answer": 2, "note": "食べた is the only word with a verb ending; the others are nouns with particles."},
-    {"id": 8, "type": "tap", "instruction": "Tap the adjective", "options": ["空が", "高い", "町の"], "answer": 1, "note": "高い ends in い and stands as the engine."},
-    {"id": 9, "type": "choice", "instruction": "What is the superpower of an adverbial noun like ゆっくり?", "prompt": "", "options": ["It may drop the に used to make adverbs", "It may take the soft copula な", "It may drop を", "It may take う-row endings"], "answer": 0, "note": "ゆっくりにする and ゆっくりする both work."},
-    {"id": 10, "type": "choice", "instruction": "What does あまり食べない really say, word for word?", "prompt": "", "options": ["I do not eat an excess", "I eat nothing", "I eat too much", "I never eat"], "answer": 0, "note": "あまり means excess; the understatement means \"not much\"."},
-    {"id": 11, "type": "order", "instruction": "Build the sentence", "prompt": "(I) studied in the library, quietly. (place first, then manner)", "options": ["図書館で", "静かに", "勉強した"], "note": "Place, then manner, then the verb engine at the end."},
-    {"id": 12, "type": "choice", "instruction": "Which sentence is natural?", "prompt": "", "options": ["勉強が好きだ。", "勉強するが好きだ。", "勉強をするが好きだ。", "勉強するが好きです。"], "answer": 0, "note": "勉強 is already a noun, so が can follow it directly."}
+    {
+      "type": "choice",
+      "instruction": "What kind of word is this?",
+      "prompt": "学校",
+      "options": [
+        "Verb",
+        "Noun",
+        "Adjective"
+      ],
+      "answer": 1,
+      "note": "Written in kanji only, with no verb or adjective ending.",
+      "id": 21
+    },
+    {
+      "type": "choice",
+      "instruction": "What kind of word is this?",
+      "prompt": "遊ぶ",
+      "options": [
+        "Noun",
+        "Verb",
+        "Adjective"
+      ],
+      "answer": 1,
+      "note": "It ends in an う-row kana.",
+      "id": 22
+    },
+    {
+      "type": "choice",
+      "instruction": "What kind of word is this?",
+      "prompt": "新しい",
+      "options": [
+        "Noun",
+        "Adjective",
+        "Verb"
+      ],
+      "answer": 1,
+      "note": "It ends in い.",
+      "id": 23
+    },
+    {
+      "type": "choice",
+      "instruction": "What kind of word is this?",
+      "prompt": "天気",
+      "options": [
+        "Adjective",
+        "Noun",
+        "Verb"
+      ],
+      "answer": 1,
+      "note": "Only kanji: a noun.",
+      "id": 24
+    },
+    {
+      "type": "choice",
+      "instruction": "Which noun may drop を and fuse with する?",
+      "prompt": "",
+      "options": [
+        "静か",
+        "散歩",
+        "ゆっくり",
+        "あまり"
+      ],
+      "answer": 1,
+      "note": "散歩 is a する noun.",
+      "id": 25
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "元気＿＿子供",
+      "options": [
+        "な",
+        "の",
+        "い",
+        "に"
+      ],
+      "answer": 0,
+      "note": "An adjectival noun uses な before a noun.",
+      "en": "A healthy child.",
+      "id": 26
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "静か is an い-adjective.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "It does not end in い: it is an adjectival noun.",
+      "en": "静か is an adjectival noun.",
+      "id": 27
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this say, word for word?",
+      "prompt": "このカレーはあまり辛くない。",
+      "options": [
+        "This curry is very spicy",
+        "This curry is never made",
+        "This curry does not have an excess of spiciness",
+        "This curry is spicy only for me"
+      ],
+      "answer": 2,
+      "note": "あまり is a noun meaning excess; in practice \"not very\".",
+      "en": "This curry is not very spicy.",
+      "id": 28
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "A word written only in kanji, like 机, is almost always a noun.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "Japanese is noun-centered.",
+      "id": 29
+    },
+    {
+      "type": "choice",
+      "instruction": "Which words must show their ending in kana?",
+      "prompt": "",
+      "options": [
+        "Verbs and adjectives",
+        "Nouns and particles",
+        "Only particles",
+        "Only nouns"
+      ],
+      "answer": 0,
+      "note": "The last kana is the part that changes.",
+      "id": 30
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these is a noun?",
+      "prompt": "",
+      "options": [
+        "食べる",
+        "高い",
+        "走る",
+        "机"
+      ],
+      "answer": 3,
+      "note": "No verb or adjective ending.",
+      "id": 31
+    },
+    {
+      "type": "choice",
+      "instruction": "Which phrase is wrong?",
+      "prompt": "",
+      "options": [
+        "静かな部屋",
+        "きれいな花",
+        "静かい部屋",
+        "高い山"
+      ],
+      "answer": 2,
+      "note": "静か is a noun, so it takes な, not い.",
+      "id": 32
+    },
+    {
+      "type": "choice",
+      "instruction": "In the course's terms, an adjectival noun is a noun like 静か (textbook: な-adjective). What is its one power?",
+      "prompt": "",
+      "options": [
+        "It may drop the に",
+        "It may take the soft copula な before a noun",
+        "It may fuse with する",
+        "It may take う-row endings"
+      ],
+      "answer": 1,
+      "note": "静かな町.",
+      "id": 33
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I read a book in a quiet room.",
+      "options": [
+        "静かな部屋で",
+        "本を",
+        "読んだ"
+      ],
+      "note": "Adjectival noun + な + noun.",
+      "en": "I read a book in a quiet room.",
+      "id": 34
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "The teacher will come soon.",
+      "options": [
+        "先生は",
+        "すぐ",
+        "来ます"
+      ],
+      "note": "An adverbial noun needs no に.",
+      "en": "The teacher will come soon.",
+      "id": 35
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I like exercise.",
+      "options": [
+        "私は",
+        "運動が",
+        "好きです"
+      ],
+      "note": "運動 is a noun: it takes が.",
+      "en": "I like exercise.",
+      "id": 36
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That mountain is high.",
+      "options": [
+        "あの",
+        "山は",
+        "高い"
+      ],
+      "note": "い-adjective as the engine.",
+      "en": "That mountain is high.",
+      "id": 37
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the verb",
+      "options": [
+        "弟は",
+        "公園で",
+        "遊んだ"
+      ],
+      "answer": 2,
+      "note": "遊んだ has a verb ending.",
+      "en": "My younger brother played in the park.",
+      "id": 38
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the adjective",
+      "options": [
+        "この",
+        "スープは",
+        "熱い"
+      ],
+      "answer": 2,
+      "note": "熱い ends in い.",
+      "en": "This soup is hot.",
+      "id": 39
+    },
+    {
+      "type": "tap",
+      "instruction": "In the course's terms, an adverbial noun is a noun that may drop the に it would normally need (like ゆっくり). Tap the adverbial noun",
+      "options": [
+        "先生は",
+        "はっきり",
+        "話した"
+      ],
+      "answer": 1,
+      "note": "It may drop に.",
+      "en": "The teacher spoke clearly.",
+      "id": 40
+    },
+    {
+      "type": "tap",
+      "instruction": "In the course's terms, an adjectival noun is a noun that may take な before another noun (like 静か). Tap the word made of an adjectival noun plus な",
+      "options": [
+        "きれいな",
+        "花を",
+        "買った"
+      ],
+      "answer": 0,
+      "note": "きれい + な before a noun.",
+      "en": "I bought pretty flowers.",
+      "id": 41
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the する noun",
+      "options": [
+        "毎日",
+        "運動",
+        "する"
+      ],
+      "answer": 1,
+      "note": "運動 + する.",
+      "en": "I exercise every day.",
+      "id": 42
+    }
   ]
 }

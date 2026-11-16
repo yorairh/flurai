@@ -228,8 +228,15 @@ class BuiltFuriganaTest(unittest.TestCase):
         self.assertLess(missing / total, 0.005, f"{missing} of {total} kanji have no furigana")
 
     def test_a_gap_in_a_fill_in_question_does_not_cost_the_reading_of_the_word_before_it(self):
-        marked = self.db.execute("SELECT ruby FROM course_question WHERE lesson_id = 150 AND id = 3").fetchone()[0]
-        self.assertIn("{開|あ}ける", json.loads(marked)["prompt"])
+        total = read = 0
+        for prompt, stored in self.db.execute("SELECT prompt, ruby FROM course_question WHERE prompt GLOB '*[一-鿿]＿*'"):
+            total += 1
+            marked = (json.loads(stored) if stored else {}).get("prompt", "")
+            # the kanji right before the gap must be inside a {word|reading}
+            if re.search(r"\|[^}]*\}＿", marked):
+                read += 1
+        self.assertGreater(total, 20)
+        self.assertGreater(read / total, 0.9, f"{total - read} of {total} gaps lost the reading before them")
 
     def test_the_bug_from_the_phone_is_fixed(self):
         marked = self.db.execute("SELECT ruby FROM grammar_example WHERE japanese = ?", ("誰が来ましたか。",)).fetchone()

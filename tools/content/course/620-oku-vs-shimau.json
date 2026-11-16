@@ -73,167 +73,27 @@
     }
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Pick the meaning",
-      "prompt": "切符を買っておいた。",
-      "options": [
-        "I bought the ticket ahead, to be ready",
-        "I accidentally bought a ticket",
-        "I finished buying every ticket",
-        "I want to buy a ticket"
-      ],
-      "answer": 0,
-      "note": "ておく sets things up beforehand.",
-      "id": 1
-    },
-    {
-      "type": "choice",
-      "instruction": "Which helper adds an \"it happened!\" exclamation mark?",
-      "prompt": "",
-      "options": [
-        "てしまう",
-        "ておく",
-        "ている",
-        "てみる"
-      ],
-      "answer": 0,
-      "note": "てしまう.",
-      "id": 2
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "財布を忘れて＿＿。 (Oops, I forgot my wallet.)",
-      "options": [
-        "しまった",
-        "おいた",
-        "みた",
-        "くれた"
-      ],
-      "answer": 0,
-      "note": "An unwanted surprise: てしまった.",
-      "id": 3
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "会議の前に資料を読んで＿＿。 (read it in advance)",
-      "options": [
-        "おく",
-        "くれる",
-        "もらう",
-        "あげる"
-      ],
-      "answer": 0,
-      "note": "Reading it ahead: 読んでおく.",
-      "id": 4
-    },
-    {
-      "type": "choice",
-      "instruction": "Which is the casual contraction of 見ておく?",
-      "prompt": "",
-      "options": [
-        "見とく",
-        "見ちゃう",
-        "見てる",
-        "見ない"
-      ],
-      "answer": 0,
-      "note": "〜ておく → 〜とく.",
-      "id": 5
-    },
-    {
-      "type": "choice",
-      "instruction": "Which is the casual contraction of 食べてしまった?",
-      "prompt": "",
-      "options": [
-        "食べちゃった",
-        "食べとく",
-        "食べてる",
-        "食べない"
-      ],
-      "answer": 0,
-      "note": "〜てしまう → 〜ちゃう.",
-      "id": 6
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "ておく carries the feeling of an unplanned accident.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "That is てしまう. ておく is deliberate preparation.",
-      "id": 7
-    },
-    {
-      "type": "choice",
-      "instruction": "What does the speaker fear in 聞かないで。さくらは説明してしまうから。",
-      "prompt": "",
-      "options": [
-        "Sakura will launch into a long explanation",
-        "Sakura will forget to explain",
-        "Sakura will explain in advance, politely",
-        "Sakura will refuse to explain"
-      ],
-      "answer": 0,
-      "note": "てしまう here carries a sense of \"it will just happen, and at length\".",
-      "id": 8
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence fits \"Oh no, I broke the cup\"?",
-      "prompt": "",
-      "options": [
-        "コップを割ってしまった",
-        "コップを割っておいた",
-        "コップを割ってみた",
-        "コップを割ってあげた"
-      ],
-      "answer": 0,
-      "note": "An accident: てしまった.",
-      "id": 9
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I will explain it beforehand.",
-      "options": [
-        "先に",
-        "説明して",
-        "おきます"
-      ],
-      "note": "Helper おきます follows the て-form.",
-      "id": 10
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the helper verb that shows preparation",
-      "options": [
-        "窓を",
-        "開けて",
-        "おく"
-      ],
-      "answer": 2,
-      "note": "おく is the helper: put the opening in place.",
-      "id": 11
-    },
-    {
-      "type": "choice",
-      "instruction": "What does Japanese use in place of English up and out?",
-      "prompt": "",
-      "options": [
-        "Helper verbs",
-        "Prepositions",
-        "Articles",
-        "Nothing at all"
-      ],
-      "answer": 0,
-      "note": "Japanese has no prepositions; helper verbs do that work.",
-      "id": 12
-    }
+    {"id": 101, "type": "choice", "instruction": "What does おく add?", "prompt": "試験の前に、ノートを読んでおく。", "options": ["It happened unexpectedly", "Doing it in a hurry", "Doing it ahead, for a purpose", "Nobody did it"], "answer": 2, "en": "(I) read my notes before the exam (to be prepared).", "note": "ておく puts the action in place so things are ready."},
+    {"id": 102, "type": "choice", "instruction": "What does しまう add?", "prompt": "電車の中で、かさを忘れてしまった。", "options": ["A request", "An \"oops, it happened\" feeling", "Doing it ahead", "A future plan"], "answer": 1, "en": "Oops, I left my umbrella on the train.", "note": "てしまう adds an exclamation mark: it got done, whether wanted or not."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "忘れないように、メモを書いて＿＿＿。", "options": ["しまった", "おいた", "いった", "くれた"], "answer": 1, "en": "So I won't forget, I wrote a note (beforehand).", "note": "A purpose (so as not to forget) calls for ておく."},
+    {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "あ、大事な写真を消して＿＿＿！", "options": ["おいた", "みた", "しまった", "いった"], "answer": 2, "en": "Oh no, I deleted the important photo!", "note": "An unwelcome accident calls for てしまう."},
+    {"id": 105, "type": "choice", "instruction": "Which is the casual form of 見ておく?", "prompt": "", "options": ["見ちゃう", "見とく", "見てる", "見ていく"], "answer": 1, "note": "ておく shrinks to とく."},
+    {"id": 106, "type": "choice", "instruction": "Which is the casual form of 食べてしまった?", "prompt": "", "options": ["食べちゃった", "食べとった", "食べてた", "食べといた"], "answer": 0, "note": "てしまう shrinks to ちゃう."},
+    {"id": 107, "type": "choice", "instruction": "Which sentence means \"I'll leave the heater on (so the room stays warm)\"?", "prompt": "", "options": ["ヒーターをつけてしまう。", "ヒーターをつけておく。", "ヒーターをつけてくる。", "ヒーターをつけている。"], "answer": 1, "note": "Setting things up for a purpose is ておく."},
+    {"id": 108, "type": "choice", "instruction": "Which sentence feels like an unwelcome accident?", "prompt": "", "options": ["ごはんを作っておく。", "ドアを開けておいた。", "お茶をこぼしてしまった。", "先に買っておいた。"], "answer": 2, "note": "こぼしてしまった: it spilled, oops."},
+    {"id": 109, "type": "tap", "instruction": "Tap the helper verb that sets things up ahead", "options": ["明日の", "朝ごはんを", "作って", "おく"], "answer": 3, "en": "(I) will make tomorrow's breakfast ahead of time.", "note": "おく is the helper verb that puts the action in place."},
+    {"id": 110, "type": "tap", "instruction": "Tap the helper verb that carries the \"oops\" feeling", "options": ["電車で", "寝て", "しまった"], "answer": 2, "en": "(I) fell asleep on the train (oops).", "note": "しまった adds the exclamation mark."},
+    {"id": 111, "type": "order", "instruction": "Build the sentence", "prompt": "(I) checked the times beforehand.", "options": ["先に", "時間を", "調べて", "おいた"], "en": "(I) checked the times beforehand.", "note": "て-form + おく: done ahead for a purpose."},
+    {"id": 112, "type": "order", "instruction": "Build the sentence", "prompt": "Oh no, I lost my phone.", "options": ["電話を", "なくして", "しまった"], "en": "Oh no, I lost my phone.", "note": "て-form + しまった: it happened, oops."},
+    {"id": 113, "type": "order", "instruction": "Build the sentence", "prompt": "(I) will clean the room before the guests arrive.", "options": ["お客さんが", "来る前に", "部屋を", "そうじして", "おく"], "en": "(I) will clean the room before the guests arrive.", "note": "Preparing in advance is ておく.", "alt": [["部屋を", "お客さんが", "来る前に", "そうじして", "おく"]]},
+    {"id": 114, "type": "choice", "instruction": "Which sentence means \"I'll tell him in advance (so he is prepared)\"?", "prompt": "", "options": ["彼に話してしまう。", "彼に話している。", "彼に話しておく。", "彼に話してみる。"], "answer": 2, "note": "The careful workman's helper is おく."},
+    {"id": 115, "type": "choice", "instruction": "Which picture does おく carry?", "prompt": "", "options": ["Putting something away and finishing", "Moving toward the speaker", "Trying something out", "Putting something in place for a purpose"], "answer": 3, "note": "おく means to put or set something down."},
+    {"id": 116, "type": "choice", "instruction": "Which picture does しまう carry?", "prompt": "", "options": ["Finishing or putting away, with an exclamation mark", "Setting something up ahead", "Going and coming back", "Keeping a state going"], "answer": 0, "note": "しまう means to finish or put away."},
+    {"id": 117, "type": "choice", "instruction": "True or false? てしまう is always about something unwelcome.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "It is often unwelcome, but not always: ケーキを全部食べてしまった-type sentences can be happy."},
+    {"id": 118, "type": "choice", "instruction": "Fill the gap", "prompt": "ピザを一人で全部食べて＿＿＿。", "options": ["いった", "おいた", "しまった", "あった"], "answer": 2, "en": "I ate the whole pizza all by myself.", "note": "Finishing it all, with a \"there, it happened\" feeling."},
+    {"id": 119, "type": "choice", "instruction": "Which is the casual form of 飲んでしまった?", "prompt": "", "options": ["飲んとった", "飲んちゃった", "飲んじゃった", "飲みちゃった"], "answer": 2, "note": "After ん the casual form is じゃう."},
+    {"id": 120, "type": "choice", "instruction": "Which helper verb sounds like a careful workman, with no exclamation mark?", "prompt": "", "options": ["しまう", "おく"], "answer": 1, "note": "おく prepares quietly."},
+    {"id": 121, "type": "choice", "instruction": "Which is the full form of 忘れちゃった?", "prompt": "", "options": ["忘れておいた", "忘れてみた", "忘れてくれた", "忘れてしまった"], "answer": 3, "note": "ちゃった is the casual てしまった."},
+    {"id": 122, "type": "choice", "instruction": "Which means ドアを開けとく?", "prompt": "", "options": ["ドアを開けておく", "ドアを開けてしまう", "ドアを開けてみる", "ドアを開けている"], "answer": 0, "note": "とく is the casual ておく."}
   ]
 }

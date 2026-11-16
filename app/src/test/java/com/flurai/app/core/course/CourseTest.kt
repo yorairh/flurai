@@ -235,4 +235,16 @@ class CourseTest {
         assertTrue(rubyMap("not json", mapOf("a" to "x")).isEmpty())
         assertTrue(rubyMap("""{"a": 5}""", mapOf("a" to "x")).isEmpty())
     }
+
+    @Test
+    fun anOrderQuestionAcceptsItsAlternativeArrangements() {
+        val entity = CourseQuestionEntity(
+            10, 3, "order", "Build it", "A dog runs.", null, """["犬が","庭で","走る"]""", 0, "x",
+            alt = """[["庭で","犬が","走る"]]""",
+        )
+        val q = courseQuestion(entity, 5, Random(1))!!
+        assertTrue(q.isArrangementRight("犬が庭で走る"))
+        assertTrue(q.isArrangementRight("庭で犬が走る"))
+        assertTrue(!q.isArrangementRight("走る犬が庭で"))
+    }
 }

@@ -78,34 +78,6 @@
    "note": "どうも言えぬ."
   },
   {
-   "id": 2,
-   "type": "choice",
-   "instruction": "What does どうもありがとう mean?",
-   "prompt": "",
-   "options": [
-    "Thank you very much",
-    "Thank you somehow",
-    "Thank you, goodbye",
-    "Thank you maybe"
-   ],
-   "answer": 0,
-   "note": "どうも = very much."
-  },
-  {
-   "id": 3,
-   "type": "choice",
-   "instruction": "What does どうも調子が悪い mean?",
-   "prompt": "",
-   "options": [
-    "Somehow I'm not well",
-    "I am very well",
-    "I am well",
-    "I am never sick"
-   ],
-   "answer": 0,
-   "note": "どうも without ほど: somehow."
-  },
-  {
    "id": 4,
    "type": "choice",
    "instruction": "What is やっぱり a casual form of?",
@@ -172,30 +144,6 @@
    "note": "It stands in for a greeting."
   },
   {
-   "id": 9,
-   "type": "tap",
-   "instruction": "Tap the word meaning \"after all\"",
-   "options": [
-    "彼は",
-    "やっぱり",
-    "来た"
-   ],
-   "answer": 1,
-   "note": "やっぱり."
-  },
-  {
-   "id": 10,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Somehow I'm not well.",
-   "options": [
-    "どうも",
-    "調子が",
-    "悪い"
-   ],
-   "note": "どうも at the start means somehow."
-  },
-  {
    "id": 11,
    "type": "choice",
    "instruction": "Why can folk etymology be helpful?",
@@ -222,6 +170,174 @@
    ],
    "answer": 0,
    "note": "ほど = extent."
+  },
+  {
+   "id": 13,
+   "type": "choice",
+   "instruction": "What does どうも mean here?",
+   "prompt": "どうも体が重い。",
+   "options": [
+    "Thank you",
+    "Exactly as expected",
+    "Somehow (I can't say why)",
+    "Goodbye"
+   ],
+   "answer": 2,
+   "note": "Without ありがとう, どうも can mean somehow.",
+   "en": "Somehow my body feels heavy."
+  },
+  {
+   "id": 14,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "テストは難しいと思ったが、＿＿難しかった。",
+   "options": [
+    "やっぱり",
+    "どうも",
+    "せっかく",
+    "ちょうど"
+   ],
+   "answer": 0,
+   "note": "やっぱり: as expected, after all.",
+   "en": "I thought the test would be hard, and it was hard after all."
+  },
+  {
+   "id": 15,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "＿＿ありがとうございました。",
+   "options": [
+    "やっぱり",
+    "たぶん",
+    "どうも",
+    "もし"
+   ],
+   "answer": 2,
+   "note": "どうも before thanks means very much.",
+   "en": "Thank you very much."
+  },
+  {
+   "id": 16,
+   "type": "choice",
+   "instruction": "Fill the gap",
+   "prompt": "考えたけど、＿＿行かないことにした。",
+   "options": [
+    "どうも",
+    "やっぱり",
+    "ありがとう",
+    "しか"
+   ],
+   "answer": 1,
+   "note": "やっぱり: after all, back to my first idea.",
+   "en": "I thought about it, but I decided not to go after all."
+  },
+  {
+   "id": 17,
+   "type": "choice",
+   "instruction": "What does どうも mean here?",
+   "prompt": "どうも、お世話になりました。",
+   "options": [
+    "Somehow",
+    "After all",
+    "Never",
+    "Thanks (an all-purpose thank-you)"
+   ],
+   "answer": 3,
+   "note": "どうも alone works as a general thanks.",
+   "en": "Thanks for everything you did for me."
+  },
+  {
+   "id": 18,
+   "type": "tap",
+   "instruction": "Tap the word meaning \"somehow\"",
+   "options": [
+    "今日は",
+    "どうも",
+    "眠い"
+   ],
+   "answer": 1,
+   "note": "どうも before a feeling: I can't say why.",
+   "en": "Somehow I'm sleepy today."
+  },
+  {
+   "id": 19,
+   "type": "tap",
+   "instruction": "Tap the word meaning \"as expected\"",
+   "options": [
+    "彼は",
+    "やっぱり",
+    "来なかった"
+   ],
+   "answer": 1,
+   "note": "やっぱり shows it turned out as expected.",
+   "en": "As I expected, he didn't come."
+  },
+  {
+   "id": 20,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "As expected, the shop was closed.",
+   "options": [
+    "やっぱり",
+    "店は",
+    "閉まっていた"
+   ],
+   "note": "やっぱり opens the sentence.",
+   "alt": [["店は", "やっぱり", "閉まっていた"]],
+   "en": "As expected, the shop was closed."
+  },
+  {
+   "id": 21,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "After all, I'll have coffee.",
+   "options": [
+    "やっぱり",
+    "コーヒーに",
+    "します"
+   ],
+   "note": "やっぱり: after all, I changed my mind.",
+   "en": "After all, I'll have coffee."
+  },
+  {
+   "id": 22,
+   "type": "order",
+   "instruction": "Build the sentence",
+   "prompt": "Somehow my head hurts.",
+   "options": [
+    "どうも",
+    "頭が",
+    "痛い"
+   ],
+   "note": "どうも: somehow, I can't say why.",
+   "alt": [["頭が", "どうも", "痛い"]],
+   "en": "Somehow my head hurts."
+  },
+  {
+   "id": 23,
+   "type": "choice",
+   "instruction": "True or false?",
+   "prompt": "どうも always means \"thank you\".",
+   "options": [
+    "True",
+    "False"
+   ],
+   "answer": 1,
+   "note": "It can also mean somehow, or serve as a greeting."
+  },
+  {
+   "id": 24,
+   "type": "choice",
+   "instruction": "Which sentence means \"After all, I'll walk\"?",
+   "prompt": "",
+   "options": [
+    "どうも歩いて行く。",
+    "やっぱり歩いて行く。",
+    "ほど歩いて行く。",
+    "まで歩いて行く。"
+   ],
+   "answer": 1,
+   "note": "やっぱり marks going back to your first idea."
   }
  ]
 }

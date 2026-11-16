@@ -17,8 +17,8 @@ GRAMMAR_IDS = {g["id"] for g in json.loads(bc.GRAMMAR.read_text(encoding="utf-8"
 
 def good_lesson(**changes) -> dict:
     questions = [
-        {"id": i, "type": "choice", "instruction": "Pick one", "prompt": "さくらが歩く", "options": ["a", "b", "c"], "answer": 1, "note": "Because."}
-        for i in range(1, 11)
+        {"id": i, "type": "choice", "instruction": "Pick one", "prompt": "さくらが歩く", "en": "Sakura walks.", "options": ["a", "b", "c"], "answer": 1, "note": "Because."}
+        for i in range(1, 21)
     ]
     entry = {
         "id": 10, "number": "1", "kind": "lesson", "jlpt": 5, "title": "T", "summary": "S", "video": "https://www.youtube.com/watch?v=abc",
@@ -35,9 +35,9 @@ class RulesTest(unittest.TestCase):
     def test_a_good_lesson_has_no_problems(self):
         self.assertEqual([], self.check(good_lesson()))
 
-    def test_a_lesson_needs_ten_questions(self):
-        short = good_lesson(questions=good_lesson()["questions"][:9])
-        self.assertTrue(any("at least 10" in p for p in self.check(short)))
+    def test_a_lesson_needs_twenty_questions(self):
+        short = good_lesson(questions=good_lesson()["questions"][:19])
+        self.assertTrue(any("at least 20" in p for p in self.check(short)))
 
     def test_a_note_has_no_questions_and_no_level(self):
         note = good_lesson(kind="note", jlpt=None, questions=[])
@@ -62,6 +62,13 @@ class RulesTest(unittest.TestCase):
         bad["questions"][0] = {"id": 1, "type": "order", "instruction": "Order", "prompt": "I eat", "options": ["は", "は", "は"], "note": "n"}
         self.assertTrue(any("same" in p for p in self.check(bad)))
 
+    def test_an_alternative_arrangement_must_reorder_the_same_pieces(self):
+        bad = good_lesson()
+        bad["questions"][0] = {"id": 1, "type": "order", "instruction": "Order", "prompt": "I eat", "en": "I eat.", "options": ["a", "b", "c"], "alt": [["a", "b", "x"]], "note": "n"}
+        self.assertTrue(any("alt arrangement" in p for p in self.check(bad)))
+        bad["questions"][0]["alt"] = [["b", "a", "c"]]
+        self.assertFalse(any("alt arrangement" in p for p in self.check(bad)))
+
     def test_related_points_must_exist(self):
         self.assertTrue(any("does not exist" in p for p in self.check(good_lesson(related=[1]))))
 
@@ -74,6 +81,46 @@ class RulesTest(unittest.TestCase):
         self.assertTrue(any("note" in p for p in self.check(bad)))
 
 
+class NewSentenceRulesTest(unittest.TestCase):
+    def lesson_with(self, question: dict, example: str = "犬が走る。", **changes) -> dict:
+        entry = good_lesson(blocks=[{"type": "example", "jp": example, "en": "x"}], **changes)
+        entry["questions"][0] = {"id": 1, "instruction": "Pick", "note": "n", **question}
+        return entry
+
+    def check(self, entry, easy=None):
+        return course.problems([entry], GRAMMAR_IDS, easy)
+
+    def test_a_question_may_not_quote_a_lesson_example(self):
+        q = {"type": "choice", "prompt": "犬が走る", "en": "The dog runs.", "options": ["a", "b"], "answer": 0}
+        self.assertTrue(any("repeats the lesson example" in p for p in self.check(self.lesson_with(q))))
+
+    def test_a_gap_sentence_that_is_an_example_with_a_blank_counts_as_quoting_it(self):
+        q = {"type": "choice", "prompt": "犬＿走る。", "en": "The dog runs.", "options": ["が", "を"], "answer": 0}
+        self.assertTrue(any("repeats the lesson example" in p for p in self.check(self.lesson_with(q))))
+
+    def test_pieces_that_build_an_example_count_as_quoting_it(self):
+        q = {"type": "order", "prompt": "The dog runs.", "en": "The dog runs.", "options": ["犬", "が", "走る"]}
+        self.assertTrue(any("repeats" in p for p in self.check(self.lesson_with(q))))
+
+    def test_a_new_sentence_is_fine(self):
+        q = {"type": "choice", "prompt": "猫が歩く。", "en": "The cat walks.", "options": ["a", "b"], "answer": 0}
+        self.assertEqual([], self.check(self.lesson_with(q)))
+
+    def test_a_question_with_a_sentence_needs_its_translation(self):
+        q = {"type": "choice", "prompt": "猫が歩く。", "options": ["a", "b"], "answer": 0}
+        self.assertTrue(any("translation" in p for p in self.check(self.lesson_with(q))))
+
+    def test_a_concept_question_needs_no_translation(self):
+        q = {"type": "choice", "prompt": "Which verb is other-move?", "options": ["a", "b"], "answer": 0}
+        self.assertEqual([], self.check(self.lesson_with(q)))
+
+    def test_new_sentences_use_easy_kanji_the_lesson_shows_or_extra_kanji(self):
+        q = {"type": "choice", "prompt": "猫が歩く。", "en": "The cat walks.", "options": ["a", "b"], "answer": 0}
+        easy = set("犬走")
+        self.assertTrue(any("above N4" in p and "猫" in p for p in self.check(self.lesson_with(q), easy)))
+        self.assertEqual([], self.check(self.lesson_with(q, extraKanji="猫歩"), easy))
+
+
 class CourseFilesTest(unittest.TestCase):
     """The real entries in tools/content/course."""
 
@@ -82,7 +129,11 @@ class CourseFilesTest(unittest.TestCase):
         cls.entries = course.load(bc.COURSE_DIR)
 
     def test_the_course_has_no_problems(self):
-        self.assertEqual([], course.problems(self.entries, GRAMMAR_IDS))
+        easy = None
+        if bc.OUTPUT.exists():
+            import check_course
+            easy = check_course.easy_kanji(bc.OUTPUT)
+        self.assertEqual([], course.problems(self.entries, GRAMMAR_IDS, easy))
 
     def test_entries_are_in_course_order(self):
         numbers = [e["number"] for e in self.entries]

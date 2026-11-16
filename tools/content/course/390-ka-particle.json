@@ -6,47 +6,438 @@
   "title": "The か particle",
   "summary": "か turns a statement into a question-like idea that can sit inside another sentence: whether, or, maybe, I wonder, as if. It is always uncertain, never a confirmed fact.",
   "video": "https://www.youtube.com/watch?v=TOv3voBcEv8",
-  "related": [482, 481, 734],
+  "related": [
+    482,
+    481,
+    734
+  ],
   "blocks": [
-    {"type": "text", "text": "At the end of a polite sentence **か** marks a question. In casual speech tone does that job. But か does much of its work **inside** sentences, and every use grows from one function: **it turns a proposition into an uncertain, question-like thing**."},
-    {"type": "heading", "text": "Buried questions"},
-    {"type": "text", "text": "Place か after a clause and it becomes a noun-like \"whether ...\", which can be the object of 分からない, 知っている and so on. Usually no が or を is added after か."},
-    {"type": "example", "jp": "さくらが来るか分からない。", "en": "I do not know whether Sakura will come."},
-    {"type": "example", "jp": "これは誰の本か分かりますか。", "en": "Do you know whose book this is?"},
-    {"type": "text", "text": "**かどうか** spells out \"or not\": 来るかどうか分からない."},
-    {"type": "heading", "text": "Set phrases made of か"},
-    {"type": "table", "rows": [
-      ["Phrase", "Parts", "Meaning"],
-      ["お茶かコーヒー", "tea か coffee", "tea or coffee"],
-      ["来るかもしれない", "か + も + しれない", "might come"],
-      ["来るかな", "か + な (to oneself)", "I wonder if (he) will come"],
-      ["行くものか", "か marks a rhetorical question", "As if I would go!"],
-      ["漢字どころか", "ところ + か", "far from (kanji)"]
-    ]},
-    {"type": "example", "jp": "明日は雨が降るかな。", "en": "I wonder if it will rain tomorrow."},
-    {"type": "example", "jp": "そんな物を食べるもんか。", "en": "As if I would eat such a thing!"},
-    {"type": "example", "jp": "漢字どころか、ひらがなも読めない。", "en": "Far from kanji, I cannot even read hiragana."},
-    {"type": "heading", "text": "Pretend situations"},
-    {"type": "text", "text": "As in lesson 26, か marks a situation as imagined, not real: ゆうれいを見た**か**のような顔, \"a face as if she had seen a ghost\"."},
-    {"type": "keypoints", "items": [
-      "**Clause + か + 分からない / 知らない**: whether ...",
-      "**か + どうか**: whether or not.",
-      "**A か B**: A or B; **かもしれない**: might; **かな**: I wonder.",
-      "**ものか / もんか**: strong rhetorical denial."
-    ]}
+    {
+      "type": "text",
+      "text": "At the end of a polite sentence **か** marks a question. In casual speech tone does that job. But か does much of its work **inside** sentences, and every use grows from one function: **it turns a proposition into an uncertain, question-like thing**."
+    },
+    {
+      "type": "heading",
+      "text": "Buried questions"
+    },
+    {
+      "type": "text",
+      "text": "Place か after a clause and it becomes a noun-like \"whether ...\", which can be the object of 分からない, 知っている and so on. Usually no が or を is added after か."
+    },
+    {
+      "type": "example",
+      "jp": "さくらが来るか分からない。",
+      "en": "I do not know whether Sakura will come."
+    },
+    {
+      "type": "example",
+      "jp": "これは誰の本か分かりますか。",
+      "en": "Do you know whose book this is?"
+    },
+    {
+      "type": "text",
+      "text": "**かどうか** spells out \"or not\": 来るかどうか分からない."
+    },
+    {
+      "type": "heading",
+      "text": "Set phrases made of か"
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Phrase",
+          "Parts",
+          "Meaning"
+        ],
+        [
+          "お茶かコーヒー",
+          "tea か coffee",
+          "tea or coffee"
+        ],
+        [
+          "来るかもしれない",
+          "か + も + しれない",
+          "might come"
+        ],
+        [
+          "来るかな",
+          "か + な (to oneself)",
+          "I wonder if (he) will come"
+        ],
+        [
+          "行くものか",
+          "か marks a rhetorical question",
+          "As if I would go!"
+        ],
+        [
+          "漢字どころか",
+          "ところ + か",
+          "far from (kanji)"
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "明日は雨が降るかな。",
+      "en": "I wonder if it will rain tomorrow."
+    },
+    {
+      "type": "example",
+      "jp": "そんな物を食べるもんか。",
+      "en": "As if I would eat such a thing!"
+    },
+    {
+      "type": "example",
+      "jp": "漢字どころか、ひらがなも読めない。",
+      "en": "Far from kanji, I cannot even read hiragana."
+    },
+    {
+      "type": "heading",
+      "text": "Pretend situations"
+    },
+    {
+      "type": "text",
+      "text": "As in lesson 26, か marks a situation as imagined, not real: ゆうれいを見た**か**のような顔, \"a face as if she had seen a ghost\"."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Clause + か + 分からない / 知らない**: whether ...",
+        "**か + どうか**: whether or not.",
+        "**A か B**: A or B; **かもしれない**: might; **かな**: I wonder.",
+        "**ものか / もんか**: strong rhetorical denial."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What does this mean?", "prompt": "さくらが来るか分からない。", "options": ["I do not know whether Sakura will come", "Sakura will not come", "Sakura is coming for sure", "Who is Sakura?"], "answer": 0, "note": "か buries a question inside the sentence."},
-    {"id": 2, "type": "choice", "instruction": "What does かどうか add?", "prompt": "来るかどうか分からない。", "options": ["\"Whether or not\"", "\"Because\"", "\"Already\"", "\"Even\""], "answer": 0, "note": "かどうか: whether or not."},
-    {"id": 3, "type": "choice", "instruction": "What does か do here?", "prompt": "お茶かコーヒー", "options": ["Means \"or\"", "Means \"and\"", "Marks the object", "Marks a place"], "answer": 0, "note": "A か B: an open choice."},
-    {"id": 4, "type": "choice", "instruction": "What does this mean?", "prompt": "彼は来るかもしれない。", "options": ["He might come", "He must come", "He came", "He cannot come"], "answer": 0, "note": "か + も + しれない."},
-    {"id": 5, "type": "choice", "instruction": "What does かな express?", "prompt": "明日は雨が降るかな。", "options": ["\"I wonder if it will rain\"", "\"It will rain for sure\"", "\"Please rain\"", "\"It rained\""], "answer": 0, "note": "か + な (said to oneself)."},
-    {"id": 6, "type": "choice", "instruction": "What does this mean?", "prompt": "そんな物を食べるもんか。", "options": ["As if I would eat such a thing!", "I want to eat that", "Will you eat it?", "I ate it"], "answer": 0, "note": "A rhetorical question that denies."},
-    {"id": 7, "type": "choice", "instruction": "What does どころか mean?", "prompt": "漢字どころか、ひらがなも読めない。", "options": ["Far from ..., not even ...", "Both ... and ...", "Because of ...", "If ..."], "answer": 0, "note": "Not even reaching the nearer \"place\"."},
-    {"id": 8, "type": "choice", "instruction": "What does か do inside a sentence?", "prompt": "", "options": ["Turns a proposition into an uncertain, question-like thing", "Marks the subject", "Marks the past", "Marks a place"], "answer": 0, "note": "That one function explains every use."},
-    {"id": 9, "type": "order", "instruction": "Build the sentence", "prompt": "I do not know if he will come.", "options": ["彼が", "来るか", "分からない"], "note": "Clause + か + 分からない."},
-    {"id": 10, "type": "order", "instruction": "Build the sentence", "prompt": "I wonder if it will rain tomorrow.", "options": ["明日", "雨が", "降るかな"], "note": "Clause + かな."},
-    {"id": 11, "type": "tap", "instruction": "Tap the part that means \"whether or not\"", "options": ["彼が", "来る", "かどうか", "知らない"], "answer": 2, "note": "かどうか."},
-    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "これは誰の本＿＿分かりますか。", "options": ["か", "が", "を", "は"], "answer": 0, "note": "A buried question uses か."}
+    {
+      "type": "choice",
+      "instruction": "What does か do here?",
+      "prompt": "あした雨が降るか、知っていますか。",
+      "options": [
+        "Marks the subject",
+        "Turns the clause into \"whether\"",
+        "Marks the past",
+        "Means \"and\""
+      ],
+      "answer": 1,
+      "note": "A buried question.",
+      "en": "Do you know whether it will rain tomorrow?",
+      "id": 21
+    },
+    {
+      "type": "choice",
+      "instruction": "What does かどうか add?",
+      "prompt": "このカレーが辛いかどうか、聞いてみた。",
+      "options": [
+        "\"Whether or not\"",
+        "\"Because\"",
+        "\"Even\"",
+        "\"Already\""
+      ],
+      "answer": 0,
+      "note": "かどうか: whether or not.",
+      "en": "I asked whether this curry is spicy or not.",
+      "id": 22
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "駅はどこ＿＿教えてください。",
+      "options": [
+        "を",
+        "が",
+        "は",
+        "か"
+      ],
+      "answer": 3,
+      "note": "A buried question uses か.",
+      "en": "Please tell me where the station is.",
+      "id": 23
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "テストが難しい＿＿どうか、まだ分かりません。",
+      "options": [
+        "が",
+        "を",
+        "か",
+        "に"
+      ],
+      "answer": 2,
+      "note": "か + どうか: whether or not.",
+      "en": "I do not know yet whether the test is hard or not.",
+      "id": 24
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "コーヒー＿＿お茶、どちらがいいですか。",
+      "options": [
+        "を",
+        "か",
+        "が",
+        "に"
+      ],
+      "answer": 1,
+      "note": "A か B: A or B.",
+      "en": "Coffee or tea, which would you like?",
+      "id": 25
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "田中さんは、もう帰ったかもしれない。",
+      "options": [
+        "Mr. Tanaka may have already gone home",
+        "Mr. Tanaka must have gone home",
+        "Mr. Tanaka has not gone home",
+        "Did Mr. Tanaka go home?"
+      ],
+      "answer": 0,
+      "note": "か + も + しれない: might.",
+      "en": "Mr. Tanaka may have already gone home.",
+      "id": 26
+    },
+    {
+      "type": "choice",
+      "instruction": "What does かな express?",
+      "prompt": "明日は晴れるかな。",
+      "options": [
+        "\"It will be sunny for sure\"",
+        "\"Please be sunny\"",
+        "\"It was sunny\"",
+        "\"I wonder if it will be sunny\""
+      ],
+      "answer": 3,
+      "note": "か + な: said to oneself.",
+      "en": "I wonder if it will be sunny tomorrow.",
+      "id": 27
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "あんな高い車、買うものか。",
+      "options": [
+        "I want to buy it",
+        "Will you buy it?",
+        "As if I would buy such an expensive car!",
+        "I bought it"
+      ],
+      "answer": 2,
+      "note": "ものか: a rhetorical denial.",
+      "en": "As if I would buy such an expensive car!",
+      "id": 28
+    },
+    {
+      "type": "choice",
+      "instruction": "What does どころか do?",
+      "prompt": "お金どころか、時間もない。",
+      "options": [
+        "Both X and Y",
+        "Far from X, not even Y",
+        "Because of X",
+        "If X"
+      ],
+      "answer": 1,
+      "note": "どころか: far from the nearer thing.",
+      "en": "Far from money, I do not even have time.",
+      "id": 29
+    },
+    {
+      "type": "choice",
+      "instruction": "What does かのよう suggest?",
+      "prompt": "まるで雪が降っているかのようだ。",
+      "options": [
+        "An imagined situation, not a real one",
+        "A confirmed fact",
+        "A past habit",
+        "An order"
+      ],
+      "answer": 0,
+      "note": "か marks the situation as pretend.",
+      "en": "It is as if snow were falling.",
+      "id": 30
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "か inside a sentence can state a confirmed fact.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "か always leaves things uncertain.",
+      "en": "Inside a sentence か turns a proposition into something uncertain.",
+      "id": 31
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "誰が来るか知りません。",
+        "何を食べたか忘れた。",
+        "誰が来るを知りません。",
+        "いつ行くか決めた。"
+      ],
+      "answer": 2,
+      "note": "After a buried question use か, not を.",
+      "id": 32
+    },
+    {
+      "type": "choice",
+      "instruction": "What does A か B mean?",
+      "prompt": "りんごかみかん",
+      "options": [
+        "Apples and mandarins",
+        "Apples or mandarins",
+        "Apples but not mandarins",
+        "Neither"
+      ],
+      "answer": 1,
+      "note": "か between nouns: or.",
+      "en": "Apples or mandarins.",
+      "id": 33
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this express?",
+      "prompt": "今、何時かな。",
+      "options": [
+        "\"I wonder what time it is\"",
+        "\"What time is it, sir?\"",
+        "\"It is nine o'clock\"",
+        "\"Do not ask the time\""
+      ],
+      "answer": 0,
+      "note": "かな: wondering to oneself.",
+      "en": "I wonder what time it is.",
+      "id": 34
+    },
+    {
+      "type": "choice",
+      "instruction": "What does this mean?",
+      "prompt": "どこへ行くか決めましたか。",
+      "options": [
+        "Where did you go?",
+        "I decided not to go",
+        "Please go somewhere",
+        "Have you decided where to go?"
+      ],
+      "answer": 3,
+      "note": "か buries the question \"where to go\".",
+      "en": "Have you decided where to go?",
+      "id": 35
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I don't know what he ate.",
+      "options": [
+        "彼が",
+        "何を",
+        "食べたか",
+        "分かりません"
+      ],
+      "note": "Clause + か + 分かりません.",
+      "en": "I don't know what he ate.",
+      "id": 36
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I wonder if Mom is home.",
+      "options": [
+        "お母さんは",
+        "家に",
+        "いるかな"
+      ],
+      "note": "Clause + かな.",
+      "en": "I wonder if Mom is home.",
+      "id": 37
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Please tell me if you can come or not.",
+      "options": [
+        "来られるか",
+        "どうか",
+        "教えて",
+        "ください"
+      ],
+      "note": "か + どうか.",
+      "en": "Please tell me if you can come or not.",
+      "id": 38
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "He might be sick.",
+      "options": [
+        "彼は",
+        "病気かも",
+        "しれない"
+      ],
+      "note": "か + も + しれない.",
+      "en": "He might be sick.",
+      "id": 39
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Far from tea, we do not even have water.",
+      "options": [
+        "お茶どころか",
+        "水も",
+        "ない"
+      ],
+      "note": "どころか: far from.",
+      "en": "Far from tea, we do not even have water.",
+      "id": 40
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the clause that became \"when\" (a buried question)",
+      "options": [
+        "いつ",
+        "終わるか",
+        "分からない"
+      ],
+      "answer": 1,
+      "note": "Clause + か.",
+      "en": "I do not know when it will end.",
+      "id": 41
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that means \"might\"",
+      "options": [
+        "あの人は",
+        "学生",
+        "かもしれない"
+      ],
+      "answer": 1,
+      "note": "か + も + しれない.",
+      "en": "That person might be a student.",
+      "id": 42
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the part that denies strongly",
+      "options": [
+        "そんな",
+        "話を",
+        "聞くものか"
+      ],
+      "answer": 2,
+      "note": "ものか: a rhetorical denial.",
+      "en": "As if I would listen to such a story!",
+      "id": 43
+    }
   ]
 }

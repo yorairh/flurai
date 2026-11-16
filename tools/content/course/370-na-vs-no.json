@@ -6,40 +6,419 @@
   "title": "な versus の, and なる / たる adjectives",
   "summary": "Japanese is noun-centered: な-adjectives, の-adjectives and する-verbs are all nouns. な is the copula before a noun, の links a noun to a noun, and なる / たる are old-style forms.",
   "video": "https://www.youtube.com/watch?v=GB8fWjQuz9A",
-  "related": [532, 535],
+  "related": [
+    532,
+    535
+  ],
   "blocks": [
-    {"type": "text", "text": "The course models a sentence as a **train**: three kinds of **engines** (verbs, い-adjectives, and noun + だ) pull noun **carriages** marked by particles. Almost everything that is not an engine is a noun, even words dictionaries file under \"adjective\"."},
-    {"type": "heading", "text": "Adjectival nouns (\"な-adjectives\")"},
-    {"type": "text", "text": "A word like 綺麗 is a **noun** that is used as a description. The copula だ becomes **な** before a noun, so だ and な are the same word."},
-    {"type": "example", "jp": "あの女の子は綺麗だ。", "en": "That girl is pretty."},
-    {"type": "example", "jp": "綺麗な女の子が来た。", "en": "A pretty girl came."},
-    {"type": "text", "text": "Some such words also work as ordinary nouns and take particles: 元気 (healthy) can be 元気な子供, but also 元気を出して (\"cheer up\"). Only nouns take case particles like を, so that proves it."},
-    {"type": "heading", "text": "の: noun to noun"},
-    {"type": "text", "text": "Any noun can describe another with **の**: 魔法の帽子, a magic hat. Some words take either: 不思議な国 makes the country itself strange, while 不思議の国 keeps 不思議 more noun-like, a country of wonder."},
-    {"type": "heading", "text": "する-verbs"},
-    {"type": "text", "text": "A noun + **する** becomes a verb: 勉強 + する = 勉強する. It is the one big exception where an imported noun really acts as a verb."},
-    {"type": "heading", "text": "Compounds with no particle"},
-    {"type": "text", "text": "Two nouns can simply sit side by side: 本棚 (bookshelf), 日本語 (the Japanese language). In longer chains each noun describes the one after it. A word written only in kanji, with no okurigana, is almost always a noun."},
-    {"type": "heading", "text": "なる and たる: the literary forms"},
-    {"type": "text", "text": "Words like 華麗なる探偵 or 堂々たる態度 sound old-fashioned and grand. They are nouns too, in an old-style attributive form, and work like \"magnificent\" in a title."},
-    {"type": "keypoints", "items": [
-      "**Noun + な + noun**: an adjectival noun described by the copula.",
-      "**Noun + の + noun**: any noun modifies another.",
-      "**Noun + する**: a verb.",
-      "**なる / たる**: grand, literary descriptive forms."
-    ]}
+    {
+      "type": "text",
+      "text": "The course models a sentence as a **train**: three kinds of **engines** (verbs, い-adjectives, and noun + だ) pull noun **carriages** marked by particles. Almost everything that is not an engine is a noun, even words dictionaries file under \"adjective\"."
+    },
+    {
+      "type": "heading",
+      "text": "Adjectival nouns (\"な-adjectives\")"
+    },
+    {
+      "type": "text",
+      "text": "A word like 綺麗 is a **noun** that is used as a description. The copula だ becomes **な** before a noun, so だ and な are the same word."
+    },
+    {
+      "type": "example",
+      "jp": "あの女の子は綺麗だ。",
+      "en": "That girl is pretty."
+    },
+    {
+      "type": "example",
+      "jp": "綺麗な女の子が来た。",
+      "en": "A pretty girl came."
+    },
+    {
+      "type": "text",
+      "text": "Some such words also work as ordinary nouns and take particles: 元気 (healthy) can be 元気な子供, but also 元気を出して (\"cheer up\"). Only nouns take case particles like を, so that proves it."
+    },
+    {
+      "type": "heading",
+      "text": "の: noun to noun"
+    },
+    {
+      "type": "text",
+      "text": "Any noun can describe another with **の**: 魔法の帽子, a magic hat. Some words take either: 不思議な国 makes the country itself strange, while 不思議の国 keeps 不思議 more noun-like, a country of wonder."
+    },
+    {
+      "type": "heading",
+      "text": "する-verbs"
+    },
+    {
+      "type": "text",
+      "text": "A noun + **する** becomes a verb: 勉強 + する = 勉強する. It is the one big exception where an imported noun really acts as a verb."
+    },
+    {
+      "type": "heading",
+      "text": "Compounds with no particle"
+    },
+    {
+      "type": "text",
+      "text": "Two nouns can simply sit side by side: 本棚 (bookshelf), 日本語 (the Japanese language). In longer chains each noun describes the one after it. A word written only in kanji, with no okurigana, is almost always a noun."
+    },
+    {
+      "type": "heading",
+      "text": "なる and たる: the literary forms"
+    },
+    {
+      "type": "text",
+      "text": "Words like 華麗なる探偵 or 堂々たる態度 sound old-fashioned and grand. They are nouns too, in an old-style attributive form, and work like \"magnificent\" in a title."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Noun + な + noun**: an adjectival noun described by the copula.",
+        "**Noun + の + noun**: any noun modifies another.",
+        "**Noun + する**: a verb.",
+        "**なる / たる**: grand, literary descriptive forms."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "What is the な in 綺麗な花?", "prompt": "", "options": ["The copula だ in its before-a-noun form", "A particle meaning \"and\"", "A verb ending", "An adverb"], "answer": 0, "note": "だ and な are the same copula."},
-    {"id": 2, "type": "choice", "instruction": "What does の do in 魔法の帽子?", "prompt": "", "options": ["Lets one noun describe another", "Marks the object", "Makes a question", "Marks a place"], "answer": 0, "note": "Noun + の + noun."},
-    {"id": 3, "type": "choice", "instruction": "Which word can take both な and の?", "prompt": "", "options": ["不思議", "綺麗", "元気", "静か"], "answer": 0, "note": "不思議な国 and 不思議の国 both exist."},
-    {"id": 4, "type": "choice", "instruction": "What is 勉強する made of?", "prompt": "", "options": ["The noun 勉強 + する", "A verb + する", "An adjective + する", "A particle + する"], "answer": 0, "note": "Noun + する = a verb."},
-    {"id": 5, "type": "choice", "instruction": "What is 本棚?", "prompt": "", "options": ["Two nouns joined (book + shelf)", "A verb", "An adjective", "A particle"], "answer": 0, "note": "Nouns can sit side by side."},
-    {"id": 6, "type": "choice", "instruction": "What feel does 華麗なる探偵 have?", "prompt": "", "options": ["Grand and old-fashioned", "Casual and slangy", "Rude", "Childlike"], "answer": 0, "note": "なる forms sound literary."},
-    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "Words traditionally called な-adjectives are really nouns.", "options": ["True", "False"], "answer": 0, "note": "Hence 元気を出して works."},
-    {"id": 8, "type": "order", "instruction": "Build the sentence", "prompt": "She is a pretty girl.", "options": ["彼女は", "綺麗な", "女の子だ"], "note": "Adjectival noun + な before the noun."},
-    {"id": 9, "type": "tap", "instruction": "Tap the noun carrying a case particle (proof it is a noun)", "options": ["元気を", "出して"], "answer": 0, "note": "Only nouns take を."},
-    {"id": 10, "type": "choice", "instruction": "Fill the gap", "prompt": "魔法＿＿帽子", "options": ["の", "な", "に", "で"], "answer": 0, "note": "魔法 is an ordinary noun, so it takes の."},
-    {"id": 11, "type": "choice", "instruction": "Which is wrong?", "prompt": "", "options": ["綺麗の女の子", "綺麗な女の子", "魔法の帽子", "元気な子供"], "answer": 0, "note": "綺麗 takes な, not の."}
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "静か＿＿町に住んでいる。",
+      "options": [
+        "の",
+        "な",
+        "に",
+        "を"
+      ],
+      "answer": 1,
+      "note": "Adjectival noun + な + noun.",
+      "en": "I live in a quiet town.",
+      "id": 21
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "子供＿＿おもちゃを買った。",
+      "options": [
+        "の",
+        "な",
+        "に",
+        "が"
+      ],
+      "answer": 0,
+      "note": "An ordinary noun uses の to describe another noun.",
+      "en": "I bought a child's toy.",
+      "id": 22
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "有名＿＿歌手が来た。",
+      "options": [
+        "の",
+        "に",
+        "を",
+        "な"
+      ],
+      "answer": 3,
+      "note": "有名 is an adjectival noun: だ becomes な.",
+      "en": "A famous singer came.",
+      "id": 23
+    },
+    {
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "紙＿＿コップでお茶を飲んだ。",
+      "options": [
+        "な",
+        "に",
+        "の",
+        "が"
+      ],
+      "answer": 2,
+      "note": "紙 is an ordinary noun: の.",
+      "en": "I drank tea from a paper cup.",
+      "id": 24
+    },
+    {
+      "type": "choice",
+      "instruction": "Which word takes な before a noun?",
+      "prompt": "",
+      "options": [
+        "学生",
+        "親切",
+        "朝",
+        "水"
+      ],
+      "answer": 1,
+      "note": "親切な人: an adjectival noun.",
+      "id": 25
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "元気の子供が来た。",
+        "元気な子供が来た。",
+        "学生の友達が来た。",
+        "便利な店がある。"
+      ],
+      "answer": 0,
+      "note": "元気 takes な before a noun.",
+      "id": 26
+    },
+    {
+      "type": "choice",
+      "instruction": "Which verb is made from the noun 料理 (cooking)?",
+      "prompt": "",
+      "options": [
+        "料理ある",
+        "料理れる",
+        "料理いる",
+        "料理する"
+      ],
+      "answer": 3,
+      "note": "Noun + する makes a verb.",
+      "id": 27
+    },
+    {
+      "type": "choice",
+      "instruction": "What is the な here?",
+      "prompt": "有名な店で食べた。",
+      "options": [
+        "A particle meaning \"and\"",
+        "A verb ending",
+        "The copula だ before a noun",
+        "A question marker"
+      ],
+      "answer": 2,
+      "note": "だ and な are the same word.",
+      "en": "I ate at a famous shop.",
+      "id": 28
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these is a compound of two nouns with no particle?",
+      "prompt": "",
+      "options": [
+        "静かな町",
+        "電話番号",
+        "学校の先生",
+        "高い山"
+      ],
+      "answer": 1,
+      "note": "Two nouns side by side.",
+      "id": 29
+    },
+    {
+      "type": "choice",
+      "instruction": "Which is the normal, everyday way to say \"a quiet night\"?",
+      "prompt": "",
+      "options": [
+        "静かな夜",
+        "静かの夜",
+        "静かだ夜",
+        "静かに夜"
+      ],
+      "answer": 0,
+      "note": "静か takes な before a noun.",
+      "en": "a quiet night",
+      "id": 45
+    },
+    {
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "A word written only in kanji, with no okurigana, is almost always a noun.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "That is a quick test for nouns.",
+      "id": 31
+    },
+    {
+      "type": "choice",
+      "instruction": "Which word takes な before a noun?",
+      "prompt": "",
+      "options": [
+        "有名",
+        "学生",
+        "本",
+        "先生"
+      ],
+      "answer": 0,
+      "note": "有名な店, but 学生の本.",
+      "id": 46
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these is a する-noun?",
+      "prompt": "",
+      "options": [
+        "親切",
+        "運動",
+        "静か",
+        "有名"
+      ],
+      "answer": 1,
+      "note": "運動する: noun + する.",
+      "id": 33
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "彼女は親切の人だ。",
+        "彼女は親切だ。",
+        "彼女は親切な人だ。",
+        "彼女は親切で優しい。"
+      ],
+      "answer": 0,
+      "note": "親切 takes な, not の.",
+      "id": 34
+    },
+    {
+      "type": "choice",
+      "instruction": "What does な do here?",
+      "prompt": "彼は親切な人です。",
+      "options": [
+        "Asks a question",
+        "Marks the past",
+        "Marks the object",
+        "Links 親切 to the noun 人"
+      ],
+      "answer": 3,
+      "note": "Adjectival noun + な + noun.",
+      "en": "He is a kind person.",
+      "id": 35
+    },
+    {
+      "type": "choice",
+      "instruction": "Which of these is NOT a noun?",
+      "prompt": "",
+      "options": [
+        "静か",
+        "本",
+        "高い",
+        "運動"
+      ],
+      "answer": 2,
+      "note": "高い is an い-adjective, one of the three engines.",
+      "id": 36
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "He is a famous singer.",
+      "options": [
+        "彼は",
+        "有名な",
+        "歌手です"
+      ],
+      "note": "Adjectival noun + な + noun.",
+      "en": "He is a famous singer.",
+      "id": 37
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I live in a quiet town.",
+      "options": [
+        "静かな",
+        "町に",
+        "住んでいます"
+      ],
+      "note": "な before the noun.",
+      "en": "I live in a quiet town.",
+      "id": 38
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "This is my friend's bag.",
+      "options": [
+        "これは",
+        "友達の",
+        "かばんです"
+      ],
+      "note": "Noun + の + noun.",
+      "en": "This is my friend's bag.",
+      "id": 39
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I exercise every morning.",
+      "options": [
+        "毎朝",
+        "運動を",
+        "します"
+      ],
+      "note": "Noun + する.",
+      "en": "I exercise every morning.",
+      "id": 40,
+      "alt": [
+        [
+          "運動を",
+          "毎朝",
+          "します"
+        ]
+      ]
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That child is a lively kid.",
+      "options": [
+        "あの子は",
+        "元気な",
+        "子供です"
+      ],
+      "note": "元気 + な + noun.",
+      "en": "That child is a lively kid.",
+      "id": 41
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the word that has な joining it to the noun after it",
+      "options": [
+        "有名な",
+        "店で",
+        "食べた"
+      ],
+      "answer": 0,
+      "note": "有名 + な before the noun 店.",
+      "en": "I ate at a famous shop.",
+      "id": 42
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the noun that describes the next noun with の",
+      "options": [
+        "紙の",
+        "袋に",
+        "入れた"
+      ],
+      "answer": 0,
+      "note": "Noun + の + noun.",
+      "en": "I put it in a paper bag.",
+      "id": 43
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the noun that carries を (proof it is a noun)",
+      "options": [
+        "毎日",
+        "散歩を",
+        "する"
+      ],
+      "answer": 1,
+      "note": "Only nouns take を.",
+      "en": "I take a walk every day.",
+      "id": 44
+    }
   ]
 }
