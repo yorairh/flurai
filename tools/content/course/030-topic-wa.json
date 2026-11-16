@@ -12,7 +12,7 @@
     {"type": "text", "text": "Because は is not a logical particle, the sentence underneath still needs its own main carriage and が (often a zero)."},
     {"type": "diagram", "cars": [
       {"text": "私は", "role": "topic", "label": "topic flag"},
-      {"text": "（ゼロ）が", "role": "zero"},
+      {"text": "Øが", "role": "zero"},
       {"text": "学生だ", "role": "engine"}
     ], "text": "私は学生だ。 Literally: \"As for me, (I) am a student.\""},
     {"type": "example", "jp": "私は学生だ。", "en": "As for me, (I) am a student."},

@@ -12,7 +12,7 @@
     {"type": "heading", "text": "What a topic is"},
     {"type": "text", "text": "A topic is what the conversation is currently about. English tracks it with pronouns: \"I had a ball. I dropped it. It rolled away. Sakura picked it up.\" The ball is sometimes an object, sometimes a subject, so what is tracked is not the subject but the topic. Japanese just tracks it with は, or leaves it out as a zero."},
     {"type": "diagram", "cars": [
-      {"text": "（ゼロ）は", "role": "topic", "label": "invisible topic"},
+      {"text": "Øは", "role": "topic", "label": "invisible topic"},
       {"text": "コーヒーが", "role": "carriage"},
       {"text": "好きだ", "role": "engine"}
     ], "text": "（私は）コーヒーが好きだ。 As for me, coffee is likable."},

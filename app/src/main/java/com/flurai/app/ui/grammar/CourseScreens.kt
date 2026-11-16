@@ -401,15 +401,19 @@ fun TrainDiagram(cars: List<TrainCar>) {
     }
 }
 
+private val TrainBlack = Color(0xFF1F1F26)
+private val TrainWhite = Color(0xFFF6F3EC)
+
 @Composable
 private fun Car(car: TrainCar) {
     val scheme = MaterialTheme.colorScheme
     val (background, content, border) = when (car.role) {
         "engine" -> Triple(scheme.primary, scheme.onPrimary, null)
-        "carriage" -> Triple(scheme.inverseSurface, scheme.inverseOnSurface, null)
+        // the black carriage stays black and the white one white in both themes (as in the course's pictures)
+        "carriage" -> Triple(TrainBlack, TrainWhite, BorderStroke(1.dp, TrainWhite.copy(alpha = 0.5f)))
         "topic" -> Triple(scheme.tertiaryContainer, scheme.onTertiaryContainer, null)
         "zero" -> Triple(scheme.surface, scheme.onSurfaceVariant, BorderStroke(1.dp, scheme.outline))
-        "white" -> Triple(scheme.surface, scheme.onSurface, BorderStroke(1.dp, scheme.onSurface))
+        "white" -> Triple(TrainWhite, TrainBlack, BorderStroke(1.dp, TrainBlack))
         "particle" -> Triple(scheme.secondaryContainer, scheme.onSecondaryContainer, null)
         else -> Triple(scheme.surfaceContainerHighest, scheme.onSurface, null)
     }
