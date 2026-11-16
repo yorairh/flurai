@@ -774,8 +774,8 @@ def write_database(
         course.lesson_rows(course_entries),
     )
     db.executemany(
-        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO course_question (lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         course.question_rows(course_entries),
     )
     db.executemany("INSERT INTO content_info (key, value) VALUES (?, ?)", sorted(info.items()))
@@ -838,7 +838,8 @@ def main() -> None:
             example["ruby"] = ruby.text_markup(reader, example["jp"])
 
     course_entries = course.load(COURSE_DIR)
-    found = course.problems(course_entries, {g["id"] for g in grammar})
+    easy_kanji = {c for w in words if w.jlpt >= 4 for c in w.expression if "一" <= c <= "鿿" or c == "々"}
+    found = course.problems(course_entries, {g["id"] for g in grammar}, easy_kanji)
     if found:
         sys.exit("The grammar course has problems:\n  " + "\n  ".join(found))
     course.add_ruby(course_entries, lambda text: ruby.text_markup(reader, text) if text else None)

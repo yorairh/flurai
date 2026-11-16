@@ -192,6 +192,8 @@ data class MissedQuestion(
     /** Furigana markup of the texts above, by plain text (see [Question.ruby]). */
     val ruby: Map<String, String> = emptyMap(),
     val furigana: Boolean = true,
+    /** The English translation of the sentence asked about (course questions). */
+    val translation: String? = null,
 )
 
 data class QuizResult(
@@ -338,7 +340,7 @@ class QuizRun(
             // A course question may have no prompt text, only an instruction ("Spot the mistake"): that is then what was asked.
             val asked = q.prompt.ifBlank { q.instruction.orEmpty() }
             val detail = if (q.prompt.isBlank()) q.hint else listOfNotNull(q.instruction, q.hint).joinToString(" · ").ifBlank { null }
-            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: asked, detail, q.correctOption, chosen, q.note?.takeIf { q.kind != QuestionKind.WordListening }, q.ruby, q.furigana)
+            MissedQuestion(q.note?.takeIf { q.kind == QuestionKind.WordListening } ?: asked, detail, q.correctOption, chosen, q.note?.takeIf { q.kind != QuestionKind.WordListening }, q.ruby, q.furigana, q.translation)
         }
         val placementLevel = if (kind.adaptive) placement.result else null
         backend.saveResult(

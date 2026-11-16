@@ -39,6 +39,8 @@ data class Question(
      * listening); everything else follows the furigana setting.
      */
     val furigana: Boolean = true,
+    /** Course questions: the English translation of the sentence asked about, shown after answering. */
+    val translation: String? = null,
 ) {
     val correctOption: String get() = correctText ?: options[answer]
 }

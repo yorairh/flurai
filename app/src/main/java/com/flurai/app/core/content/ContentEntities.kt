@@ -149,6 +149,8 @@ data class CourseQuestionEntity(
     val note: String?,
     /** JSON object with the furigana markup of instruction, prompt, hint, options (array) and note; null when none. */
     val ruby: String? = null,
+    /** English translation of the question's Japanese sentence, shown only after answering; null when it has none. */
+    val en: String? = null,
 )
 
 /** Build metadata: data versions, build date, row counts. */

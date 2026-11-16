@@ -229,7 +229,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseChoice, prompt = entity.prompt, hint = entity.hint, options = shown,
                 answer = shown.indexOf(right), level = jlpt, note = entity.note, instruction = entity.instruction,
-                courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
+                courseLesson = key.first, courseQuestion = key.second, ruby = ruby, translation = entity.en,
             )
         }
         "tap" -> {
@@ -237,7 +237,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseTap, prompt = options.joinToString(""), hint = entity.hint, options = options,
                 answer = entity.answer, level = jlpt, note = entity.note, instruction = entity.instruction,
-                courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
+                courseLesson = key.first, courseQuestion = key.second, ruby = ruby, translation = entity.en,
             )
         }
         "order" -> {
@@ -248,7 +248,7 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
             Question(
                 kind = QuestionKind.CourseOrder, prompt = entity.prompt, hint = entity.hint, options = options,
                 answer = 0, level = jlpt, note = entity.note, instruction = entity.instruction, tiles = tiles,
-                correctText = options.joinToString(""), courseLesson = key.first, courseQuestion = key.second, ruby = ruby,
+                correctText = options.joinToString(""), courseLesson = key.first, courseQuestion = key.second, ruby = ruby, translation = entity.en,
             )
         }
         else -> null

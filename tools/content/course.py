@@ -8,13 +8,16 @@ lesson never reaches the app. Stdlib only.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 LESSON_KINDS = ("lesson", "note")
 BLOCK_TYPES = ("heading", "text", "example", "diagram", "keypoints", "table")
 CAR_ROLES = ("engine", "carriage", "topic", "zero", "plain", "white", "particle")
 QUESTION_TYPES = ("choice", "tap", "order")
-MIN_QUESTIONS = 10
+MIN_QUESTIONS = 20
+#: A Japanese text of at least this many kana/kanji is a sentence: its question needs an English translation (`en`).
+SENTENCE_LENGTH = 4
 VIDEO_PREFIXES = ("https://www.youtube.com/watch?v=", "https://youtu.be/")
 
 
@@ -96,8 +99,82 @@ def _question_problems(where: str, q: dict) -> list[str]:
     return out
 
 
-def problems(entries: list[dict], grammar_ids: set[int]) -> list[str]:
-    """Everything wrong with the course; empty when it can be built."""
+# -- new sentences, easy words -----------------------------------------------------------------------
+
+_JAPANESE = re.compile(r"[぀-ヿ一-鿿々ー]")
+_KANJI = re.compile(r"[一-鿿々]")
+_GAP = re.compile(r"＿+")
+
+
+def japanese_only(text: str) -> str:
+    """Just the kana and kanji of [text]: no spaces, punctuation, brackets or English."""
+    return "".join(_JAPANESE.findall(text))
+
+
+def _without_brackets(text: str) -> str:
+    return re.sub(r"[（(][^）)]*[）)]", "", text)
+
+
+def question_japanese(q: dict) -> list[str]:
+    """The Japanese texts a question shows: its prompt, the pieces of a tap or order question joined, and every longer option."""
+    texts = [q.get("prompt", "")]
+    options = q.get("options") or []
+    if q.get("type") in ("tap", "order"):
+        texts.append("".join(options))
+    else:
+        texts += [o for o in options if len(japanese_only(o)) >= SENTENCE_LENGTH + 1]
+    return [t for t in texts if japanese_only(t)]
+
+
+def has_sentence(q: dict) -> bool:
+    """True when the question shows a Japanese sentence (so it needs an English translation)."""
+    if q.get("type") in ("tap", "order"):
+        return True
+    return len(japanese_only(_GAP.sub("", q.get("prompt", "")))) >= SENTENCE_LENGTH
+
+
+def reuses_example(text: str, examples: list[str]) -> str | None:
+    """The example sentence of the lesson that [text] repeats (also with a gap, or inside a longer text), else None."""
+    kind = _GAP.search(text)
+    for example in examples:
+        for form in {japanese_only(example), japanese_only(_without_brackets(example))}:
+            if len(form) < SENTENCE_LENGTH:
+                continue
+            if kind:
+                pieces = [japanese_only(p) for p in _GAP.split(text)]
+                if re.fullmatch(".{0,8}?".join(re.escape(p) for p in pieces), form):
+                    return example
+            elif form in japanese_only(text):
+                return example
+    return None
+
+
+def _reuse_and_word_problems(name: str, entry: dict, easy_kanji: set[str] | None) -> list[str]:
+    out: list[str] = []
+    examples = [b["jp"] for b in entry.get("blocks", []) if b.get("type") == "example"]
+    seen = "".join(_KANJI.findall(" ".join(
+        b.get("text", "") + b.get("jp", "") + " ".join(b.get("items", [])) for b in entry.get("blocks", [])
+    )))
+    allowed = None if easy_kanji is None else easy_kanji | set(seen) | set(entry.get("extraKanji", ""))
+    for q in entry.get("questions", []):
+        where = f"{name} question {q.get('id')}"
+        for text in question_japanese(q):
+            hit = reuses_example(text, examples)
+            if hit:
+                out.append(f"{where}: repeats the lesson example {hit!r}; test with a new sentence")
+        if has_sentence(q) and not _text(q.get("en")):
+            out.append(f"{where}: a question with a Japanese sentence needs an English translation (en)")
+        if allowed is not None:
+            for text in question_japanese(q):
+                hard = sorted(set(_KANJI.findall(text)) - allowed)
+                if hard:
+                    out.append(f"{where}: kanji above N4 and not in the lesson: {''.join(hard)} (use an easier word or add extraKanji)")
+    return out
+
+
+def problems(entries: list[dict], grammar_ids: set[int], easy_kanji: set[str] | None = None) -> list[str]:
+    """Everything wrong with the course; empty when it can be built. [easy_kanji] are the kanji of N5 and N4 words: new
+    questions may use those, the kanji the lesson itself shows and the lesson's `extraKanji`; None skips that check."""
     out: list[str] = []
     ids = [e.get("id") for e in entries]
     if len(set(ids)) != len(ids):
@@ -137,6 +214,7 @@ def problems(entries: list[dict], grammar_ids: set[int]) -> list[str]:
             out.append(f"{name}: question ids must be unique numbers")
         for q in questions:
             out += _question_problems(f"{name} question {q.get('id')}", q)
+        out += _reuse_and_word_problems(name, entry, easy_kanji)
     return out
 
 
@@ -189,11 +267,11 @@ def lesson_rows(entries: list[dict]) -> list[tuple]:
 
 
 def question_rows(entries: list[dict]) -> list[tuple]:
-    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby."""
+    """Rows for course_question: lesson_id, id, type, instruction, prompt, hint, options, answer, note, ruby, en."""
     return [
         (
             e["id"], q["id"], q["type"], q["instruction"], q.get("prompt", ""), q.get("hint"),
-            json.dumps(q["options"], ensure_ascii=False), q.get("answer", 0), q["note"], q.get("_ruby"),
+            json.dumps(q["options"], ensure_ascii=False), q.get("answer", 0), q["note"], q.get("_ruby"), q.get("en"),
         )
         for e in entries
         for q in e.get("questions", [])

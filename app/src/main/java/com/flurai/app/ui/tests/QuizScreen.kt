@@ -186,6 +186,14 @@ private fun QuestionView(
             }
         }
         if (state.selected != null) {
+            question.translation?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                )
+            }
             question.note?.let {
                 QText(
                     it, question, MaterialTheme.typography.bodyMedium.japanese(),
@@ -331,6 +339,7 @@ private fun MissedList(missed: List<MissedQuestion>) {
                     m.hint?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                     FuriganaLine("Right: ", m.correct, m.ruby[m.correct], MaterialTheme.typography.bodyMedium.japanese(), CorrectGreen, show)
                     FuriganaLine("You chose: ", m.chosen, m.ruby[m.chosen], MaterialTheme.typography.bodyMedium.japanese(), WrongRed, show)
+                    m.translation?.let { Text(it, style = MaterialTheme.typography.bodySmall, fontStyle = androidx.compose.ui.text.font.FontStyle.Italic, color = MaterialTheme.colorScheme.onSurfaceVariant) }
                     m.note?.let { FuriganaLine("", it, m.ruby[it], MaterialTheme.typography.bodySmall.japanese(), MaterialTheme.colorScheme.onSurfaceVariant, show) }
                 }
             }
