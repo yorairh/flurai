@@ -48,6 +48,9 @@ sealed class QuizKind(
     /** The test after one course lesson (its hand-written questions). */
     data class CourseLesson(val lessonId: Int) : QuizKind(TestType.Course)
 
+    /** The checkup after five lessons: 20 questions over them; the last of the five is [lastLessonId]. */
+    data class CourseCheckup(val lastLessonId: Int) : QuizKind(TestType.Course)
+
     /** "Test yourself": [count] random questions over every course lesson passed. */
     data class CourseReview(val count: Int) : QuizKind(TestType.Course)
 
@@ -61,6 +64,7 @@ sealed class QuizKind(
         is Reading -> "reading-$jlpt"
         is CourseLesson -> "course-$lessonId"
         is CourseReview -> "courseself-$count"
+        is CourseCheckup -> "coursecheck-$lastLessonId"
     }
 
     val title: String
@@ -73,6 +77,7 @@ sealed class QuizKind(
             is Reading -> "N$jlpt reading"
             is CourseLesson -> "Lesson test"
             is CourseReview -> "Test yourself"
+            is CourseCheckup -> "Checkup"
         }
 
     /**
@@ -84,7 +89,7 @@ sealed class QuizKind(
     /** Only a checkpoint and a course lesson test are passed or failed. */
     fun passed(correct: Int, total: Int): Boolean? = when (this) {
         is Checkpoint -> total > 0 && correct.toDouble() / total >= CHECKPOINT_PASS_FRACTION
-        is CourseLesson -> total > 0 && correct.toDouble() / total >= COURSE_PASS_FRACTION
+        is CourseLesson, is CourseCheckup -> total > 0 && correct.toDouble() / total >= COURSE_PASS_FRACTION
         else -> null
     }
 
@@ -98,6 +103,7 @@ sealed class QuizKind(
             value.startsWith("checkpoint-") -> Checkpoint(value.removePrefix("checkpoint-").toInt())
             value.startsWith("grammar-") -> value.removePrefix("grammar-").split("-").let { Grammar(it[0].toInt(), it[1].toInt()) }
             value.startsWith("reading-") -> Reading(value.removePrefix("reading-").toInt())
+            value.startsWith("coursecheck-") -> CourseCheckup(value.removePrefix("coursecheck-").toInt())
             value.startsWith("courseself-") -> CourseReview(value.removePrefix("courseself-").toInt())
             value.startsWith("course-") -> CourseLesson(value.removePrefix("course-").toInt())
             else -> Quick
@@ -152,11 +158,13 @@ class RepositoryQuizBackend @Inject constructor(
         is QuizKind.Grammar -> grammar.practice(uid, kind.jlpt, kind.pointId.takeIf { it != 0 }, learnedOnly = true)
         is QuizKind.CourseLesson -> course.lessonTest(uid, kind.lessonId)
         is QuizKind.CourseReview -> course.selfTest(uid, kind.count)
+        is QuizKind.CourseCheckup -> course.checkupTest(uid, kind.lastLessonId)
     }
 
     override suspend fun recordCourse(uid: String, kind: QuizKind, answers: List<CourseAnswer>, at: Long): Int? = when (kind) {
         is QuizKind.CourseLesson -> course.recordLessonTest(uid, kind.lessonId, answers, at)
         is QuizKind.CourseReview -> { course.recordSelfTest(uid, answers, at); null }
+        is QuizKind.CourseCheckup -> { course.recordCheckup(uid, kind.lastLessonId, answers, at); null }
         else -> null
     }
 
@@ -214,9 +222,6 @@ data class QuizResult(
     val levelApplied: Boolean = false,
     /** Course lesson test: the entry to take next, if any. */
     val nextLessonId: Int? = null,
-    /** Course lesson test: how the questions from earlier lessons went (they are not part of [correct] / [total]). */
-    val reviewCorrect: Int = 0,
-    val reviewTotal: Int = 0,
 )
 
 data class QuizRunState(
@@ -334,13 +339,8 @@ class QuizRun(
     }
 
     private suspend fun finish() {
-        // A lesson test also asks a few questions from earlier lessons. The score and the pass mark are the
-        // lesson's own questions only (what is saved as the lesson's best); the review has its own line.
-        val lessonId = (kind as? QuizKind.CourseLesson)?.lessonId
-        val scored = if (lessonId == null) answered else answered.filter { it.question.courseLesson == lessonId }
-        val review = if (lessonId == null) emptyList() else answered.filter { it.question.courseLesson != lessonId }
-        val correct = scored.count { it.correct }
-        val total = scored.size
+        val correct = answered.count { it.correct }
+        val total = answered.size
         val missedAnswers = answered.filter { !it.correct }
         val missed = missedAnswers.mapNotNull { it.question.wordId }.distinct()
         val missedNew = if (missed.isEmpty()) emptyList() else backend.withoutFlashcards(uid, missed)
@@ -372,7 +372,6 @@ class QuizRun(
                     title = kind.title, correct = correct, total = total, passed = kind.passed(correct, total),
                     placementLevel = placementLevel, missedWordIds = missed, missed = missedList, missedNewWordIds = missedNew,
                     currentLevel = profile?.level, nextLessonId = nextLessonId,
-                    reviewCorrect = review.count { it.correct }, reviewTotal = review.size,
                 ),
             )
         }

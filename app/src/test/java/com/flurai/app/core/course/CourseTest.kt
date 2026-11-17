@@ -142,13 +142,10 @@ class CourseTest {
     private val jlpt: (Int) -> Int = { 5 }
 
     @Test
-    fun aLessonTestAsksTenQuestionsTwoOfThemFromEarlierLessons() {
-        val own = (1..12).map { question(2, it) }
-        val earlier = (1..12).map { question(1, it) }
-        val test = lessonTest(own, earlier, emptySet(), jlpt, Random(7))
+    fun aLessonTestAsksTenQuestionsAllFromTheLesson() {
+        val test = lessonTest((1..12).map { question(2, it) }, jlpt, Random(7))
         assertEquals(10, test.size)
-        assertEquals(2, test.count { it.courseLesson == 1 })
-        assertEquals(8, test.count { it.courseLesson == 2 })
+        assertTrue(test.all { it.courseLesson == 2 })
     }
 
     @Test
@@ -157,7 +154,7 @@ class CourseTest {
         val wo = (1..6).map { question(2, it, options = """["を","x","y"]""", answer = 0) }
         val others = listOf("に", "で", "が", "と", "へ", "も", "の", "か").mapIndexed { i, a -> question(2, 10 + i, options = """["$a","x","y"]""", answer = 0) }
         repeat(20) { seed ->
-            val test = lessonTest(wo + others, emptyList(), emptySet(), jlpt, Random(seed))
+            val test = lessonTest(wo + others, jlpt, Random(seed))
             assertEquals(10, test.size)
             assertTrue(test.count { it.options[it.answer] == "を" } <= SAME_ANSWER_LIMIT)
         }
@@ -165,31 +162,73 @@ class CourseTest {
 
     @Test
     fun aLessonWithOnlyOneRightAnswerStillGetsAFullTest() {
-        val test = lessonTest((1..12).map { question(2, it, answer = 0) }, emptyList(), emptySet(), jlpt, Random(3))
+        val test = lessonTest((1..12).map { question(2, it, answer = 0) }, jlpt, Random(3))
         assertEquals(10, test.size)
     }
 
     @Test
-    fun withNothingEarlierTheTestIsTheLessonsOwn() {
-        val test = lessonTest((1..12).map { question(2, it) }, emptyList(), emptySet(), jlpt, Random(7))
-        assertEquals(10, test.size)
-        assertTrue(test.all { it.courseLesson == 2 })
+    fun aShortLessonAsksAllItsQuestions() {
+        assertEquals(4, lessonTest((1..4).map { question(2, it) }, jlpt, Random(7)).size)
+    }
+
+    // -- checkups ----------------------------------------------------------------------------------------
+
+    private fun lessons(count: Int) = (1..count).map { lesson(it * 10, it) }
+
+    @Test
+    fun aCheckupFollowsEveryFiveLessonsAndNotesDoNotCount() {
+        val all = lessons(12) + lesson(55, 3, kind = KIND_NOTE)
+        val groups = checkupGroups(all)
+        assertEquals(2, groups.size) // 12 lessons: two complete groups, the last two wait
+        assertEquals(listOf(10, 20, 30, 40, 50), groups[0].map { it.id })
+        assertEquals(100, checkupId(groups[1]))
+        assertTrue(checkupGroups(lessons(4)).isEmpty())
     }
 
     @Test
-    fun aShortLessonIsFilledUpFromEarlierLessons() {
-        val test = lessonTest((1..4).map { question(2, it) }, (1..12).map { question(1, it) }, emptySet(), jlpt, Random(7))
-        assertEquals(10, test.size)
-        assertEquals(4, test.count { it.courseLesson == 2 })
+    fun aCheckupOpensWhenAllFiveLessonsArePassed() {
+        val group = checkupGroups(lessons(5))[0]
+        val rows = group.associate { it.id to progress(it.id) }
+        assertTrue(checkupUnlocked(group, rows))
+        assertTrue(!checkupUnlocked(group, rows - 30))
+        assertTrue(!checkupUnlocked(group, rows + (30 to progress(30, passed = false))))
     }
 
     @Test
-    fun earlierQuestionsMissedBeforeComeFirst() {
-        val earlier = (1..12).map { question(1, it) }
+    fun aCheckupAsksTwentyQuestionsFourFromEachLesson() {
+        val byLesson = (1..5).map { l -> (1..12).map { question(l, it) } }
+        val test = checkupTest(byLesson, emptySet(), jlpt, Random(5))
+        assertEquals(20, test.size)
+        (1..5).forEach { l -> assertEquals(4, test.count { it.courseLesson == l }) }
+    }
+
+    @Test
+    fun aCheckupAsksTheMissedQuestionsOfALessonFirst() {
+        val byLesson = (1..5).map { l -> (1..12).map { question(l, it) } }
         repeat(10) { seed ->
-            val test = lessonTest((1..12).map { question(2, it) }, earlier, setOf(1 to 5, 1 to 6), jlpt, Random(seed))
-            assertEquals(setOf(5, 6), test.filter { it.courseLesson == 1 }.map { it.courseQuestion }.toSet())
+            val test = checkupTest(byLesson, setOf(3 to 2, 3 to 9), jlpt, Random(seed))
+            assertTrue(test.filter { it.courseLesson == 3 }.map { it.courseQuestion }.containsAll(listOf(2, 9)))
         }
+    }
+
+    @Test
+    fun aCheckupIsFilledUpFromTheOtherLessonsWhenOneHasTooFew() {
+        val byLesson = listOf((1..2).map { question(1, it) }) + (2..5).map { l -> (1..12).map { question(l, it) } }
+        val test = checkupTest(byLesson, emptySet(), jlpt, Random(5))
+        assertEquals(20, test.size)
+        assertEquals(2, test.count { it.courseLesson == 1 })
+    }
+
+    @Test
+    fun aCheckupScoreIsKeptLikeALessonsBestAndPassesAtEightyPercent() {
+        val first = null.afterCheckup("u", 100_050, 15, 20, at = 1) // 75%
+        assertNull(first.passedAt)
+        val second = first.afterCheckup("u", 100_050, 17, 20, at = 2) // 85%
+        assertEquals(2L, second.passedAt)
+        val third = second.afterCheckup("u", 100_050, 10, 20, at = 3)
+        assertEquals(17, third.bestCorrect)
+        assertEquals(2L, third.passedAt)
+        assertEquals(3, third.attempts)
     }
 
     @Test

@@ -69,9 +69,15 @@ interface CourseProgressDao {
 /** A lesson test is passed at this share of right answers (the same mark as a level checkpoint). */
 const val COURSE_PASS_FRACTION = 0.8
 
-/** How many questions a lesson test asks, and how many of them come from earlier lessons. */
+/** How many questions a lesson test asks (all of them from the lesson itself). */
 const val LESSON_TEST_SIZE = 10
-const val LESSON_TEST_EARLIER = 2
+
+/** A checkup follows every [CHECKUP_EVERY] lessons and asks [CHECKUP_SIZE] questions about those lessons. */
+const val CHECKUP_EVERY = 5
+const val CHECKUP_SIZE = 20
+
+/** A checkup's progress is saved as a course_progress row with this id plus the id of its last lesson. */
+const val CHECKUP_ROW_BASE = 100_000
 
 /** The sizes "Test yourself" offers. */
 val SELF_TEST_SIZES = listOf(10, 20, 30)
@@ -130,6 +136,19 @@ fun CourseProgressEntity?.afterLessonTest(uid: String, lessonId: Int, answers: L
         attempts = (this?.attempts ?: 0) + 1,
         missed = updatedMissed(this, lessonId, answers),
         lastAt = at,
+    )
+}
+
+/** The progress after a checkup: its score, kept like a lesson's best, passed at [COURSE_PASS_FRACTION]. */
+fun CourseProgressEntity?.afterCheckup(uid: String, rowId: Int, correct: Int, total: Int, at: Long): CourseProgressEntity {
+    val better = this == null || bestTotal == 0 || correct.toDouble() / total.coerceAtLeast(1) > bestCorrect.toDouble() / bestTotal
+    val passedNow = total > 0 && correct.toDouble() / total >= COURSE_PASS_FRACTION
+    return CourseProgressEntity(
+        uid = uid, lessonId = rowId,
+        bestCorrect = if (better) correct else this!!.bestCorrect,
+        bestTotal = if (better) total else this!!.bestTotal,
+        passedAt = this?.passedAt ?: if (passedNow) at else null,
+        attempts = (this?.attempts ?: 0) + 1, missed = "", lastAt = at,
     )
 }
 
@@ -261,23 +280,42 @@ fun courseQuestion(entity: CourseQuestionEntity, jlpt: Int, random: Random): Que
     }
 }
 
-/**
- * The questions of one lesson's test: up to [LESSON_TEST_SIZE], of which [LESSON_TEST_EARLIER] come
- * from [earlier] lessons the learner passed (the ones missed before first), the rest from the lesson
- * itself. With nothing earlier to ask about, all of them are the lesson's own.
- */
+/** The questions of one lesson's test: up to [LESSON_TEST_SIZE] of the lesson's own, with few repeated answers. */
 fun lessonTest(
     own: List<CourseQuestionEntity>,
-    earlier: List<CourseQuestionEntity>,
+    jlptOf: (Int) -> Int,
+    random: Random,
+): List<Question> =
+    variedPick(own.shuffled(random), LESSON_TEST_SIZE).shuffled(random).mapNotNull { courseQuestion(it, jlptOf(it.lessonId), random) }
+
+/** The lessons (not notes) in course order, cut into complete groups of [CHECKUP_EVERY]; each group has a checkup. */
+fun checkupGroups(lessons: List<CourseLessonEntity>): List<List<CourseLessonEntity>> =
+    lessons.filter { !it.isNote() }.sortedBy { it.position }.chunked(CHECKUP_EVERY).filter { it.size == CHECKUP_EVERY }
+
+/** The id of the checkup after [group]: its last lesson. */
+fun checkupId(group: List<CourseLessonEntity>): Int = group.last().id
+
+/** A checkup opens once every lesson of its group is passed. */
+fun checkupUnlocked(group: List<CourseLessonEntity>, progress: Map<Int, CourseProgressEntity>): Boolean =
+    group.all { courseStatus(progress[it.id]) == CourseStatus.Done }
+
+/**
+ * A checkup: [CHECKUP_SIZE] questions spread evenly over the lessons of its group ([byLesson], one list per
+ * lesson), the ones missed before first. If a lesson has too few, the others make up the number.
+ */
+fun checkupTest(
+    byLesson: List<List<CourseQuestionEntity>>,
     missed: Set<Pair<Int, Int>>,
     jlptOf: (Int) -> Int,
     random: Random,
 ): List<Question> {
-    val fromEarlier = earlier.shuffled(random).sortedBy { (it.lessonId to it.id) !in missed }.take(LESSON_TEST_EARLIER)
-    val fromOwn = variedPick(own.shuffled(random), LESSON_TEST_SIZE - fromEarlier.size)
-    // If the lesson itself is short, earlier questions fill the gap rather than leaving a short test.
-    val padding = if (fromOwn.size < LESSON_TEST_SIZE - fromEarlier.size) earlier.shuffled(random).filter { it !in fromEarlier }.take(LESSON_TEST_SIZE - fromEarlier.size - fromOwn.size) else emptyList()
-    return (fromOwn + fromEarlier + padding).shuffled(random).mapNotNull { courseQuestion(it, jlptOf(it.lessonId), random) }
+    if (byLesson.isEmpty()) return emptyList()
+    val ordered = byLesson.map { qs -> qs.shuffled(random).sortedBy { (it.lessonId to it.id) !in missed } }
+    val share = CHECKUP_SIZE / ordered.size
+    val chosen = ordered.flatMap { variedPick(it, share) }.toMutableList()
+    val rest = ordered.flatten().filter { it !in chosen }.shuffled(random)
+    chosen += rest.take(CHECKUP_SIZE - chosen.size)
+    return chosen.shuffled(random).mapNotNull { courseQuestion(it, jlptOf(it.lessonId), random) }
 }
 
 /** At most this many questions of one test may have the same right answer (three gaps that all want を feel like a drill). */
@@ -339,13 +377,24 @@ class CourseRepository @Inject constructor(
     /** The questions of a lesson's test, see [lessonTest]. */
     suspend fun lessonTest(uid: String, lessonId: Int, random: Random = Random): List<Question> {
         val lessons = content.allCourseLessons()
-        val lesson = lessons.firstOrNull { it.id == lessonId } ?: return emptyList()
-        val rows = progress.all(uid)
-        val done = rows.filter { it.passedAt != null }.map { it.lessonId }.toSet()
-        val earlierIds = lessons.filter { !it.isNote() && it.position < lesson.position && it.id in done }.map { it.id }
-        val earlier = if (earlierIds.isEmpty()) emptyList() else content.courseQuestionsOf(earlierIds)
         val jlpt = lessons.associate { it.id to (it.jlpt ?: 5) }
-        return lessonTest(content.courseQuestions(lessonId), earlier, missedKeys(rows), { jlpt[it] ?: 5 }, random)
+        return lessonTest(content.courseQuestions(lessonId), { jlpt[it] ?: 5 }, random)
+    }
+
+    /** The questions of the checkup ending with lesson [lastLessonId], see [checkupTest]. Empty when it is not a checkup. */
+    suspend fun checkupTest(uid: String, lastLessonId: Int, random: Random = Random): List<Question> {
+        val lessons = content.allCourseLessons()
+        val group = checkupGroups(lessons).firstOrNull { checkupId(it) == lastLessonId } ?: return emptyList()
+        val jlpt = lessons.associate { it.id to (it.jlpt ?: 5) }
+        val questions = content.courseQuestionsOf(group.map { it.id })
+        return checkupTest(group.map { lesson -> questions.filter { it.lessonId == lesson.id } }, missedKeys(progress.all(uid)), { jlpt[it] ?: 5 }, random)
+    }
+
+    /** Saves a checkup: its score on its own row, and the missed questions of the lessons it asked about. */
+    suspend fun recordCheckup(uid: String, lastLessonId: Int, answers: List<CourseAnswer>, at: Long) {
+        val rowId = CHECKUP_ROW_BASE + lastLessonId
+        progress.upsert(progress.get(uid, rowId).afterCheckup(uid, rowId, answers.count { it.correct }, answers.size, at))
+        recordSelfTest(uid, answers, at)
     }
 
     /** The questions of "Test yourself" over every lesson passed. Empty before the first pass. */
@@ -361,8 +410,6 @@ class CourseRepository @Inject constructor(
     /** Saves a lesson test. Returns the entry to take next (the one after this lesson if it is not done), or null. */
     suspend fun recordLessonTest(uid: String, lessonId: Int, answers: List<CourseAnswer>, at: Long): Int? {
         progress.upsert(progress.get(uid, lessonId).afterLessonTest(uid, lessonId, answers, at))
-        // The review questions from earlier lessons clear (or add) those lessons' missed questions too.
-        recordSelfTest(uid, answers.filter { it.lessonId != lessonId }, at)
         val rows = progress.all(uid).associateBy { it.lessonId }
         return nextCourseEntry(content.allCourseLessons(), rows)?.id
     }

@@ -63,6 +63,7 @@ fun GrammarListScreen(
     onPractice: (jlpt: Int) -> Unit,
     onOpenLesson: (Int) -> Unit,
     onSelfTest: (count: Int) -> Unit,
+    onCheckup: (lastLessonId: Int) -> Unit,
 ) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     Column(Modifier.fillMaxSize()) {
@@ -71,7 +72,7 @@ fun GrammarListScreen(
             Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Course") })
             Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Reference") })
         }
-        if (tab == 0) CourseTab(onOpenLesson, onSelfTest) else ReferenceTab(onOpenPoint, onPractice)
+        if (tab == 0) CourseTab(onOpenLesson, onSelfTest, onCheckup) else ReferenceTab(onOpenPoint, onPractice)
     }
 }
 

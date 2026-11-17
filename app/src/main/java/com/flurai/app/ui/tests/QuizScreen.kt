@@ -97,7 +97,7 @@ fun QuizScreen(
         BackTopAppBar(title = { Text(state.title) }, onBack = { if (inProgress) confirmLeave = true else onBack() }, backDescription = "Close")
         val question = state.question
         val result = state.result
-        if (viewModel.kind is QuizKind.CourseLesson || viewModel.kind is QuizKind.CourseReview) MissingVoiceBanner(viewModel.speaker)
+        if (viewModel.kind is QuizKind.CourseLesson || viewModel.kind is QuizKind.CourseReview || viewModel.kind is QuizKind.CourseCheckup) MissingVoiceBanner(viewModel.speaker)
         when {
             state.error != null -> Message(state.error.orEmpty(), onBack)
             state.loading -> LoadingBox()
@@ -437,18 +437,11 @@ private fun ResultView(
     ) {
         Text("結果", style = MaterialTheme.typography.titleMedium.japanese(), color = MaterialTheme.colorScheme.secondary)
         Text("${result.correct} / ${result.total}", style = MaterialTheme.typography.displayLarge)
-        if (result.reviewTotal > 0) {
-            Text(
-                "Review of earlier lessons: ${result.reviewCorrect} of ${result.reviewTotal}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
         result.passed?.let { passed ->
             Text(
                 when {
-                    lessonTest && passed -> "Lesson passed!"
-                    lessonTest -> "Not yet: ${kotlin.math.ceil(result.total * 0.8).toInt()} right out of ${result.total} passes the lesson. Look over what you missed, then try again."
+                    lessonTest && passed -> if (viewModel.kind is QuizKind.CourseCheckup) "Checkup passed!" else "Lesson passed!"
+                    lessonTest -> "Not yet: ${kotlin.math.ceil(result.total * 0.8).toInt()} right out of ${result.total} passes the ${if (viewModel.kind is QuizKind.CourseCheckup) "checkup" else "lesson"}. Look over what you missed, then try again."
                     passed -> "Passed! You know ${result.title.substringBefore(' ')} well."
                     else -> "Not yet. Keep studying and try again."
                 },

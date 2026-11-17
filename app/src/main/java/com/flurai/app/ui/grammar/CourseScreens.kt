@@ -81,6 +81,7 @@ private const val CREDIT = "Written for FluRai after Cure Dolly's Organic Japane
 fun CourseTab(
     onOpenLesson: (Int) -> Unit,
     onSelfTest: (count: Int) -> Unit,
+    onCheckup: (lastLessonId: Int) -> Unit,
     viewModel: CourseListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -98,6 +99,7 @@ fun CourseTab(
             }
         }
         item(key = "next") { NextEntryCard(state, onOpenLesson) }
+        if (state.checkups.isNotEmpty()) item(key = "checkups") { CheckupsCard(state.checkups, onCheckup) }
         item(key = "self") { SelfTestCard(state.canSelfTest, onSelfTest) }
         item(key = "all") {
             Text(
@@ -155,6 +157,45 @@ private fun NextEntryCard(state: CourseListState, onOpenLesson: (Int) -> Unit) {
                 Spacer(Modifier.height(12.dp))
                 Button(onClick = { onOpenLesson(next.id) }, modifier = Modifier.fillMaxWidth()) {
                     Text(if (state.passed == 0) "Start the first lesson" else "Continue")
+                }
+            }
+        }
+    }
+}
+
+/** A checkup of 20 questions after every five lessons; each opens when its five lessons are passed. */
+@Composable
+private fun CheckupsCard(checkups: List<CheckupItem>, onCheckup: (Int) -> Unit) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Text("Checkups", style = MaterialTheme.typography.titleMedium)
+            Text(
+                "20 questions about the last five lessons, after every fifth lesson.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            checkups.forEach { item ->
+                Row(
+                    Modifier.fillMaxWidth().clickable(enabled = item.unlocked) { onCheckup(item.id) }.padding(top = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(Modifier.weight(1f)) {
+                        Text("Lessons ${item.first} to ${item.last}", style = MaterialTheme.typography.titleSmall)
+                        Text(
+                            when {
+                                !item.unlocked -> "Opens when you have passed these five lessons."
+                                item.best != null -> "Best ${item.best}"
+                                else -> "Ready"
+                            },
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    if (item.status == CourseStatus.Done) Icon(Icons.Filled.Check, contentDescription = "Passed", tint = MaterialTheme.colorScheme.primary)
+                    if (item.unlocked) Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
                 }
             }
         }

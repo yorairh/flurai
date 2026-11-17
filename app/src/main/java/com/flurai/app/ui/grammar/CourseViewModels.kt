@@ -10,7 +10,11 @@ import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.uid
 import com.flurai.app.core.content.CourseLessonEntity
 import com.flurai.app.core.content.GrammarPointEntity
+import com.flurai.app.core.course.CHECKUP_ROW_BASE
 import com.flurai.app.core.course.CourseBlock
+import com.flurai.app.core.course.checkupGroups
+import com.flurai.app.core.course.checkupId
+import com.flurai.app.core.course.checkupUnlocked
 import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.course.CourseRepository
 import com.flurai.app.core.course.CourseStatus
@@ -39,6 +43,9 @@ import javax.inject.Inject
 /** One row of the course list. [best] is the best score text ("9 of 10") once a test was taken. */
 data class CourseItem(val lesson: CourseLessonEntity, val status: CourseStatus, val best: String?)
 
+/** One checkup: after lessons [first] to [last] (their numbers); [id] is the last lesson's id. [best] is "17 of 20". */
+data class CheckupItem(val id: Int, val first: String, val last: String, val unlocked: Boolean, val status: CourseStatus, val best: String?)
+
 data class CourseListState(
     val loaded: Boolean = false,
     val items: List<CourseItem> = emptyList(),
@@ -48,6 +55,7 @@ data class CourseListState(
     val next: CourseLessonEntity? = null,
     /** "Test yourself" needs at least one lesson passed. */
     val canSelfTest: Boolean = false,
+    val checkups: List<CheckupItem> = emptyList(),
 )
 
 private fun bestText(progress: CourseProgressEntity?): String? =
@@ -71,6 +79,10 @@ class CourseListViewModel @Inject constructor(
                 lessons = lessons.count { !it.isNote() },
                 next = nextCourseEntry(lessons, byId),
                 canSelfTest = passed.isNotEmpty(),
+                checkups = checkupGroups(lessons).map { group ->
+                    val row = byId[CHECKUP_ROW_BASE + checkupId(group)]
+                    CheckupItem(checkupId(group), group.first().number, group.last().number, checkupUnlocked(group, byId), courseStatus(row), bestText(row))
+                }.let { all -> all.filter { it.unlocked } + all.filter { !it.unlocked }.take(1) }, // the ones open, and the next to earn
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CourseListState())
