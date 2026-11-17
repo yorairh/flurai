@@ -225,6 +225,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onPractice = { navController.navigate(QuizRoute(QuizKind.Grammar(it).encode())) },
                     onOpenLesson = { navController.navigate(CourseLessonRoute(it)) },
                     onSelfTest = { navController.navigate(QuizRoute(QuizKind.CourseReview(it).encode())) },
+                    onCheckup = { navController.navigate(QuizRoute(QuizKind.CourseCheckup(it).encode())) },
                 )
             }
             screen<CourseLessonRoute> {

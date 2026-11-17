@@ -45,7 +45,7 @@ class QuizViewModel @Inject constructor(
     private var run: QuizRun? = null
 
     init {
-        if (kind == QuizKind.Listening || kind is QuizKind.CourseLesson || kind is QuizKind.CourseReview) speaker.start()
+        if (kind == QuizKind.Listening || kind is QuizKind.CourseLesson || kind is QuizKind.CourseReview || kind is QuizKind.CourseCheckup) speaker.start()
         viewModelScope.launch {
             val uid = auth.uid ?: return@launch
             val run = QuizRun(uid, kind, profiles.profile(uid).first(), backend, StudyClock(activity) { auth.uid })

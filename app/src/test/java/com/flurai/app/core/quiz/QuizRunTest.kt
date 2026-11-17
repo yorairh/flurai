@@ -339,21 +339,18 @@ class QuizRunTest {
     }
 
     @Test
-    fun aLessonTestScoresOnlyItsOwnQuestionsAndReportsTheReviewSeparately() = runTest {
-        // 8 questions of lesson 3 (7 right) and 2 of lesson 1 (both wrong): the lesson is 7 of 8, not 7 of 10
-        backend.questions = (1..8).map { courseQuestion(it) } + (1..2).map { courseQuestion(it, lesson = 1) }
-        val run = run(QuizKind.CourseLesson(3))
+    fun aCheckupIsScoredOverAllItsQuestionsAndPassesAtEightyPercent() = runTest {
+        backend.questions = (1..20).map { courseQuestion(it, lesson = 1 + it % 5) }
+        val run = run(QuizKind.CourseCheckup(50))
         run.start()
-        repeat(10) { run.answer(right = it < 7) }
+        repeat(20) { run.answer(right = it < 16) }
 
         val result = run.state.value.result!!
-        assertEquals(7, result.correct)
-        assertEquals(8, result.total)
-        assertEquals(true, result.passed) // 7 of 8 = 87%
-        assertEquals(0, result.reviewCorrect)
-        assertEquals(2, result.reviewTotal)
-        assertEquals(7, backend.saved.single().correct)
-        assertEquals(8, backend.saved.single().total)
+        assertEquals(16, result.correct)
+        assertEquals(20, result.total)
+        assertEquals(true, result.passed)
+        assertEquals("Checkup", result.title)
+        assertEquals(4, backend.course.count { !it.correct })
     }
 
     @Test
@@ -431,7 +428,7 @@ class QuizRunTest {
         val kinds = listOf(
             QuizKind.Placement, QuizKind.Quick, QuizKind.Listening, QuizKind.Checkpoint(3),
             QuizKind.Grammar(4), QuizKind.Grammar(2, 777), QuizKind.Reading(1),
-            QuizKind.CourseLesson(750), QuizKind.CourseReview(20),
+            QuizKind.CourseLesson(750), QuizKind.CourseReview(20), QuizKind.CourseCheckup(50),
         )
         kinds.forEach { assertEquals(it, QuizKind.decode(it.encode())) }
     }
