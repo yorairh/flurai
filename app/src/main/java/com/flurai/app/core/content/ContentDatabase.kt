@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
         CourseQuestionEntity::class,
         ContentInfoEntity::class,
     ],
-    version = 15,
+    version = 16,
     exportSchema = true,
 )
 abstract class ContentDatabase : RoomDatabase() {

@@ -27,7 +27,7 @@
     {"type": "heading", "text": "Moving は changes emphasis, never logic"},
     {"type": "text", "text": "Changing a logical particle changes the event. Moving the は flag only changes what you are talking about."},
     {"type": "example", "jp": "私はさくらにボールを投げる。", "en": "As for me, I throw the ball to Sakura."},
-    {"type": "example", "jp": "ボールは私がさくらに（ゼロを）投げる。", "en": "As for the ball, I throw (it) to Sakura."},
+    {"type": "example", "jp": "ボールは私がさくらに（Øを）投げる。", "en": "As for the ball, I throw (it) to Sakura."},
     {"type": "keypoints", "items": [
       "**は** flags the **topic**. It says nothing about it.",
       "は is not a main carriage and not a white carriage.",
