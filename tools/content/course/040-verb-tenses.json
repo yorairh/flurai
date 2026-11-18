@@ -10,30 +10,22 @@
   "blocks": [
     {"type": "text", "text": "So far every verb has been in its plain dictionary form. Japanese has just **two tenses**: the **non-past** (the dictionary form) and the **past**. There is no separate present and no separate future."},
     {"type": "heading", "text": "The non-past is not a present tense"},
-    {"type": "text", "text": "Think of the non-past like English \"I eat at six\": it covers habits, facts, and above all **things that will happen**. So 犬が食べる most naturally means \"The dog will eat.\" The past is made by changing the ending: 食べる becomes 食べた."},
+    {"type": "text", "text": "Think of the non-past like English \"I eat at six\": it covers habits, facts, and above all **things that will happen**. So 犬が食べる most naturally means \"The dog will eat.\""},
     {"type": "example", "jp": "犬が食べる。", "en": "The dog will eat. (or: The dog eats.)"},
     {"type": "example", "jp": "犬が食べた。", "en": "The dog ate."},
+    {"type": "heading", "text": "Making the past"},
+    {"type": "text", "text": "The past (the **た-form**) is made by changing the end of the verb. For verbs like 食べる and 見る it is simple: **drop る and add た** (食べる → 食べた). Most other verbs change their last kana in a few fixed ways: 飲む → 飲んだ, 行く → 行った. Lesson 5 gives the full recipe. For now, get to know the common verbs in the table."},
+    {"type": "table", "title": "Some common verbs", "rows": [["Non-past", "Past", "て-form"], ["食べる (eat)", "食べた", "食べて"], ["見る (see)", "見た", "見て"], ["寝る (sleep)", "寝た", "寝て"], ["会う (meet)", "会った", "会って"], ["行く (go)", "行った", "行って"], ["走る (run)", "走った", "走って"], ["飲む (drink)", "飲んだ", "飲んで"], ["読む (read)", "読んだ", "読んで"], ["歩く (walk)", "歩いた", "歩いて"], ["する (do)", "した", "して"], ["来る (come)", "来た", "来て"]]},
+    {"type": "text", "text": "The third column, the **て-form**, looks just like the past with **て** instead of **た** (飲んだ, 飲んで). You need it for the next part."},
     {"type": "heading", "text": "\"Is eating\": a white engine"},
-    {"type": "text", "text": "For something happening **right now**, Japanese uses **いる**, the \"to be\" for people and animals, together with the **て-form** of the verb. 食べて is a **white engine**: a verb that cannot pull the train alone but adds information to the real engine, いる. (You will learn how to make the て-form in the next lesson.)"},
-    {"type": "diagram", "cars": [
-      {"text": "犬", "role": "carriage"},
-      {"text": "が", "role": "particle"},
-      {"text": "食べて", "role": "white", "label": "white engine"},
-      {"text": "いる", "role": "engine", "label": "engine"}
-    ], "text": "犬が食べている。 The dog is eating."},
+    {"type": "text", "text": "For something happening **right now**, Japanese uses **いる**, the \"to be\" for people and animals, together with the **て-form** of the verb. 食べて is a **white engine**: a verb that cannot pull the train alone but adds information to the real engine, いる. (The table above shows the て-form of common verbs.)"},
+    {"type": "diagram", "cars": [{"text": "犬", "role": "carriage"}, {"text": "が", "role": "particle"}, {"text": "食べて", "role": "white", "label": "white engine"}, {"text": "いる", "role": "engine", "label": "engine"}], "text": "犬が食べている。 The dog is eating."},
     {"type": "example", "jp": "犬が食べている。", "en": "The dog is eating."},
     {"type": "example", "jp": "さくらが歩いている。", "en": "Sakura is walking."},
     {"type": "heading", "text": "Time words"},
     {"type": "text", "text": "A **relative** time word (relative to now: 明日 tomorrow, 今日 today, 昨日 yesterday) goes at the start of the sentence with **no particle**. An **absolute** time (a day of the week, a clock time) takes **に**. A good rule of thumb: if English would say \"on / at / in\", Japanese uses に."},
     {"type": "example", "jp": "明日（私が）ケーキを食べる。", "en": "Tomorrow (I) will eat cake."},
-    {"type": "example", "jp": "火曜日に（私が）ケーキを食べる。", "en": "On Tuesday (I) will eat cake."},
-    {"type": "example", "jp": "六時に（私が）起きる。", "en": "(I) get up at six o'clock."},
-    {"type": "keypoints", "items": [
-      "Two tenses only: **non-past** (dictionary form) and **past** (**た**).",
-      "The non-past usually points to the **future** or to a habit.",
-      "**て + いる** says an action is **in progress**.",
-      "Relative time (明日, 今日): **no particle**. Absolute time (火曜日, 六時): **に**."
-    ]}
+    {"type": "keypoints", "items": ["Two tenses only: **non-past** (dictionary form) and **past** (**た**: 食べる → 食べた, 飲む → 飲んだ).", "The non-past usually points to the **future** or to a habit.", "**て + いる** says an action is **in progress**.", "Relative time (明日, 今日): **no particle**. Absolute time (火曜日, 六時): **に**."]}
   ],
   "questions": [
     {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "明日、妹が学校に行＿＿。", "options": ["く", "った", "っている", "かなかった"], "answer": 0, "note": "明日 points to the future: the non-past.", "en": "Tomorrow my younger sister will go to school."},

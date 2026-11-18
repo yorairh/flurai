@@ -12,34 +12,21 @@
     {"type": "heading", "text": "Existence and the copula"},
     {"type": "example", "jp": "ペンがある。", "en": "There is a pen."},
     {"type": "example", "jp": "ペンがない。", "en": "There is no pen."},
-    {"type": "text", "text": "The copula works the same way. だ becomes **ではない** (で is the て-form of だ, plus は for emphasis, plus ない). In speech it is often じゃない."},
-    {"type": "example", "jp": "これはペンだ。", "en": "This is a pen."},
+    {"type": "text", "text": "The copula works the same way. だ becomes **ではない** (で is the て-form of だ, plus は for emphasis, plus ない). In speech it is often じゃない. The past of だ is **だった**: 学生だった (was a student), and the negative past is **ではなかった**."},
     {"type": "example", "jp": "これはペンではない。", "en": "This is not a pen."},
     {"type": "heading", "text": "Verbs"},
     {"type": "text", "text": "Attach ない to the **あ-stem** of the verb: change the last kana to its **あ** sound. The one exception is verbs ending in う, which use **わ**. Ichidan verbs just drop る."},
-    {"type": "table", "rows": [
-      ["Verb", "Negative"],
-      ["聞く", "聞かない"],
-      ["話す", "話さない"],
-      ["待つ", "待たない"],
-      ["買う", "買わない"],
-      ["食べる", "食べない"]
-    ]},
+    {"type": "table", "rows": [["Verb", "Negative"], ["聞く", "聞かない"], ["話す", "話さない"], ["待つ", "待たない"], ["買う", "買わない"], ["食べる", "食べない"]]},
     {"type": "heading", "text": "い-adjectives"},
     {"type": "text", "text": "Change the final **い** to **く**, then add ない: 赤い → **赤くない**. The same く form also makes the て-form (赤くて). For the **past**, change い to **かった**: 怖い → **怖かった** (it was scary). The negative past of anything is **なかった**."},
     {"type": "example", "jp": "さくらが走らなかった。", "en": "Sakura did not run."},
-    {"type": "example", "jp": "さくらが走っている。", "en": "Sakura is running."},
     {"type": "example", "jp": "さくらが走っていなかった。", "en": "Sakura was not running."},
-    {"type": "example", "jp": "あの映画は怖かった。", "en": "That movie was scary."},
     {"type": "heading", "text": "Two small exceptions"},
-    {"type": "text", "text": "**ます** has its own negative, **ません** (not ますない). And **いい** (good) uses its old stem **よい** for every change: **よかった** (it was good), **よくない** (not good). Never いくない or いかった."},
-    {"type": "keypoints", "items": [
-      "**ない** is an い-adjective: it changes like one (**なかった**, **なくて**).",
-      "Verb: **あ-stem + ない** (う-verbs use **わ**); ichidan: drop る.",
-      "い-adjective: **い → くない**; past **い → かった**.",
-      "Noun / copula: **ではない**; polite verb: **ません**.",
-      "**いい → よくない / よかった**."
-    ]}
+    {"type": "text", "text": "**ます**, the polite verb ending (食べます is a polite 食べる; more in the next lesson), has its own negative, **ません** (not ますない). And **いい** (good) uses its old stem **よい** for every change: **よかった** (it was good), **よくない** (not good). Never いくない or いかった."},
+    {"type": "heading", "text": "All the forms together"},
+    {"type": "table", "title": "Verbs and い-adjectives", "rows": [["Form", "Verb", "い-adjective"], ["Non-past", "飲む", "赤い"], ["Negative", "飲まない", "赤くない"], ["Past", "飲んだ", "赤かった"], ["Negative past", "飲まなかった", "赤くなかった"]]},
+    {"type": "table", "title": "Nouns (with だ)", "rows": [["Form", "Noun + だ"], ["Non-past", "学生だ"], ["Negative", "学生ではない"], ["Past", "学生だった"], ["Negative past", "学生ではなかった"]]},
+    {"type": "keypoints", "items": ["**ない** is an い-adjective: it changes like one (**なかった**, **なくて**).", "Verb: **あ-stem + ない** (う-verbs use **わ**); ichidan: drop る.", "い-adjective: **い → くない**; past **い → かった**.", "Noun / copula: **ではない**, past **だった**; polite verb: **ません**.", "**いい → よくない / よかった**."]}
   ],
   "questions": [
     {"id": 62, "type": "choice", "instruction": "What is the negative of 飲む?", "prompt": "", "options": ["飲まない", "飲みない", "飲めない", "飲もない"], "answer": 0, "note": "Use the あ-stem + ない."},

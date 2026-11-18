@@ -9,11 +9,7 @@
   "related": [503, 502],
   "blocks": [
     {"type": "text", "text": "In English you must always say who or what: \"I\", \"it\", \"she\". Japanese does not. Whenever the main carriage is clear from the situation, it is simply left out. The course calls this the **invisible carriage** (textbooks: the **zero pronoun**, or a dropped subject). It is still **there** in the grammar, you just do not say it."},
-    {"type": "diagram", "cars": [
-      {"text": "Ø", "role": "zero", "label": "invisible carriage"},
-      {"text": "が", "role": "particle"},
-      {"text": "先生だ", "role": "engine", "label": "engine"}
-    ], "text": "（私が）先生だ。 The carriage is empty, but the train still runs."},
+    {"type": "diagram", "cars": [{"text": "Ø", "role": "zero", "label": "invisible carriage"}, {"text": "が", "role": "particle"}, {"text": "先生だ", "role": "engine", "label": "engine"}], "text": "（私が）先生だ。 The carriage is empty, but the train still runs."},
     {"type": "heading", "text": "Who is the zero?"},
     {"type": "text", "text": "By default the zero is **the speaker**. But context can change it: if you point at a rustling bush and say 「猫だ！」, the zero is the thing you are looking at."},
     {"type": "example", "jp": "（私が）先生だ。", "en": "(I) am a teacher. The zero defaults to the speaker."},
@@ -21,21 +17,10 @@
     {"type": "example", "jp": "（今日が）月曜日だ。", "en": "(Today) is Monday. The zero is today."},
     {"type": "heading", "text": "The white carriage を"},
     {"type": "text", "text": "The two black cars are the core. **White carriages** add information to it. The first is **を**, which marks **what the action is done to** (textbooks: the **object**; a handy memory is that を is read \"o\", as in object)."},
-    {"type": "diagram", "cars": [
-      {"text": "私", "role": "carriage"},
-      {"text": "が", "role": "particle"},
-      {"text": "ケーキを", "role": "white", "label": "white carriage"},
-      {"text": "食べる", "role": "engine"}
-    ], "text": "私がケーキを食べる。 The core is \"I eat\"; ケーキを says what is eaten."},
+    {"type": "diagram", "cars": [{"text": "私", "role": "carriage"}, {"text": "が", "role": "particle"}, {"text": "ケーキを", "role": "white", "label": "white carriage"}, {"text": "食べる", "role": "engine"}], "text": "私がケーキを食べる。 The core is \"I eat\"; ケーキを says what is eaten."},
     {"type": "example", "jp": "私がケーキを食べる。", "en": "I eat cake."},
     {"type": "example", "jp": "（私が）ケーキを食べる。", "en": "(I) eat cake. With the main carriage dropped, the zero is \"I\" again."},
-    {"type": "example", "jp": "犬が肉を食べる。", "en": "The dog eats meat."},
-    {"type": "keypoints", "items": [
-      "A sentence cannot exist without a **が**: an action needs someone doing it, so a missing carriage is a **zero**, not a gap.",
-      "The zero is **you (the speaker)** unless the situation points to something else.",
-      "**を** marks what the action is done to. It attaches to the word **before** it.",
-      "Dropping the zero is normal and natural. Saying 私 every time sounds heavy."
-    ]}
+    {"type": "keypoints", "items": ["A sentence cannot exist without a **が**: an action needs someone doing it, so a missing carriage is a **zero**, not a gap.", "The zero is **you (the speaker)** unless the situation points to something else.", "**を** marks what the action is done to. It attaches to the word **before** it.", "Dropping the zero is normal and natural. Saying 私 every time sounds heavy."]}
   ],
   "questions": [
     {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）パン＿＿食べる。", "options": ["を", "が", "に", "で"], "answer": 0, "note": "を marks what the action is done to.", "en": "(I) eat bread."},
@@ -54,7 +39,7 @@
     {"id": 26, "type": "tap", "instruction": "Tap the white carriage", "options": ["妹が", "りんごを", "食べる"], "answer": 1, "note": "を adds what is eaten: a white carriage.", "en": "My younger sister eats an apple."},
     {"id": 27, "type": "tap", "instruction": "Tap the main carriage", "options": ["兄が", "手紙を", "書く"], "answer": 0, "note": "The main carriage is the one who did the writing.", "en": "My older brother writes a letter."},
     {"id": 28, "type": "tap", "instruction": "Tap the engine", "options": ["（私が）", "本を", "読む"], "answer": 2, "note": "The verb is the engine.", "en": "(I) read a book."},
-    {"id": 29, "type": "tap", "instruction": "Tap the white carriage", "options": ["友達が", "写真を", "見ている"], "answer": 1, "note": "写真を says what is being looked at.", "en": "A friend is looking at a photo."},
+    {"id": 29, "type": "tap", "instruction": "Tap the white carriage", "options": ["友達が", "写真を", "見る"], "answer": 1, "note": "写真を says what is looked at.", "en": "A friend looks at a photo."},
     {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "(I) drink coffee.", "options": ["（私が）", "コーヒーを", "飲む"], "note": "Zero carriage, white carriage, engine.", "en": "(I) drink coffee.", "alt": [["コーヒーを", "（私が）", "飲む"]]},
     {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "The cat eats fish.", "options": ["猫が", "魚を", "食べる"], "note": "Main carriage, white carriage, engine.", "en": "The cat eats fish.", "alt": [["魚を", "猫が", "食べる"]]},
     {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "(I) write a letter.", "options": ["（私が）", "手紙を", "書く"], "note": "The zero is I; 手紙を is the white carriage.", "en": "(I) write a letter.", "alt": [["手紙を", "（私が）", "書く"]]},

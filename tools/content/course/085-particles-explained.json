@@ -9,31 +9,17 @@
   "related": [505, 504, 554, 508, 503],
   "blocks": [
     {"type": "text", "text": "**Logical particles** say how the parts of a sentence fit together: who did it, to what, where, with what. Each attaches to a **noun** and the pair stays together. Think of them as a team of detectives, each asking one question about the event. **は** is not on the team: it only flags the topic."},
-    {"type": "table", "title": "The detective agency", "rows": [
-      ["Particle", "Question it answers", "Example"],
-      ["が", "Who did it? / what is it?", "さくらが歩く"],
-      ["を", "What was the action done to?", "水を飲む"],
-      ["に", "Where is it / where does it go?", "公園にいる"],
-      ["へ", "In what direction?", "公園へ行く"],
-      ["で", "Where did it happen? / by what means?", "公園で遊ぶ"],
-      ["と", "Together with whom? (joins two nouns)", "猫と犬"]
-    ]},
+    {"type": "table", "title": "The detective agency", "rows": [["Particle", "Question it answers", "Example"], ["が", "Who did it? / what is it?", "さくらが歩く"], ["を", "What was the action done to?", "水を飲む"], ["に", "Where is it / where does it go?", "公園にいる"], ["へ", "In what direction?", "公園へ行く"], ["で", "Where did it happen? / by what means?", "公園で遊ぶ"], ["と", "Together with whom? (joins two nouns)", "猫と犬"]]},
     {"type": "heading", "text": "Chief Detective が"},
     {"type": "text", "text": "**が** is needed in every sentence, even when it is hidden. It is also the only logical particle that works in a **description** (A is B); the others work with action verbs. And a logical particle never changes its job."},
     {"type": "heading", "text": "で: where and with what"},
     {"type": "text", "text": "You can **be** in a park (に), but to **do something** there you need で. で also marks the **means**: the bus you go by, or the language you speak in."},
-    {"type": "example", "jp": "（私が）公園にいる。", "en": "(I) am in the park."},
     {"type": "example", "jp": "（私が）公園で遊んでいる。", "en": "(I) am playing in the park."},
     {"type": "example", "jp": "（私が）バスで公園に行く。", "en": "(I) go to the park by bus."},
     {"type": "example", "jp": "（私が）日本語を話す。", "en": "(I) speak Japanese. (Japanese is the thing spoken)"},
     {"type": "example", "jp": "（私が）日本語で話す。", "en": "(I) speak in Japanese. (Japanese is the means)"},
     {"type": "example", "jp": "さくらとメアリーが歩いていた。", "en": "Sakura and Mary were walking."},
-    {"type": "keypoints", "items": [
-      "**が** doer · **を** done-to · **に** target / place · **へ** direction · **で** place of action and means.",
-      "**と** joins nouns and says nothing about the action.",
-      "**は** is not a logical particle.",
-      "Do not confuse the particles and they will not confuse you."
-    ]}
+    {"type": "keypoints", "items": ["**が** doer · **を** done-to · **に** target / place · **へ** direction · **で** place of action and means.", "**と** joins nouns and says nothing about the action.", "**は** is not a logical particle.", "Do not confuse the particles and they will not confuse you."]}
   ],
   "questions": [
     {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）図書館＿＿勉強している。", "options": ["で", "に", "を", "が"], "answer": 0, "note": "で marks where an action takes place.", "en": "(I) am studying at the library."},

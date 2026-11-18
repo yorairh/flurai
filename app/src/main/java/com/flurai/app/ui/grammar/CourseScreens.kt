@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -431,7 +433,9 @@ fun TrainDiagram(cars: List<TrainCar>) {
                     x += 14.dp.toPx()
                 }
             }
-            .padding(horizontal = 4.dp),
+            .padding(horizontal = 4.dp)
+            // every car as tall as the tallest (a car with furigana is taller), so the couplings meet
+            .height(IntrinsicSize.Max),
         verticalAlignment = Alignment.Bottom,
     ) {
         val anyLabel = cars.any { it.label != null }
@@ -474,7 +478,7 @@ private fun Car(car: TrainCar, reserveLabel: Boolean) {
         RoundedCornerShape(8.dp)
     }
     Column(
-        Modifier.drawBehind {
+        Modifier.fillMaxHeight().drawBehind {
             if (engine) {
                 // chimney and smoke above the boiler
                 val cx = 22.dp.toPx()
@@ -486,10 +490,12 @@ private fun Car(car: TrainCar, reserveLabel: Boolean) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.height(16.dp))
-        Box {
-            Surface(shape = shape, color = background, contentColor = content, border = border) {
+        Box(Modifier.weight(1f)) {
+            Surface(Modifier.fillMaxHeight(), shape = shape, color = background, contentColor = content, border = border) {
+                // the text sits at the bottom, so cars without furigana line up with the ones that have it
                 Column(
-                    Modifier.padding(start = 12.dp, end = if (engine) 20.dp else 12.dp, top = 8.dp, bottom = 8.dp),
+                    Modifier.fillMaxHeight().padding(start = 12.dp, end = if (engine) 20.dp else 12.dp, top = 8.dp, bottom = 8.dp),
+                    verticalArrangement = Arrangement.Bottom,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     FuriganaText(car.text, car.ruby, MaterialTheme.typography.titleMedium.japanese())

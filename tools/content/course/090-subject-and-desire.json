@@ -5,18 +5,13 @@
   "jlpt": 5,
   "title": "The subject of the sentence and expressing desire",
   "summary": "Japanese happily lets things be the main carriage, so \"I like coffee\" is really \"coffee is pleasing\". The same logic explains ほしい, たい and たがる.",
+  "readings": {"食べ**たい**": "{食|た}べ**たい**", "食べ)": "{食|た}べ)"},
   "video": "https://www.youtube.com/watch?v=vk3aKqMQwhM",
   "related": [576, 514, 486, 487, 577, 580],
   "blocks": [
     {"type": "text", "text": "English wants a person, usually \"I\", to be the actor of every sentence. Japanese is happy to put a **thing** in the main carriage. This explains the sentences that confuse learners most."},
     {"type": "heading", "text": "\"I like coffee\" is not about I"},
-    {"type": "example", "jp": "私はコーヒーが好きだ。", "en": "As for me, coffee is pleasing. (I like coffee.)"},
-    {"type": "diagram", "cars": [
-      {"text": "私は", "role": "topic", "label": "topic"},
-      {"text": "コーヒー", "role": "carriage", "label": "main carriage"},
-      {"text": "が", "role": "particle"},
-      {"text": "好きだ", "role": "engine", "label": "engine"}
-    ], "text": "The main carriage is コーヒー. 好き is a な-type word meaning \"pleasing\"."},
+    {"type": "diagram", "cars": [{"text": "私は", "role": "topic", "label": "topic"}, {"text": "コーヒー", "role": "carriage", "label": "main carriage"}, {"text": "が", "role": "particle"}, {"text": "好きだ", "role": "engine", "label": "engine"}], "text": "The main carriage is コーヒー. 好き is a な-type word meaning \"pleasing\"."},
     {"type": "text", "text": "\"I\" is only the **topic**. The main carriage is **coffee**, and the engine says coffee is \"pleasing\". Textbooks that say が marks \"the object\" here teach you something that never happens: が always marks the main carriage."},
     {"type": "example", "jp": "本がわかる。", "en": "The book is understandable. (I understand the book.)"},
     {"type": "heading", "text": "Wanting: ほしい and たい"},
@@ -24,17 +19,13 @@
     {"type": "example", "jp": "（私は）子猫がほしい。", "en": "(I) want a kitten. (A kitten is wanted.)"},
     {"type": "text", "text": "To want to **do** something, attach the adjective **たい** to the **い-stem** of the verb: 食べる → 食べ**たい**. Again the thing is the main carriage: \"crepes are eating-desired\". With nothing else named, the zero is the speaker."},
     {"type": "example", "jp": "私はクレープが食べたい。", "en": "I want to eat crepes."},
-    {"type": "example", "jp": "（私が）食べたい。", "en": "(I) want to eat."},
+    {"type": "text", "text": "To make the **い-stem**: an ichidan verb drops **る** (食べる → 食べ), and a godan verb changes its last kana to the **い** row (飲む → 飲み). Then add **たい** (い-stem + たい)."},
+    {"type": "table", "title": "Making たい", "rows": [["Verb", "Want to do"], ["食べる (eat)", "食べたい"], ["見る (see)", "見たい"], ["行く (go)", "行きたい"], ["飲む (drink)", "飲みたい"], ["話す (speak)", "話したい"], ["買う (buy)", "買いたい"], ["する (do)", "したい"], ["来る (come)", "来たい"]]},
     {"type": "heading", "text": "Feelings of other people: がる"},
     {"type": "text", "text": "Words like ほしい, たい and 怖い describe a feeling **from the inside**: the speaker's. They cannot describe someone else's feelings, because you cannot see them. For other people, attach **がる** (\"shows signs of\") to the stem. がる makes a verb, because all you can see is behavior."},
     {"type": "example", "jp": "おばけが怖い。", "en": "Ghosts are scary. (I am scared of ghosts.)"},
     {"type": "example", "jp": "さくらがケーキを欲しがる。", "en": "Sakura wants cake. (she shows signs of wanting it)"},
-    {"type": "keypoints", "items": [
-      "**が** marks the main carriage even in **好きだ**, **ほしい**, **たい** and **わかる**.",
-      "**ほしい**: \"is wanted\" (い-adjective). **い-stem + たい**: \"is desired to do\".",
-      "Feelings from the inside belong to the **speaker**; for someone else, add **がる**.",
-      "The topic (**私は**) is only the one who feels it."
-    ]}
+    {"type": "keypoints", "items": ["**が** marks the main carriage even in **好きだ**, **ほしい**, **たい** and **わかる**.", "**ほしい**: \"is wanted\" (い-adjective). **い-stem + たい**: \"is desired to do\".", "Feelings from the inside belong to the **speaker**; for someone else, add **がる**.", "The topic (**私は**) is only the one who feels it."]}
   ],
   "questions": [
     {"id": 36, "type": "choice", "instruction": "Fill the gap", "prompt": "弟はサッカー＿＿好きだ。", "options": ["が", "を", "に", "で"], "answer": 0, "note": "好きだ describes the thing: it is the main carriage.", "en": "My younger brother likes soccer."},

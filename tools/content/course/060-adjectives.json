@@ -11,36 +11,19 @@
     {"type": "text", "text": "You already know three kinds of engine: a **verb** (う-train), a **noun + だ** (だ-train) and an **い-adjective** (い-train). Each of them can also be turned into a **white engine**: a describing word that sits **in front of a noun** and cannot pull a train by itself. It simply tells you more about the noun behind it."},
     {"type": "heading", "text": "1. い-adjectives"},
     {"type": "text", "text": "An い-adjective is already in the right shape. Put it in front of the noun."},
-    {"type": "diagram", "cars": [
-      {"text": "赤い", "role": "white", "label": "white engine"},
-      {"text": "ペン", "role": "carriage"},
-      {"text": "が", "role": "particle"},
-      {"text": "小さい", "role": "engine"}
-    ], "text": "赤いペンが小さい。 The red pen is small."},
-    {"type": "example", "jp": "ペンが赤い。", "en": "The pen is red. (engine)"},
+    {"type": "diagram", "cars": [{"text": "赤い", "role": "white", "label": "white engine"}, {"text": "ペン", "role": "carriage"}, {"text": "が", "role": "particle"}, {"text": "小さい", "role": "engine"}], "text": "赤いペンが小さい。 The red pen is small."},
     {"type": "example", "jp": "赤いペンが小さい。", "en": "The red pen is small. (white engine + engine)"},
     {"type": "heading", "text": "2. Verbs: whole clauses can describe a noun"},
     {"type": "text", "text": "A verb in any tense can describe the noun that comes after it, and so can everything attached to it. This is not a passive; it is simply a sentence squeezed in front of a noun."},
-    {"type": "example", "jp": "歌った少女が寝ている。", "en": "The girl who sang is sleeping."},
-    {"type": "example", "jp": "犬が辞書を食べた。", "en": "The dog ate the dictionary."},
     {"type": "example", "jp": "辞書を食べた犬がやんちゃだ。", "en": "The dog that ate the dictionary is naughty."},
-    {"type": "example", "jp": "犬が食べた辞書", "en": "the dictionary that the dog ate"},
     {"type": "heading", "text": "3. Noun + だ becomes な"},
     {"type": "text", "text": "A copula engine (noun + だ) turns into **な** in front of a noun. Words that behave this way are called な-adjectives (textbooks) or adjectival nouns. They are nouns of a special class, which is why they need だ as an engine."},
-    {"type": "example", "jp": "犬がやんちゃだ。", "en": "The dog is naughty."},
     {"type": "example", "jp": "やんちゃな犬が寝ている。", "en": "The naughty dog is sleeping."},
-    {"type": "example", "jp": "静かな町", "en": "a quiet town"},
     {"type": "heading", "text": "4. The の car"},
     {"type": "text", "text": "An ordinary noun describes another noun with **の**. It works like English 's, but it also puts something in a **class**: ピンクのドレス (a dress of the class \"pink\"), ウサギのオスカー (Oscar of the class \"rabbit\"). You do not have to memorize which nouns take の and which take な. You will pick it up from exposure, and a wrong choice is only a small mistake."},
     {"type": "example", "jp": "さくらのドレス", "en": "Sakura's dress"},
-    {"type": "example", "jp": "私の鼻", "en": "my nose"},
     {"type": "example", "jp": "ピンクのドレス", "en": "a pink dress"},
-    {"type": "keypoints", "title": "Four ways to describe a noun", "items": [
-      "**い-adjective** straight in front of the noun: **赤いペン**.",
-      "**Verb clause** in front of the noun: **歌った少女**.",
-      "**だ → な**: **静かな町**.",
-      "**Noun + の**: **さくらのドレス**."
-    ]}
+    {"type": "keypoints", "title": "Four ways to describe a noun", "items": ["**い-adjective** straight in front of the noun: **赤いペン**.", "**Verb clause** in front of the noun: **歌った少女**.", "**だ → な**: **静かな町**.", "**Noun + の**: **さくらのドレス**."]}
   ],
   "questions": [
     {"id": 59, "type": "choice", "instruction": "Fill the gap", "prompt": "大き＿＿犬が走っている。", "options": ["い", "な", "の", "に"], "answer": 0, "note": "An い-adjective goes straight in front of a noun.", "en": "A big dog is running."},

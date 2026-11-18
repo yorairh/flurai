@@ -11,35 +11,21 @@
     {"type": "text", "text": "**に** is a logical particle that marks the **target** of an action. If を is what the action is done to, に is **where it is aimed**. Almost every use of に is a target of some kind."},
     {"type": "heading", "text": "1. A physical target: where you go"},
     {"type": "example", "jp": "（私が）公園に行く。", "en": "(I) go to the park."},
-    {"type": "example", "jp": "（私が）さくらにボールを投げた。", "en": "(I) threw the ball to Sakura."},
     {"type": "heading", "text": "2. A purpose target: why you go"},
     {"type": "text", "text": "Take the **い-stem** of a verb (it works as a noun for the act) and mark it with に. The place is the physical target; the purpose is the volitional target. One sentence can have both."},
-    {"type": "diagram", "cars": [
-      {"text": "Øが", "role": "zero"},
-      {"text": "店に", "role": "white", "label": "place"},
-      {"text": "卵を", "role": "white"},
-      {"text": "買いに", "role": "white", "label": "purpose"},
-      {"text": "行く", "role": "engine"}
-    ], "text": "店に卵を買いに行く。 (I) go to the shop to buy eggs."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero"}, {"text": "店に", "role": "white", "label": "place"}, {"text": "卵を", "role": "white"}, {"text": "買いに", "role": "white", "label": "purpose"}, {"text": "行く", "role": "engine"}], "text": "店に卵を買いに行く。 (I) go to the shop to buy eggs."},
     {"type": "example", "jp": "店に卵を買いに行く。", "en": "(I) go to the shop to buy eggs."},
     {"type": "heading", "text": "3. Where something is"},
     {"type": "text", "text": "Being at a place is a target that has already been reached, so に marks the location of existing and being."},
     {"type": "example", "jp": "（私が）公園にいる。", "en": "(I) am in the park."},
-    {"type": "example", "jp": "本は机の上にある。", "en": "The book is on the desk."},
     {"type": "heading", "text": "4. What something becomes"},
     {"type": "text", "text": "The result of a change is a target too. The picture is transformation: A becomes B, and B takes に."},
     {"type": "example", "jp": "さくらはカエルになった。", "en": "Sakura became a frog."},
-    {"type": "example", "jp": "今年（私が）十八歳になる。", "en": "This year (I) turn eighteen."},
     {"type": "text", "text": "An **い-adjective** cannot take に directly (it is an engine, not a carriage). Change **い → く** to get an adverb, and then use なる: 美しい → 美しく**なる**."},
     {"type": "example", "jp": "さくらが美しくなった。", "en": "Sakura became beautiful."},
     {"type": "heading", "text": "And へ?"},
     {"type": "text", "text": "**へ** (read \"e\" as a particle) is a one-trick pony. It repeats only the **destination** use of に (公園へ行く) and can never mark where something stays."},
-    {"type": "keypoints", "items": [
-      "**に** marks a **target**: a destination, a purpose, a place where something is, or what something turns into.",
-      "Purpose: **い-stem + に + 行く**.",
-      "い-adjective + なる: **い → く**, then **なる**.",
-      "**へ** only marks a **direction of travel**; it cannot mark a location."
-    ]}
+    {"type": "keypoints", "items": ["**に** marks a **target**: a destination, a purpose, a place where something is, or what something turns into.", "Purpose: **い-stem + に + 行く**.", "い-adjective + なる: **い → く**, then **なる**.", "**へ** only marks a **direction of travel**; it cannot mark a location."]}
   ],
   "questions": [
     {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）図書館＿＿行く。", "options": ["に", "を", "で", "が"], "answer": 0, "note": "に marks the destination.", "en": "(I) go to the library."},
