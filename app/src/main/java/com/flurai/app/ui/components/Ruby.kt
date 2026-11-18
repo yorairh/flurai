@@ -30,6 +30,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -75,7 +76,7 @@ val LocalFurigana = staticCompositionLocalOf { true }
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = emptyList(), onWord: ((WordEntity) -> Unit)? = null) {
-    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, textAlign = TextAlign.Center)
+    val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
     val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
     val text = parts.joinToString("") { it.text }
     val cells = remember(parts, tokens) { rubyCells(parts, tokens) }
@@ -91,13 +92,13 @@ fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = e
             }
         },
     ) {
+        val rooms = remember(cells, main.fontSize) {
+            rubyRooms(cells.map { RubyRoomCell(it.text, it.ruby, it.tail) }, ruby.fontSize.value / main.fontSize.value)
+        }
         cells.forEachIndexed { index, cell ->
             val tappable = cell.word != null && onWord != null
-            // A reading wider than its kanji may reach over a neighbor that has no reading of its own.
-            val leftFree = index > 0 && (cells[index - 1].ruby == null || cells[index - 1].tail.isNotEmpty())
-            val rightFree = cell.tail.isNotEmpty() || (index < cells.lastIndex && cells[index + 1].ruby == null)
             Row(if (tappable) Modifier.clickable { onWord?.invoke(cell.word!!) } else Modifier) {
-                RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable, leftFree = leftFree, rightFree = rightFree)
+                RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable, room = rooms[index], atStart = index == 0)
                 if (cell.tail.isNotEmpty()) RubyCell(cell.tail, null, main, ruby, rubyColor, underline = false)
             }
         }
@@ -161,24 +162,71 @@ internal fun rubyCells(parts: List<RubyPart>, tokens: List<Token>): List<RubyCel
 
 private fun Char.isClosing() = this in CLOSING
 
+/** A cell for [rubyRooms]: its text, its reading (null for plain text) and the kana that stay with it. */
+internal class RubyRoomCell(val text: String, val ruby: String?, val tail: String = "")
+
+/** How far a cell's reading may reach over its left and right neighbors, in ems of the text's font size. */
+internal data class RubyRoom(val left: Float, val right: Float) {
+    companion object { val NONE = RubyRoom(0f, 0f) }
+}
+
+/** Rough width in ems: Japanese characters are square, others about half as wide. */
+internal fun emWidth(text: String): Float = text.sumOf { c -> if (c.code >= 0x2E80) 1.0 else 0.55 }.toFloat()
+
+/**
+ * Where each reading may reach. Between two words with readings lie the first word's [RubyRoomCell.tail] and any
+ * plain cells: the first word's reading takes what it needs of that gap and the next word's reading only the
+ * rest (店に卵: みせ already covers part of に, so たまご may not), so readings never run into each other and no
+ * gap opens between the words. Next to plain text only, a reading may reach freely (the drawing caps it at one
+ * text width). [rubyScale] is the reading's font size over the text's; with [firstAtStart] the first reading
+ * starts where the text starts and takes all its extra width on the right.
+ */
+internal fun rubyRooms(cells: List<RubyRoomCell>, rubyScale: Float, firstAtStart: Boolean = true): List<RubyRoom> {
+    val free = Float.MAX_VALUE
+    fun extra(c: RubyRoomCell) = c.ruby?.let { (emWidth(it) * rubyScale - emWidth(c.text)).coerceAtLeast(0f) } ?: 0f
+    // what each reading takes on its right
+    val wantRight = cells.mapIndexed { i, c ->
+        val e = extra(c)
+        if (i == 0 && firstAtStart) minOf(e, emWidth(c.text) * 1.2f) else minOf(e / 2, emWidth(c.text))
+    }
+    val withReading = cells.indices.filter { cells[it].ruby != null }
+    // the width between the reading of cell [a] and the next one at [b]: the tail of [a] and the plain cells between
+    fun gap(a: Int, b: Int) = emWidth(cells[a].tail) + (a + 1 until b).sumOf { emWidth(cells[it].text + cells[it].tail).toDouble() }.toFloat()
+    return cells.indices.map { i ->
+        if (cells[i].ruby == null) return@map RubyRoom.NONE
+        val k = withReading.indexOf(i)
+        val prev = withReading.getOrNull(k - 1)
+        val next = withReading.getOrNull(k + 1)
+        val left = when {
+            prev != null -> (gap(prev, i) - wantRight[prev]).coerceAtLeast(0f)
+            i == 0 -> 0f
+            else -> free
+        }
+        val right = if (next != null) gap(i, next) else free
+        RubyRoom(left, right)
+    }
+}
+
 /** The base text's line height: close to the font size, so a paragraph with readings is not much looser than one without. */
 internal fun tightLineHeight(style: TextStyle): TextUnit =
     if (style.fontSize.isSpecified) style.fontSize * 1.25f else style.lineHeight
 
 /**
- * A reading stacked over its text. The cell is as wide as the text; a reading wider than that reaches over the
- * neighbor on a side that is [leftFree] / [rightFree] (has no reading of its own), at most one text width, and
- * widens the cell by what does not fit. Without this a long reading over one kanji leaves a gap on both sides.
+ * A reading stacked over its text. The cell is as wide as the text; a reading wider than that reaches over its
+ * neighbors, at most [leftRoom] / [rightRoom] pixels (see [rubyRooms]) and one text width, and widens the cell by
+ * what does not fit. Without this a long reading over one kanji leaves a gap on both sides. [atStart] (the first
+ * word of a text) puts the reading where the text starts, so the line is not indented.
  */
 @Composable
 internal fun RubyStack(
     reading: String?,
     rubyStyle: TextStyle,
     rubyColor: Color,
-    leftFree: Boolean,
-    rightFree: Boolean,
+    leftRoom: Float,
+    rightRoom: Float,
     modifier: Modifier = Modifier,
     reserveLine: Boolean = true,
+    atStart: Boolean = false,
     base: @Composable () -> Unit,
 ) {
     Layout(
@@ -198,9 +246,17 @@ internal fun RubyStack(
         val r = measurables[0].measure(loose)
         val b = measurables[1].measure(loose)
         val extra = (r.width - b.width).coerceAtLeast(0)
+        if (atStart) {
+            // the first word of a text: the reading starts where the text starts, so the line is not indented
+            val rightOver = minOf(extra, (b.width * 1.2f).toInt(), rightRoom.toInt())
+            return@Layout layout(b.width + extra - rightOver, r.height + b.height) {
+                r.place(0, 0)
+                b.place(0, r.height)
+            }
+        }
         val half = extra / 2
-        val leftOver = if (leftFree) minOf(half, (b.width * 0.6f).toInt()) else 0
-        val rightOver = if (rightFree) minOf(extra - half, (b.width * 0.6f).toInt()) else 0
+        val leftOver = minOf(half, b.width, leftRoom.toInt())
+        val rightOver = minOf(extra - half, b.width, rightRoom.toInt())
         val leftPad = half - leftOver
         val rightPad = extra - half - rightOver
         val width = b.width + leftPad + rightPad
@@ -219,10 +275,11 @@ private fun RubyCell(
     ruby: TextStyle,
     rubyColor: Color,
     underline: Boolean,
-    leftFree: Boolean = false,
-    rightFree: Boolean = false,
+    room: RubyRoom = RubyRoom.NONE,
+    atStart: Boolean = false,
 ) {
-    RubyStack(reading, ruby, rubyColor, leftFree, rightFree) {
+    val px = with(LocalDensity.current) { main.fontSize.toPx() }
+    RubyStack(reading, ruby, rubyColor, room.left * px, room.right * px, atStart = atStart) {
         Text(
             text,
             style = main.copy(lineHeight = tightLineHeight(main)),
@@ -369,7 +426,7 @@ fun FuriganaText(
         return
     }
     val cells = remember(ruby) { mixedCells(ruby) }
-    val small = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, textAlign = TextAlign.Center)
+    val small = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
     val smallColor = (if (color == Color.Unspecified) LocalContentColor.current else color).copy(alpha = 0.75f)
     FlowRow(
         modifier.clearAndSetSemantics { contentDescription = plainOf(ruby) },
@@ -377,20 +434,25 @@ fun FuriganaText(
         verticalArrangement = Arrangement.spacedBy(0.dp),
         itemVerticalAlignment = Alignment.Bottom,
     ) {
+        val rooms = remember(cells, style.fontSize) {
+            rubyRooms(cells.map { RubyRoomCell(it.text, it.ruby, it.tail) }, small.fontSize.value / style.fontSize.value, firstAtStart = !centered)
+        }
+        val px = with(LocalDensity.current) { style.fontSize.toPx() }
         cells.forEachIndexed { index, cell ->
             // A word with a reading gets a tight line under it; plain words keep the style's own line, so a line
             // without readings is as tall as in a normal paragraph.
             val withReading = cell.ruby != null
             val cellStyle = (if (cell.bold) style.copy(fontWeight = FontWeight.Bold) else style)
                 .let { if (withReading) it.copy(lineHeight = tightLineHeight(style)) else it }
-            val leftFree = index > 0 && (cells[index - 1].ruby == null || cells[index - 1].tail.isNotEmpty())
-            val rightFree = cell.tail.isNotEmpty() || (index < cells.lastIndex && cells[index + 1].ruby == null)
+            // a reading reaches left only over a plain word: the kana after a word with a reading may already be
+            // under that word's own reading (店に卵: みせ reaches over に, so たまご must not)
+            val room = rooms[index]
             Row(verticalAlignment = Alignment.Bottom) {
-                RubyStack(cell.ruby, small, smallColor, leftFree, rightFree, reserveLine = false) {
+                RubyStack(cell.ruby, small, smallColor, room.left * px, room.right * px, reserveLine = false, atStart = index == 0 && !centered) {
                     Text(cell.text, style = cellStyle, color = color, maxLines = 1, softWrap = false)
                 }
                 if (cell.tail.isNotEmpty()) {
-                    RubyStack(null, small, smallColor, leftFree = false, rightFree = false, reserveLine = false) {
+                    RubyStack(null, small, smallColor, 0f, 0f, reserveLine = false) {
                         Text(cell.tail, style = cellStyle, color = color, maxLines = 1, softWrap = false)
                     }
                 }

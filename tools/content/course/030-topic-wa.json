@@ -10,34 +10,23 @@
   "blocks": [
     {"type": "text", "text": "Many courses teach **は** on day one, so learners think it means \"is\" or \"the subject\". It is neither. は (read \"wa\" when it is a particle) can never be a black carriage, and it is not a white carriage like を. It is a **flag** that you plant on the **topic**: what the sentence is about. It does not say anything about the topic; the real sentence does that."},
     {"type": "text", "text": "Because は is not a logical particle, the sentence underneath still needs its own main carriage and が (often a zero)."},
-    {"type": "diagram", "cars": [
-      {"text": "私は", "role": "topic", "label": "topic flag"},
-      {"text": "Ø", "role": "zero"}, {"text": "が", "role": "particle"},
-      {"text": "学生だ", "role": "engine"}
-    ], "text": "私は学生だ。 Literally: \"As for me, (I) am a student.\""},
-    {"type": "example", "jp": "私は学生だ。", "en": "As for me, (I) am a student."},
+    {"type": "diagram", "cars": [{"text": "私は", "role": "topic", "label": "topic flag"}, {"text": "Ø", "role": "zero"}, {"text": "が", "role": "particle"}, {"text": "学生だ", "role": "engine"}], "text": "私は学生だ。 Literally: \"As for me, (I) am a student.\""},
     {"type": "heading", "text": "The eel sentence"},
     {"type": "text", "text": "A famous puzzle: 「私はうなぎだ」 does **not** mean \"I am an eel\". At a restaurant the zero carriage is the **dish**, not the speaker: \"As for me, (it) is eel,\" so \"I'll have the eel.\" The topic flag shapes which zero you hear."},
     {"type": "example", "jp": "私はうなぎだ。", "en": "As for me, (it) is eel: I'll have the eel."},
     {"type": "heading", "text": "The logical particles decide who does what"},
     {"type": "text", "text": "**が** marks the doer, **を** marks what is done to, and **に** marks the **target** it is aimed at. Because these three fix the roles, word order is flexible. Even a silly sentence stays grammatical: the particles decide."},
     {"type": "example", "jp": "私がさくらにボールを投げる。", "en": "I throw the ball to Sakura."},
-    {"type": "example", "jp": "さくらに私がボールを投げる。", "en": "I throw the ball to Sakura. (same roles, different order)"},
     {"type": "example", "jp": "ボールがさくらを私に投げる。", "en": "The ball throws Sakura to me. (nonsense, but perfectly grammatical)"},
     {"type": "heading", "text": "Moving は changes emphasis, never logic"},
     {"type": "text", "text": "Changing a logical particle changes the event. Moving the は flag only changes what you are talking about."},
     {"type": "example", "jp": "私はさくらにボールを投げる。", "en": "As for me, I throw the ball to Sakura."},
     {"type": "example", "jp": "ボールは私がさくらに（Øを）投げる。", "en": "As for the ball, I throw (it) to Sakura."},
-    {"type": "keypoints", "items": [
-      "**は** flags the **topic**. It says nothing about it.",
-      "は is not a main carriage and not a white carriage.",
-      "The sentence under the topic still has its own が, often a zero.",
-      "**が・を・に** decide who does what to whom. Moving **は** never changes that."
-    ]}
+    {"type": "keypoints", "items": ["**は** flags the **topic**. It says nothing about it.", "は is not a main carriage and not a white carriage.", "The sentence under the topic still has its own が, often a zero.", "**が・を・に** decide who does what to whom. Moving **は** never changes that."]}
   ],
   "questions": [
     {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "兄＿＿医者だ。", "options": ["は", "を", "に", "で"], "answer": 0, "note": "は flags the topic.", "en": "As for my older brother, (he) is a doctor."},
-    {"id": 14, "type": "choice", "instruction": "Fill the gap", "prompt": "妹は私＿＿ペンをくれた。", "options": ["を", "に", "で", "は"], "answer": 1, "note": "に marks the target of the giving.", "en": "My younger sister gave me a pen."},
+    {"id": 14, "type": "choice", "instruction": "Fill the gap", "prompt": "妹は私＿＿ボールを投げる。", "options": ["を", "に", "で", "は"], "answer": 1, "note": "に marks the target of the throw.", "en": "My younger sister throws the ball to me."},
     {"id": 15, "type": "choice", "instruction": "What does は mark?", "prompt": "", "options": ["The main carriage", "The object", "The topic", "The place"], "answer": 2, "note": "は plants a flag on what the sentence is about."},
     {"id": 16, "type": "choice", "instruction": "True or false?", "prompt": "は means 'is'.", "options": ["True", "False"], "answer": 1, "note": "は only flags the topic; the engine says the real thing."},
     {"id": 17, "type": "choice", "instruction": "Does は say anything about the topic?", "prompt": "", "options": ["No, the rest of the sentence does", "Yes, that it is the subject", "Yes, that it exists", "Yes, that it is a verb"], "answer": 0, "note": "The flag only points; the sentence under it speaks."},

@@ -10,15 +10,8 @@
   "blocks": [
     {"type": "text", "text": "Textbooks teach \"conjugation\" as a long list of verb shapes to memorize. The course says there is a simpler picture: a verb has a few **stems**, and each stem takes its own **helper words** (helper verbs or helper adjectives). The helper word brings the meaning; the stem is just where it plugs in. The changes you see in textbooks come from writing in romaji. In kana the pattern is regular."},
     {"type": "text", "text": "Every verb ends in a **う-row** sound. To get a stem, change that last kana to a different row of the kana chart: **い-stem**, **あ-stem**, **え-stem** and **お-stem**. Ichidan verbs simply drop る."},
-    {"type": "table", "title": "The four stems of 話す (to speak)", "rows": [
-      ["Stem", "Form", "Helper words"],
-      ["い-stem", "話し", "ます, たい, noun (話し方)"],
-      ["あ-stem", "話さ", "ない, せる (causative), れる (receptive)"],
-      ["え-stem", "話せ", "る (potential)"],
-      ["お-stem", "話そ", "う (volitional)"]
-    ]},
+    {"type": "table", "title": "The four stems of 話す (to speak)", "rows": [["Stem", "Form", "Helper words"], ["い-stem", "話し", "ます (polite), たい (want to), a noun (話し方, way of speaking)"], ["あ-stem", "話さ", "ない (not), せる (make someone do), れる (be done to)"], ["え-stem", "話せ", "る (can)"], ["お-stem", "話そ", "う (let's)"]]},
     {"type": "heading", "text": "Examples with 話す"},
-    {"type": "example", "jp": "話します。", "en": "(I) speak. (polite)"},
     {"type": "example", "jp": "話したい。", "en": "(I) want to speak."},
     {"type": "example", "jp": "話さない。", "en": "(I) do not speak."},
     {"type": "example", "jp": "話せる。", "en": "(I) can speak."},
@@ -28,12 +21,7 @@
     {"type": "heading", "text": "The い-stem is also a noun"},
     {"type": "text", "text": "The い-stem can stand alone as a noun for the act: 買う → 買い (buying), so 買い物 is \"shopping\" (buy + thing), and 飲み物 is \"a drink\"."},
     {"type": "example", "jp": "飲み物がほしい。", "en": "(I) want a drink."},
-    {"type": "keypoints", "title": "Which helper goes on which stem", "items": [
-      "**い-stem**: ます, たい, nouns (買い物).",
-      "**あ-stem**: ない, せる / させる, れる / られる.",
-      "**え-stem**: potential る / られる (**話せる**).",
-      "**お-stem**: volitional う (**話そう**); ichidan: よう."
-    ]}
+    {"type": "keypoints", "title": "Which helper goes on which stem", "items": ["**い-stem**: ます, たい, nouns (買い物).", "**あ-stem**: ない, せる / させる, れる / られる.", "**え-stem**: potential る / られる (**話せる**).", "**お-stem**: volitional う (**話そう**); ichidan: よう."]}
   ],
   "questions": [
     {"id": 59, "type": "choice", "instruction": "What is the い-stem of 飲む?", "prompt": "", "options": ["飲み", "飲ま", "飲め", "飲も"], "answer": 0, "note": "The い-stem changes the last kana to い."},

@@ -7,35 +7,24 @@
   "summary": "Verbs come in three groups. Each group has its own recipe for the て-form and the た-form.",
   "video": "https://www.youtube.com/watch?v=GzEVLMDC8nw",
   "related": [515, 551, 578, 516],
-  "readings": {"行いて": "{行|い}いて"},
+  "readings": {"行いて": "{行|い}いて", "Note that 来 is read": "Note that 来 is read"},
   "blocks": [
-    {"type": "text", "text": "To make the て-form (and the past た-form, which follows the very same rules) you first need to know which of three groups a verb belongs to."},
-    {"type": "heading", "text": "Group 1: ichidan verbs (\"one-level\")"},
-    {"type": "text", "text": "Ichidan verbs end in **いる** or **える**, and conjugation is easy: **drop る and add the ending**. 食べる becomes 食べて and 食べた. 見る becomes 見て and 見た."},
-    {"type": "heading", "text": "Group 2: godan verbs (\"five-level\")"},
-    {"type": "text", "text": "This is the biggest group. A godan verb can end in **any** う-row sound, and the て-form depends on that last kana. Careful: some verbs that end in いる or える are godan, not ichidan: 帰る (to return) and 走る (to run) are godan."},
-    {"type": "table", "title": "How godan verbs make the て-form", "rows": [
-      ["Ending", "て-form", "Example"],
-      ["う・つ・る", "って", "買う→買って"],
-      ["ぬ・ぶ・む", "んで", "飲む→飲んで"],
-      ["く", "いて", "歩く→歩いて"],
-      ["ぐ", "いで", "泳ぐ→泳いで"],
-      ["す", "して", "話す→話して"]
-    ]},
-    {"type": "text", "text": "The た-form works the same way with た (and だ after ん and いで): 飲む→飲んだ, 歩く→歩いた, 泳ぐ→泳いだ. 死ぬ is the only verb that ends in ぬ. One exception: **行く** becomes **行って**, not 行いて."},
-    {"type": "heading", "text": "Group 3: irregular verbs"},
-    {"type": "text", "text": "Only two: **来る** (to come, て-form 来て) and **する** (to do, て-form して)."},
+    {"type": "text", "text": "To make the て-form or the past (た-form) of a verb, first find out which of **three kinds** a verb is. Each kind has its own recipe, and the past always follows the same recipe as the て-form, with **た** instead of **て**. (Textbooks number these kinds differently from one another, so this course uses their names.)"},
+    {"type": "heading", "text": "Ichidan verbs (\"one-level\")"},
+    {"type": "text", "text": "An ichidan verb ends in **る**, and the kana just before る has an **い** or **え** sound: 見る (**み**る), 起きる (お**き**る), 食べる (た**べ**る), 寝る (**ね**る). The recipe is easy: **drop る and add て or た**."},
+    {"type": "table", "title": "Ichidan verbs", "rows": [["Verb", "て-form", "Past"], ["食べる", "食べて", "食べた"], ["見る", "見て", "見た"], ["起きる", "起きて", "起きた"], ["寝る", "寝て", "寝た"]]},
+    {"type": "heading", "text": "Godan verbs (\"five-level\")"},
+    {"type": "text", "text": "This is the biggest group. A godan verb can end in **any** う-row sound, and the て-form depends on that last kana. Careful: a few verbs look like ichidan verbs but are godan, for example 帰る (to return), 走る (to run) and 入る (to enter). You cannot tell from the look of the word; learn them as you meet them."},
+    {"type": "table", "title": "How godan verbs make the て-form", "rows": [["Last kana", "て-form / past", "Example"], ["う・つ・る", "って / った", "買う→買って"], ["ぬ・ぶ・む", "んで / んだ", "飲む→飲んで"], ["く", "いて / いた", "歩く→歩いて"], ["ぐ", "いで / いだ", "泳ぐ→泳いで"], ["す", "して / した", "話す→話して"]]},
+    {"type": "text", "text": "So the past is 買った, 飲んだ, 歩いた, 泳いだ, 話した. One exception: **行く** becomes **行って** (past 行った), not 行いて. (死ぬ, to die, is the only verb that ends in ぬ.)"},
+    {"type": "heading", "text": "Irregular verbs"},
+    {"type": "text", "text": "Only two, and you simply learn them. Note that 来 is read **く** in 来る but **き** in 来て and 来た."},
+    {"type": "table", "title": "Irregular verbs", "rows": [["Verb", "て-form", "Past"], ["する (do)", "して", "した"], ["来る (come)", "来て", "来た"]]},
     {"type": "example", "jp": "水を飲んでいる。", "en": "(I) am drinking water."},
     {"type": "example", "jp": "友達と遊んでいる。", "en": "(I) am playing with a friend."},
     {"type": "example", "jp": "公園を歩いている。", "en": "(I) am walking in the park."},
     {"type": "example", "jp": "昨日、友達に会った。", "en": "Yesterday (I) met a friend."},
-    {"type": "keypoints", "items": [
-      "**Ichidan**: drop **る**, add て / た.",
-      "**Godan**: look at the last kana (**う つ る → って**, **ぬ ぶ む → んで**, **く → いて**, **ぐ → いで**, **す → して**).",
-      "**行く → 行って** is the one godan exception.",
-      "Irregular: **来る → 来て**, **する → して**.",
-      "Do not trust the look of a verb: **帰る** and **走る** are godan."
-    ]}
+    {"type": "keypoints", "items": ["**Ichidan** (い or え sound before る): drop **る**, add て / た.", "**Godan**: look at the last kana (**う つ る → って**, **ぬ ぶ む → んで**, **く → いて**, **ぐ → いで**, **す → して**).", "The past follows the same recipe with **た / だ**: 飲んだ, 書いた, 話した.", "**行く → 行って / 行った** is the one godan exception.", "Irregular: **来る → 来て / 来た**, **する → して / した**.", "Do not trust the look of a verb: **帰る**, **走る** and **入る** are godan."]}
   ],
   "questions": [
     {"id": 58, "type": "choice", "instruction": "What is the て-form of 書く?", "prompt": "", "options": ["書いて", "書って", "書んで", "書して"], "answer": 0, "note": "く becomes いて."},
