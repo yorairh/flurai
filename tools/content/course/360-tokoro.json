@@ -6,413 +6,48 @@
   "title": "所: the concept of place",
   "summary": "ところ is a place, and then a point in a thing or a point in time: ところだ means about to, in the middle of, or just done.",
   "video": "https://www.youtube.com/watch?v=z2cgY9o-cO0",
-  "related": [
-    436,
-    363
-  ],
+  "related": [436, 363],
   "blocks": [
-    {
-      "type": "text",
-      "text": "**ところ** (所) begins as a physical **place**: 私のところ, \"my place\". Japanese stretches the idea much further than English does."
-    },
-    {
-      "type": "heading",
-      "text": "A place in a thing: an aspect"
-    },
-    {
-      "type": "text",
-      "text": "A person or object has \"places\" too: the parts or points of it. Asking どこが好き? about a person means \"which point do you like?\"."
-    },
-    {
-      "type": "example",
-      "jp": "さくらのやさしいところが好きだ。",
-      "en": "I like Sakura's kind side."
-    },
-    {
-      "type": "example",
-      "jp": "分からないところがあった。",
-      "en": "There were parts I did not understand."
-    },
-    {
-      "type": "heading",
-      "text": "A place in time: ところだ"
-    },
-    {
-      "type": "text",
-      "text": "Put a clause before ところ and you point at a **moment**. The sentence ends in だ, so it is an \"A is B\" sentence: \"the present moment is the place of ...\". The tense of the clause chooses the point."
-    },
-    {
-      "type": "table",
-      "rows": [
-        [
-          "Clause form",
-          "Meaning",
-          "Example"
-        ],
-        [
-          "Dictionary form",
-          "about to",
-          "食べるところだ"
-        ],
-        [
-          "〜ている",
-          "in the middle of",
-          "食べているところだ"
-        ],
-        [
-          "Past た",
-          "just did",
-          "食べたところだ"
-        ]
-      ]
-    },
-    {
-      "type": "example",
-      "jp": "今から昼ご飯を食べるところだ。",
-      "en": "I am just about to eat lunch."
-    },
-    {
-      "type": "example",
-      "jp": "今、昼ご飯を食べているところだ。",
-      "en": "I am in the middle of eating lunch right now."
-    },
-    {
-      "type": "example",
-      "jp": "昼ご飯を食べたところだ。",
-      "en": "I have just eaten lunch."
-    },
-    {
-      "type": "text",
-      "text": "Compare **ばかり** (lesson 27): 食べたばかり is close to 食べたところ. But ばかり can follow a plain noun (パンばかり) and ところ cannot, because \"a place of bread\" says nothing about amount."
-    },
-    {
-      "type": "heading",
-      "text": "Casual speech and context"
-    },
-    {
-      "type": "text",
-      "text": "In casual speech だ may vanish and ところ shortens to **とこ**: 今、着いたとこ. And context decides between meanings: いいところに来たね is probably \"you came at a good moment\"."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**ところ** = place, a part of something, or a moment.",
-        "**Dictionary form + ところだ**: about to.",
-        "**〜ているところだ**: in the middle of.",
-        "**〜たところだ**: just did."
-      ]
-    }
+    {"type": "text", "text": "**ところ** (所) begins as a physical **place**: 私のところ, \"my place\". Japanese stretches the idea much further than English does."},
+    {"type": "example", "jp": "私のところに遊びに来て。", "en": "Come over to my place."},
+    {"type": "heading", "text": "A place in a thing: an aspect"},
+    {"type": "text", "text": "A person or object has \"places\" too: the parts or points of it. Asking どこが好き? about a person means \"which point do you like?\"."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "さくらのどこが好き？", "en": "Which part of Sakura do you like?"}, {"who": "B", "jp": "やさしいところ。", "en": "Her kind side."}]},
+    {"type": "example", "jp": "分からないところがあった。", "en": "There were parts I did not understand."},
+    {"type": "heading", "text": "A place in time: ところだ"},
+    {"type": "text", "text": "Put a clause before ところ and you point at a **moment**. The sentence ends in だ, so it is an \"A is B\" sentence: \"the present moment is the place of ...\". The main carriage is a hidden zero, \"it, the present moment\", like \"It's time to leave\" in English. The tense of the clause chooses the point."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "the present moment"}, {"text": "食べる", "role": "white", "label": "the clause"}, {"text": "ところだ", "role": "engine", "label": "is the point"}], "text": "食べるところだ。 It is the moment of eating."},
+    {"type": "table", "rows": [["Clause form", "Meaning", "Example"], ["Dictionary form", "about to", "食べるところだ"], ["〜ている", "in the middle of", "食べているところだ"], ["Past た", "just did", "食べたところだ"]]},
+    {"type": "example", "jp": "今から昼ご飯を食べるところだ。", "en": "I am just about to eat lunch."},
+    {"type": "example", "jp": "今、昼ご飯を食べているところだ。", "en": "I am in the middle of eating lunch right now."},
+    {"type": "example", "jp": "昼ご飯を食べたところだ。", "en": "I have just eaten lunch."},
+    {"type": "text", "text": "Compare **ばかり** (lesson 27): 食べたばかり is close to 食べたところ. But ばかり can follow a plain noun (パンばかり) and ところ cannot, because \"a place of bread\" says nothing about amount."},
+    {"type": "heading", "text": "Casual speech and context"},
+    {"type": "text", "text": "In casual speech だ may vanish and ところ shortens to **とこ**: 今、着いたとこ. And context decides between meanings: いいところに来たね is probably \"you came at a good moment\"."},
+    {"type": "keypoints", "items": ["**ところ** = place, a part of something, or a moment.", "**Dictionary form + ところだ**: about to.", "**〜ているところだ**: in the middle of.", "**〜たところだ**: just did."]}
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "今、出かけるところです。",
-      "options": [
-        "I am out right now",
-        "I am just about to go out",
-        "I just came back",
-        "I never go out"
-      ],
-      "answer": 1,
-      "note": "Dictionary form + ところ: about to.",
-      "en": "I am just about to go out.",
-      "id": 21
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "今、お風呂に入っているところです。",
-      "options": [
-        "I am in the middle of taking a bath",
-        "I am about to take a bath",
-        "I just took a bath",
-        "I will take a bath tomorrow"
-      ],
-      "answer": 0,
-      "note": "〜ているところ: in the middle of.",
-      "en": "I am in the middle of taking a bath.",
-      "id": 22
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "さっき、家に着いたところです。",
-      "options": [
-        "I am about to get home",
-        "I am on my way home",
-        "I never go home",
-        "I have just gotten home"
-      ],
-      "answer": 3,
-      "note": "Past + ところ: just did.",
-      "en": "I have just gotten home.",
-      "id": 23
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "今、駅に着く＿＿です。",
-      "options": [
-        "ほど",
-        "より",
-        "ところ",
-        "まで"
-      ],
-      "answer": 2,
-      "note": "Dictionary form + ところ: about to.",
-      "en": "I am just about to arrive at the station.",
-      "id": 24
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "ちょうど手紙を書いている＿＿だ。",
-      "options": [
-        "ほど",
-        "ところ",
-        "より",
-        "まで"
-      ],
-      "answer": 1,
-      "note": "〜ているところ: in the middle of.",
-      "en": "I am in the middle of writing a letter.",
-      "id": 25
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "今、起きた＿＿です。まだ眠いです。",
-      "options": [
-        "ところ",
-        "ほど",
-        "より",
-        "まで"
-      ],
-      "answer": 0,
-      "note": "Past + ところ: just did.",
-      "en": "I just woke up. I am still sleepy.",
-      "id": 26
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ところ mean here?",
-      "prompt": "この町のいいところは、静かなことです。",
-      "options": [
-        "A time",
-        "A street",
-        "An address",
-        "A point or aspect"
-      ],
-      "answer": 3,
-      "note": "A place in a thing: an aspect.",
-      "en": "The good point of this town is that it is quiet.",
-      "id": 27
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ところ mean here?",
-      "prompt": "分からないところは、先生に聞いてください。",
-      "options": [
-        "The places",
-        "The times",
-        "The parts (points)",
-        "The people"
-      ],
-      "answer": 2,
-      "note": "A part or point of something.",
-      "en": "Please ask the teacher about the parts you do not understand.",
-      "id": 28
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence says \"I have just finished my homework\"?",
-      "prompt": "",
-      "options": [
-        "宿題をするところだ。",
-        "宿題が終わったところだ。",
-        "宿題をしているところだ。",
-        "宿題が終わるところだ。"
-      ],
-      "answer": 1,
-      "note": "Past + ところだ: just did.",
-      "id": 29
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "Dictionary form + ところだ means the action is already finished.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It means about to do it.",
-      "en": "A dictionary form before ところだ means \"about to\".",
-      "id": 30
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence is wrong?",
-      "prompt": "",
-      "options": [
-        "今、ご飯を作るところだ。",
-        "今、ご飯を作っているところだ。",
-        "ご飯を作ったところだ。",
-        "ご飯をところ作る。"
-      ],
-      "answer": 3,
-      "note": "The clause comes before ところ.",
-      "id": 31
-    },
-    {
-      "type": "choice",
-      "instruction": "Which clause form means \"in the middle of\" before ところ?",
-      "prompt": "",
-      "options": [
-        "Dictionary form",
-        "Past た",
-        "〜ている",
-        "〜ない"
-      ],
-      "answer": 2,
-      "note": "〜ているところ.",
-      "id": 32
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ところ mean here?",
-      "prompt": "私の家は、駅から近いところにある。",
-      "options": [
-        "A point in time",
-        "A physical place",
-        "An aspect of a person",
-        "An amount"
-      ],
-      "answer": 1,
-      "note": "ところ begins as a place.",
-      "en": "My house is in a place close to the station.",
-      "id": 33
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ところ mean in あなたのところ?",
-      "prompt": "あなたのところに行ってもいいですか。",
-      "options": [
-        "Your place (where you are)",
-        "Your good point",
-        "Your time",
-        "Your plan"
-      ],
-      "answer": 0,
-      "note": "私のところ: my place.",
-      "en": "May I come to your place?",
-      "id": 34
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I am in the middle of cooking dinner.",
-      "options": [
-        "晩ご飯を",
-        "作っている",
-        "ところです"
-      ],
-      "note": "〜ているところです.",
-      "en": "I am in the middle of cooking dinner.",
-      "id": 35
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I have just come back from the station.",
-      "options": [
-        "駅から",
-        "帰った",
-        "ところです"
-      ],
-      "note": "Past + ところです.",
-      "en": "I have just come back from the station.",
-      "id": 36
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I am just about to go to bed.",
-      "options": [
-        "今から",
-        "寝る",
-        "ところです"
-      ],
-      "note": "Dictionary form + ところです.",
-      "en": "I am just about to go to bed.",
-      "id": 37
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "The good point of this phone is the camera.",
-      "options": [
-        "この電話の",
-        "いいところは",
-        "カメラです"
-      ],
-      "note": "ところ as a point of something.",
-      "en": "The good point of this phone is the camera.",
-      "id": 38
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I was just about to call you.",
-      "options": [
-        "ちょうど",
-        "電話する",
-        "ところだった"
-      ],
-      "note": "Dictionary form + ところだった.",
-      "en": "I was just about to call you.",
-      "id": 39
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the verb form that goes before ところ to say \"just did\"",
-      "options": [
-        "メールを",
-        "読んだ",
-        "ところです"
-      ],
-      "answer": 1,
-      "note": "The past form + ところ.",
-      "en": "I have just read the email.",
-      "id": 40
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the verb form that goes before ところだ to say \"in the middle of\"",
-      "options": [
-        "みんなで",
-        "ご飯を",
-        "食べている",
-        "ところだ"
-      ],
-      "answer": 2,
-      "note": "〜ているところ.",
-      "en": "We are in the middle of eating together.",
-      "id": 41
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the word where ところ means a \"point\" of something",
-      "options": [
-        "この車の",
-        "大きいところが",
-        "好きだ"
-      ],
-      "answer": 1,
-      "note": "A place in a thing: an aspect.",
-      "en": "I like how big this car is.",
-      "id": 42
-    }
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "今、出かけるところです。", "options": ["I am out right now", "I am just about to go out", "I just came back", "I never go out"], "answer": 1, "note": "Dictionary form + ところ: about to.", "en": "I am just about to go out.", "id": 21},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "今、お風呂に入っているところです。", "options": ["I am in the middle of taking a bath", "I am about to take a bath", "I just took a bath", "I will take a bath tomorrow"], "answer": 0, "note": "〜ているところ: in the middle of.", "en": "I am in the middle of taking a bath.", "id": 22},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "さっき、家に着いたところです。", "options": ["I am about to get home", "I am on my way home", "I never go home", "I have just gotten home"], "answer": 3, "note": "Past + ところ: just did.", "en": "I have just gotten home.", "id": 23},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "今、駅に着く＿＿です。", "options": ["ほど", "より", "ところ", "まで"], "answer": 2, "note": "Dictionary form + ところ: about to.", "en": "I am just about to arrive at the station.", "id": 24},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "ちょうど手紙を書いている＿＿だ。", "options": ["ほど", "ところ", "より", "まで"], "answer": 1, "note": "〜ているところ: in the middle of.", "en": "I am in the middle of writing a letter.", "id": 25},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "今、起きた＿＿です。まだ眠いです。", "options": ["ところ", "ほど", "より", "まで"], "answer": 0, "note": "Past + ところ: just did.", "en": "I just woke up. I am still sleepy.", "id": 26},
+    {"type": "choice", "instruction": "What does ところ mean here?", "prompt": "この町のいいところは、静かなことです。", "options": ["A time", "A street", "An address", "A point or aspect"], "answer": 3, "note": "A place in a thing: an aspect.", "en": "The good point of this town is that it is quiet.", "id": 27},
+    {"type": "choice", "instruction": "What does ところ mean here?", "prompt": "分からないところは、先生に聞いてください。", "options": ["The places", "The times", "The parts (points)", "The people"], "answer": 2, "note": "A part or point of something.", "en": "Please ask the teacher about the parts you do not understand.", "id": 28},
+    {"type": "choice", "instruction": "Which sentence says \"I have just finished my homework\"?", "prompt": "", "options": ["宿題をするところだ。", "宿題が終わったところだ。", "宿題をしているところだ。", "宿題が終わるところだ。"], "answer": 1, "note": "Past + ところだ: just did.", "id": 29},
+    {"type": "choice", "instruction": "True or false?", "prompt": "With 〜ところ, a dictionary form means the action is already finished.", "options": ["True", "False"], "answer": 1, "note": "It means about to do it.", "id": 30},
+    {"type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["今、ご飯を作るところだ。", "今、ご飯を作っているところだ。", "ご飯を作ったところだ。", "ご飯をところ作る。"], "answer": 3, "note": "The clause comes before ところ.", "id": 31},
+    {"type": "choice", "instruction": "Which clause form means \"in the middle of\" before ところ?", "prompt": "", "options": ["Dictionary form", "Past た", "〜ている", "〜ない"], "answer": 2, "note": "〜ているところ.", "id": 32},
+    {"type": "choice", "instruction": "What does ところ mean here?", "prompt": "私の家は、駅から近いところにある。", "options": ["A point in time", "A physical place", "An aspect of a person", "An amount"], "answer": 1, "note": "ところ begins as a place.", "en": "My house is in a place close to the station.", "id": 33},
+    {"type": "choice", "instruction": "What does ところ mean in あなたのところ?", "prompt": "あなたのところに行ってもいいですか。", "options": ["Your place (where you are)", "Your good point", "Your time", "Your plan"], "answer": 0, "note": "私のところ: my place.", "en": "May I come to your place?", "id": 34},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I am in the middle of cooking dinner.", "options": ["晩ご飯を", "作っている", "ところです"], "note": "〜ているところです.", "en": "I am in the middle of cooking dinner.", "id": 35},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I have just come back from the station.", "options": ["駅から", "帰った", "ところです"], "note": "Past + ところです.", "en": "I have just come back from the station.", "id": 36},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I am just about to go to bed.", "options": ["今から", "寝る", "ところです"], "note": "Dictionary form + ところです.", "en": "I am just about to go to bed.", "id": 37},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "The good point of this phone is the camera.", "options": ["この電話の", "いいところは", "カメラです"], "note": "ところ as a point of something.", "en": "The good point of this phone is the camera.", "id": 38},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I was just about to call you.", "options": ["ちょうど", "電話する", "ところだった"], "note": "Dictionary form + ところだった.", "en": "I was just about to call you.", "id": 39},
+    {"type": "tap", "instruction": "Tap the verb form that goes before ところ to say \"just did\"", "options": ["メールを", "読んだ", "ところです"], "answer": 1, "note": "The past form + ところ.", "en": "I have just read the email.", "id": 40},
+    {"type": "tap", "instruction": "Tap the verb form that goes before ところだ to say \"in the middle of\"", "options": ["みんなで", "ご飯を", "食べている", "ところだ"], "answer": 2, "note": "〜ているところ.", "en": "We are in the middle of eating together.", "id": 41},
+    {"type": "tap", "instruction": "Tap the word where ところ means a \"point\" of something", "options": ["この車の", "大きいところが", "好きだ"], "answer": 1, "note": "A place in a thing: an aspect.", "en": "I like how big this car is.", "id": 42}
   ]
 }
