@@ -8,32 +8,33 @@
   "video": "https://www.youtube.com/watch?v=xLkY6whr7T4",
   "related": [536, 537, 538, 589, 540],
   "blocks": [
-    {"type": "text", "text": "The **こそあど** words all start with one of four sounds. **こ** is near the speaker (a memory hook: こ like 心, the heart, where the speaker is). **そ** is near the listener, or the thing just mentioned. **あ** is far from both. **ど** asks \"which?\"."},
-    {"type": "table", "title": "The four families", "rows": [
-      ["", "こ (near me)", "そ (near you)", "あ (far)", "ど (which?)"],
-      ["Place", "ここ", "そこ", "あそこ", "どこ"],
-      ["Thing (れ)", "これ", "それ", "あれ", "どれ"],
-      ["Describes (の)", "この", "その", "あの", "どの"],
-      ["Kind (な)", "こんな", "そんな", "あんな", "どんな"],
-      ["Way (う)", "こう", "そう", "ああ", "どう"]
-    ]},
-    {"type": "heading", "text": "What each family does"},
-    {"type": "text", "text": "**れ**: a thing or being, working as a noun. **の**: the describing の you know from さくらのドレス, so この ペン is \"the pen of the class near me\". **な**: \"this kind of\", like a な-adjective. **う**: the **way** something is or is done."},
+    {"type": "text", "text": "The **こそあど** words all start with one of four sounds. **こ** is near the speaker (a memory hook: こ like 心, the heart, where the speaker is). **そ** is near the listener, or the thing just mentioned. **あ** is far from both: you would have to shout \"aah!\" to reach it. **ど** asks \"which?\"."},
+    {"type": "text", "text": "Each sound takes one of five endings, and the ending decides what the word does."},
+    {"type": "table", "title": "Places, things and describing words", "rows": [["", "こ (near me)", "そ (near you)", "あ (far)", "ど (which?)"], ["Place", "ここ", "そこ", "あそこ", "どこ"], ["Thing (れ)", "これ", "それ", "あれ", "どれ"], ["Describes (の)", "この", "その", "あの", "どの"]]},
+    {"type": "table", "title": "Kinds and ways", "rows": [["", "こ (near me)", "そ (near you)", "あ (far)", "ど (which?)"], ["Kind (な)", "こんな", "そんな", "あんな", "どんな"], ["Way (う)", "こう", "そう", "ああ", "どう"]]},
+    {"type": "heading", "text": "ここ・そこ: places"},
+    {"type": "text", "text": "Words ending in **こ** are places: here, there, over there, where?"},
     {"type": "example", "jp": "ここはどこですか。", "en": "Where is this place?"},
+    {"type": "example", "jp": "私のところに遊びに来て。", "en": "Come over to my place."},
+    {"type": "heading", "text": "これ・それ: things"},
+    {"type": "text", "text": "Words ending in **れ** are a thing or a being. The れ is related to ある (\"to be\"): a being, a thing. They stand alone, like a noun."},
     {"type": "example", "jp": "これはペンだ。", "en": "This is a pen."},
+    {"type": "heading", "text": "この・その: describing a noun"},
+    {"type": "text", "text": "English uses \"this\" for both \"this\" and \"this pen\". Japanese uses two words. **これ** stands alone, and **この** must sit in front of a noun. This is the describing の you know from さくらのドレス."},
+    {"type": "table", "rows": [["Alone", "Before a noun"], ["これは赤い", "このペンは赤い"], ["あれは何ですか", "あの山は高い"]]},
     {"type": "example", "jp": "そのペンは赤い。", "en": "That pen is red."},
+    {"type": "heading", "text": "こんな・そんな: this kind of"},
+    {"type": "text", "text": "Words ending in **な** work like a な-adjective: \"this kind of\", \"that kind of\". **あんな** is the kind that both of us know."},
     {"type": "example", "jp": "こんな食べ物が好きです。", "en": "I like this kind of food."},
-    {"type": "example", "jp": "どうすればいいですか。", "en": "What should I do?"},
+    {"type": "heading", "text": "こう・そう: this way"},
+    {"type": "text", "text": "Words ending in **う** are the **way** something is or is done. **そう** is the way that was just described."},
+    {"type": "example", "jp": "どうすればいいですか。", "en": "What should I do? (すれば = \"if (I) do\", lesson 31.)"},
     {"type": "example", "jp": "そうですね。", "en": "That's right, isn't it."},
     {"type": "heading", "text": "Beyond the room"},
-    {"type": "text", "text": "The same words point inside conversations. **そう** is the way that was just described, **そんな!** is a complaint (\"such a thing!\"), and the こと-words are \"kinds of matter\": **そういうこと** (that kind of thing), **どういうこと** (what do you mean?). The あ version is used for things both people know, or share emotionally."},
+    {"type": "text", "text": "The same words point inside conversations. **そんな!** is a complaint, \"such a thing!\". The こと-words are \"kinds of matter\": **そういうこと** (that kind of thing) and **どういうこと** (what do you mean?). Here いう is not that someone said it, but how the thing is described."},
+    {"type": "example", "jp": "そんな！", "en": "No way! How could you!"},
     {"type": "example", "jp": "どういうことですか。", "en": "What do you mean? / What is going on?"},
-    {"type": "keypoints", "items": [
-      "**こ** near me · **そ** near you · **あ** far · **ど** which?",
-      "**れ** = a thing · **の** + noun = describes · **な** = this kind of · **う** = this way.",
-      "**そう**: that way, so; **そんな!**: complaint.",
-      "**どういうこと?** = what do you mean?"
-    ]}
+    {"type": "keypoints", "items": ["**こ** near me · **そ** near you · **あ** far · **ど** which?", "**れ** = a thing · **の** + noun = describes · **な** = this kind of · **う** = this way.", "**これ** stands alone, **この** needs a noun.", "**そう**: that way, so; **そんな!**: complaint.", "**どういうこと?** = what do you mean?"]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "Fill the gap (the pen is near the listener)", "prompt": "＿＿ペンはあなたのですか。", "options": ["この", "あの", "その", "どの"], "answer": 2, "note": "そ points near the listener; の describes the noun.", "en": "Is that pen yours?"},
@@ -57,7 +58,13 @@
     {"id": 38, "type": "tap", "instruction": "Tap the word that asks \"what kind of?\"", "options": ["どんな", "食べ物が", "好きですか"], "answer": 0, "note": "どんな: what kind of.", "en": "What kind of food do you like?"},
     {"id": 39, "type": "tap", "instruction": "Tap the word that means \"in this way\"", "options": ["こう", "書くと", "きれいです"], "answer": 0, "note": "こう: this way.", "en": "If you write it this way, it looks neat."},
     {"id": 40, "type": "order", "instruction": "Build the sentence", "prompt": "Which pen is yours?", "options": ["どの", "ペンが", "あなたのですか"], "note": "どの + noun: which?", "en": "Which pen is yours?"},
-    {"id": 41, "type": "order", "instruction": "Build the sentence", "prompt": "I like that kind of movie (the kind far from both of us).", "options": ["私は", "あんな", "映画が", "好きです"], "note": "あんな: that kind of (far).", "en": "I like that kind of movie.", "alt": [["あんな", "映画が", "私は", "好きです"]]},
-    {"id": 42, "type": "order", "instruction": "Build the sentence", "prompt": "Please wait here.", "options": ["ここで", "待って", "ください"], "note": "ここ: the place where I am.", "en": "Please wait here."}
+    {"id": 41, "type": "order", "instruction": "Build the sentence", "prompt": "I like that kind of movie (the one we both saw).", "options": ["私は", "あんな", "映画が", "好きです"], "note": "あんな: that kind of (far).", "en": "I like that kind of movie.", "alt": [["あんな", "映画が", "私は", "好きです"]]},
+    {"id": 42, "type": "order", "instruction": "Build the sentence", "prompt": "Please wait here.", "options": ["ここで", "待って", "ください"], "note": "ここ: the place where I am.", "en": "Please wait here."},
+    {"id": 43, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
+    {"id": 44, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."},
+    {"id": 45, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
+    {"id": 46, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."},
+    {"id": 47, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
+    {"id": 48, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."}
   ]
 }
