@@ -23,11 +23,12 @@ Write in this order, as lesson 5 now does:
 1. **Say what the thing is for before how it is made.** A learner who is told the recipe first does not know why to care. Open with the purpose and one example they already know, then the recipe.
 2. Every heading is followed by a sentence that explains, then the examples or table.
    **When a lesson has several headings, number them**: main sections `1.`, `2.`, `3.` and sub-sections `1.1`, `1.2`, `2.1`, written into the heading text (`"2. Godan verbs"`, `"2.1 Godan verbs that look ichidan"`). The numbers restart at 1 in each lesson, count every section in order without skipping or repeating, and a sub-heading is numbered after its parent. The intro paragraph before the first heading is not numbered. A lesson with only one or two headings can skip numbering.
-3. **Show each example once.** If a table lists the examples, do not repeat the same words in the paragraph above it (lesson 5's ichidan section did, and it read as clutter).
-4. A rule with exceptions or look-alikes gets its **own sub-heading** (lesson 5: "Godan verbs that look ichidan"). An aside tucked at the end of a paragraph is missed.
-5. Do not add mnemonic "memory hooks" unless they are clearly simpler than the rule. Confusing sound stories were removed from lesson 5 because the learner could not follow them; "Remember" keypoints at the end are enough.
-6. Tables: short headers and short cells so each row stays on one line at phone width (a table that does not fit scrolls sideways, with a hint). Put a verb and its form in one cell like `買う→買って` only when the column is wide enough; otherwise use separate columns.
-7. American English (practice, favor, license).
+3. **Teach only what this lesson is about.** Every word, verb, example and table row must be used by the lesson's own explanation or tested by its questions. Do not add "common words to get to know", extra vocabulary lists, or a table of items the lesson never explains (lesson 4 once had a table of 11 verbs in three forms; the learner only needed three of them, and the rest were noise that a later lesson teaches properly). Before keeping any list, table or example, ask: does the learner need this to understand this lesson's idea? If not, cut it, and leave it to the lesson that teaches it. The same goes for background facts and side remarks: say them in the lesson they belong to.
+4. **Show each example once.** If a table lists the examples, do not repeat the same words in the paragraph above it (lesson 5's ichidan section did, and it read as clutter).
+5. A rule with exceptions or look-alikes gets its **own sub-heading** (lesson 5: "Godan verbs that look ichidan"). An aside tucked at the end of a paragraph is missed.
+6. Do not add mnemonic "memory hooks" unless they are clearly simpler than the rule. Confusing sound stories were removed from lesson 5 because the learner could not follow them; "Remember" keypoints at the end are enough.
+7. Tables: short headers and short cells so each row stays on one line at phone width (a table that does not fit scrolls sideways, with a hint). Put a verb and its form in one cell like `買う→買って` only when the column is wide enough; otherwise use separate columns.
+8. American English (practice, favor, license).
 
 **Furigana is added by the pipeline.** Never write ruby markup yourself except in `readings` (below). Two traps:
 - **Never bold part of a word** (`食べ**て**いる`). It splits the word, and the dictionary then reads 食 alone as しょく. Bold the whole word (`**食べて**いる`) or none of it.
@@ -55,6 +56,7 @@ Rules that `course.py` enforces (a failure stops the build):
 
 Rules from experience, not enforced:
 - **Never ask a learner to produce a form of a verb or word they were not given.** A gap question like `友達を待＿＿いる` needs the dictionary form in the instruction: "Fill the gap with the て-form of 待つ". Questions that offer the full word as an option are fine.
+- **Use only verbs and words the lesson itself shows or explains.** A question may not rely on a word that only a deleted table or a later lesson covers (when lesson 4's extra verb table was cut, its questions about 会う and 走る changed to 飲む and 食べる, which the lesson text shows).
 - Wrong options should be plausible mistakes of the same shape (て-form endings among て-form endings), never nonsense.
 - Mix the types and cover each rule, each exception and the irregular cases; add a few true/false and tap questions so it is not all multiple choice.
 - The lesson test asks 10 of the questions at random, so every question must stand alone and be answerable from the lesson text alone.
