@@ -15,6 +15,10 @@
       "text": "The story so far"
     },
     {
+      "type": "text",
+      "text": "Here is what has happened in the story so far, in a few short lines."
+    },
+    {
       "type": "example",
       "jp": "部屋には誰もおらず、電気がついていた。",
       "en": "No one was in the room, and the light was on."

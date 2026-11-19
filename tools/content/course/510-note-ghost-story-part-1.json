@@ -15,6 +15,10 @@
       "text": "The story so far"
     },
     {
+      "type": "text",
+      "text": "Here is what has happened in the story so far, in a few short lines."
+    },
+    {
       "type": "example",
       "jp": "それは、美咲が友達の家の鍋パーティーに参加した、雪の夜。",
       "en": "It was the snowy night when Misaki took part in the hot-pot party at her friend's house."

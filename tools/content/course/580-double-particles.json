@@ -68,6 +68,10 @@
       "text": "Logical + は or も"
     },
     {
+      "type": "text",
+      "text": "Once a logical particle is followed by は or も, the pair works as one unit, as the table shows."
+    },
+    {
       "type": "table",
       "rows": [
         [

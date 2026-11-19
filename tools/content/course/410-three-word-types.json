@@ -40,6 +40,32 @@
       "text": "These three groups are the textbook's な-adjectives, する verbs and adverbs. In this course they are all just nouns with one extra power."
     },
     {
+      "type": "table",
+      "title": "The three super-nouns",
+      "rows": [
+        [
+          "Kind",
+          "Extra power",
+          "Example"
+        ],
+        [
+          "Adjectival noun",
+          "may take な in front of a noun",
+          "静かな部屋"
+        ],
+        [
+          "Adverbial noun",
+          "may drop に before a verb",
+          "ゆっくり止まる"
+        ],
+        [
+          "する noun",
+          "may drop を and join する",
+          "勉強する"
+        ]
+      ]
+    },
+    {
       "type": "heading",
       "text": "Adjectival nouns"
     },

@@ -6,50 +6,458 @@
   "title": "ばかり",
   "summary": "ばかり is a noun meaning \"just that\". Every use is a kind of exaggeration: just happened, nothing but, a great deal of, and the links ばかりか and ばかりに.",
   "video": "https://www.youtube.com/watch?v=jqC60f-c1ng",
-  "related": [437, 490, 265, 705, 323],
+  "related": [
+    437,
+    490,
+    265,
+    705,
+    323
+  ],
   "blocks": [
-    {"type": "text", "text": "**ばかり** is in essence a **noun**, so it can take だ after it. Its core is \"just this and nothing else\", used the way English uses \"nothing but\": as a **hyperbole**. Seen that way, its uses stop looking like a list."},
-    {"type": "heading", "text": "1. Just happened"},
-    {"type": "text", "text": "After a **past** verb it says that nothing has happened since: the action is very recent. The past tense is needed because the idea is about something completed. This is an exaggeration too: you have had a walk and a talk since lunch, but \"nothing else has happened\"."},
-    {"type": "example", "jp": "昼ご飯を食べたばかりだ。", "en": "I have just eaten lunch."},
-    {"type": "example", "jp": "日本に来たばかりです。", "en": "I have just come to Japan."},
-    {"type": "heading", "text": "2. A great deal of one thing"},
-    {"type": "text", "text": "After a noun it exaggerates: there is so much of it that it feels like nothing else exists."},
-    {"type": "example", "jp": "この町は観光客ばかりだ。", "en": "This town is nothing but tourists."},
-    {"type": "heading", "text": "3. Doing only one thing"},
-    {"type": "text", "text": "After a verb in the **て-form**, plus いる: you keep doing that and nothing else."},
-    {"type": "example", "jp": "弟はゲームをしてばかりいる。", "en": "My little brother does nothing but play games."},
-    {"type": "heading", "text": "Two links"},
-    {"type": "text", "text": "**ばかりか** adds か, a question used to deny: \"do you think that is all?\" So ばかり is \"only that\", and ばかりか is \"not only that\". **ばかりに** adds に and means **\"just because\"**, with a stronger and usually unlucky cause than から or ので."},
-    {"type": "example", "jp": "彼女は歌ったばかりか、踊った。", "en": "She did not only sing, she danced too."},
-    {"type": "example", "jp": "傘を忘れたばかりに、濡れてしまった。", "en": "Just because I forgot my umbrella, I got wet."},
-    {"type": "example", "jp": "耳が大きいばかりに、誰も遊んでくれない。", "en": "Just because my ears are big, nobody plays with me."},
-    {"type": "heading", "text": "Side by side"},
-    {"type": "table", "rows": [["After", "Meaning", "Example"], ["Past verb", "just did it", "食べたばかり"], ["Noun", "nothing but", "子供ばかり"], ["て-form + いる", "only does that", "寝てばかりいる"], ["ばかりか", "not only, but", "歌ったばかりか"], ["ばかりに", "just because (unlucky)", "忘れたばかりに"]]},
-    {"type": "keypoints", "items": ["**Past verb + ばかり**: just did it.", "**Noun + ばかり**: nothing but / loads of.", "**Verb て-form + ばかり + いる**: keeps doing only that.", "**ばかりか**: not only, but also; **ばかりに**: just because."]}
+    {
+      "type": "text",
+      "text": "**ばかり** is in essence a **noun**, so it can take だ after it. Its core is \"just this and nothing else\", used the way English uses \"nothing but\": as a **hyperbole**. Seen that way, its uses stop looking like a list."
+    },
+    {
+      "type": "heading",
+      "text": "1. Just happened"
+    },
+    {
+      "type": "text",
+      "text": "After a **past** verb it says that nothing has happened since: the action is very recent. The past tense is needed because the idea is about something completed. This is an exaggeration too: you have had a walk and a talk since lunch, but \"nothing else has happened\"."
+    },
+    {
+      "type": "example",
+      "jp": "昼ご飯を食べたばかりだ。",
+      "en": "I have just eaten lunch."
+    },
+    {
+      "type": "example",
+      "jp": "日本に来たばかりです。",
+      "en": "I have just come to Japan."
+    },
+    {
+      "type": "heading",
+      "text": "2. A great deal of one thing"
+    },
+    {
+      "type": "text",
+      "text": "After a noun it exaggerates: there is so much of it that it feels like nothing else exists."
+    },
+    {
+      "type": "example",
+      "jp": "この町は観光客ばかりだ。",
+      "en": "This town is nothing but tourists."
+    },
+    {
+      "type": "heading",
+      "text": "3. Doing only one thing"
+    },
+    {
+      "type": "text",
+      "text": "After a verb in the **て-form**, plus いる: you keep doing that and nothing else."
+    },
+    {
+      "type": "example",
+      "jp": "弟はゲームをしてばかりいる。",
+      "en": "My little brother does nothing but play games."
+    },
+    {
+      "type": "heading",
+      "text": "Two links"
+    },
+    {
+      "type": "text",
+      "text": "**ばかりか** adds か, a question used to deny: \"do you think that is all?\" So ばかり is \"only that\", and ばかりか is \"not only that\". **ばかりに** adds に and means **\"just because\"**, with a stronger and usually unlucky cause than から or ので."
+    },
+    {
+      "type": "example",
+      "jp": "彼女は歌ったばかりか、踊った。",
+      "en": "She did not only sing, she danced too."
+    },
+    {
+      "type": "example",
+      "jp": "傘を忘れたばかりに、濡れてしまった。",
+      "en": "Just because I forgot my umbrella, I got wet."
+    },
+    {
+      "type": "example",
+      "jp": "耳が大きいばかりに、誰も遊んでくれない。",
+      "en": "Just because my ears are big, nobody plays with me."
+    },
+    {
+      "type": "heading",
+      "text": "Side by side"
+    },
+    {
+      "type": "text",
+      "text": "The uses of ばかり differ in what comes before it, so here they are next to each other."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "After",
+          "Meaning",
+          "Example"
+        ],
+        [
+          "Past verb",
+          "just did it",
+          "食べたばかり"
+        ],
+        [
+          "Noun",
+          "nothing but",
+          "子供ばかり"
+        ],
+        [
+          "て-form + いる",
+          "only does that",
+          "寝てばかりいる"
+        ],
+        [
+          "ばかりか",
+          "not only, but",
+          "歌ったばかりか"
+        ],
+        [
+          "ばかりに",
+          "just because (unlucky)",
+          "忘れたばかりに"
+        ]
+      ]
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Past verb + ばかり**: just did it.",
+        "**Noun + ばかり**: nothing but / loads of.",
+        "**Verb て-form + ばかり + いる**: keeps doing only that.",
+        "**ばかりか**: not only, but also; **ばかりに**: just because."
+      ]
+    }
   ],
   "questions": [
-    {"id": 20, "type": "choice", "instruction": "Fill the gap", "prompt": "さっき起きた＿＿です。", "options": ["だけ", "しか", "ばかり", "まで"], "answer": 2, "note": "Past verb + ばかり: it just happened.", "en": "I have just woken up."},
-    {"id": 21, "type": "choice", "instruction": "Fill the gap", "prompt": "この本は買った＿＿だ。でも、もうなくした。", "options": ["ばかり", "だけ", "しか", "ほど"], "answer": 0, "note": "Past verb + ばかり: just did.", "en": "I have just bought this book. But I already lost it."},
-    {"id": 22, "type": "choice", "instruction": "Which says \"I have just arrived\"?", "prompt": "", "options": ["着くばかりです", "着いているばかりです", "着かばかりです", "着いたばかりです"], "answer": 3, "note": "The past form is needed: 着いた + ばかり."},
-    {"id": 23, "type": "choice", "instruction": "Fill the gap", "prompt": "この店は女の人＿＿だ。", "options": ["まで", "ばかり", "より", "ほど"], "answer": 1, "note": "Noun + ばかり: nothing but, so many that nothing else seems to exist.", "en": "This shop is nothing but women."},
-    {"id": 24, "type": "choice", "instruction": "What does this say?", "prompt": "彼は食べてばかりいる。", "options": ["He has just eaten", "He does nothing but eat", "He eats a great deal of rice", "He eats only after others"], "answer": 1, "note": "て-form + ばかり + いる: keeps doing only that.", "en": "He does nothing but eat."},
-    {"id": 25, "type": "choice", "instruction": "Fill the gap", "prompt": "妹は寝て＿＿いる。", "options": ["だけ", "しか", "ほど", "ばかり"], "answer": 3, "note": "て-form + ばかりいる.", "en": "My little sister does nothing but sleep."},
-    {"id": 26, "type": "choice", "instruction": "Fill the gap", "prompt": "彼は英語＿＿、中国語も話せる。", "options": ["ばかりか", "ばかりに", "ばかりで", "ばかり"], "answer": 0, "note": "ばかりか: not only that, but also.", "en": "He speaks not only English but also Chinese."},
-    {"id": 27, "type": "choice", "instruction": "Fill the gap", "prompt": "かぎを忘れた＿＿、家に入れなかった。", "options": ["ばかりか", "ばかりで", "ばかりに", "ばかり"], "answer": 2, "note": "ばかりに: just because (an unlucky cause).", "en": "Just because I forgot the key, I could not get in."},
-    {"id": 28, "type": "choice", "instruction": "Which one means \"just because\" (an unlucky cause)?", "prompt": "", "options": ["ばかりか", "ばかり", "ばかりに", "ばかりだ"], "answer": 2, "note": "に adds the cause: stronger than から or ので."},
-    {"id": 29, "type": "choice", "instruction": "True or false?", "prompt": "Past verb + ばかり says the action happened very recently.", "options": ["True", "False"], "answer": 0, "note": "The action was completed just now."},
-    {"id": 30, "type": "choice", "instruction": "True or false?", "prompt": "The ending that means \"just because\" usually gives a lucky cause.", "options": ["True", "False"], "answer": 1, "note": "It usually gives an unlucky cause."},
-    {"id": 31, "type": "choice", "instruction": "Which verb form does the \"just did\" ばかり need?", "prompt": "", "options": ["The past form", "The present form", "The negative form", "The volitional form"], "answer": 0, "note": "The idea is about something completed."},
-    {"id": 32, "type": "choice", "instruction": "What kind of word is ばかり?", "prompt": "", "options": ["A verb", "A particle only", "An adverb", "A noun"], "answer": 3, "note": "It can take だ after it."},
-    {"id": 33, "type": "choice", "instruction": "Which says \"My brother keeps watching TV and nothing else\"?", "prompt": "", "options": ["兄はテレビを見るばかりいる", "兄はテレビを見てばかりいる", "兄はテレビを見たばかりいる", "兄はテレビを見てばかりある"], "answer": 1, "note": "て-form + ばかり + いる."},
-    {"id": 34, "type": "tap", "instruction": "Tap the phrase that means \"have just done\"", "options": ["さっき", "ご飯を", "食べたばかりです"], "answer": 2, "note": "Past verb + ばかり.", "en": "I just ate a moment ago."},
-    {"id": 35, "type": "tap", "instruction": "Tap the part that means \"nothing but\"", "options": ["この町は", "今", "外国人ばかりだ"], "answer": 2, "note": "Noun + ばかり.", "en": "This town is nothing but foreigners now."},
-    {"id": 36, "type": "tap", "instruction": "Tap the part that gives the unlucky cause", "options": ["遅れたばかりに、", "電車に", "乗れなかった"], "answer": 0, "note": "Past verb + ばかりに.", "en": "Just because I was late, I could not get on the train."},
-    {"id": 37, "type": "order", "instruction": "Build the sentence", "prompt": "I have just got home.", "options": ["私は", "家に", "帰ったばかりだ"], "note": "Past verb + ばかり + だ.", "en": "I have just got home.", "alt": [["家に", "私は", "帰ったばかりだ"]]},
-    {"id": 38, "type": "order", "instruction": "Build the sentence", "prompt": "My brother does nothing but read comics.", "options": ["弟は", "まんがを", "読んでばかりいる"], "note": "て-form + ばかり + いる.", "en": "My brother does nothing but read comics.", "alt": [["まんがを", "弟は", "読んでばかりいる"]]},
-    {"id": 39, "type": "order", "instruction": "Build the sentence", "prompt": "He not only studied, but also worked.", "options": ["彼は", "勉強した", "ばかりか、", "仕事も", "した"], "note": "ばかりか: not only, but also.", "en": "He not only studied, but also worked."},
-    {"id": 40, "type": "order", "instruction": "Build the sentence", "prompt": "Just because I did not study, I failed the test.", "options": ["勉強しなかった", "ばかりに、", "試験に落ちた"], "note": "ばかりに: just because.", "en": "Just because I did not study, I failed the test."},
-    {"id": 41, "type": "choice", "instruction": "Which says \"The park is full of children\"?", "prompt": "", "options": ["公園は子供ばかりか", "公園は子供ばかりだ", "公園は子供ばかりに", "公園は子供ばかりて"], "answer": 1, "note": "Noun + ばかり + だ."}
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "さっき起きた＿＿です。",
+      "options": [
+        "だけ",
+        "しか",
+        "ばかり",
+        "まで"
+      ],
+      "answer": 2,
+      "note": "Past verb + ばかり: it just happened.",
+      "en": "I have just woken up."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "この本は買った＿＿だ。でも、もうなくした。",
+      "options": [
+        "ばかり",
+        "だけ",
+        "しか",
+        "ほど"
+      ],
+      "answer": 0,
+      "note": "Past verb + ばかり: just did.",
+      "en": "I have just bought this book. But I already lost it."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "Which says \"I have just arrived\"?",
+      "prompt": "",
+      "options": [
+        "着くばかりです",
+        "着いているばかりです",
+        "着かばかりです",
+        "着いたばかりです"
+      ],
+      "answer": 3,
+      "note": "The past form is needed: 着いた + ばかり."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "この店は女の人＿＿だ。",
+      "options": [
+        "まで",
+        "ばかり",
+        "より",
+        "ほど"
+      ],
+      "answer": 1,
+      "note": "Noun + ばかり: nothing but, so many that nothing else seems to exist.",
+      "en": "This shop is nothing but women."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "What does this say?",
+      "prompt": "彼は食べてばかりいる。",
+      "options": [
+        "He has just eaten",
+        "He does nothing but eat",
+        "He eats a great deal of rice",
+        "He eats only after others"
+      ],
+      "answer": 1,
+      "note": "て-form + ばかり + いる: keeps doing only that.",
+      "en": "He does nothing but eat."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "妹は寝て＿＿いる。",
+      "options": [
+        "だけ",
+        "しか",
+        "ほど",
+        "ばかり"
+      ],
+      "answer": 3,
+      "note": "て-form + ばかりいる.",
+      "en": "My little sister does nothing but sleep."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "彼は英語＿＿、中国語も話せる。",
+      "options": [
+        "ばかりか",
+        "ばかりに",
+        "ばかりで",
+        "ばかり"
+      ],
+      "answer": 0,
+      "note": "ばかりか: not only that, but also.",
+      "en": "He speaks not only English but also Chinese."
+    },
+    {
+      "id": 27,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "かぎを忘れた＿＿、家に入れなかった。",
+      "options": [
+        "ばかりか",
+        "ばかりで",
+        "ばかりに",
+        "ばかり"
+      ],
+      "answer": 2,
+      "note": "ばかりに: just because (an unlucky cause).",
+      "en": "Just because I forgot the key, I could not get in."
+    },
+    {
+      "id": 28,
+      "type": "choice",
+      "instruction": "Which one means \"just because\" (an unlucky cause)?",
+      "prompt": "",
+      "options": [
+        "ばかりか",
+        "ばかり",
+        "ばかりに",
+        "ばかりだ"
+      ],
+      "answer": 2,
+      "note": "に adds the cause: stronger than から or ので."
+    },
+    {
+      "id": 29,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "Past verb + ばかり says the action happened very recently.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "The action was completed just now."
+    },
+    {
+      "id": 30,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "The ending that means \"just because\" usually gives a lucky cause.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "It usually gives an unlucky cause."
+    },
+    {
+      "id": 31,
+      "type": "choice",
+      "instruction": "Which verb form does the \"just did\" ばかり need?",
+      "prompt": "",
+      "options": [
+        "The past form",
+        "The present form",
+        "The negative form",
+        "The volitional form"
+      ],
+      "answer": 0,
+      "note": "The idea is about something completed."
+    },
+    {
+      "id": 32,
+      "type": "choice",
+      "instruction": "What kind of word is ばかり?",
+      "prompt": "",
+      "options": [
+        "A verb",
+        "A particle only",
+        "An adverb",
+        "A noun"
+      ],
+      "answer": 3,
+      "note": "It can take だ after it."
+    },
+    {
+      "id": 33,
+      "type": "choice",
+      "instruction": "Which says \"My brother keeps watching TV and nothing else\"?",
+      "prompt": "",
+      "options": [
+        "兄はテレビを見るばかりいる",
+        "兄はテレビを見てばかりいる",
+        "兄はテレビを見たばかりいる",
+        "兄はテレビを見てばかりある"
+      ],
+      "answer": 1,
+      "note": "て-form + ばかり + いる."
+    },
+    {
+      "id": 34,
+      "type": "tap",
+      "instruction": "Tap the phrase that means \"have just done\"",
+      "options": [
+        "さっき",
+        "ご飯を",
+        "食べたばかりです"
+      ],
+      "answer": 2,
+      "note": "Past verb + ばかり.",
+      "en": "I just ate a moment ago."
+    },
+    {
+      "id": 35,
+      "type": "tap",
+      "instruction": "Tap the part that means \"nothing but\"",
+      "options": [
+        "この町は",
+        "今",
+        "外国人ばかりだ"
+      ],
+      "answer": 2,
+      "note": "Noun + ばかり.",
+      "en": "This town is nothing but foreigners now."
+    },
+    {
+      "id": 36,
+      "type": "tap",
+      "instruction": "Tap the part that gives the unlucky cause",
+      "options": [
+        "遅れたばかりに、",
+        "電車に",
+        "乗れなかった"
+      ],
+      "answer": 0,
+      "note": "Past verb + ばかりに.",
+      "en": "Just because I was late, I could not get on the train."
+    },
+    {
+      "id": 37,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I have just got home.",
+      "options": [
+        "私は",
+        "家に",
+        "帰ったばかりだ"
+      ],
+      "note": "Past verb + ばかり + だ.",
+      "en": "I have just got home.",
+      "alt": [
+        [
+          "家に",
+          "私は",
+          "帰ったばかりだ"
+        ]
+      ]
+    },
+    {
+      "id": 38,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "My brother does nothing but read comics.",
+      "options": [
+        "弟は",
+        "まんがを",
+        "読んでばかりいる"
+      ],
+      "note": "て-form + ばかり + いる.",
+      "en": "My brother does nothing but read comics.",
+      "alt": [
+        [
+          "まんがを",
+          "弟は",
+          "読んでばかりいる"
+        ]
+      ]
+    },
+    {
+      "id": 39,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "He not only studied, but also worked.",
+      "options": [
+        "彼は",
+        "勉強した",
+        "ばかりか、",
+        "仕事も",
+        "した"
+      ],
+      "note": "ばかりか: not only, but also.",
+      "en": "He not only studied, but also worked."
+    },
+    {
+      "id": 40,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Just because I did not study, I failed the test.",
+      "options": [
+        "勉強しなかった",
+        "ばかりに、",
+        "試験に落ちた"
+      ],
+      "note": "ばかりに: just because.",
+      "en": "Just because I did not study, I failed the test."
+    },
+    {
+      "id": 41,
+      "type": "choice",
+      "instruction": "Which says \"The park is full of children\"?",
+      "prompt": "",
+      "options": [
+        "公園は子供ばかりか",
+        "公園は子供ばかりだ",
+        "公園は子供ばかりに",
+        "公園は子供ばかりて"
+      ],
+      "answer": 1,
+      "note": "Noun + ばかり + だ."
+    }
   ]
 }

@@ -6,55 +6,498 @@
   "title": "らしい versus そうだ, and っぽい",
   "summary": "らしい is a helper adjective for inference, hearsay and \"typical of\". Next to そうだ it is more subjective and takes any noun; っぽい is its casual, often negative cousin.",
   "video": "https://www.youtube.com/watch?v=y3KlZ6IwtQ0",
-  "related": [440, 441],
+  "related": [
+    440,
+    441
+  ],
   "blocks": [
-    {"type": "text", "text": "Lesson 24 gave you そう. This lesson adds two more words that sit on the same sliding scale between \"it looks\" and \"it is\": **らしい** and **っぽい**."},
-    {"type": "heading", "text": "What らしい is"},
-    {"type": "text", "text": "**らしい** is a helper adjective, a member of the **-しい** family (悲しい, 嬉しい, 難しい), a family that expresses personal impressions. It attaches to a single word or a whole sentence **without changing** the form before it."},
-    {"type": "example", "jp": "あの動物はウサギらしい。", "en": "That animal seems to be a rabbit."},
-    {"type": "heading", "text": "After a whole sentence"},
-    {"type": "text", "text": "Here らしい means \"it seems that\". The same words can come from two situations, and context decides. Scene 1: people around you tell you about it, so らしい is \"apparently\". Scene 2: you study footprints in the snow yourself, so らしい is \"it seems, from the evidence\"."},
-    {"type": "example", "jp": "みんなの話では、あの動物はウサギらしい。", "en": "From what everyone says, that animal is apparently a rabbit."},
-    {"type": "example", "jp": "足あとを見ると、あの動物はウサギだったらしい。", "en": "Looking at the footprints, it seems that animal was a rabbit."},
-    {"type": "text", "text": "If you want to say only \"I heard\", use **そうだ**: it is clearer. らしい can be heard or inferred."},
-    {"type": "table", "rows": [["Sentence", "Meaning"], ["ウサギだそうだ。", "I heard it is a rabbit."], ["ウサギらしい。", "Heard or worked out: it seems a rabbit."]]},
-    {"type": "example", "jp": "あの店は閉まったらしい。", "en": "That shop seems to have closed."},
-    {"type": "heading", "text": "After a single noun: likeness and quality"},
-    {"type": "text", "text": "Appearance そう cannot follow a plain noun, but **らしい** can follow any noun. It means \"like X\" or \"having the qualities X ought to have\". It does not claim the thing IS X: ウサギらしい動物 is \"a rabbit-like animal\"."},
-    {"type": "example", "jp": "あの人は男らしい。", "en": "That person is manly."},
-    {"type": "example", "jp": "先生らしくない先生だ。", "en": "He is a teacher who does not act like a teacher."},
-    {"type": "example", "jp": "それはさくららしくない。", "en": "That is not like Sakura."},
-    {"type": "heading", "text": "っぽい: the casual one"},
-    {"type": "text", "text": "**っぽい** is casual and attaches only to single words, never to a whole sentence. As a tendency, らしい praises (\"as it should be\") while っぽい points to a quality you might not like."},
-    {"type": "example", "jp": "彼は子供っぽい。", "en": "He is childish."},
-    {"type": "example", "jp": "このスープは水っぽい。", "en": "This soup is watery."},
-    {"type": "table", "rows": [["Word", "Meaning"], ["子供らしい", "child-like, as a child should be"], ["子供っぽい", "childish"]]},
-    {"type": "heading", "text": "Side by side"},
-    {"type": "table", "rows": [["Word", "After a sentence?", "After a plain noun?", "Feel"], ["そう (looks)", "no", "no", "how it looks"], ["そうだ (heard)", "yes", "yes (with だ)", "I heard"], ["らしい", "yes", "yes", "seems / typical of"], ["っぽい", "no", "yes", "-ish, casual, often negative"]]},
-    {"type": "keypoints", "items": ["**Sentence + らしい**: it seems / apparently (inference or hearsay).", "**Noun + らしい**: like / typical of that noun.", "**Noun + っぽい**: -ish, often a little negative; casual.", "For clear hearsay use **そうだ**; appearance そう takes no plain nouns."]}
+    {
+      "type": "text",
+      "text": "Lesson 24 gave you そう. This lesson adds two more words that sit on the same sliding scale between \"it looks\" and \"it is\": **らしい** and **っぽい**."
+    },
+    {
+      "type": "heading",
+      "text": "What らしい is"
+    },
+    {
+      "type": "text",
+      "text": "**らしい** is a helper adjective, a member of the **-しい** family (悲しい, 嬉しい, 難しい), a family that expresses personal impressions. It attaches to a single word or a whole sentence **without changing** the form before it."
+    },
+    {
+      "type": "example",
+      "jp": "あの動物はウサギらしい。",
+      "en": "That animal seems to be a rabbit."
+    },
+    {
+      "type": "heading",
+      "text": "After a whole sentence"
+    },
+    {
+      "type": "text",
+      "text": "Here らしい means \"it seems that\". The same words can come from two situations, and context decides. Scene 1: people around you tell you about it, so らしい is \"apparently\". Scene 2: you study footprints in the snow yourself, so らしい is \"it seems, from the evidence\"."
+    },
+    {
+      "type": "example",
+      "jp": "みんなの話では、あの動物はウサギらしい。",
+      "en": "From what everyone says, that animal is apparently a rabbit."
+    },
+    {
+      "type": "example",
+      "jp": "足あとを見ると、あの動物はウサギだったらしい。",
+      "en": "Looking at the footprints, it seems that animal was a rabbit."
+    },
+    {
+      "type": "text",
+      "text": "If you want to say only \"I heard\", use **そうだ**: it is clearer. らしい can be heard or inferred."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "Meaning"
+        ],
+        [
+          "ウサギだそうだ。",
+          "I heard it is a rabbit."
+        ],
+        [
+          "ウサギらしい。",
+          "Heard or worked out: it seems a rabbit."
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "あの店は閉まったらしい。",
+      "en": "That shop seems to have closed."
+    },
+    {
+      "type": "heading",
+      "text": "After a single noun: likeness and quality"
+    },
+    {
+      "type": "text",
+      "text": "Appearance そう cannot follow a plain noun, but **らしい** can follow any noun. It means \"like X\" or \"having the qualities X ought to have\". It does not claim the thing IS X: ウサギらしい動物 is \"a rabbit-like animal\"."
+    },
+    {
+      "type": "example",
+      "jp": "あの人は男らしい。",
+      "en": "That person is manly."
+    },
+    {
+      "type": "example",
+      "jp": "先生らしくない先生だ。",
+      "en": "He is a teacher who does not act like a teacher."
+    },
+    {
+      "type": "example",
+      "jp": "それはさくららしくない。",
+      "en": "That is not like Sakura."
+    },
+    {
+      "type": "heading",
+      "text": "っぽい: the casual one"
+    },
+    {
+      "type": "text",
+      "text": "**っぽい** is casual and attaches only to single words, never to a whole sentence. As a tendency, らしい praises (\"as it should be\") while っぽい points to a quality you might not like."
+    },
+    {
+      "type": "example",
+      "jp": "彼は子供っぽい。",
+      "en": "He is childish."
+    },
+    {
+      "type": "example",
+      "jp": "このスープは水っぽい。",
+      "en": "This soup is watery."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Word",
+          "Meaning"
+        ],
+        [
+          "子供らしい",
+          "child-like, as a child should be"
+        ],
+        [
+          "子供っぽい",
+          "childish"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Side by side"
+    },
+    {
+      "type": "text",
+      "text": "The same word can mean different things depending on what it follows, so compare them in one table."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Word",
+          "After a sentence?",
+          "After a plain noun?",
+          "Feel"
+        ],
+        [
+          "そう (looks)",
+          "no",
+          "no",
+          "how it looks"
+        ],
+        [
+          "そうだ (heard)",
+          "yes",
+          "yes (with だ)",
+          "I heard"
+        ],
+        [
+          "らしい",
+          "yes",
+          "yes",
+          "seems / typical of"
+        ],
+        [
+          "っぽい",
+          "no",
+          "yes",
+          "-ish, casual, often negative"
+        ]
+      ]
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Sentence + らしい**: it seems / apparently (inference or hearsay).",
+        "**Noun + らしい**: like / typical of that noun.",
+        "**Noun + っぽい**: -ish, often a little negative; casual.",
+        "For clear hearsay use **そうだ**; appearance そう takes no plain nouns."
+      ]
+    }
   ],
   "questions": [
-    {"id": 20, "type": "choice", "instruction": "What does this say?", "prompt": "雨が降ったらしい。", "options": ["It is typical of rain", "It looks like rain is coming", "It seems that it rained", "It is watery"], "answer": 2, "note": "Sentence + らしい: it seems (inference or hearsay).", "en": "It seems it rained."},
-    {"id": 42, "type": "choice", "instruction": "Fill the gap (\"as a teacher should be\": praise)", "prompt": "田中さんはとても先生＿＿。", "options": ["らしい", "っぽい", "そう", "ようだ"], "answer": 0, "note": "Noun + らしい: having the qualities it ought to have.", "en": "Mr. Tanaka is very much like a teacher should be."},
-    {"id": 22, "type": "choice", "instruction": "Fill the gap (a complaint: too watery)", "prompt": "このジュースは水＿＿。", "options": ["らしい", "そう", "ようだ", "っぽい"], "answer": 3, "note": "Noun + っぽい: -ish, often a little negative.", "en": "This juice is watery."},
-    {"id": 23, "type": "choice", "instruction": "Fill the gap (a typical spring day, as it should be)", "prompt": "今日は春＿＿天気ですね。", "options": ["っぽい", "らしい", "そう", "ようだ"], "answer": 1, "note": "Noun + らしい praises: it is just what it should be.", "en": "Today is a real spring day, isn't it?"},
-    {"id": 24, "type": "choice", "instruction": "Fill the gap (it seems that)", "prompt": "あの店は明日休む＿＿。", "options": ["っぽい", "らしい", "たい", "ような"], "answer": 1, "note": "らしい follows a whole sentence and means \"it seems\".", "en": "That shop seems to be closed tomorrow."},
-    {"id": 25, "type": "choice", "instruction": "Which is clearer if you only want to say \"I heard\"?", "prompt": "", "options": ["らしい", "っぽい", "みたい", "そうだ"], "answer": 3, "note": "らしい can also be inference; そうだ is clearly hearsay."},
-    {"id": 26, "type": "choice", "instruction": "Which one can NOT follow a whole sentence?", "prompt": "", "options": ["っぽい", "らしい", "そうだ", "ようだ"], "answer": 0, "note": "っぽい attaches only to single words."},
-    {"id": 27, "type": "choice", "instruction": "What does this say?", "prompt": "それは兄らしくない。", "options": ["That is not my brother's", "My brother does not like it", "That is not typical of my older brother", "My brother is not there"], "answer": 2, "note": "Noun + らしくない: not like that person.", "en": "That is not like my older brother."},
-    {"id": 43, "type": "choice", "instruction": "Which is the present negative of 学生らしい?", "prompt": "", "options": ["学生らしいない", "学生らしでない", "学生らしくない", "学生らしないです"], "answer": 2, "note": "らしい is an い-adjective: らしくない."},
-    {"id": 29, "type": "choice", "instruction": "Which says \"It seems that he went home\"?", "prompt": "", "options": ["彼は帰ったらしい", "彼は帰るっぽい", "彼は帰ったらしだ", "彼は帰ったらしく"], "answer": 0, "note": "Past plain + らしい."},
-    {"id": 30, "type": "choice", "instruction": "Which one is casual and often a little negative?", "prompt": "", "options": ["らしい", "そうだ", "ようだ", "っぽい"], "answer": 3, "note": "っぽい points at a quality you may not like."},
-    {"id": 31, "type": "choice", "instruction": "Which one means \"childish\"?", "prompt": "", "options": ["子供らしい", "子供っぽい", "子供そう", "子供のような"], "answer": 1, "note": "っぽい points at a quality you might not like; 子供らしい is \"as a child should be\"."},
-    {"id": 32, "type": "choice", "instruction": "True or false?", "prompt": "っぽい can attach to a whole sentence.", "options": ["True", "False"], "answer": 1, "note": "っぽい attaches to single words only."},
-    {"id": 33, "type": "choice", "instruction": "True or false?", "prompt": "Noun + らしい can mean \"typical of that noun\".", "options": ["True", "False"], "answer": 0, "note": "男らしい: manly."},
-    {"id": 34, "type": "choice", "instruction": "True or false?", "prompt": "らしい tends to praise, while っぽい often points to a quality you might not like.", "options": ["True", "False"], "answer": 0, "note": "As a tendency, yes.", "en": "\"Typical of\" tends to praise; \"-ish\" often points to a quality you might not like."},
-    {"id": 35, "type": "tap", "instruction": "Tap the word that means \"typical of\"", "options": ["あの人は", "父親らしい", "人です"], "answer": 1, "note": "Noun + らしい.", "en": "That person is fatherly."},
-    {"id": 36, "type": "tap", "instruction": "Tap the casual \"-ish\" word", "options": ["この色は", "赤っぽい"], "answer": 1, "note": "Noun + っぽい.", "en": "This color is reddish."},
-    {"id": 37, "type": "tap", "instruction": "Tap the word that marks inference (\"it seems\")", "options": ["雨が", "降る", "らしい"], "answer": 2, "note": "Sentence + らしい.", "en": "It seems it will rain."},
-    {"id": 38, "type": "order", "instruction": "Build the sentence", "prompt": "This shop seems to be closed tomorrow.", "options": ["この店は", "明日", "休みらしい"], "note": "Noun + らしい.", "en": "This shop seems to be closed tomorrow.", "alt": [["明日", "この店は", "休みらしい"]]},
-    {"id": 39, "type": "order", "instruction": "Build the sentence", "prompt": "This tea is a bit watery.", "options": ["このお茶は", "ちょっと", "水っぽい"], "note": "Noun + っぽい.", "en": "This tea is a bit watery."},
-    {"id": 40, "type": "order", "instruction": "Build the sentence", "prompt": "That is not like you.", "options": ["それは", "あなたらしく", "ない"], "note": "らしい → らしくない.", "en": "That is not like you."},
-    {"id": 41, "type": "order", "instruction": "Build the sentence", "prompt": "She is very childish.", "options": ["彼女は", "とても", "子供っぽい"], "note": "Noun + っぽい.", "en": "She is very childish.", "alt": [["とても", "彼女は", "子供っぽい"]]}
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "What does this say?",
+      "prompt": "雨が降ったらしい。",
+      "options": [
+        "It is typical of rain",
+        "It looks like rain is coming",
+        "It seems that it rained",
+        "It is watery"
+      ],
+      "answer": 2,
+      "note": "Sentence + らしい: it seems (inference or hearsay).",
+      "en": "It seems it rained."
+    },
+    {
+      "id": 42,
+      "type": "choice",
+      "instruction": "Fill the gap (\"as a teacher should be\": praise)",
+      "prompt": "田中さんはとても先生＿＿。",
+      "options": [
+        "らしい",
+        "っぽい",
+        "そう",
+        "ようだ"
+      ],
+      "answer": 0,
+      "note": "Noun + らしい: having the qualities it ought to have.",
+      "en": "Mr. Tanaka is very much like a teacher should be."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "Fill the gap (a complaint: too watery)",
+      "prompt": "このジュースは水＿＿。",
+      "options": [
+        "らしい",
+        "そう",
+        "ようだ",
+        "っぽい"
+      ],
+      "answer": 3,
+      "note": "Noun + っぽい: -ish, often a little negative.",
+      "en": "This juice is watery."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "Fill the gap (a typical spring day, as it should be)",
+      "prompt": "今日は春＿＿天気ですね。",
+      "options": [
+        "っぽい",
+        "らしい",
+        "そう",
+        "ようだ"
+      ],
+      "answer": 1,
+      "note": "Noun + らしい praises: it is just what it should be.",
+      "en": "Today is a real spring day, isn't it?"
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "Fill the gap (it seems that)",
+      "prompt": "あの店は明日休む＿＿。",
+      "options": [
+        "っぽい",
+        "らしい",
+        "たい",
+        "ような"
+      ],
+      "answer": 1,
+      "note": "らしい follows a whole sentence and means \"it seems\".",
+      "en": "That shop seems to be closed tomorrow."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "Which is clearer if you only want to say \"I heard\"?",
+      "prompt": "",
+      "options": [
+        "らしい",
+        "っぽい",
+        "みたい",
+        "そうだ"
+      ],
+      "answer": 3,
+      "note": "らしい can also be inference; そうだ is clearly hearsay."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "Which one can NOT follow a whole sentence?",
+      "prompt": "",
+      "options": [
+        "っぽい",
+        "らしい",
+        "そうだ",
+        "ようだ"
+      ],
+      "answer": 0,
+      "note": "っぽい attaches only to single words."
+    },
+    {
+      "id": 27,
+      "type": "choice",
+      "instruction": "What does this say?",
+      "prompt": "それは兄らしくない。",
+      "options": [
+        "That is not my brother's",
+        "My brother does not like it",
+        "That is not typical of my older brother",
+        "My brother is not there"
+      ],
+      "answer": 2,
+      "note": "Noun + らしくない: not like that person.",
+      "en": "That is not like my older brother."
+    },
+    {
+      "id": 43,
+      "type": "choice",
+      "instruction": "Which is the present negative of 学生らしい?",
+      "prompt": "",
+      "options": [
+        "学生らしいない",
+        "学生らしでない",
+        "学生らしくない",
+        "学生らしないです"
+      ],
+      "answer": 2,
+      "note": "らしい is an い-adjective: らしくない."
+    },
+    {
+      "id": 29,
+      "type": "choice",
+      "instruction": "Which says \"It seems that he went home\"?",
+      "prompt": "",
+      "options": [
+        "彼は帰ったらしい",
+        "彼は帰るっぽい",
+        "彼は帰ったらしだ",
+        "彼は帰ったらしく"
+      ],
+      "answer": 0,
+      "note": "Past plain + らしい."
+    },
+    {
+      "id": 30,
+      "type": "choice",
+      "instruction": "Which one is casual and often a little negative?",
+      "prompt": "",
+      "options": [
+        "らしい",
+        "そうだ",
+        "ようだ",
+        "っぽい"
+      ],
+      "answer": 3,
+      "note": "っぽい points at a quality you may not like."
+    },
+    {
+      "id": 31,
+      "type": "choice",
+      "instruction": "Which one means \"childish\"?",
+      "prompt": "",
+      "options": [
+        "子供らしい",
+        "子供っぽい",
+        "子供そう",
+        "子供のような"
+      ],
+      "answer": 1,
+      "note": "っぽい points at a quality you might not like; 子供らしい is \"as a child should be\"."
+    },
+    {
+      "id": 32,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "っぽい can attach to a whole sentence.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "note": "っぽい attaches to single words only."
+    },
+    {
+      "id": 33,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "Noun + らしい can mean \"typical of that noun\".",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "男らしい: manly."
+    },
+    {
+      "id": 34,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "らしい tends to praise, while っぽい often points to a quality you might not like.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "As a tendency, yes.",
+      "en": "\"Typical of\" tends to praise; \"-ish\" often points to a quality you might not like."
+    },
+    {
+      "id": 35,
+      "type": "tap",
+      "instruction": "Tap the word that means \"typical of\"",
+      "options": [
+        "あの人は",
+        "父親らしい",
+        "人です"
+      ],
+      "answer": 1,
+      "note": "Noun + らしい.",
+      "en": "That person is fatherly."
+    },
+    {
+      "id": 36,
+      "type": "tap",
+      "instruction": "Tap the casual \"-ish\" word",
+      "options": [
+        "この色は",
+        "赤っぽい"
+      ],
+      "answer": 1,
+      "note": "Noun + っぽい.",
+      "en": "This color is reddish."
+    },
+    {
+      "id": 37,
+      "type": "tap",
+      "instruction": "Tap the word that marks inference (\"it seems\")",
+      "options": [
+        "雨が",
+        "降る",
+        "らしい"
+      ],
+      "answer": 2,
+      "note": "Sentence + らしい.",
+      "en": "It seems it will rain."
+    },
+    {
+      "id": 38,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "This shop seems to be closed tomorrow.",
+      "options": [
+        "この店は",
+        "明日",
+        "休みらしい"
+      ],
+      "note": "Noun + らしい.",
+      "en": "This shop seems to be closed tomorrow.",
+      "alt": [
+        [
+          "明日",
+          "この店は",
+          "休みらしい"
+        ]
+      ]
+    },
+    {
+      "id": 39,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "This tea is a bit watery.",
+      "options": [
+        "このお茶は",
+        "ちょっと",
+        "水っぽい"
+      ],
+      "note": "Noun + っぽい.",
+      "en": "This tea is a bit watery."
+    },
+    {
+      "id": 40,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That is not like you.",
+      "options": [
+        "それは",
+        "あなたらしく",
+        "ない"
+      ],
+      "note": "らしい → らしくない.",
+      "en": "That is not like you."
+    },
+    {
+      "id": 41,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "She is very childish.",
+      "options": [
+        "彼女は",
+        "とても",
+        "子供っぽい"
+      ],
+      "note": "Noun + っぽい.",
+      "en": "She is very childish.",
+      "alt": [
+        [
+          "とても",
+          "彼女は",
+          "子供っぽい"
+        ]
+      ]
+    }
   ]
 }

@@ -15,6 +15,10 @@
       "text": "The story so far"
     },
     {
+      "type": "text",
+      "text": "Here is what has happened in the story so far, in a few short lines."
+    },
+    {
       "type": "example",
       "jp": "美咲は、駅への道を間違えたことに気づいた。",
       "en": "Misaki noticed that she had taken the wrong road to the station."
