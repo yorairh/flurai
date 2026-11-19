@@ -6,416 +6,49 @@
   "title": "The ば / れば conditional",
   "summary": "ば is the hypothetical \"if\". Its hypothetical nature gives you advice (どうすればいい), regret (ばよかった) and obligation (なければいけない).",
   "video": "https://www.youtube.com/watch?v=O81EPCsPUpw",
-  "related": [
-    418,
-    756,
-    429
-  ],
+  "related": [418, 756, 429],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Where と says \"this always leads to that\", **ば** (also called れば) says **\"suppose this\"**. It is always \"if\", never \"when\", because it states a hypothesis, not a fact."
-    },
-    {
-      "type": "heading",
-      "text": "How to make it"
-    },
-    {
-      "type": "table",
-      "rows": [
-        [
-          "Word",
-          "Rule",
-          "Example"
-        ],
-        [
-          "Godan verb",
-          "え-stem + ば",
-          "行く → 行けば"
-        ],
-        [
-          "Ichidan verb",
-          "drop る + れば",
-          "食べる → 食べれば"
-        ],
-        [
-          "する / 来る",
-          "すれば / 来れば",
-          "すれば, 来れば"
-        ],
-        [
-          "い-adjective",
-          "drop い + ければ",
-          "高い → 高ければ"
-        ],
-        [
-          "Negative ない",
-          "なければ",
-          "食べない → 食べなければ"
-        ]
-      ]
-    },
-    {
-      "type": "text",
-      "text": "The **え-stem** is the vowel row the ば form uses for godan verbs. Adjectives follow the same か-行 pattern: くない, かった, ければ."
-    },
-    {
-      "type": "heading",
-      "text": "Three expressions that come from hypotheticals"
-    },
-    {
-      "type": "text",
-      "text": "Japanese has no single word for \"should\" or \"must\". It uses a hypothetical instead, and that is why ば appears in so many set phrases. Think of する as \"act\" here."
-    },
-    {
-      "type": "text",
-      "text": "**どうすればいい?** is literally \"if I act how, would it be good?\", which is \"What should I do?\""
-    },
-    {
-      "type": "example",
-      "jp": "どうすればいいですか。",
-      "en": "What should I do?"
-    },
-    {
-      "type": "text",
-      "text": "**〜ばよかった** is \"if I had done it, it would have been good\", which is regret: \"I should have\"."
-    },
-    {
-      "type": "example",
-      "jp": "傘を持ってくればよかった。",
-      "en": "I should have brought an umbrella."
-    },
-    {
-      "type": "text",
-      "text": "**〜なければいけない** is \"if I do not do it, it will not do\": obligation. Casually it shrinks to **〜なきゃ**."
-    },
-    {
-      "type": "example",
-      "jp": "もう行かなければいけない。",
-      "en": "I have to go now."
-    },
-    {
-      "type": "example",
-      "jp": "早く寝なきゃ。",
-      "en": "I have to go to bed early."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**ば** = hypothetical \"if\"; never a known fact.",
-        "**どうすればいい**: what should I do?",
-        "**〜ばよかった**: I should have / I wish I had.",
-        "**〜なければいけない / 〜なきゃ**: must."
-      ]
-    }
+    {"type": "text", "text": "Where と says \"this always leads to that\", **ば** (also called れば) says **\"suppose this\"**. It is always \"if\", never \"when\", because it states a hypothesis, not a fact."},
+    {"type": "heading", "text": "How to make it"},
+    {"type": "text", "text": "ば is a helper that sits on the え-stem (the stem from lesson 7.5: 行く → 行け). Ichidan verbs drop る and take れば, and adjectives follow the same pattern as くない, かった, ければ."},
+    {"type": "table", "rows": [["Word", "Rule", "Example"], ["Godan verb", "え-stem + ば", "行く → 行けば"], ["Ichidan verb", "drop る + れば", "食べる → 食べれば"], ["する / 来る", "すれば / 来れば", "すれば"], ["い-adjective", "drop い + ければ", "高い → 高ければ"], ["Negative ない", "なければ", "しない → しなければ"]]},
+    {"type": "heading", "text": "Hypothetical, so not about what happened"},
+    {"type": "text", "text": "Because ば only supposes, using it about the past means the thing did **not** happen. That is the reason ばよかった is regret: \"if I had done it, it would have been good (but I did not)\"."},
+    {"type": "heading", "text": "Three expressions that come from hypotheticals"},
+    {"type": "text", "text": "Japanese has no single word for \"should\" or \"must\". It uses a hypothetical instead, and that is why ば appears in so many set phrases. Think of する as \"act\" here."},
+    {"type": "text", "text": "**どうすればいい?** is literally \"if I act how, would it be good?\", which is \"What should I do?\""},
+    {"type": "example", "jp": "どうすればいいですか。", "en": "What should I do?"},
+    {"type": "text", "text": "**〜ばよかった** is \"if I had done it, it would have been good\", which is regret: \"I should have\"."},
+    {"type": "example", "jp": "傘を持ってくればよかった。", "en": "I should have brought an umbrella."},
+    {"type": "text", "text": "**〜なければいけない** unpacks like this: しなければ is \"if I do not do it\", and いけない is \"it will not do\". Together: \"I must\". Lesson 30 had the same idea with と (しないといけない); this is the ば version. Casually the end is dropped: **〜なきゃ**."},
+    {"type": "diagram", "cars": [{"text": "勉強しなければ", "role": "white", "label": "if I don't study"}, {"text": "いけない", "role": "engine", "label": "it won't do"}], "text": "勉強しなければいけない。 I have to study."},
+    {"type": "example", "jp": "もう行かなければいけない。", "en": "I have to go now."},
+    {"type": "example", "jp": "早く寝なきゃ。", "en": "I have to go to bed early."},
+    {"type": "keypoints", "items": ["**ば** = hypothetical \"if\"; never a known fact.", "**どうすればいい**: what should I do?", "**〜ばよかった**: I should have / I wish I had.", "**〜なければいけない / 〜なきゃ**: must."]}
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Pick the ば form of 飲む",
-      "prompt": "",
-      "options": [
-        "飲むば",
-        "飲めば",
-        "飲みば",
-        "飲まば"
-      ],
-      "answer": 1,
-      "note": "Godan: え-stem + ば.",
-      "id": 21
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the ば form of 見る",
-      "prompt": "",
-      "options": [
-        "見れば",
-        "見ば",
-        "見るば",
-        "見けば"
-      ],
-      "answer": 0,
-      "note": "Ichidan: drop る, add れば.",
-      "id": 22
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the ば form of 安い",
-      "prompt": "",
-      "options": [
-        "安いば",
-        "安くれば",
-        "安かれば",
-        "安ければ"
-      ],
-      "answer": 3,
-      "note": "Drop い, add ければ.",
-      "id": 23
-    },
-    {
-      "type": "choice",
-      "instruction": "Pick the ば form of 読まない",
-      "prompt": "",
-      "options": [
-        "読まないれば",
-        "読まなくれば",
-        "読まなければ",
-        "読まなけば"
-      ],
-      "answer": 2,
-      "note": "ない works like an い-adjective: なければ.",
-      "id": 24
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "もっと早く起きればよかった。",
-      "options": [
-        "I got up early",
-        "I should have gotten up earlier",
-        "I will get up early tomorrow",
-        "I do not need to get up early"
-      ],
-      "answer": 1,
-      "note": "ばよかった: regret.",
-      "en": "I should have gotten up earlier.",
-      "id": 25
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ば express here?",
-      "prompt": "この薬を飲めば、すぐ治りますよ。",
-      "options": [
-        "A hypothesis: if you take it",
-        "A past habit",
-        "A request",
-        "A known fact"
-      ],
-      "answer": 0,
-      "note": "ば is hypothetical.",
-      "en": "If you take this medicine, you'll get better soon.",
-      "id": 26
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "明日までに宿題を出さなければいけません。",
-      "options": [
-        "I must not hand it in",
-        "I handed it in already",
-        "I may hand it in",
-        "I have to hand in my homework by tomorrow"
-      ],
-      "answer": 3,
-      "note": "なければいけない: must.",
-      "en": "I have to hand in my homework by tomorrow.",
-      "id": 27
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this express?",
-      "prompt": "友達に聞けばよかった。",
-      "options": [
-        "A plan to ask",
-        "A request to ask",
-        "Regret: I should have asked",
-        "A question"
-      ],
-      "answer": 2,
-      "note": "ば + よかった: it would have been good.",
-      "en": "I should have asked my friend.",
-      "id": 28
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "駅までどう行けばいいですか。",
-      "options": [
-        "How did you get to the station?",
-        "How should I get to the station?",
-        "I got to the station somehow",
-        "Go to the station"
-      ],
-      "answer": 1,
-      "note": "どうすればいい: what should I do?",
-      "en": "How should I get to the station?",
-      "id": 29
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "もっと勉強すれ＿＿よかった。",
-      "options": [
-        "ば",
-        "と",
-        "て",
-        "を"
-      ],
-      "answer": 0,
-      "note": "ば + よかった: regret.",
-      "en": "I should have studied more.",
-      "id": 30
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "お金がなけれ＿＿、買えない。",
-      "options": [
-        "と",
-        "は",
-        "も",
-        "ば"
-      ],
-      "answer": 3,
-      "note": "なければ: if there is not.",
-      "en": "If I have no money, I cannot buy it.",
-      "id": 31
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "ば is used for something certain to happen at a known time.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "ば is always hypothetical: if.",
-      "id": 32
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 寝なきゃ stand for?",
-      "prompt": "",
-      "options": [
-        "寝れば",
-        "寝なければいけない",
-        "寝ない",
-        "寝よう"
-      ],
-      "answer": 1,
-      "note": "なければ shrinks to なきゃ.",
-      "id": 33
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence says \"I should not have said that\"?",
-      "prompt": "",
-      "options": [
-        "言わなければよかった。",
-        "言えばよかった。",
-        "言わなければいけない。",
-        "言わなかった。"
-      ],
-      "answer": 0,
-      "note": "Negative ば + よかった.",
-      "id": 34
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence is wrong?",
-      "prompt": "",
-      "options": [
-        "寒ければ、ストーブをつける。",
-        "安ければ、買います。",
-        "行けば、分かる。",
-        "寒いば、ストーブをつける。"
-      ],
-      "answer": 3,
-      "note": "い-adjectives use ければ.",
-      "id": 35
-    },
-    {
-      "type": "choice",
-      "instruction": "What does どうすればいい literally ask?",
-      "prompt": "",
-      "options": [
-        "How did I act?",
-        "Why did I act?",
-        "If I act how, would it be good?",
-        "Who acted?"
-      ],
-      "answer": 2,
-      "note": "する = act: if I act how is it good.",
-      "id": 36
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "If you go by taxi, you can make it in time.",
-      "options": [
-        "タクシーで",
-        "行けば",
-        "間に合います"
-      ],
-      "note": "Hypothetical clause, then result.",
-      "en": "If you go by taxi, you can make it in time.",
-      "id": 37
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I should have eaten more.",
-      "options": [
-        "もっと",
-        "食べれば",
-        "よかった"
-      ],
-      "note": "ば + よかった.",
-      "en": "I should have eaten more.",
-      "id": 38
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I have to wash the dishes.",
-      "options": [
-        "お皿を",
-        "洗わなければ",
-        "いけない"
-      ],
-      "note": "なければいけない.",
-      "en": "I have to wash the dishes.",
-      "id": 39
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "If this book is cheap, I will buy it.",
-      "options": [
-        "この本が",
-        "安ければ",
-        "買います"
-      ],
-      "note": "い-adjective: ければ.",
-      "en": "If this book is cheap, I will buy it.",
-      "id": 40
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the part that says \"it would have been good\"",
-      "options": [
-        "もう少し",
-        "勉強すれば",
-        "よかった"
-      ],
-      "answer": 2,
-      "note": "Past よかった: it would have been good.",
-      "en": "I should have studied a little more.",
-      "id": 41
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the ば clause",
-      "options": [
-        "急がなければ",
-        "電車に",
-        "間に合わない"
-      ],
-      "answer": 0,
-      "note": "なければ: if we do not.",
-      "en": "If we don't hurry, we won't make the train.",
-      "id": 42
-    }
+    {"type": "choice", "instruction": "Pick the ば form of 飲む", "prompt": "", "options": ["飲むば", "飲めば", "飲みば", "飲まば"], "answer": 1, "note": "Godan: え-stem + ば.", "id": 21},
+    {"type": "choice", "instruction": "Pick the ば form of 見る", "prompt": "", "options": ["見れば", "見ば", "見るば", "見けば"], "answer": 0, "note": "Ichidan: drop る, add れば.", "id": 22},
+    {"type": "choice", "instruction": "Pick the ば form of 安い", "prompt": "", "options": ["安いば", "安くれば", "安かれば", "安ければ"], "answer": 3, "note": "Drop い, add ければ.", "id": 23},
+    {"type": "choice", "instruction": "Pick the ば form of 読まない", "prompt": "", "options": ["読まないれば", "読まなくれば", "読まなければ", "読まなけば"], "answer": 2, "note": "ない works like an い-adjective: なければ.", "id": 24},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "もっと早く起きればよかった。", "options": ["I got up early", "I should have gotten up earlier", "I will get up early tomorrow", "I do not need to get up early"], "answer": 1, "note": "ばよかった: regret.", "en": "I should have gotten up earlier.", "id": 25},
+    {"type": "choice", "instruction": "What does ば express here?", "prompt": "この薬を飲めば、すぐ治りますよ。", "options": ["A hypothesis: if you take it", "A past habit", "A request", "A known fact"], "answer": 0, "note": "ば is hypothetical.", "en": "If you take this medicine, you'll get better soon.", "id": 26},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "明日までに宿題を出さなければいけません。", "options": ["I must not hand it in", "I handed it in already", "I may hand it in", "I have to hand in my homework by tomorrow"], "answer": 3, "note": "なければいけない: must.", "en": "I have to hand in my homework by tomorrow.", "id": 27},
+    {"type": "choice", "instruction": "What does this express?", "prompt": "友達に聞けばよかった。", "options": ["A plan to ask", "A request to ask", "Regret: I should have asked", "A question"], "answer": 2, "note": "ば + よかった: it would have been good.", "en": "I should have asked my friend.", "id": 28},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "駅までどう行けばいいですか。", "options": ["How did you get to the station?", "How should I get to the station?", "I got to the station somehow", "Go to the station"], "answer": 1, "note": "どうすればいい: what should I do?", "en": "How should I get to the station?", "id": 29},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "もっと勉強すれ＿＿よかった。", "options": ["ば", "と", "て", "を"], "answer": 0, "note": "ば + よかった: regret.", "en": "I should have studied more.", "id": 30},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "お金がなけれ＿＿、買えない。", "options": ["と", "は", "も", "ば"], "answer": 3, "note": "なければ: if there is not.", "en": "If I have no money, I cannot buy it.", "id": 31},
+    {"type": "choice", "instruction": "True or false?", "prompt": "ば is used for something certain to happen at a known time.", "options": ["True", "False"], "answer": 1, "note": "ば is always hypothetical: if.", "id": 32},
+    {"type": "choice", "instruction": "What does 寝なきゃ stand for?", "prompt": "", "options": ["寝れば", "寝なければいけない", "寝ない", "寝よう"], "answer": 1, "note": "なければ shrinks to なきゃ.", "id": 33},
+    {"type": "choice", "instruction": "Which sentence says \"I should not have said that\"?", "prompt": "", "options": ["言わなければよかった。", "言えばよかった。", "言わなければいけない。", "言わなかった。"], "answer": 0, "note": "Negative ば + よかった.", "id": 34},
+    {"type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["寒ければ、ストーブをつける。", "安ければ、買います。", "行けば、分かる。", "寒いば、ストーブをつける。"], "answer": 3, "note": "い-adjectives use ければ.", "id": 35},
+    {"type": "choice", "instruction": "What does どうすればいい literally ask?", "prompt": "", "options": ["How did I act?", "Why did I act?", "If I act how, would it be good?", "Who acted?"], "answer": 2, "note": "する = act: if I act how is it good.", "id": 36},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "If you go by taxi, you can make it in time.", "options": ["タクシーで", "行けば", "間に合います"], "note": "Hypothetical clause, then result.", "en": "If you go by taxi, you can make it in time.", "id": 37},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I should have eaten more.", "options": ["もっと", "食べれば", "よかった"], "note": "ば + よかった.", "en": "I should have eaten more.", "id": 38},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I have to wash the dishes.", "options": ["お皿を", "洗わなければ", "いけない"], "note": "なければいけない.", "en": "I have to wash the dishes.", "id": 39},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "If this book is cheap, I will buy it.", "options": ["この本が", "安ければ", "買います"], "note": "い-adjective: ければ.", "en": "If this book is cheap, I will buy it.", "id": 40},
+    {"type": "tap", "instruction": "Tap the part that says \"it would have been good\"", "options": ["もう少し", "勉強すれば", "よかった"], "answer": 2, "note": "Past よかった: it would have been good.", "en": "I should have studied a little more.", "id": 41},
+    {"type": "tap", "instruction": "Tap the ば clause", "options": ["急がなければ", "電車に", "間に合わない"], "answer": 0, "note": "なければ: if we do not.", "en": "If we don't hurry, we won't make the train.", "id": 42},
+    {"id": 43, "type": "choice", "instruction": "What does ば tell you about the past here?", "prompt": "早く寝ればよかった。", "options": ["I did not go to bed early", "I went to bed early", "I always go to bed early", "I will go to bed early"], "answer": 0, "note": "ば is hypothetical: used about the past, it means it did not happen.", "en": "I should have gone to bed early."}
   ]
 }
