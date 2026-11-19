@@ -9,24 +9,24 @@
   "related": [416, 519, 520],
   "blocks": [
     {"type": "text", "text": "Both endings sit after the **て-form** and add a particle. Notice which particle: **も** is the \"also / even\" particle, and **は** is the topic particle that draws a line around something. Their personalities come straight from that."},
+    {"type": "heading", "text": "Same clause, three feels"},
+    {"type": "text", "text": "Start from one clause, 雨が降る (it rains), and add each ending. Plain て just gives a neutral cause. ても says \"even so\". ては says \"that is a problem\"."},
+    {"type": "table", "rows": [["Ending", "Sentence", "Feel"], ["て", "雨が降って、公園に行けない。", "Because it rains (a plain reason)"], ["ても", "雨が降っても、公園に行く。", "Even if it rains, still going"], ["ては", "雨が降っては、公園に行けない。", "If it rains, that is a problem"]]},
     {"type": "heading", "text": "ても: even if, even though"},
-    {"type": "text", "text": "も says \"even as far as that\". 雨が降っても means \"even going as far as rain\". The result that follows is simply not stopped by it, and it can be good or bad. This is the same も that appears in でも, where で is the て-form of だ."},
-    {"type": "example", "jp": "雨が降っても公園に行く。", "en": "Even if it rains, I will go to the park."},
+    {"type": "text", "text": "も says \"even as far as that\". 雨が降っても means \"even going as far as rain\". The result that follows is simply not stopped by it, and it can be good or bad. A handy picture: ても is \"as much as\" (even that far, it is still fine). This is the same も that appears in でも, where で is the て-form of だ."},
     {"type": "example", "jp": "寒くても散歩に行く。", "en": "Even though it is cold, I go for a walk."},
+    {"type": "example", "jp": "空っぽの箱でも、重い。", "en": "Even an empty box is heavy."},
     {"type": "heading", "text": "Asking permission"},
     {"type": "text", "text": "Turn ても into a question and you have permission: \"even if I did that, would it be fine?\""},
     {"type": "example", "jp": "ここに座ってもいいですか。", "en": "May I sit here?"},
     {"type": "heading", "text": "ては: that would be a problem"},
-    {"type": "text", "text": "は narrows things down: **\"as soon as you do just this\"**. The result tends to be **unwelcome**: a ban, a complaint, a trouble. Because it is so often used to forbid, casual speech squeezes ては into **ちゃ** (and では into **じゃ**)."},
+    {"type": "text", "text": "は narrows things down: **\"as soon as you do just this\"**. A handy picture: ては is \"as little as\" (even just that much is bad). The result tends to be **unwelcome**: a ban, a complaint, a trouble."},
     {"type": "example", "jp": "雨が降っては遠足に行けない。", "en": "If it rains, we cannot go on the trip (and that is a nuisance)."},
     {"type": "example", "jp": "ここで泣いては恥ずかしい。", "en": "It would be embarrassing to cry here."},
-    {"type": "example", "jp": "ここで寝ちゃだめだよ。", "en": "You mustn't sleep here."},
-    {"type": "keypoints", "items": [
-      "**て-form + も**: even if / even though, any kind of result.",
-      "**て-form + もいい**: permission.",
-      "**て-form + は**: when that happens, trouble; often forbids.",
-      "**ては → ちゃ**, **では → じゃ** in casual speech."
-    ]}
+    {"type": "example", "jp": "ここで寝てはだめだよ。", "en": "You mustn't sleep here."},
+    {"type": "text", "text": "Because it is so often used to forbid, casual speech squeezes ては into **ちゃ** (and では into **じゃ**)."},
+    {"type": "example", "jp": "ここで寝ちゃだめだよ。", "en": "You mustn't sleep here. (casual)"},
+    {"type": "keypoints", "items": ["**て-form + も**: even if / even though, any kind of result.", "**て-form + もいい**: permission.", "**て-form + は**: when that happens, trouble; often forbids.", "**ては → ちゃ**, **では → じゃ** in casual speech."]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "Fill the gap", "prompt": "雨が降っ＿＿、出かけます。", "options": ["ては", "ちゃ", "ても", "のに"], "answer": 2, "note": "ても: even if, and the result goes ahead.", "en": "Even if it rains, I will go out."},
@@ -38,7 +38,7 @@
     {"id": 26, "type": "choice", "instruction": "Fill the gap", "prompt": "日曜日＿＿、仕事があります。", "options": ["でも", "ても", "では", "には"], "answer": 0, "note": "Noun + でも: even on.", "en": "Even on Sunday I have work."},
     {"id": 27, "type": "choice", "instruction": "What does this say?", "prompt": "ここで食べてはいけません。", "options": ["You may eat here", "You should eat here", "Eating here is not allowed", "Please eat here"], "answer": 2, "note": "て-form + はいけない forbids.", "en": "You must not eat here."},
     {"id": 28, "type": "choice", "instruction": "What does this say?", "prompt": "あしたは休んでもいいです。", "options": ["You must take tomorrow off", "You must not rest", "It is fine to take tomorrow off", "I never rest"], "answer": 2, "note": "て-form + もいい gives permission.", "en": "You may take tomorrow off."},
-    {"id": 29, "type": "choice", "instruction": "Which particle points at an unwelcome result?", "prompt": "", "options": ["は", "も", "が", "を"], "answer": 0, "note": "は draws a line: \"as soon as you do just this\"."},
+    {"id": 29, "type": "choice", "instruction": "Which part gives the \"that would be bad\" feel?", "prompt": "〜ては", "options": ["The は after the て-form", "The て-form itself", "The verb stem", "The も"], "answer": 0, "note": "は draws a line: \"as soon as you do just this\"."},
     {"id": 30, "type": "choice", "instruction": "Which means \"even if it is big\"?", "prompt": "", "options": ["大きくては", "大きくなら", "大きくで", "大きくても"], "answer": 3, "note": "い-adjective く + ても."},
     {"id": 31, "type": "choice", "instruction": "True or false?", "prompt": "ても can be followed by a good or a bad result.", "options": ["True", "False"], "answer": 0, "note": "も says \"even as far as that\"; the result is not stopped."},
     {"id": 32, "type": "choice", "instruction": "True or false?", "prompt": "Casual speech squeezes the ending that points at unwelcome results into ちゃ.", "options": ["True", "False"], "answer": 0, "note": "ては → ちゃ, では → じゃ."},
@@ -50,6 +50,7 @@
     {"id": 38, "type": "order", "instruction": "Build the sentence", "prompt": "You mustn't cry here.", "options": ["ここで", "泣いちゃ", "だめだよ"], "note": "ては → ちゃ in casual speech.", "en": "You mustn't cry here."},
     {"id": 39, "type": "choice", "instruction": "Which is the casual form of 食べては?", "prompt": "", "options": ["食べじゃ", "食べちゃ", "食べても", "食べって"], "answer": 1, "note": "After a て ending, ては becomes ちゃ."},
     {"id": 40, "type": "choice", "instruction": "Which is the casual form of 読んでは?", "prompt": "", "options": ["読んちゃ", "読んじゃ", "読んでちゃ", "読みちゃ"], "answer": 1, "note": "After a で ending, では becomes じゃ."},
-    {"id": 41, "type": "choice", "instruction": "Which says \"Even if I study, I do not understand\"?", "prompt": "", "options": ["勉強しては分からない", "勉強しにも分からない", "勉強してが分からない", "勉強しても分からない"], "answer": 3, "note": "ても: even if; the result is not stopped."}
+    {"id": 41, "type": "choice", "instruction": "Which says \"Even if I study, I do not understand\"?", "prompt": "", "options": ["勉強しては分からない", "勉強しにも分からない", "勉強してが分からない", "勉強しても分からない"], "answer": 3, "note": "ても: even if; the result is not stopped."},
+    {"id": 42, "type": "choice", "instruction": "Which sentence sounds like a complaint?", "prompt": "", "options": ["雨が降っては、困る。", "雨が降っても、行く。", "雨が降って、うちにいた。"], "answer": 0, "note": "ては points at an unwelcome result."}
   ]
 }

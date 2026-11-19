@@ -8,29 +8,26 @@
   "video": "https://www.youtube.com/watch?v=LCvGHWbhDKw",
   "related": [431, 717, 718],
   "blocks": [
-    {"type": "text", "text": "Both helpers attach to the **あ-stem**. The **receptive** れる / られる (lesson 13) is the close relative of ある (\"be\"), the mother of self-move verbs. The **causative** せる / させる is the relative of する (\"do\"), the father of other-move verbs. Textbooks call them conjugations, but a verb plus a helper is really **two verbs with two doers**."},
+    {"type": "text", "text": "The causative means **cause someone to do something**. You attach **せる / させる** to a verb, and the person who actually does the action is not the person who speaks. So every causative sentence has **two verbs and two doers**."},
+    {"type": "heading", "text": "How to make it"},
+    {"type": "text", "text": "The helpers attach to the **あ-stem**. Godan verbs take **せる**, ichidan verbs take **させる**. Add **られる** after that and you get \"was made to\". The helper せる is the relative of する (\"do\"), the father of other-move verbs, just as れる / られる (lesson 13) is the relative of ある."},
+    {"type": "table", "rows": [["Plain", "Causative", "Causative receptive"], ["飲む", "飲ませる", "飲ませられる"], ["食べる", "食べさせる", "食べさせられる"], ["行く", "行かせる", "行かせられる"], ["する", "させる", "させられる"], ["来る", "来させる", "来させられる"]]},
     {"type": "heading", "text": "Causative: せる / させる"},
-    {"type": "text", "text": "Godan verbs take **せる**, ichidan verbs take **させる**: 飲む → 飲ませる, 食べる → 食べさせる. It means \"to cause X to happen\" by any means. \"Make\" and \"let\" are only partial translations: you may have forced it, allowed it, or simply arranged things so it happened."},
+    {"type": "text", "text": "The causative means \"to cause X to happen\" by any means. \"Make\" and \"let\" are only partial translations: you may have forced it, allowed it, or simply arranged things so it happened."},
+    {"type": "text", "text": "Look at the two doers. The inner sentence is what the dog does. The outer sentence adds what I do: I set it up."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "me"}, {"text": "犬に", "role": "white", "label": "the dog"}, {"text": "肉を", "role": "white"}, {"text": "食べさせた", "role": "engine", "label": "my action: cause"}], "text": "犬に肉を食べさせた。 I fed the dog meat."},
+    {"type": "diagram", "cars": [{"text": "犬が", "role": "carriage", "label": "the dog"}, {"text": "肉を", "role": "white"}, {"text": "食べた", "role": "engine", "label": "the dog's action"}], "text": "犬が肉を食べた。 The dog ate meat."},
+    {"type": "example", "jp": "（私が）犬に肉を食べさせた。", "en": "(I) fed the dog meat. I did not force it and did not just allow it: I set it up."},
+    {"type": "example", "jp": "母は子供に野菜を食べさせた。", "en": "The mother made her child eat vegetables."},
+    {"type": "heading", "text": "Who takes を and who takes に"},
     {"type": "text", "text": "The one who actually does the action (the **causee**) takes **を** or **に**. Using を treats them as an object, with no will of their own, which fits compulsion. Using に treats them as a target and suggests more cooperation. But when the attached verb already has its own を, the causee must take **に**, so there are not two を in the sentence."},
     {"type": "example", "jp": "（私が）犬を歩かせた。", "en": "(I) made the dog walk."},
-    {"type": "example", "jp": "（私が）犬に肉を食べさせた。", "en": "(I) had the dog eat meat."},
-    {"type": "example", "jp": "母は子供に野菜を食べさせた。", "en": "The mother made her child eat vegetables."},
+    {"type": "example", "jp": "先生は私たちに歌を歌わせた。", "en": "The teacher had us sing a song."},
     {"type": "heading", "text": "Causative receptive: made to"},
     {"type": "text", "text": "Drop る from せる / させる and add **られる**. It is an ichidan helper, so you get 食べさせられる: \"to receive being made to eat\". A sentence like this has **three verbs and two doers**: the first and the last verb share the person who was forced, and the middle verb belongs to the person who forced them."},
-    {"type": "diagram", "cars": [
-      {"text": "私は", "role": "topic"},
-      {"text": "ブロッコリーを", "role": "white"},
-      {"text": "食べ", "role": "plain", "label": "eat (my action)"},
-      {"text": "させ", "role": "plain", "label": "made (their action)"},
-      {"text": "られた", "role": "engine", "label": "received"}
-    ], "text": "私はブロッコリーを食べさせられた。 I was made to eat broccoli."},
+    {"type": "diagram", "cars": [{"text": "私は", "role": "topic"}, {"text": "ブロッコリーを", "role": "white"}, {"text": "食べ", "role": "plain", "label": "eat: me"}, {"text": "させ", "role": "plain", "label": "make: them"}, {"text": "られた", "role": "engine", "label": "receive: me"}], "text": "私はブロッコリーを食べさせられた。 I was made to eat broccoli."},
     {"type": "example", "jp": "私はブロッコリーを食べさせられた。", "en": "I was made to eat broccoli."},
-    {"type": "keypoints", "items": [
-      "**あ-stem + せる** (godan), **させる** (ichidan): make / let / cause.",
-      "The causee takes **を** or **に**; if the verb has its own **を**, use **に**.",
-      "**させ + られる** = **させられる**: \"was made to\".",
-      "Think in separate verbs with separate doers."
-    ]}
+    {"type": "keypoints", "items": ["**あ-stem + せる** (godan), **させる** (ichidan): make / let / cause.", "Two doers: the one who causes it, and the one who does it.", "The causee takes **を** or **に**; if the verb has its own **を**, use **に**.", "**させ + られる** = **させられる**: \"was made to\"."]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "Pick the causative", "prompt": "読む", "options": ["読まれる", "読める", "読ませる", "読もう"], "answer": 2, "note": "あ-stem 読ま + せる."},
@@ -52,8 +49,9 @@
     {"id": 36, "type": "choice", "instruction": "True or false?", "prompt": "The causee takes に when the attached verb already has を.", "options": ["True", "False"], "answer": 0, "note": "This avoids two を in one sentence."},
     {"id": 37, "type": "choice", "instruction": "True or false?", "prompt": "A causative sentence always means the person was forced, never allowed.", "options": ["True", "False"], "answer": 1, "note": "The causative means \"cause it to happen\": forcing, allowing or arranging."},
     {"id": 38, "type": "choice", "instruction": "What does this say?", "prompt": "子供に好きな本を読ませた。", "options": ["The child let me read a book", "I was made to read the book", "I read the child's book", "I let the child read a book he likes"], "answer": 3, "note": "Causative: the child reads; the speaker causes it.", "en": "I let the child read a book he likes."},
-    {"id": 39, "type": "choice", "instruction": "食べさせられた chains 食べる + させる + られる, and involves the person forced to eat and the person forcing. How many verbs and doers is that?", "prompt": "", "options": ["One verb, one doer", "Three verbs, two doers", "Two verbs, one doer", "Three verbs, three doers"], "answer": 1, "note": "食べる + させる + られる, with the forced person and the forcer."},
+    {"id": 39, "type": "choice", "instruction": "How many verbs and doers?", "prompt": "食べさせられた", "options": ["One verb, one doer", "Three verbs, two doers", "Two verbs, one doer", "Three verbs, three doers"], "answer": 1, "note": "食べる + させる + られる, with the forced person and the forcer.", "en": "was made to eat"},
     {"id": 40, "type": "choice", "instruction": "Which one is NOT a causative?", "prompt": "", "options": ["笑わせる", "食べられる", "泣かせる", "飲ませる"], "answer": 1, "note": "食べられる is a receptive (or potential)."},
-    {"id": 41, "type": "choice", "instruction": "In the course's terms, する is the \"father\" of the other-move verbs (verbs that act on something, like 出す). Which verb is せる / させる a relative of?", "prompt": "", "options": ["ある (be)", "いる", "くる", "する (do)"], "answer": 3, "note": "The causative is the relative of する, the father of other-move verbs."}
+    {"id": 41, "type": "choice", "instruction": "Which verb is the causative a relative of?", "prompt": "", "options": ["ある (be)", "いる", "くる", "する (do)"], "answer": 3, "note": "The causative is the relative of する, the father of other-move verbs."},
+    {"id": 42, "type": "choice", "instruction": "Which one is the causative receptive?", "prompt": "", "options": ["書かせる", "書かれる", "書かせられる", "書ける"], "answer": 2, "note": "書かせ + られる: caused, then received."}
   ]
 }

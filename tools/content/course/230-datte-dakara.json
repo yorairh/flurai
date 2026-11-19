@@ -10,28 +10,26 @@
   "blocks": [
     {"type": "text", "text": "Dictionaries list many meanings for **だって**: because, but, even, \"I hear\". They all come from one idea once you see the parts."},
     {"type": "heading", "text": "The parts: だ + って"},
-    {"type": "text", "text": "**だ** is the copula, and it points back at what was just said: \"that is so\". **って** is a casual shortening of the quotation particle と plus いう (\"say\"). Together: \"it is said that so\"."},
+    {"type": "text", "text": "**だ** is the copula, and it points back at what was just said: \"that is so\" (like the そう in そうですね). **って** is a casual shortening of the quotation particle と plus いう (\"say\"). Together: \"it is said that so\"."},
+    {"type": "diagram", "cars": [{"text": "明日は晴れ", "role": "plain", "label": "what was said"}, {"text": "だ", "role": "engine", "label": "it is so"}, {"text": "って", "role": "particle", "label": "it is said"}], "text": "明日は晴れだって。 They say tomorrow will be sunny."},
     {"type": "example", "jp": "明日は雨だって。", "en": "They say tomorrow will be rainy."},
     {"type": "heading", "text": "Because and but"},
-    {"type": "text", "text": "At the start of a reply, だって works like a child's protest. The speaker **accepts** the other person's statement and then adds something that pushes back. It can mean \"but...\" or \"because...\"."},
-    {"type": "example", "jp": "だって、眠いんだもん。", "en": "But I am sleepy!"},
+    {"type": "text", "text": "At the start of a reply, だって works like a child's protest. The speaker **accepts** the other person's statement and then adds something that pushes back. That is why it can mean \"but...\" or \"because...\": both accept the first line and add a second."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "このケーキ、おいしいね。", "en": "This cake is delicious, isn't it?"}, {"who": "B", "jp": "だって、さくらが作ったから。", "en": "Well, because Sakura made it."}]},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "宿題は？", "en": "What about your homework?"}, {"who": "B", "jp": "だって、時間がなかった。", "en": "But I had no time."}]},
     {"type": "heading", "text": "Even"},
     {"type": "text", "text": "Attached to one noun, だって means \"even\": \"take the case of me\". It has a casual, slightly defensive tone, unlike the neutral も."},
+    {"type": "table", "rows": [["Sentence", "Feel"], ["私もできる。", "I can do it too (neutral)"], ["私だってできる。", "Even I can do it (a bit defensive)"]]},
     {"type": "example", "jp": "子供だって知っている。", "en": "Even a child knows that."},
     {"type": "heading", "text": "だから and それから"},
-    {"type": "text", "text": "**だから** is a short form of \"since that is so\". **から** originally means \"from\", so \"from that, this follows\". **それから** is also \"from that\", but in time: **after that**."},
+    {"type": "text", "text": "**だから** is a short form of \"since that is so\": だ points back at what was said, and **から** originally means \"from\", so \"from that, this follows\". **それから** is also \"from that\", but in time: **after that**. It does **not** mean \"because of that\"."},
     {"type": "example", "jp": "雨だから、家にいる。", "en": "It is raining, so I am staying home."},
     {"type": "example", "jp": "ご飯を食べて、それから寝た。", "en": "I ate, and after that I went to bed."},
-    {"type": "keypoints", "items": [
-      "**だ + って**: \"it is said\" (hearsay).",
-      "A reply starting with だって accepts, then pushes back: \"but / because\".",
-      "**Noun + だって**: even (casual).",
-      "**だから**: so; **それから**: after that."
-    ]}
+    {"type": "keypoints", "items": ["**だ + って**: \"it is said\" (hearsay).", "A reply starting with だって accepts, then pushes back: \"but / because\".", "**Noun + だって**: even (casual).", "**だから**: so; **それから**: after that (not \"because\")."]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "What does this say?", "prompt": "来週は雪だって。", "options": ["It is snowing now", "Because of snow, ...", "They say it will snow next week", "Even snow ..."], "answer": 2, "note": "だ + って: it is said.", "en": "They say it will be snowy next week."},
-    {"id": 21, "type": "choice", "instruction": "Fill the gap: accept, then protest (\"But I am tired!\")", "prompt": "＿＿、疲れているんだもん。", "options": ["だって", "だから", "それから", "ところで"], "answer": 0, "note": "A reply starting with だって accepts and pushes back.", "en": "But I am tired!"},
+    {"id": 21, "type": "choice", "instruction": "Fill the gap: accept, then protest", "prompt": "A：もう寝なさい。　B：＿＿、まだ眠くない。", "options": ["だって", "だから", "それから", "ところで"], "answer": 0, "note": "A reply starting with だって accepts and pushes back.", "en": "A: Go to bed now. B: But I am not sleepy yet."},
     {"id": 22, "type": "choice", "instruction": "Fill the gap", "prompt": "今日は雨だ。＿＿、家にいる。", "options": ["それから", "だって", "ところで", "だから"], "answer": 3, "note": "だから: since that is so.", "en": "It is raining today. So I will stay home."},
     {"id": 23, "type": "choice", "instruction": "Fill the gap", "prompt": "朝ご飯を食べた。＿＿、学校へ行った。", "options": ["だから", "それから", "だって", "ところで"], "answer": 1, "note": "それから: after that, in time.", "en": "I ate breakfast. After that, I went to school."},
     {"id": 24, "type": "choice", "instruction": "Fill the gap to say \"even\"", "prompt": "私＿＿、そんなことはできない。", "options": ["だから", "だって", "それから", "ところで"], "answer": 1, "note": "Noun + だって: even.", "en": "Even I can't do that."},
@@ -39,10 +37,10 @@
     {"id": 26, "type": "choice", "instruction": "Which two parts make だって?", "prompt": "", "options": ["だ + って", "で + て", "だ + から", "た + って"], "answer": 0, "note": "だ points back at what was said; って is the casual quote."},
     {"id": 27, "type": "choice", "instruction": "Which word is the second part of だから?", "prompt": "", "options": ["って", "まで", "から", "ので"], "answer": 2, "note": "\"From that, this follows.\""},
     {"id": 28, "type": "choice", "instruction": "What does それから add?", "prompt": "宿題をして、それからゲームをした。", "options": ["Because of that", "But", "After that", "Even"], "answer": 2, "note": "それから: from that, in time.", "en": "I did my homework, and after that I played a game."},
-    {"id": 29, "type": "choice", "instruction": "Which reply accepts what was said and then pushes back?", "prompt": "", "options": ["だって、行きたくないんだもん。", "それから、行きたくないんだもん。", "だから、行きたくないんだもん。", "では、行きたくないんだもん。"], "answer": 0, "note": "だって starts a protest: \"but / because\"."},
+    {"id": 29, "type": "choice", "instruction": "Which reply accepts what was said and then pushes back?", "prompt": "A：明日は学校だよ。", "options": ["だって、行きたくない。", "それから、行きたくない。", "だから、行きたくない。", "では、行きたくない。"], "answer": 0, "note": "だって starts a protest: \"but / because\".", "en": "A: Tomorrow is a school day. B: ..."},
     {"id": 30, "type": "choice", "instruction": "What does だって mean here?", "prompt": "彼だって人間だよ。", "options": ["Because he", "After he", "So he", "Even he"], "answer": 3, "note": "Noun + だって: even.", "en": "Even he is a human being."},
     {"id": 31, "type": "choice", "instruction": "True or false?", "prompt": "だって always means \"because\".", "options": ["True", "False"], "answer": 1, "note": "It can also mean \"but\", \"even\" or \"I hear\"."},
-    {"id": 42, "type": "choice", "instruction": "What does それから usually mean?", "prompt": "", "options": ["After that, and then", "Because of that", "Even so", "By the way"], "answer": 0, "note": "それから is から (from) in time: from that point on."},
+    {"id": 42, "type": "choice", "instruction": "Which word does NOT mean \"because\"?", "prompt": "", "options": ["だから", "だって", "それから"], "answer": 2, "note": "それから only means after that, in time."},
     {"id": 33, "type": "tap", "instruction": "Tap the word that means \"after that\"", "options": ["お風呂に入って、", "それから", "寝た"], "answer": 1, "note": "それから links two events in time.", "en": "I took a bath, and after that I went to sleep."},
     {"id": 34, "type": "tap", "instruction": "Tap the word that means \"so\"", "options": ["雨だった。", "だから、", "行かなかった。"], "answer": 1, "note": "だから gives the result.", "en": "It was rainy. So I did not go."},
     {"id": 35, "type": "tap", "instruction": "Tap the word that means \"even\"", "options": ["先生だって", "間違えるよ"], "answer": 0, "note": "Noun + だって: even.", "en": "Even teachers make mistakes."},
@@ -51,6 +49,6 @@
     {"id": 38, "type": "order", "instruction": "Build the sentence", "prompt": "I did my homework, and after that I slept.", "options": ["宿題をして、", "それから", "寝た。"], "note": "それから joins events in time.", "en": "I did my homework, and after that I slept."},
     {"id": 39, "type": "order", "instruction": "Build the sentence", "prompt": "Even I get tired sometimes.", "options": ["私だって", "時々", "疲れるよ"], "note": "Noun + だって: even.", "en": "Even I get tired sometimes.", "alt": [["時々", "私だって", "疲れるよ"]]},
     {"id": 40, "type": "choice", "instruction": "Which sentence means \"I heard he is a student\"?", "prompt": "", "options": ["彼は学生だから", "彼は学生だって", "彼は学生それから", "彼は学生までだ"], "answer": 1, "note": "だ + って at the end reports hearsay."},
-    {"id": 41, "type": "choice", "instruction": "Which word means \"from that\" in time?", "prompt": "", "options": ["だから", "それから", "だって", "では"], "answer": 1, "note": "それから = after that; だから = so."}
+    {"id": 41, "type": "choice", "instruction": "Which one means \"even I\" (a bit defensive)?", "prompt": "", "options": ["私も", "私だって", "私から", "私まで"], "answer": 1, "note": "Noun + だって: even."}
   ]
 }

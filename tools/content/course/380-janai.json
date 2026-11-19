@@ -6,417 +6,48 @@
   "title": "When \"isn't\" means \"is\": じゃない and ではない",
   "summary": "じゃない is the negative of the copula, but as a question or an exclamation it means \"isn't it?\" or \"well, it is!\". It is a tag, like ね.",
   "video": "https://www.youtube.com/watch?v=so7BXOwSyEU",
-  "related": [
-    484,
-    511
-  ],
+  "related": [484, 511],
   "blocks": [
-    {
-      "type": "text",
-      "text": "**じゃない** is a shortening of **ではない**, the negative of the copula だ / です. As a plain negative it just denies: これはペンじゃない, \"This is not a pen\". But in casual speech it often means the opposite."
-    },
-    {
-      "type": "heading",
-      "text": "Negative questions seek agreement"
-    },
-    {
-      "type": "text",
-      "text": "Many languages ask for agreement with a negative: \"It's nice, isn't it?\". Japanese does too: さくらじゃないですか is \"Isn't that Sakura?\", and the speaker thinks it is. In casual speech か disappears, so the form stays and **tone** does the work."
-    },
-    {
-      "type": "table",
-      "rows": [
-        [
-          "Casual sentence",
-          "Tone",
-          "Meaning"
-        ],
-        [
-          "あれはさくらじゃない。",
-          "Flat",
-          "That is not Sakura."
-        ],
-        [
-          "あれはさくらじゃない？",
-          "Rising",
-          "That's Sakura, isn't it?"
-        ],
-        [
-          "さくらじゃない！",
-          "Excited",
-          "Well, if it isn't Sakura!"
-        ]
-      ]
-    },
-    {
-      "type": "heading",
-      "text": "A tag that stretches to anything"
-    },
-    {
-      "type": "text",
-      "text": "As a tag, じゃない works like **ね**, on adjectives and verbs too. It is **not** the negative of the word before it. The true negative of 暑い is 暑くない."
-    },
-    {
-      "type": "example",
-      "jp": "今日は暑いじゃない。",
-      "en": "It's hot today, isn't it?"
-    },
-    {
-      "type": "example",
-      "jp": "もう言ったじゃない。",
-      "en": "I already told you, didn't I?"
-    },
-    {
-      "type": "text",
-      "text": "Even shorter and very casual: **じゃん**."
-    },
-    {
-      "type": "heading",
-      "text": "The polite, persuasive version"
-    },
-    {
-      "type": "text",
-      "text": "Politely, **のではないでしょうか** sums up an argument gently: の turns the clause into a noun, ではない links it, and でしょうか adds a question. Japanese writers prefer this soft suggestion to a blunt assertion."
-    },
-    {
-      "type": "example",
-      "jp": "その理論は間違っているのではないでしょうか。",
-      "en": "Might that theory not be mistaken? (I think it is.)"
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**じゃない** = ではない (negative of だ).",
-        "Rising tone or exclamation: it means \"isn't it? / well, it is!\".",
-        "As a tag, じゃない ≈ ね; じゃん is its casual form.",
-        "Plain negatives of adjectives and verbs stay くない / ない."
-      ]
-    }
+    {"type": "text", "text": "**じゃない** is a shortening of **ではない**, the negative of the copula だ / です. As a plain negative it just denies: これはペンじゃない, \"This is not a pen\". But in casual speech it often means the opposite."},
+    {"type": "heading", "text": "Negative questions seek agreement"},
+    {"type": "text", "text": "Many languages ask for agreement with a negative: \"It's nice, isn't it?\". Japanese does too: さくらじゃないですか is \"Isn't that Sakura?\", and the speaker thinks it is. In casual speech か disappears, so the form stays and **tone** does the work. English does the same with tone alone: \"She came on Saturday.\" / \"She came on Saturday?\" / \"She came on Saturday?!\""},
+    {"type": "table", "rows": [["Casual sentence", "Tone", "Meaning"], ["あれはさくらじゃない。", "Flat", "That is not Sakura."], ["あれはさくらじゃない？", "Rising", "That's Sakura, isn't it?"], ["さくらじゃない！", "Excited", "Well, if it isn't Sakura!"]]},
+    {"type": "heading", "text": "A tag that stretches to anything"},
+    {"type": "text", "text": "As a tag, じゃない works like **ね**, on adjectives and verbs too. It is **not** the negative of the word before it. The true negative of 暑い is 暑くない."},
+    {"type": "example", "jp": "今日は暑いじゃない。", "en": "It's hot today, isn't it?"},
+    {"type": "example", "jp": "もう言ったじゃない。", "en": "I already told you, didn't I?"},
+    {"type": "text", "text": "Even shorter and very casual: **じゃん**."},
+    {"type": "example", "jp": "暑いじゃん。", "en": "It's hot, isn't it?"},
+    {"type": "example", "jp": "昨日言ったじゃん。", "en": "I told you yesterday, you know."},
+    {"type": "heading", "text": "The polite, persuasive version"},
+    {"type": "text", "text": "Politely, **のではないでしょうか** sums up an argument gently. The clause 間違っている is complete; **の** (\"the case\") makes it a noun, so ではない can join it; and でしょうか adds a soft question. Japanese writers prefer this gentle suggestion to a blunt assertion. In casual speech のではない shortens to んじゃない."},
+    {"type": "diagram", "cars": [{"text": "その理論が間違っている", "role": "white", "label": "complete clause"}, {"text": "の", "role": "carriage", "label": "the case"}, {"text": "ではない", "role": "engine"}, {"text": "でしょうか", "role": "plain", "label": "softens"}], "text": "その理論が間違っているのではないでしょうか。"},
+    {"type": "example", "jp": "その理論は間違っているのではないでしょうか。", "en": "Might that theory not be mistaken? (I think it is.)"},
+    {"type": "keypoints", "items": ["**じゃない** = ではない (negative of だ).", "Rising tone or exclamation: it means \"isn't it? / well, it is!\".", "As a tag, じゃない ≈ ね; じゃん is its casual form.", "Plain negatives of adjectives and verbs stay くない / ない."]}
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "Said with a flat tone, what does this mean?",
-      "prompt": "あれは山田さんじゃない。",
-      "options": [
-        "That is Mr. Yamada, isn't it?",
-        "That is not Mr. Yamada",
-        "Well, if it isn't Mr. Yamada!",
-        "Is that Mr. Yamada?"
-      ],
-      "answer": 1,
-      "note": "A flat tone: a plain negative.",
-      "en": "That is not Mr. Yamada.",
-      "id": 21
-    },
-    {
-      "type": "choice",
-      "instruction": "Said with a rising tone, what does this mean?",
-      "prompt": "あれは山田さんじゃない？",
-      "options": [
-        "That's Mr. Yamada, isn't it?",
-        "That is not Mr. Yamada",
-        "Who is Mr. Yamada?",
-        "Mr. Yamada left"
-      ],
-      "answer": 0,
-      "note": "A rising tone: a tag asking for agreement.",
-      "en": "That's Mr. Yamada, isn't it?",
-      "id": 22
-    },
-    {
-      "type": "choice",
-      "instruction": "Said with excitement, what does this mean?",
-      "prompt": "山田さんじゃない！",
-      "options": [
-        "That is not Mr. Yamada!",
-        "Where is Mr. Yamada?",
-        "Do not call Mr. Yamada!",
-        "Well, if it isn't Mr. Yamada!"
-      ],
-      "answer": 3,
-      "note": "An exclamation of recognition.",
-      "en": "Well, if it isn't Mr. Yamada!",
-      "id": 23
-    },
-    {
-      "type": "choice",
-      "instruction": "What does じゃない do here?",
-      "prompt": "今日は寒いじゃない。",
-      "options": [
-        "It makes 寒い negative",
-        "It makes it past tense",
-        "It acts like ね: asking for agreement",
-        "It makes it a command"
-      ],
-      "answer": 2,
-      "note": "As a tag it is not the negative of 寒い.",
-      "en": "It's cold today, isn't it?",
-      "id": 24
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "約束したじゃない。",
-      "options": [
-        "We did not promise",
-        "We promised, didn't we?",
-        "Do not promise",
-        "Shall we promise?"
-      ],
-      "answer": 1,
-      "note": "A tag after a verb: じゃない ≈ ね.",
-      "en": "We promised, didn't we?",
-      "id": 25
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the real negative of 高い?",
-      "prompt": "",
-      "options": [
-        "高くない",
-        "高いじゃない",
-        "高じゃない",
-        "高いない"
-      ],
-      "answer": 0,
-      "note": "い-adjectives negate with くない.",
-      "id": 26
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the real negative of 行く?",
-      "prompt": "",
-      "options": [
-        "行くじゃない",
-        "行くない",
-        "行きない",
-        "行かない"
-      ],
-      "answer": 3,
-      "note": "Verbs negate with ない.",
-      "id": 27
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the real negative of 静かだ?",
-      "prompt": "",
-      "options": [
-        "静かくない",
-        "静かない",
-        "静かじゃない",
-        "静かいない"
-      ],
-      "answer": 2,
-      "note": "Noun + だ negates as じゃない / ではない.",
-      "id": 28
-    },
-    {
-      "type": "choice",
-      "instruction": "In which sentence is じゃない a real negative?",
-      "prompt": "",
-      "options": [
-        "今日は寒いじゃない。",
-        "これは私の傘じゃない。",
-        "昨日話したじゃない。",
-        "先生が来たじゃない。"
-      ],
-      "answer": 1,
-      "note": "Only after a noun does it deny.",
-      "id": 29
-    },
-    {
-      "type": "choice",
-      "instruction": "What does じゃん express?",
-      "prompt": "できたじゃん！",
-      "options": [
-        "A casual \"Hey, you did it!\"",
-        "A formal \"You did not do it\"",
-        "A polite request",
-        "A question word"
-      ],
-      "answer": 0,
-      "note": "じゃん is a very casual form of the tag.",
-      "en": "Hey, you did it!",
-      "id": 30
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "As a tag, じゃない can follow verbs and adjectives, and it is not their negative.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "It works like ね.",
-      "en": "As a tag, じゃない is not the negative of the word before it.",
-      "id": 31
-    },
-    {
-      "type": "choice",
-      "instruction": "What makes あの人は先生じゃない mean \"That person is a teacher, isn't she?\"",
-      "prompt": "",
-      "options": [
-        "The particle は",
-        "The word 人",
-        "A rising tone",
-        "A past form"
-      ],
-      "answer": 2,
-      "note": "In casual speech tone does the work of か.",
-      "id": 32
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "もう宿題は終わった＿＿。",
-      "options": [
-        "くない",
-        "じゃない",
-        "だない",
-        "いない"
-      ],
-      "answer": 1,
-      "note": "A tag after a verb: I already finished, didn't I?",
-      "en": "I already finished my homework, didn't I?",
-      "id": 33
-    },
-    {
-      "type": "choice",
-      "instruction": "Which is the more formal form of じゃない?",
-      "prompt": "",
-      "options": [
-        "ではない",
-        "じゃん",
-        "ってば",
-        "だけど"
-      ],
-      "answer": 0,
-      "note": "ではない is the longer, formal form.",
-      "id": 34
-    },
-    {
-      "type": "choice",
-      "instruction": "What tone does this sentence have?",
-      "prompt": "こっちの道のほうが近いんじゃない？",
-      "options": [
-        "A flat denial",
-        "A rude order",
-        "A casual greeting",
-        "A soft suggestion that it is so"
-      ],
-      "answer": 3,
-      "note": "んじゃない？ softens an opinion.",
-      "en": "Isn't this road closer?",
-      "id": 44
-    },
-    {
-      "type": "choice",
-      "instruction": "What does the speaker think?",
-      "prompt": "あれは田中さんじゃないですか。",
-      "options": [
-        "That it is not Mr. Tanaka",
-        "That Mr. Tanaka is absent",
-        "That it is Mr. Tanaka",
-        "Nothing"
-      ],
-      "answer": 2,
-      "note": "A negative question seeks agreement.",
-      "en": "Isn't that Mr. Tanaka?",
-      "id": 36
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "That is not my umbrella.",
-      "options": [
-        "あれは",
-        "私の",
-        "傘では",
-        "ありません"
-      ],
-      "note": "Noun + ではありません.",
-      "en": "That is not my umbrella.",
-      "id": 37
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I said it yesterday, didn't I?",
-      "options": [
-        "昨日",
-        "言った",
-        "じゃない"
-      ],
-      "note": "A tag after a verb.",
-      "en": "I said it yesterday, didn't I?",
-      "id": 38
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "It's a nice day, isn't it?",
-      "options": [
-        "今日は",
-        "いい天気",
-        "じゃない？"
-      ],
-      "note": "A tag asking for agreement.",
-      "en": "It's a nice day, isn't it?",
-      "id": 39
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "He is not a student.",
-      "options": [
-        "彼は",
-        "学生",
-        "じゃない"
-      ],
-      "note": "Noun + じゃない: a real negative.",
-      "en": "He is not a student.",
-      "id": 40
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the word that asks for agreement",
-      "options": [
-        "この",
-        "ケーキ",
-        "おいしいじゃない"
-      ],
-      "answer": 2,
-      "note": "The tag じゃない works like ね.",
-      "en": "This cake is tasty, isn't it?",
-      "id": 41
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the part that is the real negative",
-      "options": [
-        "ここは",
-        "私の",
-        "家じゃない"
-      ],
-      "answer": 2,
-      "note": "Noun + じゃない: denies.",
-      "en": "This is not my house.",
-      "id": 42
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the closing part (\"isn't it?\") that softens the opinion",
-      "options": [
-        "それは",
-        "ちがうのでは",
-        "ないでしょうか"
-      ],
-      "answer": 2,
-      "note": "でしょうか adds a gentle question.",
-      "en": "Isn't that perhaps wrong?",
-      "id": 43
-    }
+    {"type": "choice", "instruction": "Said with a flat tone, what does this mean?", "prompt": "あれは山田さんじゃない。", "options": ["That is Mr. Yamada, isn't it?", "That is not Mr. Yamada", "Well, if it isn't Mr. Yamada!", "Is that Mr. Yamada?"], "answer": 1, "note": "A flat tone: a plain negative.", "en": "That is not Mr. Yamada.", "id": 21},
+    {"type": "choice", "instruction": "Said with a rising tone, what does this mean?", "prompt": "あれは山田さんじゃない？", "options": ["That's Mr. Yamada, isn't it?", "That is not Mr. Yamada", "Who is Mr. Yamada?", "Mr. Yamada left"], "answer": 0, "note": "A rising tone: a tag asking for agreement.", "en": "That's Mr. Yamada, isn't it?", "id": 22},
+    {"type": "choice", "instruction": "Said with excitement, what does this mean?", "prompt": "山田さんじゃない！", "options": ["That is not Mr. Yamada!", "Where is Mr. Yamada?", "Do not call Mr. Yamada!", "Well, if it isn't Mr. Yamada!"], "answer": 3, "note": "An exclamation of recognition.", "en": "Well, if it isn't Mr. Yamada!", "id": 23},
+    {"type": "choice", "instruction": "What does じゃない do here?", "prompt": "今日は寒いじゃない。", "options": ["It makes 寒い negative", "It makes it past tense", "It acts like ね: asking for agreement", "It makes it a command"], "answer": 2, "note": "As a tag it is not the negative of 寒い.", "en": "It's cold today, isn't it?", "id": 24},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "約束したじゃない。", "options": ["We did not promise", "We promised, didn't we?", "Do not promise", "Shall we promise?"], "answer": 1, "note": "A tag after a verb: じゃない ≈ ね.", "en": "We promised, didn't we?", "id": 25},
+    {"type": "choice", "instruction": "What is the real negative of 高い?", "prompt": "", "options": ["高くない", "高いじゃない", "高じゃない", "高いない"], "answer": 0, "note": "い-adjectives negate with くない.", "id": 26},
+    {"type": "choice", "instruction": "What is the real negative of 行く?", "prompt": "", "options": ["行くじゃない", "行くない", "行きない", "行かない"], "answer": 3, "note": "Verbs negate with ない.", "id": 27},
+    {"type": "choice", "instruction": "What is the real negative of 静かだ?", "prompt": "", "options": ["静かくない", "静かない", "静かじゃない", "静かいない"], "answer": 2, "note": "Noun + だ negates as じゃない / ではない.", "id": 28},
+    {"type": "choice", "instruction": "In which sentence is じゃない a real negative?", "prompt": "", "options": ["今日は寒いじゃない。", "これは私の傘じゃない。", "昨日話したじゃない。", "先生が来たじゃない。"], "answer": 1, "note": "Only after a noun does it deny.", "id": 29},
+    {"type": "choice", "instruction": "What does じゃん express?", "prompt": "できたじゃん！", "options": ["A casual \"Hey, you did it!\"", "A formal \"You did not do it\"", "A polite request", "A question word"], "answer": 0, "note": "じゃん is a very casual form of the tag.", "en": "Hey, you did it!", "id": 30},
+    {"type": "choice", "instruction": "True or false?", "prompt": "As a tag, じゃない can follow verbs and adjectives, and it is not their negative.", "options": ["True", "False"], "answer": 0, "note": "It works like ね.", "en": "As a tag, じゃない is not the negative of the word before it.", "id": 31},
+    {"type": "choice", "instruction": "What makes あの人は先生じゃない mean \"That person is a teacher, isn't she?\"", "prompt": "", "options": ["The particle は", "The word 人", "A rising tone", "A past form"], "answer": 2, "note": "In casual speech tone does the work of か.", "id": 32},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "もう宿題は終わった＿＿。", "options": ["くない", "じゃない", "だない", "いない"], "answer": 1, "note": "A tag after a verb: I already finished, didn't I?", "en": "I already finished my homework, didn't I?", "id": 33},
+    {"type": "choice", "instruction": "Which is the more formal form of じゃない?", "prompt": "", "options": ["ではない", "じゃん", "ってば", "だけど"], "answer": 0, "note": "ではない is the longer, formal form.", "id": 34},
+    {"type": "choice", "instruction": "What tone does this sentence have?", "prompt": "こっちの道のほうが近いんじゃない？", "options": ["A flat denial", "A rude order", "A casual greeting", "A soft suggestion that it is so"], "answer": 3, "note": "のではない shortens to んじゃない: a soft suggestion that it is so.", "en": "Isn't this road closer?", "id": 44},
+    {"type": "choice", "instruction": "What does the speaker think?", "prompt": "あれは田中さんじゃないですか。", "options": ["That it is not Mr. Tanaka", "That Mr. Tanaka is absent", "That it is Mr. Tanaka", "Nothing"], "answer": 2, "note": "A negative question seeks agreement.", "en": "Isn't that Mr. Tanaka?", "id": 36},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "That is not my umbrella.", "options": ["あれは", "私の", "傘では", "ありません"], "note": "Noun + ではありません.", "en": "That is not my umbrella.", "id": 37},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I said it yesterday, didn't I?", "options": ["昨日", "言った", "じゃない"], "note": "A tag after a verb.", "en": "I said it yesterday, didn't I?", "id": 38},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "It's a nice day, isn't it?", "options": ["今日は", "いい天気", "じゃない？"], "note": "A tag asking for agreement.", "en": "It's a nice day, isn't it?", "id": 39},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "He is not a student.", "options": ["彼は", "学生", "じゃない"], "note": "Noun + じゃない: a real negative.", "en": "He is not a student.", "id": 40},
+    {"type": "tap", "instruction": "Tap the word that asks for agreement", "options": ["この", "ケーキ", "おいしいじゃない"], "answer": 2, "note": "The tag じゃない works like ね.", "en": "This cake is tasty, isn't it?", "id": 41},
+    {"type": "tap", "instruction": "Tap the part that is the real negative", "options": ["ここは", "私の", "家じゃない"], "answer": 2, "note": "Noun + じゃない: denies.", "en": "This is not my house.", "id": 42},
+    {"type": "tap", "instruction": "Tap the closing part (\"isn't it?\") that softens the opinion", "options": ["それは", "ちがうのでは", "ないでしょうか"], "answer": 2, "note": "でしょうか adds a gentle question.", "en": "Isn't that perhaps wrong?", "id": 43}
   ]
 }

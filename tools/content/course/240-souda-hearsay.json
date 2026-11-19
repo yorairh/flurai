@@ -11,27 +11,23 @@
     {"type": "text", "text": "**そう** belongs to the family こう, そう, ああ, どう (lesson 20): it means \"that way\". From that it grows two jobs, and the trick is to know which one you are looking at."},
     {"type": "heading", "text": "Job 1: how it looks (appearance)"},
     {"type": "text", "text": "Here **そう** is attached to a **single word** and makes an adjectival noun. How the word is trimmed depends on its engine:"},
-    {"type": "table", "rows": [
-      ["Word", "Rule", "Result"],
-      ["静か (adjectival noun)", "drop だ / な", "静かそう (looks quiet)"],
-      ["おいしい (い-adjective)", "drop い", "おいしそう (looks tasty)"],
-      ["降る (verb)", "use the い-stem", "降りそう (looks about to fall)"],
-      ["食べる (ichidan verb)", "drop る", "食べそう"]
-    ]},
+    {"type": "table", "rows": [["Word", "Rule", "Result", "Means"], ["静か", "drop だ / な", "静かそう", "looks quiet"], ["おいしい", "drop い", "おいしそう", "looks tasty"], ["降る", "い-stem", "降りそう", "looks like rain"], ["食べる", "drop る", "食べそう", "looks about to eat"]]},
     {"type": "text", "text": "Plain nouns cannot take this そう. Japanese is careful about what you claim: you can only say おいしい after tasting, but おいしそう from the look of it."},
     {"type": "example", "jp": "このケーキはおいしそうだ。", "en": "This cake looks delicious."},
     {"type": "example", "jp": "空が暗くて、雨が降りそうだ。", "en": "The sky is dark and it looks like rain."},
+    {"type": "text", "text": "With a verb, it means \"about to happen\". The result is an adjectival noun, so before a noun it takes **な**."},
+    {"type": "example", "jp": "子供が泣きそうだ。", "en": "The child looks about to cry."},
     {"type": "example", "jp": "静かそうな女の子が来た。", "en": "A quiet-looking girl came."},
+    {"type": "diagram", "cars": [{"text": "おいし", "role": "plain", "label": "the word, trimmed"}, {"text": "そうだ", "role": "engine", "label": "looks"}], "text": "おいしそうだ。 It looks tasty."},
     {"type": "heading", "text": "Job 2: I heard (hearsay)"},
-    {"type": "text", "text": "Here **そうだ / そうです** is **not** a suffix. It attaches to a **whole sentence** in its plain form, and that sentence becomes the content of what you heard. The sentence itself keeps its own tense."},
+    {"type": "text", "text": "Here **そうだ / そうです** is **not** a suffix. It attaches to a **whole sentence** in its plain form, and that sentence becomes the content of what you heard. The sentence itself keeps its own tense. English does the same: \"It seems masked people drove it away\" means someone told me."},
+    {"type": "diagram", "cars": [{"text": "さくらは日本人だ", "role": "carriage", "label": "what I heard"}, {"text": "そうだ", "role": "engine", "label": "I heard"}], "text": "さくらは日本人だそうだ。 I heard that Sakura is Japanese."},
     {"type": "example", "jp": "先生は来週戻るそうだ。", "en": "I hear the teacher will be back next week."},
     {"type": "example", "jp": "さくらは日本人だそうだ。", "en": "I have heard that Sakura is Japanese."},
-    {"type": "keypoints", "items": [
-      "**Stem + そう** = looks like (appearance); no noun allowed.",
-      "**Plain sentence + そうだ** = I heard that (hearsay).",
-      "い-adjective: drop **い**; verb: use the **い-stem**; adjectival noun: drop **だ / な**.",
-      "降りそう (about to rain) and 降るそう (I hear it rains) are different."
-    ]}
+    {"type": "heading", "text": "Looks or heard?"},
+    {"type": "text", "text": "The same verb gives two different meanings. Look at what comes before そう: a stem means \"looks\", a plain verb means \"I heard\"."},
+    {"type": "table", "rows": [["Sentence", "Attaches to", "Meaning"], ["雨が降りそうだ。", "the い-stem", "It looks like rain."], ["雨が降るそうだ。", "the plain verb", "I hear it will rain."]]},
+    {"type": "keypoints", "items": ["**Stem + そう** = looks like (appearance); no noun allowed.", "**Plain sentence + そうだ** = I heard that (hearsay).", "い-adjective: drop **い**; verb: use the **い-stem**; adjectival noun: drop **だ / な**.", "降りそう (about to rain) and 降るそう (I hear it rains) are different."]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "Make \"looks like\"", "prompt": "高い", "options": ["高いそう", "高くそう", "高そう", "高さそう"], "answer": 2, "note": "い-adjective: drop い, add そう."},

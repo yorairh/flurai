@@ -17,18 +17,17 @@
     {"type": "text", "text": "For the future, たら stresses **what happens once the condition is met**, while ば stresses **whether it will be met at all**. When you expect the condition to happen, たら leans towards \"when\"."},
     {"type": "example", "jp": "雨がやんだら、出かけよう。", "en": "Once the rain stops, let's go out."},
     {"type": "heading", "text": "ったら: exasperation"},
-    {"type": "text", "text": "A small っ gives **ったら** (and the stronger **ってば**): a shortened \"when it comes to ...\" with a tone of mild complaint, often teasing."},
+    {"type": "text", "text": "A small っ gives **ったら**. It is a shortened \"when it comes to ...\": さくらったら is さくらと言ったら, \"when you say Sakura ...\". The tone is mild complaint, often teasing. The stronger **ってば** is the same idea, said when you have already told someone."},
     {"type": "example", "jp": "お母さんったら、また忘れたの。", "en": "Honestly, Mom, you forgot again?"},
+    {"type": "example", "jp": "もう言ったってば！", "en": "I already told you!"},
     {"type": "heading", "text": "なら: given that"},
-    {"type": "text", "text": "**なら** attaches directly to a noun or a full clause. It takes up what was said or is clearly the case: \"if it's X (as you say / as it is)\"."},
-    {"type": "example", "jp": "さくらなら、できるよ。", "en": "If it's Sakura, she can do it."},
-    {"type": "example", "jp": "駅なら、あそこです。", "en": "If you mean the station, it is over there."},
-    {"type": "keypoints", "items": [
-      "**Past form + ら**: once that has happened; the only if-form for the past.",
-      "In the past, it can carry surprise.",
-      "**ったら / ってば**: exasperation.",
-      "**Noun or clause + なら**: if it is the case that; \"since it's X\"."
-    ]}
+    {"type": "text", "text": "**なら** attaches directly to a noun or a full clause. It is used when there is no real doubt: it takes up what was said or is clearly the case. Read it as \"if it's X\" or even \"since it's X\"."},
+    {"type": "example", "jp": "さくらなら、できるよ。", "en": "Since it's Sakura, she can do it."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "駅はどこですか。", "en": "Where is the station?"}, {"who": "B", "jp": "駅なら、あそこです。", "en": "If you mean the station, it is over there."}]},
+    {"type": "heading", "text": "All four conditionals side by side"},
+    {"type": "text", "text": "Here are the four conditionals from lessons 30 to 32 in one place."},
+    {"type": "table", "rows": [["Form", "Made with", "Core feel", "About the past?"], ["と", "clause + と", "always follows", "no"], ["ば", "え-stem + ば", "suppose; hypothetical", "means it did not happen"], ["たら", "past form + ら", "once it has happened", "yes, often a surprise"], ["なら", "noun or clause + なら", "given that / since", "no"]]},
+    {"type": "keypoints", "items": ["**Past form + ら**: once that has happened; the only if-form for the past.", "In the past, it can carry surprise.", "**ったら / ってば**: exasperation.", "**Noun or clause + なら**: if it is the case that; \"since it's X\"."]}
   ],
   "questions": [
     {"type": "choice", "instruction": "Pick the たら form of 飲む", "prompt": "", "options": ["飲めば", "飲んだら", "飲むと", "飲んなら"], "answer": 1, "note": "Past 飲んだ + ら.", "id": 21},
@@ -51,6 +50,8 @@
     {"type": "order", "instruction": "Build the sentence", "prompt": "If it's Nagoya, it's two hours by train.", "options": ["名古屋なら", "電車で", "二時間です"], "note": "Noun + なら.", "en": "If it's Nagoya, it's two hours by train.", "id": 38},
     {"type": "order", "instruction": "Build the sentence", "prompt": "Once school is over, let's eat.", "options": ["学校が", "終わったら", "ご飯を", "食べよう"], "note": "Past form + ら + suggestion.", "en": "Once school is over, let's eat.", "id": 39},
     {"type": "tap", "instruction": "Tap the conditional", "options": ["家に", "着いたら", "連絡して"], "answer": 1, "note": "着いた + ら.", "en": "Contact me when you arrive home.", "id": 40},
-    {"type": "tap", "instruction": "Tap the word that picks up the topic that was raised", "options": ["旅行なら", "北海道が", "いいですよ"], "answer": 0, "note": "Noun + なら.", "en": "If it's a trip, Hokkaido is good.", "id": 41}
+    {"type": "tap", "instruction": "Tap the word that picks up the topic that was raised", "options": ["旅行なら", "北海道が", "いいですよ"], "answer": 0, "note": "Noun + なら.", "en": "If it's a trip, Hokkaido is good.", "id": 41},
+    {"id": 42, "type": "choice", "instruction": "Which conditional fits? \"When I opened the door, nobody was there.\"", "prompt": "", "options": ["と", "ば", "たら", "なら"], "answer": 2, "note": "Only たら can talk about a past event, with surprise."},
+    {"id": 43, "type": "choice", "instruction": "Which conditional fits? \"Since you mean the station, it is over there.\"", "prompt": "", "options": ["と", "ば", "たら", "なら"], "answer": 3, "note": "なら takes up what was just raised."}
   ]
 }
