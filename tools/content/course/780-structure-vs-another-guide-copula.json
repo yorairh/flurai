@@ -6,43 +6,17 @@
   "summary": "The second commentary looks at how the copula だ and です are treated, and why the course keeps them as one logical element.",
   "video": "https://www.youtube.com/watch?v=u2RBlHxD7fk",
   "blocks": [
-    {
-      "type": "text",
-      "text": "This is the second commentary episode. Last time the subject was が; this time it is the copula. The course argues that a model which makes だ a vague declarative marker takes away one of the pillars of Japanese structure."
-    },
-    {
-      "type": "heading",
-      "text": "Three engines"
-    },
-    {
-      "type": "text",
-      "text": "A logical Japanese sentence can end in only three ways: with a **verb**, with an **adjective**, or with a **noun plus the copula**. A bare noun is not an engine. On one side stand verbs, adjectives and the copula; on the other nouns, particles and conjunctions. The copula always attaches to a noun and says that A is B, one way: さくらは日本人だ means Sakura belongs to the set of Japanese people, not the reverse."
-    },
-    {
-      "type": "heading",
-      "text": "Dropped だ in casual speech"
-    },
-    {
-      "type": "text",
-      "text": "In casual speech だ and particles are often dropped, just as English drops words in \"Got up early this morning.\" That does not mean they are unnecessary: dropping is a legal shortcut because the listener can fill the gap. The course also treats だ and です as the same copula, with です being slightly eccentric in one respect."
-    },
-    {
-      "type": "example",
-      "jp": "さくらは日本人だ。",
-      "en": "Sakura is a Japanese person."
-    },
-    {
-      "type": "example",
-      "jp": "さくら、日本人。",
-      "en": "Sakura, Japanese. (casual, だ and は dropped)"
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "Three ways to end a logical sentence: verb, adjective, noun + copula.",
-        "The copula is a one-way equals sign.",
-        "In casual speech だ can be dropped, but it is still understood."
-      ]
-    }
+    {"type": "text", "text": "This is the second commentary episode. Last time the subject was が; this time it is the copula. The course argues that a model which makes だ a vague declarative marker takes away one of the pillars of Japanese structure."},
+    {"type": "text", "text": "The teaching of the copula is in lesson 79. This note only looks at how it is treated in the other guide."},
+    {"type": "heading", "text": "Three engines"},
+    {"type": "text", "text": "A logical Japanese sentence can end in only three ways: with a **verb**, with an **adjective**, or with a **noun plus the copula**. A bare noun is not an engine. The course's strongest evidence that だ is a real engine is that it changes form, just like verbs and adjectives."},
+    {"type": "table", "rows": [["Form", "Example", "Meaning", "Lesson"], ["だ", "学生だ", "is a student", "7"], ["だった", "学生だった", "was a student", "7"], ["で (て-form)", "学生で、まじめだ", "is a student and serious", "40"], ["な (before a noun)", "学生な人", "a person who is a student", "40"], ["だろう", "学生だろう", "probably a student", "17"]]},
+    {"type": "heading", "text": "Dropped だ in casual speech"},
+    {"type": "text", "text": "In casual speech だ and particles are often dropped. That does not mean they are unnecessary."},
+    {"type": "text", "text": "English does the same: \"Got up early this morning\" drops the \"I\", yet everyone understands it. Dropping is a legal shortcut because the listener can fill the gap."},
+    {"type": "example", "jp": "さくら、日本人。", "en": "Sakura, Japanese. (casual, だ and は dropped)"},
+    {"type": "diagram", "cars": [{"text": "さくらは", "role": "topic"}, {"text": "日本人だ", "role": "engine"}], "text": "Complete: topic + one engine."},
+    {"type": "diagram", "cars": [{"text": "さくら", "role": "topic", "label": "は dropped"}, {"text": "日本人", "role": "engine", "label": "だ dropped"}], "text": "Dropped but understood: the listener fills the gap."},
+    {"type": "keypoints", "items": ["Three ways to end a logical sentence: verb, adjective, noun + copula.", "だ changes form like a verb or adjective: だった, で, な, だろう.", "In casual speech だ can be dropped, but it is still understood."]}
   ]
 }

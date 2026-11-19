@@ -6,61 +6,32 @@
   "title": "Japanese is not English: expression strategies",
   "summary": "Japanese does the work of English pronouns with the zero pronoun, その, ある and the favor verbs, so you do not need a word for it, he or she.",
   "video": "https://www.youtube.com/watch?v=UCmnwgCc54A",
-  "related": [
-    423,
-    424
-  ],
+  "related": [423, 424],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Languages differ in their **expression strategies**: what they say with a pronoun, Japanese may say with structure. English cannot get through a paragraph without **it**; Japanese has **no word for it**, only zero. Even I and you are not true pronouns: 私, 僕, 俺 and あなた, お前 are roundabout ways of pointing at yourself and others, and textbook sentences full of 私 and あなた are unnatural. Calling a teacher or boss **あなた** is rude; use their name or title."
-    },
-    {
-      "type": "heading",
-      "text": "Strategies that replace pronouns"
-    },
-    {
-      "type": "text",
-      "text": "**その** is not just \"that\": it means the related one, the thing in question, so さくらとその犬 is \"Sakura and her dog\". **ある日** (an existing day) starts stories: \"one day\". And the favor verbs tell who did what to whom: 教えてくれた contains no he and no me, but くれる says someone else did it for me. A plain future action defaults to I."
-    },
-    {
-      "type": "example",
-      "jp": "さくらとその犬が公園に来た。",
-      "en": "Sakura and her dog came to the park."
-    },
-    {
-      "type": "example",
-      "jp": "先生が教えてくれた。",
-      "en": "The teacher taught me."
-    },
-    {
-      "type": "example",
-      "jp": "私が手伝ってあげる。",
-      "en": "I'll help (you)."
-    },
-    {
-      "type": "example",
-      "jp": "ある日、森で熊に会った。",
-      "en": "One day I met a bear in the forest."
-    },
-    {
-      "type": "example",
-      "jp": "今帰る。",
-      "en": "I'm going home now."
-    },
-    {
-      "type": "text",
-      "text": "彼 and 彼女 were brought in during the late Edo and Meiji eras to translate European novels. They are used today, but the zero pronoun is far more common."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "No word for \"it\": use zero.",
-        "I and you: mostly zero or a name; あなた can be rude.",
-        "**その** = related to the topic; **ある日** = one day.",
-        "**くれる / あげる / もらう** show who does it for whom."
-      ]
-    }
+    {"type": "text", "text": "Languages differ in their **expression strategies**: what they say with a pronoun, Japanese may say with structure. English cannot get through a paragraph without **it**; Japanese has **no word for it**, only zero."},
+    {"type": "heading", "text": "I and you"},
+    {"type": "text", "text": "Even I and you are not true pronouns. 私, 僕, 俺 and あなた, お前, 君 are roundabout ways of pointing at yourself and others, and textbook sentences full of 私 and あなた are unnatural. Most of the time you simply leave them out."},
+    {"type": "table", "rows": [["Word", "Who says it", "Feel"], ["私", "anyone", "neutral, polite"], ["僕", "mostly men", "soft, boyish"], ["俺", "men, among friends", "rough, casual"], ["あなた", "anyone, to equals", "distant; rude to a teacher or boss"], ["お前", "men, to close friends or inferiors", "very rough"], ["君", "men, to people below them", "friendly or superior"]]},
+    {"type": "text", "text": "Calling a teacher or boss **あなた** is rude. Use their name or title."},
+    {"type": "heading", "text": "その: the related one"},
+    {"type": "text", "text": "**その** is not just \"that\": it means the related one, the thing in question, so さくらとその犬 is \"Sakura and her dog\"."},
+    {"type": "example", "jp": "さくらとその犬が公園に来た。", "en": "Sakura and her dog came to the park."},
+    {"type": "heading", "text": "Favor verbs show who did what"},
+    {"type": "text", "text": "The favor verbs tell who did what to whom, with no pronoun at all. 教えてくれた contains no he and no me, but くれる says someone else did it for me. 手伝ってあげる says I do it for you. (A rougher cousin is てやる, for a person below you.)"},
+    {"type": "example", "jp": "先生が教えてくれた。", "en": "The teacher taught me."},
+    {"type": "diagram", "cars": [{"text": "先生が", "role": "carriage"}, {"text": "(私に)", "role": "white", "label": "unseen: to me"}, {"text": "教えてくれた", "role": "engine", "label": "くれる: for me"}], "text": "くれた says the unseen に is me."},
+    {"type": "example", "jp": "私が手伝ってあげる。", "en": "I'll help (you)."},
+    {"type": "diagram", "cars": [{"text": "私が", "role": "carriage"}, {"text": "(あなたを)", "role": "white", "label": "unseen: you"}, {"text": "手伝ってあげる", "role": "engine", "label": "あげる: for you"}], "text": "あげる says the unseen を is you."},
+    {"type": "heading", "text": "A plain future action is \"I\""},
+    {"type": "text", "text": "With no other clue, a plain action about to happen is yours."},
+    {"type": "example", "jp": "今帰る。", "en": "I'm going home now."},
+    {"type": "heading", "text": "ある: a certain one"},
+    {"type": "text", "text": "**ある日** (an existing day) starts stories: \"one day\". The same ある works for a place or a person: ある国のある村 is \"a certain village in a certain country\". And ある日のこと, ある村のこと use こと as \"the affair of...\", as in lesson 74."},
+    {"type": "example", "jp": "ある日、森で熊に会った。", "en": "One day I met a bear in the forest."},
+    {"type": "example", "jp": "ある国のある村に、おばあさんが住んでいた。", "en": "In a certain village of a certain country, an old woman lived."},
+    {"type": "text", "text": "彼 and 彼女 were brought in during the late Edo and Meiji eras to translate European novels. They are used today, but the zero pronoun is far more common."},
+    {"type": "table", "rows": [["English uses", "Japanese uses"], ["it", "zero"], ["her dog", "その犬"], ["she taught me", "教えてくれた"], ["one day / a certain", "ある"]]},
+    {"type": "keypoints", "items": ["No word for \"it\": use zero.", "I and you: mostly zero or a name; あなた can be rude.", "**その** = related to the topic; **ある日** = one day.", "**くれる / あげる / もらう** show who does it for whom."]}
   ],
   "questions": [
     {"id": 34, "type": "choice", "instruction": "How do you start a story with \"one day\"?", "prompt": "", "options": ["毎日", "今日", "ある日", "その日"], "answer": 2, "note": "ある日 (an existing day) opens a story."},
@@ -75,8 +46,8 @@
     {"id": 43, "type": "order", "instruction": "Build the sentence", "prompt": "I'll make dinner for you.", "options": ["晩ごはんを", "作って", "あげる"], "note": "あげる shows I do it for you, so no pronoun is needed.", "en": "I'll make dinner for you."},
     {"id": 44, "type": "tap", "instruction": "Tap the word that shows someone did it for me", "prompt": "", "options": ["母が", "弁当を", "作って", "くれた"], "answer": 3, "note": "くれた carries the 'for me'.", "en": "My mother made me a lunch box."},
     {"id": 45, "type": "tap", "instruction": "Tap the word that opens a story", "prompt": "", "options": ["ある日、", "駅で", "友だちに", "会った"], "answer": 0, "note": "ある日 is the storytelling \"one day\".", "en": "One day, I met a friend at the station."},
-    {"id": 46, "type": "choice", "instruction": "Which is the more natural way to say \"I ate breakfast\"?", "prompt": "", "options": ["私は私の朝ごはんを食べました", "朝ごはんを食べました", "あなたは朝ごはんを食べました", "彼が朝ごはんを食べました"], "answer": 1, "note": "The zero pronoun is far more common than 私は私の..."},
-    {"id": 47, "type": "choice", "instruction": "True or false?", "prompt": "Calling your boss あなた is polite.", "options": ["True", "False"], "answer": 1, "note": "あなた is rude toward a boss or teacher."},
+    {"id": 46, "type": "choice", "instruction": "Which is the most natural way to say \"I ate breakfast\"?", "prompt": "", "options": ["朝ごはんを食べました。", "私は朝ごはんを食べました。", "彼は朝ごはんを食べました。", "君は朝ごはんを食べました。"], "answer": 0, "note": "The zero pronoun is far more common than 私は私の..."},
+    {"id": 47, "type": "choice", "instruction": "Who is the unseen \"you\"?", "prompt": "私が荷物を持ってあげる。", "options": ["The listener", "The speaker", "A teacher", "Nobody"], "answer": 0, "note": "あげる says that the unseen に is you.", "en": "I'll carry your luggage for you."},
     {"id": 48, "type": "choice", "instruction": "教えてくれた has no word for \"me\". What shows it?", "prompt": "", "options": ["The verb くれる", "The verb 教える", "The ending た", "Nothing"], "answer": 0, "note": "くれる says someone else did it for me."},
     {"id": 49, "type": "order", "instruction": "Build the sentence", "prompt": "One day I found money on the road.", "options": ["ある日、", "道で", "お金を", "見つけた"], "note": "ある日 opens, and the zero pronoun hides I.", "en": "One day I found money on the road.", "alt": [["ある日、", "お金を", "道で", "見つけた"]]},
     {"id": 50, "type": "choice", "instruction": "Who gave the present?", "prompt": "友だちが私にプレゼントをくれた。", "options": ["The speaker", "The friend", "The teacher", "Nobody"], "answer": 1, "note": "くれる: the giver is the one marked が, and the receiver is me.", "en": "A friend gave me a present."},
