@@ -3,17 +3,222 @@
   "number": "45",
   "kind": "note",
   "title": "Note: your first step into immersion",
-  "summary": "A walk through a short native fable, as a way to move from theory to real Japanese material.",
+  "summary": "A short greedy-dog fable, read one sentence at a time with the tools from the earlier lessons.",
   "video": "https://www.youtube.com/watch?v=g5uyGx5OnuE",
   "blocks": [
-    {"type": "text", "text": "This episode is not a grammar topic. It shows how to start working with real Japanese made for Japanese readers: a short, simple fable about a greedy dog, read sentence by sentence. Even a children's story contains words you have never met, so the method matters more than the story."},
-    {"type": "heading", "text": "How the episode works"},
-    {"type": "keypoints", "items": [
-      "Pick material that is short, simple and not rewritten for learners.",
-      "Take one sentence at a time and find its engine and main carriage before looking up details.",
-      "Expect new vocabulary: children's stories use many words that textbooks skip.",
-      "Once the text is clear, listen to the audio again and again so the rhythm and the words settle in."
-    ]},
-    {"type": "text", "text": "The episode points out that many of the structures from earlier lessons appear right away in a tiny story, such as modifiers before nouns and verbs ending in a helper. Use the video as a model for how to break down your own first reading."}
+    {
+      "type": "text",
+      "text": "This page is not a new rule. It is a first real reading: a short fable about a greedy dog, written for FluRai, taken apart one sentence at a time. Even a children's story holds words you have never met, so the method matters more than the story. Read the whole story first, then see how each sentence is built."
+    },
+    {
+      "type": "heading",
+      "text": "The story"
+    },
+    {
+      "type": "text",
+      "text": "Seven short sentences. Try to find the engine and the main carriage of each one before reading on."
+    },
+    {
+      "type": "example",
+      "jp": "ある日、お肉をくわえた犬が橋を渡っていました。",
+      "en": "One day, a dog with a piece of meat in its mouth was crossing a bridge."
+    },
+    {
+      "type": "example",
+      "jp": "川の中を見ると、お肉をくわえた犬がいます。",
+      "en": "When he looked into the river, there was a dog with a piece of meat."
+    },
+    {
+      "type": "example",
+      "jp": "「あの肉のほうが大きそうだ。」と犬は思いました。",
+      "en": "\"That meat looks bigger,\" the dog thought."
+    },
+    {
+      "type": "example",
+      "jp": "犬は、その肉もほしくなりました。",
+      "en": "The dog came to want that meat too."
+    },
+    {
+      "type": "example",
+      "jp": "そして、思いっきり吠えました。",
+      "en": "And he barked with all his might."
+    },
+    {
+      "type": "example",
+      "jp": "すると、お肉が川に落ちてしまいました。",
+      "en": "Then the meat fell into the river."
+    },
+    {
+      "type": "example",
+      "jp": "犬はお腹がすいたまま、家に帰りました。",
+      "en": "The dog went home still hungry."
+    },
+    {
+      "type": "heading",
+      "text": "A describer before the noun"
+    },
+    {
+      "type": "text",
+      "text": "The first sentence opens with お肉をくわえた犬. A whole clause stands in front of 犬 and tells you which dog. That clause is a describer, not the engine, so くわえた is drawn white."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "お肉をくわえた",
+          "role": "white",
+          "label": "which dog?"
+        },
+        {
+          "text": "犬が",
+          "role": "carriage",
+          "label": "new character"
+        },
+        {
+          "text": "橋を",
+          "role": "white",
+          "label": "crossed what?"
+        },
+        {
+          "text": "渡っていました",
+          "role": "engine"
+        }
+      ],
+      "text": "A clause in front of a noun is only a describer. The engine is 渡っていました."
+    },
+    {
+      "type": "heading",
+      "text": "が for the new, は for the known"
+    },
+    {
+      "type": "text",
+      "text": "A thing that appears for the first time takes **が**. Once the reader knows it, the same thing takes **は**. That is why the dog is 犬が in sentence 1 and 犬は in sentences 3, 4 and 7. (Lesson 3 and lesson 61 explain this.)"
+    },
+    {
+      "type": "heading",
+      "text": "A story in the present tense"
+    },
+    {
+      "type": "text",
+      "text": "Sentence 2 ends in います, not いました. Japanese narration often slips into the non-past to make a scene vivid, as if you were watching it now. Do not read it as a mistake."
+    },
+    {
+      "type": "heading",
+      "text": "ほうが, そう and と"
+    },
+    {
+      "type": "text",
+      "text": "In sentence 3 the dog compares two pieces of meat. あの肉のほうが picks the one that is bigger (lesson 35). 大きそうだ says it looks big (lesson 24), judged by its appearance. The dog's words end in と思いました, which quotes a thought (lesson 12)."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "犬は",
+          "role": "topic",
+          "label": "known"
+        },
+        {
+          "text": "あの肉のほうが",
+          "role": "carriage",
+          "label": "that meat"
+        },
+        {
+          "text": "大きそうだ",
+          "role": "engine",
+          "label": "looks big"
+        }
+      ],
+      "text": "「あの肉のほうが大きそうだ。」 The thought, with its own carriage and engine."
+    },
+    {
+      "type": "heading",
+      "text": "Surprise endings"
+    },
+    {
+      "type": "text",
+      "text": "すると is \"when he did so\": the verb する plus the conditional と (lesson 30). 落ちてしまいました uses the helper しまう from lesson 44: the meat fell, and nobody could take it back. And お腹がすいたまま uses まま from lesson 42: the dog's hunger stayed unchanged."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "お肉が",
+          "role": "carriage",
+          "label": "the meat"
+        },
+        {
+          "text": "川に",
+          "role": "white",
+          "label": "where to"
+        },
+        {
+          "text": "落ちてしまいました",
+          "role": "engine",
+          "label": "fell and it's done"
+        }
+      ],
+      "text": "すると、お肉が川に落ちてしまいました。 The meat went and fell into the river."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Phrase in the story",
+          "What it shows",
+          "Lesson"
+        ],
+        [
+          "お肉をくわえた犬",
+          "clause before a noun",
+          "46, 47"
+        ],
+        [
+          "犬が … 犬は",
+          "が for new, は for known",
+          "3, 61"
+        ],
+        [
+          "あの肉のほうが",
+          "comparing with ほう",
+          "35"
+        ],
+        [
+          "大きそうだ",
+          "looks, by appearance",
+          "24"
+        ],
+        [
+          "〜と思いました",
+          "quoting a thought",
+          "12"
+        ],
+        [
+          "すると",
+          "する + と, \"when\"",
+          "30"
+        ],
+        [
+          "落ちてしまいました",
+          "helper しまう",
+          "44"
+        ],
+        [
+          "お腹がすいたまま",
+          "unchanged condition",
+          "42"
+        ]
+      ],
+      "title": "Phrase → lesson it comes from"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Pick material that is short and not rewritten for learners.",
+        "Take one sentence at a time and find its engine and main carriage first.",
+        "A clause before a noun is a describer.",
+        "Expect new vocabulary, then listen to the story again and again so the rhythm settles in."
+      ]
+    }
   ]
 }
