@@ -102,6 +102,13 @@ fun CourseLessonEntity.relatedPoints(): List<Int> = related.split(',').mapNotNul
 fun nextCourseEntry(lessons: List<CourseLessonEntity>, progress: Map<Int, CourseProgressEntity>): CourseLessonEntity? =
     lessons.sortedBy { it.position }.firstOrNull { courseStatus(progress[it.id]) != CourseStatus.Done }
 
+/** The entry after [id] in course order, or null after the last one (the "Next" button goes forward, whatever is passed). */
+fun entryAfter(lessons: List<CourseLessonEntity>, id: Int): CourseLessonEntity? {
+    val ordered = lessons.sortedBy { it.position }
+    val index = ordered.indexOfFirst { it.id == id }
+    return if (index < 0) null else ordered.getOrNull(index + 1)
+}
+
 /** Lessons (not notes) passed. */
 fun passedLessons(lessons: List<CourseLessonEntity>, progress: Map<Int, CourseProgressEntity>): List<CourseLessonEntity> =
     lessons.filter { !it.isNote() && courseStatus(progress[it.id]) == CourseStatus.Done }
@@ -166,10 +173,14 @@ fun noteRead(uid: String, lessonId: Int, at: Long) =
 @Serializable
 data class TrainCar(val text: String, val role: String = "plain", val label: String? = null, val ruby: String? = null)
 
+/** One line of a dialogue block: who says it ("A", "B"), the Japanese, its English and the furigana markup of the Japanese. */
+@Serializable
+data class DialogueLine(val who: String, val jp: String, val en: String, val ruby: String? = null)
+
 /**
  * One block of a lesson. [type]: "heading" ([text]), "text" ([text]; **bold** marks emphasis), "example"
- * ([jp], [en], [ruby]), "diagram" ([cars], [text] as caption), "keypoints" ([title], [items]) and
- * "table" ([title], [rows], the first row is the header).
+ * ([jp], [en], [ruby]), "diagram" ([cars], [text] as caption), "keypoints" ([title], [items]),
+ * "table" ([title], [rows], the first row is the header) and "dialogue" ([lines], two or more speakers).
  */
 @Serializable
 data class CourseBlock(
@@ -185,6 +196,7 @@ data class CourseBlock(
     /** Furigana markup of each of [items] and of each cell of [rows] (null where a text has no kanji). */
     val itemsRuby: List<String?>? = null,
     val rowsRuby: List<List<String?>>? = null,
+    val lines: List<DialogueLine>? = null,
 )
 
 private val json = Json { ignoreUnknownKeys = true }
@@ -425,4 +437,33 @@ class CourseRepository @Inject constructor(
     suspend fun markRead(uid: String, lessonId: Int, at: Long) {
         if (progress.get(uid, lessonId) == null) progress.upsert(noteRead(uid, lessonId, at))
     }
+}
+
+// -- table layout ----------------------------------------------------------------------------------
+
+/** The width of each table column in dp, and whether the table is wider than the available width and must scroll. */
+data class TableLayout(val widths: List<Float>, val scrolls: Boolean)
+
+private const val TABLE_CELL_PADDING_DP = 20f
+private const val TABLE_EM_DP = 15f
+private const val TABLE_MIN_COLUMN_DP = 64f
+private const val TABLE_MAX_COLUMN_DP = 220f
+
+/** Longest line of a cell in "ems" (Japanese characters are 1, others about half); a long cell wraps, so it is capped. */
+private fun cellEms(cell: String): Float =
+    cell.replace("**", "").lines().maxOf { line -> line.sumOf { c -> if (c.code >= 0x2E80) 1.0 else 0.55 }.toFloat() }.coerceAtMost(14f)
+
+/**
+ * Columns sized to their content. When they fit in [availableDp] they are stretched to fill it exactly (so a
+ * table is always full width); when they do not, they keep their own width and the table scrolls sideways.
+ */
+fun tableLayout(rows: List<List<String>>, availableDp: Float): TableLayout {
+    if (rows.isEmpty()) return TableLayout(emptyList(), false)
+    val columns = rows.maxOf { it.size }
+    val ideal = (0 until columns).map { col ->
+        val ems = rows.maxOf { cellEms(it.getOrElse(col) { "" }) }
+        (ems * TABLE_EM_DP + TABLE_CELL_PADDING_DP).coerceIn(TABLE_MIN_COLUMN_DP, TABLE_MAX_COLUMN_DP)
+    }
+    val total = ideal.sum()
+    return if (total <= availableDp) TableLayout(ideal.map { it * availableDp / total }, false) else TableLayout(ideal, true)
 }

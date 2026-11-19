@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -50,6 +52,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -65,7 +68,7 @@ import com.flurai.app.core.course.CourseStatus
 import com.flurai.app.core.course.SELF_TEST_SIZES
 import com.flurai.app.core.course.TrainCar
 import com.flurai.app.core.course.isNote
-import com.flurai.app.core.course.lessonRuby
+import com.flurai.app.core.course.tableLayout
 import com.flurai.app.ui.components.BackTopAppBar
 import com.flurai.app.ui.components.ExampleSentence
 import com.flurai.app.ui.components.FuriganaText
@@ -154,7 +157,7 @@ private fun NextEntryCard(state: CourseListState, onOpenLesson: (Int) -> Unit) {
                     style = MaterialTheme.typography.labelLarge,
                 )
                 Spacer(Modifier.height(4.dp))
-                FuriganaText(next.title, remember(next) { lessonRuby(next) }[next.title], MaterialTheme.typography.titleLarge.japanese())
+                Text(next.title, style = MaterialTheme.typography.titleLarge.japanese())
                 Text(next.summary, style = MaterialTheme.typography.bodyMedium, maxLines = 3)
                 Spacer(Modifier.height(12.dp))
                 Button(onClick = { onOpenLesson(next.id) }, modifier = Modifier.fillMaxWidth()) {
@@ -239,7 +242,7 @@ private fun CourseRow(item: CourseItem, onClick: () -> Unit) {
             modifier = Modifier.width(40.dp),
         )
         Column(Modifier.weight(1f)) {
-            FuriganaText(lesson.title, remember(lesson) { lessonRuby(lesson) }[lesson.title], MaterialTheme.typography.titleMedium.japanese())
+            Text(lesson.title, style = MaterialTheme.typography.titleMedium.japanese())
             Text(
                 listOfNotNull(
                     if (lesson.isNote()) "Study note" else lesson.jlpt?.let { "N$it" },
@@ -288,8 +291,8 @@ fun CourseLessonScreen(
             Modifier.verticalScroll(scroll).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            val rubyOf = remember(lesson) { lessonRuby(lesson) }
-            FuriganaText(lesson.title, rubyOf[lesson.title], MaterialTheme.typography.headlineSmall.japanese())
+            // a title is short enough to read without furigana
+            Text(lesson.title, style = MaterialTheme.typography.headlineSmall.japanese())
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (lesson.isNote()) {
                     Badge("Study note")
@@ -326,6 +329,16 @@ fun CourseLessonScreen(
                     )
                 }
             }
+            state.resume?.let { resume ->
+                TextButton(onClick = { onNext(resume.id) }, modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        "Continue where you left off: ${resume.title}",
+                        maxLines = 1,
+                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.labelLarge.japanese(),
+                    )
+                }
+            }
             lesson.video?.let { video -> VideoCredit(video) { context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(video))) } }
             Text(CREDIT, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(16.dp))
@@ -355,24 +368,26 @@ internal fun boldMarkup(text: String): AnnotatedString = buildAnnotatedString {
 @Composable
 private fun BlockView(block: CourseBlock, speak: (String, Boolean) -> Unit) {
     when (block.type) {
-        "heading" -> FuriganaText(block.text.orEmpty(), block.ruby, MaterialTheme.typography.titleMedium.japanese(), Modifier.padding(top = 8.dp))
+        "heading" -> Text(block.text.orEmpty().replace("**", ""), style = MaterialTheme.typography.titleMedium.japanese(), modifier = Modifier.padding(top = 8.dp))
         "text" -> FuriganaText(block.text.orEmpty(), block.ruby, MaterialTheme.typography.bodyLarge.japanese())
         "example" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)) {
-            Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    ExampleSentence(block.jp.orEmpty(), block.ruby, MaterialTheme.typography.titleLarge.japanese())
-                    Text(block.en.orEmpty(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            // the sentence takes the whole card width; the English line and the play button share the row under it
+            Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 16.dp, end = 8.dp, bottom = 8.dp)) {
+                ExampleSentence(block.jp.orEmpty(), block.ruby, MaterialTheme.typography.titleLarge.japanese())
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(block.en.orEmpty(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                    Spacer(Modifier.width(8.dp))
+                    SentenceSpeakButton(onSpeak = { slow -> speak(spokenText(block.jp.orEmpty()), slow) })
                 }
-                Spacer(Modifier.width(8.dp))
-                SentenceSpeakButton(onSpeak = { slow -> speak(spokenText(block.jp.orEmpty()), slow) })
             }
         }
+        "dialogue" -> DialogueView(block, speak)
         "diagram" -> Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             TrainDiagram(block.cars.orEmpty())
-            block.text?.let { FuriganaText(it, block.ruby, MaterialTheme.typography.bodySmall.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            block.text?.let { FuriganaText(it, block.ruby, MaterialTheme.typography.bodyMedium.japanese(), color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
-        "keypoints" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        "keypoints" -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer), modifier = Modifier.fillMaxWidth()) {
+            Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(block.title ?: "Key points", style = MaterialTheme.typography.labelLarge)
                 block.items.orEmpty().forEachIndexed { i, item ->
                     FuriganaText("•  $item", block.itemsRuby?.getOrNull(i)?.let { "•  $it" }, MaterialTheme.typography.bodyLarge.japanese())
@@ -390,23 +405,64 @@ internal fun spokenText(jp: String): String = jp.replace(Regex("[（(][^）)]*[�
 private fun TableView(block: CourseBlock) {
     val rows = block.rows.orEmpty()
     if (rows.isEmpty()) return
-    Column {
+    Column(Modifier.fillMaxWidth()) {
         block.title?.let { Text(it, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(bottom = 4.dp)) }
-        Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh) {
-            Column(Modifier.horizontalScroll(rememberScrollState())) {
-                rows.forEachIndexed { index, row ->
-                    if (index > 0) HorizontalDivider()
-                    Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                        row.forEachIndexed { col, cell ->
-                            val base = (if (index == 0) MaterialTheme.typography.labelLarge else MaterialTheme.typography.bodyMedium).japanese()
-                            FuriganaText(
-                                cell,
-                                block.rowsRuby?.getOrNull(index)?.getOrNull(col),
-                                if (index == 0) base.copy(fontWeight = FontWeight.Bold) else base,
-                                Modifier.width(110.dp).padding(end = 8.dp),
-                            )
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+            // columns sized to their content and stretched to the full width; a wider table scrolls, with a hint
+            val layout = remember(rows, maxWidth.value) { tableLayout(rows, maxWidth.value) }
+            val scroll = rememberScrollState()
+            Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh) {
+                Box {
+                    Column(Modifier.horizontalScroll(scroll)) {
+                        rows.forEachIndexed { index, row ->
+                            if (index > 0) HorizontalDivider()
+                            Row {
+                                row.forEachIndexed { col, cell ->
+                                    val base = (if (index == 0) MaterialTheme.typography.labelLarge else MaterialTheme.typography.bodyMedium).japanese()
+                                    FuriganaText(
+                                        cell,
+                                        block.rowsRuby?.getOrNull(index)?.getOrNull(col),
+                                        if (index == 0) base.copy(fontWeight = FontWeight.Bold) else base,
+                                        Modifier.width(layout.widths[col].dp).padding(horizontal = 10.dp, vertical = 8.dp),
+                                    )
+                                }
+                            }
                         }
                     }
+                    if (layout.scrolls) ScrollHint(scroll, MaterialTheme.colorScheme.surfaceContainerHigh, Modifier.align(Alignment.CenterEnd))
+                }
+            }
+        }
+    }
+}
+
+/** A fade and an arrow at the right edge while there is more to scroll to, so nothing is cut off silently. */
+@Composable
+private fun ScrollHint(scroll: ScrollState, background: Color, modifier: Modifier = Modifier) {
+    if (!scroll.canScrollForward) return
+    Box(
+        modifier.fillMaxHeight().width(40.dp).background(Brush.horizontalGradient(listOf(background.copy(alpha = 0f), background))),
+        contentAlignment = Alignment.CenterEnd,
+    ) {
+        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Scroll for more", tint = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun DialogueView(block: CourseBlock, speak: (String, Boolean) -> Unit) {
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh), modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            block.lines.orEmpty().forEach { line ->
+                Row(verticalAlignment = Alignment.Top) {
+                    Surface(shape = CircleShape, color = MaterialTheme.colorScheme.secondaryContainer) {
+                        Text(line.who, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp))
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1f)) {
+                        ExampleSentence(line.jp, line.ruby, MaterialTheme.typography.titleMedium.japanese())
+                        Text(line.en, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    SentenceSpeakButton(onSpeak = { slow -> speak(spokenText(line.jp), slow) })
                 }
             }
         }
@@ -421,9 +477,11 @@ private fun TableView(block: CourseBlock) {
 @Composable
 fun TrainDiagram(cars: List<TrainCar>) {
     val rail = MaterialTheme.colorScheme.outline
+    val scroll = rememberScrollState()
+    Box {
     Row(
         Modifier
-            .horizontalScroll(rememberScrollState())
+            .horizontalScroll(scroll)
             .drawBehind {
                 val railY = size.height - 6.dp.toPx()
                 drawLine(rail, Offset(0f, railY), Offset(size.width, railY), 3.dp.toPx())
@@ -448,6 +506,8 @@ fun TrainDiagram(cars: List<TrainCar>) {
             }
             Car(car, reserveLabel = anyLabel)
         }
+    }
+    ScrollHint(scroll, MaterialTheme.colorScheme.background, Modifier.align(Alignment.CenterEnd))
     }
 }
 
