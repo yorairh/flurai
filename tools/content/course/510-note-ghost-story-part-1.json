@@ -3,18 +3,95 @@
   "number": "51",
   "kind": "note",
   "title": "Note: reading a ghost story, part 1",
-  "summary": "The first sentence of a spoken Japanese ghost story, taken apart with the structure from the earlier lessons.",
+  "summary": "The first sentences of an original ghost story, read with the structure from the earlier lessons: a sentence that ends in a noun, and one very long describer.",
   "video": "https://www.youtube.com/watch?v=uO1rHcwjADA",
   "blocks": [
-    {"type": "text", "text": "This episode is a guided reading, made together with a Japanese storytelling channel, of a ghost story (怪談). Instead of teaching a new rule, it shows how to approach real material: stop at every sentence and ask what it is made of."},
-    {"type": "heading", "text": "What the first sentence shows"},
-    {"type": "text", "text": "The story opens with それは, like English \"It was ...\". Japanese has no visible word for English \"it\" in this role. A zero pronoun does that job, so それ is really \"that\", a pointer to something the listener is about to learn. A story-opening of this kind sets the scene before any action starts."},
-    {"type": "keypoints", "items": [
-      "Work through the story one sentence at a time.",
-      "Look for the engine and the main carriage first, including the invisible ones.",
-      "English \"it\" at the start of a story is usually a zero pronoun in Japanese.",
-      "Listen first, then analyze, then listen again."
-    ]},
-    {"type": "text", "text": "Parts 2 and 3 continue the same story and look at more of its sentences."}
+    {
+      "type": "text",
+      "text": "This is a guided reading of a short ghost story (怪談) written for FluRai. Instead of teaching a new rule, it shows how to approach real material: stop at every sentence and ask what it is made of. The story continues over three notes. Here are its first sentences."
+    },
+    {
+      "type": "heading",
+      "text": "The story so far"
+    },
+    {
+      "type": "example",
+      "jp": "それは、美咲が友達の家の鍋パーティーに参加した、雪の夜。",
+      "en": "It was the snowy night when Misaki took part in the hot-pot party at her friend's house."
+    },
+    {
+      "type": "example",
+      "jp": "パーティーが終わると、美咲は一人で駅へ向かった。",
+      "en": "When the party ended, Misaki set out for the station alone."
+    },
+    {
+      "type": "example",
+      "jp": "雪が静かに降っていた。",
+      "en": "The snow was falling quietly."
+    },
+    {
+      "type": "example",
+      "jp": "道の先に、古くて小さな家があった。",
+      "en": "Ahead on the road there was an old, small house."
+    },
+    {
+      "type": "example",
+      "jp": "窓の中に、白い顔があった。",
+      "en": "In the window there was a white face."
+    },
+    {
+      "type": "heading",
+      "text": "A sentence that ends in a noun"
+    },
+    {
+      "type": "text",
+      "text": "The first sentence ends on a bare noun, 雪の夜. A noun at the end is an A-is-B sentence with the copula だ dropped, which is common in casual narration. So それは … 雪の夜 is \"It was the snowy night ...\". (それ is \"that\": it points at something the listener is about to learn.)"
+    },
+    {
+      "type": "heading",
+      "text": "Modification mania"
+    },
+    {
+      "type": "text",
+      "text": "Everything between それは and 夜 is one long describer. It has its own carriage, 美咲が, and its own engine, 参加した. But the engine is inside a describer, and it stands in front of a noun. So the whole stretch only tells you which night."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "それは",
+          "role": "topic",
+          "label": "it"
+        },
+        {
+          "text": "美咲が友達の家の鍋パーティーに参加した",
+          "role": "white",
+          "label": "one long describer"
+        },
+        {
+          "text": "雪の夜",
+          "role": "engine",
+          "label": "noun + (だ)"
+        }
+      ],
+      "text": "それは、美咲が友達の家の鍋パーティーに参加した、雪の夜。 The describer hangs on 夜."
+    },
+    {
+      "type": "text",
+      "text": "When you meet a long sentence, look at its end first. Here it ends in a noun, so everything before it describes that noun. Read the rest backwards from there."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Work through the story one sentence at a time.",
+        "A sentence can end in a bare noun: the copula だ is dropped.",
+        "A long stretch in front of a noun is one describer, even when it holds its own carriage and engine.",
+        "Listen first, then analyze, then listen again."
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Part 2 continues the same story."
+    }
   ]
 }

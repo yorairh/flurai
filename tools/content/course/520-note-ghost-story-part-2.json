@@ -3,17 +3,143 @@
   "number": "52",
   "kind": "note",
   "title": "Note: reading a ghost story, part 2",
-  "summary": "The story continues: a time statement, a verb that carries something back, and a quiet realization.",
+  "summary": "The story continues: noticing something, a verb that joins two clauses, and a sudden but.",
   "video": "https://www.youtube.com/watch?v=I38yhYh4Lfg",
   "blocks": [
-    {"type": "text", "text": "This episode carries on with the same ghost story and works through the next few sentences. It is a reading practice rather than a new grammar topic."},
-    {"type": "heading", "text": "Things worth noticing"},
-    {"type": "keypoints", "items": [
-      "A sentence often opens with a time statement, such as \"after the party ended\", that sets the scene. In relaxed speech the particle after it may be dropped.",
-      "One verb can be chained to 来る: 忘れてくる means to leave something behind and then come away without it.",
-      "A long phrase can be packed into a noun with こと, and a verb such as 気づく (to notice) then uses it as its content.",
-      "Small words like ふと (suddenly, by chance) set the mood."
-    ]},
-    {"type": "text", "text": "The aim is a habit: read a long sentence from the engine backwards, and ask for each piece which word it modifies."}
+    {
+      "type": "text",
+      "text": "Part 2 of the ghost story. Misaki walks on, and something is wrong. Read each sentence first, then see what it teaches."
+    },
+    {
+      "type": "heading",
+      "text": "The story so far"
+    },
+    {
+      "type": "example",
+      "jp": "美咲は、駅への道を間違えたことに気づいた。",
+      "en": "Misaki noticed that she had taken the wrong road to the station."
+    },
+    {
+      "type": "example",
+      "jp": "美咲は立ち止まり、あたりを見回した。",
+      "en": "Misaki stopped and looked around."
+    },
+    {
+      "type": "example",
+      "jp": "ところが、さっきの古い家が、また目の前にあった。",
+      "en": "But there was the old house from before, right in front of her again."
+    },
+    {
+      "type": "example",
+      "jp": "戸が開いている。美咲は寒さのあまり、そのまま中に入った。",
+      "en": "The door is open. From sheer cold, Misaki went straight inside."
+    },
+    {
+      "type": "example",
+      "jp": "奥の部屋の戸を、ゆっくり押す。",
+      "en": "She pushes the door of the back room, slowly."
+    },
+    {
+      "type": "heading",
+      "text": "気づく: what you notice is a target"
+    },
+    {
+      "type": "text",
+      "text": "気づく is 気 (spirit, attention) + 付く (to stick). Your attention sticks to something, so what you notice is a **target**, and it takes **に**, not を. The same idea is behind 気をつけて, \"be careful\". Here the thing noticed is a whole clause turned into a noun with こと."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "(美咲は)",
+          "role": "topic",
+          "label": "unseen"
+        },
+        {
+          "text": "道を間違えたことに",
+          "role": "white",
+          "label": "what she noticed"
+        },
+        {
+          "text": "気づいた",
+          "role": "engine",
+          "label": "noticed"
+        }
+      ],
+      "text": "道を間違えたことに気づいた。 (She) noticed that she had gone the wrong way."
+    },
+    {
+      "type": "heading",
+      "text": "The い-stem joins clauses"
+    },
+    {
+      "type": "text",
+      "text": "In 立ち止まり、見回した, the first verb is in its い-stem (立ち止まる → 立ち止まり). The い-stem can join clauses in narration, a bit like the て-form but more written and brisk. Both verbs share the zero carriage."
+    },
+    {
+      "type": "heading",
+      "text": "ところが: but at that point"
+    },
+    {
+      "type": "text",
+      "text": "ところが joins ところ (point) and が (but). It means \"but at that point\": the story turns, and something unexpected is met."
+    },
+    {
+      "type": "heading",
+      "text": "そのまま, and the present tense again"
+    },
+    {
+      "type": "text",
+      "text": "そのまま is the unchanged condition from lesson 42: she went in without changing anything, as she was. And once more the last sentence slips into the present tense (押す) to make the scene feel as if it is happening now."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Phrase in the story",
+          "What it shows",
+          "Lesson"
+        ],
+        [
+          "道を間違えたことに気づいた",
+          "気づく + に",
+          "29"
+        ],
+        [
+          "立ち止まり、見回した",
+          "い-stem joining clauses",
+          "72"
+        ],
+        [
+          "ところが",
+          "but at that point",
+          "—"
+        ],
+        [
+          "寒さのあまり",
+          "あまり as excess",
+          "41"
+        ],
+        [
+          "そのまま",
+          "unchanged condition",
+          "42"
+        ]
+      ],
+      "title": "Phrase → lesson it comes from"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "気づく takes に: the thing noticed is a target.",
+        "The い-stem can join clauses in narration.",
+        "ところが marks a turn in the story.",
+        "Narration may slip into the present tense for effect."
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Part 3 finishes this stretch of the story."
+    }
   ]
 }
