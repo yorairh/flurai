@@ -6,74 +6,33 @@
   "title": "Coming and going: ていく and てくる",
   "summary": "来る always moves toward where the speaker is, 行く away from it. Attached to a て-form they describe change in space, in time and in how you feel.",
   "video": "https://www.youtube.com/watch?v=PsTsliRe2Cg",
-  "related": [
-    464
-  ],
+  "related": [464],
   "blocks": [
-    {
-      "type": "text",
-      "text": "**来る** can only mean moving from somewhere the speaker is **not** to the place where the speaker **is** (in mind as well). **行く** is looser: it moves away, or between two places the speaker is not at. That is why you cannot tell someone on the phone \"I'll come to you\" with 来る: you say 行く."
-    },
-    {
-      "type": "heading",
-      "text": "Physical, then metaphorical"
-    },
-    {
-      "type": "text",
-      "text": "With a て-form, the helper keeps the same direction. 持って**くる** brings something toward me; 持って**いく** takes it away. Then the picture stretches to **time** and to **feeling**."
-    },
-    {
-      "type": "example",
-      "jp": "お弁当を持ってきた。",
-      "en": "I brought a lunch (to here)."
-    },
-    {
-      "type": "example",
-      "jp": "お弁当を持っていく。",
-      "en": "I'll take a lunch (away from here)."
-    },
-    {
-      "type": "example",
-      "jp": "雨が降ってきた。",
-      "en": "It has started to rain. (rain came toward the present)"
-    },
-    {
-      "type": "example",
-      "jp": "これからも日本語を勉強していく。",
-      "en": "I will keep studying Japanese from now on. (moving forward in time)"
-    },
-    {
-      "type": "heading",
-      "text": "Subjective and objective"
-    },
-    {
-      "type": "text",
-      "text": "**くる** is also a movement toward **my own state of mind**. 分かる means \"be clear\", so as you study, math *comes* to be clear to you. And **〜てきた** sounds like the change touches me or us, while **〜ていった** reports it from outside."
-    },
-    {
-      "type": "example",
-      "jp": "だんだん数学が分かってくる。",
-      "en": "Math gradually becomes clear to me."
-    },
-    {
-      "type": "example",
-      "jp": "最近、寒くなってきた。",
-      "en": "It has been getting colder lately. (I feel it)"
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**来る**: toward the speaker's place, time or state. **行く**: away from it.",
-        "**〜てくる**: change arriving toward now; **〜ていく**: change continuing away, into the future.",
-        "**くる** can be subjective (it touches me); **いく** can be objective.",
-        "There are no strict rules: use the picture, and let immersion fill it in."
-      ]
-    }
+    {"type": "text", "text": "**来る** can only mean moving from somewhere the speaker is **not** to the place where the speaker **is** (in mind as well). **行く** is looser: it moves away, or between two places the speaker is not at. That is why you cannot tell someone on the phone \"I'll come to you\" with 来る: you say 行く."},
+    {"type": "example", "jp": "今からそっちに行くね。", "en": "I'm coming to you now. (On the phone you say 行く, never 来る.)"},
+    {"type": "heading", "text": "Physical, then metaphorical"},
+    {"type": "text", "text": "With a て-form, the helper keeps the same direction. 持って**くる** brings something toward me; 持って**いく** takes it away. Then the picture stretches to **time** and to **feeling**."},
+    {"type": "example", "jp": "お弁当を持ってきた。", "en": "I brought a lunch (to here)."},
+    {"type": "example", "jp": "お弁当を持っていく。", "en": "I'll take a lunch (away from here)."},
+    {"type": "example", "jp": "雨が降ってきた。", "en": "It has started to rain. (rain came toward the present)"},
+    {"type": "example", "jp": "これからも日本語を勉強していく。", "en": "I will keep studying Japanese from now on. (moving forward in time)"},
+    {"type": "diagram", "cars": [{"text": "past", "role": "plain", "label": "where it began"}, {"text": "てくる", "role": "plain", "label": "arrives toward now"}, {"text": "now", "role": "engine", "label": "the speaker"}, {"text": "ていく", "role": "plain", "label": "moves on, away"}, {"text": "future", "role": "plain", "label": "where it goes"}], "text": "てくる brings a change toward now; ていく carries it away from now."},
+    {"type": "heading", "text": "Go and come back"},
+    {"type": "text", "text": "A very common use is 行ってくる: go somewhere and come back. The action happens over there, and you return to where you started."},
+    {"type": "example", "jp": "ちょっとコンビニでお茶を買ってくる。", "en": "I'll go buy some tea at the convenience store (and come right back)."},
+    {"type": "heading", "text": "Subjective and objective"},
+    {"type": "text", "text": "**くる** is also a movement toward **my own state of mind**. 分かる means \"be clear\", so as you study, math comes to be clear to you. That is why it is くる and not いく."},
+    {"type": "example", "jp": "だんだん数学が分かってくる。", "en": "Math gradually becomes clear to me."},
+    {"type": "text", "text": "And **〜てきた** sounds like the change touches me or us, while **〜ていった** reports it from outside."},
+    {"type": "example", "jp": "最近、寒くなってきた。", "en": "It has been getting colder lately. (I feel it)"},
+    {"type": "example", "jp": "だんだん寒くなっていった。", "en": "It gradually got colder. (reported from outside, as a story)"},
+    {"type": "table", "rows": [["", "〜てくる", "〜ていく"], ["Space", "持ってくる: bring it here", "持っていく: take it away"], ["Time", "雨が降ってきた: it started raining", "毎日勉強していく: keep studying from now on"], ["Feeling", "日本語が分かってくる: it comes to me", "(reported from outside)"]]},
+    {"type": "keypoints", "items": ["**来る**: toward the speaker's place, time or state. **行く**: away from it.", "**〜てくる**: change arriving toward now; **〜ていく**: change continuing away, into the future.", "**くる** can be subjective (it touches me); **いく** can be objective.", "There are no strict rules: use the picture, and let immersion fill it in."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Fill the gap", "prompt": "友達の家に行くとき、ケーキを持って＿＿。", "options": ["くる", "いく", "みる", "おく"], "answer": 1, "en": "When I go to my friend's house, I'll take a cake.", "note": "The cake moves away from here, so いく."},
     {"id": 102, "type": "choice", "instruction": "Fill the gap", "prompt": "友達が私の家に来て、ケーキを持って＿＿。", "options": ["いった", "きた", "みた", "おいた"], "answer": 1, "en": "My friend came to my house and brought a cake.", "note": "The cake arrives where the speaker is, so くる."},
-    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "あ、雪が降って＿＿＿。", "options": ["いった", "しまった", "きた", "おいた"], "answer": 2, "en": "Oh, it has started to snow.", "note": "The change arrives toward the present moment: てくる."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "あ、雪が降って＿＿。", "options": ["いった", "しまった", "きた", "おいた"], "answer": 2, "en": "Oh, it has started to snow.", "note": "The change arrives toward the present moment: てくる."},
     {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "これからも毎日走って＿＿つもりだ。", "options": ["くる", "いく", "しまう", "おく"], "answer": 1, "en": "I intend to keep running every day from now on.", "note": "Moving forward in time is ていく."},
     {"id": 105, "type": "choice", "instruction": "Which sentence says \"I will keep doing my best from now on\"?", "prompt": "", "options": ["これからもがんばってくる。", "これからもがんばっていく。", "これからもがんばってしまう。", "これからもがんばっておく。"], "answer": 1, "note": "ていく carries an action forward in time."},
     {"id": 106, "type": "choice", "instruction": "On the phone, which verb do you use to say you are heading to your friend's house?", "prompt": "今から、あなたの家に＿＿よ。", "options": ["来る", "行く"], "answer": 1, "en": "I'm heading to your place now.", "note": "来る only moves to where the speaker is."},
@@ -84,14 +43,14 @@
     {"id": 111, "type": "order", "instruction": "Build the sentence", "prompt": "Let's take an umbrella (with us).", "options": ["かさを", "持って", "いこう"], "en": "Let's take an umbrella (with us).", "note": "て-form + いく: carry it away from here."},
     {"id": 112, "type": "order", "instruction": "Build the sentence", "prompt": "It has gotten dark outside.", "options": ["外が", "暗く", "なってきた"], "en": "It has gotten dark outside.", "note": "てきた: the change has reached the present."},
     {"id": 113, "type": "order", "instruction": "Build the sentence", "prompt": "Gradually English is becoming clear to me.", "options": ["だんだん", "英語が", "分かって", "きた"], "en": "Gradually English is becoming clear to me.", "note": "くる is also movement toward my own state of mind."},
-    {"id": 114, "type": "order", "instruction": "Build the sentence", "prompt": "I will keep running every day (from now on).", "options": ["毎日", "走って", "いく"], "en": "I will keep running every day (from now on).", "note": "ていく continues the action forward in time."},
+    {"id": 114, "type": "order", "instruction": "Build the sentence", "prompt": "I'll go and buy some bread (and come back).", "options": ["ちょっと", "パンを", "買って", "くる"], "en": "I'll go and buy some bread (and come back).", "note": "て-form + くる: go, do it, and come back."},
     {"id": 115, "type": "choice", "instruction": "True or false? 〜てくる can describe a change that reaches the speaker's own feeling.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "くる can be a movement toward my state of mind."},
-    {"id": 116, "type": "choice", "instruction": "Which means \"bring (toward me)\"?", "prompt": "", "options": ["持っていく", "持ってしまう", "持ってくる", "持っておく"], "answer": 2, "note": "て-form + くる keeps the direction toward the speaker."},
-    {"id": 117, "type": "choice", "instruction": "Which sounds like the change touches me or us?", "prompt": "", "options": ["〜てきた", "〜ていった"], "answer": 0, "note": "〜ていった reports it from outside."},
-    {"id": 118, "type": "choice", "instruction": "Fill the gap", "prompt": "友達が遠くから歩いて＿＿＿。", "options": ["いった", "おいた", "しまった", "きた"], "answer": 3, "en": "My friend came walking from far away.", "note": "The friend moves toward the speaker."},
-    {"id": 119, "type": "choice", "instruction": "Why can you not say 来るよ on the phone when you are heading to the other person's house?", "prompt": "", "options": ["来る is rude", "来る only moves toward where the speaker is", "来る is for the past only", "来る needs ている"], "answer": 1, "note": "Use 行く when going to the other person's place."},
+    {"id": 116, "type": "choice", "instruction": "Which sentence means \"I'll go buy some water and come right back\"?", "prompt": "", "options": ["水を買ってくる。", "水を買ってしまう。", "水を買っておく。", "水を買ってみる。"], "answer": 0, "note": "て-form + くる can mean go, do it, and come back."},
+    {"id": 117, "type": "choice", "instruction": "Which sounds like the change touches me or us?", "prompt": "", "options": ["〜てきた", "〜ていった", "〜ておいた"], "answer": 0, "note": "〜ていった reports it from outside."},
+    {"id": 118, "type": "choice", "instruction": "Fill the gap", "prompt": "友達が遠くから歩いて＿＿。", "options": ["いった", "おいた", "しまった", "きた"], "answer": 3, "en": "My friend came walking from far away.", "note": "The friend moves toward the speaker."},
+    {"id": 119, "type": "choice", "instruction": "What does 行ってくる picture?", "prompt": "", "options": ["Go there, then come back to where you are", "Go there and stay", "Come here and stay", "Come here, then leave again"], "answer": 0, "note": "The going happens away from here; くる brings you back."},
     {"id": 120, "type": "choice", "instruction": "In 日本語が分かってくる, what is くる picturing?", "prompt": "", "options": ["Someone coming to my house", "Time going into the past", "Understanding arriving toward my own state of mind", "A request"], "answer": 2, "note": "Clarity comes toward me as I study."},
-    {"id": 121, "type": "choice", "instruction": "True or false? There are strict rules for ていく and てくる, so you must memorize them.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "Use the picture of direction and let immersion fill in the rest."},
+    {"id": 121, "type": "choice", "instruction": "Fill the gap", "prompt": "ちょっと銀行へ行って＿＿。", "options": ["くる", "いく", "みる", "しまう"], "answer": 0, "note": "Go and come back: て-form + くる.", "en": "I'll go to the bank (and come back)."},
     {"id": 122, "type": "choice", "instruction": "Fill the gap", "prompt": "春になって、だんだんあたたかく＿＿。", "options": ["なってみた", "なっておいた", "なってきた", "なってあげた"], "answer": 2, "en": "With spring here, it has gradually gotten warmer.", "note": "A change reaching the present is てきた."}
   ]
 }

@@ -6,74 +6,32 @@
   "title": "Love and other mysteries of こと",
   "summary": "こと is an agile word for what concerns someone: あなたのことが好き, 田中さんのこと, そういうこと, どういうこと.",
   "video": "https://www.youtube.com/watch?v=aoP6sFyTsIk",
-  "related": [
-    604,
-    605
-  ],
+  "related": [604, 605],
   "blocks": [
-    {
-      "type": "text",
-      "text": "**こと** is a very agile word. It means a thing that happens or a matter, and Japanese puts it to many uses that English cannot translate neatly."
-    },
-    {
-      "type": "heading",
-      "text": "のこと: the matter of someone"
-    },
-    {
-      "type": "text",
-      "text": "**あなたのことが好きだ** is a gentle way of saying \"I like you\". It is not quite \"I like you\" but \"I like things about you\": your laugh, your way of walking. It avoids a direct, physical feel and suggests love grown through knowing someone. The same goes for dislike: you react to what you observe of a person, not to their very being."
-    },
-    {
-      "type": "example",
-      "jp": "あなたのことが好きだ。",
-      "en": "I like you (the things about you)."
-    },
-    {
-      "type": "example",
-      "jp": "私のことが嫌いらしい。",
-      "en": "(They) seem to dislike me."
-    },
-    {
-      "type": "example",
-      "jp": "田中さんのことを考えている。",
-      "en": "I'm thinking about Tanaka (and his situation)."
-    },
-    {
-      "type": "heading",
-      "text": "ということ, そういうこと, どういうこと"
-    },
-    {
-      "type": "text",
-      "text": "言う and こと belong together: a こと is a matter that needs explaining. That is why you hear **そういうこと** (\"that's how it is\") and **どういうこと** (\"what do you mean?\")."
-    },
-    {
-      "type": "example",
-      "jp": "どういうことですか。",
-      "en": "What do you mean?"
-    },
-    {
-      "type": "example",
-      "jp": "なるほど、そういうことか。",
-      "en": "I see, so that's what it is."
-    },
-    {
-      "type": "example",
-      "jp": "彼が来ないということは、忙しいのだろう。",
-      "en": "The fact that he isn't coming probably means he is busy."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**Xのこと**: the matter of X, things about X.",
-        "**Xのことが好き**: I like X and the things about X.",
-        "**そういうこと / どういうこと**: that's how it is / what do you mean?",
-        "**ということ**: the fact that / it means that."
-      ]
-    }
+    {"type": "text", "text": "**こと** is a very agile word. It means a thing that happens or a matter, and Japanese puts it to many uses that English cannot translate neatly."},
+    {"type": "heading", "text": "のこと: the matter of someone"},
+    {"type": "text", "text": "**あなたのことが好きだ** is a gentle way of saying \"I like you\". It is not quite \"I like you\" but \"I like things about you\": your laugh, your way of walking. It avoids a direct, physical feel and suggests love grown through knowing someone. The same goes for dislike: you react to what you observe of a person, not to their very being."},
+    {"type": "text", "text": "There is a reason. Few people say 愛してる (\"I love you\") out loud, so the usual way to tell someone is あなたのことが好き. The same goes for a feeling about someone else: you cannot know their inner being, only the things you observe, \"my こと\". That is why 私のことが嫌いらしい is the natural way to guess how someone feels about you."},
+    {"type": "example", "jp": "あなたのことが好きだ。", "en": "I like you (the things about you)."},
+    {"type": "diagram", "cars": [{"text": "(私は)", "role": "topic", "label": "unseen topic"}, {"text": "あなたのことが", "role": "carriage", "label": "the things about you"}, {"text": "好きだ", "role": "engine"}], "text": "The carriage is not you, but the things about you."},
+    {"type": "example", "jp": "私のことが嫌いらしい。", "en": "(They) seem to dislike me."},
+    {"type": "example", "jp": "田中さんのことを考えている。", "en": "I'm thinking about Tanaka (and his situation)."},
+    {"type": "heading", "text": "ということ, そういうこと, どういうこと"},
+    {"type": "text", "text": "言う and こと belong together: a こと is a matter that needs explaining. **Xということ** means \"the matter that X\": \"it means that...\". That is why you hear **そういうこと** (\"that's how it is\") and **どういうこと** (\"what do you mean?\")."},
+    {"type": "example", "jp": "どういうことですか。", "en": "What do you mean?"},
+    {"type": "example", "jp": "なるほど、そういうことか。", "en": "I see, so that's what it is."},
+    {"type": "example", "jp": "彼が来ないということは、忙しいのだろう。", "en": "The fact that he isn't coming probably means he is busy."},
+    {"type": "text", "text": "When the detective finally understands, he says it in the past: そういうことでした, \"so that's how it was\". The matching phrase with わけ is in lesson 68."},
+    {"type": "example", "jp": "なるほど、そういうことでした。", "en": "I see, so that was it."},
+    {"type": "heading", "text": "そんなこと: no, not at all"},
+    {"type": "text", "text": "**そんなこと** is \"that sort of thing\" (そんな from lesson 20, + こと). With ない it is the polite way to reject a compliment."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "日本語が上手ですね。", "en": "Your Japanese is good."}, {"who": "B", "jp": "いえ、そんなことないです。", "en": "No, not at all."}]},
+    {"type": "text", "text": "Said sharply, a single **そんな！** is a protest: \"No way!\" or \"How could you!\""},
+    {"type": "keypoints", "items": ["**Xのこと**: the matter of X, things about X.", "**Xのことが好き**: I like X and the things about X; it is why 愛してる is rarely said.", "**そういうこと / どういうこと**: that's how it is / what do you mean?", "**ということ**: the fact that / it means that.", "**そんなことない**: the polite way to say \"not at all\"."]}
   ],
   "questions": [
     {"id": 53, "type": "choice", "instruction": "Fill the gap", "prompt": "私は妹＿＿ことが心配だ。", "options": ["が", "の", "を", "に"], "answer": 1, "note": "Xのこと: the matter of X, things about X.", "en": "I worry about my younger sister."},
-    {"id": 54, "type": "choice", "instruction": "Which sentence is a gentle way to say \"I like Mr. Yamada\"?", "prompt": "", "options": ["山田さんことの好きだ", "山田さんのことが好きです", "山田さんが好きこと", "山田さんのこと好きに"], "answer": 1, "note": "Xのことが好き: you like the things you know about X."},
+    {"id": 54, "type": "choice", "instruction": "Which sentence is a gentle way to say \"I like Mr. Yamada\"?", "prompt": "", "options": ["山田さんことの好きだ", "山田さんのことが好きだ", "山田さんが好きこと", "山田さんのこと好きに"], "answer": 1, "note": "Xのことが好き: you like the things you know about X."},
     {"id": 55, "type": "choice", "instruction": "What does Xのことが好き focus on?", "prompt": "", "options": ["X's body", "The things you notice about X, like how X laughs", "X's clothes", "X's money"], "answer": 1, "note": "It suggests liking grown through knowing someone, not a physical feel."},
     {"id": 56, "type": "choice", "instruction": "Which expression asks for an explanation?", "prompt": "", "options": ["そういうこと。", "ということ。", "どういうこと？", "こと。"], "answer": 2, "note": "どういうこと means \"what do you mean?\""},
     {"id": 57, "type": "choice", "instruction": "Fill the gap", "prompt": "明日は休みだ＿＿ことです。", "options": ["から", "まで", "という", "ので"], "answer": 2, "note": "〜ということ: it means that, the fact that.", "en": "It means tomorrow is a day off."},
@@ -84,13 +42,15 @@
     {"id": 62, "type": "choice", "instruction": "Which sentence is NOT natural?", "prompt": "", "options": ["私のことが好きだ", "先生のことを考える", "友だちことのが好き", "母のことが心配だ"], "answer": 2, "note": "The order must be Xのこと; こと cannot come before の."},
     {"id": 63, "type": "choice", "instruction": "Fill the gap", "prompt": "毎日あなた＿＿ことを考えています。", "options": ["が", "は", "の", "も"], "answer": 2, "note": "の links あなた and こと: the matter of you.", "en": "I think about you every day."},
     {"id": 64, "type": "choice", "instruction": "What does ということは express?", "prompt": "ケーキが売れたということは、人気があるのだろう。", "options": ["A command", "Drawing a conclusion from a fact", "A question", "Dislike"], "answer": 1, "note": "ということは takes a fact and draws a conclusion from it.", "en": "The fact that the cake sold well probably means it is popular."},
-    {"id": 65, "type": "order", "instruction": "Build the sentence", "prompt": "What does that story mean?", "options": ["今の", "話は", "どういう", "ことなの"], "note": "どういうこと asks what matter is behind the words.", "en": "What does that story mean?"},
+    {"id": 65, "type": "choice", "instruction": "Someone praises your Japanese. Which reply politely denies it?", "prompt": "", "options": ["そんなことないです。", "そんなことあります。", "そういうことです。", "どうしてですか。"], "note": "そんなことない is the polite way to say \"not at all\".", "answer": 0},
     {"id": 66, "type": "choice", "instruction": "True or false?", "prompt": "父のことが心配だ means I worry about my father's situation.", "options": ["True", "False"], "answer": 0, "note": "のこと covers the person's circumstances, not only the person.", "en": "I worry about my father."},
     {"id": 67, "type": "tap", "instruction": "Tap the word for the person who is liked", "prompt": "", "options": ["先生", "のこと", "が", "好きな", "人が", "多い"], "answer": 0, "note": "Xのこと: X is the one the feeling is about.", "en": "Many people like the teacher."},
     {"id": 68, "type": "choice", "instruction": "Who knows whom?", "prompt": "田中さんは私のことを知っている。", "options": ["Tanaka knows the speaker", "The speaker knows Tanaka", "Both know each other", "Nobody knows anyone"], "answer": 0, "note": "のこと marks the matter known: me. Tanaka is the one who knows.", "en": "Tanaka knows about me."},
     {"id": 69, "type": "order", "instruction": "Build the sentence", "prompt": "It means the shop is closed today.", "options": ["今日は", "店が", "休みだ", "ということです"], "note": "という turns a whole sentence into 'the fact that'.", "en": "It means the shop is closed today.", "alt": [["店が", "今日は", "休みだ", "ということです"]]},
-    {"id": 70, "type": "choice", "instruction": "Which noun fits? こと means roughly...", "prompt": "", "options": ["A thing that happens, a matter", "A person", "A place", "A color"], "answer": 0, "note": "こと is a word for a matter or event."},
-    {"id": 71, "type": "tap", "instruction": "Tap the word that means \"that kind of\" (そういう)", "prompt": "", "options": ["なるほど", "そういう", "ことだ", "ね"], "answer": 1, "note": "そう + いう + こと: that is what it is.", "en": "I see, so that's how it is."},
-    {"id": 72, "type": "choice", "instruction": "Which sentence means \"I am worried about her\"?", "prompt": "", "options": ["彼女のことが心配だ", "彼女が心配のこと", "彼女のが心配こと", "彼女ことの心配だ"], "answer": 0, "note": "Xのことが心配: worried about X and her situation."}
+    {"id": 70, "type": "choice", "instruction": "What does こと mean?", "prompt": "", "options": ["A thing that happens, a matter", "A person", "A place", "A color"], "answer": 0, "note": "こと is a word for a matter or event."},
+    {"id": 71, "type": "tap", "instruction": "Tap the word that means \"that kind of\"", "prompt": "", "options": ["なるほど", "そういう", "ことだ", "ね"], "answer": 1, "note": "そう + いう + こと: that is what it is.", "en": "I see, so that's how it is."},
+    {"id": 72, "type": "choice", "instruction": "Which sentence means \"I am worried about her\"?", "prompt": "", "options": ["彼女のことが心配だ", "彼女が心配のこと", "彼女のが心配こと", "彼女ことの心配だ"], "answer": 0, "note": "Xのことが心配: worried about X and her situation."},
+    {"id": 73, "type": "choice", "instruction": "Fill the gap", "prompt": "「すてきな服ですね。」「いえ、そんな＿＿ないですよ。」", "options": ["こと", "もの", "ところ", "とき"], "answer": 0, "en": "\"Nice clothes!\" \"No, not at all.\"", "note": "そんなことない: the polite reply to a compliment."},
+    {"id": 74, "type": "choice", "instruction": "What does a sharp そんな！ show?", "prompt": "", "options": ["Protest: \"No way!\"", "Praise", "Thanks", "A question"], "answer": 0, "note": "そんな！ alone is a protest."}
   ]
 }
