@@ -6,88 +6,31 @@
   "title": "は and が: the deeper secrets",
   "summary": "は marks old, known information and throws the weight onto what follows; が marks the new information, often the answer to a question.",
   "video": "https://www.youtube.com/watch?v=o-hK4-qv9Yk",
-  "related": [
-    501,
-    502,
-    580
-  ],
+  "related": [501, 502, 580],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Every Japanese sentence has a **topic** and a **subject**. When you see neither, both are **zero**: 日本人です is really (zero は)(zero が)日本人です. The choice between **は** and **が** only exists when the topic and the subject are the same thing, and then you are not creating either one. You are **stressing** which role the word plays, and that changes what the sentence implies."
-    },
-    {
-      "type": "heading",
-      "text": "Old information and new information"
-    },
-    {
-      "type": "text",
-      "text": "**は** can only mark **old information**: something the listener already knows or will easily accept. Old information is the unimportant part of a sentence, so **は** pushes the weight onto whatever comes after it. **が** can mark new information, and when it does, the new thing is the word itself."
-    },
-    {
-      "type": "example",
-      "jp": "本を買った。",
-      "en": "(I) bought a book. (neutral: nothing is stressed)"
-    },
-    {
-      "type": "example",
-      "jp": "私は本を買った。",
-      "en": "As for me, I bought a book. (answers \"What did you do?\")"
-    },
-    {
-      "type": "example",
-      "jp": "私が本を買った。",
-      "en": "I am the one who bought the book. (answers \"Who bought it?\")"
-    },
-    {
-      "type": "text",
-      "text": "Imagine two friends staring at an empty gap on a shelf. They know the book is gone, so the book is old information. The new information is **who** took it, so you say 私**が**買った."
-    },
-    {
-      "type": "heading",
-      "text": "Particular or general"
-    },
-    {
-      "type": "text",
-      "text": "Because of this, **が** tends to point at particular things and **は** at general ones. These are tendencies, not laws: the listener decides from what sounds natural."
-    },
-    {
-      "type": "example",
-      "jp": "花が美しい。",
-      "en": "These flowers are beautiful. (particular flowers)"
-    },
-    {
-      "type": "example",
-      "jp": "花は美しい。",
-      "en": "Flowers are beautiful. (flowers in general are the topic)"
-    },
-    {
-      "type": "heading",
-      "text": "は for contrast and for emphasis"
-    },
-    {
-      "type": "text",
-      "text": "The plain way to report weather is 雨**が**降っている. Say 雨**は**降っている and you imply a contrast: rain, at least, is falling (perhaps you expected snow). Used as a sub-topic, **は** also throws emphasis forward onto the engine, as in 休み**は**ない: \"as for rest, there is none.\""
-    },
-    {
-      "type": "example",
-      "jp": "雨が降っている。",
-      "en": "It is raining. (neutral report)"
-    },
-    {
-      "type": "example",
-      "jp": "雨は降っている。",
-      "en": "Rain is falling (but something else you expected is not)."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "A sentence always has a topic and a subject, visible or zero.",
-        "**は** marks old information and pushes the weight forward; it cannot introduce something new.",
-        "**が** can mark new information: the word itself is the answer.",
-        "**が** leans toward the particular, **は** toward the general. Learn what sounds natural by immersion."
-      ]
-    }
+    {"type": "text", "text": "Every Japanese sentence has a **topic** and a **subject**. When you see neither, both are **zero**. The choice between **は** and **が** only exists when the topic and the subject are the same thing, and then you are not creating either one. You are **stressing** which role the word plays, and that changes what the sentence implies."},
+    {"type": "diagram", "cars": [{"text": "(私は)", "role": "topic", "label": "unseen topic"}, {"text": "Ø", "role": "zero", "label": "unseen carriage"}, {"text": "日本人です", "role": "engine"}], "text": "日本人です is really (topic)(carriage) 日本人です, with both left out."},
+    {"type": "heading", "text": "Old information and new information"},
+    {"type": "text", "text": "**は** can only mark **old information**: something the listener already knows or will easily accept. Old information is the unimportant part of a sentence, so **は** pushes the weight onto whatever comes after it. **が** can mark new information, and when it does, the new thing is the word itself."},
+    {"type": "text", "text": "Think of は as the English word \"the\". \"I fed the dog\" is fine, because everyone knows the dog. \"I fed the iguana\" makes people ask \"what iguana?\", because nobody has met it. In the same way, は cannot introduce something new."},
+    {"type": "example", "jp": "本を買った。", "en": "(I) bought a book. (neutral: nothing is stressed)"},
+    {"type": "text", "text": "Now add は. The friends already know you did something yesterday, and the question is what."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "昨日、何をしたの？", "en": "What did you do yesterday?"}, {"who": "B", "jp": "私は本を買った。", "en": "I bought a book. (私は is old: we are talking about you)"}]},
+    {"type": "diagram", "cars": [{"text": "私は", "role": "topic", "label": "old information"}, {"text": "本を", "role": "white"}, {"text": "買った", "role": "engine", "label": "the weight lands here"}], "text": "は shows the topic. The carriage is the same person, left unseen."},
+    {"type": "text", "text": "Imagine two friends staring at an empty gap on a shelf. They know the book is gone, so the book is old information. The new information is **who** took it, so you say 私**が**買った."},
+    {"type": "dialogue", "lines": [{"who": "A", "jp": "誰が本を買ったの？", "en": "Who bought the book?"}, {"who": "B", "jp": "私が買った。", "en": "I did. (私 is the new information)"}]},
+    {"type": "diagram", "cars": [{"text": "私が", "role": "carriage", "label": "new information"}, {"text": "本を", "role": "white"}, {"text": "買った", "role": "engine"}], "text": "が shows the carriage. The topic stays unseen."},
+    {"type": "table", "rows": [["Sentence", "The question it answers"], ["本を買った。", "(nothing in particular)"], ["私は本を買った。", "What did you do?"], ["私が本を買った。", "Who bought the book?"]]},
+    {"type": "heading", "text": "Particular or general"},
+    {"type": "text", "text": "Because of this, **が** tends to point at particular things and **は** at general ones. These are tendencies, not laws: the listener decides from what sounds natural."},
+    {"type": "example", "jp": "花が美しい。", "en": "These flowers are beautiful. (particular flowers)"},
+    {"type": "example", "jp": "花は美しい。", "en": "Flowers are beautiful. (flowers in general are the topic)"},
+    {"type": "heading", "text": "は for contrast and for emphasis"},
+    {"type": "text", "text": "The plain way to report weather is 雨**が**降っている. Say 雨**は**降っている and you imply a contrast: rain, at least, is falling (perhaps you expected snow). Used as a sub-topic, **は** also throws emphasis forward onto the engine, as in 休み**は**ない: \"as for rest, there is none.\""},
+    {"type": "example", "jp": "仕事が終わるまで、休みはない。", "en": "Until the work is done, there is no break. (The weight falls on ない.)"},
+    {"type": "example", "jp": "雨が降っている。", "en": "It is raining. (neutral report)"},
+    {"type": "example", "jp": "雨は降っている。", "en": "Rain is falling (but something else you expected is not)."},
+    {"type": "keypoints", "items": ["A sentence always has a topic and a subject, visible or zero.", "**は** marks old information and pushes the weight forward; it cannot introduce something new.", "**が** can mark new information: the word itself is the answer.", "**が** leans toward the particular, **は** toward the general. Learn what sounds natural by immersion."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Fill the gap (the answer is new information)", "prompt": "「誰がケーキを食べましたか。」「弟＿＿食べました。」", "options": ["は", "を", "が", "に"], "answer": 2, "en": "\"Who ate the cake?\" \"My brother did.\"", "note": "The answer to \"who\" is new information, so が."},
@@ -97,7 +40,7 @@
     {"id": 105, "type": "choice", "instruction": "What does は add here?", "prompt": "ビールは飲んだ。", "options": ["A question", "A contrast with something else (maybe the food was not touched)", "The past tense", "A request"], "answer": 1, "en": "(I) did drink the beer (but maybe not something else).", "note": "は can imply a contrast."},
     {"id": 106, "type": "choice", "instruction": "Fill the gap (a neutral report)", "prompt": "窓の外を見て！雪＿＿降っている。", "options": ["は", "を", "に", "が"], "answer": 3, "en": "Look outside! It's snowing.", "note": "A plain weather report uses が; は would hint at a contrast."},
     {"id": 107, "type": "choice", "instruction": "Fill the gap (a sub-topic that stresses the engine)", "prompt": "お金＿＿ない。", "options": ["を", "に", "は", "で"], "answer": 2, "en": "(As for money,) there is none.", "note": "は as a sub-topic throws emphasis onto ない."},
-    {"id": 108, "type": "choice", "instruction": "Which particle can mark new information?", "prompt": "", "options": ["は", "が"], "answer": 1, "note": "は can only mark old information."},
+    {"id": 108, "type": "choice", "instruction": "Which particle can mark new information?", "prompt": "", "options": ["は", "が", "を"], "answer": 1, "note": "は can only mark old information."},
     {"id": 109, "type": "choice", "instruction": "A friend asks, \"What did you do yesterday?\" Which answer fits best?", "prompt": "", "options": ["映画が見ました。", "私が映画を見ました。", "私は映画を見ました。"], "answer": 2, "note": "The question is about what you did; 私は is old information."},
     {"id": 110, "type": "choice", "instruction": "Which line starts a story naturally: \"Long ago an old man lived (there)\"?", "prompt": "", "options": ["むかしむかし、おじいさんは住んでいました。", "むかしむかし、おじいさんが住んでいました。"], "answer": 1, "note": "The old man is new to the listener, so が."},
     {"id": 111, "type": "tap", "instruction": "Tap the word that holds the old information", "options": ["あの本は", "私が", "買った"], "answer": 0, "en": "I bought that book.", "note": "The book is already known; 私が is the new part."},

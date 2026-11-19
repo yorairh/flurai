@@ -6,54 +6,22 @@
   "title": "Hidden subjects and how to find them",
   "summary": "When no main carriage is visible, work out the clauses: the subject needs が, and an unnamed doer is just an undefined zero pronoun, like English \"they\".",
   "video": "https://www.youtube.com/watch?v=GN_tGX0W-LE",
-  "related": [
-    424
-  ],
+  "related": [424],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Every sentence says that A is B or that A does B, so every sentence has an **A-car** (main carriage). Sometimes you cannot see it, and the reason is usually that Japanese expresses an idea differently from English. 好きだ is built on an adjectival noun, so in コーヒー**が**好きだ the **coffee** is the one being liked and is the subject; English \"I like coffee\" has a different structure."
-    },
-    {
-      "type": "heading",
-      "text": "Method: find the clauses first"
-    },
-    {
-      "type": "text",
-      "text": "A clause that ends a sentence (with a full stop, a connector like から, a て-form or an い-stem) is a real logical clause. A clause sitting **directly before a noun** is only a description of that noun, whatever が it contains. The subject of the whole sentence must carry **が** and belong to the main engine."
-    },
-    {
-      "type": "heading",
-      "text": "An undefined zero pronoun"
-    },
-    {
-      "type": "text",
-      "text": "Take 選手が食べる料理をみんなに教えてもらう. 選手が belongs to the clause that describes 料理. 料理 has を and みんな has に, so neither is the subject. The engine もらう means that someone **had** everyone do something for them, and the subject is simply **unnamed**: an undefined zero pronoun, like English \"they\" in \"they're asking everyone for opinions\". It is not the athletes."
-    },
-    {
-      "type": "example",
-      "jp": "先生に作文を直してもらった。",
-      "en": "I had the teacher correct my composition."
-    },
-    {
-      "type": "example",
-      "jp": "友達に道を教えてもらった。",
-      "en": "I had a friend tell me the way."
-    },
-    {
-      "type": "example",
-      "jp": "みんなに意見を聞いてもらう。",
-      "en": "(Someone) gets everyone's opinions."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "Every sentence has an A-car; if you cannot see it, it is a zero pronoun.",
-        "A clause directly before a noun only describes that noun.",
-        "The subject needs **が** and belongs to the main engine.",
-        "**〜てもらう**: the zero subject gets someone else (に) to do it. With no context, the zero subject defaults to I; sometimes it is simply unnamed."
-      ]
-    }
+    {"type": "text", "text": "Every sentence says that A is B or that A does B, so every sentence has a **main carriage**. Sometimes you cannot see it, and the reason is usually that Japanese expresses an idea differently from English. 好きだ is built on an adjectival noun, so in コーヒー**が**好きだ the **coffee** is the one being liked and is the subject; English \"I like coffee\" has a different structure."},
+    {"type": "heading", "text": "Method: find the clauses first"},
+    {"type": "text", "text": "Use two checks, as in lesson 34. A clause that ends a sentence (with a full stop, a connector like から, a て-form or an い-stem) is a real logical clause. A clause sitting **directly before a noun** is only a describer of that noun, whatever が it contains. The subject of the whole sentence must carry **が** and belong to the main engine."},
+    {"type": "heading", "text": "The default: the zero carriage is \"I\""},
+    {"type": "text", "text": "With no other clue, the invisible carriage is the speaker. Both of these sentences hide an \"I\"."},
+    {"type": "example", "jp": "先生に作文を直してもらった。", "en": "I had the teacher correct my composition."},
+    {"type": "example", "jp": "友達に道を教えてもらった。", "en": "I had a friend tell me the way."},
+    {"type": "heading", "text": "An undefined zero pronoun"},
+    {"type": "text", "text": "Sometimes the invisible carriage is simply **unnamed**, like English \"they\" in \"I hear they're putting a statue in the park\". Nobody in particular is meant. Japanese does the same, and the sentence below shows how to find it."},
+    {"type": "example", "jp": "お客さんが食べる料理を店の人に選んでもらう。", "en": "(They) have the shop staff choose the dishes the customers eat."},
+    {"type": "diagram", "cars": [{"text": "Ø", "role": "zero", "label": "they: unnamed"}, {"text": "お客さんが食べる", "role": "white", "label": "describes 料理"}, {"text": "料理を", "role": "white"}, {"text": "店の人に", "role": "white"}, {"text": "選んでもらう", "role": "engine"}], "text": "お客さんが is inside the describer, 料理を and 店の人に cannot be the subject, so the main carriage is an unnamed zero."},
+    {"type": "text", "text": "お客さんが belongs to the clause that describes 料理. 料理 has を and 店の人 has に, so neither is the subject. The engine もらう means that someone **had** the shop staff do something for them, and the subject is not the customers."},
+    {"type": "example", "jp": "みんなに意見を教えてもらう。", "en": "(They) are getting everyone to tell them their opinions."},
+    {"type": "keypoints", "items": ["Every sentence has a main carriage; if you cannot see it, it is a zero pronoun.", "A clause directly before a noun only describes that noun.", "The subject needs **が** and belongs to the main engine.", "**〜てもらう**: the zero subject gets someone else (に) to do it. With no context, the zero subject defaults to I; sometimes it is simply unnamed."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Who is the carriage of the main engine 食べた?", "prompt": "兄が作った料理を食べた。", "options": ["兄", "料理", "A zero pronoun (I)", "Nobody"], "answer": 2, "en": "(I) ate the dish my older brother made.", "note": "兄が belongs to the clause describing 料理; the main subject is a zero."},
@@ -76,7 +44,7 @@
     {"id": 118, "type": "choice", "instruction": "True or false? In 兄に手伝ってもらった, my brother is the subject.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "The subject is the zero; the brother is the one asked (に)."},
     {"id": 119, "type": "choice", "instruction": "Which noun is the carriage of the whole sentence?", "prompt": "雨が降ったので、試合がなくなった。", "options": ["雨", "試合", "A zero (I)", "Nobody"], "answer": 1, "en": "Because it rained, the game was canceled.", "note": "雨が belongs to the first clause; 試合が goes with the main engine."},
     {"id": 120, "type": "tap", "instruction": "Tap the carriage of the main engine", "options": ["犬が", "ほえたので、", "赤ちゃんが", "起きた"], "answer": 2, "en": "Because the dog barked, the baby woke up.", "note": "The first clause ends at ので; the main engine 起きた goes with 赤ちゃんが."},
-    {"id": 121, "type": "choice", "instruction": "True or false? Every sentence has an A-car; if you cannot see it, it is a zero pronoun.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "The carriage can be invisible."},
-    {"id": 122, "type": "choice", "instruction": "Which noun is the carriage of 好きだ?", "prompt": "弟は魚が好きだ。", "options": ["は", "弟", "好き", "魚"], "answer": 3, "en": "My younger brother likes fish.", "note": "好きだ is built on an adjectival noun: the fish is the one liked."}
+    {"id": 121, "type": "choice", "instruction": "True or false? Every sentence has a main carriage; if you cannot see it, it is a zero pronoun.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "The carriage can be invisible."},
+    {"id": 122, "type": "choice", "instruction": "Which noun is the carriage of 好きだ?", "prompt": "弟は魚が好きだ。", "options": ["弟", "魚", "私", "Nobody"], "answer": 1, "en": "My younger brother likes fish.", "note": "好きだ is built on an adjectival noun: the fish is the one liked."}
   ]
 }
