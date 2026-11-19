@@ -6,53 +6,465 @@
   "title": "Agility: は and の as light, quick tools",
   "summary": "Japanese can make a topic (は) or box up a whole clause (の) with almost no effort, so sentences use them where English would feel heavy.",
   "video": "https://www.youtube.com/watch?v=FdMeXqweBJ0",
-  "related": [501, 580, 450],
+  "related": [
+    501,
+    580,
+    450
+  ],
   "blocks": [
-    {"type": "text", "text": "Languages differ in **agility**: how light and fast a tool is to use. A tool that is heavy in English may be nimble in Japanese, so Japanese uses it all the time. If you do not notice this, ordinary sentences feel odd."},
-    {"type": "heading", "text": "は: a topic in one step"},
-    {"type": "text", "text": "English \"speaking of …\" or \"as for …\" is clumsy, so you use it rarely. Japanese **は** is tiny, so it can be dropped in wherever you want to **set one thing against another**. The comment after a は topic is always a complete logical clause (lesson 60), and the new topic says: \"what I say next may differ from what I said about the neighbor\"."},
-    {"type": "example", "jp": "この店はラーメンはおいしいが、カレーはまずい。", "en": "At this shop the ramen is good, but the curry is bad."},
-    {"type": "text", "text": "Here the clause carries two sub-topics. Each は contrasts: ramen against curry. If the comment is the same, use **も** instead."},
-    {"type": "heading", "text": "の: a whole clause in a noun box"},
-    {"type": "text", "text": "The **nominalizing の** is a pronoun that bundles everything before it into a single noun, \"the one that …\". English needs preparation for \"what she saw when she opened the door was …\", but Japanese slips it in anywhere, even as a topic."},
-    {"type": "diagram", "cars": [
-      {"text": "朝の町に響く", "role": "plain", "label": "resounds in the morning town"},
-      {"text": "の", "role": "particle", "label": "the one that"},
-      {"text": "は", "role": "topic"},
-      {"text": "鐘", "role": "carriage"},
-      {"text": "だ", "role": "engine"}
-    ], "text": "朝の町に響くのは鐘だ。 What resounds in the morning town is a bell."},
-    {"type": "text", "text": "So 朝の町に響くのは鐘だ is not \"a bell resounds\". It is an A-is-B sentence: A is \"the one that resounds in the morning town\" (topic), B is \"a bell\"."},
-    {"type": "example", "jp": "彼女が部屋で見たのは、古い人形だった。", "en": "What she saw in the room was an old doll."},
-    {"type": "example", "jp": "毎朝歩くのは気持ちがいい。", "en": "Walking every morning feels good."},
-    {"type": "keypoints", "items": [
-      "**Agility** = how light a tool is. は and の are very light in Japanese.",
-      "**は** can be used again and again to set topics against each other; **も** says the comment is the same.",
-      "**の** turns a clause into a noun, \"the one that …\".",
-      "In a sentence like Xのは Y だ, X is the topic and Y is the answer."
-    ]}
+    {
+      "type": "text",
+      "text": "Languages differ in **agility**: how light and fast a tool is to use. A tool that is heavy in English may be nimble in Japanese, so Japanese uses it all the time. If you do not notice this, ordinary sentences feel odd."
+    },
+    {
+      "type": "heading",
+      "text": "は: a topic in one step"
+    },
+    {
+      "type": "text",
+      "text": "English \"speaking of …\" or \"as for …\" is clumsy, so you use it rarely. Japanese **は** is tiny, so it can be dropped in wherever you want to **set one thing against another**. The comment after a は topic is always a complete logical clause (lesson 60), and the new topic says: \"what I say next may differ from what I said about the neighbor\"."
+    },
+    {
+      "type": "example",
+      "jp": "この店はラーメンはおいしいが、カレーはまずい。",
+      "en": "At this shop the ramen is good, but the curry is bad."
+    },
+    {
+      "type": "text",
+      "text": "Here the clause carries two sub-topics. Each は contrasts: ramen against curry. Each one has its own hidden main carriage and engine."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "この店は",
+          "role": "topic"
+        },
+        {
+          "text": "ラーメンは",
+          "role": "topic",
+          "label": "sub-topic 1"
+        },
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "it"
+        },
+        {
+          "text": "おいしい",
+          "role": "engine"
+        }
+      ],
+      "text": "ラーメンはおいしい。 As for ramen, (it) is good."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "この店は",
+          "role": "topic"
+        },
+        {
+          "text": "カレーは",
+          "role": "topic",
+          "label": "sub-topic 2"
+        },
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "it"
+        },
+        {
+          "text": "まずい",
+          "role": "engine"
+        }
+      ],
+      "text": "カレーはまずい。 As for curry, (it) is bad."
+    },
+    {
+      "type": "text",
+      "text": "If the comment is the same, use **も** instead."
+    },
+    {
+      "type": "heading",
+      "text": "の: a whole clause in a noun box"
+    },
+    {
+      "type": "text",
+      "text": "The **nominalizing の** is a pronoun that bundles everything before it into a single noun, \"the one that …\". English needs preparation for \"what she saw when she opened the door was …\", but Japanese slips it in anywhere, even as a topic."
+    },
+    {
+      "type": "text",
+      "text": "English needs preparation for \"what she saw when she opened the door was ...\": you have to build the sentence up in advance. Japanese slips the の in anywhere, even as a topic."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "朝の町に響くのは",
+          "role": "topic",
+          "label": "the one that resounds in the morning town"
+        },
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "it"
+        },
+        {
+          "text": "鐘だ",
+          "role": "engine",
+          "label": "a bell"
+        }
+      ],
+      "text": "朝の町に響くのは鐘だ。 What resounds in the morning town is a bell."
+    },
+    {
+      "type": "text",
+      "text": "So 朝の町に響くのは鐘だ is not \"a bell resounds\". It is an A-is-B sentence: A is \"the one that resounds in the morning town\" (topic), B is \"a bell\"."
+    },
+    {
+      "type": "example",
+      "jp": "彼女が部屋で見たのは、古い人形だった。",
+      "en": "What she saw in the room was an old doll."
+    },
+    {
+      "type": "example",
+      "jp": "毎朝歩くのは気持ちがいい。",
+      "en": "Walking every morning feels good."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**Agility** = how light a tool is. は and の are very light in Japanese.",
+        "**は** can be used again and again to set topics against each other; **も** says the comment is the same.",
+        "**の** turns a clause into a noun, \"the one that …\".",
+        "In a sentence like Xのは Y だ, X is the topic and Y is the answer."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "Which particle sets one thing against another?", "prompt": "", "options": ["が", "は", "を", "の"], "answer": 1, "note": "は is so light that you can use it again and again to contrast topics."},
-    {"id": 14, "type": "choice", "instruction": "If the comment is the same for a second thing, which particle do you use?", "prompt": "", "options": ["も", "は", "を", "で"], "answer": 0, "note": "も says \"also\": the same comment applies."},
-    {"id": 15, "type": "choice", "instruction": "What do the two は do?", "prompt": "この店は魚はおいしいが、肉はまずい。", "options": ["They contrast fish with meat", "They mark objects", "They make a question", "They show past tense"], "answer": 0, "note": "Each は sets its topic against the other.", "en": "At this shop the fish is good, but the meat is bad."},
-    {"id": 16, "type": "choice", "instruction": "Fill the gap", "prompt": "彼が書いた＿＿は手紙だった。", "options": ["を", "の", "に", "で"], "answer": 1, "note": "の bundles the clause into a noun: the one that he wrote.", "en": "What he wrote was a letter."},
-    {"id": 17, "type": "choice", "instruction": "Fill the gap", "prompt": "朝、走る＿＿は気持ちがいい。", "options": ["の", "を", "で", "が"], "answer": 0, "note": "の turns 朝、走る into a noun so it can be the topic.", "en": "Running in the morning feels good."},
-    {"id": 18, "type": "choice", "instruction": "What is the topic of this sentence?", "prompt": "駅にいたのは弟だった。", "options": ["駅にいたの (the one who was at the station)", "弟", "だった", "駅"], "answer": 0, "note": "のは makes a whole clause the topic; 弟 is the answer.", "en": "The one who was at the station was my younger brother."},
-    {"id": 19, "type": "choice", "instruction": "What kind of sentence is Xのは Yだ?", "prompt": "", "options": ["A question", "A command", "An A-is-B sentence: X is the topic, Y the answer", "A wish"], "answer": 2, "note": "X (the one that …) is B's topic and Y is the answer."},
-    {"id": 20, "type": "choice", "instruction": "What is the nominalizing の?", "prompt": "", "options": ["A pronoun that bundles a clause into a noun", "A past marker", "A polite ending", "An object marker"], "answer": 0, "note": "It means \"the one that …\"."},
-    {"id": 21, "type": "choice", "instruction": "True or false?", "prompt": "私が食べたのは魚だ。 魚 is the answer in an A-is-B sentence.", "options": ["True", "False"], "answer": 0, "note": "A = the one I ate; B = fish.", "en": "What I ate was fish."},
-    {"id": 22, "type": "choice", "instruction": "What does \"agility\" mean in this lesson?", "prompt": "", "options": ["How light and quick a tool is to use", "How fast you speak", "How many particles exist", "How polite a word is"], "answer": 0, "note": "は and の are nimble in Japanese, so they are used all the time."},
-    {"id": 23, "type": "choice", "instruction": "True or false: the comment after a は topic is a complete logical clause.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "The comment is always a full clause with its own engine."},
-    {"id": 24, "type": "choice", "instruction": "Which English phrase is closest to は?", "prompt": "", "options": ["\"as for …\" / \"speaking of …\"", "\"because of …\"", "\"in order to …\"", "\"even if …\""], "answer": 0, "note": "English needs a clumsy phrase; Japanese just uses は."},
-    {"id": 25, "type": "choice", "instruction": "What are the two は contrasting?", "prompt": "朝は雨だったが、午後は天気がよかった。", "options": ["Morning and afternoon", "Rain and snow", "Weather and time", "Nothing"], "answer": 0, "note": "Each topic is set against the other: morning versus afternoon.", "en": "It was raining in the morning, but the weather was good in the afternoon."},
-    {"id": 26, "type": "choice", "instruction": "Which sentence is an A-is-B sentence with a bundled clause as the topic?", "prompt": "", "options": ["弟が走った。", "弟は走った。", "弟も走った。", "走ったのは弟だ。"], "answer": 3, "note": "走ったの is the topic and 弟 is the answer."},
-    {"id": 27, "type": "tap", "instruction": "Tap the nominalizing の", "options": ["駅にいた", "の", "は", "弟", "だった"], "answer": 1, "note": "の bundles 駅にいた into a noun: the one who was at the station.", "en": "The one who was at the station was my younger brother."},
-    {"id": 28, "type": "tap", "instruction": "Tap the topic (the clause that became a noun)", "options": ["毎日走るのは", "大変だ"], "answer": 0, "note": "毎日走るの = the thing of running every day.", "en": "Running every day is hard."},
-    {"id": 29, "type": "tap", "instruction": "Tap the answer (B) of this A-is-B sentence", "options": ["私が見たのは", "古い写真", "だった"], "answer": 1, "note": "A is what I saw; B is an old photo.", "en": "What I saw was an old photo."},
-    {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "What I learned at school was hiragana.", "options": ["学校で", "習ったのは", "ひらがなだ"], "note": "学校で習ったの is the topic; ひらがなだ is the answer.", "en": "What I learned at school was hiragana."},
-    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "I eat meat but not fish.", "options": ["私は", "肉は", "食べるが", "魚は", "食べない"], "note": "Each は sets one food against the other.", "en": "I eat meat but not fish."},
-    {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "Traveling alone is fun.", "options": ["一人で", "旅行するのは", "楽しい"], "note": "旅行するの is the nominalized topic.", "en": "Traveling alone is fun."},
-    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "What I saw yesterday was an interesting movie.", "options": ["昨日", "見たのは", "おもしろい", "映画だった"], "note": "昨日見たの is the topic; the answer comes last.", "en": "What I saw yesterday was an interesting movie."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "Which particle sets one thing against another?",
+      "prompt": "",
+      "options": [
+        "が",
+        "は",
+        "を",
+        "の"
+      ],
+      "answer": 1,
+      "note": "は is so light that you can use it again and again to contrast topics."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "If the comment is the same for a second thing, which particle do you use?",
+      "prompt": "",
+      "options": [
+        "も",
+        "は",
+        "を",
+        "で"
+      ],
+      "answer": 0,
+      "note": "も says \"also\": the same comment applies."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "What do the two は do?",
+      "prompt": "この店は魚はおいしいが、肉はまずい。",
+      "options": [
+        "They contrast fish with meat",
+        "They mark objects",
+        "They make a question",
+        "They show past tense"
+      ],
+      "answer": 0,
+      "note": "Each は sets its topic against the other.",
+      "en": "At this shop the fish is good, but the meat is bad."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "彼が書いた＿＿は手紙だった。",
+      "options": [
+        "を",
+        "の",
+        "に",
+        "で"
+      ],
+      "answer": 1,
+      "note": "の bundles the clause into a noun: the one that he wrote.",
+      "en": "What he wrote was a letter."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "朝、走る＿＿は気持ちがいい。",
+      "options": [
+        "の",
+        "を",
+        "で",
+        "が"
+      ],
+      "answer": 0,
+      "note": "の turns 朝、走る into a noun so it can be the topic.",
+      "en": "Running in the morning feels good."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "What is the topic of this sentence?",
+      "prompt": "駅にいたのは弟だった。",
+      "options": [
+        "駅にいたの (the one who was at the station)",
+        "弟",
+        "だった",
+        "駅"
+      ],
+      "answer": 0,
+      "note": "のは makes a whole clause the topic; 弟 is the answer.",
+      "en": "The one who was at the station was my younger brother."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "What kind of sentence is Xのは Yだ?",
+      "prompt": "",
+      "options": [
+        "A question",
+        "A command",
+        "An A-is-B sentence: X is the topic, Y the answer",
+        "A wish"
+      ],
+      "answer": 2,
+      "note": "X (the one that …) is B's topic and Y is the answer."
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "What is the nominalizing の?",
+      "prompt": "",
+      "options": [
+        "A pronoun that bundles a clause into a noun",
+        "A past marker",
+        "A polite ending",
+        "An object marker"
+      ],
+      "answer": 0,
+      "note": "It means \"the one that …\"."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "私が食べたのは魚だ。 魚 is the answer in an A-is-B sentence.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "A = the one I ate; B = fish.",
+      "en": "What I ate was fish."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "What does \"agility\" mean in this lesson?",
+      "prompt": "",
+      "options": [
+        "How light and quick a tool is to use",
+        "How fast you speak",
+        "How many particles exist",
+        "How polite a word is"
+      ],
+      "answer": 0,
+      "note": "は and の are nimble in Japanese, so they are used all the time."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "What follows a は topic?",
+      "prompt": "弟は毎朝走っている。",
+      "options": [
+        "A complete clause: 毎朝走っている",
+        "Only a noun",
+        "Only a particle",
+        "Nothing"
+      ],
+      "answer": 0,
+      "note": "The comment after は is a complete logical clause.",
+      "en": "My younger brother runs every morning."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "Which English phrase is closest to は?",
+      "prompt": "",
+      "options": [
+        "\"as for …\" / \"speaking of …\"",
+        "\"because of …\"",
+        "\"in order to …\"",
+        "\"even if …\""
+      ],
+      "answer": 0,
+      "note": "English needs a clumsy phrase; Japanese just uses は."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "What are the two は contrasting?",
+      "prompt": "朝は雨だったが、午後は天気がよかった。",
+      "options": [
+        "Morning and afternoon",
+        "Rain and snow",
+        "Weather and time",
+        "Nothing"
+      ],
+      "answer": 0,
+      "note": "Each topic is set against the other: morning versus afternoon.",
+      "en": "It was raining in the morning, but the weather was good in the afternoon."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "Which sentence is an A-is-B sentence with a bundled clause as the topic?",
+      "prompt": "",
+      "options": [
+        "弟が走った。",
+        "弟は走った。",
+        "弟も走った。",
+        "走ったのは弟だ。"
+      ],
+      "answer": 3,
+      "note": "走ったの is the topic and 弟 is the answer."
+    },
+    {
+      "id": 27,
+      "type": "tap",
+      "instruction": "Tap the nominalizing の",
+      "options": [
+        "駅にいた",
+        "の",
+        "は",
+        "弟",
+        "だった"
+      ],
+      "answer": 1,
+      "note": "の bundles 駅にいた into a noun: the one who was at the station.",
+      "en": "The one who was at the station was my younger brother."
+    },
+    {
+      "id": 28,
+      "type": "tap",
+      "instruction": "Tap the topic (the clause that became a noun)",
+      "options": [
+        "毎日走るのは",
+        "大変だ"
+      ],
+      "answer": 0,
+      "note": "毎日走るの = the thing of running every day.",
+      "en": "Running every day is hard."
+    },
+    {
+      "id": 29,
+      "type": "tap",
+      "instruction": "Tap the answer (B) of this A-is-B sentence",
+      "options": [
+        "私が見たのは",
+        "古い写真",
+        "だった"
+      ],
+      "answer": 1,
+      "note": "A is what I saw; B is an old photo.",
+      "en": "What I saw was an old photo."
+    },
+    {
+      "id": 30,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "What I learned at school was hiragana.",
+      "options": [
+        "学校で",
+        "習ったのは",
+        "ひらがなだ"
+      ],
+      "note": "学校で習ったの is the topic; ひらがなだ is the answer.",
+      "en": "What I learned at school was hiragana."
+    },
+    {
+      "id": 31,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I eat meat but not fish.",
+      "options": [
+        "私は",
+        "肉は",
+        "食べるが",
+        "魚は",
+        "食べない"
+      ],
+      "note": "Each は sets one food against the other.",
+      "en": "I eat meat but not fish."
+    },
+    {
+      "id": 32,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Traveling alone is fun.",
+      "options": [
+        "一人で",
+        "旅行するのは",
+        "楽しい"
+      ],
+      "note": "旅行するの is the nominalized topic.",
+      "en": "Traveling alone is fun."
+    },
+    {
+      "id": 33,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "What I saw yesterday was an interesting movie.",
+      "options": [
+        "昨日",
+        "見たのは",
+        "おもしろい",
+        "映画だった"
+      ],
+      "note": "昨日見たの is the topic; the answer comes last.",
+      "en": "What I saw yesterday was an interesting movie."
+    },
+    {
+      "type": "choice",
+      "instruction": "Which sentence sets two things against each other?",
+      "prompt": "",
+      "options": [
+        "魚は食べるが、肉は食べない。",
+        "魚を食べた。",
+        "魚が好きだ。",
+        "魚も食べた。"
+      ],
+      "answer": 0,
+      "note": "Two は set one thing against another.",
+      "id": 34
+    },
+    {
+      "type": "tap",
+      "instruction": "Tap the answer (B) of this A-is-B sentence",
+      "options": [
+        "昨日買ったのは",
+        "この本",
+        "です"
+      ],
+      "answer": 1,
+      "note": "Xのは Y だ: Y is the answer.",
+      "en": "What I bought yesterday is this book.",
+      "id": 35
+    }
   ]
 }

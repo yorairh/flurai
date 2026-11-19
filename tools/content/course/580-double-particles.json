@@ -6,57 +6,524 @@
   "title": "Double particles: には, にも, とは and の + particle",
   "summary": "There is no such thing as a combined particle. Logical and non-logical particles can sit together; two logical particles cannot.",
   "video": "https://www.youtube.com/watch?v=iPiLVZoYhfM",
-  "related": [501, 507, 502, 503],
+  "related": [
+    501,
+    507,
+    502,
+    503
+  ],
   "blocks": [
-    {"type": "text", "text": "Lists of \"particle combinations\" make you memorize which can pair with which. You do not need them. Every particle just does its own job. Two facts explain all the pairings."},
-    {"type": "heading", "text": "Logical and non-logical particles"},
-    {"type": "text", "text": "The five main **logical** particles are **が, を, に, で, へ**. They say what role each noun plays in the sentence: who does it, what it is done to, where, to what. A noun has one role, so **two logical particles cannot stand together**. The **non-logical** particles **は** and **も** do not give a role; they only make a topic or sub-topic. They fit beside a logical particle with no clash."},
-    {"type": "heading", "text": "The two direct particles"},
-    {"type": "text", "text": "**が** (main carriage) and **を** (direct object) are so basic that nothing can be put next to them. To make such a noun a topic, **drop** the particle and put は or も alone. さくらをなぐった becomes さくらはなぐった, and the missing を is understood. You never see をは or がは."},
-    {"type": "table", "rows": [
-      ["Combine", "What it does", "Example"],
-      ["に + は", "topic and contrast", "冬には雪が降る (in winter, at least)"],
-      ["に + も", "topic and \"also\"", "春にも雪が降る (in spring too)"],
-      ["で + は", "topic and contrast at a place", "ここでは泳げない"],
-      ["と + は", "topic about \"with\"", "彼とは話した"]
-    ]},
-    {"type": "text", "text": "In 明日学校に行く, に is needed to show the destination. 明日学校には行く says \"as for school, I will go (but maybe not somewhere else)\". 明日学校にも行く says \"I will go to school too\". The logical particle gives the role, and は or も adds a feeling."},
-    {"type": "heading", "text": "の combines with anything"},
-    {"type": "text", "text": "The **nominalizing の** turns whatever comes before it into a noun, and a noun can take any logical particle: 泳ぐのが好きだ, 泳ぐのを見た, 泳ぐのに疲れた."},
-    {"type": "example", "jp": "昼には家に着く。", "en": "(I) will arrive home by noon."},
-    {"type": "example", "jp": "この町にも図書館がある。", "en": "This town has a library as well."},
-    {"type": "example", "jp": "友達と一緒に走るのが楽しい。", "en": "Running together with a friend is fun."},
-    {"type": "keypoints", "items": [
-      "Logical: **が を に で へ**. Non-logical: **は も**.",
-      "Two logical particles never combine; a logical plus は or も does.",
-      "**が** and **を** drop away when は or も takes over.",
-      "**の** (the noun box) can be followed by any logical particle."
-    ]}
+    {
+      "type": "text",
+      "text": "Lists of \"particle combinations\" make you memorize which can pair with which. You do not need them. Every particle just does its own job. Two facts explain all the pairings."
+    },
+    {
+      "type": "heading",
+      "text": "Logical and non-logical particles"
+    },
+    {
+      "type": "text",
+      "text": "The five main **logical** particles are **が, を, に, で, へ**. They say what role each noun plays in the sentence: who does it, what it is done to, where, to what. A noun has one role, so **two logical particles cannot stand together**. (と, \"with\", works the same way here: it gives a role, so it counts as logical too.) The **non-logical** particles **は** and **も** do not give a role; they only make a topic or sub-topic. They fit beside a logical particle with no clash."
+    },
+    {
+      "type": "heading",
+      "text": "The two direct particles"
+    },
+    {
+      "type": "text",
+      "text": "**が** (main carriage) and **を** (direct object) are so basic that nothing can be put next to them. To make such a noun a topic, **drop** the particle and put は or も alone. The missing を is understood. You never see をは or がは."
+    },
+    {
+      "type": "example",
+      "jp": "さくらはなぐった。",
+      "en": "(I) hit Sakura. (as for Sakura, (I) hit her)"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "さくらは",
+          "role": "topic",
+          "label": "was さくらを"
+        },
+        {
+          "text": "Øを",
+          "role": "zero",
+          "label": "hidden を"
+        },
+        {
+          "text": "なぐった",
+          "role": "engine"
+        }
+      ],
+      "text": "✗ さくらをは / さくらはを: the particle drops away when は arrives."
+    },
+    {
+      "type": "heading",
+      "text": "Logical + は or も"
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Combine",
+          "What it does",
+          "Example"
+        ],
+        [
+          "に + は",
+          "topic and contrast",
+          "冬には雪が降る (in winter, at least)"
+        ],
+        [
+          "に + も",
+          "topic and \"also\"",
+          "春にも雪が降る (in spring too)"
+        ],
+        [
+          "で + は",
+          "topic and contrast at a place",
+          "ここでは泳げない"
+        ],
+        [
+          "と + は",
+          "topic about \"with\"",
+          "彼とは話した"
+        ]
+      ]
+    },
+    {
+      "type": "text",
+      "text": "The logical particle gives the role, and は or も adds a feeling. Compare three nearly identical sentences:"
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "Feel"
+        ],
+        [
+          "明日学校に行く。",
+          "Plain: I will go to school."
+        ],
+        [
+          "明日学校には行く。",
+          "As for school, I will go (but maybe not elsewhere)."
+        ],
+        [
+          "明日学校にも行く。",
+          "I will go to school too."
+        ]
+      ]
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "明日",
+          "role": "white"
+        },
+        {
+          "text": "学校には",
+          "role": "topic",
+          "label": "に + は"
+        },
+        {
+          "text": "Øが",
+          "role": "zero"
+        },
+        {
+          "text": "行く",
+          "role": "engine"
+        }
+      ],
+      "text": "The に stays: it gives the destination. は only adds the feeling."
+    },
+    {
+      "type": "heading",
+      "text": "の combines with anything"
+    },
+    {
+      "type": "text",
+      "text": "The **nominalizing の** turns whatever comes before it into a noun, and a noun can take any logical particle: 泳ぐのが好きだ, 泳ぐのを見た, 泳ぐのに疲れた."
+    },
+    {
+      "type": "example",
+      "jp": "昼には家に着く。",
+      "en": "(I) will arrive home by noon."
+    },
+    {
+      "type": "example",
+      "jp": "この町にも図書館がある。",
+      "en": "This town has a library as well."
+    },
+    {
+      "type": "example",
+      "jp": "友達と一緒に走るのが楽しい。",
+      "en": "Running together with a friend is fun."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Logical: **が を に で へ**. Non-logical: **は も**.",
+        "Two logical particles never combine; a logical plus は or も does.",
+        "**が** and **を** drop away when は or も takes over.",
+        "**の** (the noun box) can be followed by any logical particle."
+      ]
+    }
   ],
   "questions": [
-    {"id": 1, "type": "choice", "instruction": "Which pair is made up of logical particles only?", "prompt": "", "options": ["が, を", "は, も", "に, は", "で, も"], "answer": 0, "note": "が, を, に, で, へ are logical; は and も are not."},
-    {"id": 2, "type": "choice", "instruction": "Which is a non-logical particle?", "prompt": "", "options": ["も", "が", "を", "に"], "answer": 0, "note": "も only sets a topic."},
-    {"id": 4, "type": "choice", "instruction": "Why can you not say さくらをはなぐった?", "prompt": "", "options": ["を cannot be combined; use は alone", "は must follow が", "なぐる is intransitive", "さくら is a verb"], "answer": 0, "note": "The direct particles drop away when は takes over."},
-    {"id": 10, "type": "choice", "instruction": "Why can の take any logical particle?", "prompt": "", "options": ["It turns the clause into a noun", "It is a verb", "It is a topic marker", "It replaces を"], "answer": 0, "note": "A noun can take any role marker."},
-    {"id": 101, "type": "choice", "instruction": "Fill the gap", "prompt": "夏＿＿は海へ行く。", "options": ["に", "を", "が", "と"], "answer": 0, "en": "In summer, (I) go to the sea.", "note": "に gives the time, and は sits beside it as the topic."},
-    {"id": 102, "type": "choice", "instruction": "Fill the gap: \"at that shop, too\"", "prompt": "あの店＿＿野菜を売っている。", "options": ["でも", "をも", "がも", "にも"], "answer": 0, "en": "They sell vegetables at that shop, too.", "note": "Selling happens at a place, so で; も adds \"too\"."},
-    {"id": 103, "type": "choice", "instruction": "Which sentence is correct?", "prompt": "", "options": ["友達ととは遊んだ。", "友達をは遊んだ。", "友達とは遊んだ。", "友達がとは遊んだ。"], "answer": 2, "note": "と is logical and は sits beside it; the others stack logical particles."},
-    {"id": 104, "type": "tap", "instruction": "Tap the word that is a place plus a topic", "options": ["図書館では", "静かに", "してください"], "answer": 0, "en": "Please be quiet in the library.", "note": "で marks the place and は makes it a topic."},
-    {"id": 105, "type": "order", "instruction": "Build the sentence", "prompt": "(I) eat breakfast at school, too.", "options": ["学校でも", "朝ごはんを", "食べる"], "en": "(I) eat breakfast at school, too.", "note": "で gives the place, も adds \"too\"; を stays with the object.", "alt": [["朝ごはんを", "学校でも", "食べる"]]},
-    {"id": 106, "type": "choice", "instruction": "True or false? After the nominalizing の you can attach が, を or に.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "の makes a noun, and a noun can take any logical particle."},
-    {"id": 107, "type": "choice", "instruction": "Fill the gap", "prompt": "毎朝走る＿＿楽しい。", "options": ["のを", "のが", "のに", "のへ"], "answer": 1, "en": "Running every morning is fun.", "note": "The boxed clause is the carriage of 楽しい, so が."},
-    {"id": 108, "type": "choice", "instruction": "Fill the gap", "prompt": "子供が泳ぐ＿＿見た。", "options": ["のが", "のに", "のへ", "のを"], "answer": 3, "en": "(I) watched the child swim.", "note": "What you saw is the object, so を follows の."},
-    {"id": 109, "type": "choice", "instruction": "What does this sentence suggest?", "prompt": "弟の部屋にも行く。", "options": ["(I) will go only to his room", "(I) will not go", "(I) will go to my brother's room, too", "(I) went yesterday"], "answer": 2, "en": "(I) will go to my brother's room, too.", "note": "に shows the destination and も adds \"also\"."},
-    {"id": 110, "type": "choice", "instruction": "What feeling does は add?", "prompt": "電車では行かない。", "options": ["By train, at least, I won't go (maybe by other means)", "I will go by train, too", "Nobody goes", "I already went"], "answer": 0, "en": "(I) won't go by train (but maybe some other way).", "note": "で marks the means; は adds contrast."},
-    {"id": 111, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["毎日、本は読む。", "毎日、本がを読む。", "毎日、本も読む。", "毎日、本を読む。"], "answer": 1, "note": "が and を are both logical, so they cannot stand together."},
-    {"id": 112, "type": "order", "instruction": "Build the sentence", "prompt": "On Sunday, at least, (I) will go to the park.", "options": ["日曜日には", "公園に", "行く"], "en": "On Sunday, at least, (I) will go to the park.", "note": "に gives the time and は adds contrast; に marks the destination."},
-    {"id": 113, "type": "choice", "instruction": "魚 is what in this sentence, and what happened to its particle?", "prompt": "魚は食べない。", "options": ["The carriage; が was replaced by は", "The object; を was replaced by は", "A place; で was replaced by は", "A goal; に was replaced by は"], "answer": 1, "en": "(As for fish, I don't eat it.)", "note": "The fish is eaten, so it is the object; を drops away when は takes over."},
-    {"id": 114, "type": "tap", "instruction": "Tap the word with a place particle plus も", "options": ["山の", "上にも", "家が", "ある"], "answer": 1, "en": "There is a house on top of the mountain, too.", "note": "に shows where it exists and も adds \"too\"."},
-    {"id": 116, "type": "choice", "instruction": "What does this sentence suggest?", "prompt": "家では勉強しない。", "options": ["(I) don't study anywhere", "At home, (I) don't study, though maybe elsewhere", "(I) only study at home", "(I) studied at home yesterday"], "answer": 1, "en": "At home, (I) don't study (but maybe elsewhere).", "note": "で marks the place, and は contrasts it with other places."},
-    {"id": 117, "type": "order", "instruction": "Build the sentence", "prompt": "(I) like reading books in the library.", "options": ["図書館で", "本を読むのが", "好きだ"], "en": "(I) like reading books in the library.", "note": "の boxes 本を読む, and が marks it as what is liked."},
-    {"id": 118, "type": "choice", "instruction": "Why is に kept in 公園にも行く?", "prompt": "", "options": ["も replaces に", "に is a topic marker", "に shows the destination; も only adds \"also\"", "に is needed only in the past"], "answer": 2, "note": "A logical particle gives the role; は and も sit beside it."},
-    {"id": 120, "type": "choice", "instruction": "Fill the gap", "prompt": "雨の日＿＿は家にいる。", "options": ["を", "が", "に", "と"], "answer": 2, "en": "On rainy days, (I) stay home.", "note": "に gives the time, and は adds the topic."},
-    {"id": 121, "type": "choice", "instruction": "Fill the gap", "prompt": "彼女＿＿は毎日会う。", "options": ["がは", "とは", "をは", "のは"], "answer": 1, "en": "(I) meet her every day.", "note": "と means \"with\"; は sits beside it as the topic."},
-    {"id": 122, "type": "tap", "instruction": "Tap the word where の makes a clause into a noun with a role particle", "options": ["私は", "歌うのが", "好きだ"], "answer": 1, "en": "I like singing.", "note": "歌うの is a noun box, and が marks it."}
+    {
+      "id": 1,
+      "type": "choice",
+      "instruction": "Which pair is made up of logical particles only?",
+      "prompt": "",
+      "options": [
+        "が, を",
+        "は, も",
+        "に, は",
+        "で, も"
+      ],
+      "answer": 0,
+      "note": "が, を, に, で, へ are logical; は and も are not."
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "instruction": "Which is a non-logical particle?",
+      "prompt": "",
+      "options": [
+        "も",
+        "が",
+        "を",
+        "に"
+      ],
+      "answer": 0,
+      "note": "も only sets a topic."
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "instruction": "Why can you not say さくらをはなぐった?",
+      "prompt": "",
+      "options": [
+        "を cannot be combined; use は alone",
+        "は must follow が",
+        "なぐる is intransitive",
+        "さくら is a verb"
+      ],
+      "answer": 0,
+      "note": "The direct particles drop away when は takes over."
+    },
+    {
+      "id": 10,
+      "type": "choice",
+      "instruction": "Why can の take any logical particle?",
+      "prompt": "",
+      "options": [
+        "It turns the clause into a noun",
+        "It is a verb",
+        "It is a topic marker",
+        "It replaces を"
+      ],
+      "answer": 0,
+      "note": "A noun can take any role marker."
+    },
+    {
+      "id": 101,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "夏＿＿は海へ行く。",
+      "options": [
+        "に",
+        "を",
+        "が",
+        "と"
+      ],
+      "answer": 0,
+      "en": "In summer, (I) go to the sea.",
+      "note": "に gives the time, and は sits beside it as the topic."
+    },
+    {
+      "id": 102,
+      "type": "choice",
+      "instruction": "Fill the gap: \"at that shop, too\"",
+      "prompt": "あの店＿＿野菜を売っている。",
+      "options": [
+        "でも",
+        "をも",
+        "がも",
+        "にも"
+      ],
+      "answer": 0,
+      "en": "They sell vegetables at that shop, too.",
+      "note": "Selling happens at a place, so で; も adds \"too\"."
+    },
+    {
+      "id": 103,
+      "type": "choice",
+      "instruction": "Which sentence is correct?",
+      "prompt": "",
+      "options": [
+        "友達ととは遊んだ。",
+        "友達をは遊んだ。",
+        "友達とは遊んだ。",
+        "友達がとは遊んだ。"
+      ],
+      "answer": 2,
+      "note": "と is logical and は sits beside it; the others stack logical particles."
+    },
+    {
+      "id": 104,
+      "type": "tap",
+      "instruction": "Tap the word that is a place plus a topic",
+      "options": [
+        "図書館では",
+        "静かに",
+        "してください"
+      ],
+      "answer": 0,
+      "en": "Please be quiet in the library.",
+      "note": "で marks the place and は makes it a topic."
+    },
+    {
+      "id": 105,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "(I) eat breakfast at school, too.",
+      "options": [
+        "学校でも",
+        "朝ごはんを",
+        "食べる"
+      ],
+      "en": "(I) eat breakfast at school, too.",
+      "note": "で gives the place, も adds \"too\"; を stays with the object.",
+      "alt": [
+        [
+          "朝ごはんを",
+          "学校でも",
+          "食べる"
+        ]
+      ]
+    },
+    {
+      "id": 106,
+      "type": "choice",
+      "instruction": "True or false? After the nominalizing の you can attach が, を or に.",
+      "prompt": "",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "の makes a noun, and a noun can take any logical particle."
+    },
+    {
+      "id": 107,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "毎朝走る＿＿楽しい。",
+      "options": [
+        "のを",
+        "のが",
+        "のに",
+        "のへ"
+      ],
+      "answer": 1,
+      "en": "Running every morning is fun.",
+      "note": "The boxed clause is the carriage of 楽しい, so が."
+    },
+    {
+      "id": 108,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "子供が泳ぐ＿＿見た。",
+      "options": [
+        "のが",
+        "のに",
+        "のへ",
+        "のを"
+      ],
+      "answer": 3,
+      "en": "(I) watched the child swim.",
+      "note": "What you saw is the object, so を follows の."
+    },
+    {
+      "id": 109,
+      "type": "choice",
+      "instruction": "What does this sentence suggest?",
+      "prompt": "弟の部屋にも行く。",
+      "options": [
+        "(I) will go only to his room",
+        "(I) will not go",
+        "(I) will go to my brother's room, too",
+        "(I) went yesterday"
+      ],
+      "answer": 2,
+      "en": "(I) will go to my brother's room, too.",
+      "note": "に shows the destination and も adds \"also\"."
+    },
+    {
+      "id": 110,
+      "type": "choice",
+      "instruction": "What feeling does は add?",
+      "prompt": "電車では行かない。",
+      "options": [
+        "By train, at least, I won't go (maybe by other means)",
+        "I will go by train, too",
+        "Nobody goes",
+        "I already went"
+      ],
+      "answer": 0,
+      "en": "(I) won't go by train (but maybe some other way).",
+      "note": "で marks the means; は adds contrast."
+    },
+    {
+      "id": 111,
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "毎日、本は読む。",
+        "毎日、本がを読む。",
+        "毎日、本も読む。",
+        "毎日、本を読む。"
+      ],
+      "answer": 1,
+      "note": "が and を are both logical, so they cannot stand together."
+    },
+    {
+      "id": 112,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "On Sunday, at least, (I) will go to the park.",
+      "options": [
+        "日曜日には",
+        "公園に",
+        "行く"
+      ],
+      "en": "On Sunday, at least, (I) will go to the park.",
+      "note": "に gives the time and は adds contrast; に marks the destination."
+    },
+    {
+      "id": 113,
+      "type": "choice",
+      "instruction": "魚 is what in this sentence, and what happened to its particle?",
+      "prompt": "魚は食べない。",
+      "options": [
+        "The carriage; が was replaced by は",
+        "The object; を was replaced by は",
+        "A place; で was replaced by は",
+        "A goal; に was replaced by は"
+      ],
+      "answer": 1,
+      "en": "(As for fish, I don't eat it.)",
+      "note": "The fish is eaten, so it is the object; を drops away when は takes over."
+    },
+    {
+      "id": 114,
+      "type": "tap",
+      "instruction": "Tap the word with a place particle plus も",
+      "options": [
+        "山の",
+        "上にも",
+        "家が",
+        "ある"
+      ],
+      "answer": 1,
+      "en": "There is a house on top of the mountain, too.",
+      "note": "に shows where it exists and も adds \"too\"."
+    },
+    {
+      "id": 116,
+      "type": "choice",
+      "instruction": "What does this sentence suggest?",
+      "prompt": "家では勉強しない。",
+      "options": [
+        "(I) don't study anywhere",
+        "At home, (I) don't study, though maybe elsewhere",
+        "(I) only study at home",
+        "(I) studied at home yesterday"
+      ],
+      "answer": 1,
+      "en": "At home, (I) don't study (but maybe elsewhere).",
+      "note": "で marks the place, and は contrasts it with other places."
+    },
+    {
+      "id": 117,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "(I) like reading books in the library.",
+      "options": [
+        "図書館で",
+        "本を読むのが",
+        "好きだ"
+      ],
+      "en": "(I) like reading books in the library.",
+      "note": "の boxes 本を読む, and が marks it as what is liked."
+    },
+    {
+      "id": 118,
+      "type": "choice",
+      "instruction": "Why is に kept in 公園にも行く?",
+      "prompt": "",
+      "options": [
+        "も replaces に",
+        "に is a topic marker",
+        "に shows the destination; も only adds \"also\"",
+        "に is needed only in the past"
+      ],
+      "answer": 2,
+      "note": "A logical particle gives the role; は and も sit beside it."
+    },
+    {
+      "id": 120,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "雨の日＿＿は家にいる。",
+      "options": [
+        "を",
+        "が",
+        "に",
+        "と"
+      ],
+      "answer": 2,
+      "en": "On rainy days, (I) stay home.",
+      "note": "に gives the time, and は adds the topic."
+    },
+    {
+      "id": 121,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "彼女＿＿は毎日会う。",
+      "options": [
+        "がは",
+        "とは",
+        "をは",
+        "のは"
+      ],
+      "answer": 1,
+      "en": "(I) meet her every day.",
+      "note": "と means \"with\"; は sits beside it as the topic."
+    },
+    {
+      "id": 122,
+      "type": "tap",
+      "instruction": "Tap the word where の makes a clause into a noun with a role particle",
+      "options": [
+        "私は",
+        "歌うのが",
+        "好きだ"
+      ],
+      "answer": 1,
+      "en": "I like singing.",
+      "note": "歌うの is a noun box, and が marks it."
+    }
   ]
 }

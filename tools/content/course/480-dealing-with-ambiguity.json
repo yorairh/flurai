@@ -469,6 +469,36 @@
           "見られた"
         ]
       ]
+    },
+    {
+      "type": "choice",
+      "instruction": "Is 食べられた potential or receptive?",
+      "prompt": "昨日、一人で全部食べられた。",
+      "options": [
+        "Potential: could eat",
+        "Receptive: got eaten",
+        "Both equally likely",
+        "Neither"
+      ],
+      "answer": 0,
+      "note": "Probability and context: someone alone eating it all is the doer.",
+      "en": "Yesterday I was able to eat it all by myself.",
+      "id": 35
+    },
+    {
+      "type": "choice",
+      "instruction": "In a noodle shop, what does this most likely mean?",
+      "prompt": "あの人はラーメンだ。",
+      "options": [
+        "That person is having ramen",
+        "That person is a bowl of ramen",
+        "That person is Japanese",
+        "That person cooks"
+      ],
+      "answer": 0,
+      "note": "Context and absurdity point to the order.",
+      "en": "That person is having ramen.",
+      "id": 36
     }
   ]
 }

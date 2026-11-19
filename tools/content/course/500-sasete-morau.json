@@ -436,6 +436,33 @@
       ],
       "note": "もらえますか asks politely: can I receive …?",
       "en": "Could you let me make a call here?"
+    },
+    {
+      "type": "choice",
+      "instruction": "Which means \"let someone know\"?",
+      "prompt": "",
+      "options": [
+        "知らせる",
+        "知れる",
+        "知らない",
+        "知ろう"
+      ],
+      "answer": 0,
+      "note": "知らせる is the causative of 知る.",
+      "id": 34
+    },
+    {
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "Could you let me know tomorrow's time?",
+      "options": [
+        "明日の時間を",
+        "知らせて",
+        "もらえますか"
+      ],
+      "note": "Causative て-form + もらえますか.",
+      "en": "Could you let me know tomorrow's time?",
+      "id": 35
     }
   ]
 }
