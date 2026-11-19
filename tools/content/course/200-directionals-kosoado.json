@@ -61,10 +61,6 @@
     {"id": 41, "type": "order", "instruction": "Build the sentence", "prompt": "I like that kind of movie (the one we both saw).", "options": ["私は", "あんな", "映画が", "好きです"], "note": "あんな: that kind of (far).", "en": "I like that kind of movie.", "alt": [["あんな", "映画が", "私は", "好きです"]]},
     {"id": 42, "type": "order", "instruction": "Build the sentence", "prompt": "Please wait here.", "options": ["ここで", "待って", "ください"], "note": "ここ: the place where I am.", "en": "Please wait here."},
     {"id": 43, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
-    {"id": 44, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."},
-    {"id": 45, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
-    {"id": 46, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."},
-    {"id": 47, "type": "choice", "instruction": "Which one must come before a noun?", "prompt": "", "options": ["これ", "この", "ここ", "どれ"], "answer": 1, "note": "の describes: この + noun. これ stands alone."},
-    {"id": 48, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."}
+    {"id": 44, "type": "tap", "instruction": "Tap the word that describes the noun", "prompt": "", "options": ["あの", "人は", "先生です"], "answer": 0, "note": "あの + noun: that (far) person.", "en": "That person is a teacher."}
   ]
 }

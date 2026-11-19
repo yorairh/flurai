@@ -56,7 +56,6 @@
     {"id": 39, "type": "choice", "instruction": "True or false?", "prompt": "A noun before よう takes の.", "options": ["True", "False"], "answer": 0, "note": "夢のようだ style: noun + の + よう."},
     {"id": 40, "type": "choice", "instruction": "True or false?", "prompt": "Before みたい, a noun needs the linking particle as well.", "options": ["True", "False"], "answer": 1, "note": "It follows the noun directly."},
     {"id": 41, "type": "choice", "instruction": "Which says \"as if he were sleeping\"?", "prompt": "", "options": ["寝ているのようだ", "寝ているかのようだ", "寝ているかようだ", "寝ているみたいのだ"], "answer": 1, "note": "Clause + か + のようだ."},
-    {"id": 43, "type": "choice", "instruction": "What does this say?", "prompt": "部屋の電気が消えたようだ。", "options": ["The light is like a star", "It seems the light went out", "I want to turn off the light", "The light must not be turned off"], "answer": 1, "note": "Sentence + ようだ: it seems that.", "en": "It seems the light in the room went out."},
-    {"id": 44, "type": "choice", "instruction": "What does this say?", "prompt": "部屋の電気が消えたようだ。", "options": ["The light is like a star", "It seems the light went out", "I want to turn off the light", "The light must not be turned off"], "answer": 1, "note": "Sentence + ようだ: it seems that.", "en": "It seems the light in the room went out."}
+    {"id": 43, "type": "choice", "instruction": "What does this say?", "prompt": "部屋の電気が消えたようだ。", "options": ["The light is like a star", "It seems the light went out", "I want to turn off the light", "The light must not be turned off"], "answer": 1, "note": "Sentence + ようだ: it seems that.", "en": "It seems the light in the room went out."}
   ]
 }

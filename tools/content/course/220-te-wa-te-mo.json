@@ -51,8 +51,6 @@
     {"id": 39, "type": "choice", "instruction": "Which is the casual form of 食べては?", "prompt": "", "options": ["食べじゃ", "食べちゃ", "食べても", "食べって"], "answer": 1, "note": "After a て ending, ては becomes ちゃ."},
     {"id": 40, "type": "choice", "instruction": "Which is the casual form of 読んでは?", "prompt": "", "options": ["読んちゃ", "読んじゃ", "読んでちゃ", "読みちゃ"], "answer": 1, "note": "After a で ending, では becomes じゃ."},
     {"id": 41, "type": "choice", "instruction": "Which says \"Even if I study, I do not understand\"?", "prompt": "", "options": ["勉強しては分からない", "勉強しにも分からない", "勉強してが分からない", "勉強しても分からない"], "answer": 3, "note": "ても: even if; the result is not stopped."},
-    {"id": 42, "type": "choice", "instruction": "Which sentence sounds like a complaint?", "prompt": "", "options": ["雨が降っては、困る。", "雨が降っても、行く。", "雨が降って、うちにいた。"], "answer": 0, "note": "ては points at an unwelcome result."},
-    {"id": 43, "type": "choice", "instruction": "Which sentence sounds like a complaint?", "prompt": "", "options": ["雨が降っては、困る。", "雨が降っても、行く。", "雨が降って、うちにいた。"], "answer": 0, "note": "ては points at an unwelcome result."},
-    {"id": 44, "type": "choice", "instruction": "Which sentence sounds like a complaint?", "prompt": "", "options": ["雨が降っては、困る。", "雨が降っても、行く。", "雨が降って、うちにいた。"], "answer": 0, "note": "ては points at an unwelcome result."}
+    {"id": 42, "type": "choice", "instruction": "Which sentence sounds like a complaint?", "prompt": "", "options": ["雨が降っては、困る。", "雨が降っても、行く。", "雨が降って、うちにいた。"], "answer": 0, "note": "ては points at an unwelcome result."}
   ]
 }
