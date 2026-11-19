@@ -6,415 +6,57 @@
   "title": "Similes: ようだ, のように, のような and みたい",
   "summary": "ようだ is the far end of the scale: it makes metaphors and similes, with まるで for emphasis; みたい is its casual partner.",
   "video": "https://www.youtube.com/watch?v=Ft_zw0mdeyI",
-  "related": [
-    442,
-    352,
-    278
-  ],
+  "related": [442, 352, 278],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Think of a sliding scale. **そうだ** says how something looks. **らしい** compares it to a quality. **ようだ** goes furthest: it says \"it is like this\", and can build a full metaphor. All three can also end a whole sentence to mean \"it seems\"."
-    },
-    {
-      "type": "heading",
-      "text": "The shapes of ようだ"
-    },
-    {
-      "type": "text",
-      "text": "**よう** is a noun meaning \"form, likeness\", and ようだ behaves like any adjectival noun: **ようだ** at the end, **ように** as an adverb, **ような** before a noun. A noun before it takes **の**."
-    },
-    {
-      "type": "table",
-      "rows": [
-        [
-          "Use",
-          "Form",
-          "Example"
-        ],
-        [
-          "End of sentence",
-          "ようだ",
-          "夢のようだ"
-        ],
-        [
-          "Adverb",
-          "ように",
-          "風のように走る"
-        ],
-        [
-          "Before a noun",
-          "ような",
-          "夢のような話"
-        ]
-      ]
-    },
-    {
-      "type": "example",
-      "jp": "彼女は風のように走った。",
-      "en": "She ran like the wind."
-    },
-    {
-      "type": "example",
-      "jp": "それは夢のような話だ。",
-      "en": "That is a story like a dream."
-    },
-    {
-      "type": "heading",
-      "text": "まるで: here comes a simile"
-    },
-    {
-      "type": "text",
-      "text": "**まるで** (from 丸, \"round, whole\") announces an exaggerated comparison: \"completely as if\". It goes with ようだ and みたい, not with そうだ or らしい."
-    },
-    {
-      "type": "example",
-      "jp": "彼女はまるで人形のようだ。",
-      "en": "She is just like a doll."
-    },
-    {
-      "type": "heading",
-      "text": "A whole clause: かのようだ"
-    },
-    {
-      "type": "text",
-      "text": "To compare something with a whole situation, attach **か** to the clause first. か makes the clause a pretend, unconfirmed idea: \"as if ...\". Then add ように / ような."
-    },
-    {
-      "type": "example",
-      "jp": "まるでゆうれいを見たかのような顔をした。",
-      "en": "She made a face as if she had seen a ghost."
-    },
-    {
-      "type": "heading",
-      "text": "みたい: the casual partner"
-    },
-    {
-      "type": "text",
-      "text": "**みたい** is casual and an adjectival noun: みたいに, みたいな, みたいだ. It follows a noun directly, without の. Do not mix it up with 見たい (\"want to see\")."
-    },
-    {
-      "type": "example",
-      "jp": "まるで夢みたいだ。",
-      "en": "It is just like a dream."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**Noun + の + ようだ / ように / ような**; casual: **noun + みたい**.",
-        "**まるで** marks a vivid comparison.",
-        "**Clause + かのように / かのような** compares with a pretend situation.",
-        "ようだ is the strongest of そうだ, らしい, ようだ for similes."
-      ]
-    }
+    {"type": "text", "text": "Think of a sliding scale. **そうだ** says how something looks. **らしい** compares it to a quality. **ようだ** goes furthest: it says \"it is like this\", and can build a full metaphor. All three can also end a whole sentence to mean \"it seems\"."},
+    {"type": "heading", "text": "The shapes of ようだ"},
+    {"type": "text", "text": "**よう** is a noun meaning \"form, likeness\", and ようだ behaves like any adjectival noun: **ようだ** at the end, **ように** as an adverb, **ような** before a noun. A noun before it takes **の**."},
+    {"type": "table", "rows": [["Use", "Form", "Example"], ["End of sentence", "ようだ", "夢のようだ"], ["Adverb", "ように", "風のように走る"], ["Before a noun", "ような", "夢のような話"]]},
+    {"type": "example", "jp": "彼女は風のように走った。", "en": "She ran like the wind."},
+    {"type": "example", "jp": "それは夢のような話だ。", "en": "That is a story like a dream."},
+    {"type": "heading", "text": "ようだ after a whole sentence"},
+    {"type": "text", "text": "After a whole plain sentence, ようだ means \"it seems that\": you judge from what you can see or hear."},
+    {"type": "example", "jp": "誰かが来たようだ。", "en": "It seems someone has come."},
+    {"type": "heading", "text": "Why ようだ is the furthest"},
+    {"type": "text", "text": "Think of a wrestler. We know he is not really a mountain, so we only borrow one quality of a mountain: it is big and heavy. That is a simile: ようだ borrows one quality, and it never claims the two are the same."},
+    {"type": "example", "jp": "あの力士は山のようだ。", "en": "That wrestler is like a mountain."},
+    {"type": "heading", "text": "まるで: here comes a simile"},
+    {"type": "text", "text": "**まるで** (from 丸, \"round, whole\") announces an exaggerated comparison: \"completely as if\". It goes with ようだ and みたい, not with そうだ or らしい."},
+    {"type": "example", "jp": "彼女はまるで人形のようだ。", "en": "She is just like a doll."},
+    {"type": "heading", "text": "A whole clause: かのようだ"},
+    {"type": "text", "text": "To compare something with a whole situation, attach **か** to the clause first. The か turns the clause into an \"if\": she did not really see a ghost, it is only pretend. That whole pretend clause then acts like a noun, so it can take の and ような."},
+    {"type": "diagram", "cars": [{"text": "ゆうれいを見た", "role": "white", "label": "the pretend clause"}, {"text": "か", "role": "particle", "label": "as if"}, {"text": "のような", "role": "white"}, {"text": "顔を", "role": "white"}, {"text": "した", "role": "engine"}], "text": "まるでゆうれいを見たかのような顔をした。 She made a face as if she had seen a ghost."},
+    {"type": "example", "jp": "まるでゆうれいを見たかのような顔をした。", "en": "She made a face as if she had seen a ghost."},
+    {"type": "heading", "text": "みたい: the casual partner"},
+    {"type": "text", "text": "**みたい** is casual and an adjectival noun: みたいに, みたいな, みたいだ. It follows a noun directly, without の, and in speech the だ is often dropped: 羊みたい. It cannot do the かのよう trick, and it is not for essays. Do not mix it up with 見たい (\"want to see\")."},
+    {"type": "example", "jp": "まるで夢みたいだ。", "en": "It is just like a dream."},
+    {"type": "example", "jp": "まるで羊みたい。", "en": "She is just like a sheep."},
+    {"type": "keypoints", "items": ["**Noun + の + ようだ / ように / ような**; casual: **noun + みたい**.", "**Sentence + ようだ**: it seems that.", "**まるで** marks a vivid comparison.", "**Clause + かのように / かのような** compares with a pretend situation.", "ようだ is the strongest of そうだ, らしい, ようだ for similes."]}
   ],
   "questions": [
-    {
-      "id": 20,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "彼女の声は鳥＿＿ようだ。",
-      "options": [
-        "が",
-        "に",
-        "の",
-        "は"
-      ],
-      "answer": 2,
-      "note": "A noun before the formal simile word takes the particle の.",
-      "en": "Her voice is like a bird's."
-    },
-    {
-      "id": 21,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "このクッキーは雪の＿＿白い。",
-      "options": [
-        "ように",
-        "ような",
-        "ようだ",
-        "みたい"
-      ],
-      "answer": 0,
-      "note": "ように is the adverb form, describing 白い.",
-      "en": "This cookie is white like snow."
-    },
-    {
-      "id": 22,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "今日は夏の＿＿暑い日だ。",
-      "options": [
-        "ように",
-        "ようだ",
-        "みたい",
-        "ような"
-      ],
-      "answer": 3,
-      "note": "ような comes before a noun.",
-      "en": "Today is a hot day like summer."
-    },
-    {
-      "id": 23,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "あの人の歌は、まるでプロの＿＿。",
-      "options": [
-        "ように",
-        "ようだ",
-        "ような",
-        "みたい"
-      ],
-      "answer": 1,
-      "note": "ようだ ends the sentence; a noun takes の.",
-      "en": "That person's singing is just like a pro's."
-    },
-    {
-      "id": 24,
-      "type": "choice",
-      "instruction": "Fill the gap (casual)",
-      "prompt": "彼の部屋はまるでごみ箱＿＿だ。",
-      "options": [
-        "のみたい",
-        "みたい",
-        "ようみたい",
-        "らしい"
-      ],
-      "answer": 1,
-      "note": "みたい follows a noun directly, without の.",
-      "en": "His room is just like a trash can."
-    },
-    {
-      "id": 25,
-      "type": "choice",
-      "instruction": "Which does まるで NOT go with?",
-      "prompt": "",
-      "options": [
-        "ようだ",
-        "みたい",
-        "かのように",
-        "そうだ"
-      ],
-      "answer": 3,
-      "note": "まるで goes with ようだ and みたい, not そうだ or らしい."
-    },
-    {
-      "id": 26,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "まるで何も見なかった＿＿帰った。",
-      "options": [
-        "かのように",
-        "かのような",
-        "かのようだ",
-        "かのよう"
-      ],
-      "answer": 0,
-      "note": "か + ように: a pretend clause as an adverb.",
-      "en": "He went home as if he had seen nothing."
-    },
-    {
-      "id": 27,
-      "type": "choice",
-      "instruction": "What does this say?",
-      "prompt": "彼は魚のように泳ぐ。",
-      "options": [
-        "He is a fish",
-        "He eats fish",
-        "He swims like a fish",
-        "He wants to see a fish"
-      ],
-      "answer": 2,
-      "note": "Noun + のように: like it.",
-      "en": "He swims like a fish."
-    },
-    {
-      "id": 28,
-      "type": "choice",
-      "instruction": "What does 見たい mean here?",
-      "prompt": "私は海が見たい。",
-      "options": [
-        "It is like the sea",
-        "I saw the sea",
-        "I want to see the sea",
-        "I see the sea"
-      ],
-      "answer": 2,
-      "note": "見たい is want to see; みたい is a simile.",
-      "en": "I want to see the sea."
-    },
-    {
-      "id": 29,
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "雪＿＿ようだ。",
-      "options": [
-        "の",
-        "が",
-        "な",
-        "で"
-      ],
-      "answer": 0,
-      "note": "Noun + の + ようだ.",
-      "en": "It is like snow."
-    },
-    {
-      "id": 30,
-      "type": "choice",
-      "instruction": "Which is correct?",
-      "prompt": "",
-      "options": [
-        "猫のみたいだ",
-        "猫みたいのだ",
-        "猫なみたいだ",
-        "猫みたいだ"
-      ],
-      "answer": 3,
-      "note": "みたい follows a noun directly."
-    },
-    {
-      "id": 31,
-      "type": "choice",
-      "instruction": "Which word class does みたい behave like?",
-      "prompt": "",
-      "options": [
-        "い-adjective",
-        "Adjectival noun (みたいだ / みたいに / みたいな)",
-        "Verb",
-        "Particle"
-      ],
-      "answer": 1,
-      "note": "Like よう, it takes だ / に / な."
-    },
-    {
-      "id": 32,
-      "type": "tap",
-      "instruction": "Tap the word that announces a simile",
-      "options": [
-        "彼女は",
-        "まるで",
-        "鳥のように",
-        "歌った"
-      ],
-      "answer": 1,
-      "note": "まるで marks a vivid comparison.",
-      "en": "She sang just like a bird."
-    },
-    {
-      "id": 33,
-      "type": "tap",
-      "instruction": "Tap the simile that describes the noun",
-      "options": [
-        "彼は",
-        "子供のような",
-        "顔を",
-        "している"
-      ],
-      "answer": 1,
-      "note": "ような comes before a noun.",
-      "en": "He has a face like a child."
-    },
-    {
-      "id": 34,
-      "type": "tap",
-      "instruction": "Tap the casual simile",
-      "options": [
-        "あの雲は",
-        "魚みたいだ"
-      ],
-      "answer": 1,
-      "note": "Noun + みたい.",
-      "en": "That cloud looks like a fish."
-    },
-    {
-      "id": 35,
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "She talks like a teacher.",
-      "options": [
-        "彼女は",
-        "先生のように",
-        "話す"
-      ],
-      "note": "Noun + のように: adverb.",
-      "en": "She talks like a teacher."
-    },
-    {
-      "id": 36,
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I heard a story like a movie.",
-      "options": [
-        "映画のような",
-        "話を",
-        "聞いた"
-      ],
-      "note": "ような comes before the noun 話.",
-      "en": "I heard a story like a movie."
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "That person is like a teacher.",
-      "options": [
-        "あの人は",
-        "先生の",
-        "ようだ"
-      ],
-      "note": "Noun + の + ようだ.",
-      "en": "That person is like a teacher.",
-      "id": 42
-    },
-    {
-      "id": 38,
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "This room is as cold as winter.",
-      "options": [
-        "この部屋は",
-        "冬みたいに",
-        "寒い"
-      ],
-      "note": "みたいに is the casual adverb.",
-      "en": "This room is as cold as winter."
-    },
-    {
-      "id": 39,
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "A noun before the formal simile word takes the particle の.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "夢のようだ style: noun + の + よう."
-    },
-    {
-      "id": 40,
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "The casual simile word follows a noun together with the particle の.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It follows the noun directly."
-    },
-    {
-      "id": 41,
-      "type": "choice",
-      "instruction": "Which says \"as if he were sleeping\"?",
-      "prompt": "",
-      "options": [
-        "寝ているのようだ",
-        "寝ているかのようだ",
-        "寝ているかようだ",
-        "寝ているみたいのだ"
-      ],
-      "answer": 1,
-      "note": "Clause + か + のようだ."
-    }
+    {"id": 20, "type": "choice", "instruction": "Fill the gap", "prompt": "彼女の声は鳥＿＿ようだ。", "options": ["が", "に", "の", "は"], "answer": 2, "note": "A noun before the formal simile word takes the particle の.", "en": "Her voice is like a bird's."},
+    {"id": 21, "type": "choice", "instruction": "Fill the gap", "prompt": "このクッキーは雪の＿＿白い。", "options": ["ように", "ような", "ようだ", "みたい"], "answer": 0, "note": "ように is the adverb form, describing 白い.", "en": "This cookie is white like snow."},
+    {"id": 22, "type": "choice", "instruction": "Fill the gap", "prompt": "今日は夏の＿＿暑い日だ。", "options": ["ように", "ようだ", "みたい", "ような"], "answer": 3, "note": "ような comes before a noun.", "en": "Today is a hot day like summer."},
+    {"id": 23, "type": "choice", "instruction": "Fill the gap", "prompt": "あの人の歌は、まるでプロの＿＿。", "options": ["ように", "ようだ", "ような", "みたい"], "answer": 1, "note": "ようだ ends the sentence; a noun takes の.", "en": "That person's singing is just like a pro's."},
+    {"id": 24, "type": "choice", "instruction": "Fill the gap (casual)", "prompt": "彼の部屋はまるでごみ箱＿＿だ。", "options": ["のみたい", "みたい", "らしい", "っぽい"], "answer": 1, "note": "みたい follows a noun directly, without の.", "en": "His room is just like a trash can."},
+    {"id": 25, "type": "choice", "instruction": "Which does まるで NOT go with?", "prompt": "", "options": ["ようだ", "みたい", "かのように", "そうだ"], "answer": 3, "note": "まるで goes with ようだ and みたい, not そうだ or らしい."},
+    {"id": 26, "type": "choice", "instruction": "Fill the gap", "prompt": "まるで何も見なかった＿＿帰った。", "options": ["かのように", "かのような", "かのようだ", "かのよう"], "answer": 0, "note": "か + ように: a pretend clause as an adverb.", "en": "He went home as if he had seen nothing."},
+    {"id": 27, "type": "choice", "instruction": "What does this say?", "prompt": "彼は魚のように泳ぐ。", "options": ["He is a fish", "He eats fish", "He swims like a fish", "He wants to see a fish"], "answer": 2, "note": "Noun + のように: like it.", "en": "He swims like a fish."},
+    {"id": 28, "type": "choice", "instruction": "What does 見たい mean here?", "prompt": "私は海が見たい。", "options": ["It is like the sea", "I saw the sea", "I want to see the sea", "I see the sea"], "answer": 2, "note": "見たい is want to see; みたい is a simile.", "en": "I want to see the sea."},
+    {"id": 29, "type": "choice", "instruction": "Fill the gap", "prompt": "雪＿＿ようだ。", "options": ["の", "が", "な", "で"], "answer": 0, "note": "Noun + の + ようだ.", "en": "It is like snow."},
+    {"id": 30, "type": "choice", "instruction": "Which is correct?", "prompt": "", "options": ["猫のみたいだ", "猫みたいのだ", "猫なみたいだ", "猫みたいだ"], "answer": 3, "note": "みたい follows a noun directly."},
+    {"id": 31, "type": "choice", "instruction": "Which word class does みたい behave like?", "prompt": "", "options": ["い-adjective", "Adjectival noun (みたいだ / みたいに / みたいな)", "Verb", "Particle"], "answer": 1, "note": "Like よう, it takes だ / に / な."},
+    {"id": 32, "type": "tap", "instruction": "Tap the word that announces a simile", "options": ["彼女は", "まるで", "鳥のように", "歌った"], "answer": 1, "note": "まるで marks a vivid comparison.", "en": "She sang just like a bird."},
+    {"id": 33, "type": "tap", "instruction": "Tap the simile that describes the noun", "options": ["彼は", "子供のような", "顔を", "している"], "answer": 1, "note": "ような comes before a noun.", "en": "He has a face like a child."},
+    {"id": 34, "type": "tap", "instruction": "Tap the casual simile", "options": ["あの雲は", "魚みたいだ"], "answer": 1, "note": "Noun + みたい.", "en": "That cloud looks like a fish."},
+    {"id": 35, "type": "order", "instruction": "Build the sentence", "prompt": "She talks like a teacher.", "options": ["彼女は", "先生のように", "話す"], "note": "Noun + のように: adverb.", "en": "She talks like a teacher."},
+    {"id": 36, "type": "order", "instruction": "Build the sentence", "prompt": "I heard a story like a movie.", "options": ["映画のような", "話を", "聞いた"], "note": "ような comes before the noun 話.", "en": "I heard a story like a movie."},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "That person is like a teacher.", "options": ["あの人は", "先生の", "ようだ"], "note": "Noun + の + ようだ.", "en": "That person is like a teacher.", "id": 42},
+    {"id": 38, "type": "order", "instruction": "Build the sentence", "prompt": "This room is as cold as winter.", "options": ["この部屋は", "冬みたいに", "寒い"], "note": "みたいに is the casual adverb.", "en": "This room is as cold as winter."},
+    {"id": 39, "type": "choice", "instruction": "True or false?", "prompt": "A noun before よう takes の.", "options": ["True", "False"], "answer": 0, "note": "夢のようだ style: noun + の + よう."},
+    {"id": 40, "type": "choice", "instruction": "True or false?", "prompt": "Before みたい, a noun needs the linking particle as well.", "options": ["True", "False"], "answer": 1, "note": "It follows the noun directly."},
+    {"id": 41, "type": "choice", "instruction": "Which says \"as if he were sleeping\"?", "prompt": "", "options": ["寝ているのようだ", "寝ているかのようだ", "寝ているかようだ", "寝ているみたいのだ"], "answer": 1, "note": "Clause + か + のようだ."},
+    {"id": 43, "type": "choice", "instruction": "What does this say?", "prompt": "部屋の電気が消えたようだ。", "options": ["The light is like a star", "It seems the light went out", "I want to turn off the light", "The light must not be turned off"], "answer": 1, "note": "Sentence + ようだ: it seems that.", "en": "It seems the light in the room went out."},
+    {"id": 44, "type": "choice", "instruction": "What does this say?", "prompt": "部屋の電気が消えたようだ。", "options": ["The light is like a star", "It seems the light went out", "I want to turn off the light", "The light must not be turned off"], "answer": 1, "note": "Sentence + ようだ: it seems that.", "en": "It seems the light in the room went out."}
   ]
 }
