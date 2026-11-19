@@ -1,401 +1,155 @@
 {
- "id": 880,
- "number": "88",
- "kind": "lesson",
- "jlpt": 4,
- "title": "Xをしたい vs Xがしたい",
- "summary": "Both are fine: が says that X is making you want it; を says that you want to do the action.",
- "video": "https://www.youtube.com/watch?v=Gi3BmIRZZPs",
- "related": [
-  514,
-  576
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "The adjective of desire たい points at something. In **パンが食べたい**, it points at the bread: \"the bread is want-inducing (to me)\". But you also hear **パンを食べたい**. Are the particles changing their meaning? No. They always mean the same thing; only the point of view changes."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Sentence",
-     "The adjective points at",
-     "Feel"
-    ],
-    [
-     "パンが食べたい",
-     "the bread (A-car)",
-     "the bread is tempting me, right now"
-    ],
-    [
-     "パンを食べたい",
-     "me (zero A-car)",
-     "I want to do the action \"eat bread\""
-    ]
-   ]
-  },
-  {
-   "type": "diagram",
-   "cars": [
+  "id": 880,
+  "number": "88",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "Xをしたい vs Xがしたい",
+  "summary": "Both are fine: が says that X is making you want it; を says that you want to do the action.",
+  "video": "https://www.youtube.com/watch?v=Gi3BmIRZZPs",
+  "related": [
+    514,
+    576
+  ],
+  "blocks": [
     {
-     "text": "パンが",
-     "role": "carriage"
+      "type": "text",
+      "text": "The adjective of desire たい points at something. In **パンが食べたい**, it points at the bread: \"the bread is want-inducing (to me)\". But you also hear **パンを食べたい**. Are the particles changing their meaning? No. They always mean the same thing; only the point of view changes."
     },
     {
-     "text": "食べたい",
-     "role": "engine"
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "The adjective points at",
+          "Feel"
+        ],
+        [
+          "パンが食べたい",
+          "the bread (main carriage)",
+          "the bread is tempting me, right now"
+        ],
+        [
+          "パンを食べたい",
+          "me (zero main carriage)",
+          "I want to do the action \"eat bread\""
+        ]
+      ]
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "パンが",
+          "role": "carriage"
+        },
+        {
+          "text": "食べたい",
+          "role": "engine",
+          "label": "食べ + たい"
+        }
+      ],
+      "text": "パンが食べたい。 The bread makes me want to eat it."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Ø",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "パンを",
+          "role": "white"
+        },
+        {
+          "text": "食べたい",
+          "role": "engine",
+          "label": "たい attaches to パンを食べ"
+        }
+      ],
+      "text": "パンを食べたい。 I want to eat bread. たい attaches to the whole unit パンを食べ, not to 食べ alone."
+    },
+    {
+      "type": "text",
+      "text": "How can an adjective have an object? Because たい is attached to the whole unit パンを食べ, not to the verb 食べ alone. We can glue verbs and objects into one block and add たい to it."
+    },
+    {
+      "type": "text",
+      "text": "Flipping polarity like this is normal, even in English: \"We were happy that day\" points at us, while \"That was a happy day\" points at the day."
+    },
+    {
+      "type": "example",
+      "jp": "君の膵臓を食べたい。",
+      "en": "I want to eat your pancreas. (the title of a famous novel, a real を + たい)"
+    },
+    {
+      "type": "heading",
+      "text": "When が is natural"
+    },
+    {
+      "type": "text",
+      "text": "With food, drink and things you can see or feel, the thing pulls at you, so が fits."
+    },
+    {
+      "type": "example",
+      "jp": "のどが渇いたから、水が飲みたい。",
+      "en": "I'm thirsty, so I feel like having water. (the water tempts me)"
+    },
+    {
+      "type": "heading",
+      "text": "When を is the natural choice"
+    },
+    {
+      "type": "text",
+      "text": "With abstract things or people, we do not feel the thing is \"pulling\" us. It is our own decision. It is also more respectful for people: 友達を助けたい, not 友達が助けたい, because the friend is not a tempting object."
+    },
+    {
+      "type": "example",
+      "jp": "友達を助けたい。",
+      "en": "I want to help my friend."
+    },
+    {
+      "type": "example",
+      "jp": "国を守りたい。",
+      "en": "I want to protect my country."
+    },
+    {
+      "type": "example",
+      "jp": "お腹がすいたから、早く食べたい。",
+      "en": "I'm hungry, so I want to eat soon. (the adjective points back at me)"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "が + たい: the thing is the cause of the wish.",
+        "を + たい: I want to do that action; common with people and abstract things.",
+        "The particles never change meaning; the point of view does."
+      ]
     }
-   ],
-   "text": "パンが食べたい。 The bread makes me want to eat it."
-  },
-  {
-   "type": "diagram",
-   "cars": [
-    {
-     "text": "(私が)",
-     "role": "zero"
-    },
-    {
-     "text": "パンを",
-     "role": "white"
-    },
-    {
-     "text": "食べ",
-     "role": "plain"
-    },
-    {
-     "text": "たい",
-     "role": "engine"
-    }
-   ],
-   "text": "(私が)パンを食べたい。 I want to eat bread."
-  },
-  {
-   "type": "text",
-   "text": "How can an adjective have an object? Because たい is attached to the whole unit パンを食べ, not to the verb 食べ alone. We can glue verbs and objects into one block and add たい to it."
-  },
-  {
-   "type": "heading",
-   "text": "When を is the natural choice"
-  },
-  {
-   "type": "text",
-   "text": "With abstract things or people, we do not feel the thing is \"pulling\" us. It is our own decision: 国を守りたい, 友達を助けたい, 平和を守りたい. It is also more respectful for people: 友達を助けたい, not 友達が助けたい, because the friend is not a tempting object."
-  },
-  {
-   "type": "example",
-   "jp": "友達を助けたい。",
-   "en": "I want to help my friend."
-  },
-  {
-   "type": "example",
-   "jp": "冷たい水が飲みたい。",
-   "en": "I feel like having cold water. (the water tempts me)"
-  },
-  {
-   "type": "example",
-   "jp": "お腹がすいたから、早く食べたい。",
-   "en": "I'm hungry, so I want to eat soon. (the adjective points back at me)"
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "が + たい: the thing is the cause of the wish.",
-    "を + たい: I want to do that action; common with people and abstract things.",
-    "The particles never change meaning; the point of view does."
-   ]
-  }
- ],
- "questions": [
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "What is the hidden A-car in パンを食べたい?",
-   "prompt": "",
-   "options": [
-    "私 (zero)",
-    "パン",
-    "食べ",
-    "たい"
-   ],
-   "answer": 0,
-   "note": "I want to eat bread."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "Why can たい take を?",
-   "prompt": "",
-   "options": [
-    "It attaches to the whole unit パンを食べ",
-    "Adjectives always take を",
-    "を became が",
-    "It is a mistake"
-   ],
-   "answer": 0,
-   "note": "The verb and object become one block."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "The particles change meaning between パンが食べたい and パンを食べたい.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "They mean the same; the viewpoint differs.",
-   "en": "I want to eat bread."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "Which pair is a correct explanation?",
-   "prompt": "",
-   "options": [
-    "が = the thing causes the wish; を = I want the action",
-    "が = past; を = future",
-    "が = polite; を = casual",
-    "が and を are always interchangeable by accent"
-   ],
-   "answer": 0,
-   "note": "Same particles, different viewpoint."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "家族＿＿守りたい。",
-   "options": [
-    "に",
-    "を",
-    "で",
-    "と"
-   ],
-   "answer": 1,
-   "note": "A person we want to protect does not tempt us like food: it is our own wish to do the action, so を.",
-   "en": "I want to protect my family."
-  },
-  {
-   "id": 13,
-   "type": "choice",
-   "instruction": "Which sentence fits best when the sight of a cake suddenly makes you want it?",
-   "prompt": "",
-   "options": [
-    "先生を助けたい。",
-    "町を守りたい。",
-    "友達を手伝いたい。",
-    "ケーキが食べたい。"
-   ],
-   "answer": 3,
-   "note": "The cake is the thing pulling at you, so it is the A-car with が."
-  },
-  {
-   "id": 14,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I want to help my mother.",
-   "options": [
-    "母を",
-    "手伝い",
-    "たい"
-   ],
-   "note": "を + stem + たい: I want to do the action.",
-   "en": "I want to help my mother."
-  },
-  {
-   "id": 15,
-   "type": "tap",
-   "instruction": "Tap the word that たい points at",
-   "options": [
-    "ケーキが",
-    "食べたい"
-   ],
-   "answer": 0,
-   "note": "The cake is the A-car of たい.",
-   "en": "I want to eat cake."
-  },
-  {
-   "id": 16,
-   "type": "tap",
-   "instruction": "Tap the word that たい points at",
-   "options": [
-    "今は",
-    "水が",
-    "飲みたい"
-   ],
-   "answer": 1,
-   "note": "水が is the tempting thing, the A-car of たい.",
-   "en": "I want some water right now."
-  },
-  {
-   "id": 17,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "母を手伝いたい。 The one who wants is a hidden \"I\" (zero pronoun).",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "With を, たい points back at the speaker.",
-   "en": "I want to help my mother."
-  },
-  {
-   "id": 18,
-   "type": "choice",
-   "instruction": "Which is the correct form of 見る + たい?",
-   "prompt": "",
-   "options": [
-    "見るたい",
-    "見たい",
-    "見りたい",
-    "見てたい"
-   ],
-   "answer": 1,
-   "note": "たい attaches to the stem: 見 + たい."
-  },
-  {
-   "id": 19,
-   "type": "choice",
-   "instruction": "Which is the correct form of 読む + たい?",
-   "prompt": "",
-   "options": [
-    "読むたい",
-    "読んたい",
-    "読みたい",
-    "読めたい"
-   ],
-   "answer": 2,
-   "note": "読む has the stem 読み: 読み + たい."
-  },
-  {
-   "id": 20,
-   "type": "choice",
-   "instruction": "What does が show in this sentence?",
-   "prompt": "暑いから、冷たいジュースが飲みたい。",
-   "options": [
-    "I have decided to sell juice",
-    "Somebody else wants juice",
-    "The cold juice is tempting me right now",
-    "I want to help the juice"
-   ],
-   "answer": 2,
-   "note": "が makes the juice the thing that causes the wish.",
-   "en": "It's hot, so I want a cold juice."
-  },
-  {
-   "id": 21,
-   "type": "choice",
-   "instruction": "Why is this an odd way to say \"I want to help my teacher\"?",
-   "prompt": "先生が助けたい。",
-   "options": [
-    "が makes the teacher a tempting thing, like food",
-    "が is only for the past",
-    "先生 cannot be a noun",
-    "助ける never takes たい"
-   ],
-   "answer": 0,
-   "note": "For a person we use を: they are not an object that tempts us.",
-   "en": "I want to help my teacher."
-  },
-  {
-   "id": 22,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "水が飲みたい and 水を飲みたい are both fine Japanese.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "Same particles, different point of view.",
-   "en": "I want to drink water."
-  },
-  {
-   "id": 23,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "弟＿＿手伝いたい。",
-   "options": [
-    "を",
-    "で",
-    "へ",
-    "から"
-   ],
-   "answer": 0,
-   "note": "The object of the action you want to do takes を.",
-   "en": "I want to help my younger brother."
-  },
-  {
-   "id": 24,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "疲れたから、早く寝たい。 No tempting thing appears, so たい points back at the speaker.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "Nothing pulls at me; I want to do the action.",
-   "en": "I'm tired, so I want to go to bed soon."
-  },
-  {
-   "id": 25,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I feel like watching a movie today.",
-   "options": [
-    "今日は",
-    "映画が",
-    "見たい"
-   ],
-   "note": "The topic comes first, then the A-car 映画が, then the engine.",
-   "en": "I feel like watching a movie today."
-  },
-  {
-   "id": 26,
-   "type": "choice",
-   "instruction": "Why does 先生を助けたい use を?",
-   "prompt": "",
-   "options": [
-    "Because 先生 is a place",
-    "Because を is the past tense",
-    "Because helping a person is our own wish to act, not a pull from a thing",
-    "Because たい cannot take が"
-   ],
-   "answer": 2,
-   "note": "People are not tempting objects: we want to do the action."
-  },
-  {
-   "id": 27,
-   "type": "choice",
-   "instruction": "In 水が飲みたい, which written word is the main carriage that たい describes?",
-   "prompt": "",
-   "options": [
-    "水",
-    "飲み",
-    "たい",
-    "が"
-   ],
-   "answer": 0,
-   "note": "The water makes me want to drink."
-  },
-  {
-   "id": 28,
-   "type": "choice",
-   "instruction": "Which is NOT a correct たい form?",
-   "prompt": "",
-   "options": [
-    "食べたい",
-    "行きたい",
-    "飲みたい",
-    "見るたい"
-   ],
-   "answer": 3,
-   "note": "たい attaches to the stem: 見たい, not 見るたい."
-  }
- ]
+  ],
+  "questions": [
+    {"id": 5, "type": "choice", "instruction": "What is the hidden main carriage in パンを食べたい?", "prompt": "", "options": ["私 (zero)", "パン", "食べ", "たい"], "answer": 0, "note": "With を, たい points back at the speaker, the zero main carriage."},
+    {"id": 6, "type": "choice", "instruction": "Why can たい take を?", "prompt": "", "options": ["It attaches to the whole unit パンを食べ", "Adjectives always take を", "を became が", "It is a mistake"], "answer": 0, "note": "The verb and object become one block."},
+    {"id": 7, "type": "choice", "instruction": "Which pair says the same wish from two points of view?", "prompt": "", "options": ["パンが食べたい / パンを食べたい", "パンが食べたい / パンが食べた", "パンを食べたい / パンを食べない", "パンに食べたい / パンで食べたい"], "answer": 0, "note": "Same particles, different viewpoint."},
+    {"id": 11, "type": "choice", "instruction": "Which pair is a correct explanation?", "prompt": "", "options": ["が = the thing causes the wish; を = I want the action", "が = past; を = future", "が = polite; を = casual", "が and を are always interchangeable by accent"], "answer": 0, "note": "Same particles, different viewpoint."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "家族＿＿守りたい。", "options": ["に", "を", "で", "と"], "answer": 1, "note": "A person we want to protect does not tempt us like food: it is our own wish to do the action, so を.", "en": "I want to protect my family."},
+    {"id": 13, "type": "choice", "instruction": "Which sentence fits best when the sight of a cake suddenly makes you want it?", "prompt": "", "options": ["先生を助けたい。", "町を守りたい。", "友達を手伝いたい。", "ケーキが食べたい。"], "answer": 3, "note": "The cake is the thing pulling at you, so it is the main carriage with が."},
+    {"id": 14, "type": "order", "instruction": "Build the sentence", "prompt": "I want to help my mother.", "options": ["母を", "手伝い", "たい"], "note": "を + stem + たい: I want to do the action.", "en": "I want to help my mother."},
+    {"id": 15, "type": "tap", "instruction": "Tap the word that たい points at", "options": ["今日は", "ケーキが", "食べたい"], "answer": 1, "note": "The cake is the main carriage of たい.", "en": "I want to eat cake today."},
+    {"id": 16, "type": "tap", "instruction": "Tap the word that たい points at", "options": ["今は", "暑いから", "冷たい", "水が", "飲みたい"], "answer": 3, "note": "水が is the tempting thing, the main carriage of たい.", "en": "It's hot, so I want some cold water right now."},
+    {"id": 17, "type": "choice", "instruction": "True or false?", "prompt": "母を手伝いたい。 The one who wants is a hidden \"I\" (zero pronoun).", "options": ["True", "False"], "answer": 0, "note": "With を, たい points back at the speaker.", "en": "I want to help my mother."},
+    {"id": 18, "type": "choice", "instruction": "Which particle points たい back at the speaker?", "prompt": "映画＿見たい。", "options": ["を", "が", "に", "と"], "answer": 0, "note": "With を, たい points back at the speaker.", "en": "I want to watch a movie."},
+    {"id": 19, "type": "choice", "instruction": "Which particle shows the ramen is tempting you?", "prompt": "ラーメン＿食べたい！", "options": ["が", "を", "に", "で"], "answer": 0, "note": "が makes the ramen the main carriage of たい.", "en": "I want ramen!"},
+    {"id": 20, "type": "choice", "instruction": "What does が show in this sentence?", "prompt": "暑いから、冷たいジュースが飲みたい。", "options": ["I have decided to sell juice", "Somebody else wants juice", "The cold juice is tempting me right now", "I want to help the juice"], "answer": 2, "note": "が makes the juice the thing that causes the wish.", "en": "It's hot, so I want a cold juice."},
+    {"id": 21, "type": "choice", "instruction": "Why is this an odd way to say \"I want to help my teacher\"?", "prompt": "先生が助けたい。", "options": ["が makes the teacher a tempting thing, like food", "が is only for the past", "先生 cannot be a noun", "助ける never takes たい"], "answer": 0, "note": "For a person we use を: they are not an object that tempts us.", "en": "I want to help my teacher."},
+    {"id": 22, "type": "choice", "instruction": "Fill the gap", "prompt": "困っている人＿助けたい。", "options": ["を", "に", "で", "と"], "answer": 0, "note": "A person we want to help takes を.", "en": "I want to help people in trouble."},
+    {"id": 23, "type": "choice", "instruction": "Fill the gap", "prompt": "弟＿＿手伝いたい。", "options": ["を", "で", "へ", "から"], "answer": 0, "note": "The object of the action you want to do takes を.", "en": "I want to help my younger brother."},
+    {"id": 24, "type": "choice", "instruction": "True or false?", "prompt": "疲れたから、早く寝たい。 No tempting thing appears, so たい points back at the speaker.", "options": ["True", "False"], "answer": 0, "note": "Nothing pulls at me; I want to do the action.", "en": "I'm tired, so I want to go to bed soon."},
+    {"id": 25, "type": "order", "instruction": "Build the sentence", "prompt": "I feel like watching a movie today.", "options": ["今日は", "映画が", "見たい"], "note": "The topic comes first, then the main carriage 映画が, then the engine.", "en": "I feel like watching a movie today."},
+    {"id": 26, "type": "choice", "instruction": "Why does 先生を助けたい use を?", "prompt": "", "options": ["Because 先生 is a place", "Because を is the past tense", "Because helping a person is our own wish to act, not a pull from a thing", "Because たい cannot take が"], "answer": 2, "note": "People are not tempting objects: we want to do the action."},
+    {"id": 27, "type": "choice", "instruction": "In 水が飲みたい, which word is the main carriage?", "prompt": "", "options": ["水", "飲み", "たい", "私 (zero)"], "answer": 0, "note": "The water makes me want to drink."},
+    {"id": 28, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["水が飲みたい", "水を飲みたい", "水に飲みたい", "水も飲みたい"], "answer": 2, "note": "に cannot mark what you drink: が or を."},
+    {"id": 29, "type": "order", "instruction": "Build the sentence", "prompt": "I want to help my grandmother.", "options": ["おばあさんを", "手伝い", "たい"], "note": "を + stem + たい: I want to do the action.", "en": "I want to help my grandmother."}
+  ]
 }

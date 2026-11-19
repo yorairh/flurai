@@ -13,7 +13,56 @@
   "blocks": [
     {
       "type": "text",
-      "text": "The **copula** is a **one-way equals sign**: A is B, but B is not necessarily A. さくらは日本人だ means Sakura belongs to the set of Japanese people. It places things in **sets**, the most basic way humans think about the world. When the set has only one member, the sign works both ways: あの人はさくらだ."
+      "text": "You have used だ and です since lesson 1. Here is what they really do. The **copula** is a **one-way equals sign**: A is B, but B is not necessarily A. It places things in **sets**, the most basic way humans think about the world."
+    },
+    {
+      "type": "heading",
+      "text": "A one-way equals sign"
+    },
+    {
+      "type": "text",
+      "text": "さくらは日本人だ says that Sakura belongs to the set of Japanese people. It does not say that every Japanese person is Sakura, so the sign only works in one direction."
+    },
+    {
+      "type": "example",
+      "jp": "さくらは日本人だ。",
+      "en": "Sakura is a Japanese person. (she belongs to the set)"
+    },
+    {
+      "type": "text",
+      "text": "Sets can sit inside bigger sets, and each だ steps one level up."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {"text": "バラ", "role": "plain", "label": "rose"},
+        {"text": "花", "role": "plain", "label": "flower"},
+        {"text": "植物", "role": "plain", "label": "plant"},
+        {"text": "生き物", "role": "plain", "label": "living thing"}
+      ],
+      "text": "バラは花だ。花は植物だ。植物は生き物だ。 Each set sits inside the next one, never the other way round."
+    },
+    {
+      "type": "heading",
+      "text": "When it works both ways"
+    },
+    {
+      "type": "text",
+      "text": "If the set has only one member, the sign works in both directions. There is only one Sakura, so the two sides are the same thing."
+    },
+    {
+      "type": "example",
+      "jp": "あの人はさくらだ。",
+      "en": "That person is Sakura. (a set of one)"
+    },
+    {
+      "type": "table",
+      "rows": [
+        ["Sentence", "Works?", "Why"],
+        ["さくらは日本人だ", "Yes", "Sakura is inside the bigger set"],
+        ["日本人はさくらだ", "No", "It says every Japanese person is Sakura"],
+        ["あの人はさくらだ", "Yes, both ways", "The set has one member"]
+      ]
     },
     {
       "type": "heading",
@@ -22,6 +71,15 @@
     {
       "type": "text",
       "text": "English uses one verb, **be**, for two jobs: the copula (I am an American) and **existence** (I think, therefore I am). Spanish separates them (ser / estar versus haber), and so does Japanese: **だ / です** is the copula, **ある / いる** says something exists. Mixing the two causes a lot of confusion."
+    },
+    {
+      "type": "table",
+      "rows": [
+        ["", "Copula だ / です", "Existence ある / いる"],
+        ["Question it answers", "Which set is it in?", "Is it there?"],
+        ["Example", "これは本です", "机の上に本がある"],
+        ["The engine is", "noun + です (one engine)", "ある (the verb itself)"]
+      ]
     },
     {
       "type": "example",
@@ -34,14 +92,31 @@
       "en": "There is a book on the desk. (it exists)"
     },
     {
-      "type": "example",
-      "jp": "私は学生です。",
-      "en": "I am a student."
+      "type": "text",
+      "text": "On a train, noun + です is one engine. With ある, the noun is the main carriage and ある is the engine all by itself."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {"text": "私は", "role": "topic"},
+        {"text": "Ø", "role": "zero", "label": "I"},
+        {"text": "学生です", "role": "engine"}
+      ],
+      "text": "私は学生です。 Noun + copula is one engine."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {"text": "机の上に", "role": "white"},
+        {"text": "本が", "role": "carriage"},
+        {"text": "ある", "role": "engine"}
+      ],
+      "text": "机の上に本がある。 With ある, the noun is the carriage."
     },
     {
       "type": "example",
-      "jp": "さくらは日本人だ。",
-      "en": "Sakura is a Japanese person."
+      "jp": "私は学生です。",
+      "en": "I am a student."
     },
     {
       "type": "heading",
@@ -50,6 +125,15 @@
     {
       "type": "text",
       "text": "The course treats だ and です as the **same copula**; です is the polite version with one eccentricity. Any logical sentence ends in a verb, an adjective, or a noun plus the copula: a noun cannot end a logical sentence by itself."
+    },
+    {
+      "type": "text",
+      "text": "The eccentricity: after an い-adjective, です adds no copula at all. かわいい already carries \"is\", so です only makes it polite (lesson 17)."
+    },
+    {
+      "type": "example",
+      "jp": "この猫はかわいいです。",
+      "en": "This cat is cute. (です only adds politeness)"
     },
     {
       "type": "keypoints",
@@ -64,15 +148,15 @@
   "questions": [
     {"id": 34, "type": "choice", "instruction": "Which sentence uses the copula?", "prompt": "", "options": ["机の上に猫がいる", "あれは犬です", "公園にベンチがある", "庭に花がある"], "answer": 1, "note": "あれは犬です: A belongs to the set B, with です."},
     {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "これは私の本＿＿。", "options": ["ある", "いる", "です", "する"], "answer": 2, "note": "The copula says what A is.", "en": "This is my book."},
-    {"id": 36, "type": "choice", "instruction": "Fill the gap", "prompt": "駅の前に銀行＿＿＿。", "options": ["です", "がある", "だった", "ではない"], "answer": 1, "note": "Existence uses ある, not the copula.", "en": "There is a bank in front of the station."},
+    {"id": 36, "type": "choice", "instruction": "Compare the two sentences", "prompt": "「学生は田中さんだ」と「田中さんは学生だ」", "options": ["They mean the same", "The first says every student is Tanaka", "The first uses ある", "Both are ungrammatical"], "answer": 1, "note": "The sign goes one way: 田中さんは学生だ is fine, but there are many students.", "en": "\"Students are Tanaka\" and \"Tanaka is a student\""},
     {"id": 37, "type": "choice", "instruction": "True or false?", "prompt": "A noun can end a logical sentence by itself.", "options": ["True", "False"], "answer": 1, "note": "A noun is not an engine: it needs the copula."},
     {"id": 38, "type": "choice", "instruction": "What is the copula?", "prompt": "", "options": ["A verb of existence", "A particle", "A kind of adjective", "A one-way equals sign"], "answer": 3, "note": "A is B, but B is not necessarily A."},
     {"id": 39, "type": "choice", "instruction": "What does the sentence say?", "prompt": "田中さんは学生だ。", "options": ["Tanaka belongs to the set of students", "All students are Tanaka", "Tanaka exists", "A student exists"], "answer": 0, "note": "The copula places Tanaka in a set.", "en": "Tanaka is a student."},
-    {"id": 40, "type": "choice", "instruction": "Fill the gap", "prompt": "私の姉は医者＿＿。", "options": ["が", "です", "ある", "いる"], "answer": 1, "note": "医者 is a noun, so it needs the copula to be an engine.", "en": "My older sister is a doctor."},
+    {"id": 40, "type": "choice", "instruction": "In which sentence does です add only politeness?", "prompt": "", "options": ["あれは犬です", "あの人は先生です", "この花は赤いです", "弟は学生です"], "answer": 2, "note": "After an い-adjective the い already carries \"is\"; です just makes it polite."},
     {"id": 41, "type": "choice", "instruction": "When does the equals sign work both ways?", "prompt": "", "options": ["When the set has only one member", "When the noun is long", "When you use です", "Never"], "answer": 0, "note": "あの人はさくらだ works both ways because there is one Sakura."},
     {"id": 42, "type": "choice", "instruction": "Which sentence says something exists?", "prompt": "", "options": ["あの人は先生です", "私は学生だった", "かばんの中にペンがある", "これは木です"], "answer": 2, "note": "ある says that a thing exists."},
-    {"id": 43, "type": "tap", "instruction": "Tap the copula", "prompt": "", "options": ["弟は", "小学生", "です"], "answer": 2, "note": "です turns the noun into an engine.", "en": "My younger brother is an elementary school student."},
-    {"id": 44, "type": "tap", "instruction": "Tap the word that says something exists", "prompt": "", "options": ["部屋に", "机が", "ある"], "answer": 2, "note": "ある / いる are the verbs of existence.", "en": "There is a desk in the room."},
+    {"id": 43, "type": "tap", "instruction": "Tap the noun that です turns into an engine", "prompt": "", "options": ["私の", "弟は", "小学生", "です"], "answer": 2, "note": "小学生 + です is one engine.", "en": "My younger brother is an elementary school student."},
+    {"id": 44, "type": "tap", "instruction": "Tap the thing that exists", "prompt": "", "options": ["部屋に", "大きい", "机が", "ある"], "answer": 2, "note": "机が is the carriage; ある says it exists.", "en": "There is a big desk in the room."},
     {"id": 45, "type": "order", "instruction": "Build the sentence", "prompt": "Her father is a teacher.", "options": ["彼女の", "お父さんは", "先生", "です"], "note": "Noun + copula makes the engine.", "en": "Her father is a teacher."},
     {"id": 46, "type": "order", "instruction": "Build the sentence", "prompt": "There is a cat under the table.", "options": ["テーブルの", "下に", "猫が", "いる"], "note": "いる says a living thing exists.", "en": "There is a cat under the table.", "alt": [["猫が", "テーブルの", "下に", "いる"]]},
     {"id": 47, "type": "choice", "instruction": "Fill the gap", "prompt": "庭に犬＿＿＿。", "options": ["がある", "です", "だ", "がいる"], "answer": 3, "note": "A dog exists: いる, not the copula.", "en": "There is a dog in the garden."},
@@ -81,7 +165,9 @@
     {"id": 50, "type": "choice", "instruction": "What is the relationship between だ and です?", "prompt": "", "options": ["The same copula in two speech styles", "Different words with different meanings", "です is for existence", "だ is a verb of existence"], "answer": 0, "note": "です is the polite copula."},
     {"id": 51, "type": "choice", "instruction": "Which can end a logical sentence?", "prompt": "", "options": ["本", "本と", "本が", "本だ"], "answer": 3, "note": "A noun needs the copula to be an engine."},
     {"id": 52, "type": "choice", "instruction": "Which sentence wrongly mixes the copula and existence?", "prompt": "", "options": ["弟は学生です", "机の上にペンがある", "庭に犬がです", "犬がいる"], "answer": 2, "note": "がです is wrong: existence takes ある / いる."},
-    {"id": 53, "type": "order", "instruction": "Build the sentence", "prompt": "My older sister is an office worker.", "options": ["姉は", "会社員", "です"], "note": "The noun 会社員 plus the copula です.", "en": "My older sister is an office worker."},
-    {"id": 54, "type": "choice", "instruction": "Fill the gap", "prompt": "公園に子どもが＿＿＿。", "options": ["だ", "です", "する", "いる"], "answer": 3, "note": "Children exist in the park: いる.", "en": "There are children in the park."}
+    {"id": 53, "type": "order", "instruction": "Build the sentence", "prompt": "My older sister was a student.", "options": ["姉は", "学生", "だった"], "note": "Noun + だった is one engine in the past.", "en": "My older sister was a student."},
+    {"id": 54, "type": "choice", "instruction": "Which sentence claims too much, as if every flower were a rose?", "prompt": "", "options": ["バラは花だ", "花は植物だ", "花はバラだ", "植物は生き物だ"], "answer": 2, "note": "花 is the bigger set, so 花はバラだ goes the wrong way."},
+    {"id": 55, "type": "choice", "instruction": "What does です add here?", "prompt": "かわいいです。", "options": ["Only politeness", "The meaning \"exists\"", "A second \"is\"", "A question"], "answer": 0, "note": "The い of かわいい already carries \"is\".", "en": "(It's) cute."},
+    {"id": 56, "type": "choice", "instruction": "Fill the gap", "prompt": "あの人は田中さん＿＿。", "options": ["だ", "ある", "いる", "が"], "answer": 0, "note": "A set of one: the copula says who that person is.", "en": "That person is Mr. Tanaka."}
   ]
 }

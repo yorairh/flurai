@@ -1,129 +1,157 @@
 {
- "id": 820,
- "number": "82",
- "kind": "lesson",
- "jlpt": 3,
- "title": "なんて, なんか and など",
- "summary": "Three small words that mean \"and so on\" or \"things like\": など is neutral, なんて and なんか add surprise or a belittling tone.",
- "video": "https://www.youtube.com/watch?v=OlUG9ym-b4Y",
- "related": [
-  711,
-  712,
-  454
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "These three words overlap, so a dictionary list of meanings feels random. Think of them as a scale from neutral to casual."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Word",
-     "Feel",
-     "Main jobs"
-    ],
-    [
-     "など",
-     "neutral, fine in formal writing",
-     "\"and so on\"; mildly downplays"
-    ],
-    [
-     "なんて",
-     "in the middle",
-     "\"what a ...\", surprise, downplaying, a vague という"
-    ],
-    [
-     "なんか",
-     "very casual",
-     "downplaying, \"something\", \"sort of\""
-    ]
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "など: and so on"
-  },
-  {
-   "type": "text",
-   "text": "**など** is not a cop-out like \"etc.\" can be in English. It lists examples and sits right after the noun, even before other particles."
-  },
-  {
-   "type": "example",
-   "jp": "机の上に本やペンなどがある。",
-   "en": "On the desk there are books, pens and so on."
-  },
-  {
-   "type": "text",
-   "text": "In casual speech it can also make light of a noun: the speaker rejects \"things like that\"."
-  },
-  {
-   "type": "example",
-   "jp": "お世辞など言わない。",
-   "en": "(I) don't say flattery or the like."
-  },
-  {
-   "type": "heading",
-   "text": "なんか: things like, something, somehow"
-  },
-  {
-   "type": "text",
-   "text": "なんか is a squashed 何か (something). From \"something\" it grows: **vague** (なんか変だ), **for some reason** (なんか眠い), and in sloppy talk a filler like \"kinda\". Attached to a noun it belittles it, often with real feeling, and it is common with oneself."
-  },
-  {
-   "type": "example",
-   "jp": "兄なんか大嫌い。",
-   "en": "I can't stand a person like my big brother."
-  },
-  {
-   "type": "example",
-   "jp": "私なんかには無理です。",
-   "en": "Someone like me can't do that."
-  },
-  {
-   "type": "example",
-   "jp": "なんか寒いね。",
-   "en": "Somehow it's cold, isn't it."
-  },
-  {
-   "type": "heading",
-   "text": "なんて: a squashed なんと / 何という"
-  },
-  {
-   "type": "text",
-   "text": "なんて asks \"what?\" (なんて言ったの？), but it is also the exclamation **\"what a ...!\"**, a belittling marker after a noun, and a surprise marker after a whole clause."
-  },
-  {
-   "type": "example",
-   "jp": "なんて広い部屋なんだ。",
-   "en": "What a big room!"
-  },
-  {
-   "type": "example",
-   "jp": "勉強なんて嫌いだ。",
-   "en": "I hate studying and things like it."
-  },
-  {
-   "type": "example",
-   "jp": "雪が降るなんて信じられない。",
-   "en": "I can't believe it's snowing! (of all things)"
-  },
-  {
-   "type": "example",
-   "jp": "田中なんて人は知らない。",
-   "en": "I don't know anybody called Tanaka. (and I doubt there is one)"
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "**など** is neutral, **なんて** is in the middle, **なんか** is the most casual.",
-    "After a noun, なんか and なんて belittle it and replace が and を.",
-    "After a whole clause, **なんて** shows surprise or disbelief; なんか never does that."
-   ]
-  }
- ],
- "questions": [
+  "id": 820,
+  "number": "82",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "なんて, なんか and など",
+  "summary": "Three small words that mean \"and so on\" or \"things like\": など is neutral, なんて and なんか add surprise or a belittling tone.",
+  "video": "https://www.youtube.com/watch?v=OlUG9ym-b4Y",
+  "related": [
+    711,
+    712,
+    454
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "These three words overlap, so a dictionary list of meanings feels random. Think of them as a scale from neutral to casual."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Word",
+          "Feel",
+          "Main jobs"
+        ],
+        [
+          "など",
+          "neutral, fine in formal writing",
+          "\"and so on\"; mildly downplays"
+        ],
+        [
+          "なんて",
+          "in the middle",
+          "\"what a ...\", surprise, downplaying, a vague という"
+        ],
+        [
+          "なんか",
+          "very casual",
+          "downplaying, \"something\", \"sort of\""
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "など: and so on"
+    },
+    {
+      "type": "text",
+      "text": "**など** is not a cop-out like \"etc.\" can be in English. It lists examples and sits right after the noun, even before other particles."
+    },
+    {
+      "type": "example",
+      "jp": "机の上に本やペンなどがある。",
+      "en": "On the desk there are books, pens and so on."
+    },
+    {
+      "type": "text",
+      "text": "Because it is neutral, **など** also fits formal and written Japanese."
+    },
+    {
+      "type": "example",
+      "jp": "電車やバスなどの交通は便利だ。",
+      "en": "Transport such as trains and buses is convenient."
+    },
+    {
+      "type": "text",
+      "text": "In casual speech it can also make light of a noun: the speaker rejects \"things like that\"."
+    },
+    {
+      "type": "example",
+      "jp": "お世辞など言わない。",
+      "en": "(I) don't say flattery or the like."
+    },
+    {
+      "type": "example",
+      "jp": "宿題などしたくない。",
+      "en": "I don't want to do homework or things like that. (など replaces を)"
+    },
+    {
+      "type": "heading",
+      "text": "なんか: things like, something, somehow"
+    },
+    {
+      "type": "text",
+      "text": "なんか is a squashed 何か (something). Its first and plainest job is exactly that: \"something\". From there it grows: **vague** (なんか変だ), **for some reason** (なんか眠い), and in sloppy talk a filler like \"kinda\". Attached to a noun it belittles it, often with real feeling, and it is common with oneself."
+    },
+    {
+      "type": "example",
+      "jp": "なんか食べる？",
+      "en": "Want to eat something? (なんか = 何か)"
+    },
+    {
+      "type": "example",
+      "jp": "兄なんか大嫌い。",
+      "en": "I can't stand a person like my big brother."
+    },
+    {
+      "type": "example",
+      "jp": "私なんかには無理です。",
+      "en": "Someone like me can't do that."
+    },
+    {
+      "type": "example",
+      "jp": "なんか寒いね。",
+      "en": "Somehow it's cold, isn't it."
+    },
+    {
+      "type": "text",
+      "text": "A warning: a filler なんか… なんか… in every sentence sounds sloppy, so use it sparingly."
+    },
+    {
+      "type": "heading",
+      "text": "なんて: a squashed なんと / 何という"
+    },
+    {
+      "type": "text",
+      "text": "なんて asks \"what?\" (なんて言ったの？), but it is also the exclamation **\"what a ...!\"**, a belittling marker after a noun, and a surprise marker after a whole clause."
+    },
+    {
+      "type": "example",
+      "jp": "なんて広い部屋なんだ。",
+      "en": "What a big room!"
+    },
+    {
+      "type": "example",
+      "jp": "もう一度、なんて言った？",
+      "en": "What did you say, once more? (the natural casual question)"
+    },
+    {
+      "type": "example",
+      "jp": "勉強なんて嫌いだ。",
+      "en": "I hate studying and things like it."
+    },
+    {
+      "type": "example",
+      "jp": "雪が降るなんて信じられない。",
+      "en": "I can't believe it's snowing! (of all things)"
+    },
+    {
+      "type": "example",
+      "jp": "田中なんて人は知らない。",
+      "en": "I don't know anybody called Tanaka. (and I doubt there is one)"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**など** is neutral, **なんて** is in the middle, **なんか** is the most casual.",
+        "After a noun, なんか and なんて belittle it and replace が and を.",
+        "After a whole clause, **なんて** shows surprise or disbelief; なんか never does that."
+      ]
+    }
+  ],
+  "questions": [
     {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "かばんの中に本＿＿ノートなどがある。", "options": ["を", "が", "や", "に"], "answer": 2, "note": "や lists examples, and など closes the list.", "en": "In the bag there are books, notebooks and so on."},
     {"id": 14, "type": "choice", "instruction": "Which one is the most casual?", "prompt": "", "options": ["など", "なんて", "なんか", "なにか"], "answer": 2, "note": "など is neutral, なんて is in the middle, なんか is the most casual."},
     {"id": 15, "type": "choice", "instruction": "Which one is neutral and fine in formal writing?", "prompt": "", "options": ["なんか", "など", "なんて", "なんだか"], "answer": 1, "note": "など sits right after the noun and suits formal writing."},
@@ -132,18 +160,20 @@
     {"id": 18, "type": "choice", "instruction": "What does なんか mean here?", "prompt": "なんか頭が痛い。", "options": ["A list of things", "A question about what", "Somehow, for some reason", "A command"], "answer": 2, "note": "なんか at the start of a clause is a vague \"somehow\".", "en": "My head hurts somehow."},
     {"id": 19, "type": "choice", "instruction": "Fill the gap", "prompt": "テレビ＿＿＿見たくない。", "options": ["いつ", "どこ", "なんで", "なんか"], "answer": 3, "note": "なんか after a noun belittles it and replaces を.", "en": "I don't want to watch TV or the like."},
     {"id": 20, "type": "choice", "instruction": "True or false?", "prompt": "After a whole clause, なんか shows surprise or disbelief.", "options": ["True", "False"], "answer": 1, "note": "Only なんて shows surprise after a whole clause."},
-    {"id": 21, "type": "choice", "instruction": "True or false?", "prompt": "なんて can show surprise after a whole clause.", "options": ["True", "False"], "answer": 0, "note": "After a clause, なんて means \"I can't believe...\"."},
+    {"id": 21, "type": "choice", "instruction": "Which sentence shows surprise at a whole event?", "prompt": "", "options": ["彼が来るなんて思わなかった", "彼なんか大嫌いだ", "彼などの友達がいる", "なんか彼が変だ"], "answer": 0, "note": "After a whole clause, なんて shows surprise or disbelief."},
     {"id": 22, "type": "choice", "instruction": "What does なんて express?", "prompt": "雨が降るなんて思わなかった。", "options": ["A question", "A list", "A command", "Surprise at the whole event"], "answer": 3, "note": "なんて after a whole clause shows surprise.", "en": "I never thought it would rain!"},
     {"id": 23, "type": "choice", "instruction": "Which means \"someone like me\"?", "prompt": "", "options": ["私なにか", "私なんで", "私なんか", "私なら"], "answer": 2, "note": "なんか after a noun belittles it, often oneself."},
-    {"id": 24, "type": "tap", "instruction": "Tap the word that belittles", "prompt": "", "options": ["友だち", "なんて", "いらない"], "answer": 1, "note": "なんて after a noun belittles it.", "en": "I don't need friends or anything like that."},
+    {"id": 24, "type": "tap", "instruction": "Tap the word that belittles", "prompt": "", "options": ["私は", "友だち", "なんて", "いらない"], "answer": 2, "note": "なんて after a noun belittles it.", "en": "I don't need friends or anything like that."},
     {"id": 25, "type": "tap", "instruction": "Tap the word that means \"and so on\"", "prompt": "", "options": ["本や", "ノート", "など", "を", "買った"], "answer": 2, "note": "など closes a list of examples.", "en": "I bought books, notebooks and so on."},
     {"id": 26, "type": "order", "instruction": "Build the sentence", "prompt": "What a kind teacher!", "options": ["なんて", "親切な", "先生なんだ"], "note": "なんて opens the exclamation.", "en": "What a kind teacher!"},
     {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "It's somehow hot today, isn't it.", "options": ["今日は", "なんか", "暑いね"], "note": "なんか: a vague \"somehow\" before the clause.", "en": "It's somehow hot today, isn't it.", "alt": [["なんか", "今日は", "暑いね"]]},
     {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "I don't eat vegetables or anything like that.", "options": ["私は", "野菜なんか", "食べない"], "note": "なんか after the noun replaces を and belittles it.", "en": "I don't eat vegetables or anything like that.", "alt": [["野菜なんか", "私は", "食べない"]]},
     {"id": 29, "type": "choice", "instruction": "Which pair belittles a noun and can replace が / を?", "prompt": "", "options": ["など and や", "から and まで", "なんか and なんて", "だけ and しか"], "answer": 2, "note": "なんか and なんて are the belittling pair."},
-    {"id": 30, "type": "choice", "instruction": "Which sentence lists examples?", "prompt": "", "options": ["箱の中にりんごやバナナなどがある", "母なんか大嫌い", "なんて高い建物", "なんか暑い"], "answer": 0, "note": "や ... など lists examples."},
+    {"id": 30, "type": "choice", "instruction": "Which sentence lists examples?", "prompt": "", "options": ["箱の中にりんごやバナナなどがある", "母なんか大嫌いだ", "なんて高い建物なんだ", "なんか今日は暑い"], "answer": 0, "note": "や ... など lists examples."},
     {"id": 31, "type": "choice", "instruction": "なんか is a squashed what?", "prompt": "", "options": ["何か", "何と", "何で", "何も"], "answer": 0, "note": "なんか is a squashed 何か, \"something\"."},
     {"id": 32, "type": "choice", "instruction": "なんて is a squashed what?", "prompt": "", "options": ["何か", "何という", "何で", "何も"], "answer": 1, "note": "なんて is a squashed なんと / 何という."},
-    {"id": 33, "type": "choice", "instruction": "Who is being belittled?", "prompt": "私なんかが先生になれない。", "options": ["The speaker", "The teacher", "A friend", "Nobody"], "answer": 0, "note": "なんか after 私 belittles oneself.", "en": "Someone like me can't become a teacher."}
+    {"id": 33, "type": "choice", "instruction": "Who is being belittled?", "prompt": "私なんかに先生は無理だ。", "options": ["The speaker", "The teacher", "A friend", "Nobody"], "answer": 0, "note": "なんか after 私 belittles oneself.", "en": "Someone like me can't be a teacher."},
+    {"id": 34, "type": "choice", "instruction": "Which is the natural casual \"what did you say?\"", "prompt": "", "options": ["なんて言ったの？", "なんか言ったの？", "など言ったの？", "なんで言ったの？"], "answer": 0, "note": "なんて言った？ asks what; なんか言った？ asks \"did you say something?\"; なんで asks why."},
+    {"id": 35, "type": "choice", "instruction": "What does なんか mean here?", "prompt": "なんか心配ある？", "options": ["Something (anything)", "Things like", "What a ...!", "Surprise"], "answer": 0, "note": "Here なんか is the plain 何か.", "en": "Is anything worrying you?"}
   ]
 }
