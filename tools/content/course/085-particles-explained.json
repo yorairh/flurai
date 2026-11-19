@@ -8,18 +8,30 @@
   "video": "https://www.youtube.com/watch?v=dwcTI9qvO-U",
   "related": [505, 504, 554, 508, 503],
   "blocks": [
-    {"type": "text", "text": "**Logical particles** say how the parts of a sentence fit together: who did it, to what, where, with what. Each attaches to a **noun** and the pair stays together. Think of them as a team of detectives, each asking one question about the event. **は** is not on the team: it only flags the topic."},
-    {"type": "table", "title": "The detective agency", "rows": [["Particle", "Question it answers", "Example"], ["が", "Who did it? / what is it?", "さくらが歩く"], ["を", "What was the action done to?", "水を飲む"], ["に", "Where is it / where does it go?", "公園にいる"], ["へ", "In what direction?", "公園へ行く"], ["で", "Where did it happen? / by what means?", "公園で遊ぶ"], ["と", "Together with whom? (joins two nouns)", "猫と犬"]]},
+    {"type": "text", "text": "**Logical particles** say how the parts of a sentence fit together: who did it, to what, where, with what. Each attaches to a **noun** and the pair stays together, so a particle on a word also tells you that the word is acting as a noun. Think of them as a team of detectives, each asking one question about the event. **は** is not on the team: it only flags the topic."},
+    {"type": "table", "title": "The detective agency", "rows": [["Particle", "Question it answers", "Example"], ["が", "Who did it? / what is it?", "さくらが歩く"], ["を", "What was the action done to?", "水を飲む"], ["に", "Where is it / where does it go?", "公園にいる"], ["へ", "In what direction?", "北へ行く"], ["で", "Where did it happen? / by what means?", "公園で遊ぶ"]]},
     {"type": "heading", "text": "Chief Detective が"},
-    {"type": "text", "text": "**が** is needed in every sentence, even when it is hidden. It is also the only logical particle that works in a **description** (A is B); the others work with action verbs. And a logical particle never changes its job."},
+    {"type": "text", "text": "**が** is needed in every sentence, even when it is hidden. It is also the only logical particle that works in a **description** (A is B); the others work with action verbs. A logical particle never changes its job."},
+    {"type": "example", "jp": "さくらが日本人だ。", "en": "Sakura is Japanese. (only が can work here)"},
     {"type": "heading", "text": "で: where and with what"},
     {"type": "text", "text": "You can **be** in a park (に), but to **do something** there you need で. で also marks the **means**: the bus you go by, or the language you speak in."},
+    {"type": "diagram", "cars": [{"text": "公園に", "role": "white", "label": "where I am"}, {"text": "いる", "role": "engine", "label": "being"}], "text": "公園にいる vs 公園で遊んでいる: に is for being, で is for doing."},
+    {"type": "diagram", "cars": [{"text": "公園で", "role": "white", "label": "where I act"}, {"text": "遊んで", "role": "white", "label": "white engine"}, {"text": "いる", "role": "engine", "label": "engine"}], "text": "公園で遊んでいる。"},
     {"type": "example", "jp": "（私が）公園で遊んでいる。", "en": "(I) am playing in the park."},
     {"type": "example", "jp": "（私が）バスで公園に行く。", "en": "(I) go to the park by bus."},
     {"type": "example", "jp": "（私が）日本語を話す。", "en": "(I) speak Japanese. (Japanese is the thing spoken)"},
     {"type": "example", "jp": "（私が）日本語で話す。", "en": "(I) speak in Japanese. (Japanese is the means)"},
+    {"type": "heading", "text": "Many detectives in one sentence"},
+    {"type": "text", "text": "A real sentence can have several detectives, each answering its own question. Ask them one by one and the whole picture appears."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "who?"}, {"text": "バスで", "role": "white", "label": "by what?"}, {"text": "公園に", "role": "white", "label": "where to?"}, {"text": "行く", "role": "engine", "label": "what happens?"}], "text": "（私が）バスで公園に行く。"},
+    {"type": "heading", "text": "へ and the direction"},
+    {"type": "text", "text": "に and へ often swap places. へ is the one to choose when you think of the **direction** of travel, not the arrival: 北へ is \"toward the north\", where に would sound odd."},
+    {"type": "example", "jp": "（私が）北へ行く。", "en": "(I) go north."},
+    {"type": "heading", "text": "Not a detective: と"},
+    {"type": "text", "text": "**と** is not a logical particle. It only **adds nouns together** (\"and\", or \"together with\") and says nothing about the action. The detective が, を or に still has to do the real work."},
     {"type": "example", "jp": "さくらとメアリーが歩いていた。", "en": "Sakura and Mary were walking."},
-    {"type": "keypoints", "items": ["**が** doer · **を** done-to · **に** target / place · **へ** direction · **で** place of action and means.", "**と** joins nouns and says nothing about the action.", "**は** is not a logical particle.", "Do not confuse the particles and they will not confuse you."]}
+    {"type": "example", "jp": "猫と犬", "en": "a cat and a dog"},
+    {"type": "keypoints", "title": "Remember", "items": ["**が** doer · **を** done-to · **に** target / place · **へ** direction · **で** place of action and means.", "**と** joins nouns and says nothing about the action. It is not a logical particle.", "**は** is not a logical particle either.", "A particle on a word shows that the word is working as a noun."]}
   ],
   "questions": [
     {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）図書館＿＿勉強している。", "options": ["で", "に", "を", "が"], "answer": 0, "note": "で marks where an action takes place.", "en": "(I) am studying at the library."},
@@ -30,7 +42,7 @@
     {"id": 40, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）机の上＿＿本をおいた。", "options": ["で", "に", "を", "と"], "answer": 1, "note": "に marks the target of putting.", "en": "(I) put a book on the desk."},
     {"id": 41, "type": "choice", "instruction": "Fill the gap", "prompt": "姉が町＿＿買い物をしている。", "options": ["に", "が", "で", "へ"], "answer": 2, "note": "で marks where the shopping happens.", "en": "My older sister is shopping in town."},
     {"id": 42, "type": "choice", "instruction": "Which particle answers 'where did it happen?'", "prompt": "", "options": ["を", "と", "が", "で"], "answer": 3, "note": "で is the place of an action."},
-    {"id": 43, "type": "choice", "instruction": "Which particle answers 'together with whom?'", "prompt": "", "options": ["と", "で", "に", "へ"], "answer": 0, "note": "と joins nouns."},
+    {"id": 43, "type": "choice", "instruction": "Which particle answers 'together with whom?'", "prompt": "", "options": ["と", "で", "に", "へ"], "answer": 0, "note": "と joins nouns and says who comes along."},
     {"id": 44, "type": "choice", "instruction": "Which particle is NOT a logical particle?", "prompt": "", "options": ["が", "は", "を", "で"], "answer": 1, "note": "は only flags the topic."},
     {"id": 45, "type": "choice", "instruction": "Which particle works in a description (A is B)?", "prompt": "", "options": ["を", "で", "が", "へ"], "answer": 2, "note": "Only が works when there is no action."},
     {"id": 46, "type": "choice", "instruction": "Which particle marks 'being in a place'?", "prompt": "", "options": ["で", "を", "と", "に"], "answer": 3, "note": "Being in a place is a target already reached."},
@@ -43,6 +55,8 @@
     {"id": 53, "type": "order", "instruction": "Build the sentence", "prompt": "(I) eat at the restaurant.", "options": ["レストランで", "ご飯を", "食べる"], "note": "Place of action: で.", "en": "(I) eat at the restaurant.", "alt": [["ご飯を", "レストランで", "食べる"]]},
     {"id": 54, "type": "order", "instruction": "Build the sentence", "prompt": "(I) go to the station by taxi.", "options": ["タクシーで", "駅に", "行く"], "note": "Means で, destination に.", "en": "(I) go to the station by taxi.", "alt": [["駅に", "タクシーで", "行く"]]},
     {"id": 55, "type": "order", "instruction": "Build the sentence", "prompt": "Mother and father are walking.", "options": ["母と", "父が", "歩いている"], "note": "と joins the two nouns.", "en": "Mother and father are walking."},
-    {"id": 56, "type": "order", "instruction": "Build the sentence", "prompt": "(I) am studying in the library with a friend.", "options": ["友達と", "図書館で", "勉強している"], "note": "と, then place で, then the verb.", "en": "(I) am studying in the library with a friend.", "alt": [["図書館で", "友達と", "勉強している"]]}
+    {"id": 56, "type": "order", "instruction": "Build the sentence", "prompt": "(I) am studying in the library with a friend.", "options": ["友達と", "図書館で", "勉強している"], "note": "と, then place で, then the verb.", "en": "(I) am studying in the library with a friend.", "alt": [["図書館で", "友達と", "勉強している"]]},
+    {"id": 57, "type": "choice", "instruction": "Which particle suits a direction?", "prompt": "（私が）東＿＿行く。", "options": ["へ", "で", "を", "と"], "answer": 0, "note": "へ marks the direction of travel.", "en": "(I) go east."},
+    {"id": 58, "type": "choice", "instruction": "Fill the gap", "prompt": "弟＿＿学生だ。", "options": ["が", "を", "で", "へ"], "answer": 0, "note": "Only が works in an A-is-B sentence.", "en": "My younger brother is a student."}
   ]
 }

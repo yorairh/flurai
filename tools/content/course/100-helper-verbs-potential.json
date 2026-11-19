@@ -9,30 +9,24 @@
   "related": [432, 404],
   "blocks": [
     {"type": "text", "text": "Remember: Japanese has no conjugation, only **helper words** that plug into stems. The **potential** (\"can do\") is one of them. It attaches to the **え-stem** and says that the action is **possible**."},
-    {"type": "table", "title": "Making the potential", "rows": [
-      ["Verb", "Potential", "Meaning"],
-      ["買う", "買える", "can buy"],
-      ["聞く", "聞ける", "can hear / ask"],
-      ["話す", "話せる", "can speak"],
-      ["待つ", "待てる", "can wait"],
-      ["食べる", "食べられる", "can eat"],
-      ["来る", "来られる", "can come"],
-      ["する", "できる", "can do"]
-    ]},
-    {"type": "text", "text": "For **godan** verbs the helper is just the single kana **る**, added to the え-stem. For **ichidan** verbs it is **られる**. Either way the result is an **ichidan verb**, so it changes like one: 歩ける, 歩けない, 歩けた, 歩けなかった. The potential of する is the separate verb **できる**."},
+    {"type": "heading", "text": "Making the potential"},
+    {"type": "text", "text": "For **godan** verbs the helper is just the single kana **る**, added to the え-stem. For **ichidan** verbs it is **られる**. Either way the result is an **ichidan verb**, so it changes like one. The potential of する is the separate verb **できる**; written 出来る, it means \"comes out\", so \"Japanese comes out (is possible) for me\"."},
+    {"type": "table", "title": "Making the potential", "rows": [["Verb", "Potential", "Meaning"], ["買う", "買える", "can buy"], ["聞く", "聞ける", "can hear / ask"], ["話す", "話せる", "can speak"], ["待つ", "待てる", "can wait"], ["食べる", "食べられる", "can eat"], ["来る", "来られる (こられる)", "can come"], ["する", "できる", "can do"]]},
+    {"type": "text", "text": "Note that 来 changes its reading: 来る is read **くる**, but 来られる is read **こられる**."},
+    {"type": "table", "title": "The potential changes like an ichidan verb", "rows": [["Form", "歩ける (godan)", "食べられる (ichidan)"], ["Non-past", "歩ける", "食べられる"], ["Negative", "歩けない", "食べられない"], ["Past", "歩けた", "食べられた"], ["Negative past", "歩けなかった", "食べられなかった"]]},
     {"type": "heading", "text": "Watch the particles"},
-    {"type": "text", "text": "The potential says that something **is possible**, so the thing that is possible is the main carriage and takes **が**. 本が読める is literally \"the book is readable\". With a hidden carriage, the zero is again the speaker: 読める means \"(I) can read\"."},
-    {"type": "example", "jp": "日本語が話せる。", "en": "(I) can speak Japanese. (Japanese is speakable.)"},
+    {"type": "text", "text": "The potential says that something **is possible**, so the thing that is possible is the main carriage and takes **が**. 本が読める is literally \"the book is readable\"."},
+    {"type": "diagram", "cars": [{"text": "本が", "role": "carriage", "label": "main carriage"}, {"text": "読める", "role": "engine", "label": "engine: is possible"}], "text": "本が読める。 The book is readable."},
     {"type": "example", "jp": "本が読める。", "en": "(I) can read the book. (The book is readable.)"},
+    {"type": "example", "jp": "日本語が話せる。", "en": "(I) can speak Japanese. (Japanese is speakable.)"},
     {"type": "example", "jp": "魚が食べられる。", "en": "(I) can eat fish."},
+    {"type": "diagram", "cars": [{"text": "日本語が", "role": "carriage", "label": "main carriage"}, {"text": "できる", "role": "engine", "label": "engine"}], "text": "日本語ができる。 Japanese comes out (is possible)."},
     {"type": "example", "jp": "日本語ができる。", "en": "(I) can do Japanese. (Japanese is possible.)"},
+    {"type": "heading", "text": "Who is the main carriage?"},
+    {"type": "text", "text": "With a hidden carriage, the zero is again the speaker, just like 食べたい in lesson 9: 読める on its own means \"(I) can read\". You can also put 私 in front as a topic. A sentence like 私が本を読める is possible, but it puts the person first the way English does, and it sounds less Japanese."},
+    {"type": "example", "jp": "読める。", "en": "(I) can read."},
     {"type": "example", "jp": "もう歩けない。", "en": "(I) cannot walk any more."},
-    {"type": "keypoints", "items": [
-      "Godan: **え-stem + る** (買う → 買える). Ichidan: **drop る + られる**.",
-      "来る → **来られる**; する → **できる**.",
-      "The result is an **ichidan verb**: 歩ける, 歩けない, 歩けた, 歩けなかった.",
-      "The thing that is possible takes **が**: **本が読める**."
-    ]}
+    {"type": "keypoints", "title": "Remember", "items": ["Godan: **え-stem + る** (買う → 買える). Ichidan: **drop る + られる**.", "来る → **来られる** (こられる); する → **できる**.", "The result is an **ichidan verb**: 歩ける, 歩けない, 歩けた, 歩けなかった.", "The thing that is possible takes **が**: **本が読める**."]}
   ],
   "questions": [
     {"id": 36, "type": "choice", "instruction": "What is the potential of 書く?", "prompt": "", "options": ["書ける", "書かれる", "書けれる", "書きる"], "answer": 0, "note": "え-stem + る."},
@@ -51,12 +45,14 @@
     {"id": 49, "type": "choice", "instruction": "Why does the thing take が in 料理が作れる?", "prompt": "", "options": ["が always marks the object", "It is what is 'makeable': the main carriage", "作れる is past", "It is the topic"], "answer": 1, "note": "The possible thing is the main carriage.", "en": "(I) can make dishes."},
     {"id": 50, "type": "choice", "instruction": "True or false?", "prompt": "The potential of ichidan verbs is る only.", "options": ["True", "False"], "answer": 1, "note": "Ichidan verbs use られる."},
     {"id": 51, "type": "choice", "instruction": "True or false?", "prompt": "The potential of する is できる.", "options": ["True", "False"], "answer": 0, "note": "A separate verb.", "en": "The potential of する is できる."},
-    {"id": 52, "type": "tap", "instruction": "Tap the main carriage", "options": ["英語が", "話せる"], "answer": 0, "note": "The possible thing takes が.", "en": "(I) can speak English."},
-    {"id": 53, "type": "tap", "instruction": "Tap the potential verb", "options": ["自転車が", "乗れる"], "answer": 1, "note": "乗れる is the え-stem + る.", "en": "(I) can ride a bicycle."},
+    {"id": 52, "type": "tap", "instruction": "Tap the main carriage", "options": ["弟は", "英語が", "話せる"], "answer": 1, "note": "The possible thing takes が.", "en": "My younger brother can speak English."},
+    {"id": 53, "type": "tap", "instruction": "Tap the potential verb", "options": ["妹は", "自転車が", "乗れる"], "answer": 2, "note": "乗れる is the え-stem + る.", "en": "My younger sister can ride a bicycle."},
     {"id": 54, "type": "tap", "instruction": "Tap the main carriage", "options": ["ここで", "手紙が", "書ける"], "answer": 1, "note": "The possible thing is the main carriage.", "en": "(I) can write a letter here."},
     {"id": 55, "type": "order", "instruction": "Build the sentence", "prompt": "I can read English.", "options": ["私は", "英語が", "読める"], "note": "The possible thing takes が.", "en": "I can read English.", "alt": [["英語が", "私は", "読める"]]},
     {"id": 56, "type": "order", "instruction": "Build the sentence", "prompt": "My younger brother can't eat vegetables.", "options": ["弟は", "野菜が", "食べられない"], "note": "食べられる + ない.", "en": "My younger brother can't eat vegetables.", "alt": [["野菜が", "弟は", "食べられない"]]},
     {"id": 57, "type": "order", "instruction": "Build the sentence", "prompt": "I can run fast.", "options": ["私は", "はやく", "走れる"], "note": "え-stem + る.", "en": "I can run fast."},
-    {"id": 59, "type": "order", "instruction": "Build the sentence", "prompt": "Can (you) go tomorrow?", "options": ["明日", "行け", "ますか"], "note": "行く becomes 行ける: the え-row plus る.", "en": "Can (you) go tomorrow?"}
+    {"id": 59, "type": "order", "instruction": "Build the sentence", "prompt": "Can (you) go tomorrow?", "options": ["明日", "学校に", "行ける？"], "note": "行く becomes 行ける: the え-row plus る.", "en": "Can (you) go to school tomorrow?", "alt": [["学校に", "明日", "行ける？"]]},
+    {"id": 60, "type": "choice", "instruction": "Who is able to read?", "prompt": "手紙が読める。", "options": ["The speaker (a zero)", "The letter", "Nobody", "A friend"], "answer": 0, "note": "The letter is the main carriage; the zero topic is the speaker.", "en": "(I) can read the letter."},
+    {"id": 61, "type": "choice", "instruction": "What is the potential of 来る?", "prompt": "", "options": ["来られる", "来える", "来ける", "来あれる"], "answer": 0, "note": "来る is irregular: 来られる, read こられる."}
   ]
 }

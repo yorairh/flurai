@@ -11,34 +11,23 @@
     {"type": "text", "text": "Textbooks call this the \"passive\" and label it a conjugation. The course prefers **receptive helper verb**, because that is what it does: it makes a verb that means \"to get\" or \"to receive\" the action. Both names point at the same form. What matters is that the particles keep doing their usual jobs."},
     {"type": "heading", "text": "Form"},
     {"type": "text", "text": "Attach the helper to the **あ-stem** (the same stem ない uses). Godan: **れる**. Ichidan: **られる**. It looks exactly like the ichidan potential られる, but real sentences make the difference clear."},
-    {"type": "table", "rows": [
-      ["Verb", "Receptive", "Meaning"],
-      ["叱る", "叱られる", "get scolded"],
-      ["飲む", "飲まれる", "get drunk (by someone)"],
-      ["盗む", "盗まれる", "get stolen"],
-      ["食べる", "食べられる", "get eaten"]
-    ]},
+    {"type": "table", "title": "Making the receptive", "rows": [["Verb", "Receptive", "Meaning"], ["叱る", "叱られる", "get scolded"], ["飲む", "飲まれる", "get drunk (by someone)"], ["盗む", "盗まれる", "get stolen"], ["食べる", "食べられる", "get eaten"]]},
     {"type": "heading", "text": "Who is the main carriage?"},
-    {"type": "text", "text": "The engine of the sentence is **れる / られる**, so the main carriage is the one who **receives**. It does not have to be a person. The real doer is marked with **に**. The picture: れる is a **pull** verb, so に marks the **source** the thing is pulled from, not a target."},
+    {"type": "text", "text": "The engine of the sentence is **れる / られる**, so the main carriage is the one who **receives**. It does not have to be a person."},
+    {"type": "text", "text": "Keep the receptive in **two separate verbs**: the attached verb (叱る) is done by someone else, and the head verb れる is done by the receiver, who \"gets\" it. In 叱られた someone else scolds and Sakura does the getting. So, unlike the potential (読める), the two verbs must never be merged into one."},
+    {"type": "heading", "text": "Push and pull"},
+    {"type": "text", "text": "Compare two directions. When you **push** something toward a target, に marks the target. れる is a **pull** verb, so に marks the **source** the thing is pulled from, not a target."},
+    {"type": "example", "jp": "（私が）さくらにボールを投げた。", "en": "(I) threw the ball to Sakura. (push: に = target)"},
+    {"type": "diagram", "cars": [{"text": "水が", "role": "carriage", "label": "receiver"}, {"text": "犬に", "role": "white", "label": "doer (source)"}, {"text": "飲まれた", "role": "engine", "label": "got drunk"}], "text": "水が犬に飲まれた。 に marks the source of the pull."},
     {"type": "example", "jp": "さくらが叱られた。", "en": "Sakura got scolded."},
     {"type": "example", "jp": "水が犬に飲まれた。", "en": "The water got drunk by the dog."},
     {"type": "example", "jp": "かばんが誰かに盗まれた。", "en": "The bag was stolen by someone."},
-    {"type": "diagram", "cars": [
-      {"text": "水", "role": "carriage", "label": "receiver"},
-      {"text": "が", "role": "particle"},
-      {"text": "犬に", "role": "white", "label": "doer (source)"},
-      {"text": "飲まれた", "role": "engine", "label": "got drunk"}
-    ], "text": "水が犬に飲まれた。"},
     {"type": "heading", "text": "The suffering receptive"},
-    {"type": "text", "text": "Japanese also uses the receptive when something happens **to a person** and it bothers them. The affected person becomes the main carriage (が), while the thing that was taken keeps its **を**."},
+    {"type": "text", "text": "Japanese also uses the receptive when something happens **to a person** and it bothers them. Textbooks call it the \"nuisance receptive\" (迷惑受け身). The affected person becomes the main carriage (が), while the thing that was taken keeps its **を**. Compare the two versions."},
+    {"type": "diagram", "cars": [{"text": "さくらが", "role": "carriage", "label": "receiver (bothered)"}, {"text": "誰かに", "role": "white", "label": "source"}, {"text": "かばんを", "role": "white", "label": "the bag"}, {"text": "盗まれた", "role": "engine", "label": "had stolen"}], "text": "さくらが誰かにかばんを盗まれた。 Sakura is the receiver."},
+    {"type": "table", "title": "Bag stolen, two ways", "rows": [["Sentence", "Receiver", "On かばん", "Feel"], ["さくらは誰かにかばんが盗まれた。", "the bag", "が", "The bag was stolen. (normal)"], ["さくらが誰かにかばんを盗まれた。", "Sakura", "を", "Sakura had her bag stolen. (nuisance)"]]},
     {"type": "example", "jp": "さくらが誰かにかばんを盗まれた。", "en": "Sakura had her bag stolen by someone."},
-    {"type": "text", "text": "Keep the receptive in **two separate verbs**: the head verb れる / られる belongs to the receiver, the attached verb is done by someone else. Unlike the potential, they must never be merged into one."},
-    {"type": "keypoints", "items": [
-      "**あ-stem + れる** (godan), **られる** (ichidan): \"to get X-ed\".",
-      "The **receiver** is the main carriage (**が**). The **doer** takes **に**.",
-      "The suffering receptive: **person が + other に + thing を + 〜られた**.",
-      "Do not mix it up with the potential: **食べられる** can be either, and the sentence tells you which."
-    ]}
+    {"type": "keypoints", "title": "Remember", "items": ["**あ-stem + れる** (godan), **られる** (ichidan): \"to get X-ed\".", "The **receiver** is the main carriage (**が**). The **doer** takes **に**.", "The suffering receptive: **person が + other に + thing を + 〜られた**.", "Do not mix it up with the potential: **食べられる** can be either, and the sentence tells you which."]}
   ],
   "questions": [
     {"id": 20, "type": "choice", "instruction": "Pick the receptive", "prompt": "読む", "options": ["読める", "読ませる", "読まれる", "読もう"], "answer": 2, "note": "あ-stem 読ま + れる."},
@@ -47,9 +36,9 @@
     {"id": 23, "type": "choice", "instruction": "Pick the form that fits", "prompt": "弟が姉に朝早く＿＿。", "options": ["起こした", "起こされた", "起こす", "起こして"], "answer": 1, "note": "弟 is the receiver and 姉に marks the doer, so the engine is receptive.", "en": "The little brother was woken up early by his older sister."},
     {"id": 24, "type": "tap", "instruction": "Tap the doer (who called)", "options": ["子供が", "母に", "呼ばれた"], "answer": 1, "note": "に marks the doer in a receptive sentence.", "en": "The child was called by the mother."},
     {"id": 25, "type": "tap", "instruction": "Tap the receiver (the main carriage)", "options": ["ケーキが", "妹に", "食べられた"], "answer": 0, "note": "The one who receives the action takes が.", "en": "The cake was eaten by my little sister."},
-    {"id": 42, "type": "order", "instruction": "Build the sentence", "prompt": "I was laughed at by my friend.", "options": ["私は", "友達に", "笑われた"], "note": "Receiver は, doer に, receptive verb.", "en": "I was laughed at by my friend.", "alt": [["友達に", "私は", "笑われた"]]},
+    {"id": 42, "type": "order", "instruction": "Build the sentence", "prompt": "I was laughed at by my friend.", "options": ["私は", "友達に", "笑われた"], "note": "私は is the topic; the hidden が carriage is me, the receiver. 友達に marks the doer.", "en": "I was laughed at by my friend.", "alt": [["友達に", "私は", "笑われた"]]},
     {"id": 43, "type": "order", "instruction": "Build the sentence", "prompt": "I had my diary read by my mother.", "options": ["私は", "母に", "日記を", "読まれた"], "note": "Suffering receptive: the read thing keeps を.", "en": "I had my diary read by my mother.", "alt": [["母に", "私は", "日記を", "読まれた"], ["私は", "日記を", "母に", "読まれた"]]},
-    {"id": 28, "type": "choice", "instruction": "Which sentence means \"I was praised by the teacher\"?", "prompt": "", "options": ["私は先生をほめた", "私は先生にほめられた", "私は先生にほめた", "私が先生にほめさせた"], "answer": 1, "note": "Receiver は, doer に, received verb."},
+    {"id": 28, "type": "choice", "instruction": "Which sentence means \"I was praised by the teacher\"?", "prompt": "", "options": ["私は先生をほめた", "私は先生にほめられた", "私は先生にほめた", "私が先生にほめさせた"], "answer": 1, "note": "私は is the topic; the hidden が carriage is me, the receiver. 先生に marks the doer."},
     {"id": 29, "type": "choice", "instruction": "What does this say?", "prompt": "手紙が母に読まれた。", "options": ["The letter read Mom", "Mom could read the letter", "Mom wrote the letter", "The letter got read by Mom"], "answer": 3, "note": "Receiver 手紙が, doer 母に: the receptive.", "en": "The letter was read by Mom."},
     {"id": 30, "type": "choice", "instruction": "Fill the gap", "prompt": "私は犬＿＿足をかまれた。", "options": ["に", "を", "と", "へ"], "answer": 0, "note": "The doer takes に; the bitten leg keeps を.", "en": "I was bitten on the leg by a dog."},
     {"id": 31, "type": "choice", "instruction": "True or false?", "prompt": "兄が母に叱られた。 The one who scolded is 母.", "options": ["True", "False"], "answer": 0, "note": "に marks the doer.", "en": "My older brother was scolded by Mother."},
@@ -58,10 +47,11 @@
     {"id": 34, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["本が先生を読まれた", "本が先生に読まれた", "本は先生に読まれた", "本が先生に読まれている"], "answer": 0, "note": "The doer must take に, not を."},
     {"id": 35, "type": "choice", "instruction": "Who is bothered by what happened?", "prompt": "私は弟にケーキを食べられた。", "options": ["My little brother", "The cake", "Nobody", "I (the receiver)"], "answer": 3, "note": "The suffering receptive: the affected person is the main carriage.", "en": "My little brother ate my cake (and it bothered me)."},
     {"id": 36, "type": "choice", "instruction": "True or false?", "prompt": "In a receptive sentence the doer is marked with を.", "options": ["True", "False"], "answer": 1, "note": "The doer takes に: れる is a pull verb."},
-    {"id": 37, "type": "choice", "instruction": "Which sentence says the window was opened by my little brother?", "prompt": "", "options": ["窓を弟に開けられた", "窓が弟に開けられた", "窓が弟を開けられた", "窓が弟に開けた"], "answer": 1, "note": "Receiver が, doer に, られる."},
+    {"id": 37, "type": "choice", "instruction": "Which sentence makes the window the main carriage?", "prompt": "", "options": ["窓を弟に開けられた", "窓が弟に開けられた", "窓が弟を開けられた", "窓が弟に開けた"], "answer": 1, "note": "Receiver が, doer に, られる."},
     {"id": 38, "type": "tap", "instruction": "Tap the thing taken from the receiver (the を word)", "options": ["私は", "兄に", "ケーキを", "食べられた"], "answer": 2, "note": "In the suffering receptive the affected thing keeps を.", "en": "My older brother ate my cake."},
     {"id": 39, "type": "order", "instruction": "Build the sentence", "prompt": "The photo was seen by my friend.", "options": ["写真が", "友達に", "見られた"], "note": "Receiver が, doer に, receptive verb.", "en": "The photo was seen by my friend.", "alt": [["友達に", "写真が", "見られた"]]},
     {"id": 40, "type": "choice", "instruction": "What do れる / られる do to a verb?", "prompt": "", "options": ["Someone is made to do it", "The subject receives the action", "The verb becomes polite", "The verb becomes negative"], "answer": 1, "note": "れる / られる is the receptive helper verb."},
-    {"id": 41, "type": "choice", "instruction": "Pick the receptive", "prompt": "呼ぶ", "options": ["呼べる", "呼ばせる", "呼ぼう", "呼ばれる"], "answer": 3, "note": "あ-stem 呼ば + れる."}
+    {"id": 41, "type": "choice", "instruction": "Pick the receptive", "prompt": "呼ぶ", "options": ["呼べる", "呼ばせる", "呼ぼう", "呼ばれる"], "answer": 3, "note": "あ-stem 呼ば + れる."},
+    {"id": 44, "type": "choice", "instruction": "Which sentence says my brother himself was bothered?", "prompt": "", "options": ["弟は誰かに自転車が盗まれた。", "弟が誰かに自転車を盗まれた。", "弟が誰かに自転車を盗んだ。", "弟を誰かに自転車が盗まれた。"], "answer": 1, "note": "The bothered person is the main carriage, and the stolen thing keeps を.", "en": "My younger brother had his bicycle stolen by someone."}
   ]
 }

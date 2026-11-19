@@ -8,21 +8,27 @@
   "video": "https://www.youtube.com/watch?v=pSvH9vH60Ig",
   "related": [526, 502, 529, 552],
   "blocks": [
-    {"type": "text", "text": "Picture every Japanese sentence as a small **train**. It always has two black cars at its core: the **main carriage** (A), which is the thing the sentence is about, and the **engine** (B), which makes the sentence go and says something about A. Textbooks call these the subject and the predicate."},
-    {"type": "diagram", "cars": [{"text": "さくら", "role": "carriage", "label": "main carriage"}, {"text": "が", "role": "particle", "label": "links them"}, {"text": "歩く", "role": "engine", "label": "engine"}], "text": "The core of every sentence: main carriage + が + engine."},
-    {"type": "text", "text": "The little word **が** joins the main carriage to the engine. It is the heart of Japanese grammar. Sometimes it is invisible (you will meet that in the next lesson), but it is always there. All sentences, in any language, come down to two kinds: **A does B** and **A is B**. Japanese has three kinds of engine to say them."},
+    {"type": "text", "text": "Picture every Japanese sentence as a small **train**. It always has two dark cars at its core: the **main carriage**, which is the thing the sentence is about, and the **engine**, which makes the sentence go and says something about the carriage. Textbooks call these the subject and the predicate."},
+    {"type": "diagram", "cars": [{"text": "さくらが", "role": "carriage", "label": "main carriage"}, {"text": "歩く", "role": "engine", "label": "engine"}], "text": "The core of every sentence: main carriage + engine, joined by が."},
+    {"type": "text", "text": "The little word **が** sits on the main carriage and links it to the engine. It is the heart of Japanese grammar. Sometimes it is invisible (you will meet that in the next lesson), but it is always there."},
+    {"type": "text", "text": "All sentences, in any language, come down to two kinds: **A does B** and **A is B**. Japanese has three kinds of engine to say them."},
     {"type": "heading", "text": "Type 1: verb sentences (A does B)"},
     {"type": "text", "text": "The engine is a verb. In the plain form every verb ends in a **う-row sound** (う, く, す, つ, ぬ, ふ, む, る…)."},
     {"type": "example", "jp": "さくらが歩く。", "en": "Sakura walks."},
     {"type": "heading", "text": "Type 2: copula sentences (A is B)"},
     {"type": "text", "text": "The engine is a noun, so it needs help to pull the train. That help is **だ**, the copula. Think of だ as an **equals sign in a box that works one way only**: Sakura is a Japanese person, but not every Japanese person is Sakura. **です** is the polite form of だ."},
+    {"type": "diagram", "cars": [{"text": "さくらが", "role": "carriage", "label": "main carriage"}, {"text": "日本人だ", "role": "engine", "label": "noun + だ"}], "text": "A noun alone cannot pull the train: noun + だ is one engine."},
     {"type": "example", "jp": "さくらが日本人だ。", "en": "Sakura is Japanese."},
     {"type": "example", "jp": "犬が動物だ。", "en": "A dog is an animal."},
     {"type": "heading", "text": "Type 3: adjective sentences (A is adjective)"},
     {"type": "text", "text": "An **い-adjective** (a word ending in い like 赤い) can pull the train by itself, because it already carries the meaning \"is\". So there is **no だ**."},
+    {"type": "diagram", "cars": [{"text": "ペンが", "role": "carriage", "label": "main carriage"}, {"text": "赤い", "role": "engine", "label": "い-adjective: no だ"}], "text": "The い-adjective is the whole engine."},
     {"type": "example", "jp": "ペンが赤い。", "en": "The pen is red."},
     {"type": "example", "jp": "空が青い。", "en": "The sky is blue."},
-    {"type": "keypoints", "title": "Three engines", "items": ["A verb engine: **さくらが歩く** (ends in a う-row sound).", "A noun + **だ** engine: **さくらが日本人だ**.", "An **い-adjective** engine: **ペンが赤い** (never add だ).", "In every one, the main carriage takes **が**."]}
+    {"type": "heading", "text": "The three engines side by side"},
+    {"type": "text", "text": "Whatever the engine is, the main carriage in front of it takes が."},
+    {"type": "table", "title": "Three engines", "rows": [["Engine", "What it looks like", "Example"], ["Verb", "ends in a う-row sound", "さくらが歩く"], ["Noun + だ", "a noun with だ", "さくらが日本人だ"], ["い-adjective", "ends in い, no だ", "ペンが赤い"]]},
+    {"type": "keypoints", "title": "Remember", "items": ["An い-adjective never takes だ.", "Every main carriage takes が.", "だ works one way: A = B, not B = A."]}
   ],
   "questions": [
     {"id": 14, "type": "choice", "instruction": "Fill the gap", "prompt": "鳥＿＿飛ぶ。", "options": ["が", "を", "に", "で"], "answer": 0, "note": "The main carriage of a verb sentence takes が.", "en": "The bird flies."},
@@ -36,15 +42,16 @@
     {"id": 22, "type": "choice", "instruction": "Which sentence says A is B with a noun?", "prompt": "", "options": ["これが本だ。", "これが高い。", "これが落ちる。", "これが新しい。"], "answer": 0, "note": "A noun engine takes だ."},
     {"id": 23, "type": "choice", "instruction": "True or false?", "prompt": "ドアが白いだ。 is a correct sentence.", "options": ["True", "False"], "answer": 1, "note": "白い is an い-adjective, so だ cannot follow it.", "en": "The door is white. (with an extra だ)"},
     {"id": 24, "type": "choice", "instruction": "Who or what is the main carriage?", "prompt": "雪が降る。", "options": ["降る", "が", "雪", "There is none"], "answer": 2, "note": "The word before が is the main carriage.", "en": "Snow falls."},
-    {"id": 25, "type": "tap", "instruction": "Tap the engine", "options": ["弟が", "走る"], "answer": 1, "note": "走る is the verb that pulls the train.", "en": "My younger brother runs."},
-    {"id": 26, "type": "tap", "instruction": "Tap the main carriage", "options": ["先生が", "日本人だ"], "answer": 0, "note": "The main carriage comes before が.", "en": "The teacher is Japanese."},
-    {"id": 27, "type": "tap", "instruction": "Tap the engine", "options": ["夏が", "暑い"], "answer": 1, "note": "暑い is an い-adjective engine.", "en": "Summer is hot."},
+    {"id": 25, "type": "tap", "instruction": "Tap the engine", "options": ["あの", "弟が", "走る"], "answer": 2, "note": "走る is the verb that pulls the train.", "en": "That younger brother runs."},
+    {"id": 26, "type": "tap", "instruction": "Tap the main carriage", "options": ["あの", "先生が", "日本人だ"], "answer": 1, "note": "The main carriage comes before が.", "en": "That teacher is Japanese."},
+    {"id": 27, "type": "tap", "instruction": "Tap the engine", "options": ["この", "夏が", "暑い"], "answer": 2, "note": "暑い is an い-adjective engine.", "en": "This summer is hot."},
     {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "That cat sleeps.", "options": ["あの", "猫が", "寝る"], "note": "Main carriage first, engine last.", "en": "That cat sleeps."},
     {"id": 29, "type": "order", "instruction": "Build the sentence", "prompt": "My father is a teacher.", "options": ["父が", "先生", "だ"], "note": "A noun engine needs だ.", "en": "My father is a teacher."},
     {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "This sea is blue.", "options": ["この", "海が", "青い"], "note": "The い-adjective engine closes the sentence.", "en": "This sea is blue."},
     {"id": 31, "type": "choice", "instruction": "Which particle follows the main carriage in 'A does B'?", "prompt": "", "options": ["を", "が", "だ", "ない"], "answer": 1, "note": "が joins the main carriage to the engine."},
     {"id": 32, "type": "choice", "instruction": "True or false?", "prompt": "An い-adjective needs だ to be an engine.", "options": ["True", "False"], "answer": 1, "note": "い-adjectives already carry the meaning 'is'."},
-    {"id": 33, "type": "choice", "instruction": "What is だ like, according to the course?", "prompt": "", "options": ["A two-way equals sign", "A verb ending in a う-row sound", "A particle for the object", "An equals sign in a box that works one way only"], "answer": 3, "note": "Sakura is Japanese, but not every Japanese is Sakura."},
-    {"id": 34, "type": "choice", "instruction": "What do textbooks call the main carriage and the engine?", "prompt": "", "options": ["Subject and predicate", "Object and verb", "Topic and comment", "Noun and adjective"], "answer": 0, "note": "Subject = main carriage; predicate = engine."}
+    {"id": 33, "type": "tap", "instruction": "Tap the engine", "options": ["その", "猫が", "動物だ"], "answer": 2, "note": "動物だ is a noun + だ: it pulls the train.", "en": "That cat is an animal."},
+    {"id": 34, "type": "choice", "instruction": "What do textbooks call the main carriage and the engine?", "prompt": "", "options": ["Subject and predicate", "Object and verb", "Topic and comment", "Noun and adjective"], "answer": 0, "note": "Subject = main carriage; predicate = engine."},
+    {"id": 35, "type": "order", "instruction": "Build the sentence", "prompt": "That dog is big.", "options": ["その", "犬が", "大きい"], "note": "Main carriage first, the い-adjective engine last.", "en": "That dog is big."}
   ]
 }
