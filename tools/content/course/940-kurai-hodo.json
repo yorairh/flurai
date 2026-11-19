@@ -1,385 +1,162 @@
 {
- "id": 940,
- "number": "94",
- "kind": "lesson",
- "jlpt": 3,
- "title": "くらい vs ほど",
- "summary": "Both give an extent, but ほど stresses a large degree and くらい is approximate or small.",
- "video": "https://www.youtube.com/watch?v=6PEQTcDnbBk",
- "related": [
-  568,
-  714,
-  715
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "**くらい** (also ぐらい) and **ほど** are nouns of extent: they say how much, how far, how long. The difference is in the size they suggest."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Word",
-     "Suggests",
-     "Examples"
-    ],
-    [
-     "ほど",
-     "a large degree, an upper limit",
-     "死ぬほど眠い"
-    ],
-    [
-     "くらい",
-     "approximate, indefinite, or small",
-     "十分ぐらい"
-    ]
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "ほど: a large degree"
-  },
-  {
-   "type": "example",
-   "jp": "これほど難しいとは思わなかった。",
-   "en": "I didn't think it was this difficult."
-  },
-  {
-   "type": "example",
-   "jp": "それほど高くない。",
-   "en": "It isn't that expensive."
-  },
-  {
-   "type": "example",
-   "jp": "彼ほど速く走れない。",
-   "en": "I can't run as fast as he can."
-  },
-  {
-   "type": "example",
-   "jp": "涙が出るほど笑った。",
-   "en": "I laughed so hard that tears came."
-  },
-  {
-   "type": "text",
-   "text": "ほど is also the upper side of a comparison: the thing in front of ほど has the larger amount."
-  },
-  {
-   "type": "heading",
-   "text": "くらい: about, or at least"
-  },
-  {
-   "type": "example",
-   "jp": "駅まで十分ぐらいかかる。",
-   "en": "It takes about ten minutes to the station."
-  },
-  {
-   "type": "example",
-   "jp": "一言くらい謝ってほしい。",
-   "en": "I want at least a word of apology."
-  },
-  {
-   "type": "text",
-   "text": "When くらい marks something small, it often means \"at least\", often with a complaint."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "**ほど** = a great extent; negative: not that much.",
-    "**くらい** = about; or \"at least\" when small.",
-    "これくらい = about this much; これほど = this much (a lot)."
-   ]
-  }
- ],
- "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "Which word suggests a large degree?",
-   "prompt": "",
-   "options": [
-    "ほど",
-    "くらい",
-    "ばかり",
-    "だけ"
-   ],
-   "answer": 0,
-   "note": "ほど points at the upper limit."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "Which word is used for \"about ten minutes\"?",
-   "prompt": "",
-   "options": [
-    "くらい",
-    "ほど",
-    "しか",
-    "まで"
-   ],
-   "answer": 0,
-   "note": "Approximation."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "Which sentence uses ほど for comparison?",
-   "prompt": "",
-   "options": [
-    "私は彼ほど背が高くない。",
-    "駅まで十分ぐらいだ。",
-    "笑うくらい楽しい。",
-    "今日くらい休もう。"
-   ],
-   "answer": 0,
-   "note": "The larger one comes before ほど."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "ほど suggests a small amount.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It suggests a large degree."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "ぐらい is another sound of くらい.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "It's the same word.",
-   "en": "ぐらい is another form of くらい (about)."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "What does どのくらいかかりますか ask?",
-   "prompt": "",
-   "options": [
-    "About how long or how much does it take",
-    "Exactly how many",
-    "Whether it is large",
-    "Whether it is small"
-   ],
-   "answer": 0,
-   "note": "It asks softly for an estimate."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "せめて「ありがとう」＿＿言ってください。",
-   "options": [
-    "ほど",
-    "より",
-    "まで",
-    "くらい"
-   ],
-   "answer": 3,
-   "note": "Small thing + くらい means at least.",
-   "en": "At least say thank you."
-  },
-  {
-   "id": 13,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "今日は昨日＿＿暑くない。",
-   "options": [
-    "ほど",
-    "から",
-    "まで",
-    "しか"
-   ],
-   "answer": 0,
-   "note": "ほど marks the larger side of a comparison: not as hot as yesterday.",
-   "en": "Today isn't as hot as yesterday."
-  },
-  {
-   "id": 14,
-   "type": "choice",
-   "instruction": "What does this suggest?",
-   "prompt": "宿題はそれほど難しくなかった。",
-   "options": [
-    "It wasn't that difficult",
-    "It was extremely difficult",
-    "It was very easy",
-    "It was never given"
-   ],
-   "answer": 0,
-   "note": "ほど with a negative means not that much.",
-   "en": "The homework wasn't that difficult."
-  },
-  {
-   "id": 15,
-   "type": "choice",
-   "instruction": "What does くらい mean here?",
-   "prompt": "一度くらい行ってみたい。",
-   "options": [
-    "As many times as possible",
-    "About one time exactly",
-    "At least once",
-    "I never want to go"
-   ],
-   "answer": 2,
-   "note": "くらい after a small amount means at least.",
-   "en": "I'd like to go at least once."
-  },
-  {
-   "id": 16,
-   "type": "choice",
-   "instruction": "Which sentence says I can't sing as well as my sister?",
-   "prompt": "",
-   "options": [
-    "私は姉に上手に歌えない。",
-    "私は姉ほど上手に歌えない。",
-    "私は姉ばかり上手に歌えない。",
-    "私は姉だけ上手に歌えた。"
-   ],
-   "answer": 1,
-   "note": "ほど + negative: not as much as."
-  },
-  {
-   "id": 17,
-   "type": "choice",
-   "instruction": "Which sentence says \"It was so cold that my hands hurt\"?",
-   "prompt": "",
-   "options": [
-    "寒くて手が痛くなるまでだった。",
-    "寒くて手が痛くなるしかなかった。",
-    "寒くて手が痛くなるほどだった。",
-    "寒くて手が痛くなるだけだった。"
-   ],
-   "answer": 2,
-   "note": "ほど shows a large degree."
-  },
-  {
-   "id": 18,
-   "type": "tap",
-   "instruction": "Tap the word that gives the approximate amount",
-   "options": [
-    "バスで",
-    "二十分",
-    "ぐらい",
-    "かかる"
-   ],
-   "answer": 2,
-   "note": "ぐらい means about.",
-   "en": "It takes about twenty minutes by bus."
-  },
-  {
-   "id": 19,
-   "type": "tap",
-   "instruction": "Tap the word that marks the larger side of the comparison",
-   "options": [
-    "彼女",
-    "ほど",
-    "親切な",
-    "人は",
-    "いない"
-   ],
-   "answer": 1,
-   "note": "彼女ほど: nobody is as kind as she is.",
-   "en": "There is nobody as kind as she is."
-  },
-  {
-   "id": 20,
-   "type": "tap",
-   "instruction": "Tap the word meaning \"at least\"",
-   "options": [
-    "名前",
-    "ぐらい",
-    "書きなさい"
-   ],
-   "answer": 1,
-   "note": "ぐらい after a small thing means at least.",
-   "en": "At least write your name."
-  },
-  {
-   "id": 21,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "It takes about thirty minutes.",
-   "options": [
-    "三十分",
-    "ぐらい",
-    "かかる"
-   ],
-   "note": "Amount + ぐらい: about.",
-   "en": "It takes about thirty minutes."
-  },
-  {
-   "id": 22,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I can't run as fast as my brother.",
-   "options": [
-    "兄ほど",
-    "速く",
-    "走れない"
-   ],
-   "note": "ほど + negative.",
-   "en": "I can't run as fast as my brother."
-  },
-  {
-   "id": 23,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I want you to at least call me.",
-   "options": [
-    "電話くらい",
-    "して",
-    "ほしい"
-   ],
-   "note": "くらい: at least, with a mild complaint.",
-   "en": "I want you to at least call me."
-  },
-  {
-   "id": 24,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I was so hungry I couldn't walk.",
-   "options": [
-    "歩けない",
-    "ほど",
-    "おなかがすいた"
-   ],
-   "note": "Clause + ほど: to the extent that.",
-   "en": "I was so hungry I couldn't walk."
-  },
-  {
-   "id": 25,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "これくらい means \"about this much\", and これほど means \"this much (a lot)\".",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "くらい is approximate; ほど is a large degree.",
-   "en": "About this much / this much (a lot)."
-  },
-  {
-   "id": 26,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "彼ほど料理が上手な人はいない means that he is not good at cooking.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It means nobody is as good at cooking as he is.",
-   "en": "There is nobody as good at cooking as he is."
-  }
- ]
+  "id": 940,
+  "number": "94",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "くらい vs ほど",
+  "summary": "Both give an extent, but ほど stresses a large degree and くらい is approximate or small.",
+  "video": "https://www.youtube.com/watch?v=6PEQTcDnbBk",
+  "related": [
+    568,
+    714,
+    715
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "**くらい** (also ぐらい) and **ほど** are nouns of extent: they say how much, how far, how long. The difference is in the size they suggest. See it first in one pair: **これくらい** means \"about this much\", while **これほど** means \"this much (a lot)\"."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Word",
+          "Suggests",
+          "Examples"
+        ],
+        [
+          "ほど",
+          "a large degree, an upper limit",
+          "死ぬほど眠い"
+        ],
+        [
+          "くらい",
+          "approximate, indefinite, or small",
+          "十分ぐらい"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "ほど: this much, that much"
+    },
+    {
+      "type": "text",
+      "text": "With これ and それ, ほど points at an amount. With a negative it means \"not THAT much\", like \"it isn't that bad\" in English."
+    },
+    {
+      "type": "example",
+      "jp": "これほど難しいとは思わなかった。",
+      "en": "I didn't think it was this difficult."
+    },
+    {
+      "type": "example",
+      "jp": "それほど高くない。",
+      "en": "It isn't that expensive."
+    },
+    {
+      "type": "heading",
+      "text": "ほど: comparison"
+    },
+    {
+      "type": "text",
+      "text": "ほど is also the upper side of a comparison: the thing in front of ほど has the larger amount, and the sentence ends in a negative."
+    },
+    {
+      "type": "example",
+      "jp": "彼ほど速く走れない。",
+      "en": "I can't run as fast as he can."
+    },
+    {
+      "type": "heading",
+      "text": "ほど: a degree so large that ..."
+    },
+    {
+      "type": "text",
+      "text": "This is the most common use. A clause in front of ほど names a result that shows how large the degree is."
+    },
+    {
+      "type": "example",
+      "jp": "涙が出るほど笑った。",
+      "en": "I laughed so hard that tears came."
+    },
+    {
+      "type": "example",
+      "jp": "死ぬほど眠い。",
+      "en": "I'm so sleepy I could die."
+    },
+    {
+      "type": "heading",
+      "text": "ほどがある: there is a limit"
+    },
+    {
+      "type": "text",
+      "text": "**Noun + にもほどがある** says that even this has its limit, and you have gone past it. It is very common in anime."
+    },
+    {
+      "type": "example",
+      "jp": "冗談にもほどがある。",
+      "en": "That's beyond a joke. (even jokes have a limit)"
+    },
+    {
+      "type": "heading",
+      "text": "くらい: about, or at least"
+    },
+    {
+      "type": "text",
+      "text": "Attached to an amount, くらい means \"about\". Japanese speakers say ぐらい even for exact things, because it sounds softer: どのくらいかかりますか is a gentle way to ask how long."
+    },
+    {
+      "type": "example",
+      "jp": "駅まで十分ぐらいかかる。",
+      "en": "It takes about ten minutes to the station."
+    },
+    {
+      "type": "text",
+      "text": "When くらい marks something small, it often means \"at least\", often with a complaint. The typical frame is せめて or ... のに."
+    },
+    {
+      "type": "example",
+      "jp": "一言くらい謝ってほしい。",
+      "en": "I want at least a word of apology."
+    },
+    {
+      "type": "example",
+      "jp": "「ありがとう」ぐらい言ってくれてもいいのに。",
+      "en": "You could at least say thanks!"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**ほど** = a great extent; negative: not that much.",
+        "**くらい** = about; or \"at least\" when small.",
+        "これくらい = about this much; これほど = this much (a lot).",
+        "**にもほどがある** = there is a limit."
+      ]
+    }
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which word suggests a large degree?", "prompt": "", "options": ["ほど", "くらい", "ばかり", "だけ"], "answer": 0, "note": "ほど points at the upper limit."},
+    {"id": 2, "type": "choice", "instruction": "Which word is used for \"about ten minutes\"?", "prompt": "", "options": ["くらい", "ほど", "しか", "まで"], "answer": 0, "note": "Approximation."},
+    {"id": 6, "type": "choice", "instruction": "Which sentence uses ほど for comparison?", "prompt": "", "options": ["私は彼ほど背が高くない。", "駅まで十分ぐらいだ。", "笑うくらい楽しい。", "今日くらい休もう。"], "answer": 0, "note": "The larger one comes before ほど."},
+    {"id": 7, "type": "choice", "instruction": "What does the sentence say?", "prompt": "バカにもほどがある。", "options": ["That's going too far: there is a limit", "Fools are everywhere", "I like clever people", "Fools are about this size"], "answer": 0, "note": "にもほどがある: even this has a limit, and you passed it.", "en": "Being silly has its limits!"},
+    {"id": 8, "type": "choice", "instruction": "Why do speakers say ぐらい even for an exact amount?", "prompt": "", "options": ["It sounds softer", "It makes the amount larger", "It is a mistake", "It means at most"], "answer": 0, "note": "ぐらい gently softens: どのくらいかかりますか."},
+    {"id": 11, "type": "choice", "instruction": "What does どのくらいかかりますか ask?", "prompt": "", "options": ["About how long or how much does it take", "Exactly how many", "Whether it is large", "Whether it is small"], "answer": 0, "note": "It asks softly for an estimate."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "せめて「ありがとう」＿＿言ってください。", "options": ["ほど", "より", "まで", "くらい"], "answer": 3, "note": "Small thing + くらい means at least.", "en": "At least say thank you."},
+    {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "今日は昨日＿＿暑くない。", "options": ["ほど", "から", "まで", "しか"], "answer": 0, "note": "ほど marks the larger side of a comparison: not as hot as yesterday.", "en": "Today isn't as hot as yesterday."},
+    {"id": 14, "type": "choice", "instruction": "What does this suggest?", "prompt": "宿題はそれほど難しくなかった。", "options": ["It wasn't that difficult", "It was extremely difficult", "It was very easy", "It was never given"], "answer": 0, "note": "ほど with a negative means not that much.", "en": "The homework wasn't that difficult."},
+    {"id": 15, "type": "choice", "instruction": "What does くらい mean here?", "prompt": "一度くらい行ってみたい。", "options": ["As many times as possible", "About one time exactly", "At least once", "I never want to go"], "answer": 2, "note": "くらい after a small amount means at least.", "en": "I'd like to go at least once."},
+    {"id": 16, "type": "choice", "instruction": "Which sentence says I can't sing as well as my sister?", "prompt": "", "options": ["私は姉に上手に歌えない。", "私は姉ほど上手に歌えない。", "私は姉ばかり上手に歌えない。", "私は姉だけ上手に歌えた。"], "answer": 1, "note": "ほど + negative: not as much as."},
+    {"id": 17, "type": "choice", "instruction": "Which sentence says \"It was so cold that my hands hurt\"?", "prompt": "", "options": ["寒くて手が痛くなるまでだった。", "寒くて手が痛くなるしかなかった。", "寒くて手が痛くなるほどだった。", "寒くて手が痛くなるだけだった。"], "answer": 2, "note": "ほど shows a large degree."},
+    {"id": 18, "type": "tap", "instruction": "Tap the word that gives the approximate amount", "options": ["バスで", "二十分", "ぐらい", "かかる"], "answer": 2, "note": "ぐらい means about.", "en": "It takes about twenty minutes by bus."},
+    {"id": 19, "type": "tap", "instruction": "Tap the word that marks the larger side of the comparison", "options": ["彼女", "ほど", "親切な", "人は", "いない"], "answer": 1, "note": "彼女ほど: nobody is as kind as she is.", "en": "There is nobody as kind as she is."},
+    {"id": 20, "type": "tap", "instruction": "Tap the word meaning \"at least\"", "options": ["せめて", "名前", "ぐらい", "書きなさい"], "answer": 2, "note": "ぐらい after a small thing means at least.", "en": "At least write your name."},
+    {"id": 21, "type": "order", "instruction": "Build the sentence", "prompt": "It takes about thirty minutes.", "options": ["三十分", "ぐらい", "かかる"], "note": "Amount + ぐらい: about.", "en": "It takes about thirty minutes."},
+    {"id": 22, "type": "order", "instruction": "Build the sentence", "prompt": "I can't run as fast as my brother.", "options": ["兄ほど", "速く", "走れない"], "note": "ほど + negative.", "en": "I can't run as fast as my brother."},
+    {"id": 23, "type": "order", "instruction": "Build the sentence", "prompt": "I want you to at least call me.", "options": ["電話くらい", "して", "ほしい"], "note": "くらい: at least, with a mild complaint.", "en": "I want you to at least call me."},
+    {"id": 24, "type": "order", "instruction": "Build the sentence", "prompt": "I was so hungry I couldn't walk.", "options": ["歩けない", "ほど", "おなかがすいた"], "note": "Clause + ほど: to the extent that.", "en": "I was so hungry I couldn't walk."},
+    {"id": 25, "type": "choice", "instruction": "True or false?", "prompt": "これくらい means \"about this much\", and これほど means \"this much (a lot)\".", "options": ["True", "False"], "answer": 0, "note": "くらい is approximate; ほど is a large degree.", "en": "About this much / this much (a lot)."},
+    {"id": 26, "type": "choice", "instruction": "True or false?", "prompt": "彼ほど料理が上手な人はいない means that he is not good at cooking.", "options": ["True", "False"], "answer": 1, "note": "It means nobody is as good at cooking as he is.", "en": "There is nobody as good at cooking as he is."},
+    {"id": 27, "type": "choice", "instruction": "Fill the gap", "prompt": "いたずらも＿＿がある。", "options": ["ほど", "くらい", "しか", "まで"], "answer": 0, "note": "にもほどがある: there is a limit.", "en": "Even pranks have their limits."}
+  ]
 }

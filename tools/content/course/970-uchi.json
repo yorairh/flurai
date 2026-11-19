@@ -1,418 +1,185 @@
 {
- "id": 970,
- "number": "97",
- "kind": "lesson",
- "jlpt": 3,
- "title": "うち: inside the boundary",
- "summary": "うち is an enclosure defined by its contents: home, our group, a span of time, and a pool to choose from.",
- "video": "https://www.youtube.com/watch?v=56sy0qfY0Js",
- "related": [
-  476
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "**うち** is an enclosure, defined by what is inside it. Every meaning comes from that."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Meaning",
-     "Example"
-    ],
-    [
-     "home (family life, not just the building)",
-     "うちに来て"
-    ],
-    [
-     "our group, me",
-     "うちの母"
-    ],
-    [
-     "the in-group (内) vs. outsiders (外)",
-     "うちとそと"
-    ],
-    [
-     "a group to choose from",
-     "三つのうちから選ぶ"
-    ],
-    [
-     "a span of time",
-     "若いうちに"
-    ]
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "Home and our group"
-  },
-  {
-   "type": "text",
-   "text": "いえ is the building; **うち** is the family life inside it. Japanese often says うちの to mean \"our\": うちの母, even with no big difference between self and group. This is the **うち / そと** (in-group / out-group) split that shapes language, including くれる (giving *down to* our group)."
-  },
-  {
-   "type": "example",
-   "jp": "うちの犬はよく吠える。",
-   "en": "Our dog barks a lot."
-  },
-  {
-   "type": "heading",
-   "text": "Enclosures of time"
-  },
-  {
-   "type": "text",
-   "text": "A noun or clause + うちに means \"while it lasts\": the time is an enclosure defined by its contents."
-  },
-  {
-   "type": "example",
-   "jp": "温かいうちにどうぞ。",
-   "en": "Please enjoy it while it's warm."
-  },
-  {
-   "type": "example",
-   "jp": "今のうちに勉強しよう。",
-   "en": "Let's study while we still can."
-  },
-  {
-   "type": "example",
-   "jp": "そのうち会えるよ。",
-   "en": "We'll meet sooner or later."
-  },
-  {
-   "type": "text",
-   "text": "今のうち means \"while the present situation lasts\". そのうち is \"in that enclosure\", something vaguely coming in the near future."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "うち = an enclosure defined by its contents.",
-    "**うちに** = while a condition lasts.",
-    "**今のうち** = while we still can; **そのうち** = sooner or later."
-   ]
-  }
- ],
- "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "Which word means the family life inside a house?",
-   "prompt": "",
-   "options": [
-    "うち",
-    "いえ",
-    "やね",
-    "へや"
-   ],
-   "answer": 0,
-   "note": "うち is the interior; いえ is the building."
-  },
-  {
-   "id": 2,
-   "type": "choice",
-   "instruction": "What does うちの母 emphasize?",
-   "prompt": "",
-   "options": [
-    "Our mother (my in-group)",
-    "The building",
-    "A different mother",
-    "Other people's mother"
-   ],
-   "answer": 0,
-   "note": "Group identity."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "What does 今のうち mean?",
-   "prompt": "",
-   "options": [
-    "While we still can",
-    "Right now only",
-    "Never",
-    "The next time"
-   ],
-   "answer": 0,
-   "note": "While the present situation continues."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "What does そのうち mean?",
-   "prompt": "",
-   "options": [
-    "Sooner or later",
-    "Within that thing's boundary only",
-    "Immediately",
-    "Never"
-   ],
-   "answer": 0,
-   "note": "A vague future."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "いえ refers mainly to the physical building.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "うち is the family life inside."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "In 若いうちに, the enclosure ends when you stop being young.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "It is defined by its content.",
-   "en": "While you are young."
-  },
-  {
-   "id": 11,
-   "type": "choice",
-   "instruction": "What is the opposite of 内?",
-   "prompt": "",
-   "options": [
-    "外",
-    "前",
-    "上",
-    "下"
-   ],
-   "answer": 0,
-   "note": "うち / そと."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "忙しくならない＿＿に、友達に会おう。",
-   "options": [
-    "まま",
-    "くせ",
-    "うち",
-    "ほど"
-   ],
-   "answer": 2,
-   "note": "Clause + うちに: while it lasts.",
-   "en": "Let's see our friends while we're not busy yet."
-  },
-  {
-   "id": 13,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "冷たい＿＿に飲んでください。",
-   "options": [
-    "あと",
-    "うち",
-    "ため",
-    "ところ"
-   ],
-   "answer": 1,
-   "note": "冷たいうちに: while it is still cold.",
-   "en": "Please drink it while it's cold."
-  },
-  {
-   "id": 14,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "＿＿の父は、先生です。",
-   "options": [
-    "いえ",
-    "へや",
-    "やね",
-    "うち"
-   ],
-   "answer": 3,
-   "note": "うちの: our family's.",
-   "en": "My father (our dad) is a teacher."
-  },
-  {
-   "id": 15,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "＿＿また会いましょう。",
-   "options": [
-    "そのうち",
-    "そのまま",
-    "そのほど",
-    "そのくせ"
-   ],
-   "answer": 0,
-   "note": "そのうち: sooner or later.",
-   "en": "Let's meet again sooner or later."
-  },
-  {
-   "id": 16,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "若い＿＿に、いろいろな国へ行きたい。",
-   "options": [
-    "くせ",
-    "ほど",
-    "うち",
-    "まで"
-   ],
-   "answer": 2,
-   "note": "若いうちに: while I'm young.",
-   "en": "I want to visit many countries while I'm young."
-  },
-  {
-   "id": 17,
-   "type": "choice",
-   "instruction": "What does 今のうちに mean here?",
-   "prompt": "今のうちに宿題をしておこう。",
-   "options": [
-    "While we still can",
-    "After everything is done",
-    "Never",
-    "Because of now"
-   ],
-   "answer": 0,
-   "note": "今のうち: while the present situation lasts.",
-   "en": "Let's do the homework while we still can."
-  },
-  {
-   "id": 18,
-   "type": "choice",
-   "instruction": "Which sentence uses うち for the in-group (family)?",
-   "prompt": "",
-   "options": [
-    "先生の兄は、大学生です。",
-    "うちの兄は、大学生です。",
-    "あの人の兄は、大学生です。",
-    "お兄さんは、大学生ですか。"
-   ],
-   "answer": 1,
-   "note": "うちの marks my own group."
-  },
-  {
-   "id": 19,
-   "type": "choice",
-   "instruction": "What does うち mean here?",
-   "prompt": "この三つのうち、どれが好きですか。",
-   "options": [
-    "Home",
-    "A span of time",
-    "Among (a group to choose from)",
-    "Outside"
-   ],
-   "answer": 2,
-   "note": "A group to choose from.",
-   "en": "Of these three, which do you like?"
-  },
-  {
-   "id": 20,
-   "type": "tap",
-   "instruction": "Tap the word that means \"while\"",
-   "options": [
-    "雨が",
-    "降らない",
-    "うちに",
-    "帰ろう"
-   ],
-   "answer": 2,
-   "note": "Clause + うちに: while it lasts.",
-   "en": "Let's go home while it isn't raining."
-  },
-  {
-   "id": 21,
-   "type": "tap",
-   "instruction": "Tap the word that means \"our\"",
-   "options": [
-    "うちの",
-    "猫は",
-    "魚が",
-    "好きだ"
-   ],
-   "answer": 0,
-   "note": "うちの: our (my group's).",
-   "en": "Our cat likes fish."
-  },
-  {
-   "id": 22,
-   "type": "tap",
-   "instruction": "Tap the word that means \"sooner or later\"",
-   "options": [
-    "そのうち",
-    "雨が",
-    "止むよ"
-   ],
-   "answer": 0,
-   "note": "そのうち: some time soon.",
-   "en": "It'll stop raining sooner or later."
-  },
-  {
-   "id": 23,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Let's go while it's still early.",
-   "options": [
-    "早い",
-    "うちに",
-    "行こう"
-   ],
-   "note": "い-adjective + うちに.",
-   "en": "Let's go while it's still early."
-  },
-  {
-   "id": 24,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Let's buy it while it's cheap.",
-   "options": [
-    "安い",
-    "うちに",
-    "買おう"
-   ],
-   "note": "い-adjective + うちに.",
-   "en": "Let's buy it while it's cheap."
-  },
-  {
-   "id": 25,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Our school is big.",
-   "options": [
-    "うちの",
-    "学校は",
-    "大きい"
-   ],
-   "note": "うちの: our.",
-   "en": "Our school is big."
-  },
-  {
-   "id": 26,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "Sooner or later you'll surely understand.",
-   "options": [
-    "そのうち",
-    "きっと",
-    "わかるよ"
-   ],
-   "note": "そのうち: sooner or later.",
-   "alt": [["きっと", "そのうち", "わかるよ"]],
-   "en": "Sooner or later you'll surely understand."
-  },
-  {
-   "id": 27,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "In 若いうちに, うち means the place called home.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "Here it is an enclosure of time: while I'm young.",
-   "en": "while I'm young"
-  }
- ]
+  "id": 970,
+  "number": "97",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "うち: inside the boundary",
+  "summary": "うち is an enclosure defined by its contents: home, our group, a span of time, and a pool to choose from.",
+  "video": "https://www.youtube.com/watch?v=56sy0qfY0Js",
+  "related": [
+    476
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "**うち** is an enclosure, defined by what is inside it. Every meaning comes from that one picture."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Meaning",
+          "Example"
+        ],
+        [
+          "home (family life, not just the building)",
+          "うちに来て"
+        ],
+        [
+          "our group, me",
+          "うちの母"
+        ],
+        [
+          "the in-group vs. outsiders (うち / そと)",
+          "うちとそと"
+        ],
+        [
+          "a group to choose from",
+          "三つのうちから選ぶ"
+        ],
+        [
+          "a span of time",
+          "若いうちに"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Home and our group"
+    },
+    {
+      "type": "text",
+      "text": "いえ is the building; **うち** is the family life inside it. Compare the two."
+    },
+    {
+      "type": "example",
+      "jp": "新しい家を建てた。",
+      "en": "(We) built a new house. (the building)"
+    },
+    {
+      "type": "example",
+      "jp": "うちに帰る。",
+      "en": "(I) go home. (the family life)"
+    },
+    {
+      "type": "text",
+      "text": "Japanese often says うちの to mean \"our\": うちの母, even with no big difference between self and group. This is the **うち / そと** (in-group / out-group) split that shapes language, including くれる, which gives **down to** our group (lesson 11)."
+    },
+    {
+      "type": "example",
+      "jp": "うちの犬はよく吠える。",
+      "en": "Our dog barks a lot."
+    },
+    {
+      "type": "heading",
+      "text": "うち as \"me\""
+    },
+    {
+      "type": "text",
+      "text": "In Kansai speech, and for girls in anime, うち can mean \"I\" itself. A noun + んち is a casual \"someone's place\", short for うち."
+    },
+    {
+      "type": "example",
+      "jp": "うち、もう帰るわ。",
+      "en": "I'm heading home now. (Kansai-style うち = I)"
+    },
+    {
+      "type": "example",
+      "jp": "さくらんちに行こう。",
+      "en": "Let's go to Sakura's place. (さくらんち = さくらのうち)"
+    },
+    {
+      "type": "heading",
+      "text": "A group to choose from"
+    },
+    {
+      "type": "text",
+      "text": "The enclosure can be a group, and うち then means \"among\". Use it to pick one or several out of the group."
+    },
+    {
+      "type": "example",
+      "jp": "三つのうち一つだけ選んでください。",
+      "en": "Please choose just one of the three."
+    },
+    {
+      "type": "example",
+      "jp": "多くの本のうちから、これを選んだ。",
+      "en": "I chose this one from among many books."
+    },
+    {
+      "type": "heading",
+      "text": "Enclosures of time"
+    },
+    {
+      "type": "text",
+      "text": "A noun or clause + うちに means \"while it lasts\": the time is an enclosure defined by its contents."
+    },
+    {
+      "type": "example",
+      "jp": "温かいうちにどうぞ。",
+      "en": "Please enjoy it while it's warm."
+    },
+    {
+      "type": "example",
+      "jp": "今のうちに勉強しよう。",
+      "en": "Let's study while we still can."
+    },
+    {
+      "type": "text",
+      "text": "With a negative, ないうちに means \"before it happens\". With a verb in the ている form, ているうちに means \"while doing it, before I knew it\"."
+    },
+    {
+      "type": "example",
+      "jp": "暗くならないうちに帰ろう。",
+      "en": "Let's go home before it gets dark."
+    },
+    {
+      "type": "example",
+      "jp": "歩いているうちに、道がわからなくなった。",
+      "en": "While I was walking, I lost my way before I knew it."
+    },
+    {
+      "type": "text",
+      "text": "今のうち means \"while the present situation lasts\". そのうち is \"in that enclosure\", something vaguely coming in the near future."
+    },
+    {
+      "type": "example",
+      "jp": "そのうち会えるよ。",
+      "en": "We'll meet sooner or later."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "うち = an enclosure defined by its contents.",
+        "**うちに** = while a condition lasts.",
+        "**今のうち** = while we still can; **そのうち** = sooner or later."
+      ]
+    }
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "Which word means the family life inside a house?", "prompt": "", "options": ["うち", "いえ", "やね", "へや"], "answer": 0, "note": "うち is the interior; いえ is the building."},
+    {"id": 2, "type": "choice", "instruction": "What does うちの母 emphasize?", "prompt": "", "options": ["Our mother (my in-group)", "The building", "A different mother", "Other people's mother"], "answer": 0, "note": "Group identity."},
+    {"id": 5, "type": "choice", "instruction": "What does 今のうち mean?", "prompt": "", "options": ["While we still can", "Right now only", "Never", "The next time"], "answer": 0, "note": "While the present situation continues."},
+    {"id": 6, "type": "choice", "instruction": "What does そのうち mean?", "prompt": "", "options": ["Sooner or later", "Within that thing's boundary only", "Immediately", "Never"], "answer": 0, "note": "A vague future."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "いえ refers mainly to the physical building.", "options": ["True", "False"], "answer": 0, "note": "うち is the family life inside."},
+    {"id": 8, "type": "choice", "instruction": "What does うち mean here?", "prompt": "うち、お腹すいたわ。", "options": ["I (Kansai-style)", "Home", "A span of time", "Among"], "answer": 0, "note": "Some speakers use うち for \"I\".", "en": "I'm hungry."},
+    {"id": 11, "type": "choice", "instruction": "Which phrase picks one out of a group?", "prompt": "", "options": ["三人のうち一人", "三人のくせに", "三人のほど", "三人のまま"], "answer": 0, "note": "のうち: among the group."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "忙しくならない＿＿に、友達に会おう。", "options": ["まま", "くせ", "うち", "ほど"], "answer": 2, "note": "Clause + うちに: while it lasts.", "en": "Let's see our friends while we're not busy yet."},
+    {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "冷たい＿＿に飲んでください。", "options": ["あと", "うち", "ため", "ところ"], "answer": 1, "note": "冷たいうちに: while it is still cold.", "en": "Please drink it while it's cold."},
+    {"id": 14, "type": "choice", "instruction": "Fill the gap", "prompt": "＿＿の父は、先生です。", "options": ["いえ", "へや", "やね", "うち"], "answer": 3, "note": "うちの: our family's.", "en": "My father (our dad) is a teacher."},
+    {"id": 15, "type": "choice", "instruction": "Fill the gap", "prompt": "＿＿また会いましょう。", "options": ["そのうち", "そのまま", "そのほど", "そのくせ"], "answer": 0, "note": "そのうち: sooner or later.", "en": "Let's meet again sooner or later."},
+    {"id": 16, "type": "choice", "instruction": "Fill the gap", "prompt": "若い＿＿に、いろいろな国へ行きたい。", "options": ["くせ", "ほど", "うち", "まで"], "answer": 2, "note": "若いうちに: while I'm young.", "en": "I want to visit many countries while I'm young."},
+    {"id": 17, "type": "choice", "instruction": "What does 今のうちに mean here?", "prompt": "今のうちに宿題をしておこう。", "options": ["While we still can", "After everything is done", "Never", "Because of now"], "answer": 0, "note": "今のうち: while the present situation lasts.", "en": "Let's do the homework while we still can."},
+    {"id": 18, "type": "choice", "instruction": "Which sentence uses いえ for the building?", "prompt": "", "options": ["山の上に家を建てた。", "うちの父は先生だ。", "うちの猫が好きだ。", "うちでご飯を食べる。"], "answer": 0, "note": "家 is the building; うち is the family life inside."},
+    {"id": 19, "type": "choice", "instruction": "What does うち mean here?", "prompt": "この三つのうち、どれが好きですか。", "options": ["Home", "A span of time", "Among (a group to choose from)", "Outside"], "answer": 2, "note": "A group to choose from.", "en": "Of these three, which do you like?"},
+    {"id": 20, "type": "tap", "instruction": "Tap the word that means \"while\"", "options": ["雨が", "降らない", "うちに", "帰ろう"], "answer": 2, "note": "Clause + うちに: while it lasts.", "en": "Let's go home while it isn't raining."},
+    {"id": 21, "type": "tap", "instruction": "Tap the word that means \"our\"", "options": ["うちの", "猫は", "魚が", "好きだ"], "answer": 0, "note": "うちの: our (my group's).", "en": "Our cat likes fish."},
+    {"id": 22, "type": "tap", "instruction": "Tap the word that means \"sooner or later\"", "options": ["そのうち", "雨が", "止むよ"], "answer": 0, "note": "そのうち: some time soon.", "en": "It'll stop raining sooner or later."},
+    {"id": 23, "type": "order", "instruction": "Build the sentence", "prompt": "Let's go while it's still early.", "options": ["早い", "うちに", "行こう"], "note": "い-adjective + うちに.", "en": "Let's go while it's still early."},
+    {"id": 24, "type": "order", "instruction": "Build the sentence", "prompt": "Let's eat before it gets cold.", "options": ["冷めない", "うちに", "食べよう"], "note": "Negative + うちに: before it happens.", "en": "Let's eat before it gets cold."},
+    {"id": 25, "type": "order", "instruction": "Build the sentence", "prompt": "Before I knew it, I fell asleep while reading.", "options": ["本を", "読んでいる", "うちに", "寝てしまった"], "note": "ているうちに: while doing it, before I knew it.", "en": "Before I knew it, I fell asleep while reading."},
+    {"id": 26, "type": "order", "instruction": "Build the sentence", "prompt": "Sooner or later you'll surely understand.", "options": ["そのうち", "きっと", "わかるよ"], "note": "そのうち: sooner or later.", "alt": [["きっと", "そのうち", "わかるよ"]], "en": "Sooner or later you'll surely understand."},
+    {"id": 27, "type": "choice", "instruction": "True or false?", "prompt": "In 若いうちに, うち means the place called home.", "options": ["True", "False"], "answer": 1, "note": "Here it is an enclosure of time: while I'm young.", "en": "while I'm young"},
+    {"id": 28, "type": "choice", "instruction": "What does んち mean?", "prompt": "田中んちに泊まった。", "options": ["Tanaka's place", "Tanaka's class", "Tanaka's friend", "Tanaka's family name"], "answer": 0, "note": "んち is a casual short form of うち.", "en": "(I) stayed at Tanaka's place."}
+  ]
 }
