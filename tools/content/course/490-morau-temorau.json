@@ -6,53 +6,456 @@
   "title": "もらう and てもらう: the receiving verb",
   "summary": "もらう is a pull-verb: you receive something or an action, and the giver takes に. It behaves like the receptive, not like くれる.",
   "video": "https://www.youtube.com/watch?v=CESFJaFp8FI",
-  "related": [423, 424, 425],
+  "related": [
+    423,
+    424,
+    425
+  ],
   "blocks": [
-    {"type": "text", "text": "もらう is usually grouped with あげる and くれる, but the grouping hides how it really works. **あげる** gives up; **くれる** gives down to me or my group. Both are tied to a particular giver and receiver. **もらう** is also \"downloading\", but it is a **pull** where you take the initiative, and it works much more like the receptive れる / られる (lesson 13)."},
-    {"type": "heading", "text": "Receiving a thing"},
-    {"type": "text", "text": "With a noun, もらう need not name any giver at all: 一万円をもらった, \"(I) got ten thousand yen\". If you do name the giver, mark them with **に** (or から)."},
-    {"type": "example", "jp": "（私が）友達に花をもらった。", "en": "(I) got flowers from my friend."},
-    {"type": "heading", "text": "Receiving an action: 〜てもらう"},
-    {"type": "text", "text": "After the て-form, もらう means \"get someone to do it for me\". The carriage is the receiver, and the person who does the action takes に, exactly like the doer in a receptive sentence. The difference is in the feeling: **られる** says something simply happened to you, **てもらう** says you brought it about."},
-    {"type": "table", "rows": [
-      ["Sentence", "Reading"],
-      ["先生に褒められた。", "The teacher praised me. (it happened to me)"],
-      ["先生に見てもらった。", "I got the teacher to look at it. (I asked)"]
-    ]},
-    {"type": "text", "text": "Many English renderings are misleading. お医者さんに見てもらう is not \"see a doctor\" but \"have a doctor look at me\". 散髪をしてもらう is \"have my hair cut\" with nobody named. Without a named doer, none is implied."},
-    {"type": "heading", "text": "The receiver need not be you"},
-    {"type": "text", "text": "くれる only suits you or your group. もらう has no such restriction. You can say about another person that they received something or got something done."},
-    {"type": "example", "jp": "弟は兄に宿題を手伝ってもらった。", "en": "My younger brother got his older brother to help with his homework."},
-    {"type": "example", "jp": "髪を切ってもらったほうがいいよ。", "en": "You should get your hair cut."},
-    {"type": "keypoints", "items": [
-      "**もらう** = receive (a pull); the giver or doer takes **に**.",
-      "**Nをもらう** need not mention a giver; **Vてもらう** = get someone to do it.",
-      "It is closest to the receptive but adds \"I brought it about\".",
-      "Unlike くれる, the receiver may be a third person."
-    ]}
+    {
+      "type": "text",
+      "text": "もらう is usually grouped with あげる and くれる, but the grouping hides how it really works. **あげる** gives up; **くれる** gives down to me or my group. Both are tied to a particular giver and receiver. (A warning: 〜てあげる sounds like you are doing a favor, so it is not polite toward a superior.) **もらう** is also \"downloading\", but it is a **pull** where you take the initiative, and it works much more like the receptive れる / られる (lesson 13)."
+    },
+    {
+      "type": "heading",
+      "text": "Receiving a thing"
+    },
+    {
+      "type": "text",
+      "text": "With a noun, もらう need not name any giver at all. If you do name the giver, mark them with **に** (or から)."
+    },
+    {
+      "type": "example",
+      "jp": "一万円をもらった。",
+      "en": "(I) got ten thousand yen. (no giver needed)"
+    },
+    {
+      "type": "example",
+      "jp": "（私が）友達に花をもらった。",
+      "en": "(I) got flowers from my friend."
+    },
+    {
+      "type": "heading",
+      "text": "に: where it goes, or where it comes from"
+    },
+    {
+      "type": "text",
+      "text": "The same に points in opposite directions. With a push verb it is the place the thing travels to. With a pull verb like もらう it is the place the thing comes from."
+    },
+    {
+      "type": "example",
+      "jp": "メアリーにボールを投げた。",
+      "en": "(I) threw the ball to Mary. (に = where it goes)"
+    },
+    {
+      "type": "example",
+      "jp": "友達に花をもらった。",
+      "en": "(I) got flowers from a friend. (に = where it comes from)"
+    },
+    {
+      "type": "heading",
+      "text": "Receiving an action: 〜てもらう"
+    },
+    {
+      "type": "text",
+      "text": "After the て-form, もらう means \"get someone to do it for me\". The carriage is the receiver, and the person who does the action takes に, exactly like the doer in a receptive sentence. The difference is in the feeling: **られる** says something simply happened to you, **てもらう** says you brought it about."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "me, the receiver"
+        },
+        {
+          "text": "先生に",
+          "role": "white",
+          "label": "source"
+        },
+        {
+          "text": "見て",
+          "role": "white",
+          "label": "look"
+        },
+        {
+          "text": "もらった",
+          "role": "engine",
+          "label": "got"
+        }
+      ],
+      "text": "先生に見てもらった。 (I) got the teacher to look at it."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "Reading"
+        ],
+        [
+          "先生に褒められた。",
+          "The teacher praised me. (it happened to me)"
+        ],
+        [
+          "先生に見てもらった。",
+          "I got the teacher to look at it. (I asked)"
+        ]
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Many English renderings are misleading. With no doer named, none is implied."
+    },
+    {
+      "type": "example",
+      "jp": "お医者さんに見てもらう。",
+      "en": "(I) have a doctor look at me. (not just \"see a doctor\")"
+    },
+    {
+      "type": "example",
+      "jp": "散髪をしてもらう。",
+      "en": "(I) have my hair cut. (nobody named)"
+    },
+    {
+      "type": "heading",
+      "text": "The receiver need not be you"
+    },
+    {
+      "type": "text",
+      "text": "くれる only suits you or your group. もらう has no such restriction. You can say about another person that they received something or got something done."
+    },
+    {
+      "type": "example",
+      "jp": "弟は兄に宿題を手伝ってもらった。",
+      "en": "My younger brother got his older brother to help with his homework."
+    },
+    {
+      "type": "example",
+      "jp": "髪を切ってもらったほうがいいよ。",
+      "en": "You should get your hair cut."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**もらう** = receive (a pull); the giver or doer takes **に**.",
+        "**Nをもらう** need not mention a giver; **Vてもらう** = get someone to do it.",
+        "It is closest to the receptive but adds \"I brought it about\".",
+        "Unlike くれる, the receiver may be a third person."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "Who gave the clothes?", "prompt": "（私は）姉に服をもらった。", "options": ["I did", "The clothes", "Nobody is implied", "My older sister"], "answer": 3, "note": "The giver is marked with に; the receiver is the carriage.", "en": "I got clothes from my older sister."},
-    {"id": 14, "type": "choice", "instruction": "Which sentence says the speaker got it done by asking someone?", "prompt": "", "options": ["雨に降られた。", "弟に笑われた。", "兄に宿題を教えてもらった。", "友達に来られた。"], "answer": 2, "note": "〜てもらう means \"I brought it about\"; the others just happened."},
-    {"id": 15, "type": "choice", "instruction": "Fill the gap", "prompt": "私は兄＿＿自転車を貸してもらった。", "options": ["を", "が", "で", "に"], "answer": 3, "note": "The one who does the action takes に, as in a receptive sentence.", "en": "I got my older brother to lend me his bicycle."},
-    {"id": 16, "type": "choice", "instruction": "In a もらう sentence, who is the carriage?", "prompt": "", "options": ["The giver", "The receiver", "The thing given", "Nobody"], "answer": 1, "note": "もらう is a pull: the receiver takes the initiative."},
-    {"id": 17, "type": "choice", "instruction": "What separates 〜てもらう from the receptive 〜られる?", "prompt": "", "options": ["The ending of the verb only", "てもらう says you brought it about; られる says it happened to you", "てもらう is always rude", "Nothing"], "answer": 1, "note": "The difference is in the feeling: initiative versus things simply happening."},
-    {"id": 18, "type": "choice", "instruction": "Which verb can describe something a third person received?", "prompt": "", "options": ["もらう", "くれる", "Neither", "Only くれる"], "answer": 0, "note": "くれる only suits you or your group; もらう has no such limit."},
-    {"id": 19, "type": "choice", "instruction": "Who cut the hair?", "prompt": "妹は母に髪を切ってもらった。", "options": ["My little sister", "Mother", "Nobody is implied", "Me"], "answer": 1, "note": "The doer is marked with に.", "en": "My little sister had Mother cut her hair."},
-    {"id": 20, "type": "choice", "instruction": "Does the sentence name who did it?", "prompt": "私は駅まで送ってもらった。", "options": ["No, the doer is not named", "Yes, the station", "Yes, 私", "Yes, the receiver"], "answer": 0, "note": "The doer is simply not named; context tells us who gave the ride.", "en": "I got a ride to the station."},
-    {"id": 21, "type": "choice", "instruction": "Fill the gap", "prompt": "友達＿＿本をもらった。", "options": ["を", "の", "と", "に"], "answer": 3, "note": "The giver takes に (or から).", "en": "I got a book from a friend."},
-    {"id": 22, "type": "choice", "instruction": "True or false?", "prompt": "千円をもらった。 This sentence must name the giver.", "options": ["True", "False"], "answer": 1, "note": "With a noun, もらう need not name any giver.", "en": "I got a thousand yen."},
-    {"id": 23, "type": "choice", "instruction": "What does it mean that もらう is a \"pull\"?", "prompt": "", "options": ["The receiver takes the initiative", "The giver gives up", "The giver gives down to me", "Something happens to me"], "answer": 0, "note": "あげる gives up and くれる gives down; もらう pulls."},
-    {"id": 24, "type": "choice", "instruction": "Which verb gives \"down to me or my group\"?", "prompt": "", "options": ["あげる", "もらう", "くれる", "する"], "answer": 2, "note": "くれる is tied to a giver and a receiver in my group."},
-    {"id": 25, "type": "choice", "instruction": "Who made breakfast?", "prompt": "母に朝ご飯を作ってもらった。", "options": ["Me", "Mother", "Nobody is implied", "A friend"], "answer": 1, "note": "The person marked with に did the action.", "en": "I had Mom make breakfast."},
-    {"id": 26, "type": "choice", "instruction": "How do you say \"get someone to help me\"?", "prompt": "", "options": ["手伝ってもらう", "手伝わせもらう", "手伝いもらう", "手伝うもらう"], "answer": 0, "note": "て-form + もらう."},
-    {"id": 27, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["先生にかばんをもらった。", "先生をかばんをもらった。", "先生からかばんをもらった。", "先生に本を貸してもらった。"], "answer": 1, "note": "The giver takes に or から, never を."},
-    {"id": 28, "type": "choice", "instruction": "Who is the carriage of もらった?", "prompt": "姉は友達に写真を見てもらった。", "options": ["友達", "写真", "姉", "A zero pronoun"], "answer": 2, "note": "The receiver (姉) is the carriage; 友達 takes に.", "en": "My older sister had a friend look at the photo."},
-    {"id": 29, "type": "choice", "instruction": "True or false: in 〜てもらう, the person who does the action takes を.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "The doer takes に, exactly as in a receptive sentence."},
-    {"id": 30, "type": "tap", "instruction": "Tap the person who did the action", "options": ["母に", "料理を", "教えてもらった"], "answer": 0, "note": "に marks the doer in 〜てもらう.", "en": "I had my mother teach me cooking."},
-    {"id": 31, "type": "tap", "instruction": "Tap the helper verb that says \"I brought it about\"", "options": ["友達に", "駅まで", "送って", "もらった"], "answer": 3, "note": "もらう after the て-form means getting someone to do it.", "en": "I got a friend to take me to the station."},
-    {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "I had my brother lend me a bicycle.", "options": ["兄に", "自転車を", "貸してもらった"], "note": "The doer takes に, the thing takes を.", "en": "I had my brother lend me a bicycle."},
-    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "I had the teacher look at my photo.", "options": ["先生に", "写真を", "見てもらった"], "note": "てもらう: に marks the one who looks.", "en": "I had the teacher look at the photo."},
-    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "My brother got a book from a friend.", "options": ["弟は", "友達に", "本を", "もらった"], "note": "The giver takes に; もらった is the engine.", "en": "My brother got a book from a friend."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "Who gave the clothes?",
+      "prompt": "（私は）姉に服をもらった。",
+      "options": [
+        "I did",
+        "The clothes",
+        "Nobody is implied",
+        "My older sister"
+      ],
+      "answer": 3,
+      "note": "The giver is marked with に; the receiver is the carriage.",
+      "en": "I got clothes from my older sister."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "Which sentence says the speaker got it done by asking someone?",
+      "prompt": "",
+      "options": [
+        "雨に降られた。",
+        "弟に笑われた。",
+        "兄に宿題を教えてもらった。",
+        "友達に来られた。"
+      ],
+      "answer": 2,
+      "note": "〜てもらう means \"I brought it about\"; the others just happened."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "私は兄＿＿自転車を貸してもらった。",
+      "options": [
+        "を",
+        "が",
+        "で",
+        "に"
+      ],
+      "answer": 3,
+      "note": "The one who does the action takes に, as in a receptive sentence.",
+      "en": "I got my older brother to lend me his bicycle."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "In a もらう sentence, who is the carriage?",
+      "prompt": "",
+      "options": [
+        "The giver",
+        "The receiver",
+        "The thing given",
+        "Nobody"
+      ],
+      "answer": 1,
+      "note": "もらう is a pull: the receiver takes the initiative."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "What separates 〜てもらう from the receptive 〜られる?",
+      "prompt": "",
+      "options": [
+        "The ending of the verb only",
+        "てもらう says you brought it about; られる says it happened to you",
+        "てもらう is always rude",
+        "Nothing"
+      ],
+      "answer": 1,
+      "note": "The difference is in the feeling: initiative versus things simply happening."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "Which verb can describe something a third person received?",
+      "prompt": "",
+      "options": [
+        "もらう",
+        "くれる",
+        "Neither",
+        "Only くれる"
+      ],
+      "answer": 0,
+      "note": "くれる only suits you or your group; もらう has no such limit."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "Who cut the hair?",
+      "prompt": "妹は母に髪を切ってもらった。",
+      "options": [
+        "My little sister",
+        "Mother",
+        "Nobody is implied",
+        "Me"
+      ],
+      "answer": 1,
+      "note": "The doer is marked with に.",
+      "en": "My little sister had Mother cut her hair."
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "Does the sentence name who did it?",
+      "prompt": "私は駅まで送ってもらった。",
+      "options": [
+        "No, the doer is not named",
+        "Yes, the station",
+        "Yes, 私",
+        "Yes, the receiver"
+      ],
+      "answer": 0,
+      "note": "The doer is simply not named; context tells us who gave the ride.",
+      "en": "I got a ride to the station."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "友達＿＿本をもらった。",
+      "options": [
+        "を",
+        "の",
+        "と",
+        "に"
+      ],
+      "answer": 3,
+      "note": "The giver takes に (or から).",
+      "en": "I got a book from a friend."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "Does this sentence have to name the giver?",
+      "prompt": "千円をもらった。",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "answer": 0,
+      "note": "With a thing, もらう names no giver.",
+      "en": "I got a thousand yen."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "What does it mean that もらう is a \"pull\"?",
+      "prompt": "",
+      "options": [
+        "The receiver takes the initiative",
+        "The giver gives up",
+        "The giver gives down to me",
+        "Something happens to me"
+      ],
+      "answer": 0,
+      "note": "あげる gives up and くれる gives down; もらう pulls."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "Which verb gives \"down to me or my group\"?",
+      "prompt": "",
+      "options": [
+        "あげる",
+        "もらう",
+        "くれる",
+        "する"
+      ],
+      "answer": 2,
+      "note": "くれる is tied to a giver and a receiver in my group."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "Who made breakfast?",
+      "prompt": "母に朝ご飯を作ってもらった。",
+      "options": [
+        "Me",
+        "Mother",
+        "Nobody is implied",
+        "A friend"
+      ],
+      "answer": 1,
+      "note": "The person marked with に did the action.",
+      "en": "I had Mom make breakfast."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "How do you say \"get someone to help me\"?",
+      "prompt": "",
+      "options": [
+        "手伝ってもらう",
+        "手伝わせもらう",
+        "手伝いもらう",
+        "手伝うもらう"
+      ],
+      "answer": 0,
+      "note": "て-form + もらう."
+    },
+    {
+      "id": 27,
+      "type": "choice",
+      "instruction": "Which sentence is wrong?",
+      "prompt": "",
+      "options": [
+        "先生にかばんをもらった。",
+        "先生をかばんをもらった。",
+        "先生からかばんをもらった。",
+        "先生に本を貸してもらった。"
+      ],
+      "answer": 1,
+      "note": "The giver takes に or から, never を."
+    },
+    {
+      "id": 28,
+      "type": "choice",
+      "instruction": "Who is the carriage of もらった?",
+      "prompt": "姉は友達に写真を見てもらった。",
+      "options": [
+        "友達",
+        "写真",
+        "姉",
+        "A zero pronoun"
+      ],
+      "answer": 2,
+      "note": "The receiver (姉) is the carriage; 友達 takes に.",
+      "en": "My older sister had a friend look at the photo."
+    },
+    {
+      "id": 29,
+      "type": "choice",
+      "instruction": "Which sentence marks the doer correctly?",
+      "prompt": "",
+      "options": [
+        "兄に宿題を手伝ってもらった。",
+        "兄を宿題を手伝ってもらった。",
+        "兄が宿題を手伝ってもらった。",
+        "兄で宿題を手伝ってもらった。"
+      ],
+      "answer": 0,
+      "note": "The doer of the action takes に."
+    },
+    {
+      "id": 30,
+      "type": "tap",
+      "instruction": "Tap the person who did the action",
+      "options": [
+        "母に",
+        "料理を",
+        "教えてもらった"
+      ],
+      "answer": 0,
+      "note": "に marks the doer in 〜てもらう.",
+      "en": "I had my mother teach me cooking."
+    },
+    {
+      "id": 31,
+      "type": "tap",
+      "instruction": "Tap the helper verb that says \"I brought it about\"",
+      "options": [
+        "友達に",
+        "駅まで",
+        "送って",
+        "もらった"
+      ],
+      "answer": 3,
+      "note": "もらう after the て-form means getting someone to do it.",
+      "en": "I got a friend to take me to the station."
+    },
+    {
+      "id": 32,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I had my brother lend me a bicycle.",
+      "options": [
+        "兄に",
+        "自転車を",
+        "貸してもらった"
+      ],
+      "note": "The doer takes に, the thing takes を.",
+      "en": "I had my brother lend me a bicycle."
+    },
+    {
+      "id": 33,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I had the teacher look at my photo.",
+      "options": [
+        "先生に",
+        "写真を",
+        "見てもらった"
+      ],
+      "note": "てもらう: に marks the one who looks.",
+      "en": "I had the teacher look at the photo."
+    },
+    {
+      "id": 34,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "My brother got a book from a friend.",
+      "options": [
+        "弟は",
+        "友達に",
+        "本を",
+        "もらった"
+      ],
+      "note": "The giver takes に; もらった is the engine.",
+      "en": "My brother got a book from a friend."
+    }
   ]
 }

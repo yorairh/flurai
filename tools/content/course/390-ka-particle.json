@@ -14,7 +14,7 @@
   "blocks": [
     {
       "type": "text",
-      "text": "At the end of a polite sentence **か** marks a question. In casual speech tone does that job. But か does much of its work **inside** sentences, and every use grows from one function: **it turns a proposition into an uncertain, question-like thing**."
+      "text": "At the end of a polite sentence **か** marks a question. In casual speech your tone of voice does that job, because a bare か at the end of a casual sentence sounds blunt and rough. But か does most of its work **inside** sentences, and every use grows from one idea: **it turns a statement into something uncertain, like a question**."
     },
     {
       "type": "heading",
@@ -22,7 +22,7 @@
     },
     {
       "type": "text",
-      "text": "Place か after a clause and it becomes a noun-like \"whether ...\", which can be the object of 分からない, 知っている and so on. Usually no が or を is added after か."
+      "text": "Put か after a clause and the clause becomes a noun-like \"whether ...\". It can then be the object of words like 分からない (do not know) or 知っている (know). You normally add no が or を after か."
     },
     {
       "type": "example",
@@ -35,12 +35,99 @@
       "en": "Do you know whose book this is?"
     },
     {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "(私は)",
+          "role": "topic",
+          "label": "unseen"
+        },
+        {
+          "text": "さくらが来るか",
+          "role": "carriage",
+          "label": "whether she comes"
+        },
+        {
+          "text": "分からない",
+          "role": "engine",
+          "label": "do not know"
+        }
+      ],
+      "text": "The whole question sits in one carriage. The engine 分からない is about that carriage."
+    },
+    {
       "type": "text",
-      "text": "**かどうか** spells out \"or not\": 来るかどうか分からない."
+      "text": "**かどうか** spells out \"or not\" and makes the uncertainty explicit."
+    },
+    {
+      "type": "example",
+      "jp": "来るかどうか分からない。",
+      "en": "I do not know whether (she) will come or not."
     },
     {
       "type": "heading",
-      "text": "Set phrases made of か"
+      "text": "A か B: or"
+    },
+    {
+      "type": "text",
+      "text": "\"Or\" always means uncertain: it might be A, it might be B. That is why か fits between two nouns."
+    },
+    {
+      "type": "example",
+      "jp": "お茶かコーヒー、どっちがいい？",
+      "en": "Tea or coffee, which do you want?"
+    },
+    {
+      "type": "heading",
+      "text": "かもしれない: might"
+    },
+    {
+      "type": "text",
+      "text": "It is built from three pieces. か gives \"whether she comes\", も adds \"even\", and 知れない means \"cannot be known\". Put together: \"even whether she comes cannot be known\", so \"she might come\"."
+    },
+    {
+      "type": "example",
+      "jp": "田中さんは来るかもしれない。",
+      "en": "Mr. Tanaka might come."
+    },
+    {
+      "type": "heading",
+      "text": "かな: I wonder"
+    },
+    {
+      "type": "text",
+      "text": "か plus the soft ending な, which is how we talk to ourselves. The result is \"I wonder ...\"."
+    },
+    {
+      "type": "example",
+      "jp": "明日は雨が降るかな。",
+      "en": "I wonder if it will rain tomorrow."
+    },
+    {
+      "type": "heading",
+      "text": "ものか / もんか: as if!"
+    },
+    {
+      "type": "text",
+      "text": "もの is a \"thing\", so this asks \"is that a thing?\" and expects the answer \"of course not\". It is a question used to deny, like English \"Would I do that?\". It sounds rough and emphatic."
+    },
+    {
+      "type": "example",
+      "jp": "そんな物を食べるもんか。",
+      "en": "As if I would eat such a thing!"
+    },
+    {
+      "type": "heading",
+      "text": "どころか: far from"
+    },
+    {
+      "type": "text",
+      "text": "ところ is a \"point\", so どころか says \"not even at this point\", and then names something even smaller or nearer."
+    },
+    {
+      "type": "example",
+      "jp": "漢字どころか、ひらがなも読めない。",
+      "en": "Far from kanji, I cannot even read hiragana."
     },
     {
       "type": "table",
@@ -52,7 +139,7 @@
         ],
         [
           "お茶かコーヒー",
-          "tea か coffee",
+          "A か B",
           "tea or coffee"
         ],
         [
@@ -62,12 +149,12 @@
         ],
         [
           "来るかな",
-          "か + な (to oneself)",
+          "か + な",
           "I wonder if (he) will come"
         ],
         [
           "行くものか",
-          "か marks a rhetorical question",
+          "ものか",
           "As if I would go!"
         ],
         [
@@ -75,22 +162,8 @@
           "ところ + か",
           "far from (kanji)"
         ]
-      ]
-    },
-    {
-      "type": "example",
-      "jp": "明日は雨が降るかな。",
-      "en": "I wonder if it will rain tomorrow."
-    },
-    {
-      "type": "example",
-      "jp": "そんな物を食べるもんか。",
-      "en": "As if I would eat such a thing!"
-    },
-    {
-      "type": "example",
-      "jp": "漢字どころか、ひらがなも読めない。",
-      "en": "Far from kanji, I cannot even read hiragana."
+      ],
+      "title": "Set phrases made of か"
     },
     {
       "type": "heading",
@@ -263,15 +336,15 @@
     },
     {
       "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "か inside a sentence can state a confirmed fact.",
+      "instruction": "Does か here state a fact?",
+      "prompt": "雨が降るかもしれない。",
       "options": [
-        "True",
-        "False"
+        "Yes, it is raining",
+        "No, it is only possible"
       ],
       "answer": 1,
-      "note": "か always leaves things uncertain.",
-      "en": "Inside a sentence か turns a proposition into something uncertain.",
+      "note": "か keeps things uncertain.",
+      "en": "It might rain.",
       "id": 31
     },
     {
@@ -421,7 +494,7 @@
         "学生",
         "かもしれない"
       ],
-      "answer": 1,
+      "answer": 2,
       "note": "か + も + しれない.",
       "en": "That person might be a student.",
       "id": 42

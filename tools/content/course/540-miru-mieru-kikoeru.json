@@ -6,54 +6,460 @@
   "title": "Irregular potentials: 見える and 聞こえる",
   "summary": "見られる and 聞ける are the regular potentials; 見える and 聞こえる are forced self-move forms that mean \"look like\" and \"sound like\".",
   "video": "https://www.youtube.com/watch?v=WuMCOHisAvY",
-  "related": [432, 441],
+  "related": [
+    432,
+    441
+  ],
   "blocks": [
-    {"type": "text", "text": "Japanese is very regular. The few irregularities are local: a verb that is regular almost everywhere and bends in one spot. 見る and 聞く are two of them, and the bend has a reason."},
-    {"type": "heading", "text": "The regular potentials"},
-    {"type": "table", "rows": [
-      ["Verb", "Regular potential", "Spoken variant", "Forced self-move form"],
-      ["見る (ichidan)", "見られる", "見れる (ら抜き)", "見える"],
-      ["聞く (godan)", "聞ける", "", "聞こえる"]
-    ]},
-    {"type": "text", "text": "The ichidan potential is **られる** and the godan potential is **え-stem + る**. 見れる, with the ら dropped, is a common speech habit (ら抜き). Many people still treat it as incorrect, and the course says to keep 見られる in your own writing. It is not a new verb."},
-    {"type": "heading", "text": "What the irregular forms are"},
-    {"type": "text", "text": "Potentials are mostly **self-move**: 本が読める, \"the book does readable\". But the regular 見られる and 聞ける can also be other-move in describing clauses: さくらを見られる日 (\"the day I can see Sakura\") has an object. The irregular **見える** and **聞こえる** can only be self-move. They cannot take an object."},
-    {"type": "text", "text": "A small shade of meaning separates them from their regular partners. 見える is physical ability: it comes into view. 見られる suggests having the opportunity. If the tall lady in front takes off her hat, 芝居が見える. If tickets are on sale, 芝居が見られる."},
-    {"type": "heading", "text": "Why they survive: looks like, sounds like"},
-    {"type": "text", "text": "The real reason they exist is that **how something looks or sounds** is always self-move: it is the thing that appears, not something we do to it. So the forced forms became the \"looks like / sounds like\" verbs. A noun takes **に**, an い-adjective takes the **く-stem**."},
-    {"type": "example", "jp": "あの雲は犬に見える。", "en": "That cloud looks like a dog."},
-    {"type": "example", "jp": "彼女は若く見える。", "en": "She looks young."},
-    {"type": "example", "jp": "その話は変に聞こえる。", "en": "That story sounds strange."},
-    {"type": "example", "jp": "遠くから鐘の音が聞こえる。", "en": "A bell can be heard from far away."},
-    {"type": "keypoints", "items": [
-      "Regular potentials: **見られる** (ichidan), **聞ける** (godan); 見れる is spoken ら抜き.",
-      "**見える** and **聞こえる** are forced self-move: no object.",
-      "**Nに見える**, **く-stem + 見える**, **Nに / adverb + 聞こえる** = looks / sounds like.",
-      "見える is physical visibility; 見られる suggests having the chance."
-    ]}
+    {
+      "type": "text",
+      "text": "Japanese is very regular. The few irregularities are local: a verb that is regular almost everywhere and bends in one spot. 見る and 聞く are two of them, and the bend has a reason."
+    },
+    {
+      "type": "heading",
+      "text": "The regular potentials"
+    },
+    {
+      "type": "text",
+      "text": "The ichidan potential is **られる** and the godan potential is **え-stem + る**. Here are our two verbs:"
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Verb",
+          "Regular potential",
+          "Forced self-move form"
+        ],
+        [
+          "見る (ichidan)",
+          "見られる",
+          "見える"
+        ],
+        [
+          "聞く (godan)",
+          "聞ける",
+          "聞こえる"
+        ]
+      ]
+    },
+    {
+      "type": "text",
+      "text": "In speech you will also hear 見れる, with the ら dropped (ら抜き). Many people still treat it as incorrect, and the course says to keep 見られる in your own writing. It is not a new verb."
+    },
+    {
+      "type": "example",
+      "jp": "ここから富士山が見れるよ。",
+      "en": "You can see Mount Fuji from here. (casual speech, ら抜き)"
+    },
+    {
+      "type": "heading",
+      "text": "What the irregular forms are"
+    },
+    {
+      "type": "text",
+      "text": "Potentials are mostly **self-move**: 本が読める, \"the book does readable\". But the regular 見られる and 聞ける can also be other-move in describing clauses: they can have an object. The irregular **見える** and **聞こえる** can only be self-move. They cannot take an object."
+    },
+    {
+      "type": "example",
+      "jp": "さくらを見られる日を楽しみにしている。",
+      "en": "I'm looking forward to the day I can see Sakura. (見られる takes an object, を)"
+    },
+    {
+      "type": "text",
+      "text": "A small shade of meaning separates them from their regular partners. 見える is physical ability: it comes into view. 見られる suggests having the opportunity. If the tall lady in front takes off her hat, you can see the play; if tickets are on sale, you can get to see it."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Sentence",
+          "Why you can see it"
+        ],
+        [
+          "芝居が見える。",
+          "Nothing blocks the stage now."
+        ],
+        [
+          "芝居が見られる。",
+          "You have the chance, for example tickets."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Why they survive: looks like, sounds like"
+    },
+    {
+      "type": "text",
+      "text": "The real reason they exist is that **how something looks or sounds** is always self-move: it is the thing that appears, not something we do to it. So the forced forms became the \"looks like / sounds like\" verbs. A noun takes **に**, an い-adjective takes the **く-stem**."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "雲が",
+          "role": "carriage",
+          "label": "what appears"
+        },
+        {
+          "text": "犬に",
+          "role": "white",
+          "label": "looks like"
+        },
+        {
+          "text": "見える",
+          "role": "engine",
+          "label": "looks"
+        }
+      ],
+      "text": "雲が犬に見える。 The cloud looks like a dog."
+    },
+    {
+      "type": "example",
+      "jp": "あの雲は犬に見える。",
+      "en": "That cloud looks like a dog."
+    },
+    {
+      "type": "example",
+      "jp": "彼女は若く見える。",
+      "en": "She looks young."
+    },
+    {
+      "type": "example",
+      "jp": "その話は変に聞こえる。",
+      "en": "That story sounds strange."
+    },
+    {
+      "type": "example",
+      "jp": "遠くから鐘の音が聞こえる。",
+      "en": "A bell can be heard from far away."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Regular potentials: **見られる** (ichidan), **聞ける** (godan); 見れる is spoken ら抜き.",
+        "**見える** and **聞こえる** are forced self-move: no object.",
+        "**Nに見える**, **く-stem + 見える**, **Nに / adverb + 聞こえる** = looks / sounds like.",
+        "見える is physical visibility; 見られる suggests having the chance."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "Which is the regular potential of 見る?", "prompt": "", "options": ["見える", "見られる", "見ける", "見せる"], "answer": 1, "note": "Ichidan verbs take られる; 見える is the irregular, self-move form."},
-    {"id": 14, "type": "choice", "instruction": "What do 見える and 聞こえる have in common?", "prompt": "", "options": ["They take を", "They are forced self-move: no object", "They are other-move", "They are past forms"], "answer": 1, "note": "How things look or sound is always self-move."},
-    {"id": 15, "type": "choice", "instruction": "Which is the spoken ら抜き form of 食べられる?", "prompt": "", "options": ["食べれる", "食べえる", "食べける", "食べせる"], "answer": 0, "note": "Dropping the ら gives the spoken 食べれる; keep 食べられる in writing."},
-    {"id": 16, "type": "choice", "instruction": "Which is the regular potential of 書く?", "prompt": "", "options": ["書かれる", "書ける", "書きる", "書かせる"], "answer": 1, "note": "Godan potential: え-stem + る."},
-    {"id": 17, "type": "choice", "instruction": "Fill the gap", "prompt": "あの雲は魚＿＿見える。", "options": ["を", "が", "に", "で"], "answer": 2, "note": "A noun takes に before 見える to say \"looks like\".", "en": "That cloud looks like a fish."},
-    {"id": 18, "type": "choice", "instruction": "Fill the gap", "prompt": "このかばんは新し＿＿見える。", "options": ["に", "い", "で", "く"], "answer": 3, "note": "An い-adjective takes its く-stem before 見える.", "en": "This bag looks new."},
-    {"id": 19, "type": "choice", "instruction": "Which sentence means \"I can hear music\"?", "prompt": "", "options": ["音楽が聞こえる。", "音楽を聞こえる。", "音楽に聞こえる。", "音楽で聞こえる。"], "answer": 0, "note": "聞こえる has no object: the music is the carriage with が."},
-    {"id": 20, "type": "choice", "instruction": "Fill the gap", "prompt": "その音は雨の音＿＿聞こえる。", "options": ["を", "が", "と", "に"], "answer": 3, "note": "Nに聞こえる means \"sounds like N\".", "en": "That sound sounds like rain."},
-    {"id": 21, "type": "choice", "instruction": "Why 見られる and not 見える here?", "prompt": "来月、あの映画が見られる。", "options": ["It is about having the opportunity", "It is about physical view", "Because it is other-move", "Because it is past"], "answer": 0, "note": "見られる suggests the chance to see; 見える is physical visibility.", "en": "I can see that movie next month."},
-    {"id": 22, "type": "choice", "instruction": "Which is the main carriage?", "prompt": "ここから駅が見える。", "options": ["ここから", "駅が", "見える", "A zero pronoun"], "answer": 1, "note": "見える is self-move: the station is what comes into view.", "en": "I can see the station from here."},
-    {"id": 23, "type": "choice", "instruction": "True or false: 聞こえる can take an object with を.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "It is forced self-move, so no object."},
-    {"id": 24, "type": "choice", "instruction": "True or false: 聞ける is the regular potential of the godan verb 聞く.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "聞く is godan: え-stem + る gives 聞ける."},
-    {"id": 25, "type": "choice", "instruction": "The tall man in front sat down, so the stage is in view. Which verb fits?", "prompt": "", "options": ["見せる", "見える", "見つける", "見る"], "answer": 1, "note": "見える is physical ability: it comes into view."},
-    {"id": 26, "type": "choice", "instruction": "What does く show in 楽しく聞こえる?", "prompt": "その歌は楽しく聞こえる。", "options": ["It is the く-stem of an い-adjective before 聞こえる", "It is a question", "It marks the object", "It is a past form"], "answer": 0, "note": "い-adjectives use the く-stem before 見える / 聞こえる.", "en": "That song sounds fun."},
-    {"id": 27, "type": "choice", "instruction": "Why do 見える and 聞こえる survive as irregular forms?", "prompt": "", "options": ["They are polite", "They are the \"looks like / sounds like\" verbs, always self-move", "They are old spellings", "They were borrowed"], "answer": 1, "note": "How something looks or sounds is the thing that appears, not something we do."},
-    {"id": 28, "type": "tap", "instruction": "Tap the forced self-move verb", "options": ["遠くから", "犬の", "声が", "聞こえる"], "answer": 3, "note": "聞こえる takes no object; the voice is the carriage.", "en": "A dog's voice can be heard from far away."},
-    {"id": 29, "type": "tap", "instruction": "Tap the word that gives the \"looks like\" meaning with 見える", "options": ["あの雲は", "山に", "見える"], "answer": 1, "note": "A noun + に before 見える means \"looks like\".", "en": "That cloud looks like a mountain."},
-    {"id": 30, "type": "tap", "instruction": "Tap the spoken ら抜き form", "options": ["この字は", "小さくても", "見れる"], "answer": 2, "note": "見れる is spoken; 見られる is the written form.", "en": "I can see this character even though it is small."},
-    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "That song sounds fun.", "options": ["その歌は", "楽しく", "聞こえる"], "note": "The く-stem goes before 聞こえる.", "en": "That song sounds fun."},
-    {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "That person looks like a student.", "options": ["あの人は", "学生に", "見える"], "note": "Nに見える: looks like N.", "en": "That person looks like a student."},
-    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "The sound of a train can be heard from far away.", "options": ["遠くから", "電車の音が", "聞こえる"], "note": "聞こえる takes が for what is heard.", "en": "The sound of a train can be heard from far away.", "alt": [["電車の音が", "遠くから", "聞こえる"]]},
-    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "This room looks big.", "options": ["この部屋は", "広く", "見える"], "note": "An い-adjective's く-stem comes before 見える.", "en": "This room looks big."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "Which is the regular potential of 見る?",
+      "prompt": "",
+      "options": [
+        "見える",
+        "見られる",
+        "見ける",
+        "見せる"
+      ],
+      "answer": 1,
+      "note": "Ichidan verbs take られる; 見える is the irregular, self-move form."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "What do 見える and 聞こえる have in common?",
+      "prompt": "",
+      "options": [
+        "They take を",
+        "They are forced self-move: no object",
+        "They are other-move",
+        "They are past forms"
+      ],
+      "answer": 1,
+      "note": "How things look or sound is always self-move."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "Which is the spoken ら抜き form of 食べられる?",
+      "prompt": "",
+      "options": [
+        "食べれる",
+        "食べえる",
+        "食べける",
+        "食べせる"
+      ],
+      "answer": 0,
+      "note": "Dropping the ら gives the spoken 食べれる; keep 食べられる in writing."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "Which is the regular potential of 書く?",
+      "prompt": "",
+      "options": [
+        "書かれる",
+        "書ける",
+        "書きる",
+        "書かせる"
+      ],
+      "answer": 1,
+      "note": "Godan potential: え-stem + る."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "あの雲は魚＿＿見える。",
+      "options": [
+        "を",
+        "が",
+        "に",
+        "で"
+      ],
+      "answer": 2,
+      "note": "A noun takes に before 見える to say \"looks like\".",
+      "en": "That cloud looks like a fish."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "このかばんは新し＿＿見える。",
+      "options": [
+        "に",
+        "い",
+        "で",
+        "く"
+      ],
+      "answer": 3,
+      "note": "An い-adjective takes its く-stem before 見える.",
+      "en": "This bag looks new."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "Which sentence means \"I can hear music\"?",
+      "prompt": "",
+      "options": [
+        "音楽が聞こえる。",
+        "音楽を聞こえる。",
+        "音楽に聞こえる。",
+        "音楽で聞こえる。"
+      ],
+      "answer": 0,
+      "note": "聞こえる has no object: the music is the carriage with が."
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "その音は雨の音＿＿聞こえる。",
+      "options": [
+        "を",
+        "が",
+        "と",
+        "に"
+      ],
+      "answer": 3,
+      "note": "Nに聞こえる means \"sounds like N\".",
+      "en": "That sound sounds like rain."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "Why 見られる and not 見える here?",
+      "prompt": "来月、あの映画が見られる。",
+      "options": [
+        "It is about having the opportunity",
+        "It is about physical view",
+        "Because it is other-move",
+        "Because it is past"
+      ],
+      "answer": 0,
+      "note": "見られる suggests the chance to see; 見える is physical visibility.",
+      "en": "I can see that movie next month."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "Which is the main carriage?",
+      "prompt": "ここから駅が見える。",
+      "options": [
+        "ここから",
+        "駅が",
+        "見える",
+        "A zero pronoun"
+      ],
+      "answer": 1,
+      "note": "見える is self-move: the station is what comes into view.",
+      "en": "I can see the station from here."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "Which one can take an object with を?",
+      "prompt": "",
+      "options": [
+        "見られる",
+        "見える",
+        "聞こえる"
+      ],
+      "answer": 0,
+      "note": "Only the regular forms can be other-move."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "What is 聞ける here?",
+      "prompt": "ここでは、いい音楽が聞ける。",
+      "options": [
+        "The regular potential of 聞く",
+        "The forced self-move form",
+        "The past of 聞こえる",
+        "The causative of 聞く"
+      ],
+      "answer": 0,
+      "note": "聞ける: godan potential.",
+      "en": "You can listen to good music here."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "The tall man in front sat down, so the stage is in view. Which verb fits?",
+      "prompt": "",
+      "options": [
+        "見せる",
+        "見える",
+        "見つける",
+        "見る"
+      ],
+      "answer": 1,
+      "note": "見える is physical ability: it comes into view."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "What does く show in 楽しく聞こえる?",
+      "prompt": "その歌は楽しく聞こえる。",
+      "options": [
+        "It is the く-stem of an い-adjective before 聞こえる",
+        "It is a question",
+        "It marks the object",
+        "It is a past form"
+      ],
+      "answer": 0,
+      "note": "い-adjectives use the く-stem before 見える / 聞こえる.",
+      "en": "That song sounds fun."
+    },
+    {
+      "id": 27,
+      "type": "choice",
+      "instruction": "Why do 見える and 聞こえる survive as irregular forms?",
+      "prompt": "",
+      "options": [
+        "They are polite",
+        "They are the \"looks like / sounds like\" verbs, always self-move",
+        "They are old spellings",
+        "They were borrowed"
+      ],
+      "answer": 1,
+      "note": "How something looks or sounds is the thing that appears, not something we do."
+    },
+    {
+      "id": 28,
+      "type": "tap",
+      "instruction": "Tap the forced self-move verb",
+      "options": [
+        "遠くから",
+        "犬の",
+        "声が",
+        "聞こえる"
+      ],
+      "answer": 3,
+      "note": "聞こえる takes no object; the voice is the carriage.",
+      "en": "A dog's voice can be heard from far away."
+    },
+    {
+      "id": 29,
+      "type": "tap",
+      "instruction": "Tap the word that gives the \"looks like\" meaning with 見える",
+      "options": [
+        "あの雲は",
+        "山に",
+        "見える"
+      ],
+      "answer": 1,
+      "note": "A noun + に before 見える means \"looks like\".",
+      "en": "That cloud looks like a mountain."
+    },
+    {
+      "id": 30,
+      "type": "tap",
+      "instruction": "Tap the spoken ら抜き form",
+      "options": [
+        "この字は",
+        "小さくても",
+        "見れる"
+      ],
+      "answer": 2,
+      "note": "見れる is spoken; 見られる is the written form.",
+      "en": "I can see this character even though it is small."
+    },
+    {
+      "id": 31,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That song sounds fun.",
+      "options": [
+        "その歌は",
+        "楽しく",
+        "聞こえる"
+      ],
+      "note": "The く-stem goes before 聞こえる.",
+      "en": "That song sounds fun."
+    },
+    {
+      "id": 32,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That person looks like a student.",
+      "options": [
+        "あの人は",
+        "学生に",
+        "見える"
+      ],
+      "note": "Nに見える: looks like N.",
+      "en": "That person looks like a student."
+    },
+    {
+      "id": 33,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "The sound of a train can be heard from far away.",
+      "options": [
+        "遠くから",
+        "電車の音が",
+        "聞こえる"
+      ],
+      "note": "聞こえる takes が for what is heard.",
+      "en": "The sound of a train can be heard from far away.",
+      "alt": [
+        [
+          "電車の音が",
+          "遠くから",
+          "聞こえる"
+        ]
+      ]
+    },
+    {
+      "id": 34,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "This room looks big.",
+      "options": [
+        "この部屋は",
+        "広く",
+        "見える"
+      ],
+      "note": "An い-adjective's く-stem comes before 見える.",
+      "en": "This room looks big."
+    }
   ]
 }
