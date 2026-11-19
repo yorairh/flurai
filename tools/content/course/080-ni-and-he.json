@@ -10,22 +10,31 @@
   "blocks": [
     {"type": "text", "text": "**に** is a logical particle that marks the **target** of an action. If を is what the action is done to, に is **where it is aimed**. Almost every use of に is a target of some kind."},
     {"type": "heading", "text": "1. A physical target: where you go"},
+    {"type": "text", "text": "When you go, send or put something somewhere, that somewhere takes に."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "main carriage (zero)"}, {"text": "公園に", "role": "white", "label": "target"}, {"text": "行く", "role": "engine", "label": "engine"}], "text": "（私が）公園に行く。"},
     {"type": "example", "jp": "（私が）公園に行く。", "en": "(I) go to the park."},
     {"type": "heading", "text": "2. A purpose target: why you go"},
-    {"type": "text", "text": "Take the **い-stem** of a verb (it works as a noun for the act) and mark it with に. The place is the physical target; the purpose is the volitional target. One sentence can have both."},
-    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero"}, {"text": "店に", "role": "white", "label": "place"}, {"text": "卵を", "role": "white"}, {"text": "買いに", "role": "white", "label": "purpose"}, {"text": "行く", "role": "engine"}], "text": "店に卵を買いに行く。 (I) go to the shop to buy eggs."},
+    {"type": "text", "text": "Take the **い-stem** of a verb and mark it with に. This works because the い-stem is a **noun** (\"the act of buying\"), and logical particles only mark nouns. The place is the physical target; the purpose is the volitional target. One sentence can have both."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "main carriage (zero)"}, {"text": "店に", "role": "white", "label": "place"}, {"text": "卵を", "role": "white"}, {"text": "買いに", "role": "white", "label": "purpose"}, {"text": "行く", "role": "engine"}], "text": "店に卵を買いに行く。 (I) go to the shop to buy eggs."},
     {"type": "example", "jp": "店に卵を買いに行く。", "en": "(I) go to the shop to buy eggs."},
     {"type": "heading", "text": "3. Where something is"},
-    {"type": "text", "text": "Being at a place is a target that has already been reached, so に marks the location of existing and being."},
+    {"type": "text", "text": "To be somewhere, you must have got there, so being at a place is a target that has already been reached. に marks the location of existing and being, for people and for things."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "main carriage (zero)"}, {"text": "公園に", "role": "white", "label": "place"}, {"text": "いる", "role": "engine", "label": "engine"}], "text": "（私が）公園にいる。 Same に car as 公園に行く, different engine."},
     {"type": "example", "jp": "（私が）公園にいる。", "en": "(I) am in the park."},
+    {"type": "example", "jp": "本はテーブルの上にある。", "en": "The book is on the table."},
     {"type": "heading", "text": "4. What something becomes"},
-    {"type": "text", "text": "The result of a change is a target too. The picture is transformation: A becomes B, and B takes に."},
+    {"type": "text", "text": "The result of a change is a target too. The picture is transformation: A becomes B, and B takes に. Japanese uses なる far more than English uses \"become\"."},
+    {"type": "diagram", "cars": [{"text": "さくらは", "role": "topic", "label": "topic flag"}, {"text": "Øが", "role": "zero", "label": "main carriage (zero)"}, {"text": "カエルに", "role": "white", "label": "what she became"}, {"text": "なった", "role": "engine"}], "text": "さくらはカエルになった。"},
     {"type": "example", "jp": "さくらはカエルになった。", "en": "Sakura became a frog."},
+    {"type": "example", "jp": "今年、十八歳になる。", "en": "(I) turn eighteen this year."},
+    {"type": "example", "jp": "後で曇りになる。", "en": "It will turn cloudy later."},
     {"type": "text", "text": "An **い-adjective** cannot take に directly (it is an engine, not a carriage). Change **い → く** to get an adverb, and then use なる: 美しい → 美しく**なる**."},
     {"type": "example", "jp": "さくらが美しくなった。", "en": "Sakura became beautiful."},
     {"type": "heading", "text": "And へ?"},
-    {"type": "text", "text": "**へ** (read \"e\" as a particle) is a one-trick pony. It repeats only the **destination** use of に (公園へ行く) and can never mark where something stays."},
-    {"type": "keypoints", "items": ["**に** marks a **target**: a destination, a purpose, a place where something is, or what something turns into.", "Purpose: **い-stem + に + 行く**.", "い-adjective + なる: **い → く**, then **なる**.", "**へ** only marks a **direction of travel**; it cannot mark a location."]}
+    {"type": "text", "text": "**へ** (read \"e\" as a particle) is a one-trick pony. It repeats only the **destination** use of に and can never mark where something stays. It also suits a direction of travel, like 北へ (toward the north)."},
+    {"type": "example", "jp": "（私が）公園へ行く。", "en": "(I) go to the park."},
+    {"type": "table", "title": "に and へ", "rows": [["Sentence", "Works?"], ["公園に行く", "Yes: に marks the destination"], ["公園へ行く", "Yes: へ marks the direction"], ["公園にいる", "Yes: に marks where I am"], ["公園へいる", "No: へ cannot mark a location"]]},
+    {"type": "keypoints", "title": "Remember", "items": ["**に** marks a **target**: a destination, a purpose, a place where something is, or what something turns into.", "Purpose: **い-stem + に + 行く**.", "い-adjective + なる: **い → く**, then **なる**.", "**へ** only marks a **direction of travel**; it cannot mark a location."]}
   ],
   "questions": [
     {"id": 35, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）図書館＿＿行く。", "options": ["に", "を", "で", "が"], "answer": 0, "note": "に marks the destination.", "en": "(I) go to the library."},
@@ -49,6 +58,8 @@
     {"id": 53, "type": "order", "instruction": "Build the sentence", "prompt": "(I) go to the library to read books.", "options": ["図書館に", "本を", "読みに", "行く"], "note": "Place に, white carriage, purpose に, 行く.", "en": "(I) go to the library to read books.", "alt": [["本を", "図書館に", "読みに", "行く"]]},
     {"id": 54, "type": "order", "instruction": "Build the sentence", "prompt": "My older brother became a doctor.", "options": ["兄は", "医者に", "なった"], "note": "A becomes B: B takes に.", "en": "My older brother became a doctor."},
     {"id": 55, "type": "order", "instruction": "Build the sentence", "prompt": "The cat is on the chair.", "options": ["猫は", "いすの上に", "いる"], "note": "に marks the location.", "en": "The cat is on the chair."},
-    {"id": 56, "type": "order", "instruction": "Build the sentence", "prompt": "It became cold today.", "options": ["今日は", "寒く", "なった"], "note": "い becomes く before なる.", "en": "It became cold today."}
+    {"id": 56, "type": "order", "instruction": "Build the sentence", "prompt": "It became cold today.", "options": ["今日は", "寒く", "なった"], "note": "い becomes く before なる.", "en": "It became cold today."},
+    {"id": 57, "type": "choice", "instruction": "Fill the gap", "prompt": "（私が）南＿＿行く。", "options": ["へ", "を", "が", "だ"], "answer": 0, "note": "へ marks the direction of travel.", "en": "(I) go south."},
+    {"id": 58, "type": "choice", "instruction": "Which sentence is correct?", "prompt": "", "options": ["（私が）駅へいる。", "（私が）駅へ行く。", "（私が）駅へなる。"], "answer": 1, "note": "へ marks a direction of travel, not a location."}
   ]
 }

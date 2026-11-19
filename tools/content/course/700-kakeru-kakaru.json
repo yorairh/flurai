@@ -6,94 +6,41 @@
   "title": "かける and かかる: the all-purpose pair",
   "summary": "A long list of meanings becomes one picture: hang something so that it stays. かける is the other-move verb, かかる the self-move verb.",
   "video": "https://www.youtube.com/watch?v=1MbqmZPySPQ",
-  "related": [
-    585
-  ],
+  "related": [585],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Dictionaries give かける twenty or more meanings. They all come from one picture: **hang or hook** something on something, so that it **clings** and does not easily fall off. It is neither \"put\" nor \"hang\" in English, and **かける** (other-move) and **かかる** (self-move) are a pair."
-    },
-    {
-      "type": "heading",
-      "text": "かける: hang it on"
-    },
-    {
-      "type": "example",
-      "jp": "毛布をかける。",
-      "en": "Put a blanket over (something)."
-    },
-    {
-      "type": "example",
-      "jp": "眼鏡をかける。",
-      "en": "Put on glasses."
-    },
-    {
-      "type": "example",
-      "jp": "電話をかける。",
-      "en": "Make a phone call."
-    },
-    {
-      "type": "example",
-      "jp": "先生に迷惑をかけてしまった。",
-      "en": "I have caused the teacher trouble."
-    },
-    {
-      "type": "example",
-      "jp": "鍵をかける。",
-      "en": "Lock (the door)."
-    },
-    {
-      "type": "example",
-      "jp": "椅子に腰をかける。",
-      "en": "Sit down on a chair."
-    },
-    {
-      "type": "text",
-      "text": "The last two are old pictures: a heavy bar hung across a door was the lock and the key at once, and sitting means hanging your hips on the seat."
-    },
-    {
-      "type": "heading",
-      "text": "かかる: it hangs on"
-    },
-    {
-      "type": "text",
-      "text": "**時間がかかる** is not \"it takes time\" but \"time hangs\" (on the activity). With the other-move verb you spend it on purpose: **時間をかける**."
-    },
-    {
-      "type": "example",
-      "jp": "日本語を覚えるのに時間がかかる。",
-      "en": "Learning Japanese takes time."
-    },
-    {
-      "type": "example",
-      "jp": "この仕事にはお金がかかる。",
-      "en": "This job costs money."
-    },
-    {
-      "type": "example",
-      "jp": "料理に時間をかける。",
-      "en": "(I) spend time on cooking."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**かける**: hang or hook something on (cover, wear, call, lock, spend).",
-        "**かかる**: it hangs on: time and money \"hang\" on a task.",
-        "The core feeling: stuck on, not easily dislodged.",
-        "迷惑をかける = put annoyance on someone."
-      ]
-    }
+    {"type": "text", "text": "Dictionaries give かける twenty or more meanings. They all come from one picture: **hang or hook** something on something, so that it **clings** and does not easily fall off. It is neither \"put\" nor \"hang\" in English, and **かける** (other-move) and **かかる** (self-move) are a pair."},
+    {"type": "heading", "text": "かける: hang it on"},
+    {"type": "text", "text": "Each row below is one picture of hanging or hooking something on something. The picture is the method: if you can see the thing clinging, you know the verb."},
+    {"type": "table", "rows": [["Phrase", "What hangs where"], ["毛布をかける", "a blanket drapes over the sides"], ["眼鏡をかける", "glasses hook on the ears"], ["ごはんにふりかけをかける", "flakes cling to the rice"], ["迷惑をかける", "trouble is put on someone and stays"], ["鍵をかける", "the old bar hung across a door"], ["腰をかける", "your hips hang on the seat"]]},
+    {"type": "text", "text": "The last two are old pictures: a heavy bar hung across a door was the lock and the key at once, and sitting means hanging your hips on the seat."},
+    {"type": "text", "text": "Two more are common in everyday talk: making a call, and the call that comes in. A call is hung on the other person, and for them it hangs on to them."},
+    {"type": "example", "jp": "電話をかける。", "en": "Make a phone call."},
+    {"type": "example", "jp": "さくらから電話がかかった。", "en": "A call came in from Sakura. (the self-move partner)"},
+    {"type": "example", "jp": "先生に迷惑をかけてしまった。", "en": "I have caused the teacher trouble."},
+    {"type": "heading", "text": "かかる: it hangs on"},
+    {"type": "text", "text": "**時間がかかる** is not \"it takes time\" but \"time hangs\" (on the activity). With the other-move verb you spend it on purpose: **時間をかける**. This is the same pair as lesson 15: が with the self-move verb, を with the other-move verb."},
+    {"type": "example", "jp": "日本語を覚えるのに時間がかかる。", "en": "Learning Japanese takes time."},
+    {"type": "example", "jp": "この仕事にはお金がかかる。", "en": "This job costs money."},
+    {"type": "example", "jp": "料理に時間をかける。", "en": "(I) spend time on cooking."},
+    {"type": "diagram", "cars": [{"text": "私が", "role": "carriage", "label": "I choose"}, {"text": "時間を", "role": "white"}, {"text": "かける", "role": "engine", "label": "other-move"}], "text": "時間をかける: you spend the time on purpose."},
+    {"type": "diagram", "cars": [{"text": "時間が", "role": "carriage", "label": "it just happens"}, {"text": "かかる", "role": "engine", "label": "self-move"}], "text": "時間がかかる: the time hangs on by itself."},
+    {"type": "heading", "text": "かける on the い-stem"},
+    {"type": "text", "text": "After the い-stem of a verb, **かける** hooks the action onto something. 話しかける hooks a conversation onto someone: you start speaking to them. 食べかける means you have started eating but not finished, which is why 食べかけ is \"half-eaten\"."},
+    {"type": "table", "rows": [["Word", "Picture", "Meaning"], ["話しかける", "hook a conversation on someone", "speak to someone"], ["言いかける", "hook a sentence, drop it", "start to say"], ["食べかけ", "eating hooked on, not done", "half-eaten"], ["読みかけ", "reading hooked on, not done", "half-read"]]},
+    {"type": "example", "jp": "駅で友達に話しかけた。", "en": "I spoke to my friend at the station."},
+    {"type": "example", "jp": "食べかけのパンを机に置いた。", "en": "I put the half-eaten bread on the desk."},
+    {"type": "example", "jp": "これは読みかけの本です。", "en": "This is a book I have half read."},
+    {"type": "keypoints", "items": ["**かける**: hang or hook something on (cover, wear, call, lock, spend).", "**かかる**: it hangs on: time and money \"hang\" on a task; a call comes in.", "After an い-stem, かける hooks the action on: 話しかける, 食べかけ.", "The core feeling: stuck on, not easily dislodged."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Fill the gap", "prompt": "この旅行には三万円＿＿かかる。", "options": ["が", "を", "に", "で"], "answer": 0, "en": "This trip costs thirty thousand yen.", "note": "かかる is self-move: the money is the carriage."},
     {"id": 102, "type": "choice", "instruction": "Fill the gap", "prompt": "毎日、日本語の勉強に時間＿＿かける。", "options": ["が", "を", "へ", "で"], "answer": 1, "en": "(I) spend time on studying Japanese every day.", "note": "かける is other-move: you spend time on purpose, so を."},
-    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "友達に電話を＿＿＿。", "options": ["かかった", "かけた"], "answer": 1, "en": "(I) called a friend.", "note": "You make a phone call: other-move かける."},
+    {"id": 103, "type": "choice", "instruction": "Fill the gap", "prompt": "友達に電話を＿＿＿。", "options": ["かかった", "かけた", "かけられた"], "answer": 1, "en": "(I) called a friend.", "note": "You make a phone call: other-move かける."},
     {"id": 104, "type": "choice", "instruction": "Fill the gap", "prompt": "家から駅まで歩くと、二十分＿＿。", "options": ["かける", "かけない", "かかる", "かけて"], "answer": 2, "en": "Walking from home to the station takes twenty minutes.", "note": "Time hangs on the walk: self-move かかる."},
-    {"id": 105, "type": "choice", "instruction": "Which sentence means \"I spent a lot of time on this report\"?", "prompt": "", "options": ["このレポートに時間がかかった。", "このレポートに時間をかけた。", "このレポートを時間かけた。", "このレポートが時間をかかった。"], "answer": 1, "note": "On purpose, so other-move かける with を."},
+    {"id": 105, "type": "choice", "instruction": "Which sentence means \"I spent a lot of time on this report\"?", "prompt": "", "options": ["このレポートに時間がかかった。", "このレポートに時間をかけた。", "このレポートの時間をかけた。", "このレポートが時間をかけた。"], "answer": 1, "note": "On purpose, so other-move かける with を."},
     {"id": 106, "type": "choice", "instruction": "What does かける picture here?", "prompt": "人に迷惑をかけないでください。", "options": ["Locking", "Putting trouble onto someone", "Making a phone call", "Spending time"], "answer": 1, "en": "Please don't cause trouble for people.", "note": "迷惑をかける = put annoyance on someone."},
-    {"id": 107, "type": "tap", "instruction": "Tap the part that means \"sit down\" (hang your hips on the seat)", "options": ["ベンチに", "腰をかけて", "休んだ"], "answer": 1, "en": "(I) sat down on the bench and rested.", "note": "腰をかける is the old picture of sitting."},
-    {"id": 108, "type": "tap", "instruction": "Tap the self-move verb", "options": ["この料理は", "時間が", "かかる"], "answer": 2, "en": "This dish takes time.", "note": "The time hangs on the cooking by itself: かかる."},
+    {"id": 107, "type": "tap", "instruction": "Tap the part that hangs on the seat", "options": ["公園の", "ベンチに", "腰を", "かけて", "休んだ"], "answer": 2, "en": "(I) sat down on the bench in the park and rested.", "note": "腰をかける: you hang your hips on the seat."},
+    {"id": 108, "type": "tap", "instruction": "Tap the self-move verb", "options": ["この料理は", "作るのに", "時間が", "かかる"], "answer": 3, "en": "This dish takes time to make.", "note": "The time hangs on the cooking by itself: かかる."},
     {"id": 109, "type": "tap", "instruction": "Tap the other-move verb", "options": ["子供の", "勉強に", "時間を", "かけた"], "answer": 3, "en": "(I) spent time on my child's studies.", "note": "かけた takes を: you put time on it."},
     {"id": 110, "type": "order", "instruction": "Build the sentence", "prompt": "(I) will call her tonight.", "options": ["今晩", "彼女に", "電話を", "かけます"], "en": "(I) will call her tonight.", "note": "電話をかける: make a phone call.", "alt": [["彼女に", "今晩", "電話を", "かけます"]]},
     {"id": 111, "type": "order", "instruction": "Build the sentence", "prompt": "Going to university costs money.", "options": ["大学に", "行くには", "お金が", "かかる"], "en": "Going to university costs money.", "note": "お金が + かかる: money hangs on it."},
@@ -101,12 +48,15 @@
     {"id": 113, "type": "order", "instruction": "Build the sentence", "prompt": "From home to the station it takes ten minutes.", "options": ["家から", "駅まで", "十分", "かかる"], "en": "From home to the station it takes ten minutes.", "note": "Time hangs on the trip: かかる."},
     {"id": 114, "type": "choice", "instruction": "What is the core picture of かける?", "prompt": "", "options": ["Throw something away", "Hang or hook something on so it clings", "Cut something", "Carry something"], "answer": 1, "note": "Neither \"put\" nor \"hang\" exactly: it stays stuck on."},
     {"id": 115, "type": "choice", "instruction": "True or false? かかる is the self-move partner of かける.", "prompt": "", "options": ["True", "False"], "answer": 0, "note": "かける / かかる are a pair."},
-    {"id": 116, "type": "choice", "instruction": "Which one means to spend time on purpose?", "prompt": "", "options": ["時間をかける", "時間がかかる"], "answer": 0, "note": "The other-move verb with を."},
-    {"id": 117, "type": "choice", "instruction": "Which means \"it costs money\"?", "prompt": "", "options": ["お金にかける", "お金でかける", "お金がかかる", "お金をかかる"], "answer": 2, "note": "Self-move かかる takes が."},
+    {"id": 116, "type": "choice", "instruction": "Which one means to spend time on purpose?", "prompt": "", "options": ["時間をかける", "時間がかかる", "時間にかかる"], "answer": 0, "note": "The other-move verb with を."},
+    {"id": 117, "type": "choice", "instruction": "Which means \"it costs money\"?", "prompt": "", "options": ["お金にかける", "お金でかける", "お金がかかる", "お金がかける"], "answer": 2, "note": "Self-move かかる takes が."},
     {"id": 118, "type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["ボタンをかける。", "時間をかかる。", "ラジオをかける。", "声をかける。"], "answer": 1, "note": "かかる is self-move and cannot take を."},
     {"id": 119, "type": "choice", "instruction": "What does かけた picture here?", "prompt": "友達に声をかけた。", "options": ["Locking", "Wearing", "Putting your voice onto someone, i.e. calling out", "Spending"], "answer": 2, "en": "(I) called out to my friend.", "note": "The voice \"hangs\" on the other person."},
     {"id": 120, "type": "choice", "instruction": "Which pair is self-move / other-move?", "prompt": "", "options": ["かかる / かける", "かける / かかる", "かかる / かかる", "かける / かける"], "answer": 0, "note": "かかる hangs by itself; かける hangs it on."},
-    {"id": 121, "type": "choice", "instruction": "True or false? 時間をかける means that time takes (itself) by itself.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "That is 時間がかかる; with を you spend it on purpose."},
-    {"id": 122, "type": "choice", "instruction": "Fill the gap", "prompt": "寒いので、子供にふとんを＿＿＿。", "options": ["かかった", "かけた", "かからない", "かける"], "answer": 1, "en": "Since it was cold, (I) put a futon over the child.", "note": "You put it over the child: other-move かける, past."}
-  ]
+    {"id": 121, "type": "choice", "instruction": "True or false? 時間をかける means \"it takes time\".", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "That is 時間がかかる; with を you spend it on purpose."},
+    {"id": 122, "type": "choice", "instruction": "Fill the gap", "prompt": "寒いので、子供にふとんを＿＿＿。", "options": ["かかった", "かけた", "かからない", "かける"], "answer": 1, "en": "Since it was cold, (I) put a futon over the child.", "note": "You put it over the child: other-move かける, past."},
+    {"id": 112, "type": "choice", "instruction": "What does かけ add to a verb's い-stem?", "prompt": "食べかけのパンがある。", "options": ["Started but not finished: half-eaten", "Finished completely", "About to be eaten soon", "Never eaten at all"], "answer": 0, "en": "There is some half-eaten bread.", "note": "Verb stem + かけ: the action is hooked on, not done."},
+    {"id": 124, "type": "choice", "instruction": "Which sentence means \"I spoke to a stranger\"?", "prompt": "", "options": ["知らない人に話しかけた。", "知らない人を話しかかった。", "知らない人が話しかけた。", "知らない人で話しかかった。"], "answer": 0, "note": "Stem + かける: hook a conversation on someone (に)."}
+  ],
+  "extraKanji": "腰"
 }

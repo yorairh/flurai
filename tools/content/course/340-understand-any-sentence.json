@@ -6,360 +6,51 @@
   "title": "Understand any sentence",
   "summary": "Find the engine that ends the sentence, work out where each clause stops, and treat everything else as a modifier. A hidden main carriage is a zero.",
   "video": "https://www.youtube.com/watch?v=uot49Z85wNs",
-  "related": [
-    604
-  ],
+  "related": [604],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Every logical clause has a **main carriage** (the one the clause is about) and an **engine** (the verb, adjective, or noun + だ that says what is true of it). The engine is usually visible. The main carriage is often a **zero**, hidden but always there. The difficulty with long sentences is finding where each clause begins and ends."
-    },
-    {
-      "type": "heading",
-      "text": "Clues for where a clause ends"
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "The **head clause** ends the sentence at its last engine: a verb, an adjective, or だ / です after a noun.",
-        "Particles like よ and ね come after the sentence is over; they are not part of the clause.",
-        "A noun followed by **な** is a modifier, not a clause engine: きれいな花.",
-        "A clause that is not last ends in an engine plus a connector: a **て-form**, an **い-stem**, or a **conditional**."
-      ]
-    },
-    {
-      "type": "heading",
-      "text": "Worked example"
-    },
-    {
-      "type": "text",
-      "text": "傘を持って来ればよかった. The first clause ends in 持って来れば (a conditional is a connector), so another clause must follow. The last clause is よかった: an engine that ends the sentence. Its main carriage is a zero: \"it\", the situation in general. Compare 晴れだね: nobody says what \"is sunny\", yet the sentence works."
-    },
-    {
-      "type": "heading",
-      "text": "Modifiers"
-    },
-    {
-      "type": "text",
-      "text": "A verb without its own connector that comes before a noun simply describes that noun."
-    },
-    {
-      "type": "example",
-      "jp": "日本語が話せる留学生は、金メダルを取った女性と結婚した。",
-      "en": "The exchange student who can speak Japanese married a woman who won a gold medal."
-    },
-    {
-      "type": "text",
-      "text": "Work from the end: the head engine is 結婚した. 日本語が話せる describes 留学生, and 金メダルを取った describes 女性. So there is one clause, with the main carriage 留学生は and two modifiers."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "Look for the last engine first.",
-        "Connectors (て, い-stem, ば, たら) mean \"another clause follows\".",
-        "A verb with no connector before a noun is a modifier."
-      ]
-    }
+    {"type": "text", "text": "Every logical clause has a **main carriage** (the one the clause is about) and an **engine** (the verb, adjective, or noun + だ that says what is true of it). The engine is usually visible. The main carriage is often a **zero**, hidden but always there. The difficulty with long sentences is finding where each clause begins and ends."},
+    {"type": "text", "text": "You cannot read speech backwards, so the method is: peek at the head engine at the end first, then read from the beginning and cut at each connector."},
+    {"type": "heading", "text": "Step 1: find the last engine"},
+    {"type": "text", "text": "The **head clause** ends the sentence at its last engine: a verb, an adjective, or だ / です after a noun. Particles like よ and ね come after the sentence is over; they are not part of the clause."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "the day"}, {"text": "晴れだ", "role": "engine"}, {"text": "ね", "role": "particle"}], "text": "晴れだね。 It's sunny, isn't it."},
+    {"type": "example", "jp": "晴れだね。", "en": "It's sunny, isn't it. (Nobody says what \"is sunny\", yet the sentence works.)"},
+    {"type": "heading", "text": "Step 2: look for connectors"},
+    {"type": "text", "text": "A clause that is not last ends in an engine plus a connector: a **て-form**, an **い-stem**, or a **conditional**. A connector means \"another clause follows\"."},
+    {"type": "example", "jp": "傘を持って来ればよかった。", "en": "I should have brought an umbrella."},
+    {"type": "text", "text": "The first clause ends in 持って来れば (a conditional is a connector), so another clause must follow. The last clause is よかった, an engine. Its main carriage is a zero: \"it\", the situation in general."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "I"}, {"text": "傘を", "role": "white"}, {"text": "持って来れば", "role": "engine", "label": "+ ば connector"}], "text": "傘を持って来れば I bring an umbrella (clause 1)"},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "the situation"}, {"text": "よかった", "role": "engine", "label": "head engine"}], "text": "よかった It would be good (clause 2)"},
+    {"type": "heading", "text": "Step 3: a verb before a noun describes it"},
+    {"type": "text", "text": "A verb without its own connector that comes right before a noun simply describes that noun. A noun followed by **な** is a modifier too, not a clause engine: きれいな花."},
+    {"type": "example", "jp": "母が買ったパンを食べた。", "en": "I ate the bread my mother bought."},
+    {"type": "heading", "text": "Putting it together"},
+    {"type": "text", "text": "Work through a long sentence one piece at a time. First the head engine 結婚した. Then 日本語が話せる describes 留学生, and 金メダルを取った describes 女性. The topic 留学生は is not the main carriage: the carriage is a zero that means the student."},
+    {"type": "example", "jp": "日本語が話せる留学生は、金メダルを取った女性と結婚した。", "en": "The exchange student who can speak Japanese married a woman who won a gold medal."},
+    {"type": "diagram", "cars": [{"text": "日本語が話せる", "role": "white", "label": "describes the student"}, {"text": "留学生は", "role": "topic"}, {"text": "Øが", "role": "zero", "label": "the student"}, {"text": "金メダルを取った", "role": "white", "label": "describes the woman"}, {"text": "女性と", "role": "white"}, {"text": "結婚した", "role": "engine"}], "text": "日本語が話せる留学生は、金メダルを取った女性と結婚した。"},
+    {"type": "keypoints", "items": ["Look for the last engine first.", "Connectors (て, い-stem, ば, たら) mean \"another clause follows\".", "A verb with no connector before a noun is a modifier."]}
   ],
   "questions": [
-    {
-      "type": "tap",
-      "instruction": "Tap the engine of the head clause",
-      "options": [
-        "兄は",
-        "毎日",
-        "自転車で",
-        "学校へ",
-        "行く"
-      ],
-      "answer": 4,
-      "note": "The head clause ends the sentence at its engine.",
-      "en": "My older brother goes to school by bicycle every day.",
-      "id": 21
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the engine of the head clause",
-      "options": [
-        "雨が",
-        "降ったら",
-        "試合は",
-        "中止です"
-      ],
-      "answer": 3,
-      "note": "中止です: noun + です ends the sentence.",
-      "en": "If it rains, the game is canceled.",
-      "id": 22
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the connector that links the first clause to the next",
-      "options": [
-        "朝ごはんを",
-        "食べて",
-        "出かけた"
-      ],
-      "answer": 1,
-      "note": "The て-form means another clause follows.",
-      "en": "I ate breakfast and went out.",
-      "id": 23
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the verb that is only a modifier",
-      "options": [
-        "昨日",
-        "買った",
-        "本は",
-        "おもしろい"
-      ],
-      "answer": 1,
-      "note": "A verb with no connector before a noun describes it.",
-      "en": "The book I bought yesterday is interesting.",
-      "id": 24
-    },
-    {
-      "type": "choice",
-      "instruction": "How many clauses does this have?",
-      "prompt": "本を読んでから、お風呂に入った。",
-      "options": [
-        "One",
-        "Two",
-        "Three",
-        "Four"
-      ],
-      "answer": 1,
-      "note": "読んで is a connector, so another clause follows.",
-      "en": "After reading the book, I took a bath.",
-      "id": 25
-    },
-    {
-      "type": "choice",
-      "instruction": "What is 友達が作った here?",
-      "prompt": "友達が作ったケーキを食べた。",
-      "options": [
-        "A modifier of ケーキ",
-        "The head clause",
-        "A particle",
-        "A connector"
-      ],
-      "answer": 0,
-      "note": "A verb with no connector before a noun describes it.",
-      "en": "I ate the cake my friend made.",
-      "id": 26
-    },
-    {
-      "type": "choice",
-      "instruction": "Who is the main carriage?",
-      "prompt": "おいしいね！",
-      "options": [
-        "おいしい",
-        "ね",
-        "Nobody",
-        "A zero: the thing in general"
-      ],
-      "answer": 3,
-      "note": "The carriage is hidden but always there.",
-      "en": "It's delicious, isn't it!",
-      "id": 27
-    },
-    {
-      "type": "choice",
-      "instruction": "Which part sits outside the clause, added after the sentence is over?",
-      "prompt": "明日は行けないよ。",
-      "options": [
-        "行けない",
-        "明日",
-        "よ",
-        "は"
-      ],
-      "answer": 2,
-      "note": "よ comes after the sentence is over.",
-      "en": "I can't go tomorrow, you know.",
-      "id": 28
-    },
-    {
-      "type": "choice",
-      "instruction": "What does 静かな do here?",
-      "prompt": "静かな町に住んでいる。",
-      "options": [
-        "It is the head engine",
-        "It describes 町 (a modifier)",
-        "It is a connector",
-        "It is a particle"
-      ],
-      "answer": 1,
-      "note": "Noun + な points to a following noun.",
-      "en": "I live in a quiet town.",
-      "id": 29
-    },
-    {
-      "type": "choice",
-      "instruction": "Which ending shows that the clause is NOT the last one?",
-      "prompt": "",
-      "options": [
-        "食べて",
-        "食べた",
-        "食べる",
-        "食べます"
-      ],
-      "answer": 0,
-      "note": "A て-form is a connector.",
-      "id": 30
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "きれいな in きれいな花 is the engine of its own clause.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "Noun + な is a modifier, not a clause engine.",
-      "en": "A pretty flower: きれいな describes the noun.",
-      "id": 31
-    },
-    {
-      "type": "choice",
-      "instruction": "Where should you start reading a long sentence?",
-      "prompt": "",
-      "options": [
-        "At the first noun",
-        "At the first particle",
-        "At the last engine",
-        "At the first comma"
-      ],
-      "answer": 2,
-      "note": "The head clause ends the sentence.",
-      "id": 32
-    },
-    {
-      "type": "choice",
-      "instruction": "What is the head engine?",
-      "prompt": "赤いかばんを持った女の子が走っている。",
-      "options": [
-        "持った",
-        "走っている",
-        "赤い",
-        "女の子が"
-      ],
-      "answer": 1,
-      "note": "持った and 赤い only describe nouns.",
-      "en": "A girl carrying a red bag is running.",
-      "id": 33
-    },
-    {
-      "type": "choice",
-      "instruction": "Who is the main carriage of the head clause?",
-      "prompt": "昨日会った友達は、医者になった。",
-      "options": [
-        "友達は",
-        "昨日",
-        "会った",
-        "医者"
-      ],
-      "answer": 0,
-      "note": "会った only describes 友達.",
-      "en": "The friend I met yesterday became a doctor.",
-      "id": 34
-    },
-    {
-      "type": "choice",
-      "instruction": "In the course's terms the main carriage is the subject. Which sentence has no subject said aloud?",
-      "prompt": "",
-      "options": [
-        "犬が走る。",
-        "先生が来た。",
-        "雨が降った。",
-        "本を買った。"
-      ],
-      "answer": 3,
-      "note": "Nobody says who bought the book.",
-      "id": 35
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "The child who is sleeping is my younger brother.",
-      "options": [
-        "寝ている",
-        "子供は",
-        "私の",
-        "弟です"
-      ],
-      "note": "Modifier, carriage, engine.",
-      "en": "The child who is sleeping is my younger brother.",
-      "id": 36
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I ate the cake my mother made.",
-      "options": [
-        "母が",
-        "作った",
-        "ケーキを",
-        "食べた"
-      ],
-      "note": "The modifier goes before the noun.",
-      "en": "I ate the cake my mother made.",
-      "id": 37
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I got home and took a bath.",
-      "options": [
-        "家に",
-        "帰って",
-        "お風呂に",
-        "入った"
-      ],
-      "note": "て-form, then the last clause.",
-      "en": "I got home and took a bath.",
-      "id": 38
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "If it gets cold, I will wear a coat.",
-      "options": [
-        "寒くなれば",
-        "コートを",
-        "着ます"
-      ],
-      "note": "A conditional clause, then the head clause.",
-      "en": "If it gets cold, I will wear a coat.",
-      "id": 39
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "The man running in the park is my father.",
-      "options": [
-        "公園を",
-        "走っている",
-        "男の人は",
-        "父です"
-      ],
-      "note": "Modifier, carriage, engine.",
-      "en": "The man running in the park is my father.",
-      "id": 40
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the engine of the head clause",
-      "options": [
-        "昨日の",
-        "カレーは",
-        "とても",
-        "おいしかった"
-      ],
-      "answer": 3,
-      "note": "おいしかった ends the sentence.",
-      "en": "Yesterday's curry was very tasty.",
-      "id": 41
-    }
+    {"type": "tap", "instruction": "Tap the engine of the head clause", "options": ["兄は", "毎日", "自転車で", "学校へ", "行く"], "answer": 4, "note": "The head clause ends the sentence at its engine.", "en": "My older brother goes to school by bicycle every day.", "id": 21},
+    {"type": "tap", "instruction": "Tap the engine of the head clause", "options": ["雨が", "降ったら", "試合は", "中止です"], "answer": 3, "note": "中止です: noun + です ends the sentence.", "en": "If it rains, the game is canceled.", "id": 22},
+    {"type": "tap", "instruction": "Tap the connector that links the first clause to the next", "options": ["朝ごはんを", "食べて", "出かけた"], "answer": 1, "note": "The て-form means another clause follows.", "en": "I ate breakfast and went out.", "id": 23},
+    {"type": "tap", "instruction": "Tap the verb that is only a modifier", "options": ["昨日", "買った", "本は", "おもしろい"], "answer": 1, "note": "A verb with no connector before a noun describes it.", "en": "The book I bought yesterday is interesting.", "id": 24},
+    {"type": "choice", "instruction": "How many clauses does this have?", "prompt": "本を読んでから、お風呂に入った。", "options": ["One", "Two", "Three", "Four"], "answer": 1, "note": "読んで is a connector, so another clause follows.", "en": "After reading the book, I took a bath.", "id": 25},
+    {"type": "choice", "instruction": "What is 友達が作った here?", "prompt": "友達が作ったケーキを食べた。", "options": ["A modifier of ケーキ", "The head clause", "A particle", "A connector"], "answer": 0, "note": "A verb with no connector before a noun describes it.", "en": "I ate the cake my friend made.", "id": 26},
+    {"type": "choice", "instruction": "Who is the main carriage?", "prompt": "おいしいね！", "options": ["おいしい", "ね", "Nobody", "A zero: the thing in general"], "answer": 3, "note": "The carriage is hidden but always there.", "en": "It's delicious, isn't it!", "id": 27},
+    {"type": "choice", "instruction": "Which part sits outside the clause, added after the sentence is over?", "prompt": "明日は行けないよ。", "options": ["行けない", "明日", "よ", "は"], "answer": 2, "note": "よ comes after the sentence is over.", "en": "I can't go tomorrow, you know.", "id": 28},
+    {"type": "choice", "instruction": "What does 静かな do here?", "prompt": "静かな町に住んでいる。", "options": ["It is the head engine", "It describes 町 (a modifier)", "It is a connector", "It is a particle"], "answer": 1, "note": "Noun + な points to a following noun.", "en": "I live in a quiet town.", "id": 29},
+    {"type": "choice", "instruction": "Which ending shows that the clause is NOT the last one?", "prompt": "", "options": ["食べて", "食べた", "食べる", "食べます"], "answer": 0, "note": "A て-form is a connector.", "id": 30},
+    {"type": "choice", "instruction": "True or false?", "prompt": "きれいな in きれいな花 is the engine of its own clause.", "options": ["True", "False"], "answer": 1, "note": "Noun + な is a modifier, not a clause engine.", "en": "A pretty flower.", "id": 31},
+    {"type": "choice", "instruction": "Where should you start reading a long sentence?", "prompt": "", "options": ["At the first noun", "At the first particle", "At the last engine", "At the first comma"], "answer": 2, "note": "The head clause ends the sentence.", "id": 32},
+    {"type": "choice", "instruction": "What is the head engine?", "prompt": "赤いかばんを持った女の子が走っている。", "options": ["持った", "走っている", "赤い", "女の子が"], "answer": 1, "note": "持った and 赤い only describe nouns.", "en": "A girl carrying a red bag is running.", "id": 33},
+    {"type": "choice", "instruction": "What is the topic of the sentence?", "prompt": "昨日会った友達は、医者になった。", "options": ["友達は", "昨日", "会った", "医者"], "answer": 0, "note": "友達は is the topic; the main carriage is a zero standing for the friend.", "en": "The friend I met yesterday became a doctor.", "id": 34},
+    {"type": "choice", "instruction": "Which sentence has no subject said aloud?", "prompt": "", "options": ["犬が走る。", "先生が来た。", "雨が降った。", "本を買った。"], "answer": 3, "note": "Nobody says who bought the book.", "id": 35},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "The child who is sleeping is my younger brother.", "options": ["寝ている", "子供は", "私の", "弟です"], "note": "Modifier, carriage, engine.", "en": "The child who is sleeping is my younger brother.", "id": 36},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I ate the cake my mother made.", "options": ["母が", "作った", "ケーキを", "食べた"], "note": "The modifier goes before the noun.", "en": "I ate the cake my mother made.", "id": 37},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I got home and took a bath.", "options": ["家に", "帰って", "お風呂に", "入った"], "note": "て-form, then the last clause.", "en": "I got home and took a bath.", "id": 38},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "If it gets cold, I will wear a coat.", "options": ["寒くなれば", "コートを", "着ます"], "note": "A conditional clause, then the head clause.", "en": "If it gets cold, I will wear a coat.", "id": 39},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "The man running in the park is my father.", "options": ["公園を", "走っている", "男の人は", "父です"], "note": "Modifier, carriage, engine.", "en": "The man running in the park is my father.", "id": 40},
+    {"type": "tap", "instruction": "Tap the engine of the head clause", "options": ["昨日の", "カレーは", "とても", "おいしかった"], "answer": 3, "note": "おいしかった ends the sentence.", "en": "Yesterday's curry was very tasty.", "id": 41},
+    {"id": 42, "type": "tap", "instruction": "Tap the connector", "prompt": "", "options": ["雨が", "降れば", "中止だ"], "answer": 1, "note": "ば is a connector: another clause follows.", "en": "If it rains, it is canceled."}
   ]
 }

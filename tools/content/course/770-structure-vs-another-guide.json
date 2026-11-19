@@ -6,33 +6,17 @@
   "summary": "The course sets its structural model beside a well-known online grammar guide on three core points: が, the copula and conjugation.",
   "video": "https://www.youtube.com/watch?v=-JuHi-yKGFc",
   "blocks": [
-    {
-      "type": "text",
-      "text": "This is a commentary episode, not a lesson. The speaker compares the course's model of Japanese with another widely used online grammar guide and argues that the two cannot both be right where they disagree: if one says 2 + 2 = 4, the other cannot say 5. The aim is explained as clarifying the structure, not criticizing a person; the author of the other guide is credited with noticing real problems in the standard textbook model and trying to fix them."
-    },
-    {
-      "type": "heading",
-      "text": "The three points of disagreement"
-    },
-    {
-      "type": "text",
-      "text": "According to the course, the disagreement touches the core of the language. The **が particle** always marks the subject of a sentence (the A-car, the one that is or does something), even when you cannot see it. The **copula だ** is a real logical element that makes a noun into an engine. And **conjugation**, in the Western sense, does not exist: there are stems, and helper verbs and adjectives that attach to them."
-    },
-    {
-      "type": "heading",
-      "text": "What to take from it"
-    },
-    {
-      "type": "text",
-      "text": "You do not need to study this episode to pass the course tests. It is useful if you have met the other model elsewhere and want to see where the course's explanations differ. Where models conflict, test them against real Japanese you read and hear."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "This episode is a commentary, with no new grammar to memorize.",
-        "Disputed points: the role of が, the role of the copula, and the idea of conjugation.",
-        "Choose the model that makes real Japanese easier to understand."
-      ]
-    }
+    {"type": "text", "text": "This is a commentary episode, not a lesson. The speaker compares the course's model of Japanese with another widely used online grammar guide and argues that the two cannot both be right where they disagree: if one says 2 + 2 = 4, the other cannot say 5. The aim is explained as clarifying the structure, not criticizing a person; the author of the other guide is credited with noticing real problems in the standard textbook model and trying to fix them."},
+    {"type": "heading", "text": "The three points of disagreement"},
+    {"type": "text", "text": "According to the course, the disagreement touches the core of the language. Here it is as a table."},
+    {"type": "table", "rows": [["Point", "This course says", "The other guide says"], ["が", "always marks the subject (the main carriage), even when unseen", "marks a subject only sometimes, as a focus"], ["だ", "a real logical element: noun + だ is an engine", "a vague declarative marker"], ["Conjugation", "does not exist as such: stems plus helper verbs and adjectives", "verbs and adjectives conjugate"]]},
+    {"type": "heading", "text": "An example: wanting a crepe"},
+    {"type": "text", "text": "The course builds its が argument on a sentence like this one. In クレープが食べたい the crepe is the main carriage, and 食べたい is an adjective-like engine: \"crepes are eatable-wanted\". The person who wants it is only an unseen topic."},
+    {"type": "example", "jp": "クレープが食べたい。", "en": "I want to eat a crepe. (The crepe is the carriage.)"},
+    {"type": "diagram", "cars": [{"text": "(私は)", "role": "topic", "label": "unseen topic"}, {"text": "クレープが", "role": "carriage", "label": "the crepe"}, {"text": "食べたい", "role": "engine", "label": "is wanted-to-eat"}], "text": "Lessons 9 and 43 explain why 食べたい is an engine of its own."},
+    {"type": "text", "text": "Other languages work this way too. Spanish says Me gusta el tequila: \"the tequila is pleasing to me\". The thing liked is the subject, and the person is the one it pleases."},
+    {"type": "heading", "text": "What to take from it"},
+    {"type": "text", "text": "You do not need to study this episode to pass the course tests. It is useful if you have met the other model elsewhere and want to see where the course's explanations differ. Where models conflict, test them against real Japanese you read and hear."},
+    {"type": "keypoints", "items": ["This note is a commentary, with no new grammar to memorize.", "Disputed points: the role of が, the role of the copula, and the idea of conjugation.", "Choose the model that makes real Japanese easier to understand."]}
   ]
 }

@@ -10,24 +10,24 @@
   "blocks": [
     {"type": "text", "text": "Japanese has several \"if / when\" tools. This lesson starts with the oldest and simplest: **と**."},
     {"type": "heading", "text": "The same と you already know"},
-    {"type": "text", "text": "Japanese has two \"and\" particles for nouns. **や** is open: ペン**や**本 is a pen, a book, and maybe more. **と** is **exclusive**: ペン**と**本 is exactly those two. The conditional と is this same particle, now sitting after a whole clause. (The quoting と, as in 「行くと言った」, is a different word.)"},
+    {"type": "text", "text": "Japanese has two \"and\" particles for nouns. **や** is open: it lists examples and maybe more. **と** is **exclusive**: exactly those two. The conditional と is this same particle, now sitting after a whole clause. (The quoting と, as in 「行くと言った」, is a different word.)"},
+    {"type": "table", "rows": [["", "Meaning", "Example"], ["や", "open list (and more)", "ペンや本"], ["と", "closed list (exactly these)", "ペンと本"]]},
+    {"type": "text", "text": "Why can と follow a clause at all? Logical particles such as や normally attach only to nouns, but と is not a logical particle: it can also sit after a whole clause, and that is how it works as \"if / when\"."},
     {"type": "heading", "text": "One result, nothing else"},
     {"type": "text", "text": "Because と is exclusive, \"A と B\" says that when A is the case, **only B** follows. It suits natural laws, habits, and things that always go together."},
+    {"type": "diagram", "cars": [{"text": "冬になる", "role": "white", "label": "condition"}, {"text": "と", "role": "particle", "label": "only this follows"}, {"text": "寒くなる", "role": "engine"}], "text": "冬になると寒くなる。 When winter comes, it gets cold."},
     {"type": "example", "jp": "冬になると寒くなる。", "en": "When winter comes, it gets cold."},
     {"type": "example", "jp": "このボタンを押すとドアが開く。", "en": "When you press this button, the door opens."},
     {"type": "heading", "text": "Exaggerated certainty"},
     {"type": "text", "text": "Speakers use the absolute feel for warnings: they present a likely result as if it were certain."},
     {"type": "example", "jp": "食べ過ぎると病気になるよ。", "en": "If you overeat, you will get sick."},
+    {"type": "example", "jp": "ゲームばかりしていると、試験に落ちるよ。", "en": "If you keep playing games, you will fail the exam."},
     {"type": "heading", "text": "\"If I don't, it's bad\": must"},
-    {"type": "text", "text": "A negative clause plus と, with a negative result left understood, becomes necessity. The result is often just ダメ (\"no good\") or nothing at all."},
+    {"type": "text", "text": "A negative clause plus と, with a negative result left understood, becomes necessity. The result is often just ダメ (\"no good\") or いけない (\"it won't do\"), or nothing at all."},
     {"type": "example", "jp": "もう行かないとダメだ。", "en": "I really have to go now."},
+    {"type": "example", "jp": "毎日勉強しないといけない。", "en": "I have to study every day."},
     {"type": "example", "jp": "早く逃げないと！", "en": "We have to run, quickly!"},
-    {"type": "keypoints", "items": [
-      "**Clause + と**: when / if this, then (only) that.",
-      "Same と as in \"A と B\" (and nothing else).",
-      "Warnings sound absolute on purpose.",
-      "**Negative + と (+ ダメ)**: I must."
-    ]}
+    {"type": "keypoints", "items": ["**Clause + と**: when / if this, then (only) that.", "Same と as in \"A と B\" (and nothing else).", "Warnings sound absolute on purpose.", "**Negative + と (+ ダメ / いけない)**: I must."]}
   ],
   "questions": [
     {"type": "choice", "instruction": "Why is と natural in this sentence?", "prompt": "春になると、花がさく。", "options": ["A guess about tomorrow", "A natural law: one inevitable result", "A past event", "A wish"], "answer": 1, "note": "と: when A, only B follows.", "en": "When spring comes, flowers bloom.", "id": 21},
@@ -43,7 +43,7 @@
     {"type": "choice", "instruction": "What does this sentence express?", "prompt": "早く行かないと、遅れるよ！", "options": ["A wish", "A past event", "A polite request", "A warning that sounds certain"], "answer": 3, "note": "Negative と: if not, then the bad result.", "en": "If you don't go soon, you'll be late!", "id": 31},
     {"type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["秋になると、涼しくなる。", "窓を開けると、風が入る。", "秋になるを、涼しくなる。", "毎日歩くと、元気になる。"], "answer": 2, "note": "A condition needs と, not を.", "id": 32},
     {"type": "choice", "instruction": "Which sentence gives a warning with と?", "prompt": "", "options": ["夜ふかしをしたい。", "夜ふかしすると、あした眠くなるよ。", "夜ふかしをしてください。", "夜ふかしをした。"], "answer": 1, "note": "と presents a likely result as certain.", "id": 33},
-    {"type": "choice", "instruction": "What does や do here?", "prompt": "りんごやバナナ", "options": ["Lists examples, with more left unsaid", "Lists exactly two things", "Means \"if\"", "Means \"but\""], "answer": 0, "note": "や is open-ended.", "en": "Apples, bananas, and so on.", "id": 34},
+    {"type": "choice", "instruction": "Which sentence says \"I have to study\"?", "prompt": "", "options": ["勉強しないといけない。", "勉強するといけない。", "勉強したといけない。", "勉強しないとき。"], "answer": 0, "note": "Negative + と + いけない: must.", "en": "Apples, bananas, and so on.", "id": 34},
     {"type": "order", "instruction": "Build the sentence", "prompt": "If you push the door, it opens.", "options": ["ドアを", "押すと", "開きます"], "note": "Condition, then result.", "en": "If you push the door, it opens.", "id": 35},
     {"type": "order", "instruction": "Build the sentence", "prompt": "If you don't leave soon, you will be late.", "options": ["早く", "出ないと", "遅れるよ"], "note": "Negative + と + result.", "en": "If you don't leave soon, you will be late.", "id": 36},
     {"type": "order", "instruction": "Build the sentence", "prompt": "When I drink coffee, I cannot sleep.", "options": ["コーヒーを", "飲むと", "ねられない"], "note": "Condition と result.", "en": "When I drink coffee, I cannot sleep.", "id": 37},
@@ -51,6 +51,7 @@
     {"type": "order", "instruction": "Build the sentence", "prompt": "I have to go home now.", "options": ["もう", "帰らないと", "ダメだ"], "note": "Negative + と + ダメ.", "en": "I have to go home now.", "id": 39},
     {"type": "tap", "instruction": "Tap the part that means \"if I don't\"", "options": ["明日は", "早く", "起きないと", "いけない"], "answer": 2, "note": "Negative + と: necessity.", "en": "I have to get up early tomorrow.", "id": 40},
     {"type": "tap", "instruction": "Tap the part that says \"when this happens\"", "options": ["ボタンを", "押すと", "ライトが", "つく"], "answer": 1, "note": "Condition と.", "en": "When you press the button, the light comes on.", "id": 41},
-    {"type": "tap", "instruction": "Tap the word that is the quotation と", "options": ["父は", "すぐ", "帰ると", "言った"], "answer": 2, "note": "と + 言う quotes someone.", "en": "Dad said he will be back soon.", "id": 42}
+    {"type": "tap", "instruction": "Tap the word that is the quotation と", "options": ["父は", "すぐ", "帰ると", "言った"], "answer": 2, "note": "と + 言う quotes someone.", "en": "Dad said he will be back soon.", "id": 42},
+    {"id": 43, "type": "choice", "instruction": "What does this sentence express?", "prompt": "夜ふかしばかりしていると、病気になるよ。", "options": ["A wish", "A past event", "A polite request", "A warning that sounds certain"], "answer": 3, "note": "と presents a likely result as if it were certain.", "en": "If you keep staying up late, you will get sick."}
   ]
 }

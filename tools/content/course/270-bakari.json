@@ -9,6 +9,7 @@
   "related": [
     437,
     490,
+    265,
     705,
     323
   ],
@@ -23,7 +24,7 @@
     },
     {
       "type": "text",
-      "text": "After a **past** verb it says that nothing has happened since: the action is very recent. The past tense is needed because the idea is about something completed."
+      "text": "After a **past** verb it says that nothing has happened since: the action is very recent. The past tense is needed because the idea is about something completed. This is an exaggeration too: you have had a walk and a talk since lunch, but \"nothing else has happened\"."
     },
     {
       "type": "example",
@@ -67,7 +68,7 @@
     },
     {
       "type": "text",
-      "text": "**ばかりか** adds か, which here turns the limit around: \"not just that, but also\". **ばかりに** adds に and means **\"just because\"**, with a stronger and usually unlucky cause than から or ので."
+      "text": "**ばかりか** adds か, a question used to deny: \"do you think that is all?\" So ばかり is \"only that\", and ばかりか is \"not only that\". **ばかりに** adds に and means **\"just because\"**, with a stronger and usually unlucky cause than から or ので."
     },
     {
       "type": "example",
@@ -78,6 +79,54 @@
       "type": "example",
       "jp": "傘を忘れたばかりに、濡れてしまった。",
       "en": "Just because I forgot my umbrella, I got wet."
+    },
+    {
+      "type": "example",
+      "jp": "耳が大きいばかりに、誰も遊んでくれない。",
+      "en": "Just because my ears are big, nobody plays with me."
+    },
+    {
+      "type": "heading",
+      "text": "Side by side"
+    },
+    {
+      "type": "text",
+      "text": "The uses of ばかり differ in what comes before it, so here they are next to each other."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "After",
+          "Meaning",
+          "Example"
+        ],
+        [
+          "Past verb",
+          "just did it",
+          "食べたばかり"
+        ],
+        [
+          "Noun",
+          "nothing but",
+          "子供ばかり"
+        ],
+        [
+          "て-form + いる",
+          "only does that",
+          "寝てばかりいる"
+        ],
+        [
+          "ばかりか",
+          "not only, but",
+          "歌ったばかりか"
+        ],
+        [
+          "ばかりに",
+          "just because (unlucky)",
+          "忘れたばかりに"
+        ]
+      ]
     },
     {
       "type": "keypoints",
@@ -109,7 +158,7 @@
       "id": 21,
       "type": "choice",
       "instruction": "Fill the gap",
-      "prompt": "この本は買った＿＿なのに、もうなくした。",
+      "prompt": "この本は買った＿＿だ。でも、もうなくした。",
       "options": [
         "ばかり",
         "だけ",
@@ -118,7 +167,7 @@
       ],
       "answer": 0,
       "note": "Past verb + ばかり: just did.",
-      "en": "I just bought this book, and yet I already lost it."
+      "en": "I have just bought this book. But I already lost it."
     },
     {
       "id": 22,
@@ -264,7 +313,7 @@
     {
       "id": 32,
       "type": "choice",
-      "instruction": "In the course's terms, what kind of word is ばかり? (It can take だ after it, as in 外国人ばかりだ.)",
+      "instruction": "What kind of word is ばかり?",
       "prompt": "",
       "options": [
         "A verb",
@@ -308,11 +357,12 @@
       "instruction": "Tap the part that means \"nothing but\"",
       "options": [
         "この町は",
+        "今",
         "外国人ばかりだ"
       ],
-      "answer": 1,
+      "answer": 2,
       "note": "Noun + ばかり.",
-      "en": "This town is nothing but foreigners."
+      "en": "This town is nothing but foreigners now."
     },
     {
       "id": 36,

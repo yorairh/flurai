@@ -6,51 +6,503 @@
   "title": "Dealing with ambiguity: context, probability, absurdity",
   "summary": "Japanese can look ambiguous, but three common-sense rules (context, probability and absurdity) settle almost every doubtful sentence.",
   "video": "https://www.youtube.com/watch?v=gcbbSW-KuTQ",
-  "related": [415, 432, 580],
+  "related": [
+    415,
+    432,
+    580
+  ],
   "blocks": [
-    {"type": "text", "text": "Japanese has a name for being vague, and part of that is because of the **zero pronoun**: you cannot see the carriage. But the carriage is always there logically, and a hidden word works like English \"it\", which can mean anything and is only clear from context. Japanese is not magic. Speaker and listener fix doubts the same way English speakers do."},
-    {"type": "heading", "text": "Three rules that settle most doubts"},
-    {"type": "table", "rows": [
-      ["Rule", "What it says", "Example"],
-      ["Context", "What was said before points to the answer.", "Talking about lunch, 私はうどんだ means \"I'll have udon\""],
-      ["Probability", "If two readings fit, take the likelier one.", "私は猫を飼っている: you keep a cat, not a cat keeps you"],
-      ["Absurdity", "Do not choose the silly reading unless the speaker makes the silliness clear.", "私は魚だ means \"I am the fish dish\" at a restaurant, not that I am a fish"]
-    ]},
-    {"type": "text", "text": "Speakers expect listeners to use these rules, and languages are built around that. A speaker who wants a strange meaning has to say so clearly. The stranger the meaning, the more the speaker has to explain."},
-    {"type": "heading", "text": "A famous overlap: potential and receptive"},
-    {"type": "text", "text": "The ichidan **potential** (食べられる, \"can eat\") and the ichidan **receptive** (食べられる, \"receive being eaten\") look the same. A single sentence 食べられた could mean either. Usually probability decides: nobody tells you \"I got eaten\" while standing there. With a pet mouse, however, ネズミが食べられた could be \"the mouse could eat\" or \"the mouse got eaten\", and only context can say. This kind of real ambiguity exists in English too."},
-    {"type": "heading", "text": "は must connect"},
-    {"type": "text", "text": "A topic with は is not logical, but it still has to be **connected** to the comment after it. If a long sentence begins with 「あの人は」 and the comment has nothing to do with that person, the は-reading is unlikely. So the reader prefers a different structure."},
-    {"type": "example", "jp": "この果物は子供でも食べられる。", "en": "Even a child can eat this fruit. (potential; the situation makes that clear)"},
-    {"type": "example", "jp": "今夜は魚だ。", "en": "Tonight is fish. (we're having fish)"},
-    {"type": "keypoints", "items": [
-      "The zero pronoun is always there, and context says who or what it is.",
-      "Three rules: **context**, **probability**, **absurdity**.",
-      "Ichidan **-られる** can be potential or receptive; use the situation to decide.",
-      "A real ambiguity can exist, as in any language; the speaker is responsible for making things clear."
-    ]}
+    {
+      "type": "text",
+      "text": "Japanese has a name for being vague, and part of that is because of the **zero pronoun**: you cannot see the carriage. But the carriage is always there logically, and a hidden word works like English \"it\", which can mean anything and is only clear from context. Japanese is not magic. Speaker and listener fix doubts the same way English speakers do."
+    },
+    {
+      "type": "heading",
+      "text": "Three rules that settle most doubts"
+    },
+    {
+      "type": "text",
+      "text": "When a sentence could be read two ways, these rules decide which reading is natural."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Rule",
+          "What it says"
+        ],
+        [
+          "Context",
+          "What was said before points to the answer."
+        ],
+        [
+          "Probability",
+          "If two readings fit, take the likelier one."
+        ],
+        [
+          "Absurdity",
+          "Do not choose the silly reading unless the speaker makes the silliness clear."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Context"
+    },
+    {
+      "type": "text",
+      "text": "Talking about lunch, a zero pronoun and a bare noun are enough."
+    },
+    {
+      "type": "example",
+      "jp": "私はうどんだ。",
+      "en": "I'll have udon. (said while choosing lunch)"
+    },
+    {
+      "type": "heading",
+      "text": "Probability"
+    },
+    {
+      "type": "text",
+      "text": "English works the same way. \"I saw a man on a hill with a telescope\" could mean either of two things, but you take the likelier one."
+    },
+    {
+      "type": "example",
+      "jp": "私は猫を飼っている。",
+      "en": "I keep a cat. (not: a cat keeps me)"
+    },
+    {
+      "type": "heading",
+      "text": "Absurdity"
+    },
+    {
+      "type": "text",
+      "text": "\"I ate dinner with Sakura\" and \"I ate dinner with chopsticks\" have the same structure, and nobody reads the second one as eating dinner together with chopsticks."
+    },
+    {
+      "type": "example",
+      "jp": "私は魚だ。",
+      "en": "I'll have the fish. (at a restaurant, not: I am a fish)"
+    },
+    {
+      "type": "text",
+      "text": "Speakers expect listeners to use these rules, and languages are built around that. A speaker who wants a strange meaning has to say so clearly. The stranger the meaning, the more the speaker has to explain."
+    },
+    {
+      "type": "heading",
+      "text": "A famous overlap: potential and receptive"
+    },
+    {
+      "type": "text",
+      "text": "The ichidan **potential** (食べられる, \"can eat\") and the ichidan **receptive** (食べられる, \"receive being eaten\") look the same. Usually probability decides: nobody tells you \"I got eaten\" while standing there. With a pet mouse, however, only context can say."
+    },
+    {
+      "type": "example",
+      "jp": "ネズミが食べられた。",
+      "en": "The mouse could eat. / The mouse got eaten. (only context can tell)"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "ネズミが",
+          "role": "carriage",
+          "label": "the mouse"
+        },
+        {
+          "text": "食べられた",
+          "role": "engine",
+          "label": "could eat"
+        }
+      ],
+      "text": "Reading 1: the mouse was able to eat."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "ネズミが",
+          "role": "carriage",
+          "label": "the mouse"
+        },
+        {
+          "text": "食べられた",
+          "role": "engine",
+          "label": "was eaten"
+        }
+      ],
+      "text": "Reading 2: the mouse was eaten."
+    },
+    {
+      "type": "example",
+      "jp": "この果物は子供でも食べられる。",
+      "en": "Even a child can eat this fruit. (potential; the situation makes that clear)"
+    },
+    {
+      "type": "heading",
+      "text": "は must connect"
+    },
+    {
+      "type": "text",
+      "text": "A topic with は is not logical, but it still has to be **connected** to the comment after it. In the next sentence, the comment has a zero carriage, so the topic must be that carriage: the man is the one who bought bread."
+    },
+    {
+      "type": "example",
+      "jp": "あの犬を連れた男は、駅の前でパンを買った。",
+      "en": "The man with that dog bought bread in front of the station."
+    },
+    {
+      "type": "text",
+      "text": "A reading in which the topic has nothing to do with the comment, like \"speaking of a faraway galaxy, Sakura has a pimple\", is possible only if the speaker makes the link clear. So the reader prefers a different structure. Context settles the rest:"
+    },
+    {
+      "type": "example",
+      "jp": "今夜は魚だ。",
+      "en": "Tonight is fish. (we're having fish)"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "The zero pronoun is always there, and context says who or what it is.",
+        "Three rules: **context**, **probability**, **absurdity**.",
+        "Ichidan **-られる** can be potential or receptive; use the situation to decide.",
+        "A real ambiguity can exist, as in any language; the speaker is responsible for making things clear."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "Which one is NOT one of the three rules?", "prompt": "", "options": ["Context", "Probability", "Politeness", "Absurdity"], "answer": 2, "note": "The three rules are context, probability and absurdity."},
-    {"id": 14, "type": "choice", "instruction": "You are choosing lunch together. What does this mean?", "prompt": "私はそばだ。", "options": ["I am a bowl of noodles", "I'll have soba", "Soba is my name", "I make soba"], "answer": 1, "note": "Context says we are ordering, so it means \"I'll have soba\".", "en": "I'll have soba."},
-    {"id": 15, "type": "choice", "instruction": "Which reading does probability prefer?", "prompt": "兄は車を持っている。", "options": ["A car owns my brother", "My brother has a car", "Both are equally likely", "Neither makes sense"], "answer": 1, "note": "If two readings fit, take the likelier one.", "en": "My older brother has a car."},
-    {"id": 16, "type": "choice", "instruction": "In a café, someone says this. Which reading does absurdity rule out?", "prompt": "私はコーヒーだ。", "options": ["I'll have coffee", "I am a cup of coffee", "Mine is the coffee", "Coffee for me"], "answer": 1, "note": "Do not choose the silly reading unless the speaker makes it clear.", "en": "I'll have coffee."},
-    {"id": 17, "type": "choice", "instruction": "What does the zero pronoun work like?", "prompt": "", "options": ["A hidden word like English \"it\", clear from context", "A rare ending", "A kind of particle", "A mistake"], "answer": 0, "note": "The carriage is always there logically, even when you cannot see it."},
-    {"id": 18, "type": "choice", "instruction": "Is 見られた potential or receptive here?", "prompt": "弟に手紙を見られた。", "options": ["Potential: could see", "Receptive: it happened to me", "Neither", "Both are equally likely"], "answer": 1, "note": "The doer is marked with に and nobody boasts about being able to see, so it is receptive.", "en": "My younger brother saw my letter."},
-    {"id": 19, "type": "choice", "instruction": "Is 食べられる potential or receptive here?", "prompt": "あの子は一人でご飯が食べられる。", "options": ["Potential: can eat", "Receptive: is eaten", "Neither", "Impossible to say"], "answer": 0, "note": "A child who eats by himself fits probability: he can eat.", "en": "That child can eat by himself."},
-    {"id": 20, "type": "choice", "instruction": "With no context, which reading is likelier?", "prompt": "魚が食べられた。", "options": ["The fish got eaten", "The fish was able to eat", "They are equally likely", "Neither"], "answer": 0, "note": "Probability usually decides.", "en": "The fish was eaten."},
-    {"id": 21, "type": "choice", "instruction": "Which sentence has a comment that connects to its は topic?", "prompt": "", "options": ["あの人は雨が降っている。", "あの人は電車が来た。", "あの人は月が出ている。", "あの人は足が長い。"], "answer": 3, "note": "A は topic must connect to its comment: long legs belong to the person."},
-    {"id": 22, "type": "choice", "instruction": "True or false?", "prompt": "Ambiguity in Japanese cannot be settled and the reader must guess.", "options": ["True", "False"], "answer": 1, "note": "Context, probability and absurdity settle most doubts, as in English."},
-    {"id": 23, "type": "choice", "instruction": "True or false?", "prompt": "A speaker who wants a strange meaning has to make it clear.", "options": ["True", "False"], "answer": 0, "note": "The stranger the meaning, the more the speaker must explain."},
-    {"id": 24, "type": "choice", "instruction": "In a restaurant, you hear this. What does it most likely mean?", "prompt": "あの人はカレーだ。", "options": ["That person is a curry", "That person ordered curry", "That person cooks", "That person is curry-colored"], "answer": 1, "note": "Context (a restaurant) gives the comment a connection to the topic.", "en": "That person is having curry."},
-    {"id": 25, "type": "choice", "instruction": "The verb 見られる can be potential or receptive. Which of these is the same in both readings, so it cannot help you decide?", "prompt": "", "options": ["The doer marked with に", "The situation", "The likelier meaning", "The verb form 〜られる"], "answer": 3, "note": "The ichidan form is the same for both, so you need the other clues."},
-    {"id": 26, "type": "choice", "instruction": "Which rule says: use what was said before?", "prompt": "", "options": ["Probability", "Absurdity", "Context", "Agility"], "answer": 2, "note": "Context points to the answer from earlier talk."},
-    {"id": 27, "type": "choice", "instruction": "Which rule says: do not choose the silly reading?", "prompt": "", "options": ["Probability", "Absurdity", "Context", "Polarity"], "answer": 1, "note": "Absurdity rules out meanings nobody would mean."},
-    {"id": 28, "type": "tap", "instruction": "Tap the topic that connects to the comment", "options": ["弟は", "足が", "長い"], "answer": 0, "note": "弟は sets the topic; 足が長い describes him.", "en": "My younger brother has long legs."},
-    {"id": 29, "type": "tap", "instruction": "Tap the receptive form", "options": ["妹に", "手紙を", "見られた"], "answer": 2, "note": "見られた with a に doer is receptive: it happened to me.", "en": "My little sister saw my letter."},
-    {"id": 30, "type": "tap", "instruction": "Tap the potential form", "options": ["この", "魚は", "生でも", "食べられる"], "answer": 3, "note": "The situation says you can eat it, so 食べられる is potential.", "en": "You can eat this fish raw."},
-    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "That person has long legs.", "options": ["あの人は", "足が", "長い"], "note": "A は topic followed by a connected comment.", "en": "That person has long legs."},
-    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "He'll have coffee and I'll have tea.", "options": ["彼は", "コーヒーで、", "私は", "お茶だ"], "note": "Context (ordering drinks) tells us 私はお茶だ means \"I'll have tea\", not \"I am tea\".", "en": "He'll have coffee, and I'll have tea."},
-    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "My older sister saw my letter, and I was bothered.", "options": ["姉に", "手紙を", "見られた"], "note": "The doer takes に in a receptive sentence.", "en": "My older sister saw my letter (and I was bothered).", "alt": [["手紙を", "姉に", "見られた"]]}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "Which one is NOT one of the three rules?",
+      "prompt": "",
+      "options": [
+        "Context",
+        "Probability",
+        "Politeness",
+        "Absurdity"
+      ],
+      "answer": 2,
+      "note": "The three rules are context, probability and absurdity."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "You are choosing lunch together. What does this mean?",
+      "prompt": "私はそばだ。",
+      "options": [
+        "I am a bowl of noodles",
+        "I'll have soba",
+        "Soba is my name",
+        "I make soba"
+      ],
+      "answer": 1,
+      "note": "Context says we are ordering, so it means \"I'll have soba\".",
+      "en": "I'll have soba."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "Which reading does probability prefer?",
+      "prompt": "兄は車を持っている。",
+      "options": [
+        "A car owns my brother",
+        "My brother has a car",
+        "Both are equally likely",
+        "Neither makes sense"
+      ],
+      "answer": 1,
+      "note": "If two readings fit, take the likelier one.",
+      "en": "My older brother has a car."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "In a café, someone says this. Which reading does absurdity rule out?",
+      "prompt": "私はコーヒーだ。",
+      "options": [
+        "I'll have coffee",
+        "I am a cup of coffee",
+        "Mine is the coffee",
+        "Coffee for me"
+      ],
+      "answer": 1,
+      "note": "Do not choose the silly reading unless the speaker makes it clear.",
+      "en": "I'll have coffee."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "What does the zero pronoun work like?",
+      "prompt": "",
+      "options": [
+        "A hidden word like English \"it\", clear from context",
+        "A rare ending",
+        "A kind of particle",
+        "A mistake"
+      ],
+      "answer": 0,
+      "note": "The carriage is always there logically, even when you cannot see it."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "Is 見られた potential or receptive here?",
+      "prompt": "弟に手紙を見られた。",
+      "options": [
+        "Potential: could see",
+        "Receptive: it happened to me",
+        "Neither",
+        "Both are equally likely"
+      ],
+      "answer": 1,
+      "note": "The doer is marked with に and nobody boasts about being able to see, so it is receptive.",
+      "en": "My younger brother saw my letter."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "Is 食べられる potential or receptive here?",
+      "prompt": "あの子は一人でご飯が食べられる。",
+      "options": [
+        "Potential: can eat",
+        "Receptive: is eaten",
+        "Neither",
+        "Impossible to say"
+      ],
+      "answer": 0,
+      "note": "A child who eats by himself fits probability: he can eat.",
+      "en": "That child can eat by himself."
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "With no context, which reading is likelier?",
+      "prompt": "魚が食べられた。",
+      "options": [
+        "The fish got eaten",
+        "The fish was able to eat",
+        "They are equally likely",
+        "Neither"
+      ],
+      "answer": 0,
+      "note": "Probability usually decides.",
+      "en": "The fish was eaten."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "Which sentence has a comment that connects to its は topic?",
+      "prompt": "",
+      "options": [
+        "あの人は雨が降っている。",
+        "あの人は電車が来た。",
+        "あの人は月が出ている。",
+        "あの人は足が長い。"
+      ],
+      "answer": 3,
+      "note": "A は topic must connect to its comment: long legs belong to the person."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "Which reading does probability prefer?",
+      "prompt": "彼は猫を飼っている。",
+      "options": [
+        "He keeps a cat",
+        "A cat keeps him"
+      ],
+      "answer": 0,
+      "note": "The likelier reading wins.",
+      "en": "He keeps a cat."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "What must a speaker do to get a strange meaning across?",
+      "prompt": "",
+      "options": [
+        "Make it clear",
+        "Say nothing",
+        "Use a zero pronoun",
+        "Hope the listener guesses"
+      ],
+      "answer": 0,
+      "note": "The speaker is responsible for making a strange reading clear."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "In a restaurant, you hear this. What does it most likely mean?",
+      "prompt": "あの人はカレーだ。",
+      "options": [
+        "That person is a curry",
+        "That person ordered curry",
+        "That person cooks",
+        "That person is curry-colored"
+      ],
+      "answer": 1,
+      "note": "Context (a restaurant) gives the comment a connection to the topic.",
+      "en": "That person is having curry."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "The verb 見られる can be potential or receptive. Which of these is the same in both readings, so it cannot help you decide?",
+      "prompt": "",
+      "options": [
+        "The doer marked with に",
+        "The situation",
+        "The likelier meaning",
+        "The verb form 〜られる"
+      ],
+      "answer": 3,
+      "note": "The ichidan form is the same for both, so you need the other clues."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "Which rule says: use what was said before?",
+      "prompt": "",
+      "options": [
+        "Probability",
+        "Absurdity",
+        "Context",
+        "Agility"
+      ],
+      "answer": 2,
+      "note": "Context points to the answer from earlier talk."
+    },
+    {
+      "id": 27,
+      "type": "choice",
+      "instruction": "Which rule says: do not choose the silly reading?",
+      "prompt": "",
+      "options": [
+        "Probability",
+        "Absurdity",
+        "Context",
+        "Polarity"
+      ],
+      "answer": 1,
+      "note": "Absurdity rules out meanings nobody would mean."
+    },
+    {
+      "id": 28,
+      "type": "tap",
+      "instruction": "Tap the topic that connects to the comment",
+      "options": [
+        "弟は",
+        "足が",
+        "長い"
+      ],
+      "answer": 0,
+      "note": "弟は sets the topic; 足が長い describes him.",
+      "en": "My younger brother has long legs."
+    },
+    {
+      "id": 29,
+      "type": "tap",
+      "instruction": "Tap the receptive form",
+      "options": [
+        "妹に",
+        "手紙を",
+        "見られた"
+      ],
+      "answer": 2,
+      "note": "見られた with a に doer is receptive: it happened to me.",
+      "en": "My little sister saw my letter."
+    },
+    {
+      "id": 30,
+      "type": "tap",
+      "instruction": "Tap the potential form",
+      "options": [
+        "この",
+        "魚は",
+        "生でも",
+        "食べられる"
+      ],
+      "answer": 3,
+      "note": "The situation says you can eat it, so 食べられる is potential.",
+      "en": "You can eat this fish raw."
+    },
+    {
+      "id": 31,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "That person has long legs.",
+      "options": [
+        "あの人は",
+        "足が",
+        "長い"
+      ],
+      "note": "A は topic followed by a connected comment.",
+      "en": "That person has long legs."
+    },
+    {
+      "id": 34,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "He'll have coffee and I'll have tea.",
+      "options": [
+        "彼は",
+        "コーヒーで、",
+        "私は",
+        "お茶だ"
+      ],
+      "note": "Context (ordering drinks) tells us 私はお茶だ means \"I'll have tea\", not \"I am tea\".",
+      "en": "He'll have coffee, and I'll have tea."
+    },
+    {
+      "id": 33,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "My older sister saw my letter, and I was bothered.",
+      "options": [
+        "姉に",
+        "手紙を",
+        "見られた"
+      ],
+      "note": "The doer takes に in a receptive sentence.",
+      "en": "My older sister saw my letter (and I was bothered).",
+      "alt": [
+        [
+          "手紙を",
+          "姉に",
+          "見られた"
+        ]
+      ]
+    },
+    {
+      "type": "choice",
+      "instruction": "Is 食べられた potential or receptive?",
+      "prompt": "昨日、一人で全部食べられた。",
+      "options": [
+        "Potential: could eat",
+        "Receptive: got eaten",
+        "Both equally likely",
+        "Neither"
+      ],
+      "answer": 0,
+      "note": "Probability and context: someone alone eating it all is the doer.",
+      "en": "Yesterday I was able to eat it all by myself.",
+      "id": 35
+    },
+    {
+      "type": "choice",
+      "instruction": "In a noodle shop, what does this most likely mean?",
+      "prompt": "あの人はラーメンだ。",
+      "options": [
+        "That person is having ramen",
+        "That person is a bowl of ramen",
+        "That person is Japanese",
+        "That person cooks"
+      ],
+      "answer": 0,
+      "note": "Context and absurdity point to the order.",
+      "en": "That person is having ramen.",
+      "id": 36
+    }
   ]
 }

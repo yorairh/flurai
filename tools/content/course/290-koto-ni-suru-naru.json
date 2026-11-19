@@ -6,416 +6,48 @@
   "title": "ことにする and ことになる",
   "summary": "こと turns a verb clause into a noun so に can attach: ことにする is a deliberate decision, ことになる is a situation that has come about.",
   "video": "https://www.youtube.com/watch?v=sH3iGBkA93w",
-  "related": [
-    422,
-    426
-  ],
+  "related": [422, 426],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Lesson 28 gave you noun + **になる** (turn into) and noun + **にする** (turn something into). This lesson applies it to whole actions."
-    },
-    {
-      "type": "heading",
-      "text": "Why こと?"
-    },
-    {
-      "type": "text",
-      "text": "A logical particle such as に needs a **noun** in front of it. **こと** is an abstract \"thing\": a situation, an affair (compare **もの**, a concrete object). Put a verb clause in front of こと and the whole clause becomes a noun."
-    },
-    {
-      "type": "heading",
-      "text": "ことにする: I settle it"
-    },
-    {
-      "type": "text",
-      "text": "Literally: \"turn the situation into the one in which ...\". Someone makes this happen on purpose, so it is a **decision**. The doer is usually you."
-    },
-    {
-      "type": "example",
-      "jp": "来年、結婚することにした。",
-      "en": "I decided to get married next year."
-    },
-    {
-      "type": "example",
-      "jp": "今日から毎朝走ることにした。",
-      "en": "I decided to run every morning from today."
-    },
-    {
-      "type": "heading",
-      "text": "ことになる: it has come about"
-    },
-    {
-      "type": "text",
-      "text": "Literally: \"the situation became the one in which ...\". Nobody is named. Often someone did decide, so you hear it as \"it has been decided\", but the grammar itself never says so."
-    },
-    {
-      "type": "example",
-      "jp": "来月、大阪で働くことになった。",
-      "en": "It has turned out that I will work in Osaka next month."
-    },
-    {
-      "type": "example",
-      "jp": "大変なことになった。",
-      "en": "Things have turned into a serious matter."
-    },
-    {
-      "type": "text",
-      "text": "Because ことになる hides the decider, people often prefer it to ことにする: 結婚することになりました sounds softer and less self-centered than 結婚することにしました."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**Verb + こと + にする**: a deliberate decision.",
-        "**Verb + こと + になる**: a situation arises or has been arranged.",
-        "こと = an abstract thing; the clause before it becomes a noun.",
-        "大変なことになった: ことになる does not always involve a decision."
-      ]
-    }
+    {"type": "text", "text": "Lesson 28 gave you noun + **になる** (turn into) and noun + **にする** (turn something into). This lesson applies it to whole actions."},
+    {"type": "example", "jp": "さくらがカエルになった。", "en": "Sakura turned into a frog."},
+    {"type": "example", "jp": "魔女がさくらをカエルにした。", "en": "The witch turned Sakura into a frog."},
+    {"type": "heading", "text": "Why こと?"},
+    {"type": "text", "text": "A logical particle such as に needs a **noun** in front of it. **こと** is an abstract \"thing\": a situation, an affair (compare **もの**, a concrete object). Put a verb clause in front of こと and the whole clause becomes a noun."},
+    {"type": "heading", "text": "ことにする: I settle it"},
+    {"type": "text", "text": "Literally: \"turn the situation into the one in which ...\". Someone makes this happen on purpose, so it is a **decision**. The doer is usually you, the invisible main carriage."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "I"}, {"text": "来年結婚することに", "role": "white", "label": "clause + こと + に"}, {"text": "した", "role": "engine", "label": "decided"}], "text": "来年、結婚することにした。 I decided to get married next year."},
+    {"type": "example", "jp": "来年、結婚することにした。", "en": "I decided to get married next year."},
+    {"type": "example", "jp": "今日から毎朝走ることにした。", "en": "I decided to run every morning from today."},
+    {"type": "heading", "text": "ことになる: it has come about"},
+    {"type": "text", "text": "Literally: \"the situation became the one in which ...\". Nobody is named. The hidden main carriage here is the situation itself: \"the situation became one where I work in Osaka\". Often someone did decide, so you hear it as \"it has been decided\", but the grammar itself never says so."},
+    {"type": "diagram", "cars": [{"text": "Øが", "role": "zero", "label": "the situation"}, {"text": "大阪で働くことに", "role": "white", "label": "clause + こと + に"}, {"text": "なった", "role": "engine", "label": "came about"}], "text": "来月、大阪で働くことになった。 It has turned out that I will work in Osaka next month."},
+    {"type": "example", "jp": "来月、大阪で働くことになった。", "en": "It has turned out that I will work in Osaka next month."},
+    {"type": "example", "jp": "大変なことになった。", "en": "Things have turned into a serious matter."},
+    {"type": "text", "text": "Because ことになる hides the decider, people often prefer it to ことにする: 結婚することになりました sounds softer and less self-centered than 結婚することにしました."},
+    {"type": "keypoints", "items": ["**Verb + こと + にする**: a deliberate decision.", "**Verb + こと + になる**: a situation arises or has been arranged.", "こと = an abstract thing; the clause before it becomes a noun.", "大変なことになった: ことになる does not always involve a decision."]}
   ],
   "questions": [
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "毎朝ジョギングすることにした。",
-      "options": [
-        "It turned out that I jog every morning",
-        "I decided to jog every morning",
-        "I used to jog every morning",
-        "I wish to jog every morning"
-      ],
-      "answer": 1,
-      "note": "ことにする: your own deliberate decision.",
-      "en": "I decided to jog every morning.",
-      "id": 21
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "来月、うちの学校に新しい先生が来ることになった。",
-      "options": [
-        "It has been decided that a new teacher will come",
-        "I decided that a new teacher will come",
-        "A new teacher came last month",
-        "I want a new teacher"
-      ],
-      "answer": 0,
-      "note": "ことになる: it has come about, with nobody named.",
-      "en": "It has been decided that a new teacher will come to our school next month.",
-      "id": 22
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "夏休みに、北海道へ行く＿＿した。",
-      "options": [
-        "ことが",
-        "ことを",
-        "ことで",
-        "ことに"
-      ],
-      "answer": 3,
-      "note": "ことにする: a decision.",
-      "en": "I decided to go to Hokkaido during summer vacation.",
-      "id": 23
-    },
-    {
-      "type": "choice",
-      "instruction": "Fill the gap",
-      "prompt": "田中さんは、来月から名古屋の店で働く＿＿なった。",
-      "options": [
-        "ことが",
-        "ことを",
-        "ことに",
-        "ことは"
-      ],
-      "answer": 2,
-      "note": "ことになる: に attaches to the noun こと.",
-      "en": "It has been arranged that Mr. Tanaka will work at the Nagoya store from next month.",
-      "id": 24
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence says \"I decided (myself) to quit the club\"?",
-      "prompt": "",
-      "options": [
-        "部活をやめることになった。",
-        "部活をやめることにした。",
-        "部活をやめるようになった。",
-        "部活をやめるものだ。"
-      ],
-      "answer": 1,
-      "note": "ことにした: a personal decision.",
-      "id": 25
-    },
-    {
-      "type": "choice",
-      "instruction": "Why do announcements often use ことになりました?",
-      "prompt": "",
-      "options": [
-        "It hides who decided, so it sounds softer",
-        "It always means the decision was bad",
-        "It is the past tense of ことにする",
-        "It means the speaker is being forced"
-      ],
-      "answer": 0,
-      "note": "ことになる names nobody.",
-      "id": 26
-    },
-    {
-      "type": "choice",
-      "instruction": "What does ことになる express here?",
-      "prompt": "ふたりが同じ日に休むと、困ったことになる。",
-      "options": [
-        "I decide to take a day off",
-        "I wish to take a day off",
-        "The two people decided together",
-        "A troublesome situation arises"
-      ],
-      "answer": 3,
-      "note": "No decision is implied: a situation just comes about.",
-      "en": "If both of us take that day off, we will be in trouble.",
-      "id": 27
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "ことになる always names the person who decided.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 1,
-      "note": "It hides the decider.",
-      "en": "ことになる does not name the person who decided.",
-      "id": 28
-    },
-    {
-      "type": "choice",
-      "instruction": "What does こと do before に?",
-      "prompt": "",
-      "options": [
-        "Marks the past tense",
-        "Turns the clause into a noun",
-        "Means \"must\"",
-        "Replaces the verb"
-      ],
-      "answer": 1,
-      "note": "に needs a noun in front of it.",
-      "id": 29
-    },
-    {
-      "type": "choice",
-      "instruction": "What does this mean?",
-      "prompt": "ケーキは食べないことにした。",
-      "options": [
-        "I decided not to eat cake",
-        "I can no longer eat cake",
-        "I was told not to eat cake",
-        "I did not decide about cake"
-      ],
-      "answer": 0,
-      "note": "Negative clause + ことにした: a decision not to.",
-      "en": "I decided not to eat cake.",
-      "id": 30
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence says \"It has been set that the meeting will be on Friday\" (nobody named)?",
-      "prompt": "",
-      "options": [
-        "会議は金曜日にすることにした。",
-        "会議は金曜日にするようにした。",
-        "会議は金曜日にするものだ。",
-        "会議は金曜日にすることになった。"
-      ],
-      "answer": 3,
-      "note": "ことになった: arranged, decider not named.",
-      "id": 31
-    },
-    {
-      "type": "choice",
-      "instruction": "Which sentence is wrong?",
-      "prompt": "",
-      "options": [
-        "毎日日記を書くことにした。",
-        "毎日日記を書くことになった。",
-        "毎日日記を書くにした。",
-        "毎日日記を書かないことにした。"
-      ],
-      "answer": 2,
-      "note": "A verb cannot take に directly: add こと.",
-      "id": 32
-    },
-    {
-      "type": "choice",
-      "instruction": "Who usually decides in 〜ことにした?",
-      "prompt": "",
-      "options": [
-        "A hidden third party",
-        "The speaker",
-        "Nobody",
-        "The listener"
-      ],
-      "answer": 1,
-      "note": "する means someone acts on purpose.",
-      "id": 33
-    },
-    {
-      "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "ことになった can be used even when you yourself decided, to sound softer.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "answer": 0,
-      "note": "That is why it is common in announcements.",
-      "en": "ことになった can be used even when you decided yourself.",
-      "id": 34
-    },
-    {
-      "type": "choice",
-      "instruction": "In which sentence did the speaker decide it themselves?",
-      "prompt": "",
-      "options": [
-        "日本に行くことにした。",
-        "日本に行くことになった。",
-        "日本に行かなかった。",
-        "日本に行ってください。"
-      ],
-      "answer": 0,
-      "note": "ことにする: you decide; ことになる: it gets decided.",
-      "en": "I decided to go to Japan.",
-      "id": 43
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I decided to save money.",
-      "options": [
-        "お金を",
-        "ためる",
-        "ことに",
-        "した"
-      ],
-      "note": "Clause + ことにした.",
-      "en": "I decided to save money.",
-      "id": 36
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "It turned out that I will go to Osaka next week.",
-      "options": [
-        "来週、",
-        "大阪へ",
-        "行く",
-        "ことに",
-        "なった"
-      ],
-      "note": "Clause + ことになった.",
-      "en": "It turned out that I will go to Osaka next week.",
-      "id": 37,
-      "alt": [
-        [
-          "大阪へ",
-          "来週、",
-          "行く",
-          "ことに",
-          "なった"
-        ]
-      ]
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "I decided not to drink coffee at night.",
-      "options": [
-        "夜は",
-        "コーヒーを",
-        "飲まない",
-        "ことに",
-        "した"
-      ],
-      "note": "Negative clause + ことにした.",
-      "en": "I decided not to drink coffee at night.",
-      "id": 38,
-      "alt": [
-        [
-          "コーヒーを",
-          "夜は",
-          "飲まない",
-          "ことに",
-          "した"
-        ]
-      ]
-    },
-    {
-      "type": "order",
-      "instruction": "Build the sentence",
-      "prompt": "It has been decided that I will live in a new house next month.",
-      "options": [
-        "来月、",
-        "新しい家に",
-        "住む",
-        "ことに",
-        "なりました"
-      ],
-      "note": "Clause + ことになりました.",
-      "en": "It has been decided that I will live in a new house next month.",
-      "id": 39,
-      "alt": [
-        [
-          "新しい家に",
-          "来月、",
-          "住む",
-          "ことに",
-          "なりました"
-        ]
-      ]
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the part that shows a decision",
-      "options": [
-        "今日から",
-        "お酒は",
-        "飲まない",
-        "ことにした"
-      ],
-      "answer": 3,
-      "note": "ことにした: decided.",
-      "en": "From today I decided not to drink alcohol.",
-      "id": 40
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the part that shows it has been arranged (nobody named)",
-      "options": [
-        "来年",
-        "海外で",
-        "働く",
-        "ことになった"
-      ],
-      "answer": 3,
-      "note": "ことになった: it has come about.",
-      "en": "It has turned out that I will work abroad next year.",
-      "id": 41
-    },
-    {
-      "type": "tap",
-      "instruction": "Tap the noun that lets に attach to the clause",
-      "options": [
-        "毎日",
-        "運動する",
-        "こと",
-        "にした"
-      ],
-      "answer": 2,
-      "note": "こと turns the clause into a noun.",
-      "en": "I decided to exercise every day.",
-      "id": 42
-    }
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "毎朝ジョギングすることにした。", "options": ["It turned out that I jog every morning", "I decided to jog every morning", "I used to jog every morning", "I wish to jog every morning"], "answer": 1, "note": "ことにする: your own deliberate decision.", "en": "I decided to jog every morning.", "id": 21},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "来月、うちの学校に新しい先生が来ることになった。", "options": ["It has been decided that a new teacher will come", "I decided that a new teacher will come", "A new teacher came last month", "I want a new teacher"], "answer": 0, "note": "ことになる: it has come about, with nobody named.", "en": "It has been decided that a new teacher will come to our school next month.", "id": 22},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "夏休みに、北海道へ行く＿＿した。", "options": ["ことが", "ことを", "ことで", "ことに"], "answer": 3, "note": "ことにする: a decision.", "en": "I decided to go to Hokkaido during summer vacation.", "id": 23},
+    {"type": "choice", "instruction": "Fill the gap", "prompt": "田中さんは、来月から名古屋の店で働く＿＿なった。", "options": ["ことが", "ことを", "ことに", "ことは"], "answer": 2, "note": "ことになる: に attaches to the noun こと.", "en": "It has been arranged that Mr. Tanaka will work at the Nagoya store from next month.", "id": 24},
+    {"type": "choice", "instruction": "Which sentence says \"I decided (myself) to quit the club\"?", "prompt": "", "options": ["部活をやめることになった。", "部活をやめることにした。", "部活をやめるようになった。", "部活をやめるものだ。"], "answer": 1, "note": "ことにした: a personal decision.", "id": 25},
+    {"type": "choice", "instruction": "Why do announcements often use ことになりました?", "prompt": "", "options": ["It hides who decided, so it sounds softer", "It always means the decision was bad", "It is the past tense of ことにする", "It means the speaker is being forced"], "answer": 0, "note": "ことになる names nobody.", "id": 26},
+    {"type": "choice", "instruction": "What does ことになる express here?", "prompt": "ふたりが同じ日に休むと、困ったことになる。", "options": ["I decide to take a day off", "I wish to take a day off", "The two people decided together", "A troublesome situation arises"], "answer": 3, "note": "No decision is implied: a situation just comes about.", "en": "If both of us take that day off, we will be in trouble.", "id": 27},
+    {"type": "choice", "instruction": "True or false?", "prompt": "The \"it has come about\" pattern always names the person who decided.", "options": ["True", "False"], "answer": 1, "note": "It hides the decider.", "id": 28},
+    {"type": "choice", "instruction": "What does こと do before に?", "prompt": "", "options": ["Marks the past tense", "Turns the clause into a noun", "Means \"must\"", "Replaces the verb"], "answer": 1, "note": "に needs a noun in front of it.", "id": 29},
+    {"type": "choice", "instruction": "What does this mean?", "prompt": "ケーキは食べないことにした。", "options": ["I decided not to eat cake", "I can no longer eat cake", "I was told not to eat cake", "I did not decide about cake"], "answer": 0, "note": "Negative clause + ことにした: a decision not to.", "en": "I decided not to eat cake.", "id": 30},
+    {"type": "choice", "instruction": "Which sentence says \"It has been set that the meeting will be on Friday\" (nobody named)?", "prompt": "", "options": ["会議は金曜日にすることにした。", "会議は金曜日にするようにした。", "会議は金曜日にするものだ。", "会議は金曜日にすることになった。"], "answer": 3, "note": "ことになった: arranged, decider not named.", "id": 31},
+    {"type": "choice", "instruction": "Which sentence is wrong?", "prompt": "", "options": ["毎日日記を書くことにした。", "毎日日記を書くことになった。", "毎日日記を書くにした。", "毎日日記を書かないことにした。"], "answer": 2, "note": "A verb cannot take に directly: add こと.", "id": 32},
+    {"type": "choice", "instruction": "Who usually decides in 〜ことにした?", "prompt": "", "options": ["A hidden third party", "The speaker", "Nobody", "The listener"], "answer": 1, "note": "する means someone acts on purpose.", "id": 33},
+    {"type": "choice", "instruction": "True or false?", "prompt": "The \"it has come about\" pattern can be used even when you decided yourself, to sound softer.", "options": ["True", "False"], "answer": 0, "note": "That is why it is common in announcements.", "id": 34},
+    {"type": "choice", "instruction": "In which sentence did the speaker decide it themselves?", "prompt": "", "options": ["日本に行くことにした。", "日本に行くことになった。", "日本に行かなかった。", "日本に行ってください。"], "answer": 0, "note": "ことにする: you decide; ことになる: it gets decided.", "en": "I decided to go to Japan.", "id": 43},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I decided to save money.", "options": ["お金を", "ためる", "ことに", "した"], "note": "Clause + ことにした.", "en": "I decided to save money.", "id": 36},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "It turned out that I will go to Osaka next week.", "options": ["来週、", "大阪へ", "行く", "ことに", "なった"], "note": "Clause + ことになった.", "en": "It turned out that I will go to Osaka next week.", "id": 37, "alt": [["大阪へ", "来週、", "行く", "ことに", "なった"]]},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "I decided not to drink coffee at night.", "options": ["夜は", "コーヒーを", "飲まない", "ことに", "した"], "note": "Negative clause + ことにした.", "en": "I decided not to drink coffee at night.", "id": 38, "alt": [["コーヒーを", "夜は", "飲まない", "ことに", "した"]]},
+    {"type": "order", "instruction": "Build the sentence", "prompt": "It has been decided that I will live in a new house next month.", "options": ["来月、", "新しい家に", "住む", "ことに", "なりました"], "note": "Clause + ことになりました.", "en": "It has been decided that I will live in a new house next month.", "id": 39, "alt": [["新しい家に", "来月、", "住む", "ことに", "なりました"]]},
+    {"type": "tap", "instruction": "Tap the part that shows a decision", "options": ["今日から", "お酒は", "飲まない", "ことにした"], "answer": 3, "note": "ことにした: decided.", "en": "From today I decided not to drink alcohol.", "id": 40},
+    {"type": "tap", "instruction": "Tap the part that shows it has been arranged (nobody named)", "options": ["来年", "海外で", "働く", "ことになった"], "answer": 3, "note": "ことになった: it has come about.", "en": "It has turned out that I will work abroad next year.", "id": 41},
+    {"type": "tap", "instruction": "Tap the noun that lets に attach to the clause", "options": ["毎日", "運動する", "こと", "にした"], "answer": 2, "note": "こと turns the clause into a noun.", "en": "I decided to exercise every day.", "id": 42}
   ]
 }

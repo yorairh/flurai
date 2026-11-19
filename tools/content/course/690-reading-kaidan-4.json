@@ -2,44 +2,29 @@
   "id": 690,
   "number": "69",
   "kind": "note",
-  "title": "Reading in the wild: a ghost story, part 4",
-  "summary": "A walk through the next part of a short Japanese ghost story, using the tools from earlier lessons on real text.",
+  "title": "Note: reading a ghost story, part 4",
+  "summary": "A short ghost story to read with the tools from earlier lessons: clauses with と, receptive verbs, たら chains, hearsay and てほしい.",
   "video": "https://www.youtube.com/watch?v=Iezf0NR-cTE",
   "blocks": [
-    {
-      "type": "text",
-      "text": "This episode is practice, not new grammar. It continues a short ghost story in Japanese that began a few episodes earlier, and takes it sentence by sentence to show how the earlier tools work on real text. In the story so far, a young woman went back to her senpai's apartment late at night to fetch her phone, found the door unlocked and the room dark, and left without turning the light on."
-    },
-    {
-      "type": "heading",
-      "text": "What the episode shows"
-    },
-    {
-      "type": "text",
-      "text": "The next morning she passes the apartment and finds police there. The sentences show several things you already know: a **と** that links two clauses, **receptive** verbs for \"was killed\" and \"was ransacked\" (殺された, 荒らされて), the て-form + **おり** as a written way of joining clauses, and a run of **〜たら** clauses in which she imagines what might have been different if she had acted otherwise."
-    },
-    {
-      "type": "example",
-      "jp": "翌日、先輩のアパートの前を通りかかると、大勢の警官が集まっていた。",
-      "en": "The next day, as she passed her senpai's apartment, a crowd of police had gathered."
-    },
-    {
-      "type": "example",
-      "jp": "先輩が部屋で殺されたというのだ。",
-      "en": "It turned out that her senpai had been killed in the room."
-    },
-    {
-      "type": "example",
-      "jp": "あの時、電気をつけていたら、先輩を起こしていたら。",
-      "en": "If I had turned on the light back then... if I had woken my senpai..."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "The point is practice: break each sentence into clauses before reading the meaning.",
-        "Look for 〜た / 〜たら chains, receptive verbs, and clause connectors.",
-        "Words met here: 翌日, 通りかかる, 大勢, 警官, 事情, 驚く, 荒らす."
-      ]
-    }
+    {"type": "text", "text": "This note is practice, not new grammar. Read the story one sentence at a time and break each sentence into clauses before you look for the meaning. So far: Mika lives in an old apartment. Every night at two o'clock she hears footsteps in the empty room upstairs."},
+    {"type": "heading", "text": "The next morning"},
+    {"type": "text", "text": "The first sentence uses a **と** that links two clauses: when she went up, the door was open. The next two use receptive verbs (並べられていた, 閉められており) that say what was done to the dolls and the window, without saying who did it."},
+    {"type": "example", "jp": "次の日の朝、みかが二階の部屋に行くと、ドアが少し開いていた。", "en": "The next morning, when Mika went up to the room on the second floor, the door was a little open."},
+    {"type": "example", "jp": "部屋は暗くて、古い人形が床に並べられていた。", "en": "The room was dark, and old dolls had been lined up on the floor."},
+    {"type": "example", "jp": "窓は閉められており、空気は冷たかった。", "en": "The window was shut and the air was cold."},
+    {"type": "text", "text": "閉められており is a written way of joining clauses. It means the same as 閉められていて, only more formal. You will see it in stories and news."},
+    {"type": "diagram", "cars": [{"text": "窓は", "role": "topic"}, {"text": "閉められ", "role": "plain", "label": "shut (by someone)"}, {"text": "ており", "role": "plain", "label": "written join"}, {"text": "空気は冷たかった", "role": "engine"}], "text": "A written join: 閉められ + ており, then the next clause."},
+    {"type": "heading", "text": "What the landlord said"},
+    {"type": "text", "text": "Mika asks the landlord about the room. The next sentences are hearsay: **という** says that someone told her."},
+    {"type": "example", "jp": "大家さんの話では、昔ここに住んでいた女の子が消えたという。", "en": "According to the landlord, a girl who used to live here disappeared."},
+    {"type": "example", "jp": "その子はまだこの家にいるかもしれないという。", "en": "They say she may still be in this house."},
+    {"type": "heading", "text": "The note, and the regret"},
+    {"type": "text", "text": "There is a small paper next to the dolls. 誰かに見つけてほしかった: the person you want to do it takes に, just like in 〜てもらう. Then comes a chain of 〜たら thoughts that ends in のに: \"if I had not done it, it wouldn't have happened\"."},
+    {"type": "example", "jp": "紙には「誰かに見つけてほしかった」と書いてあった。", "en": "The paper said, \"I wanted someone to find me.\""},
+    {"type": "example", "jp": "あの時、二階に行かなかったら、こんなことにならなかったのに。", "en": "If I hadn't gone upstairs back then, it wouldn't have come to this."},
+    {"type": "example", "jp": "その夜、みかの部屋の前で、小さな足音が止まった。", "en": "That night, small footsteps stopped in front of Mika's room."},
+    {"type": "table", "rows": [["Phrase from the story", "What it does", "Lesson"], ["行くと、〜", "と links two clauses: when she went", "30"], ["並べられていた / 閉められており", "receptive: what was done, not who", "13"], ["〜という", "hearsay: they say", "74"], ["〜かもしれない", "maybe", "39"], ["誰かに見つけてほしい", "wanting someone (に) to do it", "9, 49"], ["行かなかったら、〜のに", "if I hadn't... it wouldn't have", "32, 93"]]},
+    {"type": "table", "rows": [["Word", "Reading", "Meaning"], ["大家さん", "おおやさん", "landlord"], ["人形", "にんぎょう", "doll"], ["足音", "あしおと", "footsteps"], ["昔", "むかし", "long ago"], ["消える", "きえる", "to disappear"]]},
+    {"type": "keypoints", "items": ["Break each sentence into clauses before you read the meaning.", "Look for と clauses, receptive verbs and たら chains.", "〜ており is a written way of saying 〜ていて.", "Read the story again after the table: the second time, you should need far less help."]}
   ]
 }

@@ -6,64 +6,28 @@
   "title": "The right opening: あく, あける, ひらく, ひらける",
   "summary": "Four words for opening that show how flexible self-move and other-move are: あく / あける for open and shut, ひらく for unfolding.",
   "video": "https://www.youtube.com/watch?v=QEInorgR6Rs",
-  "related": [
-    465
-  ],
+  "related": [465],
   "blocks": [
-    {
-      "type": "text",
-      "text": "開く and 開ける look like two pairs of self-move / other-move verbs, and up to a point they are: **あく** (self-move) and **あける** (other-move). The kanji is the same for ひらく and ひらける, so the writer uses hiragana when she specifically wants ひらく."
-    },
-    {
-      "type": "heading",
-      "text": "あく and あける"
-    },
-    {
-      "type": "example",
-      "jp": "ドアが開く。",
-      "en": "The door opens."
-    },
-    {
-      "type": "example",
-      "jp": "瓶を開ける。",
-      "en": "(I) open the bottle."
-    },
-    {
-      "type": "text",
-      "text": "Japanese speakers sometimes use 開く in an other-move way, as in 目を開く. The advice is to stay safe: **あける** is always right for other-move, whether the object is a door, a mouth or a bottle."
-    },
-    {
-      "type": "heading",
-      "text": "ひらく and ひらける"
-    },
-    {
-      "type": "text",
-      "text": "**ひらく** is about the kind of opening: something that **unfolds or spreads out**, like a flower or a hand. It is both self-move and other-move. **あく / あける** is simply becoming open instead of closed, like a lid. For an umbrella the usual verb is **さす**. **ひらける** is closer to a state: 運がひらける means your luck opens and stays open from then on."
-    },
-    {
-      "type": "example",
-      "jp": "花がひらく。",
-      "en": "The flower opens."
-    },
-    {
-      "type": "example",
-      "jp": "店をひらく。",
-      "en": "(I) open a shop."
-    },
-    {
-      "type": "example",
-      "jp": "運がひらける。",
-      "en": "One's luck opens up (and stays that way)."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**あく / あける**: simply become open or open it (doors, bottles, mouths).",
-        "**ひらく**: unfold, spread out (flowers, hands); both self- and other-move.",
-        "**ひらける**: a state of being opened out (luck, a view).",
-        "If unsure, あける is a safe other-move verb."
-      ]
-    }
+    {"type": "text", "text": "開く and 開ける look like two pairs of self-move / other-move verbs, and up to a point they are: **あく** (self-move) and **あける** (other-move). The kanji is the same for ひらく and ひらける, so the writer uses hiragana when she specifically wants ひらく."},
+    {"type": "heading", "text": "あく and あける"},
+    {"type": "text", "text": "Rule of thumb: **あく** is self-move (the door opens by itself) and **あける** is other-move (I open it), the same pair as lesson 15."},
+    {"type": "example", "jp": "ドアが開く。", "en": "The door opens."},
+    {"type": "example", "jp": "瓶を開ける。", "en": "(I) open the bottle."},
+    {"type": "diagram", "cars": [{"text": "ドアが", "role": "carriage"}, {"text": "開く", "role": "engine", "label": "self-move"}], "text": "ドアが開く: the door does it."},
+    {"type": "diagram", "cars": [{"text": "Ø", "role": "zero", "label": "I"}, {"text": "瓶を", "role": "white"}, {"text": "開ける", "role": "engine", "label": "other-move"}], "text": "瓶を開ける: I open the bottle."},
+    {"type": "text", "text": "Japanese speakers sometimes use 開く in an other-move way, as in 目を開く. The advice is to stay safe: **あける** is always right for other-move, whether the object is a door, a mouth or a bottle."},
+    {"type": "heading", "text": "ひらく and ひらける"},
+    {"type": "text", "text": "**ひらく** is about the kind of opening: something that **unfolds or spreads out**, like a flower or a hand. It is both self-move and other-move. **あく / あける** is simply becoming open instead of closed, like a lid. For an umbrella the usual verb is **さす**. **ひらける** is closer to a state: 運がひらける means your luck opens and stays open from then on."},
+    {"type": "example", "jp": "朝九時に店をあける。", "en": "(I) open the shop at nine in the morning. (for the day)"},
+    {"type": "example", "jp": "店をひらく。", "en": "(I) open a shop."},
+    {"type": "text", "text": "Compare the two shops. 店をあける is opening up for business today. 店をひらく is opening a new shop for the first time."},
+    {"type": "example", "jp": "駅の前に新しい店をひらく。", "en": "(I) open a new shop in front of the station."},
+    {"type": "example", "jp": "手をむすんで、ひらく。", "en": "(I) close my hand into a fist, then open it like a flower."},
+    {"type": "example", "jp": "目をひらくと、朝だった。", "en": "When I opened my eyes, it was morning."},
+    {"type": "example", "jp": "花がひらく。", "en": "The flower opens."},
+    {"type": "example", "jp": "運がひらける。", "en": "One's luck opens up (and stays that way)."},
+    {"type": "table", "rows": [["Verb", "Self or other", "The kind of opening", "Example"], ["あく", "self-move", "open instead of closed", "ドアが開く"], ["あける", "other-move", "open it up", "瓶を開ける"], ["ひらく", "both", "unfold, spread out", "花がひらく"], ["ひらける", "self-move", "stays opened out", "運がひらける"]]},
+    {"type": "keypoints", "items": ["**あく / あける**: simply become open or open it (doors, bottles, mouths).", "**ひらく**: unfold, spread out (flowers, hands); both self- and other-move.", "**ひらける**: a state of being opened out (luck, a view).", "If unsure, あける is a safe other-move verb."]}
   ],
   "questions": [
     {"id": 13, "type": "choice", "instruction": "Fill the gap", "prompt": "風で窓＿＿開いた。", "options": ["を", "が", "に", "へ"], "answer": 1, "note": "あく is self-move: the window is the main carriage, が.", "en": "The window opened in the wind."},
@@ -76,16 +40,17 @@
     {"id": 20, "type": "tap", "instruction": "Tap the other-move verb", "prompt": "", "options": ["あの子は", "口を", "あけて", "寝ている"], "answer": 2, "note": "あける is other-move, and 口を is its object.", "en": "That child is sleeping with his mouth open."},
     {"id": 21, "type": "order", "instruction": "Build the sentence", "prompt": "It was hot, so I opened the window.", "options": ["暑いので", "窓を", "あけた"], "note": "An other-move verb with を.", "en": "It was hot, so I opened the window."},
     {"id": 22, "type": "choice", "instruction": "Which verb is usual for an umbrella?", "prompt": "", "options": ["あける", "ひらく", "さす", "あく"], "answer": 2, "note": "For an umbrella the usual verb is さす."},
-    {"id": 23, "type": "choice", "instruction": "True or false?", "prompt": "あく is an other-move verb.", "options": ["True", "False"], "answer": 1, "note": "あく is self-move; あける is its other-move partner."},
+    {"id": 23, "type": "order", "instruction": "Build the sentence", "prompt": "This shop opens at nine.", "options": ["この店は", "九時に", "あく"], "note": "あく is self-move: the shop opens by itself.", "en": "This shop opens at nine."},
     {"id": 24, "type": "choice", "instruction": "Fill the gap", "prompt": "赤ちゃんが手を＿＿＿。", "options": ["あいた", "ひらいた", "ひらけた", "あった"], "answer": 1, "note": "A hand spreading out is ひらく.", "en": "The baby spread out its hand."},
     {"id": 25, "type": "choice", "instruction": "Which pair is labeled correctly?", "prompt": "", "options": ["あける (self-move) / あく (other-move)", "あく (self-move) / あける (other-move)", "あく (other-move) / あける (other-move)", "あける (self-move) / あける (other-move)"], "answer": 1, "note": "あく moves itself; あける moves something else."},
-    {"id": 26, "type": "tap", "instruction": "Tap the verb used for an umbrella", "prompt": "", "options": ["雨の", "日に", "傘を", "さす"], "answer": 3, "note": "さす is the usual verb for an umbrella.", "en": "I put up an umbrella on rainy days."},
+    {"id": 26, "type": "choice", "instruction": "Fill the gap", "prompt": "先生が本＿＿ひらいた。", "options": ["を", "が", "に", "で"], "answer": 0, "note": "ひらく is also other-move: the book takes を.", "en": "The teacher opened the book."},
     {"id": 27, "type": "choice", "instruction": "Which is NOT correct?", "prompt": "", "options": ["ドアがあく", "窓をあける", "花があける", "口をあける"], "answer": 2, "note": "A flower opens by itself: ひらく, and あける needs an object."},
     {"id": 28, "type": "choice", "instruction": "Which verb suits unfolding or spreading out?", "prompt": "", "options": ["さす", "あける", "あく", "ひらく"], "answer": 3, "note": "ひらく is the unfolding opening."},
     {"id": 29, "type": "order", "instruction": "Build the sentence", "prompt": "The flowers opened in the garden.", "options": ["庭の", "花が", "ひらいた"], "note": "ひらく as self-move: the flowers are the main carriage.", "en": "The flowers opened in the garden."},
-    {"id": 30, "type": "choice", "instruction": "If you are unsure, which is the safe choice for an other-move opening?", "prompt": "", "options": ["ひらける", "さす", "あける", "あく"], "answer": 2, "note": "あける is always right for other-move."},
+    {"id": 30, "type": "choice", "instruction": "Which sentence is natural?", "prompt": "", "options": ["ドアがあいた。", "ドアをあいた。", "花をあいた。", "口があけた。"], "answer": 0, "note": "あく is self-move: the door is the carriage."},
     {"id": 31, "type": "choice", "instruction": "Which verb says someone's luck opens and stays open?", "prompt": "", "options": ["あく", "あける", "ひらける", "さす"], "answer": 2, "note": "ひらける is closer to a state."},
     {"id": 32, "type": "choice", "instruction": "Fill the gap", "prompt": "目を＿＿＿ください。", "options": ["あけて", "あいて", "ひらけて", "さして"], "answer": 0, "note": "目 is an object, so use the other-move あける.", "en": "Please open your eyes."},
-    {"id": 33, "type": "choice", "instruction": "True or false?", "prompt": "ひらく can be both self-move and other-move.", "options": ["True", "False"], "answer": 0, "note": "ひらく: the flower opens, I open a shop."}
+    {"id": 33, "type": "choice", "instruction": "True or false?", "prompt": "ひらく can be both self-move and other-move.", "options": ["True", "False"], "answer": 0, "note": "ひらく: the flower opens, I open a shop."},
+    {"id": 34, "type": "choice", "instruction": "Which sentence means \"I open the shop at ten every day\"?", "prompt": "", "options": ["毎日十時に店をあける。", "毎日十時に店があく。", "毎日十時に店をさす。", "毎日十時に店がひらける。"], "answer": 0, "note": "店をあける: open it up for the day (other-move)."}
   ]
 }

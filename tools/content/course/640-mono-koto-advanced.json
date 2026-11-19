@@ -6,83 +6,29 @@
   "title": "もの and こと: advanced uses",
   "summary": "もの is a noun, a thing, even an abstract one. こと is a fact or state of affairs: したことがある, することがある, and sentence-ending ものだ.",
   "video": "https://www.youtube.com/watch?v=aYlgQaK7lS4",
-  "related": [
-    401,
-    449
-  ],
+  "related": [401, 449],
   "blocks": [
-    {
-      "type": "text",
-      "text": "The usual advice says **もの** is concrete (a pencil) and **こと** abstract (a situation). That is a fine start, but it breaks down. What もの really means is **a thing**, a noun: it can be an apple or it can be love. **こと** is a **state of affairs**, a fact, something that happens or exists."
-    },
-    {
-      "type": "example",
-      "jp": "愛は素晴らしいものだ。",
-      "en": "Love is a wonderful thing. (love is a noun, a thing)"
-    },
-    {
-      "type": "heading",
-      "text": "ことがある: the fact exists"
-    },
-    {
-      "type": "text",
-      "text": "Japanese has no separate perfect tense. It says that **the fact of having done it exists**. Put the verb in the **past** and you have experience; put it in the **present** and you have something that sometimes happens."
-    },
-    {
-      "type": "example",
-      "jp": "日本に行ったことがある。",
-      "en": "I have been to Japan. (the fact of having gone exists)"
-    },
-    {
-      "type": "example",
-      "jp": "日本に行くことがある。",
-      "en": "I sometimes go to Japan. (the fact of going exists)"
-    },
-    {
-      "type": "example",
-      "jp": "誰でも失敗することがある。",
-      "en": "Anyone can fail sometimes."
-    },
-    {
-      "type": "heading",
-      "text": "ものだ as a sentence ender"
-    },
-    {
-      "type": "text",
-      "text": "Adding **ものだ** to a full sentence turns it into a **thing**: a reality you have to accept, \"that's just how it is\". The generalization has to be in the present. In the **past**, **〜たものだ** becomes a personal memory: \"I used to...\", with feeling."
-    },
-    {
-      "type": "example",
-      "jp": "冬は寒いものだ。",
-      "en": "Winter is cold, that's just how it is."
-    },
-    {
-      "type": "example",
-      "jp": "子供のころ、よくここに来たものだ。",
-      "en": "As a child I used to come here often."
-    },
-    {
-      "type": "heading",
-      "text": "こと as an order"
-    },
-    {
-      "type": "text",
-      "text": "At the end of a written rule, **こと** works as a firm instruction."
-    },
-    {
-      "type": "example",
-      "jp": "宿題は必ず出すこと。",
-      "en": "Hand in your homework without fail."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**もの**: a thing (any noun, concrete or abstract).",
-        "**こと**: a fact or situation. **〜たことがある** = have done; **〜ることがある** = sometimes happens.",
-        "**〜ものだ** (present) = that's how it is; **〜たものだ** = used to, with feeling.",
-        "Rules and notices can end in **こと**: \"do it.\""
-      ]
-    }
+    {"type": "text", "text": "The usual advice says **もの** is concrete (a pencil) and **こと** abstract (a situation). That is a fine start, but it breaks down. What もの really means is **a thing**, a noun: it can be an apple or it can be love. **こと** is a **state of affairs**, a fact, something that happens or exists."},
+    {"type": "example", "jp": "愛は素晴らしいものだ。", "en": "Love is a wonderful thing. (love is a noun, a thing)"},
+    {"type": "heading", "text": "ことがある: the fact exists"},
+    {"type": "text", "text": "Japanese has no separate perfect tense. It says that **the fact of having done it exists**. Put the verb in the **past** and you have experience; put it in the **present** and you have something that sometimes happens."},
+    {"type": "example", "jp": "日本に行ったことがある。", "en": "I have been to Japan. (the fact of having gone exists)"},
+    {"type": "example", "jp": "日本に行くことがある。", "en": "I sometimes go to Japan. (the fact of going exists)"},
+    {"type": "example", "jp": "誰でも失敗することがある。", "en": "Anyone can fail sometimes."},
+    {"type": "text", "text": "The tense is what matters. Compare the same place with the same helper, in two memories:"},
+    {"type": "example", "jp": "東京に行ったことがある。", "en": "I have been to Tokyo. (a plain fact of experience)"},
+    {"type": "example", "jp": "東京によく行ったものだ。", "en": "I used to go to Tokyo a lot. (a fond memory)"},
+    {"type": "heading", "text": "ものだ as a sentence ender"},
+    {"type": "text", "text": "Adding **ものだ** to a full sentence turns it into a **thing**: a reality you have to accept, \"that's just how it is\". The generalization has to be in the present. In the **past**, **〜たものだ** becomes a personal memory: \"I used to...\", with feeling."},
+    {"type": "example", "jp": "冬は寒いものだ。", "en": "Winter is cold, that's just how it is."},
+    {"type": "example", "jp": "人は誰でも間違えるものだ。", "en": "Everyone makes mistakes. (that's just how people are)"},
+    {"type": "example", "jp": "子供のころ、よくここに来たものだ。", "en": "As a child I used to come here often."},
+    {"type": "table", "rows": [["", "Past", "Present"], ["ことがある", "行ったことがある: have done it", "行くことがある: sometimes happens"], ["ものだ", "行ったものだ: used to, with feeling", "行くものだ: that's how it is"]]},
+    {"type": "heading", "text": "こと as an order"},
+    {"type": "text", "text": "At the end of a written rule or notice, **こと** states what has been decided: \"the matter is that you do this\". It is a rule (like a 決まり, cf. ことにする in lesson 29), not an order from one person to another."},
+    {"type": "example", "jp": "宿題は必ず出すこと。", "en": "Hand in your homework without fail."},
+    {"type": "example", "jp": "動物にえさをやらないこと。", "en": "Do not feed the animals. (a sign)"},
+    {"type": "keypoints", "items": ["**もの**: a thing (any noun, concrete or abstract).", "**こと**: a fact or situation. **〜たことがある** = have done; **〜ることがある** = sometimes happens.", "**〜ものだ** (present) = that's how it is; **〜たものだ** = used to, with feeling.", "Rules and notices can end in **こと**: it states a decided rule, not a personal command."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Which sentence says \"I have (once) eaten sushi\"?", "prompt": "", "options": ["すしを食べることがある。", "すしを食べたことがある。", "すしを食べるものだ。", "すしを食べたものがある。"], "answer": 1, "note": "Past verb + ことがある = the fact of having done it exists."},

@@ -6,53 +6,461 @@
   "title": "Your secret weapon: break any sentence into carriage, engine and modifiers",
   "summary": "Every long sentence is a が carriage and an engine, with everything else telling you more about one of them.",
   "video": "https://www.youtube.com/watch?v=z9S2J8tlnUE",
-  "related": [604, 503, 504],
+  "related": [
+    604,
+    503,
+    504
+  ],
   "blocks": [
-    {"type": "text", "text": "A very long Japanese sentence is usually less complicated than it looks. Every logical clause has just two core parts: the **が main carriage** (visible or zero) and the **engine**. They are not just part of the sentence: **they are the sentence**. Everything else only gives more information about one of them."},
-    {"type": "heading", "text": "Modifying anything"},
-    {"type": "text", "text": "Lesson 46 said modifiers go before the noun. The full rule is wider: **anything that modifies anything goes before it**. That includes the engine. In an other-move sentence, the nouns marked by **を, に, で and へ** are all modifiers of the verb: each tells you more about the action. (の is different: it links one noun to another noun.)"},
-    {"type": "heading", "text": "A worked example"},
-    {"type": "text", "text": "Take the sentence below. Its core is only (私が) あげた, \"I gave\". Everything else answers a question about it."},
-    {"type": "example", "jp": "（私が）母が焼いたケーキを眼鏡をかけた女の子にあげた。", "en": "(I) gave the cake my mother baked to the girl wearing glasses."},
-    {"type": "table", "rows": [
-      ["Question", "Answer from the sentence", "Which part"],
-      ["Gave what?", "ケーキを", "を modifies あげた"],
-      ["What kind of cake?", "母が焼いた", "describes ケーキ"],
-      ["Gave to whom?", "女の子に", "に modifies あげた"],
-      ["What kind of girl?", "眼鏡をかけた", "describes 女の子"]
-    ]},
-    {"type": "text", "text": "Peel the sentence like this: find the final engine, find its carriage, then ask each other piece \"what are you telling me more about?\" Pieces ending in an engine in front of a noun are simply clauses describing that noun."},
-    {"type": "heading", "text": "Compound sentences"},
-    {"type": "text", "text": "A sentence can hold two complete clauses, such as 店に行ってパンを買った (\"went to the shop and bought bread\"). Both clauses have a carriage, and the second one shares the first one's zero carriage. English does the same with \"I went to the shop and bought bread\". The more clauses you can recognize, the more manageable long sentences become."},
-    {"type": "keypoints", "items": [
-      "Every logical clause is a **carriage + engine**; the rest modifies one of the two.",
-      "**を, に, で, へ** nouns modify the verb; **の** links two nouns.",
-      "Anything that modifies something stands **before** it.",
-      "To read a long sentence: find the engine, find the carriage, then attach each piece."
-    ]}
+    {
+      "type": "text",
+      "text": "A very long Japanese sentence is usually less complicated than it looks. Every logical clause has just two core parts: the **が main carriage** (visible or zero) and the **engine**. They are not just part of the sentence: **they are the sentence**. Everything else only gives more information about one of them."
+    },
+    {
+      "type": "heading",
+      "text": "Modifying anything"
+    },
+    {
+      "type": "text",
+      "text": "Lesson 46 said modifiers go before the noun. The full rule is wider: **anything that modifies anything goes before it**. That includes the engine. In an other-move sentence, the nouns marked by **を, に, で and へ** are all modifiers of the verb: each tells you more about the action. (の is different: it links one noun to another noun.)"
+    },
+    {
+      "type": "example",
+      "jp": "公園で走った。",
+      "en": "(I) ran in the park. (ran: where? in the park)"
+    },
+    {
+      "type": "heading",
+      "text": "The carriage can have a describer too"
+    },
+    {
+      "type": "text",
+      "text": "When the carriage needs a describer, the describer is in front of it and must be visible."
+    },
+    {
+      "type": "example",
+      "jp": "本を読んでいる女の子は私の妹だ。",
+      "en": "The girl who is reading a book is my little sister."
+    },
+    {
+      "type": "heading",
+      "text": "A worked example"
+    },
+    {
+      "type": "text",
+      "text": "Take the sentence below. Its core is only (私が) あげた, \"I gave\". Everything else answers a question about it. First the core on its own, then the full train:"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "あげた",
+          "role": "engine",
+          "label": "gave"
+        }
+      ],
+      "text": "The core: （私が）あげた。 (I) gave."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "母が焼いた",
+          "role": "white",
+          "label": "what kind?"
+        },
+        {
+          "text": "ケーキを",
+          "role": "white",
+          "label": "gave what?"
+        },
+        {
+          "text": "眼鏡をかけた",
+          "role": "white",
+          "label": "what kind?"
+        },
+        {
+          "text": "女の子に",
+          "role": "white",
+          "label": "to whom?"
+        },
+        {
+          "text": "あげた",
+          "role": "engine"
+        }
+      ],
+      "text": "Everything else hangs off the core, like a train growing carriage by carriage."
+    },
+    {
+      "type": "example",
+      "jp": "（私が）母が焼いたケーキを眼鏡をかけた女の子にあげた。",
+      "en": "(I) gave the cake my mother baked to the girl wearing glasses."
+    },
+    {
+      "type": "text",
+      "text": "Take the sentence below. Its core is only (私が) あげた, \"I gave\". Everything else answers a question about it."
+    },
+    {
+      "type": "text",
+      "text": "Peel the sentence like this: find the final engine, find its carriage, then ask each other piece \"what are you telling me more about?\" Pieces ending in an engine in front of a noun are simply clauses describing that noun."
+    },
+    {
+      "type": "heading",
+      "text": "Compound sentences"
+    },
+    {
+      "type": "text",
+      "text": "A sentence can hold two complete clauses. Both have a carriage, and the second one shares the first one's zero carriage. English does the same: \"I went to the shop and bought bread\" does not say \"I\" twice. The more clauses you can recognize, the more manageable long sentences become."
+    },
+    {
+      "type": "example",
+      "jp": "店に行ってパンを買った。",
+      "en": "(I) went to the shop and bought bread."
+    },
+    {
+      "type": "heading",
+      "text": "Serial modification, even inside words"
+    },
+    {
+      "type": "text",
+      "text": "The same chain works inside a single word. 外国人 is 外 (outside) → 国 (country) → 人 (person): a person of a country that is outside."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Every logical clause is a **carriage + engine**; the rest modifies one of the two.",
+        "**を, に, で, へ** nouns modify the verb; **の** links two nouns.",
+        "Anything that modifies something stands **before** it.",
+        "To read a long sentence: find the engine, find the carriage, then attach each piece."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "What are the two core parts of every logical clause?", "prompt": "", "options": ["Topic and comment", "Subject and object", "Carriage and engine", "Noun and particle"], "answer": 2, "note": "The carriage and the engine are the sentence; everything else modifies one of them."},
-    {"id": 14, "type": "choice", "instruction": "Which particle links one noun to another instead of modifying the verb?", "prompt": "", "options": ["を", "で", "に", "の"], "answer": 3, "note": "の joins two nouns; を, に, で and へ nouns modify the verb."},
-    {"id": 15, "type": "choice", "instruction": "What is the core of this sentence?", "prompt": "（私が）友達が作ったカレーを食べた。", "options": ["友達が作った", "カレーを", "（私が）食べた", "友達が"], "answer": 2, "note": "Carriage plus engine: (I) ate. The rest answers questions about it.", "en": "I ate the curry my friend made."},
-    {"id": 16, "type": "choice", "instruction": "What does 駅で tell us more about?", "prompt": "昨日、駅で友達に会った。", "options": ["昨日", "友達", "（私が）", "会った"], "answer": 3, "note": "A で noun modifies the verb: where the meeting happened.", "en": "(I) met a friend at the station yesterday."},
-    {"id": 17, "type": "choice", "instruction": "What does the clause 青いシャツを着た describe?", "prompt": "青いシャツを着た男の人が来た。", "options": ["男の人", "シャツ", "来た", "青い"], "answer": 0, "note": "A clause that ends in a verb in front of a noun describes that noun.", "en": "The man wearing a blue shirt came."},
-    {"id": 18, "type": "choice", "instruction": "True or false?", "prompt": "毎朝、パンを食べる。 パンを modifies the engine 食べる.", "options": ["True", "False"], "answer": 0, "note": "A を noun tells you more about the verb: eat what?", "en": "(I) eat bread every morning."},
-    {"id": 19, "type": "choice", "instruction": "True or false?", "prompt": "日本の友達 In this phrase の links two nouns.", "options": ["True", "False"], "answer": 0, "note": "の links 日本 to 友達.", "en": "a friend from Japan"},
-    {"id": 20, "type": "choice", "instruction": "Which question does 公園で answer?", "prompt": "弟は公園で遊んだ。", "options": ["Where did he play?", "Who played?", "What kind of park?", "Whose park?"], "answer": 0, "note": "で marks where the action happened and modifies 遊んだ.", "en": "My younger brother played in the park."},
-    {"id": 21, "type": "choice", "instruction": "How many logical clauses (engines) are there?", "prompt": "駅に行ってコーヒーを飲んだ。", "options": ["1", "2", "3", "4"], "answer": 1, "note": "行って and 飲んだ are two engines.", "en": "(I) went to the station and drank coffee."},
-    {"id": 22, "type": "choice", "instruction": "What is the carriage of 買った?", "prompt": "店に入って、水を買った。", "options": ["A zero (私が), shared with the first clause", "店", "水", "Nobody"], "answer": 0, "note": "Both clauses share one zero carriage, as English does with \"I went in and bought\".", "en": "(I) went into the shop and bought water."},
-    {"id": 23, "type": "choice", "instruction": "What does 妹に answer?", "prompt": "（私が）先生が書いた手紙を妹にあげた。", "options": ["Gave to whom?", "Gave what?", "What kind of letter?", "Who wrote?"], "answer": 0, "note": "に tells more about the engine あげた: to whom.", "en": "I gave my little sister the letter the teacher wrote."},
-    {"id": 24, "type": "choice", "instruction": "What does the clause 先生が書いた describe?", "prompt": "（私が）先生が書いた手紙を妹にあげた。", "options": ["妹", "手紙", "あげた", "私"], "answer": 1, "note": "It ends in a verb and stands before the noun 手紙.", "en": "I gave my little sister the letter the teacher wrote."},
-    {"id": 25, "type": "tap", "instruction": "Tap the engine", "options": ["（私が）", "大きい", "かばんを", "買った"], "answer": 3, "note": "The engine is the core; 大きい describes かばん.", "en": "(I) bought a big bag."},
-    {"id": 26, "type": "tap", "instruction": "Tap the word that 赤い describes directly", "options": ["赤い", "服を", "着た", "女の人が", "来た"], "answer": 1, "note": "A describer goes straight before what it describes.", "en": "The woman wearing red clothes came."},
-    {"id": 27, "type": "tap", "instruction": "Tap the noun that 姉が焼いた describes", "options": ["姉が", "焼いた", "パンは", "おいしい"], "answer": 2, "note": "A clause ending in a verb describes the noun after it.", "en": "The bread my older sister baked is delicious."},
-    {"id": 28, "type": "order", "instruction": "Build the sentence", "prompt": "I read the letter my younger brother wrote.", "options": ["弟が", "書いた", "手紙を", "読んだ"], "note": "弟が書いた is a clause that describes 手紙.", "en": "I read the letter my younger brother wrote."},
-    {"id": 29, "type": "order", "instruction": "Build the sentence", "prompt": "I talked to the friend I met at the station.", "options": ["駅で", "会った", "友達に", "話した"], "note": "駅で会った describes 友達; 話した is the engine.", "en": "I talked to the friend I met at the station."},
-    {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "I went to school and studied.", "options": ["学校に", "行って", "勉強した"], "note": "Two clauses share one zero carriage.", "en": "(I) went to school and studied."},
-    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "The movie I watched yesterday was interesting.", "options": ["昨日", "見た", "映画は", "おもしろかった"], "note": "昨日見た describes 映画; the engine closes the sentence.", "en": "The movie I watched yesterday was interesting."},
-    {"id": 32, "type": "choice", "instruction": "Fill the gap", "prompt": "弟は毎日バス＿＿学校に行く。", "options": ["を", "が", "の", "で"], "answer": 3, "note": "で modifies the engine 行く: by what means.", "en": "My younger brother goes to school by bus every day."},
-    {"id": 33, "type": "choice", "instruction": "Fill the gap", "prompt": "あれは母＿＿車です。", "options": ["を", "で", "の", "に"], "answer": 2, "note": "の links the two nouns: 母 and 車.", "en": "That is my mother's car."},
-    {"id": 34, "type": "choice", "instruction": "To read a long sentence, what do you look for first?", "prompt": "", "options": ["The topic with は", "The engine and its carriage", "The first verb", "Every particle"], "answer": 1, "note": "Find the final engine and its carriage, then attach each piece."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "What are the two core parts of every logical clause?",
+      "prompt": "",
+      "options": [
+        "Topic and comment",
+        "Subject and object",
+        "Carriage and engine",
+        "Noun and particle"
+      ],
+      "answer": 2,
+      "note": "The carriage and the engine are the sentence; everything else modifies one of them."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "Which particle links one noun to another instead of modifying the verb?",
+      "prompt": "",
+      "options": [
+        "を",
+        "で",
+        "に",
+        "の"
+      ],
+      "answer": 3,
+      "note": "の joins two nouns; を, に, で and へ nouns modify the verb."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "What is the core of this sentence?",
+      "prompt": "（私が）友達が作ったカレーを食べた。",
+      "options": [
+        "友達が作った",
+        "カレーを",
+        "（私が）食べた",
+        "友達が"
+      ],
+      "answer": 2,
+      "note": "Carriage plus engine: (I) ate. The rest answers questions about it.",
+      "en": "I ate the curry my friend made."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "What does 駅で tell us more about?",
+      "prompt": "昨日、駅で友達に会った。",
+      "options": [
+        "昨日",
+        "友達",
+        "（私が）",
+        "会った"
+      ],
+      "answer": 3,
+      "note": "A で noun modifies the verb: where the meeting happened.",
+      "en": "(I) met a friend at the station yesterday."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "What does the clause 青いシャツを着た describe?",
+      "prompt": "青いシャツを着た男の人が来た。",
+      "options": [
+        "男の人",
+        "シャツ",
+        "来た",
+        "青い"
+      ],
+      "answer": 0,
+      "note": "A clause that ends in a verb in front of a noun describes that noun.",
+      "en": "The man wearing a blue shirt came."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "毎朝、パンを食べる。 パンを modifies the engine 食べる.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "A を noun tells you more about the verb: eat what?",
+      "en": "(I) eat bread every morning."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "True or false?",
+      "prompt": "日本の友達 In this phrase の links two nouns.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "note": "の links 日本 to 友達.",
+      "en": "a friend from Japan"
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "Which question does 公園で answer?",
+      "prompt": "弟は公園で遊んだ。",
+      "options": [
+        "Where did he play?",
+        "Who played?",
+        "What kind of park?",
+        "Whose park?"
+      ],
+      "answer": 0,
+      "note": "で marks where the action happened and modifies 遊んだ.",
+      "en": "My younger brother played in the park."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "How many logical clauses (engines) are there?",
+      "prompt": "駅に行ってコーヒーを飲んだ。",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "note": "行って and 飲んだ are two engines.",
+      "en": "(I) went to the station and drank coffee."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "What is the carriage of 買った?",
+      "prompt": "店に入って、水を買った。",
+      "options": [
+        "A zero (私が), shared with the first clause",
+        "店",
+        "水",
+        "Nobody"
+      ],
+      "answer": 0,
+      "note": "Both clauses share one zero carriage, as English does with \"I went in and bought\".",
+      "en": "(I) went into the shop and bought water."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "What does 妹に answer?",
+      "prompt": "（私が）先生が書いた手紙を妹にあげた。",
+      "options": [
+        "Gave to whom?",
+        "Gave what?",
+        "What kind of letter?",
+        "Who wrote?"
+      ],
+      "answer": 0,
+      "note": "に tells more about the engine あげた: to whom.",
+      "en": "I gave my little sister the letter the teacher wrote."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "What does the clause 先生が書いた describe?",
+      "prompt": "（私が）先生が書いた手紙を妹にあげた。",
+      "options": [
+        "妹",
+        "手紙",
+        "あげた",
+        "私"
+      ],
+      "answer": 1,
+      "note": "It ends in a verb and stands before the noun 手紙.",
+      "en": "I gave my little sister the letter the teacher wrote."
+    },
+    {
+      "id": 25,
+      "type": "tap",
+      "instruction": "Tap the engine",
+      "options": [
+        "（私が）",
+        "大きい",
+        "かばんを",
+        "買った"
+      ],
+      "answer": 3,
+      "note": "The engine is the core; 大きい describes かばん.",
+      "en": "(I) bought a big bag."
+    },
+    {
+      "id": 26,
+      "type": "tap",
+      "instruction": "Tap the word that 赤い describes directly",
+      "options": [
+        "赤い",
+        "服を",
+        "着た",
+        "女の人が",
+        "来た"
+      ],
+      "answer": 1,
+      "note": "A describer goes straight before what it describes.",
+      "en": "The woman wearing red clothes came."
+    },
+    {
+      "id": 27,
+      "type": "tap",
+      "instruction": "Tap the noun that 姉が焼いた describes",
+      "options": [
+        "姉が",
+        "焼いた",
+        "パンは",
+        "おいしい"
+      ],
+      "answer": 2,
+      "note": "A clause ending in a verb describes the noun after it.",
+      "en": "The bread my older sister baked is delicious."
+    },
+    {
+      "id": 28,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I read the letter my younger brother wrote.",
+      "options": [
+        "弟が",
+        "書いた",
+        "手紙を",
+        "読んだ"
+      ],
+      "note": "弟が書いた is a clause that describes 手紙.",
+      "en": "I read the letter my younger brother wrote."
+    },
+    {
+      "id": 29,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I talked to the friend I met at the station.",
+      "options": [
+        "駅で",
+        "会った",
+        "友達に",
+        "話した"
+      ],
+      "note": "駅で会った describes 友達; 話した is the engine.",
+      "en": "I talked to the friend I met at the station."
+    },
+    {
+      "id": 30,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I went to school and studied.",
+      "options": [
+        "学校に",
+        "行って",
+        "勉強した"
+      ],
+      "note": "Two clauses share one zero carriage.",
+      "en": "(I) went to school and studied."
+    },
+    {
+      "id": 31,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "The movie I watched yesterday was interesting.",
+      "options": [
+        "昨日",
+        "見た",
+        "映画は",
+        "おもしろかった"
+      ],
+      "note": "昨日見た describes 映画; the engine closes the sentence.",
+      "en": "The movie I watched yesterday was interesting."
+    },
+    {
+      "id": 32,
+      "type": "choice",
+      "instruction": "What does バスで tell us more about?",
+      "prompt": "弟は毎日バスで学校に行く。",
+      "options": [
+        "行く",
+        "弟",
+        "学校",
+        "毎日"
+      ],
+      "answer": 0,
+      "note": "で modifies the engine: how did he go?",
+      "en": "My younger brother goes to school by bus every day."
+    },
+    {
+      "id": 33,
+      "type": "choice",
+      "instruction": "What does の do here?",
+      "prompt": "あれは母の車です。",
+      "options": [
+        "Links 母 to 車",
+        "Modifies the engine",
+        "Marks the subject",
+        "Marks the place"
+      ],
+      "answer": 0,
+      "note": "の links one noun to another noun.",
+      "en": "That is my mother's car."
+    },
+    {
+      "id": 34,
+      "type": "choice",
+      "instruction": "To read a long sentence, what do you look for first?",
+      "prompt": "",
+      "options": [
+        "The topic with は",
+        "The engine and its carriage",
+        "The first verb",
+        "Every particle"
+      ],
+      "answer": 1,
+      "note": "Find the final engine and its carriage, then attach each piece."
+    }
   ]
 }

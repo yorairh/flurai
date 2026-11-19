@@ -6,57 +6,448 @@
   "title": "Flipped polarity: たい, potential and そう",
   "summary": "In 〜が食べたい the main carriage is the thing that makes you want it. With no such thing in the sentence, the feeling flips back to the person.",
   "video": "https://www.youtube.com/watch?v=X_HlngOAvX8",
-  "related": [514, 576, 577],
+  "related": [
+    514,
+    576,
+    577
+  ],
   "blocks": [
-    {"type": "text", "text": "Every sentence has an **engine** and a **が main carriage**. Everything else tells you more about one of the two. Now look at クレープが食べたい. The carriage is **クレープ**, not \"I\". The engine is the helper adjective **たい**, so the sentence describes the crepes as having a quality: they stir up the wish to eat them. English puts an ego in the center (\"I want\"); Japanese is happy to put the thing that causes the feeling in the center."},
-    {"type": "heading", "text": "Polarity flips when the cause is missing"},
-    {"type": "text", "text": "Feelings can be described from the **inducer** (the crepes that stir the wish) or from the **experiencer** (the person who feels it). Japanese treats the two as halves of one event, so the default points at the inducer, but when no inducer is in the sentence the feeling swings to the person. In 東京に行きたい, 東京 already has に and 行く is a verb, so the only possible carriage is a zero: **(私が)** 東京に行きたい."},
-    {"type": "diagram", "cars": [
-      {"text": "クレープが", "role": "carriage", "label": "inducer"},
-      {"text": "食べたい", "role": "engine", "label": "makes me want to eat"}
-    ], "text": "クレープが食べたい。 Crepes are eat-wanting (to me)."},
-    {"type": "diagram", "cars": [
-      {"text": "Øが", "role": "zero", "label": "me"},
-      {"text": "東京に", "role": "white"},
-      {"text": "行きたい", "role": "engine"}
-    ], "text": "（私が）東京に行きたい。 (I) want to go to Tokyo."},
-    {"type": "heading", "text": "The same flip in the potential"},
-    {"type": "text", "text": "本が読める really says \"the book does readable\". The carriage is the book. But 私が読める or さくらが読める (no particular thing to read) points at the person: \"I can read, I am literate\". When no object is the focus, the polarity flips to the doer."},
-    {"type": "heading", "text": "And in そう"},
-    {"type": "text", "text": "不思議そう on its own would mean \"seems mysterious\", but mysterious is already a feeling. In 不思議そうに言った it flips to the person: \"said in a puzzled way\". It describes someone who senses mystery in something."},
-    {"type": "example", "jp": "お腹が空いた。早く食べたい。", "en": "(I'm) hungry. (I) want to eat soon."},
-    {"type": "example", "jp": "あのケーキが食べたい。", "en": "That cake makes (me) want to eat it."},
-    {"type": "example", "jp": "この漢字が読める。", "en": "(I) can read this kanji. (the kanji does readable)"},
-    {"type": "example", "jp": "子供は不思議そうに空を見た。", "en": "The child looked at the sky with a puzzled look."},
-    {"type": "keypoints", "items": [
-      "In **Aが + 〜たい**, the thing wanted is the carriage and たい is an adjective engine.",
-      "With no inducer in the sentence, the feeling or ability points to the **person** (a zero carriage).",
-      "The potential and **〜そう** flip in the same way.",
-      "Never read が as marking an object; it only ever marks the main carriage."
-    ]}
+    {
+      "type": "text",
+      "text": "Here is a puzzle. In クレープが食べたい, the crepes are the main carriage, not \"I\". So who is doing the wanting in 早く食べたい, where there are no crepes at all? Every sentence has an **engine** and a **が main carriage**, and everything else tells you more about one of the two. This lesson shows how the carriage swings between the thing and the person."
+    },
+    {
+      "type": "heading",
+      "text": "たい: the thing that causes the wish"
+    },
+    {
+      "type": "text",
+      "text": "The engine in クレープが食べたい is the helper adjective **たい**, so the sentence describes the crepes as having a quality: they stir up the wish to eat them. English puts an ego in the center (\"I want\"); Japanese is happy to put the thing that causes the feeling in the center."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "クレープが",
+          "role": "carriage",
+          "label": "inducer"
+        },
+        {
+          "text": "食べたい",
+          "role": "engine",
+          "label": "makes me want to eat"
+        }
+      ],
+      "text": "クレープが食べたい。 Crepes are eat-wanting (to me)."
+    },
+    {
+      "type": "example",
+      "jp": "あのケーキが食べたい。",
+      "en": "That cake makes (me) want to eat it."
+    },
+    {
+      "type": "heading",
+      "text": "Polarity flips when the cause is missing"
+    },
+    {
+      "type": "text",
+      "text": "Feelings can be described from the **inducer** (the crepes that stir the wish) or from the **experiencer** (the person who feels it). Japanese treats the two as halves of one event, so the default points at the inducer. When no inducer is in the sentence, the feeling swings to the person."
+    },
+    {
+      "type": "example",
+      "jp": "お腹が空いた。早く食べたい。",
+      "en": "(I'm) hungry. (I) want to eat soon."
+    },
+    {
+      "type": "heading",
+      "text": "Proof: 東京に行きたい"
+    },
+    {
+      "type": "text",
+      "text": "In 東京に行きたい, 東京 already has に and 行く is a verb, so the only possible carriage is a zero: **(私が)** 東京に行きたい. The wish cannot belong to \"food in general\"."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "me"
+        },
+        {
+          "text": "東京に",
+          "role": "white"
+        },
+        {
+          "text": "行きたい",
+          "role": "engine"
+        }
+      ],
+      "text": "（私が）東京に行きたい。 (I) want to go to Tokyo."
+    },
+    {
+      "type": "heading",
+      "text": "The same flip in the potential"
+    },
+    {
+      "type": "text",
+      "text": "本が読める really says \"the book does readable\". The carriage is the book. But when no object is the focus, the polarity flips to the doer: さくらが読める means \"Sakura can read, she is literate\"."
+    },
+    {
+      "type": "example",
+      "jp": "この漢字が読める。",
+      "en": "(I) can read this kanji. (the kanji does readable)"
+    },
+    {
+      "type": "example",
+      "jp": "本が読める。",
+      "en": "(I) can read the book. (the book is the main carriage)"
+    },
+    {
+      "type": "example",
+      "jp": "さくらが読める。",
+      "en": "Sakura can read. (she is literate; no particular thing to read)"
+    },
+    {
+      "type": "heading",
+      "text": "And in そう"
+    },
+    {
+      "type": "text",
+      "text": "不思議そう on its own would mean \"seems mysterious\", but mysterious is already a feeling. In 不思議そうに言った it flips to the person: \"said in a puzzled way\". It describes someone who senses mystery in something."
+    },
+    {
+      "type": "example",
+      "jp": "子供は不思議そうに空を見た。",
+      "en": "The child looked at the sky with a puzzled look."
+    },
+    {
+      "type": "example",
+      "jp": "「これは何？」と弟は不思議そうに聞いた。",
+      "en": "\"What is this?\" my little brother asked, looking puzzled."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "In **Aが + 〜たい**, the thing wanted is the carriage and たい is an adjective engine.",
+        "With no inducer in the sentence, the feeling or ability points to the **person** (a zero carriage).",
+        "The potential and **〜そう** flip in the same way.",
+        "Never read が as marking an object; it only ever marks the main carriage."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "In this course, the \"main carriage\" is the thing the engine (the last verb or adjective) is about. Which word is the main carriage?", "prompt": "冷たいジュースが飲みたい。", "options": ["冷たいジュース", "たい", "A zero pronoun (I)", "飲み"], "answer": 0, "note": "The thing that stirs the wish is the carriage; たい is the engine.", "en": "I want to drink some cold juice."},
-    {"id": 14, "type": "choice", "instruction": "Which word is the engine?", "prompt": "あの青い車が買いたい。", "options": ["車が", "青い", "買いたい", "あの"], "answer": 2, "note": "たい makes the verb stem into an adjective engine: 買いたい.", "en": "I want to buy that blue car."},
-    {"id": 15, "type": "choice", "instruction": "Who feels the wish?", "prompt": "来年、日本へ行きたい。", "options": ["The speaker (a zero carriage)", "Japan", "Next year", "Nobody"], "answer": 0, "note": "No inducer is in the sentence, so the feeling points at the person: (私が).", "en": "I want to go to Japan next year."},
-    {"id": 16, "type": "choice", "instruction": "In this course, が marks only the main carriage (the thing the engine is about), not an object. True or false?", "prompt": "パンが食べたい。 Here が marks the object of 食べる.", "options": ["True", "False"], "answer": 1, "note": "が only marks the main carriage: the bread is the carriage, 食べたい is the adjective engine.", "en": "I want some bread."},
-    {"id": 17, "type": "choice", "instruction": "Which sentence names the thing that causes the wish?", "prompt": "", "options": ["早く家に帰りたい。", "外で遊びたい。", "ピザが食べたい。", "もう寝たい。"], "answer": 2, "note": "ピザが is the inducer and the carriage; the others have a zero carriage."},
-    {"id": 18, "type": "choice", "instruction": "In this course, the main carriage is the thing the engine (the last verb or adjective) is about. A potential verb is self-move: the thing that becomes possible is its carriage. Which word is the main carriage?", "prompt": "この歌が歌える。", "options": ["歌える", "を", "A zero pronoun (I)", "この歌"], "answer": 3, "note": "Like 本が読める, the song \"does singable\": the song is the carriage.", "en": "I can sing this song."},
-    {"id": 19, "type": "choice", "instruction": "When no object is the focus, the potential points to...", "prompt": "", "options": ["the thing that is done", "the person who can do it", "the listener", "nobody"], "answer": 1, "note": "With no thing in focus, the polarity flips to the doer: \"I am literate\"."},
-    {"id": 20, "type": "choice", "instruction": "In 心配そうに見た, who senses the worry?", "prompt": "お母さんは心配そうに私を見た。", "options": ["I, the one looked at", "The listener", "Nobody", "Mom, the one looking"], "answer": 3, "note": "〜そうに flips to the person who senses something: Mom looks worried.", "en": "Mom looked at me with a worried look."},
-    {"id": 21, "type": "tap", "instruction": "Tap the engine", "options": ["雨の日は", "本が", "読みたい"], "answer": 2, "note": "読みたい is the adjective engine; 本 is the carriage.", "en": "On rainy days I want to read a book."},
-    {"id": 22, "type": "tap", "instruction": "Tap the word that shows how the teacher seemed", "options": ["先生は", "楽しそうに", "話した"], "answer": 1, "note": "〜そうに describes the look of a person sensing something.", "en": "The teacher talked as if enjoying it."},
-    {"id": 23, "type": "tap", "instruction": "Tap the carriage (the thing that stirs the wish)", "options": ["暑いので、", "冷たい", "水が", "飲みたい"], "answer": 2, "note": "水が is the inducer; 冷たい only describes it.", "en": "It's hot, so I want some cold water."},
-    {"id": 24, "type": "order", "instruction": "Build the sentence", "prompt": "I want cold water.", "options": ["冷たい", "水が", "飲みたい"], "note": "The describer comes first, then the carriage, then the engine.", "en": "I want cold water."},
-    {"id": 25, "type": "order", "instruction": "Build the sentence", "prompt": "I can read a Japanese newspaper.", "options": ["日本語の", "新聞が", "読める"], "note": "新聞 is the carriage of the potential 読める.", "en": "I can read Japanese newspapers."},
-    {"id": 26, "type": "order", "instruction": "Build the sentence", "prompt": "The girl sang happily.", "options": ["女の子は", "楽しそうに", "歌った"], "note": "楽しそうに tells how she seemed; the engine comes last.", "en": "The girl sang happily, as if she was having fun."},
-    {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "I want to go to a university in Tokyo.", "options": ["東京の", "大学に", "行きたい"], "note": "A zero (私が) carriage: に and の are only modifiers.", "en": "I want to go to a university in Tokyo."},
-    {"id": 28, "type": "choice", "instruction": "In this course, the \"carriage\" is the thing the engine (the last word) is about. Why is クレープが食べたい explained as \"crepes are eat-wanting\"?", "prompt": "", "options": ["が marks the thing eaten", "たい is an adjective whose carriage is the crepes", "The speaker is the carriage", "食べる is self-move"], "answer": 1, "note": "たい is a helper adjective, and its が carriage is the thing that stirs the wish."},
-    {"id": 29, "type": "choice", "instruction": "Which sentence has no が noun, so its main carriage is a hidden 私が?", "prompt": "", "options": ["ケーキが食べたい。", "ひらがなが書ける。", "早く家に帰りたい。", "車が止まった。"], "answer": 2, "note": "Only 帰りたい has no inducer, so the feeling points at the person."},
-    {"id": 30, "type": "choice", "instruction": "Fill the gap", "prompt": "あの人はいつも楽しそう＿＿歌う。", "options": ["を", "が", "と", "に"], "answer": 3, "note": "〜そうに turns the feeling into a way of doing the action.", "en": "That person always sings as if having fun."},
-    {"id": 31, "type": "choice", "instruction": "In this course, a potential verb is self-move: the が noun is its main carriage. True or false?", "prompt": "日本語が話せる。 日本語 is the main carriage.", "options": ["True", "False"], "answer": 0, "note": "The potential is self-move: Japanese \"does speakable\".", "en": "I can speak Japanese."},
-    {"id": 32, "type": "choice", "instruction": "What kind of word is たい?", "prompt": "", "options": ["A helper verb", "A noun", "A helper adjective", "A particle"], "answer": 2, "note": "たい behaves like an い-adjective (たかった, たくない)."},
-    {"id": 33, "type": "choice", "instruction": "What does 〜そうに describe?", "prompt": "", "options": ["A future plan", "A past habit", "A wish", "How someone looks as they sense something"], "answer": 3, "note": "〜そう flips to the person who senses the feeling."},
-    {"id": 34, "type": "choice", "instruction": "Why does 家に帰りたい need a zero carriage?", "prompt": "家に帰りたい。", "options": ["に already marks 家 and 帰る is a verb, so the only carriage left is a zero", "が is not allowed with たい", "帰る is other-move", "たい is a noun"], "answer": 0, "note": "Nothing in the sentence can be the carriage, so (私が) is understood.", "en": "I want to go home."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "Which word is the main carriage?",
+      "prompt": "冷たいジュースが飲みたい。",
+      "options": [
+        "冷たいジュース",
+        "たい",
+        "A zero pronoun (I)",
+        "飲み"
+      ],
+      "answer": 0,
+      "note": "The thing that stirs the wish is the carriage; たい is the engine.",
+      "en": "I want to drink some cold juice."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "Which word is the engine?",
+      "prompt": "あの青い車が買いたい。",
+      "options": [
+        "車が",
+        "青い",
+        "買いたい",
+        "あの"
+      ],
+      "answer": 2,
+      "note": "たい makes the verb stem into an adjective engine: 買いたい.",
+      "en": "I want to buy that blue car."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "Who feels the wish?",
+      "prompt": "来年、日本へ行きたい。",
+      "options": [
+        "The speaker (a zero carriage)",
+        "Japan",
+        "Next year",
+        "Nobody"
+      ],
+      "answer": 0,
+      "note": "No inducer is in the sentence, so the feeling points at the person: (私が).",
+      "en": "I want to go to Japan next year."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "What does が mark here?",
+      "prompt": "パンが食べたい。",
+      "options": [
+        "The main carriage, the thing that stirs the wish",
+        "The object of 食べる",
+        "The place",
+        "The time"
+      ],
+      "answer": 0,
+      "note": "が marks only the main carriage, never an object.",
+      "en": "I want some bread."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "Which sentence names the thing that causes the wish?",
+      "prompt": "",
+      "options": [
+        "早く家に帰りたい。",
+        "外で遊びたい。",
+        "ピザが食べたい。",
+        "もう寝たい。"
+      ],
+      "answer": 2,
+      "note": "ピザが is the inducer and the carriage; the others have a zero carriage."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "Which word is the main carriage?",
+      "prompt": "この歌が歌える。",
+      "options": [
+        "歌える",
+        "を",
+        "A zero pronoun (I)",
+        "この歌"
+      ],
+      "answer": 3,
+      "note": "Like 本が読める, the song \"does singable\": the song is the carriage.",
+      "en": "I can sing this song."
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "When no object is the focus, the potential points to...",
+      "prompt": "",
+      "options": [
+        "the thing that is done",
+        "the person who can do it",
+        "the listener",
+        "nobody"
+      ],
+      "answer": 1,
+      "note": "With no thing in focus, the polarity flips to the doer: \"I am literate\"."
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "In 心配そうに見た, who senses the worry?",
+      "prompt": "お母さんは心配そうに私を見た。",
+      "options": [
+        "I, the one looked at",
+        "The listener",
+        "Nobody",
+        "Mom, the one looking"
+      ],
+      "answer": 3,
+      "note": "〜そうに flips to the person who senses something: Mom looks worried.",
+      "en": "Mom looked at me with a worried look."
+    },
+    {
+      "id": 21,
+      "type": "tap",
+      "instruction": "Tap the engine",
+      "options": [
+        "雨の日は",
+        "本が",
+        "読みたい"
+      ],
+      "answer": 2,
+      "note": "読みたい is the adjective engine; 本 is the carriage.",
+      "en": "On rainy days I want to read a book."
+    },
+    {
+      "id": 22,
+      "type": "tap",
+      "instruction": "Tap the word that shows how the teacher seemed",
+      "options": [
+        "先生は",
+        "楽しそうに",
+        "話した"
+      ],
+      "answer": 1,
+      "note": "〜そうに describes the look of a person sensing something.",
+      "en": "The teacher talked as if enjoying it."
+    },
+    {
+      "id": 23,
+      "type": "tap",
+      "instruction": "Tap the carriage (the thing that stirs the wish)",
+      "options": [
+        "暑いので、",
+        "冷たい",
+        "水が",
+        "飲みたい"
+      ],
+      "answer": 2,
+      "note": "水が is the inducer; 冷たい only describes it.",
+      "en": "It's hot, so I want some cold water."
+    },
+    {
+      "id": 24,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I want cold water.",
+      "options": [
+        "冷たい",
+        "水が",
+        "飲みたい"
+      ],
+      "note": "The describer comes first, then the carriage, then the engine.",
+      "en": "I want cold water."
+    },
+    {
+      "id": 25,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I can read a Japanese newspaper.",
+      "options": [
+        "日本語の",
+        "新聞が",
+        "読める"
+      ],
+      "note": "新聞 is the carriage of the potential 読める.",
+      "en": "I can read Japanese newspapers."
+    },
+    {
+      "id": 26,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "The girl sang happily.",
+      "options": [
+        "女の子は",
+        "楽しそうに",
+        "歌った"
+      ],
+      "note": "楽しそうに tells how she seemed; the engine comes last.",
+      "en": "The girl sang happily, as if she was having fun."
+    },
+    {
+      "id": 27,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I want to go to a university in Tokyo.",
+      "options": [
+        "東京の",
+        "大学に",
+        "行きたい"
+      ],
+      "note": "A zero (私が) carriage: に and の are only modifiers.",
+      "en": "I want to go to a university in Tokyo."
+    },
+    {
+      "id": 28,
+      "type": "choice",
+      "instruction": "Why is this \"crepes are eat-wanting\"?",
+      "prompt": "クレープが食べたい。",
+      "options": [
+        "が marks the thing eaten",
+        "たい is an adjective whose carriage is the crepes",
+        "The speaker is the carriage",
+        "食べる is self-move"
+      ],
+      "answer": 1,
+      "note": "たい is a helper adjective, and its が carriage is the thing that stirs the wish.",
+      "en": "I want to eat crepes."
+    },
+    {
+      "id": 29,
+      "type": "choice",
+      "instruction": "Which sentence has no が noun, so its main carriage is a hidden 私が?",
+      "prompt": "",
+      "options": [
+        "ケーキが食べたい。",
+        "ひらがなが書ける。",
+        "早く家に帰りたい。",
+        "車が止まった。"
+      ],
+      "answer": 2,
+      "note": "Only 帰りたい has no inducer, so the feeling points at the person."
+    },
+    {
+      "id": 30,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "あの人はいつも楽しそう＿＿歌う。",
+      "options": [
+        "を",
+        "が",
+        "と",
+        "に"
+      ],
+      "answer": 3,
+      "note": "〜そうに turns the feeling into a way of doing the action.",
+      "en": "That person always sings as if having fun."
+    },
+    {
+      "id": 31,
+      "type": "choice",
+      "instruction": "What is 日本語 here?",
+      "prompt": "日本語が話せる。",
+      "options": [
+        "The main carriage",
+        "The engine",
+        "A zero carriage",
+        "A topic"
+      ],
+      "answer": 0,
+      "note": "A potential is self-move: the が noun is its main carriage.",
+      "en": "I can speak Japanese."
+    },
+    {
+      "id": 32,
+      "type": "choice",
+      "instruction": "What kind of word is たい?",
+      "prompt": "",
+      "options": [
+        "A helper verb",
+        "A noun",
+        "A helper adjective",
+        "A particle"
+      ],
+      "answer": 2,
+      "note": "たい behaves like an い-adjective (たかった, たくない)."
+    },
+    {
+      "id": 33,
+      "type": "choice",
+      "instruction": "What does 〜そうに describe?",
+      "prompt": "",
+      "options": [
+        "A future plan",
+        "A past habit",
+        "A wish",
+        "How someone looks as they sense something"
+      ],
+      "answer": 3,
+      "note": "〜そう flips to the person who senses the feeling."
+    },
+    {
+      "id": 34,
+      "type": "choice",
+      "instruction": "Why does 家に帰りたい need a zero carriage?",
+      "prompt": "家に帰りたい。",
+      "options": [
+        "に already marks 家 and 帰る is a verb, so the only carriage left is a zero",
+        "が is not allowed with たい",
+        "帰る is other-move",
+        "たい is a noun"
+      ],
+      "answer": 0,
+      "note": "Nothing in the sentence can be the carriage, so (私が) is understood.",
+      "en": "I want to go home."
+    }
   ]
 }

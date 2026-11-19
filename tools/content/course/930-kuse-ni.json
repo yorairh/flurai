@@ -1,386 +1,184 @@
 {
- "id": 930,
- "number": "93",
- "kind": "lesson",
- "jlpt": 3,
- "title": "くせに: cussing them out",
- "summary": "くせに is a contrastive connector like のに, but sharper: it blames someone for acting against what they are.",
- "video": "https://www.youtube.com/watch?v=QvuNXIYqFNM",
- "related": [
-  316,
-  443
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "**くせに** means \"even though / despite\", like のに, but with a harsh edge. It takes a person's status or character and says their behavior is the opposite of what you would expect. The 癖 (habit) meaning is not helpful here."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Word",
-     "Feel"
-    ],
-    [
-     "のに",
-     "regret, disappointment"
-    ],
-    [
-     "くせに",
-     "blame, criticism, contempt"
-    ]
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "Attaching it"
-  },
-  {
-   "type": "text",
-   "text": "くせ is a noun, so what comes before it modifies it in the usual way."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Before くせに",
-     "Joined with",
-     "Example"
-    ],
-    [
-     "noun",
-     "の",
-     "金持ちのくせに"
-    ],
-    [
-     "な-noun",
-     "な",
-     "下手なくせに"
-    ],
-    [
-     "い-adjective",
-     "nothing",
-     "若いくせに"
-    ],
-    [
-     "verb",
-     "dictionary / plain form",
-     "知っているくせに"
-    ]
-   ]
-  },
-  {
-   "type": "example",
-   "jp": "お金持ちのくせにケチだ。",
-   "en": "Though (he) is rich, (he) is stingy."
-  },
-  {
-   "type": "example",
-   "jp": "知っているくせに教えてくれない。",
-   "en": "(You) know it, and yet you won't tell me."
-  },
-  {
-   "type": "example",
-   "jp": "下手なくせに威張っている。",
-   "en": "(He) is bad at it, and yet he swaggers."
-  },
-  {
-   "type": "text",
-   "text": "The second clause is often dropped, as an insult that trails off. Be careful: what follows is a separate sentence, not part of the くせに clause."
-  },
-  {
-   "type": "example",
-   "jp": "大人のくせに。泣かないでよ。",
-   "en": "And you call yourself an adult. Stop crying."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "くせに = despite, with blame.",
-    "Noun の / な-noun な / adjective / verb + くせに.",
-    "Usually rude; don't use it with people above you."
-   ]
-  }
- ],
- "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "What is くせに?",
-   "prompt": "",
-   "options": [
-    "A harsh contrastive connector",
-    "A polite thanks",
-    "A question marker",
-    "A noun"
-   ],
-   "answer": 0,
-   "note": "Like のに, but accusing."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "Which is stronger criticism?",
-   "prompt": "",
-   "options": [
-    "くせに",
-    "のに",
-    "けれど",
-    "でも"
-   ],
-   "answer": 0,
-   "note": "くせに often sounds like severe criticism."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "What does くせ in くせに mean?",
-   "prompt": "",
-   "options": [
-    "A noun that follows the modifier",
-    "\"habit\", literally",
-    "A verb",
-    "A particle"
-   ],
-   "answer": 0,
-   "note": "The \"habit\" meaning is not helpful here."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "くせに can be used to praise someone.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It is nearly always negative."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "The second clause after くせに is sometimes left out.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "It is implied."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "Fill the gap",
-   "prompt": "学生の＿＿、全然勉強しない。",
-   "options": [
-    "から",
-    "ので",
-    "くせに",
-    "ために"
-   ],
-   "answer": 2,
-   "note": "くせに blames someone for acting against what their status suggests.",
-   "en": "Though (he) is a student, (he) doesn't study at all."
-  },
-  {
-   "id": 13,
-   "type": "choice",
-   "instruction": "Pick the correct form",
-   "prompt": "元気＿＿くせに、休んだ。",
-   "options": [
-    "の",
-    "な",
-    "に",
-    "で"
-   ],
-   "answer": 1,
-   "note": "A な-noun joins くせに with な.",
-   "en": "He's healthy, and yet he took the day off."
-  },
-  {
-   "id": 14,
-   "type": "choice",
-   "instruction": "Pick the correct form",
-   "prompt": "高い＿＿くせに、おいしくない。",
-   "options": [
-    "な",
-    "の",
-    "(nothing)",
-    "だ"
-   ],
-   "answer": 2,
-   "note": "An い-adjective joins くせに with nothing.",
-   "en": "It's expensive, and yet it isn't tasty."
-  },
-  {
-   "id": 15,
-   "type": "choice",
-   "instruction": "Pick the correct form",
-   "prompt": "先生＿＿くせに、間違えた。",
-   "options": [
-    "な",
-    "の",
-    "に",
-    "で"
-   ],
-   "answer": 1,
-   "note": "A noun joins くせに with の.",
-   "en": "Though (he) is a teacher, he made a mistake."
-  },
-  {
-   "id": 16,
-   "type": "choice",
-   "instruction": "Which sentence joins くせに correctly?",
-   "prompt": "",
-   "options": [
-    "知っているのくせに、教えない。",
-    "知っているなくせに、教えない。",
-    "知っているくせに、教えない。",
-    "知っているだくせに、教えない。"
-   ],
-   "answer": 2,
-   "note": "A verb joins くせに in its plain form with nothing added."
-  },
-  {
-   "id": 17,
-   "type": "choice",
-   "instruction": "Fill the gap: you feel regret, not blame",
-   "prompt": "せっかく準備した＿＿、雨が降った。",
-   "options": [
-    "くせに",
-    "のに",
-    "ために",
-    "ほど"
-   ],
-   "answer": 1,
-   "note": "のに is for regret; くせに would be blaming someone.",
-   "en": "Although I prepared so carefully, it rained."
-  },
-  {
-   "id": 18,
-   "type": "choice",
-   "instruction": "How does the speaker feel?",
-   "prompt": "弟は、何もできないくせに、いばっている。",
-   "options": [
-    "Grateful",
-    "Critical, a little contemptuous",
-    "Neutral report",
-    "Polite praise"
-   ],
-   "answer": 1,
-   "note": "くせに carries blame.",
-   "en": "My little brother can't do anything, and yet he acts important."
-  },
-  {
-   "id": 19,
-   "type": "tap",
-   "instruction": "Tap the word that marks the \"despite\" clause",
-   "options": [
-    "歌が",
-    "下手な",
-    "くせに",
-    "歌う"
-   ],
-   "answer": 2,
-   "note": "くせに joins the two clauses with blame.",
-   "en": "He's bad at singing, and yet he sings."
-  },
-  {
-   "id": 20,
-   "type": "tap",
-   "instruction": "Tap the connector",
-   "options": [
-    "あの人は",
-    "大人の",
-    "くせに",
-    "よく泣く"
-   ],
-   "answer": 2,
-   "note": "Noun の + くせに: despite being an adult.",
-   "en": "That person is an adult, and yet cries a lot."
-  },
-  {
-   "id": 21,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "He is a teacher, and yet he is late.",
-   "options": [
-    "先生の",
-    "くせに",
-    "遅れた"
-   ],
-   "note": "Noun + の + くせに, then the second clause.",
-   "en": "He is a teacher, and yet he is late."
-  },
-  {
-   "id": 22,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "You know it, and yet you say nothing.",
-   "options": [
-    "知っている",
-    "くせに",
-    "何も言わない"
-   ],
-   "note": "Plain verb + くせに.",
-   "en": "You know it, and yet you say nothing."
-  },
-  {
-   "id": 23,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "He is bad at cooking, and yet he cooks every day.",
-   "options": [
-    "料理が",
-    "下手な",
-    "くせに",
-    "毎日作る"
-   ],
-   "note": "な-noun + な + くせに.",
-   "en": "He is bad at cooking, and yet he cooks every day."
-  },
-  {
-   "id": 24,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "くせに is a good choice for thanking your boss.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "くせに is rude and critical."
-  },
-  {
-   "id": 25,
-   "type": "choice",
-   "instruction": "Which sentence is natural?",
-   "prompt": "",
-   "options": [
-    "親切のくせに、冷たい言い方をする。",
-    "親切だくせに、冷たい言い方をする。",
-    "親切なくせに、冷たい言い方をする。",
-    "親切くせに、冷たい言い方をする。"
-   ],
-   "answer": 2,
-   "note": "親切 is a な-word, so it needs な before くせに."
-  },
-  {
-   "id": 26,
-   "type": "choice",
-   "instruction": "Which situation fits くせに?",
-   "prompt": "",
-   "options": [
-    "You thank a friend for lunch",
-    "A famous chef burns the toast and blames others",
-    "You ask for directions politely",
-    "You describe the weather"
-   ],
-   "answer": 1,
-   "note": "くせに criticizes someone who acts against expectations."
-  }
- ]
+  "id": 930,
+  "number": "93",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "くせに: even though (with blame)",
+  "summary": "くせに is a contrastive connector like のに, but sharper: it blames someone for acting against what they are.",
+  "video": "https://www.youtube.com/watch?v=QvuNXIYqFNM",
+  "related": [
+    316,
+    443
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Two small words say \"even though\": **のに** and **くせに**. のに is the plain one, so we start there. くせに is its sharper cousin, and it comes second."
+    },
+    {
+      "type": "heading",
+      "text": "First, のに: even though"
+    },
+    {
+      "type": "text",
+      "text": "**のに** joins two clauses that clash: what you would expect did not happen. It is added to a plain clause, and after a noun or な-noun it becomes **なのに**. The feeling is regret or disappointment."
+    },
+    {
+      "type": "example",
+      "jp": "毎日練習したのに、上手にならなかった。",
+      "en": "I practiced every day, and yet I didn't get good."
+    },
+    {
+      "type": "example",
+      "jp": "休みなのに、会社に行く。",
+      "en": "Although it's a day off, (I) go to the office."
+    },
+    {
+      "type": "text",
+      "text": "のに can also end a sentence, with the second clause unsaid: \"if only ...\", \"and yet ...\"."
+    },
+    {
+      "type": "example",
+      "jp": "あんなに頑張ったのに。",
+      "en": "And I tried so hard... (it didn't work out)"
+    },
+    {
+      "type": "heading",
+      "text": "Now くせに: even though, with blame"
+    },
+    {
+      "type": "text",
+      "text": "**くせに** means \"even though / despite\", like のに, but with a harsh edge. It takes a person's status or character and says their behavior is the opposite of what you would expect. The 癖 (habit) meaning is not helpful here."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Word",
+          "Feel"
+        ],
+        [
+          "のに",
+          "regret, disappointment"
+        ],
+        [
+          "くせに",
+          "blame, criticism, contempt"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Attaching it"
+    },
+    {
+      "type": "text",
+      "text": "くせ is a noun, so what comes before it modifies it in the usual way."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Before くせに",
+          "Joined with",
+          "Example"
+        ],
+        [
+          "noun",
+          "の",
+          "金持ちのくせに"
+        ],
+        [
+          "な-noun",
+          "な",
+          "下手なくせに"
+        ],
+        [
+          "い-adjective",
+          "nothing",
+          "若いくせに"
+        ],
+        [
+          "verb",
+          "dictionary / plain form",
+          "知っているくせに"
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "お金持ちのくせにケチだ。",
+      "en": "Though (he) is rich, (he) is stingy."
+    },
+    {
+      "type": "example",
+      "jp": "知っているくせに教えてくれない。",
+      "en": "(You) know it, and yet you won't tell me."
+    },
+    {
+      "type": "example",
+      "jp": "男のくせに泣いている。",
+      "en": "(He) is a man, and yet he is crying."
+    },
+    {
+      "type": "text",
+      "text": "The direction can be reversed too: the blame can fall on someone who is bad at something yet keen."
+    },
+    {
+      "type": "example",
+      "jp": "下手なくせに威張っている。",
+      "en": "(He) is bad at it, and yet he swaggers."
+    },
+    {
+      "type": "example",
+      "jp": "下手なくせに熱心だ。",
+      "en": "(He) is bad at it, yet keen. (still a criticism)"
+    },
+    {
+      "type": "text",
+      "text": "The second clause is often dropped, as an insult that trails off. Be careful: what follows is a separate sentence, not part of the くせに clause."
+    },
+    {
+      "type": "example",
+      "jp": "大人のくせに。泣かないでよ。",
+      "en": "And you call yourself an adult. Stop crying."
+    },
+    {
+      "type": "example",
+      "jp": "男のくせに！",
+      "en": "And you call yourself a man!"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "のに = even though, with regret; くせに = even though, with blame.",
+        "Noun の / な-noun な / adjective / verb + くせに.",
+        "Usually rude; don't use it with people above you."
+      ]
+    }
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is くせに?", "prompt": "", "options": ["A harsh contrastive connector", "A polite thanks", "A question marker", "A noun"], "answer": 0, "note": "Like のに, but accusing."},
+    {"id": 5, "type": "choice", "instruction": "Which is stronger criticism?", "prompt": "", "options": ["くせに", "のに", "けれど", "でも"], "answer": 0, "note": "くせに often sounds like severe criticism."},
+    {"id": 6, "type": "choice", "instruction": "How does くせ work grammatically in くせに?", "prompt": "", "options": ["A noun that follows the modifier", "A verb that ends the clause", "A particle added to the verb", "An adverb"], "answer": 0, "note": "くせ is a noun, so what comes before it modifies it."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "くせに can be used to praise someone.", "options": ["True", "False"], "answer": 1, "note": "It is nearly always negative."},
+    {"id": 8, "type": "choice", "instruction": "True or false?", "prompt": "The second clause after くせに is sometimes left out.", "options": ["True", "False"], "answer": 0, "note": "It is implied."},
+    {"id": 12, "type": "choice", "instruction": "Fill the gap", "prompt": "学生の＿＿、全然勉強しない。", "options": ["から", "ので", "くせに", "ために"], "answer": 2, "note": "くせに blames someone for acting against what their status suggests.", "en": "Though (he) is a student, (he) doesn't study at all."},
+    {"id": 13, "type": "choice", "instruction": "Pick the correct form", "prompt": "元気＿＿くせに、休んだ。", "options": ["の", "な", "に", "で"], "answer": 1, "note": "A な-noun joins くせに with な.", "en": "He's healthy, and yet he took the day off."},
+    {"id": 14, "type": "choice", "instruction": "Pick the correct form", "prompt": "高い＿＿くせに、おいしくない。", "options": ["な", "の", "(nothing)", "だ"], "answer": 2, "note": "An い-adjective joins くせに with nothing.", "en": "It's expensive, and yet it isn't tasty."},
+    {"id": 15, "type": "choice", "instruction": "Pick the correct form", "prompt": "先生＿＿くせに、間違えた。", "options": ["な", "の", "に", "で"], "answer": 1, "note": "A noun joins くせに with の.", "en": "Though (he) is a teacher, he made a mistake."},
+    {"id": 16, "type": "choice", "instruction": "Which sentence joins くせに correctly?", "prompt": "", "options": ["知っているのくせに、教えない。", "知っているなくせに、教えない。", "知っているくせに、教えない。", "知っているだくせに、教えない。"], "answer": 2, "note": "A verb joins くせに in its plain form with nothing added."},
+    {"id": 17, "type": "choice", "instruction": "Fill the gap: you feel regret, not blame", "prompt": "せっかく準備した＿＿、雨が降った。", "options": ["くせに", "のに", "ために", "ほど"], "answer": 1, "note": "のに is for regret; くせに would be blaming someone.", "en": "Although I prepared so carefully, it rained."},
+    {"id": 18, "type": "choice", "instruction": "How does the speaker feel?", "prompt": "弟は、何もできないくせに、いばっている。", "options": ["Grateful", "Critical, a little contemptuous", "Neutral report", "Polite praise"], "answer": 1, "note": "くせに carries blame.", "en": "My little brother can't do anything, and yet he acts important."},
+    {"id": 19, "type": "tap", "instruction": "Tap the word that marks the \"despite\" clause", "options": ["歌が", "下手な", "くせに", "歌う"], "answer": 2, "note": "くせに joins the two clauses with blame.", "en": "He's bad at singing, and yet he sings."},
+    {"id": 20, "type": "tap", "instruction": "Tap the connector", "options": ["あの人は", "大人の", "くせに", "よく泣く"], "answer": 2, "note": "Noun の + くせに: despite being an adult.", "en": "That person is an adult, and yet cries a lot."},
+    {"id": 21, "type": "order", "instruction": "Build the sentence", "prompt": "He is a teacher, and yet he is late.", "options": ["先生の", "くせに", "遅れた"], "note": "Noun + の + くせに, then the second clause.", "en": "He is a teacher, and yet he is late."},
+    {"id": 22, "type": "order", "instruction": "Build the sentence", "prompt": "You know it, and yet you say nothing.", "options": ["知っている", "くせに", "何も言わない"], "note": "Plain verb + くせに.", "en": "You know it, and yet you say nothing."},
+    {"id": 23, "type": "order", "instruction": "Build the sentence", "prompt": "He is bad at cooking, and yet he cooks every day.", "options": ["料理が", "下手な", "くせに", "毎日作る"], "note": "な-noun + な + くせに.", "en": "He is bad at cooking, and yet he cooks every day."},
+    {"id": 24, "type": "choice", "instruction": "Fill the gap: regret, not blame", "prompt": "朝から待っていた＿＿、彼は来なかった。", "options": ["のに", "くせに", "ために", "ほど"], "answer": 0, "note": "のに fits plain disappointment; くせに would blame him.", "en": "I waited since morning, but he didn't come."},
+    {"id": 25, "type": "choice", "instruction": "Which sentence is natural?", "prompt": "", "options": ["親切のくせに、冷たい言い方をする。", "親切だくせに、冷たい言い方をする。", "親切なくせに、冷たい言い方をする。", "親切くせに、冷たい言い方をする。"], "answer": 2, "note": "親切 is a な-word, so it needs な before くせに."},
+    {"id": 26, "type": "choice", "instruction": "Which situation fits くせに?", "prompt": "", "options": ["You thank a friend for lunch", "A famous chef burns the toast and blames others", "You ask for directions politely", "You describe the weather"], "answer": 1, "note": "くせに criticizes someone who acts against expectations."},
+    {"id": 27, "type": "choice", "instruction": "What does the speaker do here?", "prompt": "先生のくせに！", "options": ["Scolds with contempt", "Thanks the teacher", "Asks a question", "Praises"], "answer": 0, "note": "くせに can trail off as an insult.", "en": "And you call yourself a teacher!"},
+    {"id": 28, "type": "choice", "instruction": "Fill the gap", "prompt": "雨＿＿、出かけた。", "options": ["なのに", "のに", "だのに", "のくせに"], "answer": 0, "note": "After a noun, のに becomes なのに.", "en": "Although it's raining, (I) went out."}
+  ]
 }

@@ -3,16 +3,161 @@
   "number": "53",
   "kind": "note",
   "title": "Note: reading a ghost story, part 3",
-  "summary": "The story reaches its tense scene, and several earlier structures turn up in real use.",
+  "summary": "The scariest scene so far, with several earlier structures in real use.",
   "video": "https://www.youtube.com/watch?v=8DHRS4B5SQA",
   "blocks": [
-    {"type": "text", "text": "This episode finishes the part of the ghost story begun in the last two episodes. It recaps the plot so far: a woman goes back to a friend's apartment for a forgotten phone, gets no answer at the door, finds it unlocked and walks in. Then it reads the next lines."},
-    {"type": "heading", "text": "What to take from it"},
-    {"type": "keypoints", "items": [
-      "電気がついている means the light is on; 電気をつける is to switch it on. Which verb you see tells you whether someone acted or the light simply is on.",
-      "A verb can end in a more literary shape, such as おらず in place of いなくて or いなかった. It means \"not being\", linking to what comes next.",
-      "Many points from earlier lessons appear together in real text, which is the best proof that the structure is useful.",
-      "When a point is unclear, look it up after you finish the passage, then read the passage again."
-    ]}
+    {
+      "type": "text",
+      "text": "Part 3 of the ghost story. Inside the house, the scene gets tense, and a lot of what you have learned turns up in real use. Read first, then check each phrase in the table at the end."
+    },
+    {
+      "type": "heading",
+      "text": "The story so far"
+    },
+    {
+      "type": "text",
+      "text": "Here is what has happened in the story so far, in a few short lines."
+    },
+    {
+      "type": "example",
+      "jp": "部屋には誰もおらず、電気がついていた。",
+      "en": "No one was in the room, and the light was on."
+    },
+    {
+      "type": "example",
+      "jp": "どうやら、誰かが先に電気をつけたらしい。",
+      "en": "Apparently someone had turned the light on first."
+    },
+    {
+      "type": "example",
+      "jp": "部屋の奥で、白い着物の女の人が寝てしまっていた。",
+      "en": "At the back of the room, a woman in a white kimono had fallen asleep."
+    },
+    {
+      "type": "example",
+      "jp": "美咲は起こそうかと思ったが、そっとしておくことにした。",
+      "en": "Misaki thought about waking her, but decided to leave her alone."
+    },
+    {
+      "type": "example",
+      "jp": "その時、美咲は、窓の白い顔が女の人の顔ではなかったのを思い出した。",
+      "en": "At that moment Misaki remembered that the white face in the window had not been this woman's face."
+    },
+    {
+      "type": "heading",
+      "text": "ついている vs つける"
+    },
+    {
+      "type": "text",
+      "text": "電気がついている means the light is on, as a state. 電気をつける means to switch it on, as an action. Which verb you see tells you whether someone acted or the light simply is on."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "電気が",
+          "role": "carriage",
+          "label": "the light"
+        },
+        {
+          "text": "ついていた",
+          "role": "engine",
+          "label": "was on"
+        }
+      ],
+      "text": "電気がついていた。 The light was on."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "someone"
+        },
+        {
+          "text": "電気を",
+          "role": "white",
+          "label": "what"
+        },
+        {
+          "text": "つけた",
+          "role": "engine",
+          "label": "switched on"
+        }
+      ],
+      "text": "（誰かが）電気をつけた。 (Someone) switched the light on."
+    },
+    {
+      "type": "heading",
+      "text": "おらず: old いる + old ない"
+    },
+    {
+      "type": "text",
+      "text": "おらず has two parts. おる is an older, written form of いる, and it acts like a godan verb. ず is the old negative ending, a little like ない. Together they mean \"was not (there), and ...\", joining two clauses."
+    },
+    {
+      "type": "heading",
+      "text": "Phrases from earlier lessons in the wild"
+    },
+    {
+      "type": "text",
+      "text": "どうやら … らしい is the guess of lesson 25. 寝てしまった is the helper しまう of lesson 44. 起こそうかと思った is the volitional (lesson 17) + か (lesson 39) + と (the quoted thought). And そっとしておくことにした chains two lessons: ておく (lesson 21) and ことにする (lesson 29)."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Phrase in the story",
+          "What it shows",
+          "Lesson"
+        ],
+        [
+          "電気がついている / つける",
+          "state vs action",
+          "21"
+        ],
+        [
+          "おらず",
+          "おる + ず, written style",
+          "—"
+        ],
+        [
+          "どうやら … らしい",
+          "a guess from evidence",
+          "25"
+        ],
+        [
+          "寝てしまっていた",
+          "helper しまう",
+          "44"
+        ],
+        [
+          "起こそうかと思った",
+          "volitional + か + と",
+          "17, 39"
+        ],
+        [
+          "そっとしておくことにした",
+          "ておく + ことにした",
+          "21, 29"
+        ],
+        [
+          "〜のを思い出した",
+          "の turns a clause into a noun",
+          "56"
+        ]
+      ],
+      "title": "Phrase → lesson it comes from"
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Look at which verb you see: ついている is a state, つける an action.",
+        "おらず = おる + ず.",
+        "A real sentence can stack several lessons at once.",
+        "Break it apart from the engine backwards."
+      ]
+    }
   ]
 }

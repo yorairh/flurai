@@ -448,6 +448,7 @@ private const val TABLE_CELL_PADDING_DP = 20f
 private const val TABLE_EM_DP = 15f
 private const val TABLE_MIN_COLUMN_DP = 64f
 private const val TABLE_MAX_COLUMN_DP = 220f
+private const val TABLE_READABLE_COLUMN_DP = 72f
 
 /** Longest line of a cell in "ems" (Japanese characters are 1, others about half); a long cell wraps, so it is capped. */
 private fun cellEms(cell: String): Float =
@@ -465,5 +466,11 @@ fun tableLayout(rows: List<List<String>>, availableDp: Float): TableLayout {
         (ems * TABLE_EM_DP + TABLE_CELL_PADDING_DP).coerceIn(TABLE_MIN_COLUMN_DP, TABLE_MAX_COLUMN_DP)
     }
     val total = ideal.sum()
-    return if (total <= availableDp) TableLayout(ideal.map { it * availableDp / total }, false) else TableLayout(ideal, true)
+    // Too wide for the screen: shrink every column in proportion (cells wrap) as long as none gets too narrow to read.
+    val scaled = ideal.map { it * availableDp / total }
+    return when {
+        total <= availableDp -> TableLayout(scaled, false)
+        scaled.min() >= TABLE_READABLE_COLUMN_DP -> TableLayout(scaled, false)
+        else -> TableLayout(ideal, true)
+    }
 }

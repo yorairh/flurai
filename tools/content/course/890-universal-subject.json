@@ -1,355 +1,143 @@
 {
- "id": 890,
- "number": "89",
- "kind": "lesson",
- "jlpt": 3,
- "title": "The universal subject",
- "summary": "Every real sentence has an A-car and a B-engine; when the A-car is not spoken it is a zero pronoun, not a missing subject.",
- "video": "https://www.youtube.com/watch?v=CEgGnitwXGA",
- "related": [
-  580
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "Some teachers say Japanese has no subject, because so many sentences seem to start with nothing. This course disagrees: every real sentence says something (B) about something (A). Japanese is a **null-subject** language, like Spanish: the subject is not always visible, but it is there."
-  },
-  {
-   "type": "heading",
-   "text": "The zero pronoun"
-  },
-  {
-   "type": "text",
-   "text": "The invisible A-car is found from context, and when context says nothing it defaults to **I**."
-  },
-  {
-   "type": "diagram",
-   "cars": [
+  "id": 890,
+  "number": "89",
+  "kind": "lesson",
+  "jlpt": 3,
+  "title": "The universal subject",
+  "summary": "Every real sentence has a main carriage and an engine; when the main carriage is not spoken it is a zero pronoun, not a missing subject.",
+  "video": "https://www.youtube.com/watch?v=CEgGnitwXGA",
+  "related": [
+    580
+  ],
+  "blocks": [
     {
-     "text": "(私は)",
-     "role": "zero"
+      "type": "text",
+      "text": "Some teachers say Japanese has no subject, because so many sentences seem to start with nothing. This course disagrees: every real sentence says something (the engine) about something (the main carriage). Japanese is a **null-subject** language, like Spanish: the subject is not always visible, but it is there."
     },
     {
-     "text": "疲れた",
-     "role": "engine"
+      "type": "heading",
+      "text": "The zero pronoun"
+    },
+    {
+      "type": "text",
+      "text": "The invisible main carriage is found from context, and when context says nothing it defaults to **I**. Spanish does the same: \"Soy americana\" drops \"yo\" because \"soy\" already says it. English \"am\" also implies \"I\", but English forbids dropping it."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Ø",
+          "role": "zero",
+          "label": "I (from context)"
+        },
+        {
+          "text": "疲れた",
+          "role": "engine"
+        }
+      ],
+      "text": "疲れた。 (I) am tired."
+    },
+    {
+      "type": "text",
+      "text": "It is not that \"tiredness hangs over the universe\". A language must be able to say something about something."
+    },
+    {
+      "type": "heading",
+      "text": "Indeterminate subjects"
+    },
+    {
+      "type": "text",
+      "text": "Some subjects are vague, as English \"it\" is. The copula だ links two things, so a hidden first thing must be there: here it is \"it\", the weather or the day."
+    },
+    {
+      "type": "example",
+      "jp": "雨になりそうだ。",
+      "en": "It looks like rain. (\"it\" is the hidden main carriage)"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Ø",
+          "role": "zero",
+          "label": "it (the weather)"
+        },
+        {
+          "text": "雨になりそうだ",
+          "role": "engine"
+        }
+      ],
+      "text": "雨になりそうだ。 The copula still links two things."
+    },
+    {
+      "type": "heading",
+      "text": "The one true exception"
+    },
+    {
+      "type": "text",
+      "text": "A noun with a long modifier is not a sentence. You see these in game recaps, chapter titles and narration."
+    },
+    {
+      "type": "example",
+      "jp": "泣いていた子供",
+      "en": "the child who was crying"
+    },
+    {
+      "type": "example",
+      "jp": "駅に着いた私",
+      "en": "me, who had arrived at the station"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "泣いていた",
+          "role": "white",
+          "label": "describer"
+        },
+        {
+          "text": "子供",
+          "role": "plain",
+          "label": "just a noun"
+        }
+      ],
+      "text": "泣いていた子供。 No engine, so no sentence."
+    },
+    {
+      "type": "text",
+      "text": "There is no main carriage and engine here: just a noun with a modifier."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Every real sentence has a main carriage and an engine.",
+        "When the main carriage is not spoken it is a zero pronoun: context decides, **I** by default.",
+        "A noun with a modifier is not a subjectless sentence; it is not a sentence at all."
+      ]
     }
-   ],
-   "text": "疲れた。 (I) am tired."
-  },
-  {
-   "type": "text",
-   "text": "It is not that \"tiredness hangs over the universe\". A language must be able to say B about A."
-  },
-  {
-   "type": "heading",
-   "text": "Indeterminate subjects"
-  },
-  {
-   "type": "text",
-   "text": "Some subjects are vague, as English \"it\" is: 雨になりそうだ, \"it looks like rain\". The copula だ still needs an A-car, because だ links two things."
-  },
-  {
-   "type": "heading",
-   "text": "The one true exception"
-  },
-  {
-   "type": "text",
-   "text": "A noun with a long modifier is not a sentence:"
-  },
-  {
-   "type": "example",
-   "jp": "泣いていた子供",
-   "en": "the child who was crying"
-  },
-  {
-   "type": "example",
-   "jp": "駅に着いた私",
-   "en": "me, who had arrived at the station"
-  },
-  {
-   "type": "text",
-   "text": "There is no A and B here: just a noun with a modifier. These are used in summaries and narration."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "Every real sentence has an A-car and a B-engine.",
-    "When the A-car is not spoken it is a zero pronoun: context decides, **I** by default.",
-    "A noun with a modifier is not a subjectless sentence; it is not a sentence at all."
-   ]
-  }
- ],
- "questions": [
-  {
-   "id": 1,
-   "type": "choice",
-   "instruction": "What is a null-subject language?",
-   "prompt": "",
-   "options": [
-    "One whose subjects are not always visible",
-    "One with no subjects",
-    "One with only nouns",
-    "One with no verbs"
-   ],
-   "answer": 0,
-   "note": "The subject is still there."
-  },
-  {
-   "id": 5,
-   "type": "choice",
-   "instruction": "In the course's terms だ links an A-car (subject) to a B. Why does 雨になりそうだ still have a hidden A-car?",
-   "prompt": "",
-   "options": [
-    "Because だ links an A-car to a B",
-    "Because だ means \"it\"",
-    "Because だ is a noun",
-    "Because だ is a particle"
-   ],
-   "answer": 0,
-   "note": "The copula needs two things to link."
-  },
-  {
-   "id": 6,
-   "type": "choice",
-   "instruction": "What does the zero pronoun default to in context-free sentences?",
-   "prompt": "",
-   "options": [
-    "I",
-    "You",
-    "He",
-    "They"
-   ],
-   "answer": 0,
-   "note": "When nothing else is clear, it is the speaker."
-  },
-  {
-   "id": 7,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "Japanese has no subject because the subject is often missing.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It is often invisible, not absent."
-  },
-  {
-   "id": 8,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "English also drops the subject in some cases (such as commands).",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "\"Stop crying!\" has no spoken subject."
-  },
-  {
-   "id": 12,
-   "type": "choice",
-   "instruction": "What is this course's view of grammar models?",
-   "prompt": "",
-   "options": [
-    "Tools to describe language, not its source code",
-    "The real source code",
-    "Always correct",
-    "Only for Japanese"
-   ],
-   "answer": 0,
-   "note": "Grammar describes language after the fact."
-  },
-  {
-   "id": 13,
-   "type": "choice",
-   "instruction": "Who is sleepy in this sentence said on its own?",
-   "prompt": "眠い。",
-   "options": [
-    "The listener",
-    "Normally the speaker (zero pronoun)",
-    "Nobody: there is no subject",
-    "The whole universe"
-   ],
-   "answer": 1,
-   "note": "The invisible A-car defaults to I.",
-   "en": "(I'm) sleepy."
-  },
-  {
-   "id": 14,
-   "type": "choice",
-   "instruction": "Who is the zero pronoun here?",
-   "prompt": "A: 先生は？　B: もう帰りました。",
-   "options": [
-    "The speaker B",
-    "The listener A",
-    "The teacher (from context)",
-    "Nobody"
-   ],
-   "answer": 2,
-   "note": "Context says A asked about the teacher.",
-   "en": "A: What about the teacher? B: (He) already went home."
-  },
-  {
-   "id": 15,
-   "type": "choice",
-   "instruction": "Which of these is a noun with a modifier, not a sentence?",
-   "prompt": "",
-   "options": [
-    "昨日買った本",
-    "昨日本を買った。",
-    "私は本を買った。",
-    "本を買った。"
-   ],
-   "answer": 0,
-   "note": "It ends in a noun and says nothing (B) about an A-car."
-  },
-  {
-   "id": 16,
-   "type": "choice",
-   "instruction": "Why isn't this a sentence?",
-   "prompt": "駅で会った人",
-   "options": [
-    "It has no particle",
-    "It is a question",
-    "It is a noun with a modifier: it says nothing about an A-car",
-    "It is in the past"
-   ],
-   "answer": 2,
-   "note": "A noun with a modifier has no A and B.",
-   "en": "the person I met at the station"
-  },
-  {
-   "id": 17,
-   "type": "tap",
-   "instruction": "Tap the engine (the A-car is a zero pronoun)",
-   "options": [
-    "買い物に",
-    "行った"
-   ],
-   "answer": 1,
-   "note": "行った is the engine; (I) is the invisible A-car.",
-   "en": "(I) went shopping."
-  },
-  {
-   "id": 18,
-   "type": "tap",
-   "instruction": "Tap the A-car",
-   "options": [
-    "妹が",
-    "来た"
-   ],
-   "answer": 0,
-   "note": "妹が is the A-car; 来た is the engine.",
-   "en": "My younger sister came."
-  },
-  {
-   "id": 19,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "眠い。 This sentence has no A-car (subject) at all, not even an invisible one.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "The A-car is a zero pronoun, invisible but present.",
-   "en": "(I'm) sleepy."
-  },
-  {
-   "id": 20,
-   "type": "choice",
-   "instruction": "Who fell asleep?",
-   "prompt": "お母さんが赤ちゃんを見て、「寝た」と言った。",
-   "options": [
-    "The baby (zero pronoun from context)",
-    "The mother",
-    "The listener",
-    "Nobody"
-   ],
-   "answer": 0,
-   "note": "Context fills the zero pronoun: the baby.",
-   "en": "Mother looked at the baby and said, \"(He) fell asleep.\""
-  },
-  {
-   "id": 21,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I'm very sleepy today.",
-   "options": [
-    "今日は",
-    "とても",
-    "眠い"
-   ],
-   "note": "Topic, adverb, then the engine; the A-car (I) is zero.",
-   "en": "I'm very sleepy today."
-  },
-  {
-   "id": 22,
-   "type": "order",
-   "instruction": "Build the sentence",
-   "prompt": "I went to bed early yesterday.",
-   "options": [
-    "昨日は",
-    "早く",
-    "寝た"
-   ],
-   "note": "Topic, adverb, engine; (I) is the zero pronoun.",
-   "en": "I went to bed early yesterday."
-  },
-  {
-   "id": 23,
-   "type": "choice",
-   "instruction": "Which sentence has a zero pronoun?",
-   "prompt": "",
-   "options": [
-    "妹が早く寝た。",
-    "早く寝た。",
-    "犬は早く寝た。",
-    "私は早く寝た。"
-   ],
-   "answer": 1,
-   "note": "Only 早く寝た。 leaves its A-car unspoken."
-  },
-  {
-   "id": 24,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "窓を開けた人 is a complete sentence.",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 1,
-   "note": "It is a noun (人) with a modifier.",
-   "en": "the person who opened the window"
-  },
-  {
-   "id": 25,
-   "type": "choice",
-   "instruction": "True or false?",
-   "prompt": "English also uses a vague \"it\" as a subject, as in \"It is raining.\"",
-   "options": [
-    "True",
-    "False"
-   ],
-   "answer": 0,
-   "note": "Vague subjects exist in many languages."
-  },
-  {
-   "id": 26,
-   "type": "choice",
-   "instruction": "Why does this feel complete in Japanese?",
-   "prompt": "暑い。",
-   "options": [
-    "The zero pronoun (usually I) is the A-car",
-    "暑い is a noun",
-    "Japanese has no subject",
-    "It is not a sentence"
-   ],
-   "answer": 0,
-   "note": "The A-car is invisible but still there.",
-   "en": "(I'm) hot."
-  }
- ]
+  ],
+  "questions": [
+    {"id": 1, "type": "choice", "instruction": "What is a null-subject language?", "prompt": "", "options": ["One whose subjects are not always visible", "One with no subjects", "One with only nouns", "One with no verbs"], "answer": 0, "note": "The subject is still there."},
+    {"id": 5, "type": "choice", "instruction": "What is the hidden main carriage here?", "prompt": "雪になりそうだ。", "options": ["It (the weather)", "I", "You", "Nobody: there is none"], "answer": 0, "note": "The copula needs two things to link, so a hidden \"it\" is there.", "en": "It looks like snow."},
+    {"id": 6, "type": "choice", "instruction": "What does the zero pronoun default to in context-free sentences?", "prompt": "", "options": ["I", "You", "He", "They"], "answer": 0, "note": "When nothing else is clear, it is the speaker."},
+    {"id": 7, "type": "choice", "instruction": "True or false?", "prompt": "Japanese has no subject because the subject is often missing.", "options": ["True", "False"], "answer": 1, "note": "It is often invisible, not absent."},
+    {"id": 8, "type": "choice", "instruction": "Who did it?", "prompt": "「宿題は？」「もうやった。」", "options": ["The speaker answering", "The listener", "The teacher", "Nobody"], "answer": 0, "note": "With no other clue, the zero pronoun is I.", "en": "\"What about the homework?\" \"(I) already did it.\""},
+    {"id": 12, "type": "tap", "instruction": "Tap the engine (the main carriage is a zero pronoun)", "prompt": "", "options": ["昨日", "駅で", "友達に", "会った"], "answer": 3, "note": "会った is the engine; (I) is the invisible main carriage.", "en": "(I) met a friend at the station yesterday."},
+    {"id": 13, "type": "choice", "instruction": "Who is sleepy in this sentence said on its own?", "prompt": "眠い。", "options": ["The listener", "Normally the speaker (zero pronoun)", "Nobody: there is no subject", "Someone nearby"], "answer": 1, "note": "The invisible main carriage defaults to I.", "en": "(I'm) sleepy."},
+    {"id": 14, "type": "choice", "instruction": "Who is the zero pronoun here?", "prompt": "A: 先生は？　B: もう帰りました。", "options": ["The speaker B", "The listener A", "The teacher (from context)", "Nobody"], "answer": 2, "note": "Context says A asked about the teacher.", "en": "A: What about the teacher? B: (He) already went home."},
+    {"id": 15, "type": "choice", "instruction": "Which of these is a noun with a modifier, not a sentence?", "prompt": "", "options": ["昨日買った本", "昨日本を買った。", "私は本を買った。", "本を買った。"], "answer": 0, "note": "It ends in a noun and says nothing (B) about an main carriage."},
+    {"id": 16, "type": "choice", "instruction": "Why isn't this a sentence?", "prompt": "駅で会った人", "options": ["It has no particle", "It is a question", "It is a noun with a modifier: it says nothing about an main carriage", "It is in the past"], "answer": 2, "note": "A noun with a modifier has no A and B.", "en": "the person I met at the station"},
+    {"id": 17, "type": "tap", "instruction": "Tap the noun that the modifier describes", "options": ["昨日", "公園で", "会った", "人"], "answer": 3, "note": "人 is just a noun with a modifier: not a sentence.", "en": "the person I met in the park yesterday"},
+    {"id": 18, "type": "tap", "instruction": "Tap the main carriage", "options": ["昨日", "妹が", "駅に", "来た"], "answer": 1, "note": "妹が is the main carriage; 来た is the engine.", "en": "My younger sister came to the station yesterday."},
+    {"id": 19, "type": "choice", "instruction": "Which train shows 眠い。 correctly?", "prompt": "", "options": ["Ø (zero) + 眠い", "眠い alone", "眠い + 眠い", "There is no train"], "answer": 0, "note": "The main carriage is a zero pronoun, invisible but present."},
+    {"id": 20, "type": "choice", "instruction": "Who fell asleep?", "prompt": "お母さんが赤ちゃんを見て、「寝た」と言った。", "options": ["The baby (zero pronoun from context)", "The mother", "The listener", "Nobody"], "answer": 0, "note": "Context fills the zero pronoun: the baby.", "en": "Mother looked at the baby and said, \"(He) fell asleep.\""},
+    {"id": 21, "type": "order", "instruction": "Build the sentence", "prompt": "I'm very sleepy today.", "options": ["今日は", "とても", "眠い"], "note": "Topic, adverb, then the engine; the main carriage (I) is zero.", "en": "I'm very sleepy today."},
+    {"id": 22, "type": "order", "instruction": "Build the sentence", "prompt": "I read the book I bought yesterday.", "options": ["昨日", "買った", "本を", "読んだ"], "note": "買った describes 本; 読んだ is the only engine.", "en": "I read the book I bought yesterday."},
+    {"id": 23, "type": "choice", "instruction": "Which sentence has a zero pronoun?", "prompt": "", "options": ["妹が早く寝た。", "早く寝た。", "犬は早く寝た。", "私は早く寝た。"], "answer": 1, "note": "Only 早く寝た。 leaves its main carriage unspoken."},
+    {"id": 24, "type": "choice", "instruction": "True or false?", "prompt": "窓を開けた人 is a complete sentence.", "options": ["True", "False"], "answer": 1, "note": "It is a noun (人) with a modifier.", "en": "the person who opened the window"},
+    {"id": 25, "type": "choice", "instruction": "Which sentence has a vague \"it\" as its main carriage?", "prompt": "", "options": ["寒くなりそうだ", "私は寒い", "妹が来た", "犬が走る"], "answer": 0, "note": "The hidden carriage is \"it\", the weather."},
+    {"id": 26, "type": "choice", "instruction": "Why does this feel complete in Japanese?", "prompt": "暑い。", "options": ["The zero pronoun (usually I) is the main carriage", "暑い is a noun", "Japanese has no subject", "It is not a sentence"], "answer": 0, "note": "The main carriage is invisible but still there.", "en": "(I'm) hot."},
+    {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "It looks like rain tonight.", "options": ["今夜は", "雨が", "降りそうだ"], "note": "The hidden main carriage is \"it\"; 降りそうだ is the engine.", "en": "It looks like rain tonight."},
+    {"id": 28, "type": "choice", "instruction": "Who is tired?", "prompt": "「どうしたの？」「疲れた。」", "options": ["The speaker", "The listener", "Nobody", "The teacher"], "answer": 0, "note": "With no other clue, the zero pronoun is I.", "en": "\"What's wrong?\" \"(I'm) tired.\""}
+  ]
 }

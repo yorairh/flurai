@@ -6,55 +6,471 @@
   "title": "ちゃう / ちゃった: the helper verb しまう",
   "summary": "ちゃう is しまう squeezed onto the て-form: \"it is done\". It can describe regrets, surprises, good news, and even the future.",
   "video": "https://www.youtube.com/watch?v=VyZWoJCSQ5Q",
-  "related": [463, 739],
+  "related": [
+    463,
+    739
+  ],
   "blocks": [
-    {"type": "text", "text": "Textbooks hand you separate meanings of ちゃった (\"finished\", \"by accident\", \"regret\") like the blind men describing an elephant. Look at the elephant instead. **ちゃう** is a contraction of **てしまう**, the helper verb **しまう** (finish, put away) attached to the て-form."},
-    {"type": "heading", "text": "How it is built"},
-    {"type": "table", "rows": [
-      ["Full form", "Contracted", "Example"],
-      ["〜てしまう", "〜ちゃう", "忘れてしまう → 忘れちゃう"],
-      ["〜てしまった", "〜ちゃった", "忘れてしまった → 忘れちゃった"],
-      ["〜でしまう (て-form ends in で)", "〜じゃう", "飲んでしまう → 飲んじゃう"],
-      ["〜でしまった", "〜じゃった", "踏んでしまった → 踏んじゃった"]
-    ]},
-    {"type": "text", "text": "The word しまった on its own is an exclamation: \"That's done it!\" And おしまい, the \"end\" of a fairy tale, is the noun made from しまう."},
-    {"type": "heading", "text": "One idea: \"it's done\""},
-    {"type": "text", "text": "Imagine English with a helper word **done**: \"I done forgot\", \"I done became a superhero\". The sentence says the thing happened, is finished, is a fact, and usually that it was not what anyone expected. The result can be a regret (忘れちゃった), an accident, or great news (なっちゃった). You never need to memorize separate meanings, only the idea \"it is done\"."},
-    {"type": "heading", "text": "It can point to the future"},
-    {"type": "text", "text": "しまう itself is a plain present-tense verb, so ちゃう can look ahead. 今日はどんどん飲んじゃう means \"today I'm going to just drink away\". 夏休みが終わっちゃう means \"the summer vacation will be over before we know it, and nothing can stop it\"."},
-    {"type": "example", "jp": "大事な本を電車に忘れちゃった。", "en": "(I) left my important book on the train, oh no."},
-    {"type": "example", "jp": "猫のしっぽを踏んじゃった。", "en": "(I) stepped on the cat's tail."},
-    {"type": "example", "jp": "まだ七時なのに、もう寝ちゃった。", "en": "It is only seven and (he's) already gone to sleep."},
-    {"type": "example", "jp": "この漫画は読んだら笑っちゃうよ。", "en": "(You) will end up laughing if you read this comic."},
-    {"type": "keypoints", "items": [
-      "**〜てしまう** becomes **〜ちゃう**; **〜でしまう** becomes **〜じゃう**.",
-      "The core idea is \"it is done / it happened\", often something unexpected.",
-      "It can be regret, accident, surprise or good news.",
-      "In the present tense it points to the future."
-    ]}
+    {
+      "type": "text",
+      "text": "Textbooks hand you separate meanings of ちゃった (\"finished\", \"by accident\", \"regret\") like the blind men describing an elephant. Look at the elephant instead. **ちゃう** is a contraction of **てしまう**, the helper verb **しまう** (finish, put away) attached to the て-form."
+    },
+    {
+      "type": "heading",
+      "text": "How it is built"
+    },
+    {
+      "type": "text",
+      "text": "The ちゃう form is a shortened て-form plus しまう, and the table shows how each ending contracts."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Full form",
+          "Contracted",
+          "Example"
+        ],
+        [
+          "〜てしまう",
+          "〜ちゃう",
+          "忘れてしまう → 忘れちゃう"
+        ],
+        [
+          "〜てしまった",
+          "〜ちゃった",
+          "忘れてしまった → 忘れちゃった"
+        ],
+        [
+          "〜でしまう (て-form ends in で)",
+          "〜じゃう",
+          "飲んでしまう → 飲んじゃう"
+        ],
+        [
+          "〜でしまった",
+          "〜じゃった",
+          "踏んでしまった → 踏んじゃった"
+        ]
+      ]
+    },
+    {
+      "type": "text",
+      "text": "The word しまった on its own is an exclamation: \"That's done it!\" And おしまい, the \"end\" of a fairy tale, is the noun made from しまう."
+    },
+    {
+      "type": "text",
+      "text": "Notice that the contraction is one engine: the whole verb plus its helper sits in a single car."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Øが",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "寝ちゃった",
+          "role": "engine",
+          "label": "寝て + しまった"
+        }
+      ],
+      "text": "寝ちゃった。 (I) went and fell asleep."
+    },
+    {
+      "type": "heading",
+      "text": "One idea: \"it's done\""
+    },
+    {
+      "type": "text",
+      "text": "Imagine English with a helper word **done**: \"I done forgot\", \"I done became a superhero\". The sentence says the thing happened, is finished, is a fact, and usually that it was not what anyone expected. The result can be a regret (忘れちゃった), an accident, or great news (なっちゃった). You never need to memorize separate meanings, only the idea \"it is done\"."
+    },
+    {
+      "type": "text",
+      "text": "The sentence says the thing happened, is finished, is a fact, and usually that it was not what anyone expected."
+    },
+    {
+      "type": "example",
+      "jp": "大事な本を電車に忘れちゃった。",
+      "en": "(I) left my important book on the train, oh no."
+    },
+    {
+      "type": "example",
+      "jp": "猫のしっぽを踏んじゃった。",
+      "en": "(I) stepped on the cat's tail."
+    },
+    {
+      "type": "example",
+      "jp": "まだ七時なのに、もう寝ちゃった。",
+      "en": "It is only seven and (he's) already gone to sleep."
+    },
+    {
+      "type": "text",
+      "text": "The result can also be great news. English with \"done\" does the same: \"I done passed the exam!\""
+    },
+    {
+      "type": "example",
+      "jp": "試験に受かっちゃった！",
+      "en": "I passed the exam!"
+    },
+    {
+      "type": "heading",
+      "text": "It can point to the future"
+    },
+    {
+      "type": "text",
+      "text": "しまう itself is a plain present-tense verb, so ちゃう can look ahead. It says that something will happen before we know it, and nothing can stop it."
+    },
+    {
+      "type": "example",
+      "jp": "この漫画は読んだら笑っちゃうよ。",
+      "en": "(You) will end up laughing if you read this comic."
+    },
+    {
+      "type": "example",
+      "jp": "夏休みが終わっちゃう。",
+      "en": "The summer vacation will be over before we know it."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "**〜てしまう** becomes **〜ちゃう**; **〜でしまう** becomes **〜じゃう**.",
+        "The core idea is \"it is done / it happened\", often something unexpected.",
+        "It can be regret, accident, surprise or good news.",
+        "In the present tense it points to the future."
+      ]
+    }
   ],
   "questions": [
-    {"id": 13, "type": "choice", "instruction": "What does ちゃう contract?", "prompt": "", "options": ["てしまう", "ている", "てある", "ておく"], "answer": 0, "note": "ちゃう is てしまう: the helper verb しまう on the て-form."},
-    {"id": 14, "type": "choice", "instruction": "Pick the contracted form", "prompt": "読んでしまった。", "options": ["読んちゃった", "読みちゃった", "読んでちゃった", "読んじゃった"], "answer": 3, "note": "A て-form ending in で contracts to じゃ.", "en": "I ended up reading it."},
-    {"id": 15, "type": "choice", "instruction": "Pick the contracted form", "prompt": "ケーキを食べてしまった。", "options": ["ケーキを食べちゃった", "ケーキを食べじゃった", "ケーキを食べりゃった", "ケーキを食べってしまった"], "answer": 0, "note": "食べて + しまった becomes 食べちゃった.", "en": "I ended up eating the cake."},
-    {"id": 16, "type": "choice", "instruction": "Fill the gap", "prompt": "ジュースを全部飲ん＿＿った。", "options": ["ちゃ", "しゃ", "じゃ", "にゃ"], "answer": 2, "note": "飲んで ends in で, so it contracts to じゃ.", "en": "I drank all the juice."},
-    {"id": 17, "type": "choice", "instruction": "Fill the gap", "prompt": "かぎをなくし＿＿った。", "options": ["じゃ", "ちゃ", "きゃ", "みゃ"], "answer": 1, "note": "なくして ends in て, so it contracts to ちゃ.", "en": "I lost my key, oh no."},
-    {"id": 18, "type": "choice", "instruction": "Which meaning fits?", "prompt": "もうすぐ時間がなくなっちゃうよ。", "options": ["Something will be over before we know it", "Something already happened", "A habit from the past", "A polite request"], "answer": 0, "note": "しまう is a present-tense verb, so ちゃう can look ahead.", "en": "We'll run out of time before we know it!"},
-    {"id": 19, "type": "choice", "instruction": "True or false: ちゃった always shows regret.", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "It can be regret, an accident, surprise or even good news."},
-    {"id": 20, "type": "choice", "instruction": "Which meaning is NOT a use of ちゃった?", "prompt": "", "options": ["Regret", "Accident", "A polite request", "Surprising good news"], "answer": 2, "note": "The core idea is \"it is done\"; a request is not part of it."},
-    {"id": 21, "type": "choice", "instruction": "What is the one idea behind ちゃう?", "prompt": "", "options": ["I want to", "It is done / it happened", "I have to", "I am trying"], "answer": 1, "note": "Like the English \"I done forgot\", it says the thing is finished."},
-    {"id": 22, "type": "choice", "instruction": "What is しまった on its own?", "prompt": "", "options": ["A question", "A greeting", "An exclamation: That's done it!", "A request"], "answer": 2, "note": "It is the past form of しまう used as an exclamation."},
-    {"id": 23, "type": "choice", "instruction": "What does おしまい, the end of a fairy tale, come from?", "prompt": "", "options": ["する", "しまう", "ある", "いる"], "answer": 1, "note": "おしまい is the noun made from しまう: the thing is finished."},
-    {"id": 24, "type": "choice", "instruction": "Which contraction is wrong?", "prompt": "", "options": ["書いちゃった", "飲んちゃった", "食べちゃった", "読んじゃった"], "answer": 1, "note": "で-endings take じゃ: 飲んじゃった."},
-    {"id": 25, "type": "choice", "instruction": "Pick the full form of 笑っちゃった", "prompt": "", "options": ["笑っておいた", "笑っている", "笑ってしまった", "笑ってみた"], "answer": 2, "note": "ちゃった is てしまった."},
-    {"id": 26, "type": "choice", "instruction": "Pick the contraction of 踏んでしまう", "prompt": "", "options": ["踏んじゃう", "踏んちゃう", "踏みじゃう", "踏んでちゃう"], "answer": 0, "note": "んで becomes んじゃ."},
-    {"id": 27, "type": "tap", "instruction": "Tap the word that holds the contraction of しまう", "options": ["弟が", "ケーキを", "全部", "食べちゃった"], "answer": 3, "note": "食べちゃった = 食べてしまった.", "en": "My little brother ate all the cake."},
-    {"id": 28, "type": "tap", "instruction": "Tap the word that is a contracted helper-verb form", "options": ["友達と", "雨の中で", "遊んじゃった"], "answer": 2, "note": "遊んで + しまった becomes 遊んじゃった.", "en": "(We) ended up playing with friends in the rain."},
-    {"id": 29, "type": "tap", "instruction": "Tap the word that makes it \"it is done\"", "options": ["もう", "宿題を", "やっちゃった"], "answer": 2, "note": "やって + しまった becomes やっちゃった.", "en": "(I) already did my homework."},
-    {"id": 30, "type": "order", "instruction": "Build the sentence", "prompt": "I left my bag at home.", "options": ["かばんを", "家に", "忘れちゃった"], "note": "The engine, with the contracted helper verb, goes last.", "en": "(I) left my bag at home, oh no.", "alt": [["家に", "かばんを", "忘れちゃった"]]},
-    {"id": 31, "type": "order", "instruction": "Build the sentence", "prompt": "I spilled the coffee on the table.", "options": ["テーブルの上に", "コーヒーを", "こぼしちゃった"], "note": "The engine is last; the particle pieces modify it.", "en": "(I) spilled the coffee on the table.", "alt": [["コーヒーを", "テーブルの上に", "こぼしちゃった"]]},
-    {"id": 32, "type": "order", "instruction": "Build the sentence", "prompt": "I ate all the ice cream.", "options": ["アイスを", "全部", "食べちゃった"], "note": "The engine is last; 全部 can come before アイスを or just before the verb.", "en": "(I) ate all the ice cream.", "alt": [["全部", "アイスを", "食べちゃった"]]},
-    {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "I went to sleep too early today.", "options": ["今日は", "早く", "寝ちゃった"], "note": "寝て + しまった becomes 寝ちゃった.", "en": "(I) went to sleep too early today."},
-    {"id": 34, "type": "choice", "instruction": "Fill the gap", "prompt": "宿題をやっ＿＿った。", "options": ["ちゃ", "じゃ", "きゃ", "しゃ"], "answer": 0, "note": "やって ends in て, so the contraction is ちゃ.", "en": "(I) ended up doing the homework."}
+    {
+      "id": 13,
+      "type": "choice",
+      "instruction": "What does ちゃう contract?",
+      "prompt": "",
+      "options": [
+        "てしまう",
+        "ている",
+        "てある",
+        "ておく"
+      ],
+      "answer": 0,
+      "note": "ちゃう is てしまう: the helper verb しまう on the て-form."
+    },
+    {
+      "id": 14,
+      "type": "choice",
+      "instruction": "Pick the contracted form",
+      "prompt": "読んでしまった。",
+      "options": [
+        "読んちゃった",
+        "読みちゃった",
+        "読んでちゃった",
+        "読んじゃった"
+      ],
+      "answer": 3,
+      "note": "A て-form ending in で contracts to じゃ.",
+      "en": "I ended up reading it."
+    },
+    {
+      "id": 15,
+      "type": "choice",
+      "instruction": "Pick the contracted form",
+      "prompt": "ケーキを食べてしまった。",
+      "options": [
+        "ケーキを食べちゃった",
+        "ケーキを食べじゃった",
+        "ケーキを食べりゃった",
+        "ケーキを食べってしまった"
+      ],
+      "answer": 0,
+      "note": "食べて + しまった becomes 食べちゃった.",
+      "en": "I ended up eating the cake."
+    },
+    {
+      "id": 16,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "ジュースを全部飲ん＿＿った。",
+      "options": [
+        "ちゃ",
+        "しゃ",
+        "じゃ",
+        "にゃ"
+      ],
+      "answer": 2,
+      "note": "飲んで ends in で, so it contracts to じゃ.",
+      "en": "I drank all the juice."
+    },
+    {
+      "id": 17,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "かぎをなくし＿＿った。",
+      "options": [
+        "じゃ",
+        "ちゃ",
+        "きゃ",
+        "みゃ"
+      ],
+      "answer": 1,
+      "note": "なくして ends in て, so it contracts to ちゃ.",
+      "en": "I lost my key, oh no."
+    },
+    {
+      "id": 18,
+      "type": "choice",
+      "instruction": "Which meaning fits?",
+      "prompt": "もうすぐ時間がなくなっちゃうよ。",
+      "options": [
+        "Something will be over before we know it",
+        "Something already happened",
+        "A habit from the past",
+        "A polite request"
+      ],
+      "answer": 0,
+      "note": "しまう is a present-tense verb, so ちゃう can look ahead.",
+      "en": "We'll run out of time before we know it!"
+    },
+    {
+      "id": 19,
+      "type": "choice",
+      "instruction": "What does ちゃった show here?",
+      "prompt": "宿題が早く終わっちゃった！",
+      "options": [
+        "Regret only",
+        "Surprising good news",
+        "A request",
+        "A question"
+      ],
+      "answer": 1,
+      "note": "ちゃった does not always mean regret: it can be a happy surprise.",
+      "en": "My homework is finished already, wow!"
+    },
+    {
+      "id": 20,
+      "type": "choice",
+      "instruction": "Which meaning is NOT a use of ちゃった?",
+      "prompt": "",
+      "options": [
+        "Regret",
+        "Accident",
+        "A polite request",
+        "Surprising good news"
+      ],
+      "answer": 2,
+      "note": "The core idea is \"it is done\"; a request is not part of it."
+    },
+    {
+      "id": 21,
+      "type": "choice",
+      "instruction": "What is the one idea behind ちゃう?",
+      "prompt": "",
+      "options": [
+        "I want to",
+        "It is done / it happened",
+        "I have to",
+        "I am trying"
+      ],
+      "answer": 1,
+      "note": "Like the English \"I done forgot\", it says the thing is finished."
+    },
+    {
+      "id": 22,
+      "type": "choice",
+      "instruction": "What is しまった on its own?",
+      "prompt": "",
+      "options": [
+        "A question",
+        "A greeting",
+        "An exclamation: That's done it!",
+        "A request"
+      ],
+      "answer": 2,
+      "note": "It is the past form of しまう used as an exclamation."
+    },
+    {
+      "id": 23,
+      "type": "choice",
+      "instruction": "What does おしまい, the end of a fairy tale, come from?",
+      "prompt": "",
+      "options": [
+        "する",
+        "しまう",
+        "ある",
+        "いる"
+      ],
+      "answer": 1,
+      "note": "おしまい is the noun made from しまう: the thing is finished."
+    },
+    {
+      "id": 24,
+      "type": "choice",
+      "instruction": "Which contraction is wrong?",
+      "prompt": "",
+      "options": [
+        "書いちゃった",
+        "飲んちゃった",
+        "食べちゃった",
+        "読んじゃった"
+      ],
+      "answer": 1,
+      "note": "で-endings take じゃ: 飲んじゃった."
+    },
+    {
+      "id": 25,
+      "type": "choice",
+      "instruction": "Pick the full form of 笑っちゃった",
+      "prompt": "",
+      "options": [
+        "笑っておいた",
+        "笑っている",
+        "笑ってしまった",
+        "笑ってみた"
+      ],
+      "answer": 2,
+      "note": "ちゃった is てしまった."
+    },
+    {
+      "id": 26,
+      "type": "choice",
+      "instruction": "Pick the contraction of 踏んでしまう",
+      "prompt": "",
+      "options": [
+        "踏んじゃう",
+        "踏んちゃう",
+        "踏みじゃう",
+        "踏んでちゃう"
+      ],
+      "answer": 0,
+      "note": "んで becomes んじゃ."
+    },
+    {
+      "id": 27,
+      "type": "tap",
+      "instruction": "Tap the word that holds the contraction of しまう",
+      "options": [
+        "弟が",
+        "ケーキを",
+        "全部",
+        "食べちゃった"
+      ],
+      "answer": 3,
+      "note": "食べちゃった = 食べてしまった.",
+      "en": "My little brother ate all the cake."
+    },
+    {
+      "id": 28,
+      "type": "tap",
+      "instruction": "Tap the word that is a contracted helper-verb form",
+      "options": [
+        "友達と",
+        "雨の中で",
+        "遊んじゃった"
+      ],
+      "answer": 2,
+      "note": "遊んで + しまった becomes 遊んじゃった.",
+      "en": "(We) ended up playing with friends in the rain."
+    },
+    {
+      "id": 29,
+      "type": "tap",
+      "instruction": "Tap the word that makes it \"it is done\"",
+      "options": [
+        "もう",
+        "宿題を",
+        "やっちゃった"
+      ],
+      "answer": 2,
+      "note": "やって + しまった becomes やっちゃった.",
+      "en": "(I) already did my homework."
+    },
+    {
+      "id": 30,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I left my bag at home.",
+      "options": [
+        "かばんを",
+        "家に",
+        "忘れちゃった"
+      ],
+      "note": "The engine, with the contracted helper verb, goes last.",
+      "en": "(I) left my bag at home, oh no.",
+      "alt": [
+        [
+          "家に",
+          "かばんを",
+          "忘れちゃった"
+        ]
+      ]
+    },
+    {
+      "id": 31,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I spilled the coffee on the table.",
+      "options": [
+        "テーブルの上に",
+        "コーヒーを",
+        "こぼしちゃった"
+      ],
+      "note": "The engine is last; the particle pieces modify it.",
+      "en": "(I) spilled the coffee on the table.",
+      "alt": [
+        [
+          "コーヒーを",
+          "テーブルの上に",
+          "こぼしちゃった"
+        ]
+      ]
+    },
+    {
+      "id": 32,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I ate all the ice cream.",
+      "options": [
+        "アイスを",
+        "全部",
+        "食べちゃった"
+      ],
+      "note": "The engine is last; 全部 can come before アイスを or just before the verb.",
+      "en": "(I) ate all the ice cream.",
+      "alt": [
+        [
+          "全部",
+          "アイスを",
+          "食べちゃった"
+        ]
+      ]
+    },
+    {
+      "id": 33,
+      "type": "order",
+      "instruction": "Build the sentence",
+      "prompt": "I went to sleep too early today.",
+      "options": [
+        "今日は",
+        "早く",
+        "寝ちゃった"
+      ],
+      "note": "寝て + しまった becomes 寝ちゃった.",
+      "en": "(I) went to sleep too early today."
+    },
+    {
+      "id": 34,
+      "type": "choice",
+      "instruction": "Fill the gap",
+      "prompt": "宿題をやっ＿＿った。",
+      "options": [
+        "ちゃ",
+        "じゃ",
+        "きゃ",
+        "しゃ"
+      ],
+      "answer": 0,
+      "note": "やって ends in て, so the contraction is ちゃ.",
+      "en": "(I) ended up doing the homework."
+    }
   ]
 }

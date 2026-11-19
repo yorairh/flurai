@@ -14,15 +14,45 @@
   "blocks": [
     {
       "type": "text",
-      "text": "Three look-alikes catch learners out. For each pair there is one job you know and one you may not."
+      "text": "Three look-alikes catch learners out. Each of **で**, **が** and **に** has one job you know and one you may not. The trick is always the same: look at what comes right before the kana."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Kana",
+          "Job you know",
+          "The other job",
+          "How to tell"
+        ],
+        [
+          "で",
+          "place or tool",
+          "て-form of だ",
+          "noun + で, then a verb? Place. Description + で, then more? て-form."
+        ],
+        [
+          "が",
+          "subject",
+          "\"but\"",
+          "after a noun: subject. After a full clause: \"but\"."
+        ],
+        [
+          "に",
+          "target",
+          "\"and\" in a list",
+          "one に per item in a list of nouns"
+        ]
+      ],
+      "title": "The three at a glance"
     },
     {
       "type": "heading",
-      "text": "で"
+      "text": "で: place or て-form?"
     },
     {
       "type": "text",
-      "text": "As a **particle**, で follows a noun and marks where an action happens or the means used: 図書館で勉強する. As the **て-form of だ**, it connects descriptions or clauses: さくらはきれいで優しい. It also hides in phrases such as お元気で (\"take care\") and 無事でよかった (\"I'm glad you're safe\")."
+      "text": "As a **particle**, で follows a noun and marks where an action happens or what tool is used."
     },
     {
       "type": "example",
@@ -30,22 +60,58 @@
       "en": "I study at the library."
     },
     {
+      "type": "text",
+      "text": "But で is also the **て-form of だ**. Compare an い-adjective: 美しい becomes 美しくて to link descriptions, and a noun or な-adjective does the same with で."
+    },
+    {
       "type": "example",
-      "jp": "さくらはきれいで優しい。",
+      "jp": "さくらはかわいくて、優しい。",
+      "en": "Sakura is cute and kind."
+    },
+    {
+      "type": "example",
+      "jp": "さくらはきれいで、優しい。",
       "en": "Sakura is pretty and kind."
     },
     {
-      "type": "heading",
-      "text": "が"
+      "type": "text",
+      "text": "It links whole clauses too, and then it works like \"and\" or \"and so\"."
+    },
+    {
+      "type": "example",
+      "jp": "さくらはいい子で、毎日学校に行く。",
+      "en": "Sakura is a good kid, and she goes to school every day."
     },
     {
       "type": "text",
-      "text": "As a **subject particle**, が always follows a noun. As a **connector**, が follows a complete clause (ending in a verb, an adjective or だ) and means \"but\". It can also end a sentence, leaving the rest unsaid and polite."
+      "text": "The て-form of だ hides in two set phrases. お元気で works like a request (compare 待って, \"please wait\"). 無事でよかった means \"it is good that you are safe\"."
+    },
+    {
+      "type": "example",
+      "jp": "お元気で。",
+      "en": "Take care of yourself."
+    },
+    {
+      "type": "example",
+      "jp": "無事でよかった。",
+      "en": "I'm glad you're safe."
+    },
+    {
+      "type": "heading",
+      "text": "が: subject or \"but\"?"
+    },
+    {
+      "type": "text",
+      "text": "As a **subject particle**, が always follows a noun. As a **connector**, が follows a complete clause (one that ends in a verb, an adjective or だ, never in a bare noun) and means \"but\". It is not always strongly contrastive: sometimes it only says \"and then\" or sets the scene."
     },
     {
       "type": "example",
       "jp": "お店に行ったが、パンがなかった。",
       "en": "I went to the shop, but there was no bread."
+    },
+    {
+      "type": "text",
+      "text": "A polite sentence can also end on が and leave the rest unsaid. It sounds soft and modest."
     },
     {
       "type": "example",
@@ -54,11 +120,20 @@
     },
     {
       "type": "heading",
-      "text": "に"
+      "text": "に: target, or \"and\" in a list"
     },
     {
       "type": "text",
-      "text": "The usual **target** particle, plus an old, written use meaning \"and\" in lists: 靴に指輪に帽子. The set phrase **それに** means \"besides, in addition\"."
+      "text": "に is the usual **target** particle. In an older, written style, it can also join items in a list, one に after each noun."
+    },
+    {
+      "type": "example",
+      "jp": "靴に指輪に帽子を買った。",
+      "en": "I bought shoes, a ring and a hat."
+    },
+    {
+      "type": "text",
+      "text": "The set phrase **それに** means \"besides, in addition\"."
     },
     {
       "type": "example",
@@ -68,7 +143,7 @@
     {
       "type": "keypoints",
       "items": [
-        "**Noun + で**: place or means; **predicate + で**: て-form of だ.",
+        "**Noun + で**: place or tool; **description + で**: て-form of だ.",
         "**Noun + が**: subject; **complete clause + が**: but.",
         "**に**: target; in lists, \"and\"; **それに**: besides.",
         "Check what comes before the kana and how the phrase ends."
@@ -242,15 +317,16 @@
     },
     {
       "type": "choice",
-      "instruction": "True or false?",
-      "prompt": "The connector が can come right after a plain noun.",
+      "instruction": "Which sentence uses が to mean \"but\"?",
+      "prompt": "",
       "options": [
-        "True",
-        "False"
+        "雨が降っている。",
+        "私が行きます。",
+        "高いが、おいしい。",
+        "誰が来ますか。"
       ],
-      "answer": 1,
-      "note": "A connector needs a complete clause before it.",
-      "en": "The connector が follows a complete clause, not a plain noun.",
+      "answer": 2,
+      "note": "\"But\" follows a full clause; the others follow a noun.",
       "id": 32
     },
     {

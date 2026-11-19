@@ -6,62 +6,30 @@
   "title": "わけ: the underlying reasoning",
   "summary": "わけ is a noun for the reasoning link between facts: そんなわけで (for that reason), わけが分からない, わけではない and わけがない.",
   "video": "https://www.youtube.com/watch?v=iU79wvDyDfk",
-  "related": [
-    306,
-    307,
-    308
-  ],
+  "related": [306, 307, 308],
   "blocks": [
-    {
-      "type": "text",
-      "text": "Dictionaries list a pile of meanings for **わけ**: reason, cause, conclusion, circumstances. The course unites them: わけ is a **noun** for the **reasoning link** between facts, the logic that joins a cause to a result in either direction. It is related to 分ける and 分かる: to divide, to break down so that it becomes clear."
-    },
-    {
-      "type": "heading",
-      "text": "Giving the reason"
-    },
-    {
-      "type": "example",
-      "jp": "そんなわけで、宿題を忘れました。",
-      "en": "For that reason, I forgot my homework."
-    },
-    {
-      "type": "example",
-      "jp": "毎日練習したのだから、上手なわけだ。",
-      "en": "He practiced every day, so no wonder he's good."
-    },
-    {
-      "type": "heading",
-      "text": "Denying the reasoning"
-    },
-    {
-      "type": "text",
-      "text": "**わけが分からない** means \"the reasoning doesn't compute\": it is nonsense. **〜わけではない** says that this conclusion cannot be drawn: \"it's not that...\". **〜わけがない** says that no such reasoning exists at all, so it cannot be the case: \"there's no way...\"."
-    },
-    {
-      "type": "example",
-      "jp": "お金が足りないわけではない。",
-      "en": "It's not that I'm short of money."
-    },
-    {
-      "type": "example",
-      "jp": "さくらが嘘をつくわけがない。",
-      "en": "There's no way Sakura would tell a lie."
-    },
-    {
-      "type": "example",
-      "jp": "この説明ではわけが分からない。",
-      "en": "I can't make sense of this explanation."
-    },
-    {
-      "type": "keypoints",
-      "items": [
-        "**わけ**: the reasoning or logic linking facts (a noun).",
-        "**そんなわけで**: for that reason.",
-        "**〜わけではない**: it doesn't follow that...",
-        "**〜わけがない**: there is no reasoning for it, so it can't be."
-      ]
-    }
+    {"type": "text", "text": "Dictionaries list a pile of meanings for **わけ**: reason, cause, conclusion, circumstances. The course unites them: わけ is a **noun** for the **reasoning link** between facts, the logic that joins a cause to a result in either direction. It is related to 分ける and 分かる: to divide, to break down so that it becomes clear."},
+    {"type": "heading", "text": "Giving the reason"},
+    {"type": "text", "text": "The reasoning link works in both directions. \"Sakura was out in the rain, so she's wet\" goes from cause to result. \"Sakura is wet, so she must have been out in the rain\" goes from result back to cause. **わけ** is that link, and it is a noun, so a describer clause can sit in front of it."},
+    {"type": "diagram", "cars": [{"text": "毎日練習した", "role": "white", "label": "describes わけ"}, {"text": "わけだ", "role": "engine", "label": "that's the reasoning"}], "text": "毎日練習した | わけだ: わけ is a noun, and だ makes it the engine."},
+    {"type": "text", "text": "**わけだ** says \"that's the reasoning: it follows\", so it often means \"no wonder\"."},
+    {"type": "example", "jp": "毎日練習したのだから、上手なわけだ。", "en": "He practiced every day, so no wonder he's good."},
+    {"type": "text", "text": "It is also what you say when a mystery clicks into place. A detective who has just solved the case says that it was that reasoning all along."},
+    {"type": "example", "jp": "そうか、そういうわけだったのか。", "en": "I see, so that's how it was!"},
+    {"type": "example", "jp": "そんなわけで、宿題を忘れました。", "en": "For that reason, I forgot my homework."},
+    {"type": "heading", "text": "Denying the reasoning"},
+    {"type": "text", "text": "**わけが分からない** means \"the reasoning doesn't compute\": it is nonsense."},
+    {"type": "example", "jp": "この説明ではわけが分からない。", "en": "I can't make sense of this explanation."},
+    {"type": "text", "text": "The next two are built from the same pieces as lesson 7. **〜わけではない** (ではない, \"isn't that\") says that this conclusion cannot be drawn: \"it's not that...\". **〜わけがない** (がない, \"doesn't exist\") says that no such reasoning exists at all, so it cannot be the case: \"there's no way...\"."},
+    {"type": "example", "jp": "お金が足りないわけではない。", "en": "It's not that I'm short of money."},
+    {"type": "text", "text": "わけではない does not deny the fact; it only denies the reasoning. With **〜からといって** (\"just because\"), the idea is easy to see:"},
+    {"type": "example", "jp": "安いからといって、いつも買うわけではない。", "en": "Just because it's cheap, it doesn't mean I always buy it."},
+    {"type": "example", "jp": "さくらが嘘をつくわけがない。", "en": "There's no way Sakura would tell a lie."},
+    {"type": "text", "text": "わけがない can also mean \"there's no reason to\". And **わけない** on its own (with no が) means \"easy, a piece of cake\". Context tells you which one is meant."},
+    {"type": "example", "jp": "こんな小さい店に、そんなにお金が要るわけがない。", "en": "There is no reason such a small shop would need that much money."},
+    {"type": "example", "jp": "ひらがなを読むのは、わけない。", "en": "Reading hiragana is a piece of cake."},
+    {"type": "table", "rows": [["Phrase", "Literally", "Meaning"], ["わけだ", "that's the reasoning", "no wonder; so that's why"], ["わけが分からない", "the reasoning doesn't compute", "it makes no sense"], ["わけではない", "it isn't that reasoning", "it's not that..."], ["わけがない", "no reasoning exists", "there's no way"], ["わけない", "no reasoning needed", "easy, a piece of cake"]]},
+    {"type": "keypoints", "items": ["**わけ**: the reasoning or logic linking facts (a noun).", "**そんなわけで**: for that reason.", "**〜わけではない**: it doesn't follow that...", "**〜わけがない**: there is no reasoning for it, so it can't be; **わけない**: easy."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Which sentence says \"It's not that I dislike cats\"?", "prompt": "", "options": ["猫が嫌いなわけがない。", "猫が嫌いなわけではない。", "猫が嫌いなわけだ。", "猫が嫌いなわけで。"], "answer": 1, "note": "〜わけではない: that conclusion cannot be drawn."},
@@ -85,6 +53,8 @@
     {"id": 119, "type": "choice", "instruction": "Fill the gap", "prompt": "そういう＿＿で、今日は行けません。", "options": ["こと", "もの", "とき", "わけ"], "answer": 3, "en": "For that reason, I can't go today.", "note": "そういうわけで: for that reason."},
     {"id": 120, "type": "choice", "instruction": "What does わけが分からない mean?", "prompt": "", "options": ["I know the reason", "I am splitting it", "It doesn't compute; it's nonsense", "I don't want it"], "answer": 2, "note": "The reasoning does not add up."},
     {"id": 121, "type": "choice", "instruction": "True or false? 〜わけがない means \"it is not necessarily so, but it is possible\".", "prompt": "", "options": ["True", "False"], "answer": 1, "note": "It means there is no way it can be."},
-    {"id": 122, "type": "choice", "instruction": "Which sentence says \"It's not that I'm busy\"?", "prompt": "", "options": ["忙しいわけがない。", "忙しいわけで。", "忙しいわけだ。", "忙しいわけではない。"], "answer": 3, "note": "わけではない denies the conclusion."}
+    {"id": 122, "type": "choice", "instruction": "Which sentence says \"It's not that I'm busy\"?", "prompt": "", "options": ["忙しいわけがない。", "忙しいわけで。", "忙しいわけだ。", "忙しいわけではない。"], "answer": 3, "note": "わけではない denies the conclusion."},
+    {"id": 123, "type": "choice", "instruction": "What does わけない mean here?", "prompt": "漢字を読むのは、わけない。", "options": ["It is easy", "It is impossible", "It is a mystery", "It is forbidden"], "answer": 0, "en": "Reading kanji is a piece of cake.", "note": "わけない (with no が) means easy; context decides."},
+    {"id": 124, "type": "choice", "instruction": "Which sentence means \"Just because it's expensive doesn't mean it's good\"?", "prompt": "", "options": ["高いからといって、いいわけではない。", "高いからといって、いいわけがない。", "高いから、いいわけだ。", "高いけど、いいわけで。"], "answer": 0, "note": "〜わけではない denies the conclusion, not the fact."}
   ]
 }

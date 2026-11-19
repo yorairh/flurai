@@ -11,25 +11,20 @@
     {"type": "text", "text": "Japanese has two structures at once. The **logical** one (carriage and engine) is ruled by **が**. The **non-logical** one (topic and comment) is ruled by **は**. A sentence always has a が carriage, and in the same way it always has a **は topic**, even when you cannot see it."},
     {"type": "heading", "text": "What a topic is"},
     {"type": "text", "text": "A topic is what the conversation is currently about. English tracks it with pronouns: \"I had a ball. I dropped it. It rolled away. Sakura picked it up.\" The ball is sometimes an object, sometimes a subject, so what is tracked is not the subject but the topic. Japanese just tracks it with は, or leaves it out as a zero."},
-    {"type": "diagram", "cars": [
-      {"text": "Øは", "role": "topic", "label": "invisible topic"},
-      {"text": "コーヒーが", "role": "carriage"},
-      {"text": "好きだ", "role": "engine"}
-    ], "text": "（私は）コーヒーが好きだ。 As for me, coffee is likable."},
-    {"type": "text", "text": "Sentences like コーヒーが好きだ, 頭が痛い, お腹が空いた and クレープが食べたい are complete logical clauses where the carriage is not the person. To be grammatically complete they also need an invisible topic: \"in relation to me, coffee is likable\". Usually the topic is \"I\", but not always. Seeing a tall person, you say 背が高いね, with an invisible topic pointing to that person."},
+    {"type": "text", "text": "Sentences like コーヒーが好きだ, 頭が痛い, お腹が空いた and クレープが食べたい are complete logical clauses where the carriage is not the person. To be grammatically complete they also need an invisible topic: \"in relation to me, coffee is likable\". Usually the topic is \"I\", but not always."},
+    {"type": "diagram", "cars": [{"text": "(私は)", "role": "topic", "label": "unseen topic: me"}, {"text": "コーヒーが", "role": "carriage"}, {"text": "好きだ", "role": "engine"}], "text": "（私は）コーヒーが好きだ。 As for me, coffee is likable."},
+    {"type": "text", "text": "Seeing a tall person, you can say the sentence below with an invisible topic that points to that person, not to yourself."},
+    {"type": "example", "jp": "背が高いね。", "en": "(You) are tall, aren't you! (The unseen topic is the person you are looking at.)"},
     {"type": "heading", "text": "The comment is a full clause"},
     {"type": "text", "text": "は can never mark the carriage or the engine, so a topic sentence has only **two** parts: the topic and the comment. Both elements of the logical clause must be **inside the comment**. So the comment is always a **complete logical clause**. This is not a random rule, but a consequence of the structure."},
-    {"type": "heading", "text": "は or が is really a choice of what to show"},
-    {"type": "text", "text": "People ask \"は or が?\" as if both did the same job. They do not. Since the topic and the carriage are both always present, you are really deciding which to make visible: neither (アメリカ人です), the topic (私はアメリカ人です), or the carriage (私がアメリカ人です). Each has a slightly different feeling."},
+    {"type": "diagram", "cars": [{"text": "象は", "role": "topic"}, {"text": "鼻が", "role": "carriage", "label": "inside the comment"}, {"text": "長い", "role": "engine", "label": "inside the comment"}], "text": "象は鼻が長い。 The comment 鼻が長い is a full clause: it has its own carriage and engine."},
     {"type": "example", "jp": "象は鼻が長い。", "en": "As for elephants, the nose is long."},
     {"type": "example", "jp": "この町は夏が暑い。", "en": "In this town, summer is hot."},
     {"type": "example", "jp": "私は頭が痛い。", "en": "As for me, the head hurts."},
-    {"type": "keypoints", "items": [
-      "Two structures: **carriage + engine** (が) and **topic + comment** (は).",
-      "A topic can be invisible, just like a zero carriage.",
-      "The **comment** is always a full logical clause with its own carriage and engine.",
-      "は and が are not alternatives; they show different parts of the sentence."
-    ]}
+    {"type": "heading", "text": "は or が is really a choice of what to show"},
+    {"type": "text", "text": "People ask \"は or が?\" as if both did the same job. They do not. Since the topic and the carriage are both always present, you are really deciding which to make visible. Each choice has a slightly different feeling."},
+    {"type": "table", "rows": [["What is visible", "Sentence", "Feel"], ["Neither", "アメリカ人です。", "Plain and neutral"], ["The topic (は)", "私はアメリカ人です。", "As for me, I am American (maybe others are not)"], ["The carriage (が)", "私がアメリカ人です。", "I am the one who is American"]]},
+    {"type": "keypoints", "items": ["Two structures: **carriage + engine** (が) and **topic + comment** (は).", "A topic can be invisible, just like a zero carriage.", "The **comment** is always a full logical clause with its own carriage and engine.", "は and が are not alternatives; they show different parts of the sentence."]}
   ],
   "questions": [
     {"id": 101, "type": "choice", "instruction": "Which particle rules the topic-and-comment structure?", "prompt": "", "options": ["が", "を", "は", "に"], "answer": 2, "note": "が rules carriage and engine; は rules topic and comment."},

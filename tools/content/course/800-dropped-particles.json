@@ -14,19 +14,40 @@
   "blocks": [
     {
       "type": "text",
-      "text": "Real, casual Japanese seems to leave out half of what is said. It is less of a problem than it looks, because the omissions are of a few kinds. Some are **legal** in every style, like the zero pronoun: (zero が)疲れた is correct and always means I am tired. Others are **casual shortcuts** that would be wrong in formal writing."
+      "text": "Real, casual Japanese seems to leave out half of what is said. It is less of a problem than it looks, because the omissions are of a few kinds. Some are **legal** in every style. Others are **casual shortcuts** that would be wrong in formal writing."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Kind",
+          "What goes missing",
+          "Example"
+        ],
+        [
+          "Legal",
+          "The zero pronoun",
+          "疲れた"
+        ],
+        [
+          "Casual",
+          "Parts of words",
+          "している → してる"
+        ],
+        [
+          "Casual",
+          "Markers: が, を, は, だ",
+          "私、学生"
+        ]
+      ]
     },
     {
       "type": "heading",
-      "text": "Three kinds of casual omission"
+      "text": "Legal omission: the zero pronoun"
     },
     {
       "type": "text",
-      "text": "First, **parts of words** get shortened: している → してる, しておく → しとく, 分からない → 分かんない, つまらない → つまんない. These are as regular as \"shouldn't\" in English."
-    },
-    {
-      "type": "text",
-      "text": "Second, the **markers attached to nouns** can disappear when the role is clear: **が, を, は** and the copula **だ**. Third, the zero pronoun and other things the listener can fill in."
+      "text": "You already know the invisible carriage. When the が-subject is clear, you can leave it out in any style, even in the most formal writing. English does this too, in \"the night (that) we met\": the \"that\" is optional even in formal English."
     },
     {
       "type": "example",
@@ -34,19 +55,67 @@
       "en": "(I'm) tired."
     },
     {
-      "type": "example",
-      "jp": "ご飯、食べた？",
-      "en": "Did you eat?"
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "Ø",
+          "role": "zero",
+          "label": "I"
+        },
+        {
+          "text": "疲れた",
+          "role": "engine"
+        }
+      ],
+      "text": "疲れた。 The invisible carriage is always legal."
+    },
+    {
+      "type": "heading",
+      "text": "Casual omission 1: parts of words"
+    },
+    {
+      "type": "text",
+      "text": "Some words get shorter in casual speech. These are as regular as \"shouldn't\" in English, and you will hear them all the time."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Full form",
+          "Casual",
+          "Pattern"
+        ],
+        [
+          "している",
+          "してる",
+          "い drops out"
+        ],
+        [
+          "しておく",
+          "しとく",
+          "ておく → とく"
+        ],
+        [
+          "分からない",
+          "分かんない",
+          "らない → んない"
+        ],
+        [
+          "つまらない",
+          "つまんない",
+          "らない → んない"
+        ],
+        [
+          "してしまう",
+          "しちゃう",
+          "てしまう → ちゃう"
+        ]
+      ]
     },
     {
       "type": "example",
-      "jp": "私、学生。",
-      "en": "I'm a student. (は and だ dropped)"
-    },
-    {
-      "type": "example",
-      "jp": "もう宿題やってる？",
-      "en": "Are you doing your homework already?"
+      "jp": "この本、つまんない。",
+      "en": "This book is boring."
     },
     {
       "type": "example",
@@ -55,8 +124,50 @@
     },
     {
       "type": "example",
-      "jp": "この本、つまんない。",
-      "en": "This book is boring."
+      "jp": "もう宿題やってる？",
+      "en": "Are you doing your homework already?"
+    },
+    {
+      "type": "heading",
+      "text": "Casual omission 2: dropped markers"
+    },
+    {
+      "type": "text",
+      "text": "The markers attached to nouns, **が, を, は**, can disappear when the role is clear from context. Short pauses (、) take their place."
+    },
+    {
+      "type": "example",
+      "jp": "ご飯、食べた？",
+      "en": "Did you eat?"
+    },
+    {
+      "type": "text",
+      "text": "The copula だ drops most easily of all. A sentence can only end in a verb, an adjective, or a noun plus the copula, so a bare noun at the end can only mean \"noun + だ\"."
+    },
+    {
+      "type": "example",
+      "jp": "私、学生。",
+      "en": "I'm a student. (は and だ dropped)"
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "私",
+          "role": "topic",
+          "label": "は dropped"
+        },
+        {
+          "text": "Ø",
+          "role": "zero"
+        },
+        {
+          "text": "学生",
+          "role": "engine",
+          "label": "だ dropped"
+        }
+      ],
+      "text": "私、学生。 Full form: 私は学生だ。"
     },
     {
       "type": "keypoints",
@@ -80,15 +191,17 @@
     {"id": 21, "type": "choice", "instruction": "Where do casual shortcuts fit?", "prompt": "", "options": ["A legal document", "A formal essay", "Talking with a friend", "A newspaper article"], "answer": 2, "note": "They are casual, so friends and family."},
     {"id": 22, "type": "choice", "instruction": "Which is the full form of 見てる?", "prompt": "", "options": ["見ている", "見ておく", "見られる", "見ない"], "answer": 0, "note": "てる is ている."},
     {"id": 23, "type": "choice", "instruction": "Which is the full form of 買っとく?", "prompt": "", "options": ["買っている", "買ってある", "買わない", "買っておく"], "answer": 3, "note": "とく is ておく."},
-    {"id": 24, "type": "tap", "instruction": "Tap the shortened word", "prompt": "", "options": ["あの", "映画", "つまんない"], "answer": 2, "note": "つまんない is つまらない shortened.", "en": "That movie is boring."},
-    {"id": 25, "type": "tap", "instruction": "Tap the shortened verb", "prompt": "", "options": ["雨だから", "傘", "持ってく"], "answer": 2, "note": "持ってく is 持っていく shortened.", "en": "It's raining, so are you taking an umbrella?"},
+    {"id": 24, "type": "tap", "instruction": "Tap the shortened verb", "prompt": "", "options": ["弟は", "もう", "寝てる", "から"], "answer": 2, "note": "寝てる is 寝ている shortened.", "en": "Because my little brother is already asleep."},
+    {"id": 25, "type": "tap", "instruction": "Tap the shortened verb", "prompt": "", "options": ["今日は", "雨だから", "傘、", "持ってく？"], "answer": 3, "note": "持ってく is 持っていく shortened.", "en": "It's raining today, so are you taking an umbrella?"},
     {"id": 26, "type": "order", "instruction": "Build the sentence", "prompt": "I'll leave the light on.", "options": ["私が", "電気を", "つけとく"], "note": "つけとく is つけておく: do it ahead and leave it.", "en": "I'll leave the light on.", "alt": [["電気を", "私が", "つけとく"]]},
     {"id": 27, "type": "order", "instruction": "Build the sentence", "prompt": "Mom, are you asleep already?", "options": ["お母さん、", "もう", "寝てる？"], "note": "寝てる is 寝ている, casual.", "en": "Mom, are you asleep already?"},
     {"id": 28, "type": "choice", "instruction": "Which sentence leaves out \"I\"?", "prompt": "", "options": ["寒くなった。", "私は寒くなった。", "私が寒い。", "彼は寒くなった。"], "answer": 0, "note": "The zero pronoun: nobody says 私 when it is clear."},
     {"id": 29, "type": "choice", "instruction": "Which is NOT a regular shortening?", "prompt": "", "options": ["している → してる", "しておく → しとく", "分からない → 分かんない", "している → しない"], "answer": 3, "note": "しない is a different word; it does not shorten している."},
     {"id": 30, "type": "choice", "instruction": "Pick the casual shortcut", "prompt": "この問題、全然分か＿＿。", "options": ["らない", "んない", "とく", "てる"], "answer": 1, "note": "分かんない is the casual 分からない.", "en": "I don't understand this problem at all."},
     {"id": 31, "type": "choice", "instruction": "Which can drop in the question?", "prompt": "どこ行くの？", "options": ["へ or に", "を", "が", "Nothing"], "answer": 0, "note": "The direction particle is understood from 行く.", "en": "Where are you going?"},
-    {"id": 32, "type": "choice", "instruction": "True or false?", "prompt": "Omissions are fine because the listener can fill in the gap.", "options": ["True", "False"], "answer": 0, "note": "Dropping is a legal shortcut when the role is clear."},
-    {"id": 33, "type": "choice", "instruction": "Why may が, を, は and だ vanish?", "prompt": "", "options": ["When the role is clear from context", "When the sentence is long", "Only in questions", "Never"], "answer": 0, "note": "The listener can fill the gap."}
+    {"id": 32, "type": "choice", "instruction": "Which omission is legal even in formal writing?", "prompt": "", "options": ["The zero pronoun in 疲れた", "しとく for しておく", "分かんない for 分からない", "てる for ている"], "answer": 0, "note": "Zero pronouns are always legal; the others are casual shortcuts."},
+    {"id": 33, "type": "choice", "instruction": "Why may が, を, は and だ vanish?", "prompt": "", "options": ["When the role is clear from context", "When the sentence is long", "Only in questions", "Never"], "answer": 0, "note": "The listener can fill the gap."},
+    {"id": 35, "type": "choice", "instruction": "Why can the bare noun in 私、学生。 mean 学生だ?", "prompt": "", "options": ["A sentence can only end in a verb, an adjective, or noun + copula", "学生 is a verb", "は is never dropped", "私 is the engine"], "answer": 0, "note": "A noun at the end can only mean noun + だ."},
+    {"id": 36, "type": "choice", "instruction": "Fill the gap", "prompt": "パン、もう食べ＿＿？", "options": ["てる", "とく", "んない", "ちゃ"], "answer": 0, "note": "てる is the casual ている: Are you eating it already?", "en": "Are you already eating the bread?"}
   ]
 }

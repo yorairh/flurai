@@ -11,33 +11,25 @@
     {"type": "text", "text": "Japanese has no true passive voice (the receptive れる / られる only receives an action). But Japanese does have a **passive outlook**. The first two verbs, **ある** (be) and **する** (do), come as a pair, and Japanese tends to put being before doing, while English is more activist. As a result many Japanese verbs depict a **state** and treat it grammatically as an **action done by the thing itself**."},
     {"type": "heading", "text": "Verbs that look like English \"is\" or a passive"},
     {"type": "text", "text": "本が分かる is usually rendered \"I understand the book\". But the carriage is **本**. It is the book that does the verb. The nearest English is \"the book is understandable (to me)\", and the exact structure is \"the book does understandable\". 日本語ができる is the same: \"Japanese does possible (to me)\", not \"I do Japanese\". This also applies to every potential: 本が読める."},
-    {"type": "table", "rows": [
-      ["Verb", "What English must say", "What Japanese says"],
-      ["乱れる", "to be scattered, disordered", "the thing does disorder"],
-      ["欠ける", "to be chipped, to be lacking", "the thing does chipped"],
-      ["映る", "to be reflected, to be shown", "the thing does reflection"],
-      ["濡れる", "to become wet", "the thing does wet"],
-      ["濁る", "to become cloudy", "the thing does cloudy"]
-    ]},
+    {"type": "diagram", "cars": [{"text": "(私は)", "role": "topic", "label": "unseen topic: me"}, {"text": "本が", "role": "carriage", "label": "the book does it"}, {"text": "分かる", "role": "engine", "label": "does understandable"}], "text": "（私は）本が分かる。 As for me, the book does understandable."},
+    {"type": "example", "jp": "私は英語が少しできる。", "en": "I can do a little English. (English does possible to me)"},
+    {"type": "table", "rows": [["Verb", "What English must say", "What Japanese says"], ["乱れる", "to be scattered, disordered", "the thing does disorder"], ["欠ける", "to be chipped, to be lacking", "the thing does chipped"], ["映る", "to be reflected, to be shown", "the thing does reflection"], ["濡れる", "to become wet", "the thing does wet"], ["濁る", "to become cloudy", "the thing does cloudy"]]},
+    {"type": "text", "text": "Two of these verbs deserve a sentence each, because English hides what the thing itself is doing."},
+    {"type": "example", "jp": "風で髪が乱れた。", "en": "My hair got messed up by the wind. (The hair did disorder.)"},
+    {"type": "example", "jp": "このお皿は少し欠けている。", "en": "This plate is a little chipped. (The plate keeps doing chipped.)"},
     {"type": "text", "text": "English can only use \"is\" or the passive for these, so translators do too. That is fine for telling someone what was said, but not for building your own sentences. If you look for a passive form you will go wrong. Say it as an action by the thing itself."},
     {"type": "heading", "text": "States of becoming"},
     {"type": "text", "text": "濡れる, \"become wet\", is a change. Put it into 〜ている and you get the state it leaves: 濡れている, \"is wet\", literally \"keeps doing wet\". 濁っている is \"is cloudy\". Remember the verb is self-move: nothing else is acting on the thing."},
     {"type": "example", "jp": "傘がないので、服が濡れた。", "en": "Without an umbrella, my clothes got wet."},
     {"type": "example", "jp": "窓に月が映っている。", "en": "The moon is reflected in the window."},
     {"type": "example", "jp": "この川は少し濁っている。", "en": "This river is a little cloudy."},
-    {"type": "example", "jp": "私は英語が少しできる。", "en": "I can do a little English. (English does possible to me)"},
-    {"type": "keypoints", "items": [
-      "Japanese has **no passive voice**; many verbs just describe a state as an action of the thing itself.",
-      "**本が分かる / 日本語ができる**: the が noun is the carriage.",
-      "**乱れる, 欠ける, 映る, 濡れる, 濁る** are self-move verbs of state or change.",
-      "**〜ている** turns a change into the state that follows."
-    ]}
+    {"type": "keypoints", "items": ["Japanese has **no passive voice**; many verbs just describe a state as an action of the thing itself.", "**本が分かる / 日本語ができる**: the が noun is the carriage.", "**乱れる, 欠ける, 映る, 濡れる, 濁る** are self-move verbs of state or change.", "**〜ている** turns a change into the state that follows."]}
   ],
   "questions": [
     {"id": 1, "type": "choice", "instruction": "In 本が分かる, which noun is the carriage?", "prompt": "", "options": ["本", "I (the speaker)", "分かる", "Nobody"], "answer": 0, "note": "が marks the carriage: the book does understandable."},
     {"id": 2, "type": "choice", "instruction": "True or false?", "prompt": "Japanese verbs like 乱れる are passives.", "options": ["True", "False"], "answer": 1, "note": "They are active verbs of state or change done by the thing itself."},
     {"id": 8, "type": "choice", "instruction": "Why do translators use \"is\" or the passive for these verbs?", "prompt": "", "options": ["English has no natural active form for them", "Japanese grammar requires it", "They are always honorific", "They are always past tense"], "answer": 0, "note": "That is a translation need, not Japanese structure."},
-    {"id": 10, "type": "choice", "instruction": "Which pair is the \"Adam and Eve\" of Japanese verbs?", "prompt": "", "options": ["ある and する", "行く and 来る", "見る and 聞く", "あげる and くれる"], "answer": 0, "note": "Be and do."},
+    {"id": 10, "type": "choice", "instruction": "Which noun is the carriage?", "prompt": "髪が乱れている。", "options": ["私", "風", "髪", "乱れる"], "answer": 2, "note": "が marks the hair: it does the disorder itself.", "en": "The hair is messy."},
     {"id": 101, "type": "choice", "instruction": "Which noun is the carriage?", "prompt": "道が曲がっている。", "options": ["私", "誰か", "道", "曲がる"], "answer": 2, "en": "The road bends.", "note": "が marks the road: it does the bending itself."},
     {"id": 102, "type": "choice", "instruction": "Fill the gap", "prompt": "かばんの中＿＿濡れている。", "options": ["を", "が", "に", "で"], "answer": 1, "en": "The inside of the bag is wet.", "note": "濡れる is self-move: the thing itself is the carriage."},
     {"id": 103, "type": "choice", "instruction": "Fill the gap: \"The light is on.\"", "prompt": "電気が＿＿。", "options": ["つけている", "つかせる", "ついている", "つけられる"], "answer": 2, "note": "ついている: the light does being-on by itself."},
