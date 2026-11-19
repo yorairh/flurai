@@ -1,175 +1,208 @@
 {
- "id": 810,
- "number": "81",
- "kind": "lesson",
- "jlpt": 4,
- "title": "The global principle of word forms",
- "summary": "Only verbs, adjectives and the copula change, they change only their last kana, and they always do it by the same stem-and-helper system.",
- "video": "https://www.youtube.com/watch?v=uoj5l8-Ppws",
- "related": [
-  578,
-  530,
-  534
- ],
- "blocks": [
-  {
-   "type": "text",
-   "text": "Until now you met the stem system one piece at a time. This lesson puts the whole picture in one place. Japanese has two kinds of words: **static words**, which never change (nearly all nouns), and **active words**, which can be an engine: verbs, adjectives and the **copula**. Every active word follows the same two rules."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "**Only the last kana changes.** Everything before it is as fixed as a noun: the う-row kana of a verb, the い of an adjective, the だ of the copula.",
-    "**Every change is a stem with a helper.** The て-form and the past are not magic conjugations: a stem is made, then a helper (-て, -た, -ない, -ば, -そう ...) is attached."
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "Verbs have two stem systems"
-  },
-  {
-   "type": "text",
-   "text": "You already know the first one (あ, い, う, え, お stems). The second is the **て-stem**, which is used for -て, -た and also -たら and -たり. The last kana decides the stem:"
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Ending",
-     "Becomes",
-     "Example"
-    ],
-    [
-     "う, つ, る",
-     "っ",
-     "買う → 買って"
-    ],
-    [
-     "ぬ, ぶ, む",
-     "ん (then で)",
-     "飲む → 飲んで"
-    ],
-    [
-     "く",
-     "い",
-     "書く → 書いて"
-    ],
-    [
-     "ぐ",
-     "い (then で)",
-     "泳ぐ → 泳いで"
-    ],
-    [
-     "す",
-     "し",
-     "話す → 話して"
-    ]
-   ]
-  },
-  {
-   "type": "heading",
-   "text": "Adjectives have four stems"
-  },
-  {
-   "type": "text",
-   "text": "An adjective drops its い or turns it into か, け or く. Each stem takes its own helpers."
-  },
-  {
-   "type": "table",
-   "rows": [
-    [
-     "Stem",
-     "Used for",
-     "Example"
-    ],
-    [
-     "く",
-     "ない, て, and alone as an adverb",
-     "高く, 高くない, 高くて"
-    ],
-    [
-     "かっ",
-     "past -た",
-     "高かった"
-    ],
-    [
-     "けれ",
-     "conditional -ば",
-     "高ければ"
-    ],
-    [
-     "(drop い)",
-     "そう, がる",
-     "高そう, 欲しがる"
-    ]
-   ]
-  },
-  {
-   "type": "example",
-   "jp": "速く走る。",
-   "en": "(I) run fast. (the く-stem as an adverb)"
-  },
-  {
-   "type": "example",
-   "jp": "昨日の映画は面白かった。",
-   "en": "Yesterday's movie was interesting."
-  },
-  {
-   "type": "example",
-   "jp": "安ければ買う。",
-   "en": "If it is cheap, (I) will buy it."
-  },
-  {
-   "type": "example",
-   "jp": "弟はおもちゃを欲しがる。",
-   "en": "My little brother shows signs of wanting a toy."
-  },
-  {
-   "type": "heading",
-   "text": "The copula changes too"
-  },
-  {
-   "type": "text",
-   "text": "The copula だ is one kana, so it borrows a rider: だっ + た = だった, だろ + う = だろう, and its て-form is で. It is less regular because it has no relatives to be regular with."
-  },
-  {
-   "type": "diagram",
-   "cars": [
+  "id": 810,
+  "number": "81",
+  "kind": "lesson",
+  "jlpt": 4,
+  "title": "The global principle of word forms",
+  "summary": "Only verbs, adjectives and the copula change, they change only their last kana, and they always do it by the same stem-and-helper system.",
+  "video": "https://www.youtube.com/watch?v=uoj5l8-Ppws",
+  "related": [
+    578,
+    530,
+    534
+  ],
+  "blocks": [
     {
-     "text": "今日は",
-     "role": "topic"
+      "type": "text",
+      "text": "Until now you met the stem system one piece at a time. This lesson puts the whole picture in one place. Japanese has two kinds of words: **static words**, which never change (nearly all nouns), and **active words**, which can be an engine: verbs, adjectives and the **copula**. Every active word follows the same two rules."
     },
     {
-     "text": "休み",
-     "role": "carriage"
+      "type": "text",
+      "text": "Here is the whole system in two rules."
     },
     {
-     "text": "だっ",
-     "role": "plain",
-     "label": "stem"
+      "type": "keypoints",
+      "items": [
+        "**Only the last kana changes.** Everything before it is as fixed as a noun: the う-row kana of a verb, the い of an adjective, the だ of the copula.",
+        "**Every change is a stem with a helper.** The て-form and the past are not magic conjugations: a stem is made, then a helper (-て, -た, -ない, -ば, -そう ...) is attached."
+      ]
     },
     {
-     "text": "た",
-     "role": "engine",
-     "label": "helper"
+      "type": "heading",
+      "text": "Verbs have two stem systems"
+    },
+    {
+      "type": "text",
+      "text": "You already know the first one (あ, い, う, え, お stems). The second is the **て-stem**, which is used for -て, -た and also -たら and -たり. The last kana decides the stem:"
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Ending",
+          "Becomes",
+          "Example"
+        ],
+        [
+          "う, つ, る",
+          "っ",
+          "買う → 買って"
+        ],
+        [
+          "ぬ, ぶ, む",
+          "ん (then で)",
+          "飲む → 飲んで"
+        ],
+        [
+          "く",
+          "い",
+          "書く → 書いて"
+        ],
+        [
+          "ぐ",
+          "い (then で)",
+          "泳ぐ → 泳いで"
+        ],
+        [
+          "す",
+          "し",
+          "話す → 話して"
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Adjectives have four stems"
+    },
+    {
+      "type": "text",
+      "text": "An adjective drops its い or turns it into か, け or く. Each stem takes its own helpers."
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Stem",
+          "Used for",
+          "Example"
+        ],
+        [
+          "く",
+          "ない, て, and alone as an adverb",
+          "高く, 高くない, 高くて"
+        ],
+        [
+          "かっ",
+          "past -た",
+          "高かった"
+        ],
+        [
+          "けれ",
+          "conditional -ば",
+          "高ければ"
+        ],
+        [
+          "(drop い)",
+          "そう, がる",
+          "高そう, 欲しがる"
+        ]
+      ]
+    },
+    {
+      "type": "example",
+      "jp": "速く走る。",
+      "en": "(I) run fast. (the く-stem as an adverb)"
+    },
+    {
+      "type": "example",
+      "jp": "昨日の映画は面白かった。",
+      "en": "Yesterday's movie was interesting."
+    },
+    {
+      "type": "example",
+      "jp": "安ければ買う。",
+      "en": "If it is cheap, (I) will buy it."
+    },
+    {
+      "type": "example",
+      "jp": "弟はおもちゃを欲しがる。",
+      "en": "My little brother shows signs of wanting a toy."
+    },
+    {
+      "type": "heading",
+      "text": "The copula changes too"
+    },
+    {
+      "type": "text",
+      "text": "The copula だ is one kana, so it borrows a rider: だっ + た = だった, だろ + う = だろう, and its て-form is で. It is less regular because it has no relatives to be regular with."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "今日は",
+          "role": "topic"
+        },
+        {
+          "text": "Ø",
+          "role": "zero",
+          "label": "it"
+        },
+        {
+          "text": "休みだった",
+          "role": "engine",
+          "label": "noun + copula"
+        }
+      ],
+      "text": "今日は休みだった。 Today was a day off. 休み is not the carriage: it is the noun of the engine."
+    },
+    {
+      "type": "text",
+      "text": "Inside that engine the copula follows the same stem-and-helper pattern as every other active word."
+    },
+    {
+      "type": "diagram",
+      "cars": [
+        {
+          "text": "休み",
+          "role": "plain",
+          "label": "noun"
+        },
+        {
+          "text": "だっ",
+          "role": "plain",
+          "label": "stem"
+        },
+        {
+          "text": "た",
+          "role": "plain",
+          "label": "helper"
+        }
+      ],
+      "text": "休み + だっ + た = 休みだった. The pieces of the engine."
+    },
+    {
+      "type": "heading",
+      "text": "Bare stems can stand alone"
+    },
+    {
+      "type": "text",
+      "text": "A stem is a word-part you can use by itself. An い-stem works as a noun (話し, from 話す), an え-stem is a command (lesson 83), and a く-stem works as an adverb (速く). This is why one system explains so much."
+    },
+    {
+      "type": "keypoints",
+      "items": [
+        "Nouns never change; they only take particles.",
+        "Verbs, adjectives and the copula change only their last kana, always by stem plus helper."
+      ]
     }
-   ],
-   "text": "今日は休みだった。 Today was a day off."
-  },
-  {
-   "type": "keypoints",
-   "items": [
-    "Nouns never change; they only take particles.",
-    "Verbs, adjectives and the copula change only their last kana, always by stem plus helper."
-   ]
-  }
- ],
- "questions": [
+  ],
+  "questions": [
     {"id": 14, "type": "choice", "instruction": "Which is the て-form of 待つ?", "prompt": "", "options": ["待いて", "待んで", "待って", "待して"], "answer": 2, "note": "つ becomes っ, then て."},
     {"id": 15, "type": "choice", "instruction": "Which is the て-form of 読む?", "prompt": "", "options": ["読って", "読んで", "読いて", "読して"], "answer": 1, "note": "む becomes ん, then で."},
-    {"id": 16, "type": "choice", "instruction": "Which is the て-form of 歩く?", "prompt": "", "options": ["歩って", "歩んで", "歩して", "歩いて"], "answer": 3, "note": "く becomes い, then て."},
-    {"id": 17, "type": "choice", "instruction": "Which is the て-form of 出す?", "prompt": "", "options": ["出して", "出って", "出んで", "出いて"], "answer": 0, "note": "す becomes し, then て."},
-    {"id": 18, "type": "choice", "instruction": "Which is the て-form of 遊ぶ?", "prompt": "", "options": ["遊って", "遊いで", "遊んで", "遊して"], "answer": 2, "note": "ぶ becomes ん, then で."},
+    {"id": 16, "type": "choice", "instruction": "Which part of this word is the helper?", "prompt": "高かった", "options": ["た", "かっ", "高", "かった"], "answer": 0, "note": "高かっ is the stem; た is the helper.", "en": "It was expensive."},
+    {"id": 17, "type": "choice", "instruction": "Why does 学生 stay the same?", "prompt": "学生だった", "options": ["Nouns never change; only the copula does", "Because it is a verb", "Because it is too long", "Because it ends in い"], "answer": 0, "note": "Static words never change; だった is the changing part.", "en": "(He) was a student."},
+    {"id": 18, "type": "choice", "instruction": "What do you get from だっ + た?", "prompt": "", "options": ["だった", "だた", "でった", "だっで"], "answer": 0, "note": "The copula's stem だっ plus the helper た."},
     {"id": 19, "type": "choice", "instruction": "Pick the past form of 暑い", "prompt": "", "options": ["暑かった", "暑いた", "暑った", "暑くだ"], "answer": 0, "note": "The かっ-stem plus た."},
     {"id": 20, "type": "choice", "instruction": "Pick the ば-form of 寒い", "prompt": "", "options": ["寒いば", "寒くば", "寒かれば", "寒ければ"], "answer": 3, "note": "The けれ-stem plus ば."},
     {"id": 21, "type": "choice", "instruction": "Which is the adverb form of 早い (early, fast)?", "prompt": "", "options": ["早いに", "早く", "早かった", "早けれ"], "answer": 1, "note": "The く-stem works as an adverb."},
@@ -182,10 +215,10 @@
     {"id": 28, "type": "choice", "instruction": "Which endings become ん and then で?", "prompt": "", "options": ["ぬ, ぶ, む", "う, つ, る", "く", "す"], "answer": 0, "note": "ぬ, ぶ and む all give ん + で."},
     {"id": 29, "type": "choice", "instruction": "How many stems does an adjective have?", "prompt": "", "options": ["2", "3", "4", "5"], "answer": 2, "note": "く, かっ, けれ and the dropped-い stem."},
     {"id": 30, "type": "choice", "instruction": "What is the て-form of the copula?", "prompt": "", "options": ["で", "て", "だって", "な"], "answer": 0, "note": "だ borrows で for its て-form."},
-    {"id": 31, "type": "tap", "instruction": "Tap the copula in the past", "prompt": "", "options": ["今日は", "雨", "だった"], "answer": 2, "note": "だっ + た = だった.", "en": "It was rainy today."},
+    {"id": 31, "type": "tap", "instruction": "Tap the copula in the past", "prompt": "", "options": ["昨日は", "雨", "だった", "から"], "answer": 2, "note": "だっ + た = だった.", "en": "Because it was rainy yesterday."},
     {"id": 32, "type": "tap", "instruction": "Tap the adjective in its て-stem", "prompt": "", "options": ["この", "店の", "ケーキは", "安くて", "おいしい"], "answer": 3, "note": "The く-stem plus て: 安くて.", "en": "The cakes at this shop are cheap and delicious."},
     {"id": 33, "type": "order", "instruction": "Build the sentence", "prompt": "If it is hot, I open the window.", "options": ["暑ければ、", "窓を", "あける"], "note": "The けれ-stem plus ば makes the condition.", "en": "If it is hot, I open the window."},
-    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "My younger sister wants a new book.", "options": ["妹は", "新しい", "本を", "欲しがる"], "note": "欲しがる: the dropped-い stem plus がる.", "en": "My younger sister wants a new book.", "alt": [["新しい", "本を", "妹は", "欲しがる"]]},
+    {"id": 34, "type": "order", "instruction": "Build the sentence", "prompt": "My younger sister shows signs of wanting a new book.", "options": ["妹は", "新しい", "本を", "欲しがる"], "note": "欲しがる: the dropped-い stem plus がる means \"shows signs of wanting\".", "en": "My younger sister shows signs of wanting a new book.", "alt": [["新しい", "本を", "妹は", "欲しがる"]]},
     {"id": 35, "type": "order", "instruction": "Build the sentence", "prompt": "I bought bread and drank milk.", "options": ["パンを", "買って、", "牛乳を", "飲んだ"], "note": "て-stem 買って and past 飲んだ.", "en": "I bought bread and drank milk."},
     {"id": 36, "type": "choice", "instruction": "Which sentence is correct?", "prompt": "", "options": ["海で泳んだ", "海で泳いだ", "海で泳した", "海で泳った"], "answer": 1, "note": "ぐ becomes い, then だ."}
   ]
