@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 LESSON_KINDS = ("lesson", "note")
-BLOCK_TYPES = ("heading", "text", "example", "diagram", "keypoints", "table")
+BLOCK_TYPES = ("heading", "text", "example", "diagram", "keypoints", "table", "dialogue")
 CAR_ROLES = ("engine", "carriage", "topic", "zero", "plain", "white", "particle")
 QUESTION_TYPES = ("choice", "tap", "order")
 MIN_QUESTIONS = 20
@@ -56,6 +56,13 @@ def _block_problems(where: str, block: dict) -> list[str]:
                     out.append(f"{where}: a car has no text")
                 if car.get("role", "plain") not in CAR_ROLES:
                     out.append(f"{where}: unknown car role {car.get('role')!r}")
+    if kind == "dialogue":
+        lines = block.get("lines") or []
+        if len(lines) < 2 or len({line.get("who") for line in lines}) < 2:
+            out.append(f"{where}: dialogue needs at least two lines by two speakers")
+        for line in lines:
+            if not (_text(line.get("who")) and _text(line.get("jp")) and _text(line.get("en"))):
+                out.append(f"{where}: a dialogue line needs who, jp and en")
     if kind == "keypoints" and not block.get("items"):
         out.append(f"{where}: keypoints needs items")
     if kind == "table":
@@ -278,6 +285,9 @@ def add_ruby(entries: list[dict], base_markup) -> None:
                 block["ruby"] = markup(block["jp"])
             elif kind in ("text", "heading"):
                 block["ruby"] = markup(block["text"])
+            elif kind == "dialogue":
+                for line in block["lines"]:
+                    line["ruby"] = markup(line["jp"])
             elif kind == "keypoints":
                 block["itemsRuby"] = [markup(item) for item in block["items"]]
             elif kind == "table":

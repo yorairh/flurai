@@ -98,6 +98,7 @@ fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = e
         cells.forEachIndexed { index, cell ->
             val tappable = cell.word != null && onWord != null
             Row(if (tappable) Modifier.clickable { onWord?.invoke(cell.word!!) } else Modifier) {
+                if (cell.lead.isNotEmpty()) RubyCell(cell.lead, null, main, ruby, rubyColor, underline = false)
                 RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable, room = rooms[index], atStart = index == 0)
                 if (cell.tail.isNotEmpty()) RubyCell(cell.tail, null, main, ruby, rubyColor, underline = false)
             }
@@ -109,12 +110,26 @@ fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = e
  * One piece of a sentence on screen that never breaks across lines: a word with kanji and its reading (or a
  * katakana word, or one character) and its [tail], the kana and closing punctuation that stay with it.
  */
-internal class RubyCellData(val text: String, val ruby: String?, val word: WordEntity?, val tail: String = "")
+internal data class RubyCellData(val text: String, val ruby: String?, val word: WordEntity?, val tail: String = "", val lead: String = "")
 
 /** Kana that stay with the kanji before them when a line breaks (okurigana and a particle): at most this many. */
 internal const val KANA_TAIL = 2
 
 internal const val CLOSING = "。、．，！？!?」』）)…"
+
+/** Small kana and the long-vowel mark: a line may not start with them, so they stay with the character before. */
+internal const val SMALL_KANA = "ぁぃぅぇぉっゃゅょゎゕゖァィゥェォッャュョヮヵヶー"
+
+/** Opening brackets: a line may not end with them, so they stay with the word after. */
+internal const val OPENING = "「『（(【〈《"
+
+/** Characters that never start a line (kinsoku). */
+internal fun isNoLineStart(c: Char) = c in CLOSING || c in SMALL_KANA
+
+/** A run of plain Japanese this short is kept on one line (a lone 「た。」 never hangs under a sentence). */
+internal const val KEEP_TOGETHER = 4
+
+private fun isJapaneseChar(c: Char) = c.code >= 0x2E80
 
 internal fun isHiragana(c: Char) = c in 'ぁ'..'ゟ'
 internal fun isKatakana(c: Char) = c in 'ァ'..'ヿ' && c != '・'
@@ -143,21 +158,53 @@ internal fun rubyCells(parts: List<RubyPart>, tokens: List<Token>): List<RubyCel
                 val last = cells.lastOrNull()
                 val tailKana = last?.tail.orEmpty().count { !it.isClosing() }
                 when {
-                    c.isClosing() && last != null -> cells[cells.lastIndex] = RubyCellData(last.text, last.ruby, last.word, last.tail + c)
-                    // okurigana and a particle stay with the kanji word before them
-                    isHiragana(c) && last != null && last.ruby != null && last.tail.none { it.isClosing() } &&
-                        tailKana < KANA_TAIL && last.word == word ->
-                        cells[cells.lastIndex] = RubyCellData(last.text, last.ruby, last.word, last.tail + c)
                     // a katakana word is one piece
                     isKatakana(c) && last != null && last.ruby == null && last.tail.isEmpty() && last.text.all(::isKatakana) && last.word == word ->
                         cells[cells.lastIndex] = RubyCellData(last.text + c, null, last.word)
+                    isNoLineStart(c) && last != null -> cells[cells.lastIndex] = last.copy(tail = last.tail + c)
+                    // okurigana and a particle stay with the kanji word before them
+                    isHiragana(c) && last != null && last.ruby != null && last.tail.none { it.isClosing() } &&
+                        tailKana < KANA_TAIL && last.word == word ->
+                        cells[cells.lastIndex] = last.copy(tail = last.tail + c)
                     else -> cells += RubyCellData(c.toString(), null, word)
                 }
             }
         }
         offset += part.text.length
     }
-    return cells
+    return keepEndingTogether(attachLeads(cells))
+}
+
+/** An opening bracket joins the cell after it, so a line never ends with one. */
+private fun attachLeads(cells: List<RubyCellData>): List<RubyCellData> {
+    val out = ArrayList<RubyCellData>()
+    var pending = ""
+    for (cell in cells) {
+        if (cell.ruby == null && cell.tail.isEmpty() && cell.lead.isEmpty() && cell.text.isNotEmpty() && cell.text.all { it in OPENING }) {
+            pending += cell.text
+            continue
+        }
+        out += if (pending.isEmpty()) cell else cell.copy(lead = pending + cell.lead)
+        pending = ""
+    }
+    if (pending.isNotEmpty()) out += RubyCellData(pending, null, null)
+    return out
+}
+
+/** The last plain, untappable characters of a sentence (「た。」) become one cell, so they are never left alone on a line. */
+private fun keepEndingTogether(cells: List<RubyCellData>): List<RubyCellData> {
+    var start = cells.size
+    var chars = 0
+    while (start > 0) {
+        val c = cells[start - 1]
+        val full = c.text + c.tail
+        if (c.ruby != null || c.word != null || c.lead.isNotEmpty() || !full.all(::isJapaneseChar)) break
+        if (chars + full.length > KEEP_TOGETHER) break
+        chars += full.length
+        start--
+    }
+    if (cells.size - start < 2) return cells
+    return cells.take(start) + RubyCellData(cells.drop(start).joinToString("") { it.text + it.tail }, null, null)
 }
 
 private fun Char.isClosing() = this in CLOSING
@@ -328,8 +375,8 @@ fun ExampleSentence(japanese: String, ruby: String?, style: TextStyle, modifier:
  * it), or a Japanese word (a kanji word with its reading, a katakana word, or one character) with its [tail]:
  * the kana, closing punctuation and glued English that stay with it.
  */
-internal class MixedCell(val text: String, val ruby: String?, val bold: Boolean, val tail: String = "") {
-    val full: String get() = text + tail
+internal data class MixedCell(val text: String, val ruby: String?, val bold: Boolean, val tail: String = "", val lead: String = "") {
+    val full: String get() = lead + text + tail
 }
 
 private fun isLatin(c: Char) = c.code < 0x2E80 && c != '＿'
@@ -385,21 +432,61 @@ internal fun mixedCells(markup: String): List<MixedCell> {
                         else if (wordBold != bold && c != ' ') { flushWord(); wordBold = bold }
                         word.append(c)
                     }
-                    c in CLOSING && last != null && word.isEmpty() -> appendToTail(c)
-                    // okurigana and a particle stay with the kanji word before them
-                    isHiragana(c) && word.isEmpty() && last != null && last.ruby != null && last.bold == bold &&
-                        last.tail.none { it in CLOSING } && last.tail.length < KANA_TAIL -> appendToTail(c)
                     // a katakana word is one piece
                     isKatakana(c) && word.isEmpty() && last != null && last.ruby == null && last.tail.isEmpty() &&
                         last.bold == bold && last.text.all(::isKatakana) ->
                         cells[cells.lastIndex] = MixedCell(last.text + c, null, last.bold)
+                    isNoLineStart(c) && last != null && word.isEmpty() && (c in CLOSING || !isLatin(c)) -> appendToTail(c)
+                    // okurigana and a particle stay with the kanji word before them
+                    isHiragana(c) && word.isEmpty() && last != null && last.ruby != null && last.bold == bold &&
+                        last.tail.none { it in CLOSING } && last.tail.length < KANA_TAIL -> appendToTail(c)
                     else -> { flushWord(); glue = false; cells += MixedCell(c.toString(), null, bold) }
                 }
             }
         }
     }
     flushWord()
-    return cells
+    return keepShortRunsTogether(attachMixedLeads(cells))
+}
+
+/** An opening bracket (even an ASCII one, which the text buffer made a word of its own) joins the Japanese word after it. */
+private fun attachMixedLeads(cells: List<MixedCell>): List<MixedCell> {
+    val out = ArrayList<MixedCell>()
+    var i = 0
+    while (i < cells.size) {
+        val cell = cells[i]
+        val next = cells.getOrNull(i + 1)
+        val trimmed = cell.text.trimEnd()
+        val open = cell.ruby == null && cell.tail.isEmpty() && trimmed.lastOrNull()?.let { it in OPENING } == true
+        val nextJapanese = next != null && (next.ruby != null || !isLatin(next.text.first()))
+        if (open && next != null && nextJapanese) {
+            val before = trimmed.dropLast(1)
+            if (before.isNotEmpty()) out += cell.copy(text = before)
+            out += next.copy(lead = trimmed.last() + next.lead)
+            i += 2
+        } else {
+            out += cell
+            i++
+        }
+    }
+    return out
+}
+
+/** A run of plain Japanese characters at most [KEEP_TOGETHER] long becomes one cell: a short word or phrase never splits. */
+private fun keepShortRunsTogether(cells: List<MixedCell>): List<MixedCell> {
+    val out = ArrayList<MixedCell>()
+    fun plainJapanese(c: MixedCell) = c.ruby == null && c.lead.isEmpty() && !c.bold && c.full.all(::isJapaneseChar)
+    var i = 0
+    while (i < cells.size) {
+        if (!plainJapanese(cells[i])) { out += cells[i]; i++; continue }
+        var j = i
+        var length = 0
+        while (j < cells.size && plainJapanese(cells[j])) { length += cells[j].full.length; j++ }
+        if (length <= KEEP_TOGETHER && j - i > 1) out += MixedCell(cells.subList(i, j).joinToString("") { it.full }, null, false)
+        else out += cells.subList(i, j)
+        i = j
+    }
+    return out
 }
 
 /** The plain text of markup: no readings and no bold markers (for a screen reader). */
@@ -448,6 +535,9 @@ fun FuriganaText(
             // under that word's own reading (店に卵: みせ reaches over に, so たまご must not)
             val room = rooms[index]
             Row(verticalAlignment = Alignment.Bottom) {
+                if (cell.lead.isNotEmpty()) {
+                    RubyStack(null, small, smallColor, 0f, 0f, reserveLine = false) { Text(cell.lead, style = cellStyle, color = color, maxLines = 1, softWrap = false) }
+                }
                 RubyStack(cell.ruby, small, smallColor, room.left * px, room.right * px, reserveLine = false, atStart = index == 0 && !centered) {
                     Text(cell.text, style = cellStyle, color = color, maxLines = 1, softWrap = false)
                 }

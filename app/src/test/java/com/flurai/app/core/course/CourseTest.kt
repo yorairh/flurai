@@ -304,4 +304,40 @@ class CourseTest {
         assertTrue(q.isArrangementRight("庭で犬が走る"))
         assertTrue(!q.isArrangementRight("走る犬が庭で"))
     }
+
+    @Test
+    fun nextIsTheEntryAfterThisOneNotTheFirstUnpassed() {
+        val lessons = listOf(lesson(10, 1), lesson(20, 2), lesson(30, 3))
+        assertEquals(20, entryAfter(lessons, 10)!!.id)
+        assertEquals(30, entryAfter(lessons, 20)!!.id)
+        assertNull(entryAfter(lessons, 30))
+        assertNull(entryAfter(lessons, 999))
+    }
+
+    @Test
+    fun aTableFillsTheWidthWhenItFitsAndScrollsWhenItDoesNot() {
+        val small = listOf(listOf("A", "B"), listOf("a", "b"))
+        val fits = tableLayout(small, 320f)
+        assertEquals(false, fits.scrolls)
+        assertEquals(320f, fits.widths.sum(), 0.01f)
+        val wide = listOf(List(5) { "これは長いことばです" }, List(5) { "これは長いことばです" })
+        val scrolls = tableLayout(wide, 320f)
+        assertTrue(scrolls.scrolls)
+        assertTrue(scrolls.widths.sum() > 320f)
+    }
+
+    @Test
+    fun columnsAreSizedToTheirContent() {
+        val rows = listOf(listOf("i", "a long explanation of the thing"), listOf("o", "another longish explanation"))
+        val layout = tableLayout(rows, 360f)
+        assertTrue(layout.widths[1] > layout.widths[0])
+    }
+
+    @Test
+    fun aDialogueBlockIsParsed() {
+        val body = """[{"type":"dialogue","lines":[{"who":"A","jp":"こんにちは。","en":"Hello."},{"who":"B","jp":"やあ。","en":"Hi."}]}]"""
+        val block = parseBody(body).single()
+        assertEquals("dialogue", block.type)
+        assertEquals(listOf("A", "B"), block.lines!!.map { it.who })
+    }
 }

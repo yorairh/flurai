@@ -19,6 +19,7 @@ import com.flurai.app.core.course.CourseProgressEntity
 import com.flurai.app.core.course.CourseRepository
 import com.flurai.app.core.course.CourseStatus
 import com.flurai.app.core.course.courseStatus
+import com.flurai.app.core.course.entryAfter
 import com.flurai.app.core.course.isNote
 import com.flurai.app.core.course.nextCourseEntry
 import com.flurai.app.core.course.parseBody
@@ -95,8 +96,10 @@ data class CourseLessonState(
     val best: String? = null,
     /** The grammar reference points the lesson links to. */
     val related: List<GrammarPointEntity> = emptyList(),
-    /** The entry to take after this one: the first not done, never this lesson. */
+    /** The entry after this one in course order; null after the last. */
     val next: CourseLessonEntity? = null,
+    /** Where the learner left off: the first entry not done, never this lesson. Null when it is [next] or nothing is left. */
+    val resume: CourseLessonEntity? = null,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -132,9 +135,12 @@ class CourseLessonViewModel @Inject constructor(
             val uid = auth.uid ?: return@launch
             combine(course.lessons(), course.progress(uid)) { lessons, rows ->
                 val byId = rows.associateBy { it.lessonId }
-                val next = nextCourseEntry(lessons.filter { it.id != id }, byId)
-                Triple(byId[id], next, lessons)
-            }.collect { (mine, next) -> _state.update { it.copy(status = courseStatus(mine), best = bestText(mine), next = next) } }
+                val next = entryAfter(lessons, id)
+                val resume = nextCourseEntry(lessons.filter { it.id != id }, byId)?.takeIf { it.id != next?.id }
+                Triple(byId[id], next, resume)
+            }.collect { (mine, next, resume) ->
+                _state.update { it.copy(status = courseStatus(mine), best = bestText(mine), next = next, resume = resume) }
+            }
         }
     }
 }

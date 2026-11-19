@@ -15,11 +15,14 @@ class RubyCellsTest {
 
     @Test
     fun aKatakanaWordIsOnePiece() {
-        assertEquals(listOf("ボール", "を"), cells("ボールを"))
+        assertEquals(listOf("ボール"), cells("ボール"))
+        // a short plain ending stays together
+        assertEquals(listOf("ボールを"), cells("ボールを"))
     }
 
     @Test
     fun plainKanaBreakBetweenCharacters() {
-        assertEquals(listOf("こ", "れ", "が", "本", "だ"), rubyCells(listOf(RubyPart("これが", null), RubyPart("本", "ほん").let { RubyPart("本", null) }, RubyPart("だ", null)), emptyList()).map { it.text })
+        // the last four plain characters stay together (a lone 「だ。」 never hangs under a sentence)
+        assertEquals(listOf("こ", "れが本だ"), rubyCells(listOf(RubyPart("これが", null), RubyPart("本", "ほん").let { RubyPart("本", null) }, RubyPart("だ", null)), emptyList()).map { it.text })
     }
 }

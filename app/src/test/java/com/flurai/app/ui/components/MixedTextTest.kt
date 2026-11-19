@@ -20,8 +20,11 @@ class MixedTextTest {
         assertEquals(listOf("落"), cells.map { it.text })
         assertEquals("とす", cells[0].tail)
         assertEquals("お", cells[0].ruby)
-        assertEquals(listOf("食", "べ", "る"), mixedCells("食べる").map { it.text })
-        assertNull(mixedCells("食べる")[1].ruby)
+        // a short plain Japanese word is kept on one line
+        assertEquals(listOf("食べる"), mixedCells("食べる").map { it.text })
+        assertNull(mixedCells("食べる")[0].ruby)
+        // a longer plain run still breaks between characters
+        assertEquals(6, mixedCells("あいうえおか").size)
     }
 
     @Test
@@ -46,7 +49,22 @@ class MixedTextTest {
 
     @Test
     fun theGapOfAFillInQuestionIsJapaneseNotEnglish() {
-        assertEquals(listOf("ドア", "＿", "＿", "開く。"), texts("ドア＿＿{開|あ}く。"))
+        assertEquals(listOf("ドア＿＿", "開く。"), texts("ドア＿＿{開|あ}く。"))
+    }
+
+    @Test
+    fun smallKanaNeverStartALine() {
+        val cells = mixedCells("これは{本|ほん}じゃないよ。").map { it.full }
+        assertTrue(cells.none { it.first() in SMALL_KANA })
+        assertTrue(mixedCells("あいうえおかきくけこぎゃ").map { it.full }.none { it.first() in SMALL_KANA })
+    }
+
+    @Test
+    fun anOpeningBracketJoinsTheWordAfterIt() {
+        val cells = mixedCells("see (私が{食|た}べる)")
+        assertTrue(cells.none { it.full.trimEnd().endsWith("(") })
+        assertEquals("(", cells[1].lead)
+        assertTrue(mixedCells("「{本|ほん}」です").first().lead == "「")
     }
 
     @Test
@@ -58,13 +76,13 @@ class MixedTextTest {
     fun aKanjiWordKeepsItsOkuriganaButNotMoreThanTwoKana() {
         assertEquals(listOf("投げる。"), texts("{投|な}げる。"))
         // 歩いている: いて stays with 歩, the rest may break away
-        assertEquals(listOf("歩いて", "い", "る。"), texts("{歩|ある}いている。"))
+        assertEquals(listOf("歩いて", "いる。"), texts("{歩|ある}いている。"))
     }
 
     @Test
     fun aKatakanaWordIsOneCell() {
-        assertEquals(listOf("ボール", "を"), texts("ボールを"))
-        assertEquals(listOf("ボール", "を", "投げる"), texts("ボールを{投|な}げる"))
+        assertEquals(listOf("ボールを"), texts("ボールを"))
+        assertEquals(listOf("ボールを", "投げる"), texts("ボールを{投|な}げる"))
     }
 
     @Test
