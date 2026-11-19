@@ -50,6 +50,7 @@
     {"id": 30, "type": "choice", "instruction": "Which sentence is natural?", "prompt": "", "options": ["ドアがあいた。", "ドアをあいた。", "花をあいた。", "口があけた。"], "answer": 0, "note": "あく is self-move: the door is the carriage."},
     {"id": 31, "type": "choice", "instruction": "Which verb says someone's luck opens and stays open?", "prompt": "", "options": ["あく", "あける", "ひらける", "さす"], "answer": 2, "note": "ひらける is closer to a state."},
     {"id": 32, "type": "choice", "instruction": "Fill the gap", "prompt": "目を＿＿＿ください。", "options": ["あけて", "あいて", "ひらけて", "さして"], "answer": 0, "note": "目 is an object, so use the other-move あける.", "en": "Please open your eyes."},
-    {"id": 33, "type": "choice", "instruction": "True or false?", "prompt": "ひらく can be both self-move and other-move.", "options": ["True", "False"], "answer": 0, "note": "ひらく: the flower opens, I open a shop."}
+    {"id": 33, "type": "choice", "instruction": "True or false?", "prompt": "ひらく can be both self-move and other-move.", "options": ["True", "False"], "answer": 0, "note": "ひらく: the flower opens, I open a shop."},
+    {"id": 34, "type": "choice", "instruction": "Which sentence means \"I open the shop at ten every day\"?", "prompt": "", "options": ["毎日十時に店をあける。", "毎日十時に店があく。", "毎日十時に店をさす。", "毎日十時に店がひらける。"], "answer": 0, "note": "店をあける: open it up for the day (other-move)."}
   ]
 }

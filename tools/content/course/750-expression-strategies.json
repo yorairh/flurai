@@ -54,6 +54,7 @@
     {"id": 55, "type": "choice", "instruction": "Fill the gap", "prompt": "私は妹にプレゼントを買って＿＿。", "options": ["くれた", "あげた", "もらった", "ほしい"], "answer": 1, "note": "I did it for my sister: あげる.", "en": "I bought my sister a present."},
     {"id": 52, "type": "choice", "instruction": "Who is going to bed?", "prompt": "今、寝る。", "options": ["The speaker", "You", "My mother", "The dog"], "answer": 0, "note": "A plain action in the present defaults to I.", "en": "I'm going to bed now."},
     {"id": 53, "type": "choice", "instruction": "True or false?", "prompt": "私 and あなた are true pronouns in Japanese.", "options": ["True", "False"], "answer": 1, "note": "They are roundabout ways of pointing at yourself and others.", "en": "私, あなた: I, you."},
-    {"id": 54, "type": "choice", "instruction": "Whose friend came?", "prompt": "田中さんとその友だちが来た。", "options": ["Tanaka's friend", "The speaker's friend", "A teacher's friend", "Nobody's"], "answer": 0, "note": "その means the related one: Tanaka's.", "en": "Tanaka and his friend came."}
+    {"id": 54, "type": "choice", "instruction": "Whose friend came?", "prompt": "田中さんとその友だちが来た。", "options": ["Tanaka's friend", "The speaker's friend", "A teacher's friend", "Nobody's"], "answer": 0, "note": "その means the related one: Tanaka's.", "en": "Tanaka and his friend came."},
+    {"id": 56, "type": "choice", "instruction": "Who received the watch?", "prompt": "父が時計を買ってくれた。", "options": ["The speaker", "My father", "A friend", "Nobody"], "answer": 0, "en": "My father bought me a watch.", "note": "くれる says the unseen に is me."}
   ]
 }
