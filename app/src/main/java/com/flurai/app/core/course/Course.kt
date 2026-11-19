@@ -452,7 +452,7 @@ private const val TABLE_READABLE_COLUMN_DP = 72f
 
 /** Longest line of a cell in "ems" (Japanese characters are 1, others about half); a long cell wraps, so it is capped. */
 private fun cellEms(cell: String): Float =
-    cell.replace("**", "").lines().maxOf { line -> line.sumOf { c -> if (c.code >= 0x2E80) 1.0 else 0.55 }.toFloat() }.coerceAtMost(14f)
+    cell.replace("**", "").lines().maxOf { line -> line.sumOf { c -> if (c.code >= 0x2E80 || c in '←'..'⇿') 1.0 else 0.55 }.toFloat() }.coerceAtMost(14f)
 
 /**
  * Columns sized to their content. When they fit in [availableDp] they are stretched to fill it exactly (so a

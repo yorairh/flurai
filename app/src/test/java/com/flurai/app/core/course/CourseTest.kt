@@ -334,6 +334,12 @@ class CourseTest {
     }
 
     @Test
+    fun anArrowIsCountedAsAFullWidthCharacter() {
+        val layout = tableLayout(listOf(listOf("→→→→→→", "あ"), listOf("→→", "い")), 360f)
+        assertTrue(layout.widths[0] > 200f)
+    }
+
+    @Test
     fun aDialogueBlockIsParsed() {
         val body = """[{"type":"dialogue","lines":[{"who":"A","jp":"こんにちは。","en":"Hello."},{"who":"B","jp":"やあ。","en":"Hi."}]}]"""
         val block = parseBody(body).single()
