@@ -75,7 +75,14 @@ val LocalFurigana = staticCompositionLocalOf { true }
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = emptyList(), onWord: ((WordEntity) -> Unit)? = null) {
+fun RubySentence(
+    parts: List<RubyPart>,
+    main: TextStyle,
+    tokens: List<Token> = emptyList(),
+    onWord: ((WordEntity) -> Unit)? = null,
+    /** True for running text: the first reading starts where the text starts, so the line is not indented. False for a single word, whose readings are centered over their kanji. */
+    startAligned: Boolean = true,
+) {
     val ruby = MaterialTheme.typography.labelSmall.japanese().copy(fontSize = 10.sp, lineHeight = 11.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
     val rubyColor = MaterialTheme.colorScheme.onSurfaceVariant
     val text = parts.joinToString("") { it.text }
@@ -93,13 +100,13 @@ fun RubySentence(parts: List<RubyPart>, main: TextStyle, tokens: List<Token> = e
         },
     ) {
         val rooms = remember(cells, main.fontSize) {
-            rubyRooms(cells.map { RubyRoomCell(it.text, it.ruby, it.tail) }, ruby.fontSize.value / main.fontSize.value)
+            rubyRooms(cells.map { RubyRoomCell(it.text, it.ruby, it.tail) }, ruby.fontSize.value / main.fontSize.value, firstAtStart = startAligned)
         }
         cells.forEachIndexed { index, cell ->
             val tappable = cell.word != null && onWord != null
             Row(if (tappable) Modifier.clickable { onWord?.invoke(cell.word!!) } else Modifier) {
                 if (cell.lead.isNotEmpty()) RubyCell(cell.lead, null, main, ruby, rubyColor, underline = false)
-                RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable, room = rooms[index], atStart = index == 0)
+                RubyCell(cell.text, cell.ruby, main, ruby, rubyColor, underline = tappable, room = rooms[index], atStart = startAligned && index == 0)
                 if (cell.tail.isNotEmpty()) RubyCell(cell.tail, null, main, ruby, rubyColor, underline = false)
             }
         }
@@ -295,9 +302,10 @@ internal fun RubyStack(
         val extra = (r.width - b.width).coerceAtLeast(0)
         if (atStart) {
             // the first word of a text: the reading starts where the text starts, so the line is not indented
+            // a reading narrower than its text is centered over it, like every other reading
             val rightOver = minOf(extra, (b.width * 1.2f).toInt(), rightRoom.toInt())
             return@Layout layout(b.width + extra - rightOver, r.height + b.height) {
-                r.place(0, 0)
+                r.place(if (extra == 0) (b.width - r.width) / 2 else 0, 0)
                 b.place(0, r.height)
             }
         }
@@ -570,7 +578,7 @@ fun wordHasRuby(word: WordEntity): Boolean =
 @Composable
 fun WordExpression(word: WordEntity, style: TextStyle, modifier: Modifier = Modifier) {
     if (wordHasRuby(word)) {
-        Box(modifier) { RubySentence(remember(word.id, word.reading, word.ruby) { word.ruby?.let(::parseRuby) ?: rubyParts(word.expression, word.reading) }, style) }
+        Box(modifier) { RubySentence(remember(word.id, word.reading, word.ruby) { word.ruby?.let(::parseRuby) ?: rubyParts(word.expression, word.reading) }, style, startAligned = false) }
     } else {
         Text(word.expression, style = style, modifier = modifier)
     }
