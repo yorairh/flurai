@@ -257,3 +257,43 @@ class BuiltFuriganaTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SplitPerKanjiTest(unittest.TestCase):
+    """A run of kanji gets one reading per kanji where the readings of the kanji allow it."""
+
+    KANJI = {
+        "月": ruby.kanji_candidates("ゲツ、ガツ", "つき"),
+        "曜": ruby.kanji_candidates("ヨウ", ""),
+        "日": ruby.kanji_candidates("ニチ、ジツ", "ひ、-び、か"),
+        "学": ruby.kanji_candidates("ガク", "まな.ぶ"),
+        "校": ruby.kanji_candidates("コウ", ""),
+        "今": ruby.kanji_candidates("コン、キン", "いま"),
+        "人": ruby.kanji_candidates("ジン、ニン", "ひと"),
+        "一": ruby.kanji_candidates("イチ、イツ", "ひと.つ"),
+        "本": ruby.kanji_candidates("ホン", "もと"),
+    }
+
+    def split(self, surface, reading):
+        return ruby.markup(ruby.split_parts(ruby.align(surface, reading), self.KANJI))
+
+    def test_each_kanji_gets_its_reading(self):
+        self.assertEqual(self.split("月曜日", "げつようび"), "{月|げつ}{曜|よう}{日|び}")
+
+    def test_sound_changes(self):
+        self.assertEqual(self.split("学校", "がっこう"), "{学|がっ}{校|こう}")
+        self.assertEqual(self.split("一本", "いっぽん"), "{一|いっ}{本|ぽん}")
+
+    def test_repeated_kanji(self):
+        self.assertEqual(self.split("人々", "ひとびと"), "{人|ひと}{々|びと}")
+
+    def test_read_as_a_whole_stays_one_group(self):
+        self.assertEqual(self.split("今日", "きょう"), "{今日|きょう}")
+
+    def test_single_kanji_and_kana_are_untouched(self):
+        self.assertEqual(self.split("月", "つき"), "{月|つき}")
+        self.assertEqual(self.split("学ぶ", "まなぶ"), "{学|まな}ぶ")
+
+    def test_readings_always_add_up(self):
+        for surface, reading in [("月曜日", "げつようび"), ("学校", "がっこう"), ("人々", "ひとびと")]:
+            self.assertEqual("".join(r or "" for _, r in ruby.split_parts(ruby.align(surface, reading), self.KANJI)), reading)

@@ -570,7 +570,7 @@ fun wordHasRuby(word: WordEntity): Boolean =
 @Composable
 fun WordExpression(word: WordEntity, style: TextStyle, modifier: Modifier = Modifier) {
     if (wordHasRuby(word)) {
-        Box(modifier) { RubySentence(remember(word.id, word.reading) { rubyParts(word.expression, word.reading) }, style) }
+        Box(modifier) { RubySentence(remember(word.id, word.reading, word.ruby) { word.ruby?.let(::parseRuby) ?: rubyParts(word.expression, word.reading) }, style) }
     } else {
         Text(word.expression, style = style, modifier = modifier)
     }

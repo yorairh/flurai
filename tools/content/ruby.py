@@ -60,6 +60,93 @@ def align(surface: str, reading: str) -> list[tuple[str, str | None]]:
     return parts if parts is not None else [(surface, reading)]
 
 
+# --------------------------------------------------------------------------------------------------
+# One reading per kanji
+
+_VOICED = dict(zip("かきくけこさしすせそたちつてとはひふへほ", "がぎぐげござじずぜぞだぢづでどばびぶべぼ"))
+_HALF_VOICED = dict(zip("はひふへほ", "ぱぴぷぺぽ"))
+_SOKUON_AFTER = "つくきち"
+
+
+def kanji_candidates(on: str, kun: str) -> dict[str, int]:
+    """Readings a kanji can have inside a word, with a cost: 0 for the plain readings, 1 for the sound changes
+    (rendaku: ひと to びと; a final つ/く/き/ち doubled: がく to がっ). ``on`` is the on'yomi (katakana, separated by
+    "、"), ``kun`` the kun'yomi (hiragana, "." marks okurigana, only the part before it is used)."""
+    base: set[str] = set()
+    for r in on.split("、"):
+        if r:
+            base.add(to_hiragana(r))
+    for r in kun.split("、"):
+        r = r.split(".")[0].lstrip("-").rstrip("-")
+        if r:
+            base.add(r)
+    out: dict[str, int] = {r: 0 for r in base}
+    for r in base:
+        voiced = _VOICED.get(r[0])
+        if voiced:
+            out.setdefault(voiced + r[1:], 1)
+        if r[0] in _HALF_VOICED:
+            out.setdefault(_HALF_VOICED[r[0]] + r[1:], 1)
+        if len(r) >= 2 and r[-1] in _SOKUON_AFTER:
+            out.setdefault(r[:-1] + "っ", 1)
+            if voiced:
+                out.setdefault(voiced + r[1:-1] + "っ", 2)
+    return out
+
+
+def split_run(run: str, reading: str, candidates: dict[str, dict[str, int]]) -> list[tuple[str, str]] | None:
+    """Gives each kanji of ``run`` (two or more kanji, no kana) its own part of ``reading``, or None when the
+    reading does not fit the readings of its kanji (今日 きょう, 大人 おとな: those are read as a whole).
+    The cheapest split wins; 々 repeats the kanji before it."""
+    n = len(run)
+    r = to_hiragana(reading)
+    best: dict[tuple[int, int], tuple[int, list[tuple[str, str]]] | None] = {}
+
+    def solve(i: int, pos: int) -> tuple[int, list[tuple[str, str]]] | None:
+        if i == n:
+            return (0, []) if pos == len(r) else None
+        key = (i, pos)
+        if key in best:
+            return best[key]
+        c = run[i]
+        if c == "々":
+            cands = candidates.get(run[i - 1], {}) if i else {}
+            cands = {k: max(v, 1) for k, v in cands.items()}
+            cands.update({_VOICED[k[0]] + k[1:]: 1 for k in list(cands) if k[0] in _VOICED})
+        else:
+            cands = candidates.get(c, {})
+        result = None
+        for end in range(pos + 1, min(len(r), pos + 4) + 1):
+            cost = cands.get(r[pos:end])
+            if cost is None:
+                continue
+            rest = solve(i + 1, end)
+            if rest is not None and (result is None or cost + rest[0] < result[0]):
+                result = (cost + rest[0], [(c, r[pos:end])] + rest[1])
+        best[key] = result
+        return result
+
+    found = solve(0, 0)
+    return found[1] if found else None
+
+
+def split_parts(parts: list[tuple[str, str | None]], candidates: dict[str, dict[str, int]]) -> list[tuple[str, str | None]]:
+    """Splits every part that is a run of two or more kanji into one part per kanji, where the readings allow."""
+    out: list[tuple[str, str | None]] = []
+    for text, reading in parts:
+        if reading and len(text) >= 2 and all(is_kanji(c) for c in text):
+            pieces = split_run(text, reading, candidates)
+            if pieces:
+                out.extend(pieces)
+                continue
+        out.append((text, reading))
+    return out
+
+
+def split_markup(marked: str | None, candidates: dict[str, dict[str, int]]) -> str | None:
+    return None if marked is None else markup(split_parts(parse(marked), candidates))
+
+
 def markup(parts: list[tuple[str, str | None]]) -> str:
     return "".join(text if ruby is None else f"{{{text}|{ruby}}}" for text, ruby in parts)
 

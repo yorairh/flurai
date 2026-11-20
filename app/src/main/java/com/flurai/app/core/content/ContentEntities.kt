@@ -30,6 +30,8 @@ data class WordEntity(
     @ColumnInfo(name = "jmdict_id") val jmdictId: Int?,
     /** JMdict part-of-speech codes of the first sense, comma-separated (e.g. "v5r,vt"). */
     @ColumnInfo(name = "parts_of_speech") val partsOfSpeech: String?,
+    /** Furigana markup with one reading per kanji (`{月|げつ}{曜|よう}{日|び}`), like [SentenceEntity.ruby]; null for kana words. */
+    val ruby: String? = null,
 )
 
 @Entity(tableName = "kanji", indices = [Index("jlpt")])
