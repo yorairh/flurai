@@ -14,6 +14,7 @@
     {"type": "text", "text": "All sentences, in any language, come down to two kinds: **A does B** and **A is B**. Japanese has three kinds of engine to say them."},
     {"type": "heading", "text": "1. Verb sentences (A does B)"},
     {"type": "text", "text": "The engine is a verb. In the plain form every verb ends in a **う-row sound** (う, く, す, つ, ぬ, ぶ, む, る…)."},
+    {"type": "diagram", "cars": [{"text": "子供が", "role": "carriage"}, {"text": "遊ぶ", "role": "engine", "label": "verb"}], "text": "子供が遊ぶ。 The child plays."},
     {"type": "heading", "text": "2. Copula sentences (A is B)"},
     {"type": "text", "text": "The engine is a noun, so it needs help to pull the train. That help is **だ**, the copula. Think of だ as an **equals sign in a box that works one way only**: Sakura is a Japanese person, but not every Japanese person is Sakura. **です** is the polite form of だ."},
     {"type": "diagram", "cars": [{"text": "さくらが", "role": "carriage"}, {"text": "日本人だ", "role": "engine", "label": "noun + だ"}], "text": "さくらが日本人だ。 Sakura is Japanese. A noun alone cannot pull the train: noun + だ is one engine."},
