@@ -10,6 +10,8 @@ Sources (see SOURCES below and the in-app Licences screen):
 The table layout comes from Room's exported schema (app/schemas/...ContentDatabase/<version>.json),
 so the file always matches what the app expects. Word ids are kept stable across rebuilds by
 tools/content/word_ids.tsv (user progress refers to them), so commit that file after a rebuild.
+Next to the database it writes content.db.stamp (the database's SHA-256): installed apps copy the
+database again whenever the stamp changes, so a content change never needs a Room version bump.
 
 Usage:  python tools/content/build_content.py            (downloads into tools/content/.cache)
 """
@@ -18,6 +20,7 @@ from __future__ import annotations
 
 import bz2
 import csv
+import hashlib
 import io
 import json
 import re
@@ -42,6 +45,8 @@ COURSE_DIR = HERE / "course"
 WORD_IDS_HEADER = "guid\tword_id"
 SCHEMA_DIR = ROOT / "app" / "schemas" / "com.flurai.app.core.content.ContentDatabase"
 OUTPUT = ROOT / "app" / "src" / "main" / "assets" / "content.db"
+# Read by the app (ContentCopy.kt): a new stamp makes installed apps copy content.db again.
+STAMP = OUTPUT.with_name("content.db.stamp")
 
 JLPT_DECKS_COMMIT = "1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0"
 KANJI_DATA_COMMIT = "00fd7079c3890f430759536f91aa5e854ec0ca4f"
@@ -703,6 +708,19 @@ def latest_schema() -> dict:
     return json.loads(files[-1].read_text(encoding="utf-8"))
 
 
+def content_stamp(path: Path) -> str:
+    """The stamp of a built database: the SHA-256 of its bytes, as hex."""
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def write_stamp(db_path: Path, stamp_path: Path) -> None:
+    stamp_path.write_text(content_stamp(db_path), encoding="ascii", newline="")
+
+
 def create_tables(db: sqlite3.Connection, schema: dict) -> None:
     database = schema["database"]
     for entity in database["entities"]:
@@ -864,6 +882,7 @@ def main() -> None:
         "course_lessons": str(len(course_entries)),
     }
     write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, course_entries, info, sentence_levels, sentence_ruby, word_ruby)
+    write_stamp(OUTPUT, STAMP)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)

@@ -1,11 +1,13 @@
 ---
 name: flurai-course-lesson
-description: How to write, fix or extend a lesson (or study note) of the FluRai grammar course (tools/content/course/*.json). Use whenever the user wants a new course lesson or note, wants to change a lesson's text, train diagram, table or test questions, or reports a bug in a course lesson (furigana, layout, wrong question), even if they only say "lesson 5", "add a lesson about X" or "fix the course test". Covers the file format, the writing and question rules, the checks, and the content-database version bump needed for the change to reach phones.
+description: How to write, fix or extend a lesson (or study note) of the FluRai grammar course (tools/content/course/*.json). Use whenever the user wants a new course lesson or note, wants to change a lesson's text, train diagram, table or test questions, or reports a bug in a course lesson (furigana, layout, wrong question), even if they only say "lesson 5", "add a lesson about X" or "fix the course test". Covers the file format, the writing and question rules, the checks, and how the rebuilt content reaches phones (no version bump needed).
 ---
 
 # Writing a FluRai grammar-course lesson
 
 The course is one JSON file per entry in `tools/content/course/NNN-slug.json`; file name order is the course order. `tools/content/course.py` validates them and the pipeline turns them into `course_lesson` / `course_question` rows of `content.db`. `CLAUDE.md` ("Grammar course") has the rules in short; this skill is the working procedure. The finished example to copy is `050-verb-groups-te-form.json` (lesson 5); read it first, together with one lesson of a different kind (for example `930-kuse-ni.json`) so you do not copy one lesson's quirks.
+
+**A course change is JSON only.** Edit the lesson file, run the pipeline, build. No Kotlin change, no `ContentDatabase.version` bump and no new `app/schemas` file: the pipeline writes `content.db.stamp` and the app copies the new content by itself when the stamp changes.
 
 ## 1. Before writing
 
@@ -71,24 +73,28 @@ Rules from experience, not enforced:
 
 ## 4. Check
 
-Run from the repo root, with Android Studio's JDK for Gradle (see `CLAUDE.md`):
+Run from the repo root:
 
 ```bash
 python -X utf8 tools/content/check_course.py <id>     # one entry, no rebuild; prints every problem
-python -X utf8 tools/content/build_content.py         # rebuilds app/src/main/assets/content.db (takes minutes)
-python -X utf8 -m unittest discover tools/content     # incl. test_course.py checks on the files and the db
+python -X utf8 tools/content/build_content.py         # rebuilds content.db AND content.db.stamp (takes minutes)
+python -X utf8 -m unittest discover tools/content     # incl. test_course.py, and a check that the stamp matches content.db
 ```
 
-## 5. Get it to a phone (the part that is easy to get wrong)
+`content.db.stamp` is the SHA-256 of `content.db`. If the unit tests say the stamp does not match, the pipeline was not re-run after the last change.
 
-Installed apps re-copy `content.db` **only when `ContentDatabase.version` goes up**, so an unchanged version means the phone keeps the old lesson text. Do it in this order, once:
+## 5. Get it to a phone
 
-1. Bump `version` in `app/src/main/java/com/flurai/app/core/content/ContentDatabase.kt` **once per release: keep it exactly one higher than the version on `main` (the last release)**. Do not bump it again for every rebuild while the work is unreleased; if the emulator already has a newer build, uninstall or downgrade the app (`adb uninstall com.flurai.app`, or install with `-r -d`) and install again, so the copy of `content.db` is replaced.
-2. `./gradlew kspDebugKotlin` exports the new `app/schemas/.../<version>.json`. **This must come before the rebuild**: the pipeline stamps the database with the newest schema file's number, and a mismatch makes Room wipe the content tables (the course then shows 0 lessons). Only the newest content schema file is kept in the repo (git history has the older ones): when the export writes the new number, delete the previous file. The new file is identical to the previous one when only rows changed; that is expected. If an earlier unreleased version number is left over, delete its untracked schema file.
-3. Rebuild the content, run the tests, then `./gradlew assembleRelease` and `adb install -r ~/.flurai-build/app/outputs/apk/release/app-release.apk`.
-4. On the emulator, open Learn -> Grammar -> the lesson, scroll through every block and open "Test". If an earlier build left a wrong-version `content.db` on the device, remove it with `adb shell run-as com.flurai.app rm -f databases/content.db*` and relaunch.
+Installed apps compare `content.db.stamp` with the stamp saved at their last copy of `content.db`; when it is new they delete the old copy and copy the shipped one (`core/content/ContentCopy.kt`). So nothing in Kotlin changes for a lesson:
+
+1. Run the pipeline and the tests (section 4). Commit the lesson JSON, `app/src/main/assets/content.db` and `app/src/main/assets/content.db.stamp` together (plus `tools/content/word_ids.tsv` if it changed).
+2. Build with Android Studio's JDK (see `CLAUDE.md`): `./gradlew assembleRelease`, then `adb install -r ~/.flurai-build/app/outputs/apk/release/app-release.apk`. This also works over an earlier build of the same version: no uninstall, no downgrade, no `adb shell run-as ... rm`.
+3. On the emulator open Learn -> Grammar -> the lesson, scroll through every block and open "Test".
+4. **Old text still showing?** The stamp was not regenerated: re-run the pipeline, and check that `git status` lists both `content.db` and `content.db.stamp` as changed.
 
 For a release also bump `versionCode`/`versionName` and add `docs/releases/<version>.md` (see `CLAUDE.md`, Workflow).
+
+**Only if a table changes** (a new column in `ContentEntities.kt`; a lesson never needs this): bump `ContentDatabase.version`, run `./gradlew kspDebugKotlin` **before** the pipeline (the pipeline stamps the database with the newest schema file's number, and a mismatch makes Room wipe the content tables, so the course shows 0 lessons), delete the previous schema file in `app/schemas/com.flurai.app.core.content.ContentDatabase/`, then run the pipeline.
 
 ## 6. Looking at the result
 

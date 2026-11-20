@@ -7,8 +7,10 @@ import androidx.room.PrimaryKey
 
 /*
  * The read-only study content shipped in assets/content.db, built by tools/content/build_content.py.
- * Changing an entity changes the exported schema (app/schemas): bump ContentDatabase.version and
- * re-run the pipeline so the asset matches, or the app fails to open it.
+ * Changing an entity changes the exported schema (app/schemas): bump ContentDatabase.version, run
+ * `./gradlew kspDebugKotlin`, then re-run the pipeline so the asset matches, or the app fails to open
+ * it. Changing only the content (lessons, words) needs just the pipeline: it writes content.db.stamp,
+ * and a new stamp makes installed apps copy the database again (ContentCopy.kt).
  */
 
 /** A vocabulary word from the JLPT lists. [jlpt] is the JLPT number: 5 = N5 (easiest) … 1 = N1. */
