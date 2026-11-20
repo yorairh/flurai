@@ -13,6 +13,14 @@ The course is one JSON file per entry in `tools/content/course/NNN-slug.json`; f
 - Decide the entry's `id`, `number` and file name. `id` = number x 10 (7.5 is 75, 8b is 85), file name is `<id padded to 3>-<slug>.json`, and an entry slips between two others by choosing an id between theirs. Ids of entries and questions are stored in learners' progress, so they never change once released.
 - A **lesson** has `kind: "lesson"`, `jlpt` (1-5) and at least 20 questions. A **note** has `kind: "note"`, no `jlpt` and no questions.
 - `related` lists ids of reference `grammar_point`s (`tools/content/grammar.json`) the lesson covers; each must exist.
+- **Titles must be correct.** The `title` is the first thing a learner reads and it promises what the lesson teaches, so check it against the finished lesson, not against the original video alone:
+  - It names what the lesson actually teaches, and every part of it is covered by the text and tested by the questions. A title that promises more than the lesson delivers (lesson 10 was "Helper verbs and the potential" but teaches only the potential) is wrong; shorten the title or add the missing teaching.
+  - **It states the lesson's idea, not the textbook category.** A bare grammar word ("Adjectives", "Particles", "Verb tenses") is a warning sign: lesson 6 was called "Adjectives" but teaches how any engine turns white and goes before a noun, so it is now "Describing a noun: words before a noun". Ask "what can the learner do or see after this lesson?" and put that in the title. The original lesson's title is only a hint, because the course teaches its own picture (train, stems, detectives); never keep it just because the original used it. Use the course's own terms (main carriage, engine, い-stem), not textbook terms the lesson never uses.
+  - It is short (about 3-8 words), in American English, in sentence case, with no number in it (`number` shows separately) and no trailing period.
+  - Titles of neighboring lessons are distinct and read as a sequence; two lessons never share a title (use "…, part 2" style only when the original does).
+  - The `summary` matches the title and the lesson: one or two sentences, same terms, and no claim the text does not make (no "you saw with 好き" unless that lesson came earlier and the text says so).
+  - Every `heading` is checked the same way: it describes the block under it, is numbered when the lesson has several, and does not repeat the lesson title.
+  - Re-check all of this at the end (section 6), because the lesson often changes while you write it, and the title must change with it.
 
 ## 2. Lesson text (`blocks`)
 
@@ -75,7 +83,7 @@ python -X utf8 -m unittest discover tools/content     # incl. test_course.py che
 
 Installed apps re-copy `content.db` **only when `ContentDatabase.version` goes up**, so an unchanged version means the phone keeps the old lesson text. Do it in this order, once:
 
-1. Bump `version` in `app/src/main/java/com/flurai/app/core/content/ContentDatabase.kt`.
+1. Bump `version` in `app/src/main/java/com/flurai/app/core/content/ContentDatabase.kt` **once per release: keep it exactly one higher than the version on `main` (the last release)**. Do not bump it again for every rebuild while the work is unreleased; if the emulator already has a newer build, uninstall or downgrade the app (`adb uninstall com.flurai.app`, or install with `-r -d`) and install again, so the copy of `content.db` is replaced.
 2. `./gradlew kspDebugKotlin` exports the new `app/schemas/.../<version>.json`. **This must come before the rebuild**: the pipeline stamps the database with the newest schema file's number, and a mismatch makes Room wipe the content tables (the course then shows 0 lessons). The schema file is identical to the previous one when only rows changed; that is expected. If an earlier unreleased version number is left over, delete its untracked schema file.
 3. Rebuild the content, run the tests, then `./gradlew assembleRelease` and `adb install -r ~/.flurai-build/app/outputs/apk/release/app-release.apk`.
 4. On the emulator, open Learn -> Grammar -> the lesson, scroll through every block and open "Test". If an earlier build left a wrong-version `content.db` on the device, remove it with `adb shell run-as com.flurai.app rm -f databases/content.db*` and relaunch.
@@ -84,4 +92,4 @@ For a release also bump `versionCode`/`versionName` and add `docs/releases/<vers
 
 ## 6. Looking at the result
 
-Check these on screen, because the validator cannot: the train fits without scrolling, every table row is one line, furigana reads correctly (especially on words you bolded or that start with a kanji with several readings), the purpose is explained before the recipe, and nothing is shown twice.
+Check these on screen, because the validator cannot: the train fits without scrolling, every table row is one line, furigana reads correctly (especially on words you bolded or that start with a kanji with several readings), the purpose is explained before the recipe, nothing is shown twice, and the title, summary and headings still match what the lesson ended up teaching.
