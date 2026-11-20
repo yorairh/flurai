@@ -251,6 +251,12 @@ class BuiltDatabaseTest(unittest.TestCase):
             columns = [row[1] for row in self.db.execute(f"PRAGMA table_info({entity['tableName']})")]
             self.assertEqual([f["columnName"] for f in entity["fields"]], columns, entity["tableName"])
 
+    def test_stamp_matches_database(self):
+        # The app copies content.db again only when this stamp changes; a stale stamp means phones keep old content.
+        self.assertTrue(bc.STAMP.exists(), "content.db.stamp is missing: re-run build_content.py")
+        self.assertEqual(bc.content_stamp(bc.OUTPUT), bc.STAMP.read_text(encoding="ascii").strip(),
+                         "content.db.stamp does not match content.db: re-run build_content.py")
+
     def test_every_level_is_populated(self):
         words = dict(self.db.execute("SELECT jlpt, COUNT(*) FROM word GROUP BY jlpt"))
         kanji = dict(self.db.execute("SELECT jlpt, COUNT(*) FROM kanji GROUP BY jlpt"))
