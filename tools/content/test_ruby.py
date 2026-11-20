@@ -272,6 +272,12 @@ class SplitPerKanjiTest(unittest.TestCase):
         "人": ruby.kanji_candidates("ジン、ニン", "ひと"),
         "一": ruby.kanji_candidates("イチ、イツ", "ひと.つ"),
         "本": ruby.kanji_candidates("ホン", "もと"),
+        "自": ruby.kanji_candidates("ジ、シ", "みずか.ら"),
+        "分": ruby.kanji_candidates("ブン、フン、ブ", "わ.ける"),
+        "建": ruby.kanji_candidates("ケン、コン", "た.てる"),
+        "物": ruby.kanji_candidates("ブツ、モツ", "もの"),
+        "入": ruby.kanji_candidates("ニュウ", "い.る、はい.る"),
+        "口": ruby.kanji_candidates("コウ、ク", "くち"),
     }
 
     def split(self, surface, reading):
@@ -286,6 +292,13 @@ class SplitPerKanjiTest(unittest.TestCase):
 
     def test_repeated_kanji(self):
         self.assertEqual(self.split("人々", "ひとびと"), "{人|ひと}{々|びと}")
+
+    def test_verb_stems_and_suru_nouns(self):
+        self.assertEqual(self.split("建物", "たてもの"), "{建|たて}{物|もの}")
+        self.assertEqual(self.split("入口", "いりぐち"), "{入|いり}{口|ぐち}")
+        self.assertEqual(self.split("自分", "じぶん"), "{自|じ}{分|ぶん}")
+        self.assertEqual(ruby.spoken_reading("運動", "うんどうする"), "うんどう")
+        self.assertEqual(ruby.spoken_reading("食べる", "たべる"), "たべる")
 
     def test_read_as_a_whole_stays_one_group(self):
         self.assertEqual(self.split("今日", "きょう"), "{今日|きょう}")

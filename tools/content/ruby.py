@@ -68,30 +68,66 @@ _HALF_VOICED = dict(zip("はひふへほ", "ぱぴぷぺぽ"))
 _SOKUON_AFTER = "つくきち"
 
 
+_I_ROW = dict(zip("うくぐすつぬぶむる", "いきぎしちにびみり"))
+
+
 def kanji_candidates(on: str, kun: str) -> dict[str, int]:
     """Readings a kanji can have inside a word, with a cost: 0 for the plain readings, 1 for the sound changes
-    (rendaku: ひと to びと; a final つ/く/き/ち doubled: がく to がっ). ``on`` is the on'yomi (katakana, separated by
-    "、"), ``kun`` the kun'yomi (hiragana, "." marks okurigana, only the part before it is used)."""
+    (rendaku: ひと to びと; a final つ/く/き/ち doubled: がく to がっ) and for a verb's stem form (建てる gives
+    た and たて, 入る gives い and いり). ``on`` is the on'yomi (katakana, separated by "、"), ``kun`` the kun'yomi
+    (hiragana, "." marks okurigana)."""
     base: set[str] = set()
+    extra: set[str] = set()
     for r in on.split("、"):
         if r:
             base.add(to_hiragana(r))
     for r in kun.split("、"):
-        r = r.split(".")[0].lstrip("-").rstrip("-")
-        if r:
-            base.add(r)
+        r = r.lstrip("-").rstrip("-")
+        stem, _, okuri = r.partition(".")
+        if stem:
+            base.add(stem)
+        if stem and okuri:
+            if okuri[-1] in _I_ROW:
+                extra.add(stem + okuri[:-1] + _I_ROW[okuri[-1]])  # 入る: いり
+            if len(okuri) >= 2:
+                extra.add(stem + okuri[:-1])  # 建てる: たて
     out: dict[str, int] = {r: 0 for r in base}
-    for r in base:
+    for r in extra:
+        out.setdefault(r, 1)
+    for r in list(out):
+        cost = out[r]
         voiced = _VOICED.get(r[0])
         if voiced:
-            out.setdefault(voiced + r[1:], 1)
+            out.setdefault(voiced + r[1:], cost + 1)
         if r[0] in _HALF_VOICED:
-            out.setdefault(_HALF_VOICED[r[0]] + r[1:], 1)
+            out.setdefault(_HALF_VOICED[r[0]] + r[1:], cost + 1)
         if len(r) >= 2 and r[-1] in _SOKUON_AFTER:
-            out.setdefault(r[:-1] + "っ", 1)
+            out.setdefault(r[:-1] + "っ", cost + 1)
             if voiced:
-                out.setdefault(voiced + r[1:-1] + "っ", 2)
+                out.setdefault(voiced + r[1:-1] + "っ", cost + 2)
     return out
+
+
+def all_candidates(kanjidic: dict) -> dict[str, dict[str, int]]:
+    """Candidate readings (see [kanji_candidates]) of every character in KANJIDIC2."""
+    result: dict[str, dict[str, int]] = {}
+    for char in kanjidic["characters"]:
+        on, kun = [], []
+        for group in (char.get("readingMeaning") or {}).get("groups", []):
+            for reading in group["readings"]:
+                if reading["type"] == "ja_on":
+                    on.append(reading["value"])
+                elif reading["type"] == "ja_kun":
+                    kun.append(reading["value"])
+        result[char["literal"]] = kanji_candidates("、".join(on), "、".join(kun))
+    return result
+
+
+def spoken_reading(expression: str, reading: str) -> str:
+    """A noun that takes する is listed as 運動 / うんどうする: the reading of the kanji alone is the part before する."""
+    if reading.endswith("する") and not expression.endswith("する") and all(is_kanji(c) for c in expression):
+        return reading[:-2]
+    return reading
 
 
 def split_run(run: str, reading: str, candidates: dict[str, dict[str, int]]) -> list[tuple[str, str]] | None:

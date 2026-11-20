@@ -808,10 +808,8 @@ def main() -> None:
     reader = ruby.Reader.build(jmdict["words"], jlpt_readings)
 
     print("Kanji")
-    kanji = build_kanji(
-        json.loads(fetch("kanji.json").read_text(encoding="utf-8")),
-        read_zipped_json(fetch("kanjidic2-en.json.zip")),
-    )
+    kanjidic = read_zipped_json(fetch("kanjidic2-en.json.zip"))
+    kanji = build_kanji(json.loads(fetch("kanji.json").read_text(encoding="utf-8")), kanjidic)
 
     print("Example sentences")
     indexed = parse_indices(read_indices(fetch("jpn_indices.tar.bz2")))
@@ -829,13 +827,13 @@ def main() -> None:
     sentences.update(extra)
     sentence_levels.update(extra_levels)
     tokens_by_id = {s.japanese_id: [(t.headword, t.reading, t.form) for t in s.tokens] for s in indexed}
-    kanji_readings = {k.literal: ruby.kanji_candidates(k.onyomi, k.kunyomi) for k in kanji}
+    kanji_readings = ruby.all_candidates(kanjidic)  # every kanji of KANJIDIC2, not just the ones with a JLPT level
     sentence_ruby = {
         sid: ruby.split_markup(ruby.sentence_markup(reader, jp, tokens_by_id.get(sid, [])), kanji_readings)
         for sid, (jp, _, _) in sentences.items()
     }
     word_ruby = {
-        w.id: ruby.markup(ruby.split_parts(ruby.align(w.expression, w.reading), kanji_readings))
+        w.id: ruby.markup(ruby.split_parts(ruby.align(w.expression, ruby.spoken_reading(w.expression, w.reading)), kanji_readings))
         for w in words
         if w.reading != w.expression and any(ruby.is_kanji(c) for c in w.expression)
     }
