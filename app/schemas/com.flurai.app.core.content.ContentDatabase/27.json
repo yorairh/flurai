@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 26,
-    "identityHash": "75a6ee971ef4494ed4eaee60ffa3af0a",
+    "version": 27,
+    "identityHash": "ba064998a4d2b4098b3a09d86b06a15b",
     "entities": [
       {
         "tableName": "word",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `expression` TEXT NOT NULL, `reading` TEXT NOT NULL, `other_forms` TEXT, `meanings` TEXT NOT NULL, `jlpt` INTEGER NOT NULL, `genki_lesson` INTEGER, `jmdict_id` INTEGER, `parts_of_speech` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `expression` TEXT NOT NULL, `reading` TEXT NOT NULL, `other_forms` TEXT, `meanings` TEXT NOT NULL, `jlpt` INTEGER NOT NULL, `genki_lesson` INTEGER, `jmdict_id` INTEGER, `parts_of_speech` TEXT, `ruby` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -56,6 +56,11 @@
           {
             "fieldPath": "partsOfSpeech",
             "columnName": "parts_of_speech",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "ruby",
+            "columnName": "ruby",
             "affinity": "TEXT"
           }
         ],
@@ -558,7 +563,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '75a6ee971ef4494ed4eaee60ffa3af0a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba064998a4d2b4098b3a09d86b06a15b')"
     ]
   }
 }

@@ -726,6 +726,7 @@ def write_database(
     info: dict[str, str],
     sentence_levels: dict[int, int | None] | None = None,
     sentence_ruby: dict[int, str | None] | None = None,
+    word_ruby: dict[int, str | None] | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
@@ -733,12 +734,12 @@ def write_database(
     db = sqlite3.connect(tmp)
     create_tables(db, schema)
     db.executemany(
-        "INSERT INTO word (id, expression, reading, other_forms, meanings, jlpt, genki_lesson, jmdict_id, parts_of_speech)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO word (id, expression, reading, other_forms, meanings, jlpt, genki_lesson, jmdict_id, parts_of_speech, ruby)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
             (
                 w.id, w.expression, w.reading, "; ".join(w.other_forms) or None, w.meanings, w.jlpt,
-                w.genki_lesson, w.jmdict_id, w.parts_of_speech,
+                w.genki_lesson, w.jmdict_id, w.parts_of_speech, (word_ruby or {}).get(w.id),
             )
             for w in words
         ],
@@ -807,10 +808,8 @@ def main() -> None:
     reader = ruby.Reader.build(jmdict["words"], jlpt_readings)
 
     print("Kanji")
-    kanji = build_kanji(
-        json.loads(fetch("kanji.json").read_text(encoding="utf-8")),
-        read_zipped_json(fetch("kanjidic2-en.json.zip")),
-    )
+    kanjidic = read_zipped_json(fetch("kanjidic2-en.json.zip"))
+    kanji = build_kanji(json.loads(fetch("kanji.json").read_text(encoding="utf-8")), kanjidic)
 
     print("Example sentences")
     indexed = parse_indices(read_indices(fetch("jpn_indices.tar.bz2")))
@@ -828,21 +827,30 @@ def main() -> None:
     sentences.update(extra)
     sentence_levels.update(extra_levels)
     tokens_by_id = {s.japanese_id: [(t.headword, t.reading, t.form) for t in s.tokens] for s in indexed}
-    sentence_ruby = {sid: ruby.sentence_markup(reader, jp, tokens_by_id.get(sid, [])) for sid, (jp, _, _) in sentences.items()}
+    kanji_readings = ruby.all_candidates(kanjidic)  # every kanji of KANJIDIC2, not just the ones with a JLPT level
+    sentence_ruby = {
+        sid: ruby.split_markup(ruby.sentence_markup(reader, jp, tokens_by_id.get(sid, [])), kanji_readings)
+        for sid, (jp, _, _) in sentences.items()
+    }
+    word_ruby = {
+        w.id: ruby.markup(ruby.split_parts(ruby.align(w.expression, ruby.spoken_reading(w.expression, w.reading)), kanji_readings))
+        for w in words
+        if w.reading != w.expression and any(ruby.is_kanji(c) for c in w.expression)
+    }
 
     grammar = json.loads(GRAMMAR.read_text(encoding="utf-8"))
     extras = pick_grammar_extras(grammar, indexed, japanese, english, grades)
     for point in grammar:
         point["extras"] = extras.get(point["id"], [])
         for example in point["examples"] + point["extras"]:
-            example["ruby"] = ruby.text_markup(reader, example["jp"])
+            example["ruby"] = ruby.split_markup(ruby.text_markup(reader, example["jp"]), kanji_readings)
 
     course_entries = course.load(COURSE_DIR)
     easy_kanji = {c for w in words if w.jlpt >= 4 for c in w.expression if "一" <= c <= "鿿" or c == "々"}
     found = course.problems(course_entries, {g["id"] for g in grammar}, easy_kanji)
     if found:
         sys.exit("The grammar course has problems:\n  " + "\n  ".join(found))
-    course.add_ruby(course_entries, lambda text: ruby.text_markup(reader, text) if text else None)
+    course.add_ruby(course_entries, lambda text: ruby.split_markup(ruby.text_markup(reader, text), kanji_readings) if text else None)
 
     info = {
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -855,7 +863,7 @@ def main() -> None:
         "grammar_count": str(len(grammar)),
         "course_lessons": str(len(course_entries)),
     }
-    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, course_entries, info, sentence_levels, sentence_ruby)
+    write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, course_entries, info, sentence_levels, sentence_ruby, word_ruby)
     save_registry(WORD_IDS, registry)
 
     with_examples = sum(1 for w in words if w.sentence_ids)
