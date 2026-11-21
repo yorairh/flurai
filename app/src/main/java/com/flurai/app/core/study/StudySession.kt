@@ -35,15 +35,18 @@ interface CardContentSource {
     suspend fun contentFor(item: ItemRef): CardContent?
 }
 
-/** [CardContentSource] on the content database (words) and the built-in kana table. */
-class DatabaseCardContent @Inject constructor(private val content: ContentDao) : CardContentSource {
+/** [CardContentSource] on the word databases (built-in and dictionary words) and the built-in kana table. */
+class DatabaseCardContent @Inject constructor(
+    private val content: ContentDao,
+    private val words: com.flurai.app.core.dictionary.WordSource,
+) : CardContentSource {
     override suspend fun contentFor(item: ItemRef): CardContent? = when (item.itemType) {
         ItemType.Kana -> KanaData.byId(item.itemId)?.let { kana ->
             val example = if (kana.script == KanaScript.Hiragana) content.wordStartingWith(kana.kana) else content.loanwordStartingWith(kana.kana)
             CardContent.KanaCard(kana, example)
         }
-        ItemType.Word -> content.word(item.itemId)?.let { word ->
-            CardContent.Word(word, content.sentencesForWord(word.id).firstOrNull())
+        ItemType.Word -> words.word(item.itemId)?.let { word ->
+            CardContent.Word(word, words.sentences(word.id).firstOrNull())
         }
     }
 }

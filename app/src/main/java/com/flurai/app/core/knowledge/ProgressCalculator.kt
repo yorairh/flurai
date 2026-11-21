@@ -1,6 +1,7 @@
 package com.flurai.app.core.knowledge
 
 import com.flurai.app.core.content.WordEntity
+import com.flurai.app.core.dictionary.NOT_JLPT
 import com.flurai.app.core.grammar.GrammarProgressEntity
 import com.flurai.app.core.grammar.GrammarStatus
 import com.flurai.app.core.grammar.grammarStatus
@@ -51,6 +52,11 @@ data class LevelProgress(
 /** Kanji of a level that appear in at least one known word. */
 data class KanjiProgress(val jlpt: Int, val total: Int, val known: Int)
 
+/** Words outside the JLPT lists (dictionary and custom words): no level, so no total to measure against. */
+data class OtherWordsProgress(val learning: Int = 0, val known: Int = 0) {
+    val isEmpty: Boolean get() = learning == 0 && known == 0
+}
+
 /** A word the learner has forgotten before. [retrievability] is the chance of recalling it right now. */
 data class WeakWord(val word: WordEntity, val lapses: Int, val retrievability: Double?)
 
@@ -64,13 +70,16 @@ data class ProgressSnapshot(
     val forecast: List<Int>,
     val studiedWords: Int,
     val knownWords: Int,
+    /** Words outside the JLPT lists; they never count toward a level or the level estimate. */
+    val other: OtherWordsProgress = OtherWordsProgress(),
 )
 
 private val scheduler = FsrsScheduler(fuzz = null)
 
 /**
  * What the dashboard shows, computed from the learner's cards, their grammar answers and the
- * checkpoints they passed ([passedCheckpoints]: JLPT numbers). Pure, so it is easy to test.
+ * checkpoints they passed ([passedCheckpoints]: JLPT numbers). [otherWords] holds the learner's words
+ * that are not in the catalog (dictionary words, by id). Pure, so it is easy to test.
  */
 fun computeProgress(
     cards: List<CardEntity>,
@@ -79,7 +88,9 @@ fun computeProgress(
     passedCheckpoints: Set<Int>,
     now: Instant,
     zone: ZoneId = ZoneId.systemDefault(),
+    otherWords: Map<Int, WordEntity> = emptyMap(),
 ): ProgressSnapshot {
+    fun wordFor(id: Int): WordEntity? = catalog.words[id] ?: otherWords[id]
     val wordCards = cards.filter { it.itemType == ItemType.Word }
     // A word's knowledge is that of its recognition card (the first one it gets).
     val knowledgeByWord = wordCards.filter { it.kind == CardKind.Recognition }.associate { it.itemId to it.knowledge() }
@@ -87,7 +98,8 @@ fun computeProgress(
     // jlpt -> [learning, known, mature]
     val counts = HashMap<Int, IntArray>()
     for ((id, knowledge) in knowledgeByWord) {
-        val jlpt = catalog.words[id]?.jlpt ?: continue
+        // A word outside the JLPT lists (or one no longer found) is counted under NOT_JLPT.
+        val jlpt = catalog.words[id]?.jlpt ?: NOT_JLPT
         val slot = when (knowledge) {
             Knowledge.Learning -> 0
             Knowledge.Known -> 1
@@ -96,6 +108,7 @@ fun computeProgress(
         }
         counts.getOrPut(jlpt) { IntArray(3) }[slot]++
     }
+    val otherCounts = counts[NOT_JLPT] ?: IntArray(3)
     val knownGrammar = grammar.filter { grammarStatus(it) == GrammarStatus.Known }.mapNotNull { catalog.grammarLevels[it.grammarId] }
         .groupingBy { it }.eachCount()
     val vocab = (5 downTo 1).map { jlpt ->
@@ -115,7 +128,7 @@ fun computeProgress(
     val knownKanji = HashSet<String>()
     for ((id, knowledge) in knowledgeByWord) {
         if (knowledge != Knowledge.Known && knowledge != Knowledge.Mature) continue
-        catalog.words[id]?.expression?.forEach { char ->
+        wordFor(id)?.expression?.forEach { char ->
             val kanji = char.toString()
             if (kanji in catalog.kanjiLevels) knownKanji += kanji
         }
@@ -129,7 +142,7 @@ fun computeProgress(
         .groupBy { it.itemId }
         .mapNotNull { (id, group) ->
             val lapses = group.sumOf { it.lapses }
-            val word = catalog.words[id]
+            val word = wordFor(id)
             if (lapses == 0 || word == null) return@mapNotNull null
             val retrievability = group
                 .filter { it.state == SrsState.Review.value && it.lastReview != null }
@@ -147,6 +160,7 @@ fun computeProgress(
         forecast = forecast(cards, now, zone),
         studiedWords = knowledgeByWord.values.count { it != Knowledge.Unseen },
         knownWords = knowledgeByWord.values.count { it == Knowledge.Known || it == Knowledge.Mature },
+        other = OtherWordsProgress(learning = otherCounts[0], known = otherCounts[1] + otherCounts[2]),
     )
 }
 

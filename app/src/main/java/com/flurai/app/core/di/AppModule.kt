@@ -71,6 +71,20 @@ object AppModule {
     @Provides
     fun contentDao(db: ContentDatabase): ContentDao = db.contentDao()
 
+    /** The whole of JMdict, copied from assets/dictionary.db like content.db (DictionaryCopy in ContentCopy.kt). */
+    @Provides
+    @Singleton
+    fun dictionaryDatabase(@ApplicationContext context: Context): com.flurai.app.core.dictionary.DictionaryDatabase {
+        com.flurai.app.core.content.refreshDictionaryCopy(context)
+        return Room.databaseBuilder(context, com.flurai.app.core.dictionary.DictionaryDatabase::class.java, com.flurai.app.core.content.DICTIONARY_DB_NAME)
+            .createFromAsset(com.flurai.app.core.dictionary.DictionaryDatabase.ASSET_PATH)
+            .fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
+    }
+
+    @Provides
+    fun dictionaryDao(db: com.flurai.app.core.dictionary.DictionaryDatabase): com.flurai.app.core.dictionary.DictionaryDao = db.dictionaryDao()
+
     /** The learner's cards and review history. Never destructive: schema changes need migrations. */
     @Provides
     @Singleton
@@ -79,6 +93,9 @@ object AppModule {
 
     @Provides
     fun studyDao(db: UserDatabase): StudyDao = db.studyDao()
+
+    @Provides
+    fun wordMergeDao(db: UserDatabase): com.flurai.app.core.study.WordMergeDao = db.wordMergeDao()
 
     @Provides
     fun studyDayDao(db: UserDatabase): StudyDayDao = db.studyDayDao()

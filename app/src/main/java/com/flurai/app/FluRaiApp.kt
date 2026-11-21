@@ -18,6 +18,8 @@ class FluRaiApp : Application() {
 
     @Inject lateinit var contentDatabase: Lazy<ContentDatabase>
     @Inject lateinit var userDatabase: Lazy<UserDatabase>
+    @Inject lateinit var dictionaryDatabase: Lazy<com.flurai.app.core.dictionary.DictionaryDatabase>
+    @Inject lateinit var wordMerger: Lazy<com.flurai.app.core.dictionary.WordMerger>
 
     override fun onCreate() {
         super.onCreate()
@@ -26,6 +28,10 @@ class FluRaiApp : Application() {
         appScope.launch {
             contentDatabase.get().openHelper.writableDatabase
             userDatabase.get().openHelper.writableDatabase
+            // A content update may have made a studied dictionary word a built-in one.
+            runCatching { wordMerger.get().merge() }
+            // The dictionary is large: copy it out of the app now rather than at the first search.
+            dictionaryDatabase.get().openHelper.writableDatabase
         }
     }
 }

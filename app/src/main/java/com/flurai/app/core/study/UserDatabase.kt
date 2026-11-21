@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.Flow
 @Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class, CourseProgressEntity::class], version = 7, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
+    abstract fun wordMergeDao(): WordMergeDao
     abstract fun studyDayDao(): StudyDayDao
     abstract fun testResultDao(): TestResultDao
     abstract fun grammarProgressDao(): GrammarProgressDao
@@ -197,4 +198,55 @@ interface StudyDao {
     /** Forget an item: its cards go, so it's introduced again as new. Review history is kept. */
     @Query("DELETE FROM card WHERE uid = :uid AND item_type = :itemType AND item_id = :itemId")
     suspend fun resetItem(uid: String, itemType: ItemType, itemId: Int)
+}
+
+/** Merging a dictionary word into the built-in word it became (see WordMerger). Covers every user on the phone. */
+@Dao
+interface WordMergeDao {
+    @Upsert
+    suspend fun upsertCard(card: CardEntity)
+
+    /** Word ids at or above [start] that some card, of any user, refers to. */
+    @Query("SELECT DISTINCT item_id FROM card WHERE item_type = 'Word' AND item_id >= :start")
+    suspend fun cardWordIdsFrom(start: Int): List<Int>
+
+    /** Word ids at or above [start] that some deck holds. */
+    @Query("SELECT DISTINCT word_id FROM deck_word WHERE word_id >= :start")
+    suspend fun deckWordIdsFrom(start: Int): List<Int>
+
+    @Query("SELECT * FROM card WHERE item_type = 'Word' AND item_id = :id")
+    suspend fun wordCardsOfAllUsers(id: Int): List<CardEntity>
+
+    @Query("SELECT * FROM card WHERE uid = :uid AND item_type = 'Word' AND item_id = :id AND kind = :kind")
+    suspend fun wordCard(uid: String, id: Int, kind: CardKind): CardEntity?
+
+    @Query("DELETE FROM card WHERE item_type = 'Word' AND item_id = :id")
+    suspend fun deleteWordCardsOfAllUsers(id: Int)
+
+    @Query("UPDATE review_log SET item_id = :to WHERE item_type = 'Word' AND item_id = :from")
+    suspend fun moveWordLogs(from: Int, to: Int)
+
+    @Query("UPDATE OR IGNORE deck_word SET word_id = :to WHERE word_id = :from")
+    suspend fun moveDeckWord(from: Int, to: Int)
+
+    @Query("DELETE FROM deck_word WHERE word_id = :id")
+    suspend fun deleteDeckWord(id: Int)
+
+    /**
+     * Makes word [from] word [to] everywhere: cards (where both exist, the one with more reviews is kept,
+     * the newer on a tie), review history and deck lists.
+     */
+    @Transaction
+    suspend fun mergeWord(from: Int, to: Int) {
+        for (card in wordCardsOfAllUsers(from)) {
+            val existing = wordCard(card.uid, to, card.kind)
+            val keepMoved = existing == null || card.reps > existing.reps ||
+                (card.reps == existing.reps && (card.lastReview ?: card.createdAt) > (existing.lastReview ?: existing.createdAt))
+            if (keepMoved) upsertCard(card.copy(itemId = to))
+        }
+        deleteWordCardsOfAllUsers(from)
+        moveWordLogs(from, to)
+        moveDeckWord(from, to)
+        deleteDeckWord(from)
+    }
 }

@@ -12,8 +12,11 @@ import android.content.Context
  */
 internal const val CONTENT_DB_NAME = "content.db"
 internal const val STAMP_ASSET = "content.db.stamp"
+internal const val DICTIONARY_DB_NAME = "dictionary.db"
+internal const val DICTIONARY_STAMP_ASSET = "dictionary.db.stamp"
 private const val PREFS = "content_db"
 private const val KEY_STAMP = "stamp"
+private const val KEY_DICTIONARY_STAMP = "dictionary_stamp"
 
 /**
  * Whether the installed copy is out of date. No shipped stamp means nothing to compare with, so the
@@ -22,14 +25,24 @@ private const val KEY_STAMP = "stamp"
 fun isContentStale(installed: String?, shipped: String?): Boolean =
     shipped != null && installed != shipped
 
-/** Deletes the installed content.db when the shipped one has a new stamp. Call before opening Room. */
-fun refreshContentCopy(context: Context) {
+/**
+ * Deletes the installed content.db when the shipped one has a new stamp. Call before opening Room.
+ * Returns true when the copy was renewed (new content: words may have joined the built-in list).
+ */
+fun refreshContentCopy(context: Context): Boolean = refreshCopy(context, CONTENT_DB_NAME, STAMP_ASSET, KEY_STAMP)
+
+/** The same for dictionary.db (the whole of JMdict, assets/dictionary.db.stamp). */
+fun refreshDictionaryCopy(context: Context): Boolean =
+    refreshCopy(context, DICTIONARY_DB_NAME, DICTIONARY_STAMP_ASSET, KEY_DICTIONARY_STAMP)
+
+private fun refreshCopy(context: Context, dbName: String, stampAsset: String, key: String): Boolean {
     val shipped = runCatching {
-        context.assets.open(STAMP_ASSET).bufferedReader().use { it.readText().trim() }
+        context.assets.open(stampAsset).bufferedReader().use { it.readText().trim() }
     }.getOrNull()?.ifEmpty { null }
     val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-    if (!isContentStale(prefs.getString(KEY_STAMP, null), shipped)) return
-    context.deleteDatabase(CONTENT_DB_NAME)
+    if (!isContentStale(prefs.getString(key, null), shipped)) return false
+    context.deleteDatabase(dbName)
     // commit(): the stamp must be saved before Room copies, or a crash in between repeats the copy at worst.
-    prefs.edit().putString(KEY_STAMP, shipped).commit()
+    prefs.edit().putString(key, shipped).commit()
+    return true
 }

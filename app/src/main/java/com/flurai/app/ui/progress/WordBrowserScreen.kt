@@ -1,5 +1,6 @@
 package com.flurai.app.ui.progress
 
+import com.flurai.app.core.dictionary.levelLabel
 import com.flurai.app.ui.components.WordExpression
 import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.LoadingBox
@@ -120,7 +121,7 @@ private fun BrowserWordRow(row: BrowserRow, onClick: () -> Unit) {
         }
         Spacer(Modifier.width(8.dp))
         Column(horizontalAlignment = Alignment.End) {
-            Text("N${word.jlpt}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            Text(word.levelLabel, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
             Text(cardStatus(row.card), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }

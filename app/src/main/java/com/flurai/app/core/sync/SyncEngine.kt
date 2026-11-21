@@ -4,6 +4,7 @@ import com.flurai.app.core.prefs.SyncCursors
 import com.flurai.app.core.prefs.UserPreferences
 import com.flurai.app.core.activity.studyEpochDay
 import com.flurai.app.core.auth.GUEST_UID
+import com.flurai.app.core.study.ItemType
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -40,10 +41,15 @@ class SyncEngine internal constructor(
     private val prefs: UserPreferences,
     private val clock: () -> Long,
     private val onError: (Throwable) -> Unit,
+    /** The id to keep for a word id: a dictionary word that became a built-in word maps to it (WordSource.resolve). */
+    private val resolveWord: suspend (Int) -> Int = { it },
 ) {
     @Inject
-    constructor(cloud: SyncCloud, local: SyncLocal, prefs: UserPreferences) :
-        this(cloud, local, prefs, System::currentTimeMillis, { android.util.Log.w("SyncEngine", "sync failed", it) })
+    constructor(cloud: SyncCloud, local: SyncLocal, prefs: UserPreferences, words: com.flurai.app.core.dictionary.WordSource) :
+        this(cloud, local, prefs, System::currentTimeMillis, { android.util.Log.w("SyncEngine", "sync failed", it) }, { id -> words.resolve(id) })
+
+    /** The backup was written by a newer FluRai in a format this version cannot read safely. */
+    class NeedsUpdateException : Exception("backup written by a newer version")
 
     private val mutex = Mutex()
     private val _status = MutableStateFlow(SyncStatus())
@@ -73,6 +79,7 @@ class SyncEngine internal constructor(
     }
 
     private suspend fun syncOnce(uid: String) {
+        if (!formatSupported(cloud.document(uid, META_COLLECTION, SCHEMA_DOC))) throw NeedsUpdateException()
         val startedAt = clock()
         val cursors = prefs.cursors(uid)
         val pulled = pull(uid, cursors.pull)
@@ -82,6 +89,7 @@ class SyncEngine internal constructor(
 
     /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
     private fun describe(e: Exception): String {
+        if (e is NeedsUpdateException) return "Update FluRai to keep syncing: your backup was saved by a newer version. Your data is safe on this phone."
         val reason = when ((e as? CloudException)?.reason) {
             CloudException.Reason.NotAllowed -> "not allowed (confirm your email, then sign out and in)"
             CloudException.Reason.Offline -> "no connection to the server"
@@ -131,10 +139,12 @@ class SyncEngine internal constructor(
 
         for (doc in cardDocs) {
             max = maxOf(max, doc.updatedAt)
-            val card = cardFrom(uid, doc.data) ?: continue
+            val stored = cardFrom(uid, doc.data) ?: continue
+            // A dictionary word that has since become a built-in word is merged into it (see WordMerger).
+            val card = if (stored.itemType == ItemType.Word) stored.copy(itemId = resolveWord(stored.itemId)) else stored
             val mine = local.card(uid, card.itemType, card.itemId, card.kind)
             if (mine == null || touched(card) > touched(mine)) local.upsertCard(card)
-            if (cloudCovers(touched(card), mine?.let(::touched))) cardIds += doc.id
+            if (card == stored && cloudCovers(touched(card), mine?.let(::touched))) cardIds += doc.id
         }
         for (doc in dayDocs) {
             max = maxOf(max, doc.updatedAt)
@@ -182,6 +192,7 @@ class SyncEngine internal constructor(
         }
         items("decks")?.let { cloudItems ->
             val theirs = cloudItems.mapNotNull { deckFrom(uid, it) }
+                .map { d -> DeckDoc(d.deck, d.words.map { resolveWord(it) }.distinct()) }
             val mine = localDeckDocs(uid)
             if (theirs.map { deckDoc(it.deck, it.words) } != mine && mayTakeCloudVersion(uid, "decks", mine)) {
                 local.replaceDecks(uid, theirs.map { it.deck to it.words })

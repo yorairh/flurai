@@ -52,6 +52,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.toRoute
 import com.flurai.app.core.content.ContentDao
+import com.flurai.app.core.dictionary.isJlpt
 import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.auth.AuthRepository
@@ -88,6 +89,7 @@ class WordDetailViewModel @Inject constructor(
     private val study: StudyRepository,
     val speaker: JapaneseSpeaker,
     private val decks: DeckRepository,
+    private val words: com.flurai.app.core.dictionary.WordSource,
 ) : ViewModel() {
     private val item = ItemRef(ItemType.Word, savedStateHandle.toRoute<WordRoute>().id)
     private val _detail = MutableStateFlow<WordDetail?>(null)
@@ -110,10 +112,10 @@ class WordDetailViewModel @Inject constructor(
     init {
         speaker.start()
         viewModelScope.launch {
-            val word = content.word(item.itemId) ?: return@launch
+            val word = words.word(item.itemId) ?: return@launch
             // The kanji of the word that are in the kanji list, each once, in reading order.
             val kanji = word.expression.map { it.toString() }.distinct().filter { content.kanji(it) != null }
-            _detail.value = WordDetail(word, content.sentencesForWord(item.itemId), kanji)
+            _detail.value = WordDetail(word, words.sentences(item.itemId), kanji)
         }
     }
 
@@ -198,7 +200,7 @@ fun WordDetailScreen(onBack: () -> Unit, onOpenWord: (Int) -> Unit = {}, viewMod
             }
             Text(word.meanings, style = MaterialTheme.typography.titleLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Tag("JLPT N${word.jlpt}")
+                Tag(if (word.isJlpt) "JLPT N${word.jlpt}" else "Not JLPT")
                 word.genkiLesson?.let { Tag("Genki lesson $it") }
                 partOfSpeechLabel(word.partsOfSpeech)?.let { Tag(it) }
             }

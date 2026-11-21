@@ -19,7 +19,14 @@ class WordCache @Inject constructor(private val content: ContentDao) {
     @Volatile
     private var words: List<WordEntity>? = null
 
+    @Volatile
+    private var jmdictIndex: Map<Int, Int>? = null
+
     suspend fun all(): List<WordEntity> = words ?: mutex.withLock {
         words ?: withContext(Dispatchers.IO) { content.allWords() }.also { words = it }
     }
+
+    /** JMdict entry id -> built-in word id, for the built-in words found in JMdict. */
+    suspend fun byJmdictId(): Map<Int, Int> = jmdictIndex
+        ?: all().mapNotNull { w -> w.jmdictId?.let { it to w.id } }.toMap().also { jmdictIndex = it }
 }

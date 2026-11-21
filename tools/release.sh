@@ -16,6 +16,8 @@ git fetch -q origin main
 [[ "$(git rev-parse HEAD)" == "$(git rev-parse origin/main)" ]] || { echo "main is not in sync with origin/main."; exit 1; }
 [[ -f "$notes" ]] || { echo "Missing release notes: $notes"; exit 1; }
 grep -q "versionName = \"$version\"" app/build.gradle.kts || { echo "app/build.gradle.kts versionName is not $version."; exit 1; }
+# dictionary.db is stored with Git LFS: without git-lfs the checkout holds a small pointer file instead of the database.
+[[ "$(wc -c < app/src/main/assets/dictionary.db)" -gt 1000000 ]] || { echo "dictionary.db is a Git LFS pointer: install git-lfs and run git lfs pull."; exit 1; }
 [[ -f "$HOME/.flurai-signing/keystore.properties" ]] || { echo "Release key not found in ~/.flurai-signing."; exit 1; }
 
 export JAVA_HOME="${JAVA_HOME:-/c/Program Files/Android/Android Studio/jbr}"

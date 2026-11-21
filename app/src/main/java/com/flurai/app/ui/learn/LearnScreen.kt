@@ -65,7 +65,7 @@ fun LearnScreen(
                 EntryCard(
                     japanese = "辞書",
                     title = "Word library",
-                    body = "Browse and search 8,000 words and 2,200 kanji from N5 to N1, with example sentences.",
+                    body = "Browse 8,000 JLPT words and 2,200 kanji from N5 to N1, and search a full dictionary of 200,000 words.",
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,

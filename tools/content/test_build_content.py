@@ -317,3 +317,82 @@ class BuiltDatabaseTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def jm(entry_id, kanji, kana, senses, uk=False):
+    """A JMdict entry as jmdict-simplified writes it. kanji/kana: lists of (text, tags); senses: lists of glosses."""
+    return {
+        "id": str(entry_id),
+        "kanji": [{"common": False, "text": t, "tags": tags} for t, tags in kanji],
+        "kana": [{"common": i == 0, "text": t, "tags": tags, "appliesToKanji": ["*"]} for i, (t, tags) in enumerate(kana)],
+        "sense": [
+            {"partOfSpeech": ["n"], "misc": ["uk"] if uk and i == 0 else [], "gloss": [{"text": g} for g in glosses]}
+            for i, glosses in enumerate(senses)
+        ],
+    }
+
+
+class DictionaryEntryTest(unittest.TestCase):
+    def test_kanji_word_with_other_spellings_and_its_first_senses(self):
+        e = bc.flatten_entry(jm(1358280, [("食べる", []), ("喰べる", ["sK"])], [("たべる", [])], [["to eat"], ["to live on", "to subsist on"]]))
+        self.assertEqual((1358280, "食べる", "たべる"), (e.id, e.expression, e.reading))
+        self.assertEqual([], e.other_forms)  # a search-only spelling is not shown...
+        self.assertIn(("喰べる", False), e.forms)  # ...but still finds the entry
+        self.assertEqual("to eat; to live on, to subsist on", e.meanings)
+        self.assertTrue(e.common)
+
+    def test_usually_kana_words_are_shown_in_kana(self):
+        e = bc.flatten_entry(jm(1001000, [("迄", [])], [("まで", [])], [["until"]], uk=True))
+        self.assertEqual(("まで", "まで", ["迄"]), (e.expression, e.reading, e.other_forms))
+
+    def test_only_the_first_senses_are_kept(self):
+        senses = [[f"sense {i}"] for i in range(6)]
+        e = bc.flatten_entry(jm(1002000, [], [("ああ", [])], senses))
+        self.assertEqual("sense 0; sense 1; sense 2", e.meanings)
+
+    def test_an_entry_without_glosses_is_left_out(self):
+        self.assertIsNone(bc.flatten_entry(jm(1003000, [], [("ああ", [])], [[""]])))
+
+
+@unittest.skipUnless(bc.DICT_OUTPUT.exists(), "dictionary.db not built yet")
+class BuiltDictionaryTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.db = sqlite3.connect(bc.DICT_OUTPUT)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.db.close()
+
+    def test_matches_room_schema(self):
+        schema = bc.latest_schema(bc.DICT_SCHEMA_DIR)["database"]
+        self.assertEqual(schema["version"], self.db.execute("PRAGMA user_version").fetchone()[0])
+        identity = self.db.execute("SELECT identity_hash FROM room_master_table").fetchone()[0]
+        self.assertEqual(schema["identityHash"], identity)
+
+    def test_stamp_matches_database(self):
+        self.assertTrue(bc.DICT_STAMP.exists(), "dictionary.db.stamp is missing: re-run build_content.py")
+        self.assertEqual(bc.content_stamp(bc.DICT_OUTPUT), bc.DICT_STAMP.read_text(encoding="ascii").strip(),
+                         "dictionary.db and dictionary.db.stamp disagree: re-run build_content.py and commit both")
+
+    def test_all_of_jmdict_is_there_above_the_built_in_ids(self):
+        count, low = self.db.execute("SELECT COUNT(*), MIN(id) FROM entry").fetchone()
+        self.assertGreater(count, 200_000)
+        self.assertGreaterEqual(low, 1_000_000)  # ids below that are built-in words (see WordSource)
+
+    def test_lookup_by_any_spelling_and_english_search(self):
+        def ids(sql, *args):
+            return {r[0] for r in self.db.execute(sql, args)}
+        self.assertIn(1358280, ids("SELECT id FROM entry WHERE expression = ? AND reading = ?", "食べる", "たべる"))
+        self.assertIn(1358280, ids("SELECT entry_id FROM form WHERE text = ?", "喰べる"))
+        self.assertIn(1358280, ids("SELECT rowid FROM entry_fts WHERE entry_fts MATCH ?", "eat"))
+
+    def test_furigana_covers_kanji_words(self):
+        total, marked = self.db.execute(
+            "SELECT COUNT(*), SUM(ruby IS NOT NULL) FROM entry WHERE expression != reading AND expression GLOB '*[一-龯]*'").fetchone()
+        self.assertGreater(marked / total, 0.995)
+
+    def test_examples_are_short_and_translated(self):
+        for jp, en in self.db.execute("SELECT japanese, english FROM example LIMIT 500"):
+            self.assertLessEqual(len(jp), bc.MAX_SENTENCE_LENGTH)
+            self.assertTrue(en)
