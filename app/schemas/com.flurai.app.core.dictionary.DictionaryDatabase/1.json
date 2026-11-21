@@ -1,0 +1,213 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "38311ae3ea642cdb4541d94788db742b",
+    "entities": [
+      {
+        "tableName": "entry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `expression` TEXT NOT NULL, `reading` TEXT NOT NULL, `other_forms` TEXT, `meanings` TEXT NOT NULL, `parts_of_speech` TEXT, `ruby` TEXT, `common` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expression",
+            "columnName": "expression",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reading",
+            "columnName": "reading",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "otherForms",
+            "columnName": "other_forms",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "meanings",
+            "columnName": "meanings",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "partsOfSpeech",
+            "columnName": "parts_of_speech",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "ruby",
+            "columnName": "ruby",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "common",
+            "columnName": "common",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_entry_expression",
+            "unique": false,
+            "columnNames": [
+              "expression"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entry_expression` ON `${TABLE_NAME}` (`expression`)"
+          },
+          {
+            "name": "index_entry_reading",
+            "unique": false,
+            "columnNames": [
+              "reading"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entry_reading` ON `${TABLE_NAME}` (`reading`)"
+          }
+        ]
+      },
+      {
+        "tableName": "form",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`text` TEXT NOT NULL, `entry_id` INTEGER NOT NULL, `is_kana` INTEGER NOT NULL, PRIMARY KEY(`text`, `entry_id`))",
+        "fields": [
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entryId",
+            "columnName": "entry_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isKana",
+            "columnName": "is_kana",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "text",
+            "entry_id"
+          ]
+        }
+      },
+      {
+        "tableName": "entry_fts",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`meanings` TEXT NOT NULL, content=`entry`)",
+        "fields": [
+          {
+            "fieldPath": "meanings",
+            "columnName": "meanings",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": []
+        },
+        "ftsVersion": "FTS4",
+        "ftsOptions": {
+          "tokenizer": "simple",
+          "tokenizerArgs": [],
+          "contentTable": "entry",
+          "languageIdColumnName": "",
+          "matchInfo": "FTS4",
+          "notIndexedColumns": [],
+          "prefixSizes": [],
+          "preferredOrder": "ASC"
+        },
+        "contentSyncTriggers": [
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_entry_fts_BEFORE_UPDATE BEFORE UPDATE ON `entry` BEGIN DELETE FROM `entry_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_entry_fts_BEFORE_DELETE BEFORE DELETE ON `entry` BEGIN DELETE FROM `entry_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_entry_fts_AFTER_UPDATE AFTER UPDATE ON `entry` BEGIN INSERT INTO `entry_fts`(`docid`, `meanings`) VALUES (NEW.`rowid`, NEW.`meanings`); END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_entry_fts_AFTER_INSERT AFTER INSERT ON `entry` BEGIN INSERT INTO `entry_fts`(`docid`, `meanings`) VALUES (NEW.`rowid`, NEW.`meanings`); END"
+        ]
+      },
+      {
+        "tableName": "example",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entry_id` INTEGER NOT NULL, `japanese` TEXT NOT NULL, `english` TEXT NOT NULL, `ruby` TEXT, PRIMARY KEY(`entry_id`))",
+        "fields": [
+          {
+            "fieldPath": "entryId",
+            "columnName": "entry_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "japanese",
+            "columnName": "japanese",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "english",
+            "columnName": "english",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ruby",
+            "columnName": "ruby",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "entry_id"
+          ]
+        }
+      },
+      {
+        "tableName": "dictionary_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38311ae3ea642cdb4541d94788db742b')"
+    ]
+  }
+}

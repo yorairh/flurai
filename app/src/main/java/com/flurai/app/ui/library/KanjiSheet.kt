@@ -1,5 +1,6 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.core.dictionary.levelLabel
 import com.flurai.app.ui.components.WordExpression
 import com.flurai.app.ui.components.wordHasRuby
 import androidx.compose.foundation.clickable
@@ -103,7 +104,7 @@ fun KanjiSheet(kanji: KanjiEntity, words: List<WordEntity>, onOpenWord: (Int) ->
                             }
                             Text(word.meanings, style = MaterialTheme.typography.bodyMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         }
-                        Text("N${word.jlpt}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text(word.levelLabel, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                     }
                     HorizontalDivider()
                 }

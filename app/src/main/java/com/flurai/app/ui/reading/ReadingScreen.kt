@@ -1,5 +1,6 @@
 package com.flurai.app.ui.reading
 
+import com.flurai.app.core.dictionary.levelLabel
 import com.flurai.app.ui.components.WordExpression
 import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.ui.components.LevelChips
@@ -184,7 +185,7 @@ private fun WordSheet(word: WordEntity, added: Boolean, onAdd: () -> Unit, onDet
             WordExpression(word, MaterialTheme.typography.displaySmall.japanese())
             if (word.reading != word.expression && !wordHasRuby(word)) Text(word.reading, style = MaterialTheme.typography.titleLarge.japanese())
             Text(word.meanings, style = MaterialTheme.typography.bodyLarge)
-            Text("N${word.jlpt}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(word.levelLabel, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(8.dp))
             Button(onClick = onAdd, enabled = !added, modifier = Modifier.fillMaxWidth()) {
                 Text(if (added) "Added to flashcards" else "Add to flashcards")

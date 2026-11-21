@@ -22,7 +22,7 @@ private data class Source(val name: String, val usedFor: String, val licence: St
 private val sources = listOf(
     Source(
         "JMdict and KANJIDIC2",
-        "Word details, kanji readings and meanings",
+        "The dictionary (every word in the library and the words outside the JLPT lists), word details, kanji readings and meanings",
         "Creative Commons Attribution-ShareAlike 4.0",
         "This app uses the JMdict/EDICT and KANJIDIC dictionary files. These files are the property of the " +
             "Electronic Dictionary Research and Development Group, and are used in conformance with the " +

@@ -221,4 +221,25 @@ class ProgressCalculatorTest {
         )
         assertEquals(listOf(3, 1, 0, 0, 0, 0, 1), forecast(cards, now, tokyo))
     }
+
+    @Test
+    fun dictionaryWordsCountAsOtherWordsNotTowardALevel() {
+        val drink = word(1_200_001, 0, "飲料") // a dictionary word: no JLPT level
+        val cards = listOf(card(1, stability = 30.0), card(1_200_001, stability = 30.0), card(1_200_002, stability = 1.0))
+        val p = computeProgress(cards, catalog, emptyList(), emptySet(), now, tokyo, otherWords = mapOf(drink.id to drink))
+
+        assertEquals(1, p.vocab.first { it.jlpt == 5 }.knownCount)
+        assertEquals(OtherWordsProgress(learning = 1, known = 1), p.other)
+        // Its kanji count: 飲 is an N5 kanji the learner can now read.
+        assertEquals(2, p.kanji.first { it.jlpt == 5 }.known) // 食 (食べる) and 飲 (飲料)
+        // The level estimate only looks at JLPT words.
+        assertEquals(progress(listOf(card(1, stability = 30.0))).estimate, p.estimate)
+    }
+
+    @Test
+    fun aForgottenDictionaryWordIsAWeakWord() {
+        val drink = word(1_200_001, 0, "飲料")
+        val p = computeProgress(listOf(card(1_200_001, lapses = 2)), catalog, emptyList(), emptySet(), now, tokyo, otherWords = mapOf(drink.id to drink))
+        assertEquals(listOf(1_200_001), p.weak.map { it.word.id })
+    }
 }

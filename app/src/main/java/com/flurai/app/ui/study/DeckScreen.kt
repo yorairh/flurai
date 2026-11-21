@@ -47,7 +47,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.flurai.app.core.auth.AuthRepository
 import com.flurai.app.core.auth.uid
-import com.flurai.app.core.content.ContentDao
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.study.DeckRepository
 import com.flurai.app.core.study.ItemType
@@ -85,7 +84,7 @@ class DeckViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val decks: DeckRepository,
     study: StudyRepository,
-    content: ContentDao,
+    wordSource: com.flurai.app.core.dictionary.WordSource,
 ) : ViewModel() {
     val deckId = savedStateHandle.toRoute<DeckRoute>().id
 
@@ -94,7 +93,7 @@ class DeckViewModel @Inject constructor(
         combine(decks.decks(user.uid), decks.wordIds(deckId), study.introducedItems(user.uid)) { all, ids, introduced ->
             val deck = all.firstOrNull { it.id == deckId }
                 ?: return@combine DeckUiState(loading = false, gone = true)
-            val byId = ids.chunked(500).flatMap { content.words(it) }.associateBy { it.id }
+            val byId = wordSource.words(ids).associateBy { it.id }
             val started = introduced.filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
             DeckUiState(loading = false, name = deck.name, words = ids.mapNotNull { byId[it] }, started = started)
         }

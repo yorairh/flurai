@@ -10,7 +10,6 @@ import com.flurai.app.core.content.Romaji
 import com.flurai.app.core.content.SearchQuery
 import com.flurai.app.core.content.WordEntity
 import com.flurai.app.core.content.rankKanjiList
-import com.flurai.app.core.content.rankWords
 import com.flurai.app.core.study.DeckRepository
 import com.flurai.app.ui.LibraryRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,6 +38,7 @@ class LibraryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val content: ContentDao,
     private val decks: DeckRepository,
+    private val wordSource: com.flurai.app.core.dictionary.WordSource,
 ) : ViewModel() {
 
     /** Not 0 when the library was opened to put words into one of the learner's decks. */
@@ -67,7 +67,7 @@ class LibraryViewModel @Inject constructor(
     val words: StateFlow<List<WordEntity>?> = combine(_jlpt, search) { jlpt, query -> jlpt to query }
         .flatMapLatest { (jlpt, query) ->
             if (query.text.isEmpty()) content.wordsAtLevel(jlpt)
-            else content.searchCandidates(query.text, query.kana).map { rankWords(it, query) }
+            else content.searchCandidates(query.text, query.kana).map { wordSource.search(query, it) }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
 

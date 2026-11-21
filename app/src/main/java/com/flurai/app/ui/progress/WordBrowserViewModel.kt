@@ -68,7 +68,7 @@ class WordBrowserViewModel @Inject constructor(
     val state: StateFlow<BrowserState> = auth.currentUser.flatMapLatest { user ->
         if (user == null) return@flatMapLatest emptyFlow()
         combine(progress.cards(user.uid), filter, level) { cards, selectedFilter, selectedLevel ->
-            val words = progress.catalog().words
+            val words = progress.wordsFor(cards)
             val rows = cards
                 .filter { it.itemType == ItemType.Word && it.kind == CardKind.Recognition }
                 .mapNotNull { card -> words[card.itemId]?.let { BrowserRow(it, card.knowledge(), card) } }

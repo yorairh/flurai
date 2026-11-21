@@ -47,6 +47,9 @@ SCHEMA_DIR = ROOT / "app" / "schemas" / "com.flurai.app.core.content.ContentData
 OUTPUT = ROOT / "app" / "src" / "main" / "assets" / "content.db"
 # Read by the app (ContentCopy.kt): a new stamp makes installed apps copy content.db again.
 STAMP = OUTPUT.with_name("content.db.stamp")
+DICT_SCHEMA_DIR = ROOT / "app" / "schemas" / "com.flurai.app.core.dictionary.DictionaryDatabase"
+DICT_OUTPUT = OUTPUT.with_name("dictionary.db")
+DICT_STAMP = OUTPUT.with_name("dictionary.db.stamp")
 
 JLPT_DECKS_COMMIT = "1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0"
 KANJI_DATA_COMMIT = "00fd7079c3890f430759536f91aa5e854ec0ca4f"
@@ -401,8 +404,9 @@ def pick_sentences(
     japanese: dict[int, str],
     english: dict[int, str],
     grades: dict[int, int | None] | None = None,
+    limit: int = MAX_SENTENCES_PER_WORD,
 ) -> dict[int, tuple[str, str, bool]]:
-    """Chooses up to MAX_SENTENCES_PER_WORD examples per word; returns the sentences used."""
+    """Chooses up to ``limit`` examples per word; returns the sentences used."""
     by_headword: dict[str, list[tuple[IndexToken, IndexedSentence]]] = {}
     for sentence in indexed:
         if sentence.japanese_id not in japanese or sentence.english_id not in english:
@@ -430,7 +434,7 @@ def pick_sentences(
                 best = candidates.get(sentence.japanese_id)
                 if best is None or score < best[0]:
                     candidates[sentence.japanese_id] = (score, sentence, token.good_example)
-        chosen = sorted(candidates.values(), key=lambda c: c[0])[:MAX_SENTENCES_PER_WORD]
+        chosen = sorted(candidates.values(), key=lambda c: c[0])[:limit]
         for _, sentence, good in chosen:
             word.sentence_ids.append(sentence.japanese_id)
             previous = used.get(sentence.japanese_id)
@@ -698,13 +702,122 @@ def read_indices(path: Path) -> str:
 
 
 # --------------------------------------------------------------------------------------------
+# Dictionary (assets/dictionary.db): the whole of JMdict, for words outside the JLPT lists
+#
+# An entry's id is its JMdict sequence number (>= 1,000,000). Cards and decks store it for a word
+# that is not a built-in word, so ids are never renumbered: JMdict keeps its sequence numbers.
+
+DICT_SENSES = 3  # senses shown as the meaning; later ones are rare uses
+DICT_EXAMPLES = 1  # example sentences per entry
+_HIDDEN_FORM_TAGS = frozenset({"sK", "sk", "iK", "ik", "oK", "ok", "rK", "rk"})  # search-only, irregular, outdated, rare
+
+
+@dataclass
+class DictEntry:
+    id: int
+    expression: str
+    reading: str
+    other_forms: list[str]
+    meanings: str
+    parts_of_speech: str | None
+    common: bool
+    forms: list[tuple[str, bool]]  # (text, is_kana): every spelling and reading, for lookups
+    ruby: str | None = None
+
+
+def _shown(forms: list[dict]) -> list[dict]:
+    """Forms worth showing: not search-only, irregular, outdated or rare (all of them when that leaves none)."""
+    kept = [f for f in forms if not _HIDDEN_FORM_TAGS & set(f.get("tags", []))]
+    return kept or forms
+
+
+def flatten_entry(entry: dict) -> DictEntry | None:
+    """One JMdict entry as a word: its usual spelling (kana when JMdict says it is usually written in kana),
+    the reading that goes with it, the other spellings, and the glosses of the first senses."""
+    kanji = _shown(entry["kanji"])
+    kana = _shown(entry["kana"])
+    senses = [s for s in entry["sense"] if any(g["text"] for g in s["gloss"])]
+    if not kana or not senses:
+        return None
+    usually_kana = "uk" in senses[0].get("misc", [])
+    if kanji and not usually_kana:
+        expression = kanji[0]["text"]
+        fitting = [k for k in kana if "*" in k.get("appliesToKanji", ["*"]) or expression in k.get("appliesToKanji", [])]
+        reading = (fitting or kana)[0]["text"]
+        other_forms = [k["text"] for k in kanji[1:]]
+    else:
+        expression = reading = kana[0]["text"]
+        other_forms = [k["text"] for k in kanji]
+    meanings = []
+    for sense in senses[:DICT_SENSES]:
+        glosses = list(dict.fromkeys(g["text"] for g in sense["gloss"] if g["text"]))
+        meanings.append(", ".join(glosses))
+    forms = [(k["text"], False) for k in entry["kanji"]] + [(k["text"], True) for k in entry["kana"]]
+    return DictEntry(
+        id=int(entry["id"]),
+        expression=expression,
+        reading=reading,
+        other_forms=other_forms,
+        meanings="; ".join(dict.fromkeys(meanings)),
+        parts_of_speech=",".join(senses[0]["partOfSpeech"]) or None,
+        common=any(f.get("common") for f in entry["kanji"] + entry["kana"]),
+        forms=list(dict.fromkeys(forms)),
+    )
+
+
+def dictionary_entries(jmdict: dict, kanji_readings: dict[str, dict[str, int]]) -> list[DictEntry]:
+    entries = [e for e in (flatten_entry(raw) for raw in jmdict["words"]) if e is not None]
+    for e in entries:
+        if e.reading != e.expression and any(ruby.is_kanji(c) for c in e.expression):
+            e.ruby = ruby.markup(ruby.split_parts(ruby.align(e.expression, ruby.spoken_reading(e.expression, e.reading)), kanji_readings))
+    return entries
+
+
+def as_word(entry: DictEntry) -> Word:
+    """A dictionary entry in the shape pick_sentences expects. Level 0: any graded sentence is easy enough."""
+    return Word(
+        guid=str(entry.id), expression=entry.expression, reading=entry.reading,
+        other_forms=[f for f, kana in entry.forms if not kana and f != entry.expression],
+        meanings=entry.meanings, jlpt=0, genki_lesson=None, id=entry.id, jmdict_id=entry.id,
+    )
+
+
+def write_dictionary(path: Path, schema: dict, entries: list[DictEntry], examples: dict[int, tuple[str, str, str | None]], info: dict[str, str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    tmp.unlink(missing_ok=True)
+    db = sqlite3.connect(tmp)
+    create_tables(db, schema)
+    db.executemany(
+        "INSERT INTO entry (id, expression, reading, other_forms, meanings, parts_of_speech, ruby, common) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [(e.id, e.expression, e.reading, "; ".join(e.other_forms) or None, e.meanings, e.parts_of_speech, e.ruby, int(e.common)) for e in entries],
+    )
+    db.executemany(
+        "INSERT OR IGNORE INTO form (text, entry_id, is_kana) VALUES (?, ?, ?)",
+        [(text, e.id, int(kana)) for e in entries for text, kana in e.forms if text not in (e.expression, e.reading)],
+    )
+    db.executemany(
+        "INSERT INTO example (entry_id, japanese, english, ruby) VALUES (?, ?, ?, ?)",
+        [(eid, jp, en, rb) for eid, (jp, en, rb) in sorted(examples.items())],
+    )
+    db.executemany("INSERT INTO dictionary_info (key, value) VALUES (?, ?)", sorted(info.items()))
+    db.commit()
+    db.execute("INSERT INTO entry_fts(entry_fts) VALUES ('optimize')")
+    db.commit()
+    db.execute("VACUUM")
+    db.close()
+    path.unlink(missing_ok=True)
+    tmp.rename(path)
+
+
+# --------------------------------------------------------------------------------------------
 # Database
 
 
-def latest_schema() -> dict:
-    files = sorted(SCHEMA_DIR.glob("*.json"), key=lambda p: int(p.stem))
+def latest_schema(schema_dir: Path = SCHEMA_DIR) -> dict:
+    files = sorted(schema_dir.glob("*.json"), key=lambda p: int(p.stem))
     if not files:
-        sys.exit(f"No Room schema in {SCHEMA_DIR}; build the app once (./gradlew kspDebugKotlin) first.")
+        sys.exit(f"No Room schema in {schema_dir}; build the app once (./gradlew kspDebugKotlin) first.")
     return json.loads(files[-1].read_text(encoding="utf-8"))
 
 
@@ -728,6 +841,8 @@ def create_tables(db: sqlite3.Connection, schema: dict) -> None:
         db.execute(entity["createSql"].replace("${TABLE_NAME}", table))
         for index in entity.get("indices", []):
             db.execute(index["createSql"].replace("${TABLE_NAME}", table))
+        for trigger in entity.get("contentSyncTriggers", []):  # FTS tables kept in step with their content table
+            db.execute(trigger)
     for query in database["setupQueries"]:
         db.execute(query)
     db.execute(f"PRAGMA user_version = {database['version']}")
@@ -884,6 +999,32 @@ def main() -> None:
     write_database(OUTPUT, latest_schema(), words, kanji, sentences, grammar, course_entries, info, sentence_levels, sentence_ruby, word_ruby)
     write_stamp(OUTPUT, STAMP)
     save_registry(WORD_IDS, registry)
+
+    print("Dictionary")
+    entries = dictionary_entries(jmdict, kanji_readings)
+    built_in = {w.jmdict_id for w in words if w.jmdict_id is not None}
+    # Built-in words keep their own examples; an entry that is a built-in word is always shown as that word.
+    dict_words = [as_word(e) for e in entries if e.id not in built_in]
+    dict_sentences = pick_sentences(dict_words, indexed, japanese, english, grades, limit=DICT_EXAMPLES)
+    examples = {}
+    for w in dict_words:
+        if w.sentence_ids:
+            sid = w.sentence_ids[0]
+            jp, en, _ = dict_sentences[sid]
+            rb = sentence_ruby.get(sid) if sid in sentence_ruby else ruby.split_markup(ruby.sentence_markup(reader, jp, tokens_by_id.get(sid, [])), kanji_readings)
+            examples[w.id] = (jp, en, rb)
+    dict_info = {
+        "built_at": info["built_at"],
+        "jmdict_simplified": JMDICT_SIMPLIFIED_TAG,
+        "jmdict_date": str(jmdict.get("dictDate", "")),
+        "entry_count": str(len(entries)),
+        "example_count": str(len(examples)),
+    }
+    write_dictionary(DICT_OUTPUT, latest_schema(DICT_SCHEMA_DIR), entries, examples, dict_info)
+    write_stamp(DICT_OUTPUT, DICT_STAMP)
+    print(f"Wrote {DICT_OUTPUT.relative_to(ROOT)} ({DICT_OUTPUT.stat().st_size / 1e6:.1f} MB): "
+          f"{len(entries)} entries, {len(examples)} with an example, "
+          f"{sum(1 for e in entries if e.ruby)} with furigana")
 
     with_examples = sum(1 for w in words if w.sentence_ids)
     print(f"Wrote {OUTPUT.relative_to(ROOT)} ({OUTPUT.stat().st_size / 1e6:.1f} MB)")

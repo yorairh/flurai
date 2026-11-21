@@ -24,7 +24,19 @@ class ProgressRepository @Inject constructor(
     private val wordCache: WordCache,
     private val tests: TestResultDao,
     private val grammar: GrammarProgressDao,
+    private val words: com.flurai.app.core.dictionary.WordSource,
 ) {
+    /** The learner's words outside the catalog (dictionary words), looked up once each. */
+    private val otherWords = java.util.concurrent.ConcurrentHashMap<Int, com.flurai.app.core.content.WordEntity>()
+
+    private suspend fun otherWordsFor(cards: List<CardEntity>, catalog: Catalog): Map<Int, com.flurai.app.core.content.WordEntity> {
+        val ids = cards.asSequence().filter { it.itemType == com.flurai.app.core.study.ItemType.Word }
+            .map { it.itemId }.filter { it !in catalog.words }.toSet()
+        val missing = ids.filter { !otherWords.containsKey(it) }
+        if (missing.isNotEmpty()) words.words(missing).forEach { otherWords[it.id] = it }
+        return ids.mapNotNull { id -> otherWords[id]?.let { id to it } }.toMap()
+    }
+
     @Volatile
     private var cachedCatalog: Catalog? = null
 
@@ -43,11 +55,18 @@ class ProgressRepository @Inject constructor(
             grammar.progress(uid).distinctUntilChanged(),
             tests.results(uid).distinctUntilChanged(),
         ) { cards, grammarProgress, results ->
-            computeProgress(cards, catalog(), grammarProgress, passedCheckpoints(results), Instant.now())
+            val catalog = catalog()
+            computeProgress(cards, catalog, grammarProgress, passedCheckpoints(results), Instant.now(), otherWords = otherWordsFor(cards, catalog))
         }
             .flowOn(Dispatchers.Default)
             // While answering fast, only the latest state matters.
             .conflate()
 
     fun cards(uid: String): Flow<List<CardEntity>> = study.allCards(uid)
+
+    /** Every word [cards] refer to: catalog words and the learner's dictionary words. */
+    suspend fun wordsFor(cards: List<CardEntity>): Map<Int, com.flurai.app.core.content.WordEntity> {
+        val catalog = catalog()
+        return catalog.words + otherWordsFor(cards, catalog)
+    }
 }

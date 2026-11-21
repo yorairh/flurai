@@ -33,11 +33,12 @@ class SyncEngineTest {
     private val errors = mutableListOf<Throwable>()
 
     /** One phone: its own database, settings file and clock, sharing the test's cloud. */
-    private inner class Phone {
+    private inner class Phone(builtInWords: Map<Int, Int> = emptyMap()) {
         val local = InMemoryLocal()
         val dataStore = InMemoryPrefs()
         var now = 10_000L
-        val engine = SyncEngine(cloud, local, UserPreferences(dataStore), { now }, { errors += it })
+        /** [builtInWords]: JMdict id -> built-in word id, as this phone's content knows them. */
+        val engine = SyncEngine(cloud, local, UserPreferences(dataStore), { now }, { errors += it }, { builtInWords[it] ?: it })
 
         fun sync(uid: String = UID) = runBlocking { engine.sync(uid) }.also { ok ->
             if (!ok && uid != GUEST_UID) errors.lastOrNull()?.printStackTrace()
@@ -476,6 +477,76 @@ class SyncEngineTest {
         assertTrue(a.sync())
         assertEquals(5, a.local.cardRows.single().itemId)
         assertEquals(StudyDayEntity(UID, 19_000, 120, 9), a.local.dayRows.single())
+    }
+
+    // -- dictionary words ------------------------------------------------------------------------
+
+    @Test
+    fun aDictionaryWordIsBackedUpAndRestoredLikeAnyWord() {
+        val a = Phone()
+        a.local.cardRows += card(1_358_999)
+        a.addDeck("Anime", 12, 1_358_999)
+        assertTrue(a.sync())
+        assertNotNull(cloudCard(1_358_999))
+
+        val b = Phone()
+        assertTrue(b.sync())
+        assertEquals(listOf(1_358_999), b.local.cardRows.map { it.itemId })
+        assertEquals(listOf(12, 1_358_999), b.local.deckWords[b.local.deckRows.single().id])
+    }
+
+    @Test
+    fun aDictionaryWordThatBecameBuiltInIsRestoredAsTheBuiltInWord() {
+        // Phone A (older content) studied 推し as JMdict entry 2_830_001; on phone B's content it is built-in word 8_100.
+        val a = Phone()
+        a.local.cardRows += card(2_830_001, reps = 4)
+        a.addDeck("Anime", 2_830_001, 12)
+        assertTrue(a.sync())
+
+        val b = Phone(builtInWords = mapOf(2_830_001 to 8_100))
+        assertTrue(b.sync())
+        assertEquals(listOf(8_100), b.local.cardRows.map { it.itemId })
+        assertEquals(4, b.local.cardRows.single().reps)
+        assertEquals(listOf(8_100, 12), b.local.deckWords[b.local.deckRows.single().id])
+
+        // B uploads the card under the built-in id, so a later restore finds it there.
+        assertNotNull(cloudCard(8_100))
+    }
+
+    @Test
+    fun theBuiltInCopyWinsOverAnOlderDictionaryCopyOfTheSameWord() {
+        val a = Phone()
+        a.local.cardRows += card(2_830_001, lastReview = 500, reps = 2)
+        assertTrue(a.sync())
+
+        val b = Phone(builtInWords = mapOf(2_830_001 to 8_100))
+        b.local.cardRows += card(8_100, lastReview = 900, reps = 6)
+        assertTrue(b.sync())
+        assertEquals(6, b.local.cardRows.single { it.itemId == 8_100 }.reps)
+        assertEquals(1, b.local.cardRows.size)
+    }
+
+    // -- backups from newer versions -------------------------------------------------------------
+
+    @Test
+    fun aBackupInANewerFormatStopsSyncAndAsksForAnUpdate() {
+        val a = Phone()
+        a.local.cardRows += card(1)
+        runBlocking { cloud.write(UID, listOf(CloudWrite(META_COLLECTION, SCHEMA_DOC, mapOf("minVersion" to SYNC_FORMAT + 1)))) }
+
+        assertFalse(a.sync())
+        assertTrue(a.engine.status.value.error!!.startsWith("Update FluRai"))
+        assertNull(cloudCard(1)) // nothing was written over the newer backup
+        assertEquals(1, a.local.cardRows.size) // and nothing on the phone was touched
+    }
+
+    @Test
+    fun aBackupInThisFormatSyncs() {
+        runBlocking { cloud.write(UID, listOf(CloudWrite(META_COLLECTION, SCHEMA_DOC, mapOf("minVersion" to SYNC_FORMAT)))) }
+        val a = Phone()
+        a.local.cardRows += card(1)
+        assertTrue(a.sync())
+        assertNotNull(cloudCard(1))
     }
 
     private companion object {

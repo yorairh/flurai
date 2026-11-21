@@ -79,6 +79,7 @@ fun ProgressScreen(
             item { SectionHeader("語彙", "Vocabulary", "How many words of each level you know.") }
             item { Legend() }
             items(snapshot.vocab, key = { it.jlpt }) { VocabRow(it) }
+            if (!snapshot.other.isEmpty) item { OtherWordsRow(snapshot.other) }
 
             item { SectionHeader("漢字", "Kanji", "Kanji that appear in words you know.") }
             item { KanjiCard(snapshot.kanji) }
@@ -172,6 +173,32 @@ private fun LegendItem(color: androidx.compose.ui.graphics.Color, label: String)
         Box(Modifier.size(10.dp).clip(CircleShape).background(color))
         Spacer(Modifier.width(6.dp))
         Text(label, style = MaterialTheme.typography.labelMedium)
+    }
+}
+
+/** Words outside the JLPT lists: a count only, they have no level to cover. */
+@Composable
+private fun OtherWordsRow(other: com.flurai.app.core.knowledge.OtherWordsProgress) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Other words", style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.weight(1f))
+                Text(
+                    "${other.known} known · ${other.learning} learning",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+            Text(
+                "Words outside the JLPT lists. They don't count toward a level.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }
 

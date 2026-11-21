@@ -1,5 +1,6 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.core.dictionary.levelLabel
 import com.flurai.app.ui.components.WordExpression
 import com.flurai.app.ui.components.wordHasRuby
 import com.flurai.app.core.model.JlptNumbers
@@ -208,7 +209,7 @@ private fun WordRow(word: WordEntity, showLevel: Boolean, deckState: Boolean?, o
         }
         if (showLevel) {
             Spacer(Modifier.width(8.dp))
-            Text("N${word.jlpt}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            Text(word.levelLabel, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
         if (deckState != null) {
             Spacer(Modifier.width(8.dp))

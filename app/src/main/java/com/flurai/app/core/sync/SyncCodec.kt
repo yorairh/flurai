@@ -24,6 +24,20 @@ internal const val META_COLLECTION = "meta"
 /** Every collection of a user's backup (what deleting the cloud copy removes). */
 internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION
 
+/**
+ * The backup format this app reads and writes. A version that changes the format so that older apps
+ * would misread it writes `meta/schema.minVersion`; an app whose [SYNC_FORMAT] is below it stops
+ * syncing (and asks to be updated) instead of damaging the backup.
+ */
+internal const val SYNC_FORMAT = 1
+
+/** The document under [META_COLLECTION] that holds `minVersion`. */
+internal const val SCHEMA_DOC = "schema"
+
+/** Whether this app may sync a backup whose schema document is [schema] (null: no such document yet). */
+internal fun formatSupported(schema: Map<String, Any?>?): Boolean =
+    ((schema?.get("minVersion") as? Number)?.toInt() ?: 0) <= SYNC_FORMAT
+
 /** Firestore returns every whole number as Long and every fraction as Double. */
 private fun Map<*, *>.int(key: String) = (this[key] as? Number)?.toInt()
 private fun Map<*, *>.long(key: String) = (this[key] as? Number)?.toLong()
