@@ -3,23 +3,47 @@ package com.flurai.app.core.study
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
+import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** A word list the learner made (UserDatabase v6). Its words are in [DeckWordEntity]; the cards are shared, not copied. */
-@Entity(tableName = "deck")
+/**
+ * A word list the learner made or imported (UserDatabase v6, [key] and [source] since v8). Its words are in
+ * [DeckWordEntity]; the cards are shared, not copied.
+ */
+@Entity(tableName = "deck", indices = [Index(value = ["uid", "key"], unique = true)])
 data class DeckEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val uid: String,
     val name: String,
     @ColumnInfo(name = "created_at") val createdAt: Long,
+    /**
+     * The deck's lasting identity: its cloud document id and what "Studying from" a deck stores. [id] is
+     * only this phone's row number. Decks made before v8 got [legacyDeckKey], so every phone agrees.
+     */
+    @ColumnInfo(defaultValue = "''") val key: String = newDeckKey(),
+    /** Where an imported deck came from: `jiten:<title id>` or `anki:<deck id>`; null for a deck made by hand. */
+    val source: String? = null,
 )
+
+fun newDeckKey(): String = UUID.randomUUID().toString()
+
+/**
+ * The key of a deck made before decks had keys: the same on every phone that has the deck (name and
+ * creation time travel with it in the backup), so two phones migrating apart still agree.
+ */
+fun legacyDeckKey(name: String, createdAt: Long): String =
+    UUID.nameUUIDFromBytes("deck|$createdAt|$name".toByteArray()).toString()
+
+/** The `source` of a deck made from a jiten.moe title. */
+fun jitenSource(titleId: Int) = "jiten:$titleId"
 
 @Entity(tableName = "deck_word", primaryKeys = ["deck_id", "word_id"])
 data class DeckWordEntity(
@@ -33,6 +57,9 @@ data class DeckMember(val deckId: Long, val wordId: Int)
 /** What the study session needs from a deck: its word ids, in the order they were added. */
 interface DeckWords {
     suspend fun wordIds(deckId: Long): List<Int>
+
+    /** The words of [uid]'s deck with [key], in order; null when there is no such deck (it was deleted). */
+    suspend fun wordIdsByKey(uid: String, key: String): List<Int>? = null
 }
 
 @Dao
@@ -57,8 +84,20 @@ interface DeckDao {
     @Query("SELECT d.id FROM deck d JOIN deck_word w ON w.deck_id = d.id WHERE d.uid = :uid AND w.word_id = :wordId")
     fun decksWithWord(uid: String, wordId: Int): Flow<List<Long>>
 
+    @Query("SELECT * FROM deck WHERE uid = :uid AND `key` = :key")
+    suspend fun byKey(uid: String, key: String): DeckEntity?
+
+    @Query("SELECT * FROM deck WHERE uid = :uid AND source = :source ORDER BY created_at LIMIT 1")
+    suspend fun bySource(uid: String, source: String): DeckEntity?
+
+    @Query("SELECT MAX(added_at) FROM deck_word WHERE deck_id = :deckId")
+    suspend fun lastAddedAt(deckId: Long): Long?
+
     @Insert
     suspend fun insert(deck: DeckEntity): Long
+
+    @Query("UPDATE deck SET name = :name, created_at = :createdAt, source = :source WHERE id = :id")
+    suspend fun update(id: Long, name: String, createdAt: Long, source: String?)
 
     @Query("UPDATE deck SET name = :name WHERE uid = :uid AND id = :id")
     suspend fun rename(uid: String, id: Long, name: String)
@@ -93,6 +132,37 @@ interface DeckDao {
         clearAllWords(uid)
         deleteAll(uid)
         decks.forEach { (deck, words) -> create(deck, words, deck.createdAt) }
+    }
+
+    /**
+     * Makes [uid]'s deck with [deck]'s key look like [deck] with exactly [wordIds] (the cloud's copy
+     * replacing this phone's), creating it when this phone has none. The row keeps its id.
+     */
+    @Transaction
+    suspend fun put(uid: String, deck: DeckEntity, wordIds: List<Int>) {
+        val existing = byKey(uid, deck.key)
+        if (existing == null) {
+            create(deck.copy(id = 0, uid = uid), wordIds, deck.createdAt)
+        } else {
+            update(existing.id, deck.name, deck.createdAt, deck.source)
+            clearWords(existing.id)
+            wordIds.distinct().forEachIndexed { i, wordId -> addWord(DeckWordEntity(existing.id, wordId, deck.createdAt + i)) }
+        }
+    }
+
+    @Transaction
+    suspend fun deleteByKey(uid: String, key: String) {
+        byKey(uid, key)?.let { delete(uid, it.id) }
+    }
+
+    /** Adds the words of [wordIds] the deck does not have yet, after its last word, in the given order. Returns how many were added. */
+    @Transaction
+    suspend fun append(deckId: Long, wordIds: List<Int>, now: Long): Int {
+        val have = wordIds(deckId).toHashSet()
+        val start = maxOf(now, (lastAddedAt(deckId) ?: 0L) + 1)
+        val added = wordIds.distinct().filter { it !in have }
+        added.forEachIndexed { i, wordId -> addWord(DeckWordEntity(deckId, wordId, start + i)) }
+        return added.size
     }
 
     @Transaction
@@ -136,4 +206,29 @@ class DeckRepository @Inject constructor(private val dao: DeckDao) {
     suspend fun addWord(deckId: Long, wordId: Int) = dao.addWord(DeckWordEntity(deckId, wordId, System.currentTimeMillis()))
 
     suspend fun removeWord(deckId: Long, wordId: Int) = dao.removeWord(deckId, wordId)
+
+    suspend fun byKey(uid: String, key: String): DeckEntity? = dao.byKey(uid, key)
+
+    suspend fun bySource(uid: String, source: String): DeckEntity? = dao.bySource(uid, source)
+
+    /**
+     * Puts [wordIds] into the deck that came from [source]: a new deck called [name], or (imported
+     * before) the same deck, which keeps its words and gets the missing ones after them.
+     */
+    suspend fun importInto(uid: String, source: String, name: String, wordIds: List<Int>): ImportedDeck {
+        val now = System.currentTimeMillis()
+        val existing = dao.bySource(uid, source)
+        if (existing != null) {
+            val added = dao.append(existing.id, wordIds, now)
+            return ImportedDeck(existing.key, existing.name, added = added, total = dao.wordIds(existing.id).size, isNew = false)
+        }
+        val clean = cleanDeckName(name) ?: "Imported deck"
+        val deck = DeckEntity(uid = uid, name = clean, createdAt = now, source = source)
+        dao.create(deck, wordIds, now)
+        val count = wordIds.distinct().size
+        return ImportedDeck(deck.key, clean, added = count, total = count, isNew = true)
+    }
 }
+
+/** What an import did: the deck's key and name, how many words it added and how many the deck holds now. */
+data class ImportedDeck(val key: String, val name: String, val added: Int, val total: Int, val isNew: Boolean)

@@ -31,6 +31,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Switch
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import com.flurai.app.core.media.ImportOptions
+import com.flurai.app.core.media.ImportTarget
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -161,6 +169,16 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val deck = state.deck
+    var showSheet by rememberSaveable { mutableStateOf(false) }
+    if (showSheet) {
+        ImportSheet(
+            state = state,
+            onOptions = viewModel::setOptions,
+            onStudyFromDeck = viewModel::setStudyFromDeck,
+            onImport = { viewModel.importDeck(); showSheet = false },
+            onDismiss = { showSheet = false },
+        )
+    }
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text(deck?.title ?: "Title") }, onBack = onBack)
         if (deck == null) {
@@ -212,25 +230,21 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                             Text("You know ${p.knownWords} of ${p.listedWords} words", style = MaterialTheme.typography.headlineSmall)
                             StudyProgressBar(progress = { p.share.toFloat() }, modifier = Modifier.fillMaxWidth())
                             Text(
-                                "Counts the words of this title that are in the app's JLPT word lists.",
+                                "Counts the different words of this title found in the dictionary.",
                                 style = MaterialTheme.typography.bodySmall,
                             )
-                            if (analysis.wordIds.isNotEmpty()) {
-                                Button(
-                                    onClick = { viewModel.saveAsDeck() },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    enabled = state.savedDeck == null,
-                                ) {
-                                    Text("Save all its words as a deck")
+                            if (analysis.words.isNotEmpty()) {
+                                Button(onClick = { showSheet = true }, modifier = Modifier.fillMaxWidth()) {
+                                    Text(if (state.existingDeck == null) "Make a deck from this title" else "Add more words to its deck")
                                 }
                             }
                         }
                     }
-                    state.savedDeck?.let {
-                        Text(
-                            "Saved ${state.savedDeckWords} words as the deck \"$it\" (Learn → Flashcards → My decks).",
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
+                    state.imported?.let { done ->
+                        val what = if (done.isNew) "Made the deck \"${done.name}\" with ${done.total} words"
+                        else "Added ${done.added} words to \"${done.name}\" (${done.total} in all)"
+                        val study = if (state.studyingFromImported) " New words now come from this deck." else ""
+                        Text("$what (Learn → Flashcards → My decks).$study", style = MaterialTheme.typography.bodyMedium)
                     }
                 }
             }
@@ -250,6 +264,75 @@ fun MediaDetailScreen(onBack: () -> Unit, viewModel: MediaDetailViewModel = hilt
                 modifier = Modifier.padding(bottom = 16.dp),
             )
         }
+    }
+}
+
+/** The choices for a deck made from a title: how many words, which to leave out, and in what order. */
+@OptIn(ExperimentalMaterial3Api::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+private fun ImportSheet(
+    state: MediaDetailState,
+    onOptions: (ImportOptions) -> Unit,
+    onStudyFromDeck: (Boolean) -> Unit,
+    onImport: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val o = state.options
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+        Column(
+            Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(bottom = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(if (state.existingDeck == null) "Make a deck" else "Add to \"${state.existingDeck}\"", style = MaterialTheme.typography.titleLarge)
+            Text("Words to understand", style = MaterialTheme.typography.titleSmall)
+            Text(
+                "Cover a share of the title's text with its most frequent words, or take a number of them.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                ImportTarget.entries.forEach { target ->
+                    FilterChip(selected = o.target == target, onClick = { onOptions(o.copy(target = target)) }, label = { Text(target.label) })
+                }
+            }
+            Text("Leave out", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 8.dp))
+            val harder = JlptLevel.entries.getOrNull(state.studyLevel.ordinal + 2)
+            SwitchRow("Words I know", o.skipKnown) { onOptions(o.copy(skipKnown = it)) }
+            SwitchRow("Words that appear only once", o.skipSeenOnce) { onOptions(o.copy(skipSeenOnce = it)) }
+            SwitchRow("Words written only in kana", o.skipKanaOnly) { onOptions(o.copy(skipKanaOnly = it)) }
+            if (harder != null) {
+                SwitchRow("JLPT words of ${harder.label} and harder", o.skipTooHard) { onOptions(o.copy(skipTooHard = it)) }
+            }
+            Text("Order", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(selected = !o.storyOrder, onClick = { onOptions(o.copy(storyOrder = false)) }, label = { Text("Most frequent first") })
+                FilterChip(selected = o.storyOrder, onClick = { onOptions(o.copy(storyOrder = true)) }, label = { Text("Story order") })
+            }
+            SwitchRow("Take my daily new words from this deck", state.studyFromDeck, onStudyFromDeck)
+            val count = state.picked.size
+            Button(onClick = onImport, enabled = count > 0 && !state.importing, modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+                Text(
+                    when {
+                        count == 0 -> "No words left with these choices"
+                        state.existingDeck == null -> "Make a deck of $count words"
+                        else -> "Add up to $count words"
+                    },
+                )
+            }
+            Text(
+                "Word list from jiten.moe (CC BY-SA). No cards are started: the deck's words come up as new words.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+    }
+}
+
+@Composable
+private fun SwitchRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Text(label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+        Switch(checked = checked, onCheckedChange = onChange)
     }
 }
 

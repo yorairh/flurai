@@ -10,8 +10,6 @@ import org.junit.Test
 class MediaTest {
     private fun word(id: Int, occurrences: Int) = DeckWord(id, WordForm("w$id"), occurrences)
 
-    private val words = listOf(word(1, 600), word(2, 300), word(3, 100))
-
     @Test
     fun allWordsOfATitleAreReadPageByPage() = runBlocking {
         val all = (1..5).map { word(it, 100 - it) }
@@ -32,10 +30,45 @@ class MediaTest {
         assertEquals(3, allDeckWords(maxPages = 3) { offset -> VocabularyPage(DeckVocabulary(listOf(word(offset, 1))), totalItems = 1000) }.size)
     }
 
+    // -- making a deck from a title -----------------------------------------------------------------
+
+    /** In story order: 10 occurs most, then 20 ... total 1,000 occurrences of matched words. */
+    private val title = listOf(
+        TitleWord(30, occurrences = 100, jlpt = 3, kanaOnly = false, known = false),
+        TitleWord(10, occurrences = 500, jlpt = 5, kanaOnly = true, known = true),
+        TitleWord(20, occurrences = 300, jlpt = 0, kanaOnly = false, known = false),
+        TitleWord(40, occurrences = 99, jlpt = 1, kanaOnly = false, known = false),
+        TitleWord(50, occurrences = 1, jlpt = 0, kanaOnly = false, known = false),
+    )
+    private val noFilters = ImportOptions(skipKnown = false, skipKanaOnly = false, skipSeenOnce = false, skipTooHard = false)
+
     @Test
-    fun listedWordsAreOurIdsMostCommonFirst() {
-        val map = mapOf(3 to 103, 1 to 101) // word 2 is not in our lists
-        assertEquals(listOf(101, 103), listedWordIds(words.reversed(), map))
+    fun aCoverageTargetTakesTheMostFrequentWordsUntilThatShareOfTheTextIsCovered() {
+        // 500 + 300 = 80% of 1,000.
+        assertEquals(listOf(10, 20), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.Coverage80), JlptLevel.N5))
+        assertEquals(listOf(10, 20, 30), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.Coverage90), JlptLevel.N5))
+        // Words we have no entry for still count in the text, so 95% of 2,000 needs every matched word and more.
+        assertEquals(listOf(10, 20, 30, 40, 50), pickTitleWords(title, 2_000, noFilters.copy(target = ImportTarget.Coverage95), JlptLevel.N5))
+    }
+
+    @Test
+    fun aFixedTargetTakesThatManyOfTheMostFrequentWords() {
+        assertEquals(listOf(10, 20, 30, 40, 50), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.Top200), JlptLevel.N5))
+        assertEquals(listOf(10, 20, 30, 40, 50), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.All), JlptLevel.N5))
+    }
+
+    @Test
+    fun theDefaultsLeaveOutKnownWordsWordsSeenOnceAndJlptWordsTooFarAbove() {
+        // N5 learner: N3 (30) is more than one level above; N1 (40) too; 10 is known; 50 occurs once.
+        assertEquals(listOf(20), pickTitleWords(title, 1_000, ImportOptions(target = ImportTarget.All), JlptLevel.N5))
+        // An N4 learner may take N3 words.
+        assertEquals(listOf(20, 30), pickTitleWords(title, 1_000, ImportOptions(target = ImportTarget.All), JlptLevel.N4))
+        assertEquals(listOf(20, 30, 40, 50), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.All, skipKanaOnly = true), JlptLevel.N5))
+    }
+
+    @Test
+    fun storyOrderKeepsTheWordsAsTheyFirstAppear() {
+        assertEquals(listOf(30, 10, 20, 40, 50), pickTitleWords(title, 1_000, noFilters.copy(target = ImportTarget.All, storyOrder = true), JlptLevel.N5))
     }
 
     @Test

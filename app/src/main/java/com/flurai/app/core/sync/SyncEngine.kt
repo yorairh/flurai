@@ -18,8 +18,11 @@ import java.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** What the settings screen shows about the last sync. */
-data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = null, val error: String? = null)
+/**
+ * What the settings screen shows about the last sync. [pendingUploads]: flashcards the last sync left for
+ * the next one (a push sends at most [SyncEngine.MAX_PUSH] documents, see there).
+ */
+data class SyncStatus(val running: Boolean = false, val lastSyncedAt: Long? = null, val error: String? = null, val pendingUploads: Int = 0)
 
 /**
  * Keeps a copy of the learner's progress in the cloud (users/{uid}/...) so it survives a new
@@ -67,7 +70,7 @@ class SyncEngine internal constructor(
                 cloud.refreshSignIn()
                 syncOnce(uid)
             }
-            _status.value = SyncStatus(lastSyncedAt = clock())
+            _status.value = SyncStatus(lastSyncedAt = clock(), pendingUploads = prefs.pushLeft(uid))
             true
         } catch (e: CancellationException) {
             throw e
@@ -79,12 +82,14 @@ class SyncEngine internal constructor(
     }
 
     private suspend fun syncOnce(uid: String) {
-        if (!formatSupported(cloud.document(uid, META_COLLECTION, SCHEMA_DOC))) throw NeedsUpdateException()
+        val schema = cloud.document(uid, META_COLLECTION, SCHEMA_DOC)
+        if (!formatSupported(schema)) throw NeedsUpdateException()
+        val decksAsDocuments = backupFormat(schema) >= DECKS_AS_DOCUMENTS
         val startedAt = clock()
         val cursors = prefs.cursors(uid)
-        val pulled = pull(uid, cursors.pull)
-        push(uid, cursors.push, pulled)
-        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt, push = startedAt))
+        val pulled = pull(uid, cursors.pull, decksAsDocuments)
+        val pushedUpTo = push(uid, cursors.push, pulled, decksAsDocuments)
+        prefs.saveCursors(uid, SyncCursors(pull = pulled.maxUpdatedAt, push = pushedUpTo ?: startedAt))
     }
 
     /** A message that says why, so a failure can be reported and fixed. Local data is never touched by a failed sync. */
@@ -119,7 +124,7 @@ class SyncEngine internal constructor(
      */
     private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>, val courseIds: Set<Int>)
 
-    private suspend fun pull(uid: String, since: Long): Pulled {
+    private suspend fun pull(uid: String, since: Long, decksAsDocuments: Boolean): Pulled {
         var max = since
         val cardIds = HashSet<String>()
         val dayIds = HashSet<Long>()
@@ -136,6 +141,7 @@ class SyncEngine internal constructor(
         val grammarDocs = downloaded[3]
         val courseDocs = downloaded[4]
         val metaDocs = downloaded[5]
+        val deckDocs = downloaded[6]
 
         for (doc in cardDocs) {
             max = maxOf(max, doc.updatedAt)
@@ -190,19 +196,66 @@ class SyncEngine internal constructor(
                 prefs.saveUploadedHash(uid, "channels", fingerprint(local.channels(uid).map(::channelDoc)))
             }
         }
-        items("decks")?.let { cloudItems ->
-            val theirs = cloudItems.mapNotNull { deckFrom(uid, it) }
-                .map { d -> DeckDoc(d.deck, d.words.map { resolveWord(it) }.distinct()) }
-            val mine = localDeckDocs(uid)
-            if (theirs.map { deckDoc(it.deck, it.words) } != mine && mayTakeCloudVersion(uid, "decks", mine)) {
-                local.replaceDecks(uid, theirs.map { it.deck to it.words })
-                prefs.saveUploadedHash(uid, "decks", fingerprint(localDeckDocs(uid)))
+        if (decksAsDocuments) {
+            deckDocs.forEach { max = maxOf(max, it.updatedAt) }
+            pullDecks(uid, deckDocs)
+        } else {
+            // A backup written before 2.0: decks are still one list in meta/decks, merged as a whole like channels.
+            items("decks")?.let { cloudItems ->
+                val theirs = cloudItems.mapNotNull { legacyDeckFrom(uid, it) }
+                    .map { d -> DeckDoc(d.deck, d.words.map { resolveWord(it) }.distinct()) }
+                val mine = legacyDeckDocs(uid)
+                if (theirs.map { legacyDeckDoc(it.deck, it.words) } != mine && mayTakeCloudVersion(uid, "decks", mine)) {
+                    local.replaceDecks(uid, theirs.map { it.deck to it.words })
+                }
             }
         }
         return Pulled(max, cardIds, dayIds, grammarIds, courseIds)
     }
 
-    private suspend fun localDeckDocs(uid: String) = local.decks(uid).map { deckDoc(it, local.deckWordIds(it.id)) }
+    private suspend fun legacyDeckDocs(uid: String) = local.decks(uid).map { legacyDeckDoc(it, local.deckWordIds(it.id)) }
+
+    /** Every deck of this phone as its cloud document, by key. */
+    private suspend fun localDecks(uid: String): Map<String, Map<String, Any?>> =
+        local.decks(uid).associate { it.key to deckDoc(it, local.deckWordIds(it.id)) }
+
+    /**
+     * Decks, one document each. Like a whole-document item, but per deck: the cloud's version (or its
+     * deletion) replaces this phone's deck only while the deck is as this phone last uploaded or took it;
+     * otherwise this phone's wins and is uploaded. A deck this phone deleted is not brought back; one it
+     * never had is added, so decks made on two phones are both kept.
+     */
+    private suspend fun pullDecks(uid: String, docs: List<CloudDoc>) {
+        if (docs.isEmpty()) return
+        val hashes = prefs.deckHashes(uid).toMutableMap()
+        val mine = localDecks(uid)
+        for (doc in docs) {
+            val key = doc.id
+            val myDoc = mine[key]
+            val unchangedHere = myDoc != null && hashes[key] == fingerprint(myDoc)
+            if (isTombstone(doc.data)) {
+                when {
+                    myDoc == null -> hashes.remove(key)
+                    unchangedHere -> { local.deleteDeck(uid, key); hashes.remove(key) }
+                    else -> Unit // changed here since: it stays and is uploaded again
+                }
+                continue
+            }
+            val stored = deckFrom(uid, key, doc.data) ?: continue
+            val theirs = DeckDoc(stored.deck, stored.words.map { resolveWord(it) }.distinct())
+            val theirDoc = deckDoc(theirs.deck, theirs.words)
+            val take = when {
+                myDoc == null -> key !in hashes // a deck deleted here (listed, but gone) stays deleted
+                theirDoc == myDoc -> { hashes[key] = fingerprint(myDoc); false }
+                else -> unchangedHere
+            }
+            if (take) {
+                local.putDeck(uid, theirs.deck, theirs.words)
+                hashes[key] = fingerprint(theirDoc)
+            }
+        }
+        prefs.saveDeckHashes(uid, hashes)
+    }
 
     /**
      * Whether the cloud's version of a whole-document item [part] may replace this phone's [mine]:
@@ -219,11 +272,17 @@ class SyncEngine internal constructor(
 
     // -- push ------------------------------------------------------------------------------------
 
-    private suspend fun push(uid: String, since: Long, pulled: Pulled) {
+    /**
+     * Uploads what changed here. Sends at most [MAX_PUSH] documents (the free cloud plan allows 20,000
+     * writes a day, and an import can change thousands of cards at once): when there are more cards, the
+     * oldest go now and the rest at the next sync. Returns the push cursor to save when it was cut
+     * short (the change time of the last card sent), null when everything went.
+     */
+    private suspend fun push(uid: String, since: Long, pulled: Pulled, decksAsDocuments: Boolean): Long? {
         val writes = mutableListOf<CloudWrite>()
 
-        local.cardsSince(uid, since).filter { needsUpload(it, since) && cardId(it) !in pulled.cardIds }
-            .forEach { writes += CloudWrite("cards", cardId(it), cardDoc(it)) }
+        val cards = local.cardsSince(uid, since).filter { needsUpload(it, since) && cardId(it) !in pulled.cardIds }
+            .sortedBy(::touched)
         val sinceDay = if (since == 0L) 0L else studyEpochDay(Instant.ofEpochMilli(since)) - 1
         local.days(uid).filter { it.day >= sinceDay && it.day !in pulled.dayIds }
             .forEach { writes += CloudWrite("days", it.day.toString(), dayDoc(it)) }
@@ -234,18 +293,48 @@ class SyncEngine internal constructor(
         local.courseSince(uid, since).filter { it.lastAt > since && it.lessonId !in pulled.courseIds }
             .forEach { writes += CloudWrite("course", it.lessonId.toString(), courseDoc(it)) }
 
-        // Small whole-document items: written only when they changed since the last upload (or on a full push).
-        // Each is written only when it changed here since it was last uploaded or taken (or on a full push).
+        // Small whole-document items: each is written only when it changed here since it was last uploaded
+        // or taken (or on a full push).
         val channels = local.channels(uid).map(::channelDoc)
-        val decks = localDeckDocs(uid)
         val settings = prefs.export(uid)
-        val parts = mapOf("channels" to channels, "decks" to decks, "settings" to settings)
+        val parts = mapOf("channels" to channels, "settings" to settings)
         val changed = parts.filter { (part, value) -> since == 0L || prefs.uploadedHash(uid, part) != fingerprint(value) }.keys
         if ("channels" in changed) writes += CloudWrite(META_COLLECTION, "channels", mapOf("items" to channels))
-        if ("decks" in changed) writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to decks))
         if ("settings" in changed && settings.isNotEmpty()) writes += CloudWrite(META_COLLECTION, "profile", mapOf("prefs" to settings))
+
+        // Decks: one document each, written when it changed here; a deleted deck leaves a tombstone. The
+        // first push to a backup still in format 1 moves the decks out of meta/decks and raises the format,
+        // so a FluRai older than 2.0 stops syncing instead of losing them.
+        val decks = localDecks(uid)
+        val oldHashes = prefs.deckHashes(uid)
+        val moving = !decksAsDocuments
+        decks.filter { (key, doc) -> moving || since == 0L || oldHashes[key] != fingerprint(doc) }
+            .forEach { (key, doc) -> writes += CloudWrite(DECK_COLLECTION, key, doc) }
+        (oldHashes.keys - decks.keys).forEach { writes += CloudWrite(DECK_COLLECTION, it, DECK_TOMBSTONE) }
+        if (moving) {
+            writes += CloudWrite(META_COLLECTION, "decks", mapOf("items" to emptyList<Any>(), "movedTo" to DECK_COLLECTION))
+            writes += CloudWrite(META_COLLECTION, SCHEMA_DOC, mapOf("minVersion" to SYNC_FORMAT))
+        }
+
+        // Cards fill what is left of the limit, oldest change first. Cards changed in the same millisecond
+        // as the last one sent go too, so the cursor (that millisecond) never skips any.
+        val room = (MAX_PUSH - writes.size).coerceAtLeast(0)
+        val sent = if (cards.size <= room) cards else {
+            val boundary = cards.getOrNull(room - 1)?.let(::touched)
+            if (boundary == null) emptyList() else cards.takeWhile { touched(it) <= boundary }
+        }
+        sent.forEach { writes += CloudWrite("cards", cardId(it), cardDoc(it)) }
+        val left = cards.size - sent.size
 
         if (writes.isNotEmpty()) cloud.write(uid, writes)
         changed.forEach { prefs.saveUploadedHash(uid, it, fingerprint(parts.getValue(it))) }
+        prefs.saveDeckHashes(uid, decks.mapValues { fingerprint(it.value) })
+        prefs.savePushLeft(uid, left)
+        return if (left == 0) null else sent.lastOrNull()?.let(::touched) ?: since
+    }
+
+    companion object {
+        /** The most documents one sync uploads; the rest wait for the next sync. */
+        const val MAX_PUSH = 2_000
     }
 }

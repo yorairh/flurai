@@ -345,6 +345,12 @@ class DictionaryEntryTest(unittest.TestCase):
         e = bc.flatten_entry(jm(1001000, [("迄", [])], [("まで", [])], [["until"]], uk=True))
         self.assertEqual(("まで", "まで", ["迄"]), (e.expression, e.reading, e.other_forms))
 
+    def test_a_word_whose_spellings_are_all_search_only_is_shown_in_kana(self):
+        # The particle の: JMdict lists 乃 and 之 only as search-only spellings.
+        e = bc.flatten_entry(jm(1469800, [("乃", ["sK"]), ("之", ["sK"])], [("の", [])], [["indicates possessive"]]))
+        self.assertEqual(("の", "の", []), (e.expression, e.reading, e.other_forms))
+        self.assertIn(("乃", False), e.forms)  # still found by its spelling
+
     def test_only_the_first_senses_are_kept(self):
         senses = [[f"sense {i}"] for i in range(6)]
         e = bc.flatten_entry(jm(1002000, [], [("ああ", [])], senses))

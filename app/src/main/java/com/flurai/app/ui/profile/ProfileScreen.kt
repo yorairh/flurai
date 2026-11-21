@@ -1,5 +1,14 @@
 package com.flurai.app.ui.profile
 
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.remember
+import com.flurai.app.core.study.DeckRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -125,7 +134,11 @@ private fun AccountCard(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
-            InfoRow("Studying from", profile.level.label)
+            val deckName = profile.studyDeckKey?.let { key ->
+                val names: StudyDeckViewModel = hiltViewModel()
+                remember(user.uid, key) { names.deckName(user.uid, key) }.collectAsStateWithLifecycle(null).value
+            }
+            InfoRow("Studying from", if (deckName != null) "$deckName, then ${profile.level.label}" else profile.level.label)
             InfoRow("Daily goal", "${profile.dailyMinutes} minutes")
             InfoRow("New words per day", profile.newCardsPerDay.toString())
             Button(onClick = onEditProfile, modifier = Modifier.fillMaxWidth()) {
@@ -161,4 +174,12 @@ private fun InfoRow(label: String, value: String) {
         Text(label, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
         Text(value, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
     }
+}
+
+/** The learner's decks for "Studying from" a deck: the one chosen (null when it was deleted) and the list to choose from. */
+@HiltViewModel
+class StudyDeckViewModel @Inject constructor(private val decks: DeckRepository) : ViewModel() {
+    fun decks(uid: String): Flow<List<com.flurai.app.core.study.DeckEntity>> = decks.decks(uid)
+
+    fun deckName(uid: String, key: String): Flow<String?> = decks.decks(uid).map { list -> list.firstOrNull { it.key == key }?.name }
 }

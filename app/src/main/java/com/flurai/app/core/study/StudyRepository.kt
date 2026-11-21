@@ -157,6 +157,10 @@ class StudyRepository @Inject constructor(
                     if (!profile.knowsHiragana) kana(KanaScript.Hiragana).ifEmpty { null }?.let { return it }
                     if (!profile.knowsKatakana) kana(KanaScript.Katakana).ifEmpty { null }?.let { return it }
                 }
+                profile.studyDeckKey?.let { key ->
+                    val fromDeck = deckWords.wordIdsByKey(uid, key)?.let { ids -> fresh(ids.map { ItemRef(ItemType.Word, it) }) }
+                    if (!fromDeck.isNullOrEmpty()) return fromDeck
+                }
                 for (jlpt in profile.level.firstWordList() downTo 1) {
                     val remaining = words(jlpt)
                     if (remaining.isNotEmpty()) return remaining

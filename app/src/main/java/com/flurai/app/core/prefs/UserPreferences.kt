@@ -32,6 +32,8 @@ object UserKeys {
 
     /** The sync bookkeeping keys of [uid]. */
     internal fun sync(uid: String, name: String) = longPreferencesKey(name(uid, "$SYNC$name"))
+    internal fun syncString(uid: String, name: String) = stringPreferencesKey(name(uid, "$SYNC$name"))
+    internal fun syncInt(uid: String, name: String) = intPreferencesKey(name(uid, "$SYNC$name"))
 
     internal fun belongsTo(key: Preferences.Key<*>, uid: String) = key.name.startsWith("$uid.")
     internal fun isSync(key: Preferences.Key<*>, uid: String) = key.name.startsWith("$uid.$SYNC")
@@ -108,6 +110,7 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
     private fun pullKey(uid: String) = UserKeys.sync(uid, "pull")
     private fun pushKey(uid: String) = UserKeys.sync(uid, "push")
     private fun metaKey(uid: String, part: String) = UserKeys.sync(uid, "meta.$part")
+    private fun pushLeftKey(uid: String) = UserKeys.syncInt(uid, "pushLeft")
 
     suspend fun cursors(uid: String): SyncCursors {
         val prefs = dataStore.data.first()
@@ -126,6 +129,13 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
         dataStore.edit { it[pushKey(uid)] = 0L }
     }
 
+    /** How many cards the last push left for the next sync when it was cut short (see SyncEngine's push limit). */
+    suspend fun pushLeft(uid: String): Int = dataStore.data.first()[pushLeftKey(uid)] ?: 0
+
+    suspend fun savePushLeft(uid: String, left: Int) {
+        dataStore.edit { if (left == 0) it.remove(pushLeftKey(uid)) else it[pushLeftKey(uid)] = left }
+    }
+
     /**
      * A fingerprint of one whole-document item ("channels", "decks" or "settings") as this phone last
      * uploaded or took it from the cloud; null when it never did. If the item still has this
@@ -135,6 +145,22 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
 
     suspend fun saveUploadedHash(uid: String, part: String, hash: Long) {
         dataStore.edit { it[metaKey(uid, part)] = hash }
+    }
+
+    private fun deckHashKey(uid: String) = UserKeys.syncString(uid, "decks")
+
+    /**
+     * A fingerprint per deck key of each deck as this phone last uploaded or took it (see [uploadedHash]).
+     * A key listed here whose deck is gone was deleted on this phone, so the deletion is uploaded.
+     */
+    suspend fun deckHashes(uid: String): Map<String, Long> =
+        dataStore.data.first()[deckHashKey(uid)].orEmpty().split(';').mapNotNull { entry ->
+            val (key, hash) = entry.split('=').takeIf { it.size == 2 } ?: return@mapNotNull null
+            hash.toLongOrNull()?.let { key to it }
+        }.toMap()
+
+    suspend fun saveDeckHashes(uid: String, hashes: Map<String, Long>) {
+        dataStore.edit { prefs -> prefs[deckHashKey(uid)] = hashes.entries.joinToString(";") { "${it.key}=${it.value}" } }
     }
 }
 

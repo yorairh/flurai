@@ -734,7 +734,9 @@ def _shown(forms: list[dict]) -> list[dict]:
 def flatten_entry(entry: dict) -> DictEntry | None:
     """One JMdict entry as a word: its usual spelling (kana when JMdict says it is usually written in kana),
     the reading that goes with it, the other spellings, and the glosses of the first senses."""
-    kanji = _shown(entry["kanji"])
+    # Kanji spellings that are all search-only, irregular, outdated or rare are not shown at all (the
+    # particle の is not written 乃); a reading is always needed, so kana falls back to all of them.
+    kanji = [k for k in entry["kanji"] if not _HIDDEN_FORM_TAGS & set(k.get("tags", []))]
     kana = _shown(entry["kana"])
     senses = [s for s in entry["sense"] if any(g["text"] for g in s["gloss"])]
     if not kana or not senses:

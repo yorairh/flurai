@@ -9,6 +9,7 @@ import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
 import com.flurai.app.core.study.DeckEntity
 import com.flurai.app.core.study.ItemType
+import com.flurai.app.core.study.legacyDeckKey
 import com.flurai.app.core.video.CustomChannelEntity
 
 // How each kind of row looks in the cloud, and the rules for choosing between a phone's copy and the
@@ -18,25 +19,35 @@ import com.flurai.app.core.video.CustomChannelEntity
 /** The collections that hold one document per row, in the order the pull reads them. */
 internal val ROW_COLLECTIONS = listOf("cards", "days", "tests", "grammar", "course")
 
-/** Small whole-document items (profile, channels, decks). */
+/** Small whole-document items (profile, channels; decks before format 2). */
 internal const val META_COLLECTION = "meta"
 
-/** Every collection of a user's backup (what deleting the cloud copy removes). */
-internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION
+/** One document per deck, its id the deck's key; a deleted deck stays as a tombstone (`deleted: true`). Since format 2. */
+internal const val DECK_COLLECTION = "decks"
+
+/** Every collection of a user's backup (what deleting the cloud copy removes), in the order the pull reads them. */
+internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION + DECK_COLLECTION
 
 /**
  * The backup format this app reads and writes. A version that changes the format so that older apps
  * would misread it writes `meta/schema.minVersion`; an app whose [SYNC_FORMAT] is below it stops
  * syncing (and asks to be updated) instead of damaging the backup.
+ *
+ * 1: FluRai 1.10 (decks in `meta/decks`). 2: FluRai 2.0, decks one document each in [DECK_COLLECTION].
  */
-internal const val SYNC_FORMAT = 1
+internal const val SYNC_FORMAT = 2
+
+/** The first format with decks in [DECK_COLLECTION]. */
+internal const val DECKS_AS_DOCUMENTS = 2
+
+/** The format a backup was written in: `minVersion` of its schema document (0 when there is none yet). */
+internal fun backupFormat(schema: Map<String, Any?>?): Int = (schema?.get("minVersion") as? Number)?.toInt() ?: 0
 
 /** The document under [META_COLLECTION] that holds `minVersion`. */
 internal const val SCHEMA_DOC = "schema"
 
 /** Whether this app may sync a backup whose schema document is [schema] (null: no such document yet). */
-internal fun formatSupported(schema: Map<String, Any?>?): Boolean =
-    ((schema?.get("minVersion") as? Number)?.toInt() ?: 0) <= SYNC_FORMAT
+internal fun formatSupported(schema: Map<String, Any?>?): Boolean = backupFormat(schema) <= SYNC_FORMAT
 
 /** Firestore returns every whole number as Long and every fraction as Double. */
 private fun Map<*, *>.int(key: String) = (this[key] as? Number)?.toInt()
@@ -138,12 +149,29 @@ internal fun channelFrom(uid: String, m: Map<*, *>): CustomChannelEntity? = Cust
 
 internal class DeckDoc(val deck: DeckEntity, val words: List<Int>)
 
-internal fun deckDoc(d: DeckEntity, words: List<Int>): Map<String, Any?> =
+/** A deck as an item of the format-1 `meta/decks` list (no key: it is derived, see legacyDeckKey). */
+internal fun legacyDeckDoc(d: DeckEntity, words: List<Int>): Map<String, Any?> =
     mapOf("name" to d.name, "createdAt" to d.createdAt, "words" to words)
 
-internal fun deckFrom(uid: String, m: Map<*, *>): DeckDoc? {
+internal fun legacyDeckFrom(uid: String, m: Map<*, *>): DeckDoc? {
     val name = m["name"] as? String ?: return null
     val createdAt = m.long("createdAt") ?: 0
     val words = (m["words"] as? List<*>)?.mapNotNull { (it as? Number)?.toInt() }.orEmpty()
-    return DeckDoc(DeckEntity(uid = uid, name = name, createdAt = createdAt), words)
+    return DeckDoc(DeckEntity(uid = uid, name = name, createdAt = createdAt, key = legacyDeckKey(name, createdAt)), words)
+}
+
+/** A deck's own document in [DECK_COLLECTION] (its id is the key). */
+internal fun deckDoc(d: DeckEntity, words: List<Int>): Map<String, Any?> =
+    mapOf("name" to d.name, "createdAt" to d.createdAt, "source" to d.source, "words" to words, "deleted" to false)
+
+/** What a deck deleted on some phone leaves in the cloud, so the other phones delete it too. */
+internal val DECK_TOMBSTONE: Map<String, Any?> = mapOf("deleted" to true)
+
+internal fun isTombstone(d: Map<String, Any?>) = d["deleted"] == true
+
+internal fun deckFrom(uid: String, key: String, m: Map<String, Any?>): DeckDoc? {
+    val name = m["name"] as? String ?: return null
+    val words = (m["words"] as? List<*>)?.mapNotNull { (it as? Number)?.toInt() }.orEmpty()
+    val deck = DeckEntity(uid = uid, name = name, createdAt = m.long("createdAt") ?: 0, key = key, source = m["source"] as? String)
+    return DeckDoc(deck, words)
 }

@@ -29,6 +29,7 @@ class StudyProfileRepository @Inject constructor(
             newCardsPerDay = prefs[keys.newCards] ?: StudyProfile.DEFAULT_NEW_CARDS,
             knowsHiragana = prefs[keys.knowsHiragana] ?: true,
             knowsKatakana = prefs[keys.knowsKatakana] ?: true,
+            studyDeckKey = prefs[keys.studyDeck],
         )
     }.distinctUntilChanged()
 
@@ -40,6 +41,7 @@ class StudyProfileRepository @Inject constructor(
             prefs[keys.newCards] = profile.newCardsPerDay
             prefs[keys.knowsHiragana] = profile.knowsHiragana
             prefs[keys.knowsKatakana] = profile.knowsKatakana
+            if (profile.studyDeckKey == null) prefs.remove(keys.studyDeck) else prefs[keys.studyDeck] = profile.studyDeckKey
         }
     }
 
@@ -49,5 +51,6 @@ class StudyProfileRepository @Inject constructor(
         val newCards = UserKeys.int(uid, "newCardsPerDay")
         val knowsHiragana = UserKeys.boolean(uid, "knowsHiragana")
         val knowsKatakana = UserKeys.boolean(uid, "knowsKatakana")
+        val studyDeck = UserKeys.string(uid, "studyDeckKey")
     }
 }

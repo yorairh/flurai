@@ -142,4 +142,21 @@ class InMemoryLocal : SyncLocal {
             deckWords[id] = words
         }
     }
+
+    override suspend fun putDeck(uid: String, deck: DeckEntity, words: List<Int>) {
+        val i = deckRows.indexOfFirst { it.uid == uid && it.key == deck.key }
+        if (i < 0) {
+            val id = maxOf(nextDeckId, (deckRows.maxOfOrNull { it.id } ?: 0) + 1).also { nextDeckId = it + 1 }
+            deckRows += deck.copy(id = id, uid = uid)
+            deckWords[id] = words
+        } else {
+            deckRows[i] = deck.copy(id = deckRows[i].id, uid = uid)
+            deckWords[deckRows[i].id] = words
+        }
+    }
+
+    override suspend fun deleteDeck(uid: String, key: String) {
+        deckRows.filter { it.uid == uid && it.key == key }.forEach { deckWords.remove(it.id) }
+        deckRows.removeAll { it.uid == uid && it.key == key }
+    }
 }

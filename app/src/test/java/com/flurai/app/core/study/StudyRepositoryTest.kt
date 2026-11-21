@@ -24,8 +24,10 @@ class StudyRepositoryTest {
     private val repo by lazy {
         StudyRepository(dao, FakeContentDao(), settings, object : DeckWords {
             override suspend fun wordIds(deckId: Long) = deckWords[deckId].orEmpty()
+            override suspend fun wordIdsByKey(uid: String, key: String) = decksByKey[key]
         })
     }
+    private val decksByKey = mutableMapOf<String, List<Int>>()
 
     private fun profile(level: JlptLevel, newPerDay: Int = 10, hiragana: Boolean = true, katakana: Boolean = true) =
         StudyProfile(level, 15, newPerDay, hiragana, katakana)
@@ -45,6 +47,29 @@ class StudyRepositoryTest {
         n5.newItems.forEach { repo.answer("u", QueueItem.New(it), Rating.Good, now, Duration.ZERO) }
         val later = repo.loadSession("u", profile(JlptLevel.N5), StudySource.Auto, now)
         assertEquals(listOf(10, 11), later.newItems.map { it.itemId })
+    }
+
+    @Test
+    fun studyingFromADeckTakesItsWordsFirstWithinTheDailyAllowance() = runTest {
+        decksByKey["anime"] = listOf(1_358_999, 2, 1_400_000, 5_000)
+        val p = profile(JlptLevel.N5, newPerDay = 3).copy(studyDeckKey = "anime")
+        val first = repo.loadSession("u", p, StudySource.Auto, now)
+        assertEquals(listOf(1_358_999, 2, 1_400_000), first.newItems.map { it.itemId })
+
+        first.newItems.forEach { repo.answer("u", QueueItem.New(it), Rating.Good, now, Duration.ZERO) }
+        // The allowance is used up for today.
+        assertEquals(emptyList<ItemRef>(), repo.loadSession("u", p, StudySource.Auto, now).newItems)
+    }
+
+    @Test
+    fun aFinishedOrDeletedStudyDeckFallsBackToTheLevelLists() = runTest {
+        decksByKey["done"] = listOf(3)
+        repo.answer("u", QueueItem.New(ItemRef(ItemType.Word, 3)), Rating.Good, now.minus(Duration.ofDays(2)), Duration.ZERO)
+        val finished = repo.loadSession("u", profile(JlptLevel.N5).copy(studyDeckKey = "done"), StudySource.Auto, now)
+        assertEquals(listOf(1, 2), finished.newItems.map { it.itemId })
+
+        val deleted = repo.loadSession("u", profile(JlptLevel.N5).copy(studyDeckKey = "gone"), StudySource.Auto, now)
+        assertEquals(listOf(1, 2), deleted.newItems.map { it.itemId })
     }
 
     @Test

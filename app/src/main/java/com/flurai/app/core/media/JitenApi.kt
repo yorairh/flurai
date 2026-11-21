@@ -89,10 +89,13 @@ class JitenApi @Inject constructor() {
         "sortBy" to "popularity", "sortOrder" to 1, "offset" to offset, "titleFilter" to titleFilter,
     ).let { json.decodeFromString(DeckPage.serializer(), it) }
 
-    /** One page of a deck's words, most frequent first, starting at [offset]. */
+    /**
+     * One page of a deck's words in story order (as they first appear; sortOrder 0 is ascending), starting
+     * at [offset]. Each word carries how often it occurs, so the most frequent order is worked out here.
+     */
     suspend fun vocabularyPage(deckId: Int, offset: Int, limit: Int = VOCABULARY_PAGE): VocabularyPage = get(
         "/api/media-deck/$deckId/vocabulary",
-        "sortBy" to "deckFreq", "sortOrder" to 1, "offset" to offset, "limit" to limit,
+        "sortBy" to "chrono", "sortOrder" to 0, "offset" to offset, "limit" to limit,
     ).let { json.decodeFromString(VocabularyPage.serializer(), it) }
 
     private suspend fun get(path: String, vararg params: Pair<String, Any>): String = withContext(Dispatchers.IO) {
