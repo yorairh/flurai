@@ -44,10 +44,16 @@ fun VocabHubScreen(
     onStudy: (StudySource) -> Unit,
     onOpenDeck: (Long) -> Unit,
     onOpenSource: (StudySource) -> Unit,
+    onImportAnki: (String) -> Unit,
     viewModel: VocabHubViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var creating by remember { mutableStateOf(false) }
+    val context = androidx.compose.ui.platform.LocalContext.current
+    // Anki packages have no registered type on most phones, so any file can be picked; the import checks it.
+    val pickAnkiFile = androidx.activity.compose.rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) onImportAnki(uri.toString())
+    }
 
     Column(Modifier.fillMaxSize()) {
         BackTopAppBar(title = { Text("Flashcards") }, onBack = onBack)
@@ -62,6 +68,15 @@ fun VocabHubScreen(
             }
             item {
                 OutlinedButton(onClick = { creating = true }, modifier = Modifier.fillMaxWidth()) { Text("New deck") }
+            }
+            item {
+                OutlinedButton(onClick = { pickAnkiFile.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("Import an Anki deck (.apkg)") }
+                androidx.compose.material3.TextButton(
+                    onClick = {
+                        context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://ankiweb.net/shared/decks?search=japanese")))
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text("Find shared decks on AnkiWeb") }
             }
             item { SectionHeader("かな", "Kana decks", "Hiragana and katakana, sound by sound. Open one to study just it.") }
             items(KanaScript.entries) { script ->

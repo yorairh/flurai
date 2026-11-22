@@ -6,6 +6,8 @@ import com.flurai.app.core.content.SentenceEntity
 import com.flurai.app.core.content.rankWords
 import com.flurai.app.core.content.WordCache
 import com.flurai.app.core.content.WordEntity
+import com.flurai.app.core.study.CustomWordDao
+import com.flurai.app.core.study.CustomWordEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,6 +15,7 @@ import javax.inject.Singleton
  * Word ids, as cards, decks and progress store them:
  *   1 ..< 1,000,000   a built-in JLPT word (content.db `word.id`, from tools/content/word_ids.tsv)
  *   >= 1,000,000      any other JMdict entry, by its JMdict sequence number (dictionary.db)
+ *   < 0               a word or sentence of the learner's own (user.db `custom_word`, from an Anki import)
  * A JMdict entry that is also a built-in word is always stored as the built-in id ([WordSource.resolve]).
  */
 
@@ -24,11 +27,31 @@ const val NOT_JLPT = 0
 
 fun isDictionaryId(id: Int): Boolean = id >= DICTIONARY_ID_START
 
+fun isCustomId(id: Int): Boolean = id < 0
+
 /** True for a word on the JLPT lists (levels N5..N1). */
 val WordEntity.isJlpt: Boolean get() = jlpt != NOT_JLPT
 
-/** "N5" for a JLPT word, "Not JLPT" for a dictionary word. */
-val WordEntity.levelLabel: String get() = if (isJlpt) "N$jlpt" else "Not JLPT"
+/** "N5" for a JLPT word, "Not JLPT" for a dictionary word, "Your word" for one of the learner's own. */
+val WordEntity.levelLabel: String get() = when {
+    isJlpt -> "N$jlpt"
+    isCustomId(id) -> "Your word"
+    else -> "Not JLPT"
+}
+
+/** A word of the learner's own in the shape every word screen uses. */
+fun CustomWordEntity.asWord(): WordEntity = WordEntity(
+    id = id,
+    expression = expression,
+    reading = reading,
+    otherForms = null,
+    meanings = meaning,
+    jlpt = NOT_JLPT,
+    genkiLesson = null,
+    jmdictId = null,
+    partsOfSpeech = null,
+    ruby = null,
+)
 
 /**
  * The full-text query for an English search: its words, all required ("to eat" matches both words).
@@ -61,20 +84,31 @@ class WordSource @Inject constructor(
     private val content: ContentDao,
     private val dictionary: DictionaryDao,
     private val cache: WordCache,
+    private val custom: CustomWordDao,
 ) {
-    suspend fun word(id: Int): WordEntity? =
-        if (isDictionaryId(id)) dictionary.entry(id)?.asWord() else content.word(id)
+    suspend fun word(id: Int): WordEntity? = when {
+        isCustomId(id) -> custom.anyById(id)?.asWord()
+        isDictionaryId(id) -> dictionary.entry(id)?.asWord()
+        else -> content.word(id)
+    }
 
     /** The words for [ids] (missing ones left out), in no particular order. */
     suspend fun words(ids: Collection<Int>): List<WordEntity> {
-        val (dict, builtIn) = ids.distinct().partition(::isDictionaryId)
+        val all = ids.distinct()
+        val own = all.filter(::isCustomId)
+        val dict = all.filter(::isDictionaryId)
+        val builtIn = all.filter { it > 0 && !isDictionaryId(it) }
         return builtIn.chunked(CHUNK).flatMap { content.words(it) } +
-            dict.chunked(CHUNK).flatMap { chunk -> dictionary.entries(chunk).map { it.asWord() } }
+            dict.chunked(CHUNK).flatMap { chunk -> dictionary.entries(chunk).map { it.asWord() } } +
+            own.chunked(CHUNK).flatMap { chunk -> custom.anyByIds(chunk).map { it.asWord() } }
     }
 
-    /** Example sentences, best first: up to three for a built-in word, at most one for a dictionary word. */
-    suspend fun sentences(id: Int): List<SentenceEntity> =
-        if (isDictionaryId(id)) listOfNotNull(dictionary.example(id)?.asSentence()) else content.sentencesForWord(id)
+    /** Example sentences, best first: up to three for a built-in word, at most one for a dictionary word, none for the learner's own. */
+    suspend fun sentences(id: Int): List<SentenceEntity> = when {
+        isCustomId(id) -> emptyList()
+        isDictionaryId(id) -> listOfNotNull(dictionary.example(id)?.asSentence())
+        else -> content.sentencesForWord(id)
+    }
 
     /**
      * Words for a library search, best first ([rankWords]): built-in words and the rest of JMdict. An entry

@@ -7,6 +7,7 @@ import com.flurai.app.core.quiz.TestResultEntity
 import com.flurai.app.core.quiz.TestType
 import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
+import com.flurai.app.core.study.CustomWordEntity
 import com.flurai.app.core.study.DeckEntity
 import com.flurai.app.core.study.ItemType
 import com.flurai.app.core.study.legacyDeckKey
@@ -25,8 +26,14 @@ internal const val META_COLLECTION = "meta"
 /** One document per deck, its id the deck's key; a deleted deck stays as a tombstone (`deleted: true`). Since format 2. */
 internal const val DECK_COLLECTION = "decks"
 
+/**
+ * The learner's own words (from an Anki import), one document each, its id the word id; the newer
+ * `updatedAt` wins. Added in 2.1 without a format change: an older FluRai ignores the collection.
+ */
+internal const val CUSTOM_WORD_COLLECTION = "customWords"
+
 /** Every collection of a user's backup (what deleting the cloud copy removes), in the order the pull reads them. */
-internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION + DECK_COLLECTION
+internal val CLOUD_COLLECTIONS = ROW_COLLECTIONS + META_COLLECTION + DECK_COLLECTION + CUSTOM_WORD_COLLECTION
 
 /**
  * The backup format this app reads and writes. A version that changes the format so that older apps
@@ -145,6 +152,20 @@ internal fun channelDoc(c: CustomChannelEntity): Map<String, Any?> =
 internal fun channelFrom(uid: String, m: Map<*, *>): CustomChannelEntity? = CustomChannelEntity(
     uid = uid, name = m["name"] as? String ?: return null, url = m["url"] as? String ?: return null,
     level = m.int("level") ?: 5, addedAt = m.long("addedAt") ?: 0,
+)
+
+// -- the learner's own words ------------------------------------------------------------------------
+
+internal fun customWordDoc(w: CustomWordEntity): Map<String, Any?> = mapOf(
+    "id" to w.id, "kind" to w.kind, "expression" to w.expression, "reading" to w.reading, "meaning" to w.meaning,
+    "ankiGuid" to w.ankiGuid, "createdAt" to w.createdAt, "updatedAt" to w.updatedAt,
+)
+
+internal fun customWordFrom(uid: String, d: Map<String, Any?>): CustomWordEntity? = CustomWordEntity(
+    uid = uid, id = d.int("id") ?: return null, kind = d["kind"] as? String ?: CustomWordEntity.KIND_WORD,
+    expression = d["expression"] as? String ?: return null, reading = d["reading"] as? String ?: "",
+    meaning = d["meaning"] as? String ?: "", ankiGuid = d["ankiGuid"] as? String,
+    createdAt = d.long("createdAt") ?: 0, updatedAt = d.long("updatedAt") ?: 0,
 )
 
 internal class DeckDoc(val deck: DeckEntity, val words: List<Int>)

@@ -1,5 +1,8 @@
 package com.flurai.app.ui
 
+import com.flurai.app.IncomingAnkiFile
+import com.flurai.app.ui.study.AnkiImportScreen
+import androidx.compose.runtime.LaunchedEffect
 import com.flurai.app.ui.study.SourceDeckScreen
 import com.flurai.app.ui.study.DeckScreen
 import androidx.compose.foundation.layout.padding
@@ -74,6 +77,9 @@ import kotlin.reflect.KClass
 @Serializable object VocabHubRoute
 @Serializable data class DeckRoute(val id: Long)
 
+/** Import an Anki package; [uri] is the content URI of the file (from the picker or "Open with"). */
+@Serializable data class AnkiImportRoute(val uri: String)
+
 /** A built-in deck (an N level or a kana script); [source] is StudySource.encode(). */
 @Serializable data class SourceDeckRoute(val source: String)
 @Serializable object ProgressRoute
@@ -109,6 +115,15 @@ private enum class TopLevelDestination(
 @Composable
 fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit) {
     val navController = rememberNavController()
+    // An Anki file opened from another app ("Open with" / "Share"): go straight to its import.
+    LaunchedEffect(navController) {
+        IncomingAnkiFile.uri.collect { uri ->
+            if (uri != null) {
+                IncomingAnkiFile.uri.value = null
+                navController.navigate(AnkiImportRoute(uri))
+            }
+        }
+    }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
     // Progress and the word browser are reachable from Home and from Me: the tab you came from stays selected.
@@ -126,7 +141,7 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                         it.hasRoute(destination.routeClass) ||
                             (destination == TopLevelDestination.Profile && (it.hasRoute(EditProfileRoute::class) || it.hasRoute(LicencesRoute::class) || it.hasRoute(SettingsRoute::class) || (openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))))) ||
                             (destination == TopLevelDestination.Home && !openedFromProfile && (it.hasRoute(ProgressRoute::class) || it.hasRoute(WordBrowserRoute::class))) ||
-                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(CourseLessonRoute::class) || it.hasRoute(ReadingRoute::class))) ||
+                            (destination == TopLevelDestination.Learn && (it.hasRoute(LibraryRoute::class) || it.hasRoute(WordRoute::class) || it.hasRoute(VocabHubRoute::class) || it.hasRoute(DeckRoute::class) || it.hasRoute(AnkiImportRoute::class) || it.hasRoute(SourceDeckRoute::class) || it.hasRoute(TestsRoute::class) || it.hasRoute(GrammarListRoute::class) || it.hasRoute(GrammarRoute::class) || it.hasRoute(CourseLessonRoute::class) || it.hasRoute(ReadingRoute::class))) ||
                             (destination == TopLevelDestination.Explore && (it.hasRoute(VideosRoute::class) || it.hasRoute(MediaRoute::class) || it.hasRoute(MediaDetailRoute::class)))
                     } == true
                     NavigationBarItem(
@@ -180,6 +195,18 @@ fun FluRaiAppShell(user: AuthUser, profile: StudyProfile, onSignOut: () -> Unit)
                     onStudy = { navController.navigate(StudyRoute(it.encode())) },
                     onOpenDeck = { navController.navigate(DeckRoute(it)) },
                     onOpenSource = { navController.navigate(SourceDeckRoute(it.encode())) },
+                    onImportAnki = { navController.navigate(AnkiImportRoute(it)) },
+                )
+            }
+            screen<AnkiImportRoute> {
+                AnkiImportScreen(
+                    onBack = { navController.popBackStack() },
+                    onDone = {
+                        // Back to the flashcards screen (opened from Learn, or from another app's "Open with").
+                        if (!navController.popBackStack(VocabHubRoute, inclusive = false)) {
+                            navController.navigate(VocabHubRoute) { popUpTo(HomeRoute) }
+                        }
+                    },
                 )
             }
             screen<SourceDeckRoute> {

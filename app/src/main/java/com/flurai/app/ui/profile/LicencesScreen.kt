@@ -55,6 +55,13 @@ private val sources = listOf(
         "Difficulty, word lists and titles of anime, dramas, manga, novels and games come from the public jiten.moe API. " +
             "The data is requested from the device when you open Explore and is not stored or shared by FluRai.",
     ),
+    Source(
+        "Zstandard and zstd-jni",
+        "Opening decks exported by Anki 2.1.50 and later",
+        "BSD license",
+        "Zstandard, copyright (c) Meta Platforms, Inc. and affiliates. zstd-jni, copyright (c) 2015-present Luben Karavelov. " +
+            "Both are used under their BSD licenses. Anki decks you import stay on your phone and in your own backup.",
+    ),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

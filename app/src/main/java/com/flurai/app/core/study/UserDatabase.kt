@@ -36,6 +36,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun grammarProgressDao(): GrammarProgressDao
     abstract fun customChannelDao(): CustomChannelDao
     abstract fun deckDao(): DeckDao
+    abstract fun customWordDao(): CustomWordDao
     abstract fun courseProgressDao(): CourseProgressDao
     abstract fun accountDao(): com.flurai.app.core.account.AccountDao
     abstract fun syncDao(): com.flurai.app.core.sync.SyncDao
