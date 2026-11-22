@@ -27,8 +27,9 @@ object UserTables {
         UserTable("grammar_progress", "grammar progress", cloud = "grammar"),
         UserTable("course_progress", "grammar course progress", cloud = "course"),
         UserTable("custom_channel", "channels you added", cloud = "meta"),
-        UserTable("deck", "decks", cloud = "meta"),
-        UserTable("deck_word", null, cloud = "meta", ownedBy = "deck"),
+        UserTable("deck", "decks", cloud = "decks"),
+        UserTable("deck_word", null, cloud = "decks", ownedBy = "deck"),
+        UserTable("custom_word", "your own words", cloud = null), // backed up once Anki import fills it
     )
 
     /** The cloud collections that hold a user's backup. */

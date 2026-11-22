@@ -1,7 +1,10 @@
 package com.flurai.app.ui.explore
 
-import com.flurai.app.core.study.cleanDeckName
+import com.flurai.app.core.media.ImportOptions
+import com.flurai.app.core.media.pickTitleWords
 import com.flurai.app.core.study.DeckRepository
+import com.flurai.app.core.study.ImportedDeck
+import com.flurai.app.core.study.jitenSource
 import com.flurai.app.core.auth.uid
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -92,10 +95,22 @@ data class MediaDetailState(
     val loading: Boolean = true,
     val analysis: MediaAnalysis? = null,
     val error: String? = null,
-    /** Name of the deck the title's words were saved into, and how many words it holds. */
-    val savedDeck: String? = null,
-    val savedDeckWords: Int = 0,
-)
+    /** The learner's study level: the "too hard" filter and its label follow it. */
+    val studyLevel: JlptLevel = JlptLevel.N5,
+    val options: ImportOptions = ImportOptions(),
+    /** Take the daily new words from the deck once it is made ("Studying from"). */
+    val studyFromDeck: Boolean = false,
+    /** The deck made from this title before, if any (importing again adds the missing words to it). */
+    val existingDeck: String? = null,
+    val importing: Boolean = false,
+    val imported: ImportedDeck? = null,
+    val studyingFromImported: Boolean = false,
+) {
+    /** The words the sheet's choices would put in the deck, in deck order. */
+    val picked: List<Int> by lazy {
+        analysis?.let { pickTitleWords(it.words, it.totalOccurrences, options, studyLevel) }.orEmpty()
+    }
+}
 
 @HiltViewModel
 class MediaDetailViewModel @Inject constructor(
@@ -103,6 +118,7 @@ class MediaDetailViewModel @Inject constructor(
     private val auth: AuthRepository,
     private val media: MediaRepository,
     private val decks: DeckRepository,
+    private val profiles: StudyProfileRepository,
 ) : ViewModel() {
     private val deckId = savedStateHandle.toRoute<MediaDetailRoute>().deckId
     private val _state = MutableStateFlow(MediaDetailState(deck = media.deck(deckId)))
@@ -121,24 +137,39 @@ class MediaDetailViewModel @Inject constructor(
         _state.update { it.copy(loading = true, error = null) }
         viewModelScope.launch {
             try {
+                val level = profiles.profile(uid).first()?.level ?: JlptLevel.N5
+                val existing = decks.bySource(uid, jitenSource(deckId))?.name
                 val analysis = media.analyse(uid, deckId)
-                _state.update { it.copy(loading = false, analysis = analysis) }
+                _state.update { it.copy(loading = false, analysis = analysis, studyLevel = level, existingDeck = existing) }
             } catch (e: Exception) {
                 _state.update { it.copy(loading = false, error = e.message ?: "Something went wrong.") }
             }
         }
     }
 
-    /** Saves every word of the title that the app teaches as a deck, most common first, without starting any cards. */
-    fun saveAsDeck() {
+    fun setOptions(options: ImportOptions) = _state.update { it.copy(options = options) }
+
+    fun setStudyFromDeck(on: Boolean) = _state.update { it.copy(studyFromDeck = on) }
+
+    /**
+     * Makes the deck from the sheet's choices (or adds the missing words to the deck made from this title
+     * before), without starting any cards. Optionally makes it the deck new words come from.
+     */
+    fun importDeck() {
         val uid = auth.uid ?: return
-        val words = _state.value.analysis?.wordIds?.takeIf { it.isNotEmpty() } ?: return
-        val deck = _state.value.deck ?: return
-        if (_state.value.savedDeck != null) return
-        val name = "Words: " + (deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle)
+        val s = _state.value
+        val deck = s.deck ?: return
+        val words = s.picked
+        if (words.isEmpty() || s.importing) return
+        _state.update { it.copy(importing = true) }
         viewModelScope.launch {
-            decks.create(uid, name, words) ?: return@launch
-            _state.update { it.copy(savedDeck = cleanDeckName(name), savedDeckWords = words.size) }
+            val result = decks.importInto(uid, jitenSource(deckId), deck.englishTitle?.takeIf { it.isNotBlank() } ?: deck.originalTitle, words)
+            if (s.studyFromDeck) {
+                profiles.profile(uid).first()?.let { profiles.save(uid, it.copy(studyDeckKey = result.key)) }
+            }
+            _state.update { it.copy(importing = false, imported = result, existingDeck = result.name, studyingFromImported = s.studyFromDeck) }
         }
     }
+
+    fun dismissImported() = _state.update { it.copy(imported = null) }
 }

@@ -22,6 +22,8 @@ data class OnboardingUiState(
     val knowsKatakana: Boolean = false,
     val dailyMinutes: Int = StudyProfile.DEFAULT_DAILY_MINUTES,
     val newCardsPerDay: Int = StudyProfile.DEFAULT_NEW_CARDS,
+    /** One of the learner's decks to take new words from first (only offered when editing). */
+    val studyDeckKey: String? = null,
     val saving: Boolean = false,
     /** Set once an edit of an existing profile has been written. */
     val saved: Boolean = false,
@@ -42,6 +44,7 @@ data class OnboardingUiState(
             newCardsPerDay = newCardsPerDay,
             knowsHiragana = !beginner || knowsHiragana,
             knowsKatakana = !beginner || knowsKatakana,
+            studyDeckKey = studyDeckKey,
         )
     }
 }
@@ -55,6 +58,9 @@ class OnboardingViewModel @Inject constructor(
     val state: StateFlow<OnboardingUiState> = _state.asStateFlow()
 
     fun selectLevel(level: JlptLevel) = _state.update { it.copy(level = level) }
+
+    /** Takes new words from the deck with [key] first; null for the level's word lists only. */
+    fun selectDeck(key: String?) = _state.update { it.copy(studyDeckKey = key) }
     fun setKnowsHiragana(value: Boolean) = _state.update { it.copy(knowsHiragana = value) }
     fun setKnowsKatakana(value: Boolean) = _state.update { it.copy(knowsKatakana = value) }
     fun setDailyMinutes(value: Int) = _state.update { it.copy(dailyMinutes = value) }
@@ -88,6 +94,7 @@ class OnboardingViewModel @Inject constructor(
             knowsKatakana = profile.knowsKatakana,
             dailyMinutes = profile.dailyMinutes,
             newCardsPerDay = profile.newCardsPerDay,
+            studyDeckKey = profile.studyDeckKey,
         )
     }
 

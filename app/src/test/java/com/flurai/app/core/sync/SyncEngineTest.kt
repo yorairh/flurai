@@ -118,8 +118,9 @@ class SyncEngineTest {
         b.setting("level", "N2")
         b.sync()
 
-        assertEquals(listOf("B's deck"), b.local.deckRows.map { it.name })
         assertEquals("N2", b.setting("level"))
+        // Decks are one document each: B keeps its own and gets A's.
+        assertEquals(setOf("A's deck", "B's deck"), b.deckNames().toSet())
     }
 
     // -- a review made after a sync must reach the cloud -------------------------------------------
@@ -391,7 +392,7 @@ class SyncEngineTest {
         a.syncLater()
 
         assertTrue(a.deckNames().isEmpty())
-        assertEquals(emptyList<Any?>(), cloud.doc(UID, "meta", "decks")!!["items"])
+        assertTrue(cloud.ids(UID, "decks").all { cloud.doc(UID, "decks", it)!!["deleted"] == true })
         val b = Phone()
         b.sync()
         assertTrue(b.deckNames().isEmpty())
@@ -425,8 +426,9 @@ class SyncEngineTest {
         a.syncLater()
         b.syncLater()
 
-        assertTrue(b.deckNames().isEmpty()) // this phone's change won and was uploaded
-        assertEquals(emptyList<Any?>(), cloud.doc(UID, "meta", "decks")!!["items"])
+        assertEquals(listOf("Food"), b.deckNames()) // the deletion here won; the new deck from A arrived
+        a.syncLater()
+        assertEquals(listOf("Food"), a.deckNames()) // and A deletes Trip too
     }
 
     @Test
@@ -446,7 +448,7 @@ class SyncEngineTest {
     }
 
     @Test
-    fun aPhoneThatNeverSyncedKeepsItsOwnDecksInsteadOfTakingTheClouds() {
+    fun decksMadeOnTwoPhonesBeforeTheyFirstSyncedAreBothKept() {
         val a = Phone()
         a.addDeck("Cloud deck", 1)
         a.sync()
@@ -454,8 +456,127 @@ class SyncEngineTest {
         b.addDeck("Own deck", 2)
 
         b.syncLater()
+        a.syncLater()
 
-        assertEquals(listOf("Own deck"), b.deckNames())
+        assertEquals(setOf("Cloud deck", "Own deck"), b.deckNames().toSet())
+        assertEquals(setOf("Cloud deck", "Own deck"), a.deckNames().toSet())
+    }
+
+    @Test
+    fun aDeckRenamedOnOnePhoneWhileDeletedOnTheOtherIsKept() {
+        val a = Phone()
+        a.addDeck("Trip", 1)
+        a.sync()
+        val b = Phone()
+        b.sync()
+
+        a.deleteDeck("Trip")
+        b.renameDeck("Trip", "Trip 2026")
+        a.syncLater()
+        b.syncLater() // B changed it since: B's copy wins over the deletion and goes back up
+        a.syncLater()
+
+        assertEquals(listOf("Trip 2026"), b.deckNames())
+        assertEquals(listOf("Trip 2026"), a.deckNames())
+    }
+
+    @Test
+    fun anImportedDeckKeepsWhereItCameFrom() {
+        val a = Phone()
+        a.local.deckRows += DeckEntity(id = 1, uid = UID, name = "Takagi-san", createdAt = 5, key = "k1", source = "jiten:34772")
+        a.local.deckWords[1] = listOf(1_358_999, 12)
+        a.sync()
+
+        val b = Phone()
+        b.sync()
+        val deck = b.local.deckRows.single()
+        assertEquals("k1", deck.key)
+        assertEquals("jiten:34772", deck.source)
+        assertEquals(listOf(1_358_999, 12), b.local.deckWords[deck.id])
+    }
+
+    // -- moving a 2.0 backup (decks in meta/decks) to one document per deck ---------------------------
+
+    /** What FluRai 1.10 left in the cloud: decks as one list, no schema document. */
+    private fun writeLegacyDecks(vararg decks: Triple<String, Long, List<Int>>) = runBlocking {
+        val items = decks.map { (name, createdAt, words) -> mapOf("name" to name, "createdAt" to createdAt, "words" to words) }
+        cloud.write(UID, listOf(CloudWrite(META_COLLECTION, "decks", mapOf("items" to items))))
+    }
+
+    /** A deck as the 7 -> 8 migration leaves it on a phone that had it in 2.0. */
+    private fun migratedDeck(id: Long, name: String, createdAt: Long) =
+        DeckEntity(id = id, uid = UID, name = name, createdAt = createdAt, key = com.flurai.app.core.study.legacyDeckKey(name, createdAt))
+
+    @Test
+    fun theFirstSyncAfterUpdatingMovesTheDecksAndRaisesTheBackupFormat() {
+        writeLegacyDecks(Triple("Trip", 6L, listOf(11, 12)))
+        val a = Phone()
+        a.local.deckRows += migratedDeck(1, "Trip", 6)
+        a.local.deckWords[1] = listOf(11, 12)
+
+        assertTrue(a.sync())
+
+        val key = com.flurai.app.core.study.legacyDeckKey("Trip", 6)
+        assertEquals(setOf(key), cloud.ids(UID, "decks"))
+        assertEquals(listOf(11L, 12L), cloud.doc(UID, "decks", key)!!["words"])
+        assertEquals(emptyList<Any?>(), cloud.doc(UID, "meta", "decks")!!["items"])
+        assertEquals(SYNC_FORMAT.toLong(), cloud.doc(UID, META_COLLECTION, SCHEMA_DOC)!!["minVersion"])
+        assertEquals(listOf("Trip"), a.deckNames())
+    }
+
+    @Test
+    fun aPhoneThatUpdatesAfterTheOtherHasMovedTheDecksDoesNotDoubleThem() {
+        // Both phones had "Trip" in 2.0; A updates and syncs first.
+        writeLegacyDecks(Triple("Trip", 6L, listOf(11)))
+        val a = Phone()
+        a.local.deckRows += migratedDeck(1, "Trip", 6)
+        a.local.deckWords[1] = listOf(11)
+        a.sync()
+
+        val b = Phone()
+        b.local.deckRows += migratedDeck(4, "Trip", 6)
+        b.local.deckWords[4] = listOf(11)
+        assertTrue(b.syncLater())
+
+        assertEquals(listOf("Trip"), b.deckNames())
+        assertEquals(1, cloud.ids(UID, "decks").size)
+    }
+
+    @Test
+    fun aDeckOnlyInTheOldListIsRestoredOnAFreshPhone() {
+        writeLegacyDecks(Triple("Food", 3L, listOf(2, 1_358_999)))
+        val a = Phone()
+        assertTrue(a.sync())
+
+        assertEquals(listOf("Food"), a.deckNames())
+        assertEquals(listOf(2, 1_358_999), a.local.deckWords[a.local.deckRows.single().id])
+        assertEquals(setOf(com.flurai.app.core.study.legacyDeckKey("Food", 3)), cloud.ids(UID, "decks"))
+    }
+
+    // -- big imports go up a part at a time -----------------------------------------------------------
+
+    @Test
+    fun aHugeImportIsUploadedOverSeveralSyncs() {
+        val a = Phone()
+        a.local.cardRows += (1..2_500).map { card(1_000_000 + it, lastReview = null, createdAt = it.toLong()) }
+        assertTrue(a.sync())
+
+        val first = cloud.ids(UID, "cards").size
+        assertTrue("one sync sends at most ${SyncEngine.MAX_PUSH} documents, sent $first", first <= SyncEngine.MAX_PUSH)
+        assertTrue(first > 1_900)
+        assertEquals(2_500 - first, a.engine.status.value.pendingUploads)
+
+        assertTrue(a.syncLater())
+        assertEquals(2_500, cloud.ids(UID, "cards").size)
+        assertEquals(0, a.engine.status.value.pendingUploads)
+    }
+
+    @Test
+    fun cardsChangedInTheSameMillisecondAreNeverSplitAcrossSyncs() {
+        val a = Phone()
+        a.local.cardRows += (1..2_100).map { card(1_000_000 + it, lastReview = null, createdAt = 7) }
+        assertTrue(a.sync())
+        assertEquals(2_100, cloud.ids(UID, "cards").size)
     }
 
     // -- the documents ---------------------------------------------------------------------------

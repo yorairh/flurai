@@ -39,7 +39,7 @@ class EditProfileTest {
                 tmp.newFile("edit.preferences_pb").also { it.delete() }
             },
         )
-        val original = StudyProfile(JlptLevel.N5, 15, 10, knowsHiragana = true, knowsKatakana = true)
+        val original = StudyProfile(JlptLevel.N5, 15, 10, knowsHiragana = true, knowsKatakana = true, studyDeckKey = "anime")
         // Only one write per test: DataStore replaces its file by renaming, which fails on Windows
         // when the file already exists (Android is fine).
         val vm = OnboardingViewModel(repo)
@@ -55,6 +55,7 @@ class EditProfileTest {
 
         // DataStore writes the file on a background thread, so wait for the save to finish.
         assertTrue(withTimeout(5_000) { vm.state.first { it.saved } }.saved)
+        // The deck new words come from is kept through the edit.
         assertEquals(original.copy(level = JlptLevel.N4, dailyMinutes = 30), repo.profile("uid").first())
         dataStoreScope.cancel()
     }

@@ -19,6 +19,7 @@ import com.flurai.app.core.study.MIGRATION_3_4
 import com.flurai.app.core.study.MIGRATION_4_5
 import com.flurai.app.core.study.MIGRATION_5_6
 import com.flurai.app.core.study.MIGRATION_6_7
+import com.flurai.app.core.study.MIGRATION_7_8
 import com.flurai.app.core.video.CustomChannelDao
 import com.flurai.app.core.grammar.GrammarProgressDao
 import com.flurai.app.core.study.StudyDao
@@ -89,7 +90,7 @@ object AppModule {
     @Provides
     @Singleton
     fun userDatabase(@ApplicationContext context: Context): UserDatabase =
-        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7).build()
+        Room.databaseBuilder(context, UserDatabase::class.java, "user.db").addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8).build()
 
     @Provides
     fun studyDao(db: UserDatabase): StudyDao = db.studyDao()
@@ -123,6 +124,7 @@ object AppModule {
     fun deckWords(dao: com.flurai.app.core.study.DeckDao): com.flurai.app.core.study.DeckWords =
         object : com.flurai.app.core.study.DeckWords {
             override suspend fun wordIds(deckId: Long) = dao.wordIds(deckId)
+            override suspend fun wordIdsByKey(uid: String, key: String) = dao.byKey(uid, key)?.let { dao.wordIds(it.id) }
         }
 
     @Provides

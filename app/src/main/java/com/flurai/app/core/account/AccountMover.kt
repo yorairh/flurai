@@ -59,8 +59,8 @@ interface AccountDao {
     @Query("UPDATE custom_channel SET uid = :to WHERE uid = :from")
     suspend fun moveChannels(from: String, to: String)
 
-    /** Decks keep their ids, so their words follow without being touched. */
-    @Query("UPDATE deck SET uid = :to WHERE uid = :from")
+    /** Decks keep their ids, so their words follow without being touched. A deck [to] already has (same key) stays [from]'s copy apart under a new key. */
+    @Query("UPDATE deck SET uid = :to, `key` = CASE WHEN `key` IN (SELECT `key` FROM deck WHERE uid = :to) THEN lower(hex(randomblob(16))) ELSE `key` END WHERE uid = :from")
     suspend fun moveDecks(from: String, to: String)
 
     @Query("DELETE FROM deck_word WHERE deck_id IN (SELECT id FROM deck WHERE uid = :uid)")
@@ -68,6 +68,12 @@ interface AccountDao {
 
     @Query("DELETE FROM deck WHERE uid = :uid")
     suspend fun dropDeckRows(uid: String)
+
+    @Query("UPDATE OR IGNORE custom_word SET uid = :to WHERE uid = :from")
+    suspend fun moveCustomWords(from: String, to: String)
+
+    @Query("DELETE FROM custom_word WHERE uid = :uid")
+    suspend fun dropCustomWords(uid: String)
 
     @Query("DELETE FROM review_log WHERE uid = :uid")
     suspend fun dropLogs(uid: String)
@@ -82,7 +88,7 @@ interface AccountDao {
     @Transaction
     suspend fun wipe(uid: String) {
         dropCards(uid); dropLogs(uid); dropDays(uid); dropTests(uid); dropGrammar(uid); dropCourse(uid); dropChannels(uid)
-        dropDeckWords(uid); dropDeckRows(uid)
+        dropDeckWords(uid); dropDeckRows(uid); dropCustomWords(uid)
     }
 
     /**
@@ -99,6 +105,7 @@ interface AccountDao {
         moveCourse(from, to); dropCourse(from)
         moveChannels(from, to)
         moveDecks(from, to)
+        moveCustomWords(from, to); dropCustomWords(from)
     }
 }
 

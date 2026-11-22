@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.Flow
  * The learner's own data (cards, review history). Separate from the read-only ContentDatabase so
  * a content update never touches progress. Schema changes here need real migrations.
  */
-@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class, CourseProgressEntity::class], version = 7, exportSchema = true)
+@Database(entities = [CardEntity::class, ReviewLogEntity::class, StudyDayEntity::class, TestResultEntity::class, GrammarProgressEntity::class, CustomChannelEntity::class, DeckEntity::class, DeckWordEntity::class, CourseProgressEntity::class, CustomWordEntity::class], version = 8, exportSchema = true)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun studyDao(): StudyDao
     abstract fun wordMergeDao(): WordMergeDao
@@ -39,6 +39,38 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun courseProgressDao(): CourseProgressDao
     abstract fun accountDao(): com.flurai.app.core.account.AccountDao
     abstract fun syncDao(): com.flurai.app.core.sync.SyncDao
+}
+
+/**
+ * 7 → 8: decks get a lasting [DeckEntity.key] (the same on every phone for an existing deck, see
+ * [legacyDeckKey]) and a [DeckEntity.source]; the learner's own words ([CustomWordEntity]).
+ */
+val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(connection: SQLiteConnection) {
+        connection.execSQL("ALTER TABLE `deck` ADD COLUMN `key` TEXT NOT NULL DEFAULT ''")
+        connection.execSQL("ALTER TABLE `deck` ADD COLUMN `source` TEXT")
+        val keys = mutableListOf<Triple<Long, String, String>>()
+        connection.prepare("SELECT `id`, `uid`, `name`, `created_at` FROM `deck`").use { row ->
+            while (row.step()) keys += Triple(row.getLong(0), row.getText(1), legacyDeckKey(row.getText(2), row.getLong(3)))
+        }
+        val used = HashSet<Pair<String, String>>()
+        connection.prepare("UPDATE `deck` SET `key` = ? WHERE `id` = ?").use { update ->
+            for ((id, uid, derived) in keys) {
+                // Two decks of one account with the same name and creation time stay apart.
+                val key = if (used.add(uid to derived)) derived else newDeckKey()
+                update.bindText(1, key)
+                update.bindLong(2, id)
+                update.step()
+                update.reset()
+            }
+        }
+        connection.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_deck_uid_key` ON `deck` (`uid`, `key`)")
+        connection.execSQL(
+            "CREATE TABLE IF NOT EXISTS `custom_word` (`uid` TEXT NOT NULL, `id` INTEGER NOT NULL, `kind` TEXT NOT NULL, " +
+                "`expression` TEXT NOT NULL, `reading` TEXT NOT NULL, `meaning` TEXT NOT NULL, `anki_guid` TEXT, " +
+                "`created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`uid`, `id`))",
+        )
+    }
 }
 
 /** 6 → 7: progress through the grammar course. */

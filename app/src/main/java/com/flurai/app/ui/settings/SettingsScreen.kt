@@ -179,6 +179,8 @@ fun SettingsScreen(
                         when {
                             syncStatus.running -> "Syncing…"
                             syncStatus.error != null -> syncStatus.error.orEmpty()
+                            syncStatus.lastSyncedAt != null && syncStatus.pendingUploads > 0 ->
+                                "Imported progress still uploading (${syncStatus.pendingUploads} left). Sync again to send more."
                             syncStatus.lastSyncedAt != null -> "Last synced " + java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(syncStatus.lastSyncedAt)
                             else -> "Your progress is backed up to your account when you leave the app."
                         },

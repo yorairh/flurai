@@ -75,6 +75,8 @@ data class DeckUiState(
     val started: Set<Int> = emptySet(),
     /** The deck no longer exists (it was deleted). */
     val gone: Boolean = false,
+    /** Where an imported deck's word list came from, credited under its progress. */
+    val credit: String? = null,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -95,7 +97,10 @@ class DeckViewModel @Inject constructor(
                 ?: return@combine DeckUiState(loading = false, gone = true)
             val byId = wordSource.words(ids).associateBy { it.id }
             val started = introduced.filter { it.itemType == ItemType.Word }.map { it.itemId }.toSet()
-            DeckUiState(loading = false, name = deck.name, words = ids.mapNotNull { byId[it] }, started = started)
+            DeckUiState(
+                loading = false, name = deck.name, words = ids.mapNotNull { byId[it] }, started = started,
+                credit = if (deck.source?.startsWith("jiten:") == true) "Word list from jiten.moe (CC BY-SA)." else null,
+            )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DeckUiState())
 
@@ -183,6 +188,9 @@ fun DeckScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         StudyProgressBar(progress = { started.toFloat() / state.words.size }, modifier = Modifier.fillMaxWidth())
+                        state.credit?.let {
+                            Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
                     }
                 }
             }

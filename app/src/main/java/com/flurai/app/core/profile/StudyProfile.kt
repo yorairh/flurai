@@ -10,6 +10,11 @@ data class StudyProfile(
     /** Only asked of beginners; used to decide whether to start with the kana decks. */
     val knowsHiragana: Boolean,
     val knowsKatakana: Boolean,
+    /**
+     * The key of one of the learner's decks that new words come from first ("Studying from" a deck),
+     * within the daily allowance; when it is finished or deleted, new words come from [level]'s lists again.
+     */
+    val studyDeckKey: String? = null,
 ) {
     companion object {
         val DailyMinuteOptions = listOf(5, 10, 15, 30, 60)

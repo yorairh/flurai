@@ -31,6 +31,10 @@ import com.flurai.app.ui.onboarding.KanaToggle
 import com.flurai.app.ui.onboarding.LevelCard
 import com.flurai.app.ui.onboarding.OnboardingViewModel
 import com.flurai.app.ui.theme.japanese
+import androidx.compose.material3.RadioButton
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.clickable
 
 /** Change the choices made at onboarding: level, kana knowledge and daily goal. */
 @Composable
@@ -66,6 +70,22 @@ fun EditProfileScreen(
                 LevelCard(level, state.level == level) { viewModel.selectLevel(level) }
             }
 
+            val deckSource: StudyDeckViewModel = hiltViewModel()
+            val decks by remember(user.uid) { deckSource.decks(user.uid) }.collectAsStateWithLifecycle(emptyList())
+            if (decks.isNotEmpty()) {
+                Spacer(Modifier.height(4.dp))
+                Text("Take new words from a deck first", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "New words come from the deck, in its order, within your daily number. When it has none left, they come from the word list chosen above.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                DeckChoice("No deck: the level's word list", state.studyDeckKey == null) { viewModel.selectDeck(null) }
+                decks.forEach { deck ->
+                    DeckChoice(deck.name, state.studyDeckKey == deck.key) { viewModel.selectDeck(deck.key) }
+                }
+            }
+
             if (state.level == JlptLevel.Beginner) {
                 Spacer(Modifier.height(4.dp))
                 Text("Kana", style = MaterialTheme.typography.titleMedium)
@@ -89,5 +109,13 @@ fun EditProfileScreen(
                 else Text("Save")
             }
         }
+    }
+}
+
+@Composable
+private fun DeckChoice(label: String, selected: Boolean, onClick: () -> Unit) {
+    Row(Modifier.fillMaxWidth().clickable(onClick = onClick).padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        RadioButton(selected = selected, onClick = onClick)
+        Text(label, style = MaterialTheme.typography.bodyLarge)
     }
 }

@@ -54,6 +54,11 @@ interface SyncLocal {
 
     /** Makes [decks] (each with its word ids) the whole list of [uid]. */
     suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>)
+
+    /** Makes [uid]'s deck with [deck]'s key exactly [deck] with [words], adding it when missing. */
+    suspend fun putDeck(uid: String, deck: DeckEntity, words: List<Int>)
+
+    suspend fun deleteDeck(uid: String, key: String)
 }
 
 /** [SyncLocal] on the user database. */
@@ -92,4 +97,6 @@ class RoomSyncLocal @Inject constructor(
     override suspend fun decks(uid: String) = deckDao.decksNow(uid)
     override suspend fun deckWordIds(deckId: Long) = deckDao.wordIds(deckId)
     override suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>) = deckDao.replaceAll(uid, decks)
+    override suspend fun putDeck(uid: String, deck: DeckEntity, words: List<Int>) = deckDao.put(uid, deck, words)
+    override suspend fun deleteDeck(uid: String, key: String) = deckDao.deleteByKey(uid, key)
 }
