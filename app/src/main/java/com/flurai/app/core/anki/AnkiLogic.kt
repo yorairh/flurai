@@ -233,7 +233,8 @@ fun matchVariants(word: NoteWord): List<NoteWord> {
     if (looksLikeSentence(word.expression)) return listOf(word)
     val variants = mutableListOf(word)
     // "〜と申します", "~さん": the word without the tilde that stands for what comes before or after it.
-    val trimmed = word.copy(expression = word.expression.trim('〜', '~', '～'), reading = word.reading.trim('〜', '~', '～'))
+    val tilde = charArrayOf('〜', '~', '～')
+    val trimmed = word.copy(expression = word.expression.trim(*tilde), reading = word.reading.trim(*tilde))
     if (trimmed != word && trimmed.expression.isNotEmpty()) variants += trimmed
     BRACKETED.find(word.expression)?.let { m ->
         val outside = word.expression.replace(BRACKETED, "").trim()
@@ -266,7 +267,7 @@ private fun dictionaryForms(word: NoteWord): List<NoteWord> {
         forms += word.copy(expression = spelling, reading = r.dropLast(1) + u)
     }
     if (r.endsWith("し")) forms += word.copy(expression = e.removeSuffix("し") + "する", reading = r.dropLast(1) + "する")
-    if (r == "き" || r.endsWith("き") && e.endsWith("来")) forms += word.copy(expression = e.removeSuffix("き") + "る", reading = r.dropLast(1) + "くる")
+    if (r.endsWith("き") && (r == "き" || e.endsWith("来"))) forms += word.copy(expression = e.removeSuffix("き") + "る", reading = r.dropLast(1) + "くる")
     return forms
 }
 
