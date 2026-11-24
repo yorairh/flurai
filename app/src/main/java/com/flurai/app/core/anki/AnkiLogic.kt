@@ -55,7 +55,8 @@ fun withoutFurigana(text: String): String = FURIGANA.replace(text) { it.groupVal
 fun furiganaReading(text: String): String? =
     if (!FURIGANA.containsMatchIn(text)) null else FURIGANA.replace(text) { it.groupValues[2] }.replace(" ", "").trim()
 
-fun hasJapanese(text: String) = text.any { isKanji(it) || it in '぀'..'ヿ' }
+private fun isJapaneseChar(c: Char) = isKanji(c) || c in '぀'..'ヿ'
+fun hasJapanese(text: String) = text.any(::isJapaneseChar)
 fun isKanaOnly(text: String) = text.isNotEmpty() && text.all { it in '぀'..'ヿ' || it == 'ー' }
 
 private val SENTENCE_END = Regex("[。！？!?]")
@@ -68,39 +69,102 @@ fun looksLikeSentence(expression: String): Boolean = expression.length > 12 || S
 /** Which field (by ord) holds the word, its reading and its meaning; null when the note type has none. */
 data class FieldRoles(val expression: Int?, val reading: Int?, val meaning: Int?)
 
-private val EXPRESSION_NAMES = listOf("expression", "vocab", "word", "japanese", "kanji", "front", "term", "headword", "sentence", "日本語", "単語")
-private val READING_NAMES = listOf("reading", "kana", "furigana", "hiragana", "yomi", "pronunciation", "読み")
-private val MEANING_NAMES = listOf("meaning", "english", "definition", "translation", "gloss", "back", "意味", "英語")
+private val EXPRESSION_NAMES = listOf("expression", "vocab", "word", "japanese", "kanji", "front", "term", "headword", "日本語", "単語", "单词", "日文", "日语", "sentence")
+private val READING_NAMES = listOf("reading", "kana", "furigana", "hiragana", "yomi", "pronunciation", "読み", "假名", "仮名", "かな", "ふりがな")
+private val MEANING_NAMES = listOf("meaning", "english", "definition", "def", "translation", "gloss", "eng", "back", "意味", "英語", "释义", "中文", "意思")
+
+/** Fields that never hold the word, its reading or its meaning: media, ids, sort keys, part of speech ... */
+private val NOT_TEXT = Regex("audio|sound|image|picture|pitch|stroke|diagram|uri$|url$|index|sort|order|freq|tags?$|id$|pos$|type$|romaji|notes?$|grammar")
+/** Fields of a deck's example sentence ("Sentence-Kana", "SentFurigana1", "Example EN"). */
+private val SENTENCE_FIELD = Regex("sentence|sent|example|cloze|例")
+/** A field that is a second choice for its role: "Additional definitions", "English Definition (Lengthy Version)". */
+private val SECONDARY = Regex("additional|extra|other|lengthy|long|alt|more|[2-9]$")
+
+/** A value that is data, not text: JSON or a list of key=value ("[\"基盤\",\"きばん\" ...]"). */
+private fun looksLikeData(text: String) = text.count { it in "\"{}[]=;|" } >= 3
+
+private const val PUNCTUATION = " 。！？!?・〜~()（）「」"
+
+/** What is left of a field's name without the role words: "VocabKanji" and "VocabFurigana" are both "vocab". */
+private val ROLE_WORDS = Regex("expression|japanese|kanji|kana|reading|furigana|hiragana|yomi|meaning|english|definition|def|eng|translation|gloss|word|with|ruby")
+
+private fun stem(name: String) = name.lowercase().replace("vocabulary", "vocab").replace(ROLE_WORDS, "").filter(Char::isLetterOrDigit)
 
 /**
- * Guesses the fields from their names ("Expression", "Vocab-Kana", "Meaning" ...), then from what the
- * sample notes hold: Japanese with kanji for the word, kana for the reading, Latin letters for the meaning.
+ * Whether [reading] can be how [expression] is read: kana only, hiragana for a word with kanji (a katakana
+ * "reading" next to a kanji is its on'yomi), and keeping the word's own kana (食べる → たべる, not ショク).
+ */
+private fun fitsAsReading(expression: String, text: String): Boolean {
+    val reading = text.filter { it !in PUNCTUATION }
+    if (!isKanaOnly(reading)) return false
+    if (expression.isEmpty()) return true
+    if (expression.any(::isKanji) && reading.count { it in 'ァ'..'ヺ' } * 2 > reading.length) return false
+    return expression.filter { it in 'ぁ'..'ゖ' }.all { it in reading }
+}
+
+/**
+ * Guesses the fields: the word first (a field named for it that holds Japanese, preferring single words over
+ * sentences, so Core 2000 takes "Vocabulary-Kanji" over its sentence "Expression"), then the reading and the
+ * meaning that go with it (named like it: "VocabKanji" → "VocabFurigana", "VocabDef"), each from what its name
+ * says and what the sample notes hold. With no named field, the contents decide.
  */
 fun guessFieldRoles(fields: List<AnkiField>, samples: List<AnkiNote>): FieldRoles {
-    fun texts(ord: Int) = samples.mapNotNull { it.fields.getOrNull(ord)?.let(::cleanField) }.filter { it.isNotEmpty() }
+    // Only values with words count: a "1" or "⓪" in a flag or pitch field is as good as empty.
+    fun texts(ord: Int) = samples.mapNotNull { it.fields.getOrNull(ord)?.let(::cleanField) }.filter { it.any(Char::isLetter) }
     fun mostly(ord: Int, test: (String) -> Boolean) = texts(ord).let { t -> t.isNotEmpty() && t.count(test) * 2 > t.size }
-    // Sentence decks such as Core 2000 call the example sentence "Expression" and its reading "Reading", next to
-    // "Vocabulary-Kanji"/"Vocabulary-Kana": a field named for the role whose notes are mostly sentences is only
-    // taken when no other field named for it holds words.
-    fun sentences(ord: Int) = mostly(ord) { looksLikeSentence(withoutFurigana(it)) }
-    fun byName(names: List<String>, taken: Set<Int>, fits: (Int) -> Boolean = { true }): Int? {
-        val named = names.flatMap { n ->
-            fields.filter { val name = it.name.lowercase(); it.ord !in taken && n in name && "audio" !in name && "sound" !in name }
-        }.map { it.ord }.distinct().filter(fits)
-        return named.firstOrNull { !sentences(it) } ?: named.firstOrNull()
-    }
-    fun byContent(test: (String) -> Boolean, taken: Set<Int>) =
-        fields.firstOrNull { f -> f.ord !in taken && mostly(f.ord, test) }?.ord
-    val japanese = { ord: Int -> texts(ord).isEmpty() || mostly(ord, ::hasJapanese) }
+    fun lower(ord: Int) = fields.first { it.ord == ord }.name.lowercase()
+    val text = fields.filter { !NOT_TEXT.containsMatchIn(it.name.lowercase()) }
+    fun named(names: List<String>, taken: Set<Int>) =
+        names.flatMap { n -> text.filter { it.ord !in taken && n in it.name.lowercase() } }.map { it.ord }.distinct()
+    fun nameRank(names: List<String>, ord: Int) = names.indexOfFirst { it in lower(ord) }
+    val japanese = { ord: Int -> mostly(ord, ::hasJapanese) }
+    val sentences = { ord: Int -> mostly(ord) { looksLikeSentence(withoutFurigana(it)) } }
 
-    // Reading first: "Vocab-Kana" is a reading even though it also says "vocab".
-    var reading = byName(READING_NAMES, emptySet(), japanese)
-    var expression = byName(EXPRESSION_NAMES, setOfNotNull(reading), japanese)
-    var meaning = byName(MEANING_NAMES, setOfNotNull(reading, expression))
+    // The word: never a field named as a reading or meaning ("Word Reading", "Vocabulary-English").
+    val wordCandidates = named(EXPRESSION_NAMES, emptySet())
+        .filter { o -> READING_NAMES.none { it in lower(o) } && MEANING_NAMES.none { it in lower(o) } }
+        .filter { texts(it).isEmpty() || (japanese(it) && !mostly(it, ::looksLikeData)) }
+    var expression = wordCandidates.sortedWith(
+        compareBy<Int>(
+            { texts(it).isEmpty() }, { SENTENCE_FIELD.containsMatchIn(lower(it)) }, { sentences(it) }, { SECONDARY.containsMatchIn(lower(it)) },
+            { nameRank(EXPRESSION_NAMES, it) }, { it },
+        ),
+    ).firstOrNull()
+    val expressionStem = expression?.let { stem(lower(it)) }
+    fun expressionTexts(ord: Int) = samples.map { n ->
+        withoutFurigana(expression?.let { n.fields.getOrNull(it) }?.let(::cleanField).orEmpty()) to n.fields.getOrNull(ord)?.let(::cleanField).orEmpty()
+    }.filter { it.second.isNotEmpty() }
+    // A reading must read the word: kana (or the word with furigana) that fits it, in most sample notes.
+    fun readsTheWord(ord: Int, orNoSamples: Boolean = true) = expressionTexts(ord).let { pairs ->
+        if (pairs.isEmpty()) orNoSamples else pairs.count { (e, r) -> fitsAsReading(e, (furiganaReading(r) ?: r).replace(" ", "")) } * 2 > pairs.size
+    }
+
+    var reading = named(READING_NAMES, setOfNotNull(expression)).filter { readsTheWord(it) }.sortedWith(
+        compareBy<Int>(
+            { texts(it).isEmpty() }, { stem(lower(it)) != expressionStem }, { SENTENCE_FIELD.containsMatchIn(lower(it)) }, { sentences(it) },
+            { SECONDARY.containsMatchIn(lower(it)) }, { nameRank(READING_NAMES, it) }, { it },
+        ),
+    ).firstOrNull()
+    var meaning = named(MEANING_NAMES, setOfNotNull(expression, reading)).sortedWith(
+        compareBy<Int>(
+            { texts(it).isEmpty() }, { stem(lower(it)) != expressionStem }, { SENTENCE_FIELD.containsMatchIn(lower(it)) },
+            { "kanji" in lower(it) }, { SECONDARY.containsMatchIn(lower(it)) }, { mostly(it) { t -> t.count(::isJapaneseChar) > t.count { c -> c in 'a'..'z' || c in 'A'..'Z' } } }, { nameRank(MEANING_NAMES, it) }, { it },
+        ),
+    ).firstOrNull()
+
+    fun byContent(test: (String) -> Boolean, taken: Set<Int>) =
+        text.firstOrNull { f -> f.ord !in taken && mostly(f.ord, test) }?.ord
     if (expression == null) expression = byContent({ hasJapanese(it) && !isKanaOnly(withoutFurigana(it)) }, setOfNotNull(reading, meaning))
         ?: byContent(::hasJapanese, setOfNotNull(reading, meaning))
-    if (reading == null) reading = byContent({ isKanaOnly(it) }, setOfNotNull(expression, meaning))
+    // A reading found by content alone: not a field named for something else ("vocabKey2" is another word).
+    if (reading == null) reading = text.firstOrNull { f ->
+        val name = f.name.lowercase()
+        f.ord != expression && f.ord != meaning && (EXPRESSION_NAMES + MEANING_NAMES).none { it in name } &&
+            !SENTENCE_FIELD.containsMatchIn(name) && readsTheWord(f.ord, orNoSamples = false)
+    }?.ord
     if (meaning == null) meaning = byContent({ !hasJapanese(it) && it.any(Char::isLetter) }, setOfNotNull(expression, reading))
+    // A deck of kana words: the only Japanese field was taken as the reading, so it is the word.
+    if (expression == null && reading != null) { expression = reading; reading = null }
     return FieldRoles(expression, reading, meaning)
 }
 
@@ -144,17 +208,70 @@ fun guessTemplateKind(template: AnkiTemplate, fields: List<AnkiField>, roles: Fi
 data class NoteWord(val expression: String, val reading: String, val meaning: String)
 
 fun noteWord(note: AnkiNote, roles: FieldRoles): NoteWord? {
-    val rawExpression = roles.expression?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty()
+    fun field(ord: Int?) = ord?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty().let(::unwrap)
+    val readingField = field(roles.reading)
+    // A kana word often leaves the kanji field empty ("kanjis" in Genki decks): the word is its reading.
+    val rawExpression = field(roles.expression).ifEmpty { readingField }
     val expression = withoutFurigana(rawExpression)
     if (expression.isEmpty() || !hasJapanese(expression)) return null
-    val readingField = roles.reading?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty()
     val reading = when {
-        readingField.isNotEmpty() -> furiganaReading(readingField) ?: withoutFurigana(readingField)
-        else -> furiganaReading(rawExpression) ?: if (isKanaOnly(expression)) expression else ""
+        isKanaOnly(expression) -> expression
+        readingField.isNotEmpty() -> (furiganaReading(readingField) ?: withoutFurigana(readingField)).replace(" ", "")
+        else -> furiganaReading(rawExpression) ?: ""
     }
     val meaning = roles.meaning?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty()
     return NoteWord(expression, reading, meaning)
 }
+
+private val BRACKETED = Regex("[(（]([^)）]*)[)）]")
+
+/**
+ * The ways to look a note's word up, best first: as it is, without a bracketed part or as that part
+ * ("なる(生る)" → なる, 生る), and a する verb as its noun ("ごちそうする" → ごちそう). Sentences only as they are.
+ */
+fun matchVariants(word: NoteWord): List<NoteWord> {
+    if (looksLikeSentence(word.expression)) return listOf(word)
+    val variants = mutableListOf(word)
+    // "〜と申します", "~さん": the word without the tilde that stands for what comes before or after it.
+    val trimmed = word.copy(expression = word.expression.trim('〜', '~', '～'), reading = word.reading.trim('〜', '~', '～'))
+    if (trimmed != word && trimmed.expression.isNotEmpty()) variants += trimmed
+    BRACKETED.find(word.expression)?.let { m ->
+        val outside = word.expression.replace(BRACKETED, "").trim()
+        val inside = m.groupValues[1].trim()
+        val reading = word.reading.replace(BRACKETED, "").trim()
+        if (hasJapanese(outside)) variants += word.copy(expression = outside, reading = reading)
+        if (hasJapanese(inside)) variants += word.copy(expression = inside, reading = reading)
+    }
+    variants.toList().forEach { v ->
+        if (v.expression.length > 2 && v.expression.endsWith("する") && v.reading.endsWith("する")) {
+            variants += v.copy(expression = v.expression.dropLast(2), reading = v.reading.dropLast(2))
+        }
+    }
+    // Textbook decks (Minna no Nihongo) list verbs in their ます form: try the dictionary forms it can come from.
+    variants.toList().forEach { v -> variants += dictionaryForms(v) }
+    return variants.distinct()
+}
+
+private val I_TO_U = mapOf('い' to 'う', 'き' to 'く', 'ぎ' to 'ぐ', 'し' to 'す', 'ち' to 'つ', 'に' to 'ぬ', 'び' to 'ぶ', 'み' to 'む', 'り' to 'る')
+
+/** The dictionary forms a ます form can come from ("向かいます" → 向かう; "食べます" → 食べる; "します" → する). */
+private fun dictionaryForms(word: NoteWord): List<NoteWord> {
+    if (!word.expression.endsWith("ます") || !word.reading.endsWith("ます") || word.reading.length < 3) return emptyList()
+    val e = word.expression.dropLast(2)
+    val r = word.reading.dropLast(2)
+    val forms = mutableListOf(word.copy(expression = e + "る", reading = r + "る")) // ichidan: 食べ → 食べる
+    I_TO_U[r.last()]?.let { u ->
+        // Godan: the last kana turns from the i row to the u row (in the spelling too when it is kana).
+        val spelling = if (e.last() == r.last()) e.dropLast(1) + u else e
+        forms += word.copy(expression = spelling, reading = r.dropLast(1) + u)
+    }
+    if (r.endsWith("し")) forms += word.copy(expression = e.removeSuffix("し") + "する", reading = r.dropLast(1) + "する")
+    if (r == "き" || r.endsWith("き") && e.endsWith("来")) forms += word.copy(expression = e.removeSuffix("き") + "る", reading = r.dropLast(1) + "くる")
+    return forms
+}
+
+/** A whole field in brackets, as some decks write furigana ("[肩[かた]]"), without them. */
+private fun unwrap(text: String) = if (text.length > 2 && text.first() == '[' && text.last() == ']' && '[' in text.substring(1)) text.substring(1, text.length - 1) else text
 
 /** The id of a word of the learner's own: negative, from its spelling and reading, so a re-import finds it again. */
 fun customWordId(expression: String, reading: String): Int {

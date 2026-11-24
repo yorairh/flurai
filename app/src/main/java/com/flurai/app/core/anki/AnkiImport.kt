@@ -117,7 +117,7 @@ class AnkiImporter(private val store: AnkiImportStore) {
             if (i % 50 == 0) progress(i, notes.size)
             val word = noteWord(note, options.noteTypes.getValue(note.typeId).roles)
             if (word == null) { skipped++; return@forEachIndexed }
-            val matched = store.match(word)
+            val matched = matchVariants(word).firstNotNullOfOrNull { store.match(it) }
             val sentence = matched == null && looksLikeSentence(word.expression)
             val id = matched ?: customId(uid, word, customs)
             if (matched == null) {

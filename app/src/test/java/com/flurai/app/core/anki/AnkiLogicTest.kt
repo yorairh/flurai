@@ -110,6 +110,122 @@ class AnkiLogicTest {
         assertEquals(FieldRoles(0, 1, 2), guessFieldRoles(fields("Expression", "Reading", "Meaning"), sentencesOnly))
     }
 
+    /**
+     * The field layouts of popular AnkiWeb decks (names as published, sample values written here): the guess
+     * must find the word, its reading and its meaning in each.
+     */
+    @Test
+    fun popularDeckLayoutsAreGuessed() {
+        data class Layout(val deck: String, val names: List<String>, val notes: List<List<String>>, val expected: Triple<String?, String?, String?>)
+        val layouts = listOf(
+            Layout(
+                "Core 2000 (iKnow)", listOf("Expression", "Meaning", "Reading", "Audio", "Image_URI", "iKnowID", "iKnowType"),
+                listOf(
+                    listOf("飛ぶ", "fly", "とぶ", "[sound:a.mp3]", "", "item:1", "item"),
+                    listOf("毎朝パンを食べます。", "I eat bread every morning.", "まいあさ パン を たべます", "", "", "sentence:2", "sentence"),
+                    listOf("入れる", "put in", "いれる", "", "", "item:3", "item"),
+                ),
+                Triple("Expression", "Reading", "Meaning"),
+            ),
+            Layout(
+                "Kaishi 1.5k", listOf("Word", "Word Reading", "Word Meaning", "Word Furigana", "Word Audio", "Sentence", "Sentence Meaning", "Sentence Furigana", "Notes", "Pitch Accent", "Frequency"),
+                listOf(
+                    listOf("家", "いえ", "house", "家[いえ]", "", "ここが私の家です。", "This is my house.", "ここが 私[わたし]の 家[いえ]です。", "", "イエ", "168"),
+                    listOf("食べる", "たべる", "to eat", "食[た]べる", "", "パンを食べる。", "I eat bread.", "パンを 食[た]べる。", "", "", "12"),
+                ),
+                Triple("Word", "Word Reading", "Word Meaning"),
+            ),
+            Layout(
+                "Genki", listOf("japanese_kana", "kanjis", "type", "english", "kanji_meaning", "sound", "sort_id", "uid"),
+                listOf(
+                    listOf("ろくじ", "六時", "", "six o'clock", "Six - Time", "", "5", "Genki::L01_5"),
+                    listOf("あおしんごう", "", "", "green light", "", "", "18", "Genki::L09_18"),
+                    listOf("にちようび", "日曜日", "", "Sunday", "Sun - Weekday", "", "20", "Genki::L04_20"),
+                ),
+                Triple("kanjis", "japanese_kana", "english"),
+            ),
+            Layout(
+                "Ankidrone", listOf("SentKanji", "SentFurigana", "SentEng", "SentAudio", "VocabKanji", "VocabFurigana", "VocabPitchPattern", "VocabDef", "VocabAudio", "Image"),
+                listOf(
+                    listOf("この靴は一万円です。", "この 靴[くつ]は 一万円[いちまんえん]です。", "These shoes are ten thousand yen.", "", "万", "万[まん]", "", "ten thousand", "", ""),
+                    listOf("例を見てください。", "例[れい]を 見[み]てください。", "Please look at the example.", "", "例", "例[れい]", "", "example", "", ""),
+                ),
+                Triple("VocabKanji", "VocabFurigana", "VocabDef"),
+            ),
+            Layout(
+                "Kodansha kanji with vocabulary", listOf("id", "Kanji", "keyword", "ON reading", "KUN reading", "main ON reading", "key vocab 1 kanji", "key vocab 1 reading", "key vocab 1 english", "key vocab 2 kanji", "key vocab 2 reading", "key vocab 2 english"),
+                listOf(
+                    listOf("1", "病", "ill", "ビョウ", "や.む", "ビョウ", "病院", "びょういん", "hospital", "病気", "びょうき", "illness"),
+                    listOf("2", "沼", "swamp", "ショウ", "ぬま", "ショウ", "沼地", "ぬまち", "swampland", "沼", "ぬま", "swamp"),
+                ),
+                Triple("key vocab 1 kanji", "key vocab 1 reading", "key vocab 1 english"),
+            ),
+            Layout(
+                "Chinese JLPT book", listOf("Expression", "假名", "声调", "中文释义", "例句", "Pronunciation", "例句翻译", "发音"),
+                listOf(
+                    listOf("お菓子", "おかし", "②", "[名]点心", "お菓子を食べる。", "", "", "[sound:a.mp3]"),
+                    listOf("数", "かず", "①", "[名]数目", "学生の数", "", "", "[sound:b.mp3]"),
+                ),
+                Triple("Expression", "假名", "中文释义"),
+            ),
+            Layout(
+                "Minna no Nihongo (Chinese)", listOf("日文", "音调核", "词性", "基本形", "中文", "音频", "是否需要缩小日文", "是否需要缩小中文"),
+                listOf(
+                    listOf("向[む]かいます", "⓪", "動Ⅰ", "向[む]かう", "朝着～去", "", "1", ""),
+                    listOf("普通[ふつう]", "", "", "", "普通列车", "", "1", "1"),
+                ),
+                Triple("日文", null, "中文"),
+            ),
+            Layout(
+                "Kana-only deck", listOf("Meaning", "Kana", "Pronounciation"),
+                listOf(listOf("three things", "みっつ", "[sound:a.mp3]"), listOf("lizard", "とかげ", "[sound:b.mp3]")),
+                Triple("Kana", null, "Meaning"),
+            ),
+            Layout(
+                "JLPT N5 with example sentences", listOf("Target Word with Ruby", "English Definition (Lengthy Version)", "Japanese Example Sentence", "English Translation of Sentence", "Target Japanese Word", "Target Word Furigana", "Simple Definition", "Audio"),
+                listOf(
+                    listOf("九[ここの]つ", "nine; nine years old (of a child)", "九[ここの]つの 子供[こども]。", "A child of nine.", "九つ", "ここのつ", "nine", ""),
+                    listOf("漢字[かんじ]", "a Chinese character used in Japanese writing", "漢字[かんじ]を 書[か]く。", "I write kanji.", "漢字", "かんじ", "kanji", ""),
+                ),
+                Triple("Target Word with Ruby", "Target Word Furigana", "Simple Definition"),
+            ),
+            Layout(
+                "A kanji deck storing data", listOf("Kanji", "Onyomi", "Kunyomi", "English", "Examples", "Vocab"),
+                listOf(
+                    listOf("医", "イ", "い.やす", "doctor, medicine", "", "[\"医療\",\"いりょう\",\"medical care\"],[\"医者\",\"いしゃ\",\"doctor\"]"),
+                    listOf("盤", "バン", "", "tray, board", "", "[\"基盤\",\"きばん\",\"foundation\"],[\"円盤\",\"えんばん\",\"disc\"]"),
+                ),
+                Triple("Kanji", null, "English"),
+            ),
+        )
+        for (l in layouts) {
+            val f = fields(*l.names.toTypedArray())
+            val roles = guessFieldRoles(f, l.notes.map { note(*it.toTypedArray()) })
+            fun name(o: Int?) = o?.let { l.names[it] }
+            assertEquals(l.deck, l.expected, Triple(name(roles.expression), name(roles.reading), name(roles.meaning)))
+        }
+    }
+
+    @Test
+    fun wordsAreAlsoLookedUpInTheirDictionaryForms() {
+        fun forms(e: String, r: String) = matchVariants(NoteWord(e, r, "")).map { it.expression to it.reading }
+        assertTrue(("生る" to "なる") in forms("なる(生る)", "なる"))
+        assertTrue(("ごちそう" to "ごちそう") in forms("ごちそうする", "ごちそうする"))
+        assertTrue(("と申します" to "ともうします") in forms("〜と申します", "〜ともうします"))
+        assertTrue(("向かう" to "むかう") in forms("向かいます", "むかいます"))
+        assertTrue(("食べる" to "たべる") in forms("食べます", "たべます"))
+        assertTrue(("勉強する" to "べんきょうする") in forms("勉強します", "べんきょうします"))
+        assertTrue(("来る" to "くる") in forms("来ます", "きます"))
+        assertEquals(listOf("猫が好きです。" to ""), forms("猫が好きです。", "")) // a sentence only as it is
+    }
+
+    @Test
+    fun aKanaWordWithAnEmptyKanjiFieldIsItsReading() {
+        val roles = FieldRoles(1, 0, 2)
+        assertEquals(NoteWord("あおしんごう", "あおしんごう", "green light"), noteWord(note("あおしんごう", "", "green light"), roles))
+        assertEquals(NoteWord("肩", "かた", "shoulder"), noteWord(note("", "[肩[かた]]", "shoulder"), FieldRoles(1, null, 2)))
+    }
+
     @Test
     fun fieldsWithUnhelpfulNamesAreFoundByWhatTheyHold() {
         val samples = listOf(note("cat", "ねこ", "猫"), note("dog", "いぬ", "犬"))
