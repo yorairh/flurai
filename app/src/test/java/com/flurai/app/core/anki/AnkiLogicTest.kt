@@ -197,6 +197,14 @@ class AnkiLogicTest {
                 ),
                 Triple("Kanji", null, "English"),
             ),
+            Layout(
+                "Kanji deck with radicals", listOf("Kanji", "Onyomi", "Kunyomi", "English", "Radical Reading", "Components"),
+                listOf(
+                    listOf("医", "イ", "い.やす", "doctor, medicine", "とり・とりへん", "匚 矢"),
+                    listOf("戲", "ギ", "たわむ.れる", "play, frolic", "ほこ・ほこづくり", "戈 虛"),
+                ),
+                Triple("Kanji", null, "English"),
+            ),
         )
         for (l in layouts) {
             val f = fields(*l.names.toTypedArray())

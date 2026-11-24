@@ -74,7 +74,7 @@ private val READING_NAMES = listOf("reading", "kana", "furigana", "hiragana", "y
 private val MEANING_NAMES = listOf("meaning", "english", "definition", "def", "translation", "gloss", "eng", "back", "意味", "英語", "释义", "中文", "意思")
 
 /** Fields that never hold the word, its reading or its meaning: media, ids, sort keys, part of speech ... */
-private val NOT_TEXT = Regex("audio|sound|image|picture|pitch|stroke|diagram|uri$|url$|index|sort|order|freq|tags?$|id$|pos$|type$|romaji|notes?$|grammar")
+private val NOT_TEXT = Regex("radical|component|audio|sound|image|picture|pitch|stroke|diagram|uri$|url$|index|sort|order|freq|tags?$|id$|pos$|type$|romaji|notes?$|grammar")
 /** Fields of a deck's example sentence ("Sentence-Kana", "SentFurigana1", "Example EN"). */
 private val SENTENCE_FIELD = Regex("sentence|sent|example|cloze|例")
 /** A field that is a second choice for its role: "Additional definitions", "English Definition (Lengthy Version)". */
