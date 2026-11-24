@@ -92,6 +92,24 @@ class AnkiLogicTest {
         assertEquals(FieldRoles(0, 1, 2), guessFieldRoles(fields("Vocabulary-Kanji", "Vocabulary-Kana", "Vocabulary-English", "Vocabulary-Audio"), emptyList()))
     }
 
+    /** Core 2000: "Expression" and "Reading" hold the example sentence, the word is in "Vocabulary-Kanji". */
+    @Test
+    fun aSentenceDecksWordFieldsWinOverItsSentenceFields() {
+        val f = fields(
+            "Optimized-Voc-Index", "Vocabulary-Kanji", "Vocabulary-Furigana", "Vocabulary-Kana", "Vocabulary-English",
+            "Vocabulary-Audio", "Vocabulary-Pos", "Caution", "Expression", "Reading", "Sentence-Kana", "Sentence-English",
+        )
+        val samples = listOf(
+            note("1", "それ", "それ", "それ", "that, that one", "[sound:a.mp3]", "Pronoun", "", "それはとってもいい話だ。", "それはとってもいい 話[はなし]だ。", "それはとってもいいはなしだ。", "That's a really good story."),
+            note("2", "一つ", "一[ひと]つ", "ひとつ", "one (thing)", "[sound:b.mp3]", "Noun", "", "それを一つください。", "それを 一[ひと]つください。", "それをひとつください。", "Please give me one of those."),
+            note("3", "一", "一[いち]", "いち", "one", "[sound:c.mp3]", "Number", "", "一から始めましょう。", "一[いち]から 始[はじ]めましょう。", "いちからはじめましょう。", "Let's start from the beginning."),
+        )
+        assertEquals(FieldRoles(1, 3, 4), guessFieldRoles(f, samples))
+        // A deck of sentences only still takes its sentence fields.
+        val sentencesOnly = listOf(note("猫が好きです。", "ねこがすきです。", "I like cats."), note("犬がいます。", "いぬがいます。", "There is a dog."))
+        assertEquals(FieldRoles(0, 1, 2), guessFieldRoles(fields("Expression", "Reading", "Meaning"), sentencesOnly))
+    }
+
     @Test
     fun fieldsWithUnhelpfulNamesAreFoundByWhatTheyHold() {
         val samples = listOf(note("cat", "ねこ", "猫"), note("dog", "いぬ", "犬"))

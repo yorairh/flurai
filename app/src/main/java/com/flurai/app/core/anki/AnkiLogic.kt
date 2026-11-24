@@ -77,16 +77,25 @@ private val MEANING_NAMES = listOf("meaning", "english", "definition", "translat
  * sample notes hold: Japanese with kanji for the word, kana for the reading, Latin letters for the meaning.
  */
 fun guessFieldRoles(fields: List<AnkiField>, samples: List<AnkiNote>): FieldRoles {
-    fun byName(names: List<String>, taken: Set<Int>) = names.firstNotNullOfOrNull { n ->
-        fields.firstOrNull { it.ord !in taken && n in it.name.lowercase() && "audio" !in it.name.lowercase() && "sound" !in it.name.lowercase() }?.ord
-    }
     fun texts(ord: Int) = samples.mapNotNull { it.fields.getOrNull(ord)?.let(::cleanField) }.filter { it.isNotEmpty() }
+    fun mostly(ord: Int, test: (String) -> Boolean) = texts(ord).let { t -> t.isNotEmpty() && t.count(test) * 2 > t.size }
+    // Sentence decks such as Core 2000 call the example sentence "Expression" and its reading "Reading", next to
+    // "Vocabulary-Kanji"/"Vocabulary-Kana": a field named for the role whose notes are mostly sentences is only
+    // taken when no other field named for it holds words.
+    fun sentences(ord: Int) = mostly(ord) { looksLikeSentence(withoutFurigana(it)) }
+    fun byName(names: List<String>, taken: Set<Int>, fits: (Int) -> Boolean = { true }): Int? {
+        val named = names.flatMap { n ->
+            fields.filter { val name = it.name.lowercase(); it.ord !in taken && n in name && "audio" !in name && "sound" !in name }
+        }.map { it.ord }.distinct().filter(fits)
+        return named.firstOrNull { !sentences(it) } ?: named.firstOrNull()
+    }
     fun byContent(test: (String) -> Boolean, taken: Set<Int>) =
-        fields.firstOrNull { f -> f.ord !in taken && texts(f.ord).let { t -> t.isNotEmpty() && t.count(test) * 2 > t.size } }?.ord
+        fields.firstOrNull { f -> f.ord !in taken && mostly(f.ord, test) }?.ord
+    val japanese = { ord: Int -> texts(ord).isEmpty() || mostly(ord, ::hasJapanese) }
 
     // Reading first: "Vocab-Kana" is a reading even though it also says "vocab".
-    var reading = byName(READING_NAMES, emptySet())
-    var expression = byName(EXPRESSION_NAMES, setOfNotNull(reading))
+    var reading = byName(READING_NAMES, emptySet(), japanese)
+    var expression = byName(EXPRESSION_NAMES, setOfNotNull(reading), japanese)
     var meaning = byName(MEANING_NAMES, setOfNotNull(reading, expression))
     if (expression == null) expression = byContent({ hasJapanese(it) && !isKanaOnly(withoutFurigana(it)) }, setOfNotNull(reading, meaning))
         ?: byContent(::hasJapanese, setOfNotNull(reading, meaning))
