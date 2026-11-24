@@ -208,7 +208,7 @@ fun guessTemplateKind(template: AnkiTemplate, fields: List<AnkiField>, roles: Fi
 data class NoteWord(val expression: String, val reading: String, val meaning: String)
 
 fun noteWord(note: AnkiNote, roles: FieldRoles): NoteWord? {
-    fun field(ord: Int?) = ord?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty().let(::unwrap)
+    fun field(ord: Int?) = ord?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty().let(::nestedFuriganaToSpaced).let(::unwrap)
     val readingField = field(roles.reading)
     // A kana word often leaves the kanji field empty ("kanjis" in Genki decks): the word is its reading.
     val rawExpression = field(roles.expression).ifEmpty { readingField }
@@ -222,6 +222,11 @@ fun noteWord(note: AnkiNote, roles: FieldRoles): NoteWord? {
     val meaning = roles.meaning?.let { note.fields.getOrNull(it) }?.let(::cleanField).orEmpty()
     return NoteWord(expression, reading, meaning)
 }
+
+private val NESTED_FURIGANA = Regex("\\[([^\\[\\]]+)\\[([^\\[\\]]+)\\]\\]")
+
+/** Some decks write furigana as "[乾[かわ]]く"; turn it into Anki's usual " 乾[かわ]く". */
+private fun nestedFuriganaToSpaced(text: String) = NESTED_FURIGANA.replace(text) { " ${it.groupValues[1]}[${it.groupValues[2]}]" }.trim()
 
 private val BRACKETED = Regex("[(（]([^)）]*)[)）]")
 
@@ -243,6 +248,15 @@ fun matchVariants(word: NoteWord): List<NoteWord> {
         if (hasJapanese(outside)) variants += word.copy(expression = outside, reading = reading)
         if (hasJapanese(inside)) variants += word.copy(expression = inside, reading = reading)
     }
+    // "なに・なん": one of the readings listed; "多大な", "事前に": the adjective or adverb without its ending.
+    variants.toList().forEach { v ->
+        val alternatives = v.reading.split('・', '、', '/').map { it.trim() }.filter { it.isNotEmpty() }
+        if (alternatives.size > 1) alternatives.forEach { variants += v.copy(reading = it) }
+        val end = v.expression.lastOrNull()
+        if (end in ENDINGS && v.expression.length > 1 && !isKanaOnly(v.expression) && v.reading.lastOrNull() == end) {
+            variants += v.copy(expression = v.expression.dropLast(1), reading = v.reading.dropLast(1))
+        }
+    }
     variants.toList().forEach { v ->
         if (v.expression.length > 2 && v.expression.endsWith("する") && v.reading.endsWith("する")) {
             variants += v.copy(expression = v.expression.dropLast(2), reading = v.reading.dropLast(2))
@@ -252,6 +266,8 @@ fun matchVariants(word: NoteWord): List<NoteWord> {
     variants.toList().forEach { v -> variants += dictionaryForms(v) }
     return variants.distinct()
 }
+
+private val ENDINGS = setOf('な', 'に')
 
 private val I_TO_U = mapOf('い' to 'う', 'き' to 'く', 'ぎ' to 'ぐ', 'し' to 'す', 'ち' to 'つ', 'に' to 'ぬ', 'び' to 'ぶ', 'み' to 'む', 'り' to 'る')
 

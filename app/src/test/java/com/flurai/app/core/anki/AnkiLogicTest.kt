@@ -235,6 +235,23 @@ class AnkiLogicTest {
     }
 
     @Test
+    fun furiganaWrittenInNestedBracketsIsRead() {
+        val roles = FieldRoles(0, null, 1)
+        assertEquals(NoteWord("上司", "じょうし", "boss"), noteWord(note("[上[じょう]][司[し]]", "boss"), roles))
+        assertEquals(NoteWord("乾く", "かわく", "dry"), noteWord(note("[乾[かわ]]く", "dry"), roles))
+    }
+
+    @Test
+    fun adjectivesAdverbsAndListedReadingsAreAlsoLookedUpWithoutTheirEnding() {
+        val forms = matchVariants(NoteWord("多大な", "ただいな", "")).map { it.expression to it.reading }
+        assertTrue(("多大" to "ただい") in forms)
+        assertTrue(("事前" to "じぜん") in matchVariants(NoteWord("事前に", "じぜんに", "")).map { it.expression to it.reading })
+        assertTrue(("何" to "なに") in matchVariants(NoteWord("何", "なに・なん", "")).map { it.expression to it.reading })
+        // A kana word never loses its ending.
+        assertEquals(listOf(NoteWord("だから", "だから", "")), matchVariants(NoteWord("だから", "だから", "")))
+    }
+
+    @Test
     fun fieldsWithUnhelpfulNamesAreFoundByWhatTheyHold() {
         val samples = listOf(note("cat", "ねこ", "猫"), note("dog", "いぬ", "犬"))
         assertEquals(FieldRoles(2, 1, 0), guessFieldRoles(fields("A", "B", "C"), samples))
