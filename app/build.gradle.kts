@@ -21,8 +21,8 @@ android {
         targetSdk = 36
         // Bump both in every release PR. versionCode goes up by one each time; 1.0.0 is the first release for friends,
         // after it a fix is 1.0.x and a milestone is 1.N.0.
-        versionCode = 52
-        versionName = "2.0.0"
+        versionCode = 53
+        versionName = "2.1.0"
     }
 
     // The release key lives outside the repo (~/.flurai-signing). Debug builds use it too, so test
@@ -96,6 +96,12 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+    // Anki packages: the zstd-compressed collection of Anki 2.1.50+ (zstd-jni's Android build; unit tests on the
+    // JVM use pure-Java aircompressor, which does not run on Android) and SQLite connections to read it.
+    implementation(libs.zstd.jni) { artifact { type = "aar" } }
+    implementation(libs.sqlite.framework)
+    testImplementation(libs.aircompressor)
+    testImplementation(libs.sqlite.bundled.jvm)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 

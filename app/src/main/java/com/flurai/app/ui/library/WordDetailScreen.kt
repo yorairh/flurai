@@ -1,5 +1,6 @@
 package com.flurai.app.ui.library
 
+import com.flurai.app.core.dictionary.levelLabel
 import com.flurai.app.ui.components.WordExpression
 import com.flurai.app.ui.components.wordHasRuby
 import kotlinx.coroutines.flow.map
@@ -200,7 +201,7 @@ fun WordDetailScreen(onBack: () -> Unit, onOpenWord: (Int) -> Unit = {}, viewMod
             }
             Text(word.meanings, style = MaterialTheme.typography.titleLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Tag(if (word.isJlpt) "JLPT N${word.jlpt}" else "Not JLPT")
+                Tag(if (word.isJlpt) "JLPT N${word.jlpt}" else word.levelLabel)
                 word.genkiLesson?.let { Tag("Genki lesson $it") }
                 partOfSpeechLabel(word.partsOfSpeech)?.let { Tag(it) }
             }

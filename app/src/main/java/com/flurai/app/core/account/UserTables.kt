@@ -29,7 +29,7 @@ object UserTables {
         UserTable("custom_channel", "channels you added", cloud = "meta"),
         UserTable("deck", "decks", cloud = "decks"),
         UserTable("deck_word", null, cloud = "decks", ownedBy = "deck"),
-        UserTable("custom_word", "your own words", cloud = null), // backed up once Anki import fills it
+        UserTable("custom_word", "your own words", cloud = "customWords"),
     )
 
     /** The cloud collections that hold a user's backup. */

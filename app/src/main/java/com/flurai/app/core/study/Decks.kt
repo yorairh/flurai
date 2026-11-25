@@ -54,6 +54,11 @@ data class DeckWordEntity(
 
 data class DeckMember(val deckId: Long, val wordId: Int)
 
+/** Which words are sentences (the learner's own, from an Anki import): they never get a Production card. */
+interface SentenceWords {
+    suspend fun isSentence(wordId: Int): Boolean
+}
+
 /** What the study session needs from a deck: its word ids, in the order they were added. */
 interface DeckWords {
     suspend fun wordIds(deckId: Long): List<Int>

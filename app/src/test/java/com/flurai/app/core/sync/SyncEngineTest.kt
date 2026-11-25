@@ -553,6 +553,56 @@ class SyncEngineTest {
         assertEquals(setOf(com.flurai.app.core.study.legacyDeckKey("Food", 3)), cloud.ids(UID, "decks"))
     }
 
+    // -- the learner's own words (from an Anki import) -----------------------------------------------------
+
+    private fun ownWord(id: Int, expression: String, updatedAt: Long = 5_000) = com.flurai.app.core.study.CustomWordEntity(
+        uid = UID, id = id, kind = "word", expression = expression, reading = "ぴよ", meaning = "chirp",
+        ankiGuid = "g$id", createdAt = 5_000, updatedAt = updatedAt,
+    )
+
+    @Test
+    fun theLearnersOwnWordsAreBackedUpWithTheirCards() {
+        val a = Phone()
+        a.local.customWordRows += ownWord(-77, "ぴよ語")
+        a.local.cardRows += card(-77)
+        a.addDeck("Anki", -77, 12)
+        assertTrue(a.sync())
+        assertNotNull(cloud.doc(UID, "customWords", "-77"))
+
+        val b = Phone()
+        assertTrue(b.sync())
+        assertEquals("ぴよ語", b.local.customWordRows.single().expression)
+        assertEquals(listOf(-77), b.local.cardRows.map { it.itemId })
+        assertEquals(listOf(-77, 12), b.local.deckWords[b.local.deckRows.single().id])
+    }
+
+    @Test
+    fun theNewerEditOfAnOwnWordWins() {
+        val a = Phone()
+        a.local.customWordRows += ownWord(-77, "ぴよ語")
+        a.sync()
+        val b = Phone()
+        b.sync()
+
+        a.local.upsertCustomWordNow(ownWord(-77, "ぴよぴよ語", updatedAt = 30_000))
+        a.syncLater()
+        b.syncLater()
+        assertEquals("ぴよぴよ語", b.local.customWordRows.single().expression)
+    }
+
+    @Test
+    fun ownWordsCountTowardTheUploadLimitWithTheCards() {
+        val a = Phone()
+        a.local.customWordRows += (1..1_500).map { ownWord(-it, "w$it", updatedAt = 5_000L + it) }
+        a.local.cardRows += (1..1_500).map { card(-it, lastReview = null, createdAt = 7_000L + it) }
+        assertTrue(a.sync())
+        val sent = cloud.ids(UID, "customWords").size + cloud.ids(UID, "cards").size
+        assertTrue("sent $sent", sent <= SyncEngine.MAX_PUSH)
+        assertEquals(1_500, cloud.ids(UID, "customWords").size) // words first: they are older than their cards
+        assertTrue(a.syncLater())
+        assertEquals(1_500, cloud.ids(UID, "cards").size)
+    }
+
     // -- big imports go up a part at a time -----------------------------------------------------------
 
     @Test

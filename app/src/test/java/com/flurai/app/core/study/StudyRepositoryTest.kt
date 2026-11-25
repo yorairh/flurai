@@ -7,8 +7,11 @@ import com.flurai.app.core.profile.StudyProfile
 import com.flurai.app.core.srs.Rating
 import com.flurai.app.core.srs.SrsState
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -25,6 +28,8 @@ class StudyRepositoryTest {
         StudyRepository(dao, FakeContentDao(), settings, object : DeckWords {
             override suspend fun wordIds(deckId: Long) = deckWords[deckId].orEmpty()
             override suspend fun wordIdsByKey(uid: String, key: String) = decksByKey[key]
+        }, object : SentenceWords {
+            override suspend fun isSentence(wordId: Int) = wordId == SENTENCE
         })
     }
     private val decksByKey = mutableMapOf<String, List<Int>>()
@@ -59,6 +64,15 @@ class StudyRepositoryTest {
         first.newItems.forEach { repo.answer("u", QueueItem.New(it), Rating.Good, now, Duration.ZERO) }
         // The allowance is used up for today.
         assertEquals(emptyList<ItemRef>(), repo.loadSession("u", p, StudySource.Auto, now).newItems)
+    }
+
+    @Test
+    fun aSentenceOfTheLearnersOwnIsNeverAskedToBeWritten() = runTest {
+        val sentence = ItemRef(ItemType.Word, SENTENCE)
+        repo.answer("u", QueueItem.New(sentence), Rating.Easy, now, Duration.ZERO)
+        val kinds = repo.cardsForItem("u", sentence).first().map { it.kind }
+        assertTrue(CardKind.Recognition in kinds)
+        assertFalse(CardKind.Production in kinds) // heard (Listening) and recognized, never written
     }
 
     @Test
@@ -220,5 +234,9 @@ class StudyRepositoryTest {
         repo.answer("u", QueueItem.Existing(added), Rating.Good, now, Duration.ZERO)
         val after = repo.loadSession("u", profile(JlptLevel.N5, newPerDay = 2), StudySource.Auto, now)
         assertEquals(2, after.newItems.size)
+    }
+
+    private companion object {
+        const val SENTENCE = -42
     }
 }

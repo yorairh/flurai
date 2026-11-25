@@ -155,6 +155,18 @@ class InMemoryLocal : SyncLocal {
         }
     }
 
+    val customWordRows = mutableListOf<com.flurai.app.core.study.CustomWordEntity>()
+    override suspend fun customWordsSince(uid: String, since: Long) = customWordRows.filter { it.uid == uid }
+    fun upsertCustomWordNow(word: com.flurai.app.core.study.CustomWordEntity) {
+        customWordRows.removeAll { it.uid == word.uid && it.id == word.id }
+        customWordRows += word
+    }
+    override suspend fun customWord(uid: String, id: Int) = customWordRows.firstOrNull { it.uid == uid && it.id == id }
+    override suspend fun upsertCustomWord(word: com.flurai.app.core.study.CustomWordEntity) {
+        customWordRows.removeAll { it.uid == word.uid && it.id == word.id }
+        customWordRows += word
+    }
+
     override suspend fun deleteDeck(uid: String, key: String) {
         deckRows.filter { it.uid == uid && it.key == key }.forEach { deckWords.remove(it.id) }
         deckRows.removeAll { it.uid == uid && it.key == key }

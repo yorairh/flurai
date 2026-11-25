@@ -58,6 +58,7 @@ class StudyRepository @Inject constructor(
     private val content: ContentDao,
     private val settings: SettingsRepository,
     private val deckWords: DeckWords,
+    private val sentenceWords: SentenceWords = object : SentenceWords { override suspend fun isSentence(wordId: Int) = false },
 ) {
     private val scheduler = FsrsScheduler()
 
@@ -211,7 +212,8 @@ class StudyRepository @Inject constructor(
         ) {
             val due = StudyDay.end(now)
             listOfNotNull(
-                newCard(uid, item.item, CardKind.Production, due = due, now = now),
+                // Production asks to write the word; a sentence of the learner's own is only recognized and heard.
+                if (sentenceWords.isSentence(item.item.itemId)) null else newCard(uid, item.item, CardKind.Production, due = due, now = now),
                 // Listening cards are only added while the setting is on (turning it on later adds them as you learn more).
                 // One day after the production card, so the two never arrive together (one would give the other away).
                 if (listeningOn(uid)) newCard(uid, item.item, CardKind.Listening, due = StudyDay.end(due), now = now) else null,

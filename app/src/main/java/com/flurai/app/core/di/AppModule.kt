@@ -121,6 +121,15 @@ object AppModule {
     fun deckDao(db: UserDatabase): com.flurai.app.core.study.DeckDao = db.deckDao()
 
     @Provides
+    fun customWordDao(db: UserDatabase): com.flurai.app.core.study.CustomWordDao = db.customWordDao()
+
+    @Provides
+    fun sentenceWords(dao: com.flurai.app.core.study.CustomWordDao): com.flurai.app.core.study.SentenceWords =
+        object : com.flurai.app.core.study.SentenceWords {
+            override suspend fun isSentence(wordId: Int) = wordId < 0 && dao.isSentence(wordId)
+        }
+
+    @Provides
     fun deckWords(dao: com.flurai.app.core.study.DeckDao): com.flurai.app.core.study.DeckWords =
         object : com.flurai.app.core.study.DeckWords {
             override suspend fun wordIds(deckId: Long) = dao.wordIds(deckId)

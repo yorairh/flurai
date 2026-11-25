@@ -10,6 +10,8 @@ import com.flurai.app.core.quiz.TestResultDao
 import com.flurai.app.core.quiz.TestResultEntity
 import com.flurai.app.core.study.CardEntity
 import com.flurai.app.core.study.CardKind
+import com.flurai.app.core.study.CustomWordDao
+import com.flurai.app.core.study.CustomWordEntity
 import com.flurai.app.core.study.DeckDao
 import com.flurai.app.core.study.DeckEntity
 import com.flurai.app.core.study.ItemType
@@ -59,6 +61,10 @@ interface SyncLocal {
     suspend fun putDeck(uid: String, deck: DeckEntity, words: List<Int>)
 
     suspend fun deleteDeck(uid: String, key: String)
+
+    suspend fun customWordsSince(uid: String, since: Long): List<CustomWordEntity>
+    suspend fun customWord(uid: String, id: Int): CustomWordEntity?
+    suspend fun upsertCustomWord(word: CustomWordEntity)
 }
 
 /** [SyncLocal] on the user database. */
@@ -70,6 +76,7 @@ class RoomSyncLocal @Inject constructor(
     private val courseProgress: CourseProgressDao,
     private val customChannels: CustomChannelDao,
     private val deckDao: DeckDao,
+    private val customWords: CustomWordDao,
 ) : SyncLocal {
     override suspend fun cardsSince(uid: String, since: Long) = sync.cardsSince(uid, since)
     override suspend fun card(uid: String, type: ItemType, id: Int, kind: CardKind) = sync.card(uid, type, id, kind)
@@ -99,4 +106,8 @@ class RoomSyncLocal @Inject constructor(
     override suspend fun replaceDecks(uid: String, decks: List<Pair<DeckEntity, List<Int>>>) = deckDao.replaceAll(uid, decks)
     override suspend fun putDeck(uid: String, deck: DeckEntity, words: List<Int>) = deckDao.put(uid, deck, words)
     override suspend fun deleteDeck(uid: String, key: String) = deckDao.deleteByKey(uid, key)
+
+    override suspend fun customWordsSince(uid: String, since: Long) = customWords.since(uid, since)
+    override suspend fun customWord(uid: String, id: Int) = customWords.get(uid, id)
+    override suspend fun upsertCustomWord(word: CustomWordEntity) = customWords.upsert(word)
 }

@@ -122,7 +122,14 @@ class SyncEngine internal constructor(
      * What the pull took from the cloud. Ids listed here already match the cloud copy, so the push
      * skips them; rows where the local copy won the merge are not listed and get uploaded.
      */
-    private class Pulled(val maxUpdatedAt: Long, val cardIds: Set<String>, val dayIds: Set<Long>, val grammarIds: Set<Int>, val courseIds: Set<Int>)
+    private class Pulled(
+        val maxUpdatedAt: Long,
+        val cardIds: Set<String>,
+        val dayIds: Set<Long>,
+        val grammarIds: Set<Int>,
+        val courseIds: Set<Int>,
+        val customWordIds: Set<Int>,
+    )
 
     private suspend fun pull(uid: String, since: Long, decksAsDocuments: Boolean): Pulled {
         var max = since
@@ -130,6 +137,7 @@ class SyncEngine internal constructor(
         val dayIds = HashSet<Long>()
         val grammarIds = HashSet<Int>()
         val courseIds = HashSet<Int>()
+        val customWordIds = HashSet<Int>()
 
         // The downloads are independent: start them together, then merge one by one.
         val downloaded = coroutineScope {
@@ -142,6 +150,7 @@ class SyncEngine internal constructor(
         val courseDocs = downloaded[4]
         val metaDocs = downloaded[5]
         val deckDocs = downloaded[6]
+        val customWordDocs = downloaded[7]
 
         for (doc in cardDocs) {
             max = maxOf(max, doc.updatedAt)
@@ -151,6 +160,13 @@ class SyncEngine internal constructor(
             val mine = local.card(uid, card.itemType, card.itemId, card.kind)
             if (mine == null || touched(card) > touched(mine)) local.upsertCard(card)
             if (card == stored && cloudCovers(touched(card), mine?.let(::touched))) cardIds += doc.id
+        }
+        for (doc in customWordDocs) {
+            max = maxOf(max, doc.updatedAt)
+            val remote = customWordFrom(uid, doc.data) ?: continue
+            val mine = local.customWord(uid, remote.id)
+            if (mine == null || remote.updatedAt > mine.updatedAt) local.upsertCustomWord(remote)
+            if (cloudCovers(remote.updatedAt, mine?.updatedAt)) customWordIds += remote.id
         }
         for (doc in dayDocs) {
             max = maxOf(max, doc.updatedAt)
@@ -210,7 +226,7 @@ class SyncEngine internal constructor(
                 }
             }
         }
-        return Pulled(max, cardIds, dayIds, grammarIds, courseIds)
+        return Pulled(max, cardIds, dayIds, grammarIds, courseIds, customWordIds)
     }
 
     private suspend fun legacyDeckDocs(uid: String) = local.decks(uid).map { legacyDeckDoc(it, local.deckWordIds(it.id)) }
@@ -316,21 +332,27 @@ class SyncEngine internal constructor(
             writes += CloudWrite(META_COLLECTION, SCHEMA_DOC, mapOf("minVersion" to SYNC_FORMAT))
         }
 
-        // Cards fill what is left of the limit, oldest change first. Cards changed in the same millisecond
-        // as the last one sent go too, so the cursor (that millisecond) never skips any.
+        // Cards and the learner's own words (an import makes thousands of each) fill what is left of the
+        // limit, oldest change first. Ones changed in the same millisecond as the last one sent go too, so
+        // the cursor (that millisecond) never skips any.
+        val queued = (
+            cards.map { touched(it) to CloudWrite("cards", cardId(it), cardDoc(it)) } +
+                local.customWordsSince(uid, since).filter { it.updatedAt > since && it.id !in pulled.customWordIds }
+                    .map { it.updatedAt to CloudWrite(CUSTOM_WORD_COLLECTION, it.id.toString(), customWordDoc(it)) }
+            ).sortedBy { it.first }
         val room = (MAX_PUSH - writes.size).coerceAtLeast(0)
-        val sent = if (cards.size <= room) cards else {
-            val boundary = cards.getOrNull(room - 1)?.let(::touched)
-            if (boundary == null) emptyList() else cards.takeWhile { touched(it) <= boundary }
+        val sent = if (queued.size <= room) queued else {
+            val boundary = queued.getOrNull(room - 1)?.first
+            if (boundary == null) emptyList() else queued.takeWhile { it.first <= boundary }
         }
-        sent.forEach { writes += CloudWrite("cards", cardId(it), cardDoc(it)) }
-        val left = cards.size - sent.size
+        sent.forEach { writes += it.second }
+        val left = queued.size - sent.size
 
         if (writes.isNotEmpty()) cloud.write(uid, writes)
         changed.forEach { prefs.saveUploadedHash(uid, it, fingerprint(parts.getValue(it))) }
         prefs.saveDeckHashes(uid, decks.mapValues { fingerprint(it.value) })
         prefs.savePushLeft(uid, left)
-        return if (left == 0) null else sent.lastOrNull()?.let(::touched) ?: since
+        return if (left == 0) null else sent.lastOrNull()?.first ?: since
     }
 
     companion object {

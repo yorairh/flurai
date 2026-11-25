@@ -26,9 +26,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onNewIntent(intent: android.content.Intent) {
+        super.onNewIntent(intent)
+        IncomingAnkiFile.take(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        if (savedInstanceState == null) IncomingAnkiFile.take(intent)
         setContent {
             FluRaiTheme {
                 FluRaiRoot()
