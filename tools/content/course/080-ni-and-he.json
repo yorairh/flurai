@@ -29,6 +29,7 @@
     {"type": "heading", "text": "5. And へ?"},
     {"type": "text", "text": "**へ** (read \"e\" as a particle) is a one-trick pony. It repeats only the **destination** use of に and can never mark where something stays. It also suits a direction of travel, like 北へ (toward the north). So 公園へ行く works, but 公園へいる does not."},
     {"type": "table", "title": "に and へ", "rows": [["Sentence", "Works?"], ["公園に行く", "Yes"], ["公園へ行く", "Yes"], ["公園にいる", "Yes"], ["公園へいる", "No"]]},
+    {"type": "example", "jp": "明日、（私が）東京へ行く。", "en": "Tomorrow (I) will go to Tokyo."},
     {"type": "keypoints", "title": "Remember", "items": ["**に** marks a **target**: a destination, a purpose, a place where something is, or what something turns into.", "Purpose: **い-stem + に + 行く**.", "い-adjective + なる: **い → く**, then **なる**.", "**へ** only marks a **direction of travel**; it cannot mark a location."]}
   ],
   "questions": [

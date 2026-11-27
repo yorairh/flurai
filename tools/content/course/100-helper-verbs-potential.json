@@ -13,6 +13,7 @@
     {"type": "text", "text": "For **godan** verbs the helper is just the single kana **る**, added to the え-stem. For **ichidan** verbs it is **られる**. Either way the result is an **ichidan verb**, so it changes like one. The potential of する is the separate verb **できる**; written 出来る, it means \"comes out\", so \"Japanese comes out (is possible) for me\"."},
     {"type": "table", "title": "Making the potential", "rows": [["Verb", "Potential"], ["買う", "買える"], ["話す", "話せる"], ["待つ", "待てる"], ["食べる", "食べられる"], ["来る", "来られる"], ["する", "できる"]]},
     {"type": "text", "text": "Note that 来 changes its reading: 来る is read **くる**, but 来られる is read **こられる**."},
+    {"type": "example", "jp": "友達が明日来られない。", "en": "My friend can't come tomorrow."},
     {"type": "table", "title": "The potential changes like an ichidan verb", "rows": [["Form", "歩ける (godan)", "食べられる (ichidan)"], ["Non-past", "歩ける", "食べられる"], ["Negative", "歩けない", "食べられない"], ["Past", "歩けた", "食べられた"], ["Negative past", "歩けなかった", "食べられなかった"]]},
     {"type": "heading", "text": "2. Watch the particles"},
     {"type": "text", "text": "The potential says that something **is possible**, so the thing that is possible is the main carriage and takes **が**. 本が読める is literally \"the book is readable\"."},
