@@ -22,6 +22,7 @@
     {"type": "heading", "text": "3. Moving は changes emphasis, never logic"},
     {"type": "text", "text": "Changing a logical particle changes the event. Moving the は flag only changes what you are talking about. When the ball becomes the topic, its を is dropped, because は already marks it."},
     {"type": "table", "title": "The same event (I throw the ball to Sakura), three topics", "rows": [["Topic", "Sentence"], ["私", "私はさくらにボールを投げる。"], ["さくら", "さくらには私がボールを投げる。"], ["ボール", "ボールは私がさくらに投げる。"]]},
+    {"type": "example", "jp": "このケーキは私が食べる。", "en": "As for this cake, I will eat it."},
     {"type": "keypoints", "title": "Remember", "items": ["**は** flags the **topic**. It says nothing about it.", "は is not a main carriage and not a white carriage.", "The sentence under the topic still has its own が, often a zero.", "**が・を・に** decide who does what to whom. Moving **は** never changes that."]}
   ],
   "questions": [

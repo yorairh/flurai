@@ -13,7 +13,8 @@
     {"type": "text", "text": "Every verb ends in a **う-row** sound. To get a stem, change that last kana to a different row of the kana chart: **い-stem**, **あ-stem**, **え-stem** and **お-stem**. Ichidan verbs simply drop る."},
     {"type": "table", "title": "Only the row changes", "rows": [["Verb", "あ-stem", "い-stem", "え-stem", "お-stem"], ["買う", "買わ", "買い", "買え", "買お"], ["書く", "書か", "書き", "書け", "書こ"], ["話す", "話さ", "話し", "話せ", "話そ"], ["待つ", "待た", "待ち", "待て", "待と"], ["飲む", "飲ま", "飲み", "飲め", "飲も"]]},
     {"type": "heading", "text": "2. The い-stem"},
-    {"type": "text", "text": "The い-stem takes **ます** (polite) and **たい** (want to)."},
+    {"type": "text", "text": "The い-stem takes **ます** (polite) and **たい** (want to). The polite way to say \"let's\" is **ましょう** on the い-stem."},
+    {"type": "example", "jp": "毎日、日本語を話します。", "en": "(I) speak Japanese every day. (polite)"},
     {"type": "example", "jp": "話したい。", "en": "(I) want to speak."},
     {"type": "example", "jp": "行きましょう。", "en": "Let's go. (polite)"},
     {"type": "heading", "text": "2.1 The い-stem is also a noun"},
@@ -39,6 +40,9 @@
     {"type": "heading", "text": "7. Ichidan verbs: the longer helpers"},
     {"type": "text", "text": "An ichidan verb has only one stem, the verb without る. Because there is no row change, a few helpers get longer: **させる**, **られる** and **よう** instead of せる, れる and う."},
     {"type": "table", "title": "Ichidan: 食べる", "rows": [["Helper", "Form", "Meaning"], ["ます", "食べます", "polite"], ["たい", "食べたい", "want to"], ["ない", "食べない", "not"], ["させる", "食べさせる", "make eat"], ["られる", "食べられる", "can eat / be eaten"], ["よう", "食べよう", "let's eat"]]},
+    {"type": "example", "jp": "妹にご飯を食べさせる。", "en": "(I) make my younger sister eat."},
+    {"type": "example", "jp": "このきのこは食べられる。", "en": "This mushroom can be eaten."},
+    {"type": "example", "jp": "一緒に食べよう。", "en": "Let's eat together."},
     {"type": "keypoints", "title": "Which helper goes on which stem", "items": ["**い-stem**: ます, たい, nouns (買い物).", "**あ-stem**: ない, せる / させる, れる / られる.", "**え-stem**: potential る / られる (**話せる**).", "**お-stem**: volitional う (**話そう**); ichidan: よう."]}
   ],
   "questions": [

@@ -22,6 +22,8 @@
     {"type": "text", "text": "Attach ない to the **あ-stem** of the verb: change the last kana from the **う-row** to the **あ-row**. The one exception is verbs ending in う, which use **わ**. Ichidan verbs just drop る."},
     {"type": "table", "title": "From う-row to あ-row", "rows": [["Ends in", "Becomes", "Example"], ["く", "か", "聞く→聞かない"], ["ぐ", "が", "急ぐ→急がない"], ["す", "さ", "話す→話さない"], ["つ", "た", "待つ→待たない"], ["む", "ま", "飲む→飲まない"], ["る (godan)", "ら", "走る→走らない"], ["う", "わ", "買う→買わない"], ["る (ichidan)", "drop る", "食べる→食べない"]]},
     {"type": "diagram", "cars": [{"text": "さくらが", "role": "carriage"}, {"text": "走らなかった", "role": "engine", "label": "a ない-form"}], "text": "さくらが走らなかった。 Sakura did not run."},
+    {"type": "example", "jp": "今日は服を買わない。", "en": "(I) won't buy clothes today."},
+    {"type": "example", "jp": "朝ご飯を食べない。", "en": "(I) don't eat breakfast."},
     {"type": "heading", "text": "3. い-adjectives"},
     {"type": "text", "text": "Change the final **い** to **く**, then add ない: 赤い → **赤くない**. For the **past**, change い to **かった**: 怖い → **怖かった** (it was scary). The negative past of anything is **なかった**."},
     {"type": "example", "jp": "この花は赤くない。", "en": "This flower is not red."},
@@ -39,6 +41,8 @@
     {"type": "text", "text": "**ます**, the polite verb ending (食べます is a polite 食べる; more in lesson 17), has its own negative, **ません** (not ますない)."},
     {"type": "example", "jp": "私は魚を食べません。", "en": "I do not eat fish. (polite)"},
     {"type": "text", "text": "And **いい** (good) uses its old stem **よい** for every change: **よかった** (it was good), **よくない** (not good). Never いくない or いかった."},
+    {"type": "example", "jp": "昨日の映画はよかった。", "en": "Yesterday's movie was good."},
+    {"type": "example", "jp": "この店はよくない。", "en": "This shop is not good."},
     {"type": "keypoints", "title": "Remember", "items": ["**ない** is an い-adjective: it changes like one (**なかった**).", "Verb: **あ-stem + ない** (う-verbs use **わ**); ichidan: drop る.", "い-adjective: **い → くない**; past **い → かった**.", "Noun / copula: **ではない**, past **だった**, negative past **ではなかった**; polite verb: **ません**.", "**いい → よくない / よかった**."]}
   ],
   "questions": [
